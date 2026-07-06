@@ -1,3 +1,5 @@
+![logo](./assets/logo-256.png)
+
 # SOKKANAEM
 
 **S**patial-temporal **O**ptimized **K**ey-patch **K**ernel for **A**daptive **N**etwork **A**rchitecture and **E**fficient **M**amba
