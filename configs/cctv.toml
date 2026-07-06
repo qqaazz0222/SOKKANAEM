@@ -1,0 +1,15 @@
+# Fixed-camera CCTV (primary deployment target, IDEA.md §1.2).
+# Maximum skip: background is static, push random-mask training to 0.9.
+# Long clips teach long-horizon state retention. Generic folder layout.
+data = ["folder:/data/cctv:1000"]
+size = 128
+clip_len = 16
+batch = 4         # long clips, keep memory flat
+lr = 3e-4
+steps = 20000
+max_skip = 0.9
+
+[model]
+tau_on = 0.01     # sensitive: small intrusions matter on fixed cameras
+tau_off = 0.005
+keyframe_every = 60   # static background drifts slowly

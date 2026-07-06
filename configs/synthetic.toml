@@ -1,0 +1,12 @@
+# Synthetic moving-box smoke test — no data roots needed. Fast sanity run.
+size = 128
+clip_len = 4
+batch = 4
+lr = 3e-4
+steps = 500
+max_skip = 0.8
+
+[model]
+tau_on = 0.02
+tau_off = 0.01
+keyframe_every = 30

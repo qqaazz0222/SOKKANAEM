@@ -1,0 +1,14 @@
+# Bonn RGB-D Dynamic — indoor with moving people. Dynamic objects must stay
+# active: lower tau_off keeps borderline patches updating (hysteresis wider).
+data = ["bonn:/data/bonn"]
+size = 128
+clip_len = 8
+batch = 8
+lr = 3e-4
+steps = 15000     # small dataset
+max_skip = 0.7
+
+[model]
+tau_on = 0.02
+tau_off = 0.005
+keyframe_every = 30

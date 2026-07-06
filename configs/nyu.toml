@@ -1,0 +1,13 @@
+# NYUv2 video — indoor handheld, similar to ScanNet but noisier depth (Kinect).
+data = ["nyu:/data/nyu"]
+size = 128
+clip_len = 8
+batch = 8
+lr = 3e-4
+steps = 20000
+max_skip = 0.8
+
+[model]
+tau_on = 0.02
+tau_off = 0.01
+keyframe_every = 30

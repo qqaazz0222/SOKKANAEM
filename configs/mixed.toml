@@ -1,0 +1,21 @@
+# Mixed multi-dataset training — the generalist checkpoint.
+# Sampler equalizes per-dataset probability (sokkanaem/data.py).
+# clip_len/tau are a compromise; per-dataset fine-tune from this checkpoint
+# with the dataset's own config for best results.
+data = [
+    "scannet:/data/scannet",
+    "nyu:/data/nyu",
+    "bonn:/data/bonn",
+    "kitti:/data/kitti",
+]
+size = 128
+clip_len = 6
+batch = 8
+lr = 3e-4
+steps = 50000
+max_skip = 0.7    # KITTI can't sustain 0.9; middle ground
+
+[model]
+tau_on = 0.02
+tau_off = 0.01
+keyframe_every = 30

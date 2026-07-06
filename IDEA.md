@@ -1,0 +1,172 @@
+# SOKKANAEM
+
+**S**patial-temporal **O**ptimized **K**ey-patch **K**ernel for **A**daptive **N**etwork **A**rchitecture and **E**fficient **M**amba
+
+> 프레임 간 변화가 발생한 패치만 '솎아내어' 연산하는, 실시간 비디오 깊이 추정 프레임워크
+
+---
+
+## 1. 문제 정의 (Problem Statement)
+
+### 1.1 기존의 한계
+
+* 딥러닝 기반 비디오 깊이 추정(Video Depth Estimation)은 매 프레임 전체 영역(모든 픽셀/패치)을 독립적으로 재연산한다. Transformer 기반 모델(DPT, Depth Anything 계열)은 토큰 수 $N$에 대해 $O(N^2)$ attention 비용을 매 프레임 지불한다.
+* 프레임 단위 독립 추론은 시간적 일관성(Temporal Consistency)도 보장하지 못해, 깊이 값이 프레임 간 튀는 플리커(flicker) 현상이 발생한다. 이를 후처리(NVDS 등)로 보정하면 지연(latency)이 추가된다.
+
+### 1.2 핵심 관찰
+
+* 비디오는 인접 프레임 간 **시공간적 중복성(Spatiotemporal Redundancy)** 이 매우 높다. 고정 카메라(CCTV) 환경에서 프레임 간 실제로 변하는 패치 비율은 통상 5–20% 수준이다.
+* 즉, 정적 배경을 매 프레임 재계산하는 것은 순수한 낭비다. **"변한 것만 다시 본다"** 는 원칙을 아키텍처 레벨에서 강제하면 연산량을 변화율에 비례하도록 만들 수 있다.
+
+### 1.3 왜 Mamba인가
+
+* Transformer에서 토큰을 제거(pruning)하면 attention의 전역 컨텍스트가 깨지고, 제거된 위치의 피처를 별도 캐시로 관리해야 한다.
+* Mamba(Selective SSM)는 순차 스캔으로 hidden state $h_t$를 갱신하는 $O(N)$ 모델이며, **이산화(discretization) 파라미터 $\Delta$가 "이 입력을 상태에 얼마나 반영할지"를 이미 제어하고 있다.** 여기에 마스크를 개입시키면 별도 모듈 없이 "상태 유지 = 연산 스킵"을 **수학적으로 정확하게(exact)** 구현할 수 있다. 이것이 본 프레임워크의 핵심 통찰이다 (§3.2).
+
+---
+
+## 2. 관련 연구 및 차별점 (Related Work & Positioning)
+
+| 계열 | 대표 연구 | 한계 / SOKKANAEM과의 차이 |
+|---|---|---|
+| 단안 깊이 추정 | MiDaS, DPT, Depth Anything v1/v2 | 프레임 독립 추론. 시간 축 정보 미활용, 연산량 고정 |
+| 비디오 깊이 추정 | NVDS, Video Depth Anything, DepthCrafter | 시간 일관성은 확보하나 전체 프레임 연산 유지. 실시간·에지 불가 |
+| 토큰 감축 | ToMe, EViT, DynamicViT | 이미지 단일 프레임 내 감축. 프레임 간 중복성 미활용, dense 출력 복원 문제 |
+| 효율적 비디오 추론 | Skip-Convolutions, DeltaCNN, Eventful Transformer | 변화 기반 스킵 개념은 공유. 단, CNN/Transformer 대상이며 상태 유지 메커니즘 부재 또는 캐시 관리가 복잡 |
+| Vision Mamba | Vim, VMamba, VideoMamba | 전체 토큰 스캔. 입력 적응적(input-adaptive) 연산 스킵 없음 |
+
+**차별점:** 변화 기반 스킵(Eventful Transformer 계열)과 SSM의 상태 유지 능력을 결합한 최초의 시도. 스킵된 패치의 정보는 캐시가 아니라 **Mamba hidden state 자체**가 보존하므로, 캐시 정합성 관리가 수식 레벨에서 공짜로 해결된다.
+
+---
+
+## 3. 방법론 (Method)
+
+### 3.0 전체 파이프라인
+
+```
+Frame t ──> Patchify ──> Change Detector ──> Active Mask M_t ─┐
+                │                                             ▼
+                └──────> Patch Embedding ──> Masked Mamba Backbone (Δ-gating)
+                                                    │
+Feature Cache (static) ─────────── Fuse ◄──────────┘
+                                    │
+                                    ▼
+                        Boundary Refinement Decoder ──> Dense Depth D_t
+```
+
+### 3.1 프론트엔드: 패치 레벨 변화 감지 (Change Detection)
+
+* 프레임을 $16 \times 16$ 패치로 분할, 위치 $i$의 변화 점수:
+
+$$s_i^{(t)} = \frac{\| P_i^{(t)} - P_i^{(t-1)} \|_2^2}{HW \cdot C}$$
+
+* $s_i > \tau$ 이면 **Active (1)**, 아니면 **Static (0)** 으로 바이너리 마스크 $M_t \in \{0,1\}^N$ 생성.
+* 안정화 기법 3종 (전부 픽셀 도메인 연산, 비용 무시 가능):
+  1. **Hysteresis:** 활성/비활성 전환에 이중 임계값($\tau_{on} > \tau_{off}$) 적용 — 경계 패치의 마스크 플리커 방지.
+  2. **Morphological Dilation:** 활성 영역을 1패치 팽창 — 움직이는 물체의 경계 누락 방지.
+  3. **주기적 전체 갱신(Keyframe Refresh):** 매 $K$ 프레임(예: $K=30$)마다 전체 패치 강제 활성화 — 조명 변화 등 저속 드리프트 누적 차단.
+* 조도 변화에 대한 강건성이 필요하면 MSE 대신 정규화된 코사인 유사도 또는 저해상도 피처 공간 거리로 교체 가능 (ablation 항목).
+
+### 3.2 백본: $\Delta$-Gating을 통한 조건부 상태 제어 (핵심 기여)
+
+Mamba의 ZOH(Zero-Order Hold) 이산화:
+
+$$\bar{A}_i = \exp(\Delta_i A), \qquad \bar{B}_i = (\Delta_i A)^{-1}(\exp(\Delta_i A) - I) \cdot \Delta_i B$$
+
+$$h_i = \bar{A}_i h_{i-1} + \bar{B}_i x_i$$
+
+여기서 마스크를 $\Delta$에 직접 곱한다:
+
+$$\tilde{\Delta}_i = M_i \cdot \Delta_i$$
+
+* **Static ($M_i = 0$):** $\tilde{\Delta}_i = 0 \Rightarrow \bar{A}_i = I,\ \bar{B}_i = 0 \Rightarrow h_i = h_{i-1}$.
+  → hidden state **정확한 항등 복사**. 근사가 아니라 이산화 수식의 극한값 그 자체이므로, 스킵으로 인한 상태 오염이 원천적으로 없다. 해당 토큰의 SSM 행렬 연산·게이트 연산은 커널에서 우회(bypass)한다.
+* **Active ($M_i = 1$):** 표준 Mamba 갱신. 변화 패치만 hidden state에 새 정보를 기입.
+* **학습:** $M_i$는 비미분 이진값이므로 Straight-Through Estimator(STE)로 역전파. 학습 시 랜덤 마스크 비율 스케줄링(0%→80% 스킵)으로 다양한 희소성에 강건하게 학습.
+
+**상태 배치(State Layout):** 시간 축 상태 유지가 목적이므로, 각 패치 위치가 프레임을 가로질러 자신의 temporal state를 갖는 구조가 필요하다. 설계안:
+
+* **T-Mamba(시간 축):** 패치 위치별로 프레임 축을 따라 스캔 — hidden state가 "그 위치의 시각적 기억"이 됨. Static 패치는 이 축에서 상태 복사.
+* **S-Mamba(공간 축):** 프레임 내 2D 스캔(VMamba식 cross-scan)으로 공간 컨텍스트 혼합. Active 패치만 통과, Static 패치는 캐시된 출력 피처 재사용.
+* 두 블록을 교차 적층(interleave). 시간 축이 상태를 유지하므로 공간 축의 피처 캐시는 stale해도 T-Mamba가 보정한다.
+
+### 3.3 디코더: 피처 융합 및 경계 보정 (Boundary Refinement)
+
+* Static 패치의 캐시 피처 + Active 패치의 갱신 피처를 위치대로 결합(scatter).
+* 패치 경계 불연속(blocking artifact) 억제: 경량 $3\times3$ conv 2층 + RGB guided filter. 무거운 refinement 네트워크는 배제 — 전체 연산 절감 효과를 잠식하지 않도록 디코더 예산은 백본의 10% 이하로 제한.
+* 손실 함수: scale-invariant depth loss + gradient matching loss(경계) + **temporal consistency loss** ($\| D_t - D_{t-1} \|$ on static regions — 정적 영역은 깊이도 불변이어야 함).
+
+### 3.4 학습 전략
+
+**2단계 커리큘럼 (고정 카메라 타깃):**
+
+1. **Stage 1 — 지도 학습 (TIMo):** 고정형 ToF 실내 모니터링 데이터셋 TIMo의 실측 depth GT로 지도 학습. 배포 도메인(고정 CCTV)과 일치하는 유일한 실측 GT 소스.
+2. **Stage 2 — Pseudo-GT Distillation (VIRAT):** depth GT가 없는 대규모 감시 비디오 VIRAT에 대해, SOTA 깊이 추정 모델(예: Depth Anything v2)로 의사 깊이 지도를 오프라인 생성 후 가상 GT로 distillation. 스케일 모호성은 scale-invariant loss가 흡수. 장면 다양성 확대 + 실 감시 도메인 적응.
+
+**공통 기법:**
+
+* **Teacher-Student 증류:** 마스크 없는 full-compute 모델(teacher)의 dense feature/depth를 masked 모델(student)이 모방 — 스킵으로 인한 성능 저하 최소화.
+* **Budget Loss:** $\mathcal{L}_{budget} = \lambda \cdot \max(0, \bar{M} - \rho)$ — 평균 활성 비율 $\bar{M}$이 목표 예산 $\rho$를 넘지 않도록 유도 (학습형 임계값 사용 시).
+* 사전학습 Depth Anything encoder에서 Mamba 백본으로 증류 후 fine-tuning하면 학습 비용 절감 가능.
+
+---
+
+## 4. 실험 계획 (Evaluation Plan)
+
+### 4.1 데이터셋
+
+* **고정 카메라(주 타깃):**
+  * **TIMo (Time-of-Flight Indoor Monitoring)** — 고정형 ToF 카메라 기반 실내 모니터링 RGB-Depth paired 데이터셋. 본 연구의 배포 시나리오(고정 CCTV 모니터링)와 도메인이 정확히 일치하며, 실측 depth GT를 제공하므로 **1단계 지도 학습(supervised)의 주 데이터셋**으로 사용.
+  * **VIRAT Video Dataset** — 고정형 감시 카메라 대규모 비디오. Depth GT 부재 → **SOTA급 깊이 추정 모델(예: Depth Anything v2)을 교사 모델로 삼아 의사 깊이 지도(pseudo depth GT)를 오프라인 구축**하고, 이를 가상 GT로 한 distillation으로 **2단계 학습** 진행 (§3.4). TIMo 학습 완료 후 착수. 실 감시 도메인의 스케일·장면 다양성 확보 목적.
+  * 자체 CCTV 시퀀스, ScanNet 정적 구간 — 보조.
+* **일반 비디오:** KITTI(주행), NYUv2 video, Bonn RGB-D Dynamic, Sintel — 카메라 모션 존재 환경에서의 성능 하한 확인.
+
+### 4.2 지표
+
+* **정확도:** AbsRel, RMSE, $\delta < 1.25$.
+* **시간 일관성:** TAE(Temporal Alignment Error), OPW(Optical-flow-based Warping error).
+* **효율:** FLOPs(변화율 대비 곡선), FPS/latency — RTX 4090 + **Jetson Orin(에지 타깃)** 실측. 이론 FLOPs가 아닌 wall-clock 필수(희소 연산은 GPU 활용률이 관건).
+
+### 4.3 베이스라인
+
+Depth Anything v2(프레임 독립), Video Depth Anything, NVDS, VideoMamba(마스크 없는 동일 백본 = 본 연구의 upper-bound teacher).
+
+### 4.4 Ablation
+
+| 항목 | 변수 |
+|---|---|
+| 임계값 $\tau$ | 정확도–연산량 trade-off 곡선 (핵심 그림) |
+| 패치 크기 | 8 / 16 / 32 |
+| 게이팅 위치 | $\Delta$-gating vs 입력 토큰 drop vs 출력 캐시만 |
+| 변화 감지기 | MSE vs cosine vs feature-space |
+| Keyframe 주기 $K$ | 드리프트 vs 연산량 |
+| Refinement | 없음 vs conv vs guided filter |
+
+---
+
+## 5. 예상 리스크 및 대응 (Risks & Mitigations)
+
+| 리스크 | 내용 | 대응 |
+|---|---|---|
+| **카메라 모션** | 이동 카메라에서는 전 패치가 활성화되어 이득 소멸 | (1) 주 타깃을 고정 카메라로 명시적 포지셔닝. (2) 확장: 저비용 global motion compensation(호모그래피 정렬) 후 잔차 변화만 감지 |
+| **불규칙 희소성의 GPU 비효율** | 이론 FLOPs 절감이 실제 속도로 안 이어질 수 있음 | 패치 마스크는 블록 단위 희소성이므로 gather–compute–scatter로 dense 커널 재사용. Mamba 스캔은 선형 순차 구조라 Transformer 대비 스킵 커널 구현이 단순 |
+| **저속 변화 드리프트** | 임계값 이하의 미세 변화 누적(조명 등) | Keyframe refresh + 변화 점수 누적 카운터(sub-threshold 누적치가 $\tau$ 초과 시 활성화) |
+| **경계 아티팩트** | 활성/정적 경계의 깊이 불연속 | Dilation + refinement decoder + gradient loss (§3.1, §3.3) |
+| **성능 상한** | teacher(full-compute) 대비 정확도 손실 | Budget–accuracy 곡선으로 운영점 선택 가능하게 제시. "정확도 1% 손실로 FLOPs 70% 절감" 형태의 주장 목표 |
+
+---
+
+## 6. 기여도 요약 (Contributions)
+
+1. **$\Delta$-Gating:** Mamba 이산화 수식에 변화 마스크를 개입시켜 "연산 스킵 = 정확한 상태 유지"를 수식 레벨에서 달성하는 최초의 조건부 SSM 게이팅 기법.
+2. **시간 일관성의 구조적 확보:** hidden state가 프레임 간 시각적 기억을 유지하므로, 후처리 없이 플리커 없는 비디오 깊이 추정 — 스킵할수록 오히려 정적 영역의 깊이가 안정.
+3. **입력 적응적 연산량:** 연산 비용이 장면 변화율에 비례. 고정 카메라 환경에서 FLOPs 대폭 절감, 에지 디바이스 실시간 3D 인지(가상 공간 모니터링, 실시간 공간 복원) 병목 해소.
+
+---
+
+## 7. 로드맵 (Roadmap)
+
+1. **PoC (4주):** 변화 감지기 + $\Delta$-gating을 기존 Vision Mamba(Vim/VMamba) 체크포인트에 주입, ScanNet 정적 구간에서 스킵 비율–정확도 곡선 확인. *Go/No-Go 지점: 스킵 50%에서 AbsRel 열화 5% 이내.*
+2. **본 학습 (8주):** T/S-Mamba 교차 백본. Stage 1: TIMo 지도 학습 → Stage 2: VIRAT pseudo-GT distillation (§3.4). 전체 벤치마크.
+3. **시스템 (4주):** 블록 희소 커널(Triton) 구현, Jetson Orin 실측, 데모(CCTV 실시간 깊이 스트림).
+4. **논문화:** 타깃 — CVPR/ICCV (efficiency track) 또는 실시간 시스템 강조 시 CoRL/IROS.

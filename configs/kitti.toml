@@ -1,0 +1,15 @@
+# KITTI — driving, ego-motion moves every patch. Skip potential is low:
+# cap random-mask skip at 0.5 so training matches deployment sparsity.
+# Higher tau: large photometric change per frame, avoid all-active collapse.
+data = ["kitti:/data/kitti"]
+size = 128        # ponytail: square resize distorts KITTI; aspect crop past PoC
+clip_len = 4      # fast scene turnover, long clips add little
+batch = 8
+lr = 3e-4
+steps = 30000
+max_skip = 0.5
+
+[model]
+tau_on = 0.05
+tau_off = 0.025
+keyframe_every = 10   # scene changes fast, refresh often

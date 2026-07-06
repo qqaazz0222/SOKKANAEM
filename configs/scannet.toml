@@ -1,0 +1,14 @@
+# ScanNet — indoor handheld scan. Smooth motion, moderate per-frame change.
+# Long clips exploit indoor temporal redundancy; skip ratio can go high.
+data = ["scannet:/data/scannet"]   # override root via CLI --data
+size = 128
+clip_len = 8
+batch = 8
+lr = 3e-4
+steps = 20000
+max_skip = 0.8
+
+[model]
+tau_on = 0.02
+tau_off = 0.01
+keyframe_every = 30

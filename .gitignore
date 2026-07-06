@@ -1,0 +1,26 @@
+# outputs
+work_dirs/
+*.pt
+*.pth
+*.ckpt
+
+# datasets (README examples extract into data/)
+data/
+
+# python
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+build/
+dist/
+
+# envs
+.venv/
+uv.lock
+
+# editors / OS
+.vscode/
+.idea/
+.DS_Store
