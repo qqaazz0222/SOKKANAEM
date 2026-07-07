@@ -48,6 +48,12 @@ class SpatialBlock(nn.Module):
         self.ssm = BiSpatialSSM(dim, d_state)
 
     def forward(self, tokens):
+        if self.training and tokens.requires_grad:
+            # chunked scan keeps (B, C, C, P, S) pairwise tensors alive for
+            # backward — OOMs at 256px+. Recompute them instead.
+            y = torch.utils.checkpoint.checkpoint(
+                lambda t: self.ssm(self.norm(t)), tokens, use_reentrant=False)
+            return tokens + y
         return tokens + self.ssm(self.norm(tokens))
 
     def forward_cached(self, tokens, mask, cache):
