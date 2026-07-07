@@ -42,6 +42,9 @@ def main():
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--max-skip", type=float, default=0.8,
                     help="final random-mask skip ratio")
+    ap.add_argument("--detector-mask", action="store_true",
+                    help="train with detector-driven masks instead of iid "
+                         "random (§4.4 mask-distribution ablation)")
     ap.add_argument("--resume", default=None, help="checkpoint to resume from")
     ap.add_argument("--work-dir", default=None,
                     help="output dir; default work_dirs/<config name>")
@@ -98,12 +101,15 @@ def main():
             clip, gt, valid = clip.to(dev), gt.to(dev), valid.to(dev)
             B, T = clip.shape[:2]
 
-            # random-mask scheduling: skip ratio ramps 0 -> max (§3.2)
-            skip = args.max_skip * min(1.0, step / max(1, args.steps // 2))
-            fm = (torch.rand(B, T, N, device=dev) > skip).float()
-            fm[:, 0] = 1.0  # first frame always full
-
-            depths, masks = model.forward_clip(clip, force_mask=fm)
+            if args.detector_mask:
+                skip = 0.0
+                depths, masks = model.forward_clip(clip)  # detector-driven
+            else:
+                # random-mask scheduling: skip ratio ramps 0 -> max (§3.2)
+                skip = args.max_skip * min(1.0, step / max(1, args.steps // 2))
+                fm = (torch.rand(B, T, N, device=dev) > skip).float()
+                fm[:, 0] = 1.0  # first frame always full
+                depths, masks = model.forward_clip(clip, force_mask=fm)
             loss = (si_log_loss(depths, gt, valid)
                     + 0.5 * grad_loss(depths, gt, valid)
                     + 0.1 * temporal_loss(depths, masks))
