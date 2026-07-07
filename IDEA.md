@@ -268,7 +268,19 @@ DPT-SwinV2-Tiny(40.9M) 371 FPS, DA V1 Small(24.8M) 280 FPS vs 본 모델(2.8M) �
 - **스트리밍 실측 active 20–28%** ($\tau$=0.05) vs 클립 평가 68% — 클립마다 keyframe이 리셋되는
   평가 프로토콜이 스킵률을 심하게 과소평가. 실배포 이득은 클립 지표보다 큼; 본 학습 평가에
   장클립/스트리밍 프로토콜 병기 필요.
-- 학습 필요 항목(마스크 분포 3-arm: no-skip / detector-driven fine-tune / max_skip 0.8)은 진행 중.
+- **마스크 분포 3-arm** (30k steps 각, Scene06 홀드아웃·aspect-crop 프로토콜, $\tau$=0.05):
+
+  | 학습 마스크 | AbsRel | $\delta_1$ | t-delta |
+  |---|---|---|---|
+  | **iid random, max_skip 0.5 (기본)** | **0.3272** | **0.427** | 0.093 |
+  | 없음 (max_skip 0) | 0.3326 | 0.429 | **0.931** |
+  | detector-driven 10k fine-tune | 0.3614 | 0.417 | 0.273 |
+  | iid random, max_skip 0.8 | 0.3952 | 0.361 | 0.078 |
+
+  (1) 마스크 학습의 진짜 기여는 **시간 안정성** — 없으면 t-delta 10× (정확도는 $\Delta$-gating
+  수식이 그냥 보장). (2) 과도한 스킵 학습(0.8)은 풀신호 gradient 부족으로 정확도 붕괴.
+  (3) **"학습-배포 분포 일치" 가설 기각** — detector 마스크는 공간 상관 blob이라 신호 다양성이
+  죽음; iid 무작위성 자체가 regularizer. **본 학습 레시피: iid random @ 0.5 유지.**
 - 패치 크기·게이팅 위치 변형은 모델 개조 필요로 보류 (Decoder patch 16 고정).
 - (프로토콜 주: 32프레임 클립은 median scaling 1회/클립이라 8프레임 대비 절대 수치 낮음 —
   항목 내 상대 비교만 유효.)
