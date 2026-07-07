@@ -1,8 +1,11 @@
 """Selective SSM with Δ-gating (IDEA.md §3.2).
 
-Pure-PyTorch reference implementation. The scan is a Python loop — correct
-but slow; it exists to validate the math (mask=0 ⇒ exact state copy).
-# ponytail: sequential scan, replace with Triton block-sparse kernel in phase 3.
+Pure-PyTorch implementation. The scan is chunked (segment-sum, Mamba-2
+style): within a chunk the recurrence is closed-form via pairwise decay
+factors exp(Lcum_i − Lcum_j), i ≥ j — exponents are always ≤ 0 (A < 0,
+Δ ≥ 0), so this is numerically stable with no clamping. Chunks carry the
+state sequentially, so the Python loop runs L/CHUNK times instead of L.
+The math is exact — identical to the step-by-step recurrence.
 
 Discretization (Mamba simplified ZOH):
     Ābar = exp(Δ · A),  B̄x = Δ · B · x
@@ -59,13 +62,27 @@ class SelectiveSSM(nn.Module):
         A = -torch.exp(self.A_log)                        # (d_inner, d_state)
 
         h = h0 if h0 is not None else u.new_zeros(B, self.d_inner, self.d_state)
+        s = dt.unsqueeze(-1) * A                          # (B, L, P, S), all ≤ 0
+        b = (dt * x).unsqueeze(-1) * Bp.unsqueeze(2)      # (B, L, P, S); mask=0 ⇒ 0
+        # ponytail: CHUNK=16 caps the (B, C, C, P, S) pairwise tensor; raise
+        # for fewer launches at the cost of memory (training keeps it for grad).
+        CHUNK = 16
         ys = []
-        for i in range(L):
-            dA = torch.exp(dt[:, i].unsqueeze(-1) * A)             # (B, d_inner, d_state)
-            dBx = (dt[:, i] * x[:, i]).unsqueeze(-1) * Bp[:, i].unsqueeze(1)
-            h = dA * h + dBx                                       # mask=0: h unchanged
-            ys.append((h * Cp[:, i].unsqueeze(1)).sum(-1))         # (B, d_inner)
-        y = torch.stack(ys, dim=1)
+        for c0 in range(0, L, CHUNK):
+            sc, bc = s[:, c0:c0 + CHUNK], b[:, c0:c0 + CHUNK]
+            C = sc.shape[1]
+            lc = sc.cumsum(1)                             # (B, C, P, S)
+            # pairwise decay exp(lc_i - lc_j), j ≤ i: exponents ≤ 0 ⇒ stable.
+            # j > i must be -inf *before* exp — those exponents are ≥ 0 and
+            # overflow to inf, and inf * 0 = NaN if masked after.
+            tri = torch.ones(C, C, dtype=torch.bool, device=u.device).tril()
+            w = (lc.unsqueeze(2) - lc.unsqueeze(1)) \
+                .masked_fill(~tri.view(1, C, C, 1, 1), -torch.inf).exp()
+            hc = lc.exp() * h.unsqueeze(1) \
+                + torch.einsum("bijps,bjps->bips", w, bc)  # (B, C, P, S)
+            ys.append(torch.einsum("bcps,bcs->bcp", hc, Cp[:, c0:c0 + CHUNK]))
+            h = hc[:, -1]
+        y = torch.cat(ys, dim=1)
         return self._finish(y, x, z), h
 
     def step(self, u, mask=None, h=None):
