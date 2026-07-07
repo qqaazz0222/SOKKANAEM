@@ -211,6 +211,21 @@ PoC 모델(dim 기본, size 128, clip 4)을 vkitti2 전체(100 시퀀스, 42,520
 한계: PoC 해상도(128px, 정사각 resize)와 30k step 제약으로 절대 정확도($\delta_1$ 0.68)는 낮음 —
 trade-off 곡선의 형태가 검증 대상이며, 절대 성능은 본 학습(§7)에서 확보.
 
+**Wall-clock 실측 (RTX 4090, 128px, batch 1, 스트리밍 300프레임):**
+
+| 모드 | active% | ms/frame | FPS |
+|---|---|---|---|
+| pixel gating, $\tau$=0 (풀 연산) | 100.0 | 9.64 | 103.7 |
+| pixel gating, $\tau$=0.1 | 56.2 | 9.66 | 103.5 |
+| GMC, $\tau$=0.4 | 33.4 | 10.22 | 97.8 |
+| GMC, $\tau$=0.8 | 12.1 | 10.22 | 97.8 |
+
+- 베이스라인 ~104 FPS — PoC 스케일에서 실시간 여유.
+- **스킵→속도 전환은 아직 0** — 예상대로(§5 리스크). 현재 구현은 마스크드 게이팅(전 위치 연산 후
+  $\Delta$ 게이트)이라 active%가 wall-clock에 반영 안 됨. gather–compute–scatter 커널(phase 3)이
+  active 12%를 실속도로 바꾸는 관문 — 정확도 근거는 §4.5 sweep으로 이미 확보됨.
+- GMC 오버헤드 +0.6 ms/frame — §3.5의 1–2ms 예산 내 (128px라 무축소 경로).
+
 ---
 
 ## 5. 예상 리스크 및 대응 (Risks & Mitigations)
