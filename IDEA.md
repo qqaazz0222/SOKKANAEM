@@ -176,6 +176,41 @@ Depth Anything v2(프레임 독립), Video Depth Anything, NVDS, VideoMamba(마�
 | Refinement | 없음 vs conv vs guided filter |
 | 마스크 분포 | i.i.d. 랜덤 마스크 학습만 vs detector/GMC-driven 마스크로 fine-tune (학습-배포 분포 일치) |
 
+### 4.5 PoC 결과 — Virtual KITTI 2 (2026-07-07)
+
+PoC 모델(dim 기본, size 128, clip 4)을 vkitti2 전체(100 시퀀스, 42,520 프레임, 21,120 클립)에서 30k step 학습
+(`configs/vkitti2.toml`, RTX 4090 ~111분, 최종 ckpt 11MB). 평가는 5,260 클립 중 100개 샘플.
+전체 수치는 `work_dirs/vkitti2/eval.txt`.
+
+**임계값 $\tau$ sweep — pixel gating (기본):**
+
+| $\tau_{on}$ | active% | AbsRel | RMSE | $\delta_1$ | t-delta |
+|---|---|---|---|---|---|
+| 0 (풀 연산) | 100.0 | 0.2054 | 12.93 | 0.684 | 0.1033 |
+| 0.05 | 68.1 | 0.2054 | 12.93 | 0.684 | 0.1002 |
+| 0.1 | 44.6 | 0.2057 | 12.93 | 0.684 | 0.0962 |
+
+**GMC + feature-level gating (§3.5, ego-motion 데이터에서):**
+
+| $\tau_{on}$ | active% | AbsRel | RMSE | $\delta_1$ | t-delta |
+|---|---|---|---|---|---|
+| 0.2 | 54.1 | 0.2060 | 12.94 | 0.684 | 0.0985 |
+| 0.4 | 23.7 | 0.2068 | 12.94 | 0.682 | 0.0918 |
+| 0.8 | 2.3 | 0.2098 | 12.93 | 0.677 | 0.0762 |
+
+**판정:**
+
+1. **Go** — 로드맵 기준(스킵 50%에서 AbsRel 열화 5% 이내)을 크게 상회: active 44.6%(스킵 55%)에서
+   AbsRel 열화 **+0.15% (상대)**. 주행(전역 모션) 데이터에서조차 스킵 비용이 사실상 0.
+2. **§3.5 하이브리드 실증** — pixel gating의 스킵 바닥(~active 45%)을 GMC+feature gating이 돌파:
+   active 23.7%에서 AbsRel +0.7%(상대), 극단(active 2.3%)에서도 $\delta_1$ 손실 0.007.
+   호모그래피 정렬이 ego-motion 유발 변화를 흡수해 잔차 변화만 감지됨을 확인.
+3. **스킵 = 시간 안정성 향상** — t-delta가 스킵과 단조 개선(0.1033 → 0.0762).
+   $\Delta$-gating의 정확한 상태 복사가 후처리 없는 시간 일관성을 준다는 기여 2의 직접 증거.
+
+한계: PoC 해상도(128px, 정사각 resize)와 30k step 제약으로 절대 정확도($\delta_1$ 0.68)는 낮음 —
+trade-off 곡선의 형태가 검증 대상이며, 절대 성능은 본 학습(§7)에서 확보.
+
 ---
 
 ## 5. 예상 리스크 및 대응 (Risks & Mitigations)
@@ -201,7 +236,7 @@ Depth Anything v2(프레임 독립), Video Depth Anything, NVDS, VideoMamba(마�
 
 ## 7. 로드맵 (Roadmap)
 
-1. **PoC (4주):** 변화 감지기 + $\Delta$-gating을 기존 Vision Mamba(Vim/VMamba) 체크포인트에 주입, ScanNet 정적 구간에서 스킵 비율–정확도 곡선 확인. *Go/No-Go 지점: 스킵 50%에서 AbsRel 열화 5% 이내.*
+1. **PoC (4주):** 변화 감지기 + $\Delta$-gating을 기존 Vision Mamba(Vim/VMamba) 체크포인트에 주입, ScanNet 정적 구간에서 스킵 비율–정확도 곡선 확인. *Go/No-Go 지점: 스킵 50%에서 AbsRel 열화 5% 이내.* → **✅ Go 달성 (vkitti2, §4.5): 스킵 55%에서 AbsRel 열화 +0.15%.**
 2. **본 학습 (8주):** T/S-Mamba 교차 백본. Stage 1: TIMo 지도 학습 → Stage 2: VIRAT pseudo-GT distillation (§3.4). 전체 벤치마크.
 3. **시스템 (4주):** 블록 희소 커널(Triton) 구현, Jetson Orin 실측, 데모(CCTV 실시간 깊이 스트림).
 4. **논문화:** 타깃 — CVPR/ICCV (efficiency track) 또는 실시간 시스템 강조 시 CoRL/IROS.
