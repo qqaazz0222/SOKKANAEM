@@ -13,7 +13,7 @@ from pathlib import Path
 
 import torch
 
-from sokkanaem import SOKKANAEM
+from sokkanaem import from_checkpoint
 from sokkanaem.data import build_mixed
 
 
@@ -52,11 +52,14 @@ def main():
     ap.add_argument("--max-clips", type=int, default=100)
     ap.add_argument("--sweep-tau", action="store_true",
                     help="sweep detector threshold: skip-vs-accuracy curve")
+    ap.add_argument("--gmc", action="store_true",
+                    help="ego-motion mode: Low-Res GMC + feature gating (§3.5)")
     args = ap.parse_args()
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
-    model = SOKKANAEM().to(dev).eval()
-    model.load_state_dict(torch.load(args.ckpt, map_location=dev))
+    kw = {"gmc": True, "tau_on": 0.1, "tau_off": 0.05} if args.gmc else {}
+    # trained [model] kwargs come from config.toml next to the ckpt
+    model = from_checkpoint(args.ckpt, dev, **kw).eval()
 
     dataset, _ = build_mixed(args.data, clip_len=args.clip_len,
                              clip_stride=args.clip_len, size=args.size)
@@ -66,9 +69,14 @@ def main():
     lines = [f"ckpt={args.ckpt} data={args.data} clips={len(dataset)} "
              f"max={args.max_clips}"]
 
-    taus = ([(0.0, 0.0), (0.005, 0.0025), (0.01, 0.005), (0.02, 0.01),
-             (0.05, 0.025), (0.1, 0.05)] if args.sweep_tau
-            else [(model.detector.tau_on, model.detector.tau_off)])
+    if not args.sweep_tau:
+        taus = [(model.detector.tau_on, model.detector.tau_off)]
+    elif args.gmc:  # relative-L1 feature scale (§3.5)
+        taus = [(0.0, 0.0), (0.05, 0.025), (0.1, 0.05), (0.2, 0.1),
+                (0.4, 0.2), (0.8, 0.4)]
+    else:
+        taus = [(0.0, 0.0), (0.005, 0.0025), (0.01, 0.005), (0.02, 0.01),
+                (0.05, 0.025), (0.1, 0.05)]
 
     hdr = "tau_on   active%  AbsRel   RMSE    d1      t-delta"
     lines += [hdr, "-" * len(hdr)]

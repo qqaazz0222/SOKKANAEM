@@ -16,7 +16,7 @@ import numpy as np
 import torch
 from PIL import Image
 
-from sokkanaem import SOKKANAEM
+from sokkanaem import SOKKANAEM, from_checkpoint
 from sokkanaem.data import SynthClips
 
 
@@ -53,12 +53,26 @@ def main():
                          "--ckpt given, 'none' disables")
     ap.add_argument("--size", type=int, default=128)
     ap.add_argument("--frames", type=int, default=60)
+    ap.add_argument("--gmc", action="store_true",
+                    help="ego-motion mode: Low-Res GMC + feature gating (§3.5)")
+    ap.add_argument("--tau-on", type=float, default=None,
+                    help="gate threshold override (feature scale with --gmc)")
+    ap.add_argument("--tau-off", type=float, default=None)
     args = ap.parse_args()
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
-    model = SOKKANAEM().to(dev).eval()
+    kw = {"gmc": args.gmc}
+    if args.gmc:  # feature-scale defaults (relative L1), not pixel MSE
+        kw.update(tau_on=0.1, tau_off=0.05)
+    if args.tau_on is not None:
+        kw["tau_on"] = args.tau_on
+    if args.tau_off is not None:
+        kw["tau_off"] = args.tau_off
     if args.ckpt:
-        model.load_state_dict(torch.load(args.ckpt, map_location=dev))
+        # trained [model] kwargs come from config.toml next to the ckpt
+        model = from_checkpoint(args.ckpt, dev, **kw).eval()
+    else:
+        model = SOKKANAEM(**kw).to(dev).eval()
     if args.save_dir is None and args.ckpt:
         args.save_dir = os.path.join(os.path.dirname(args.ckpt) or ".", "viz")
     if args.save_dir == "none":

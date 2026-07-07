@@ -11,12 +11,27 @@
 Mamba 이산화 파라미터 Δ에 변화 마스크를 곱한다 (Δ-gating):
 mask=0 이면 `exp(Δ·A)=I, Δ·B=0` 이므로 hidden state가 **정확히** 복사됨 — 연산 스킵 = 상태 유지가 수식 레벨에서 공짜.
 
+## 이동 카메라 확장: Low-Res GMC + Feature-level Gating (IDEA.md §3.5)
+
+고정 카메라를 넘어 블랙박스·드론 등 ego-motion 환경으로 확장하는 하이브리드 파이프라인.
+센서(IMU) 없이 순수 RGB만 사용, 전처리 병목 없이 스킵 이득 유지:
+
+1. **Low-Res GMC** (`gmc.py`) — 프레임을 저해상도(기본 128px)로 축소, 소수 특징점(≤50개) +
+   LK 추적 + RANSAC 호모그래피로 프레임 t-1을 현재 시점으로 워핑 (~1-2ms). 추적 실패 시 항등 폴백.
+   축소 이득은 HD 입력 기준 — PoC 기본 입력(128px)에서는 이미 저해상도라 무축소로 동작.
+2. **Feature-level Gating** — 워핑된 t-1과 현재 프레임을 patch embedding(초기 인코더)에 통과,
+   패치별 피처 상대 L1 차이로 active mask 확정. 정렬 잔차·조명 노이즈는 피처 레벨에서 흡수.
+   임계값 로직(hysteresis/dilation/keyframe)은 기존 detector와 공유.
+
+`SOKKANAEM(gmc=True)` 또는 `infer.py / eval.py --gmc`로 활성화. tau는 피처 스케일
+(기본 0.1/0.05, 픽셀 MSE 스케일과 다름). opencv 필요: `uv pip install -e ".[video]"`.
+
 ## 설치 (conda + uv)
 
 ```bash
 conda env create -f environment.yml   # python 3.11 + uv
 conda activate sokkanaem
-uv pip install -e ".[dev]"            # torch, numpy, pytest
+uv pip install -e ".[dev,video]"      # torch, numpy, pytest + opencv (GMC·비디오 입력)
 ```
 
 ## 사용
@@ -33,6 +48,8 @@ python scripts/train.py --config configs/synthetic.toml
 python scripts/train.py --config configs/scannet.toml --data scannet:/my/scannet
 python scripts/train.py --config configs/mixed.toml   # 멀티 데이터셋 혼합
 
+# 검증/추론 공통: ckpt 옆 config.toml에서 학습 시 [model] 설정(dim, tau, keyframe 등)
+# 자동 복원 — CLI 플래그(--gmc, --tau-on)가 우선.
 # 검증 — AbsRel/RMSE/δ1 + 시간 안정성 + active ratio, eval.txt에 기록
 python scripts/eval.py --ckpt work_dirs/scannet/latest.pt --data scannet:/data/scannet
 python scripts/eval.py --ckpt work_dirs/scannet/latest.pt --data scannet:/data/scannet --sweep-tau  # Go/No-Go 곡선
@@ -40,6 +57,10 @@ python scripts/eval.py --ckpt work_dirs/scannet/latest.pt --data scannet:/data/s
 # 추론 — depth PNG는 기본 <ckpt dir>/viz/ 저장 ('none'으로 비활성)
 python scripts/infer.py --ckpt work_dirs/scannet/latest.pt --video cam.mp4
 python scripts/infer.py --ckpt work_dirs/scannet/latest.pt --frames-dir data/cctv/seq0/rgb
+
+# 이동 카메라 (ego-motion): Low-Res GMC + feature gating (IDEA.md §3.5)
+python scripts/infer.py --ckpt work_dirs/kitti/latest.pt --video dashcam.mp4 --gmc
+python scripts/eval.py --ckpt work_dirs/kitti/latest.pt --data kitti:/data/kitti --gmc --sweep-tau
 ```
 
 ## Configs (`configs/`)
@@ -87,8 +108,11 @@ pseudo depth GT 생성 후 distillation. 두 데이터셋 모두 어댑터 추�
 ```
 sokkanaem/
   detector.py   변화 감지: MSE + hysteresis + dilation + keyframe refresh (§3.1)
+  gmc.py        Low-Res GMC: 저해상도 특징점 + RANSAC 호모그래피 + full-res 워핑 (§3.5)
   ssm.py        Selective SSM + Δ-gating, 순수 PyTorch 레퍼런스 스캔 (§3.2)
   model.py      T-Mamba/S-Mamba 교차 백본 + 경량 디코더, 스트리밍 API (§3.0-3.3)
+                스트림별 상태(SSM hidden/detector/prev frame)는 전부 state dict에 —
+                모델 하나로 다중 스트림 처리 가능. from_checkpoint()가 config 복원 로드
   data.py       멀티 데이터셋 로더: 어댑터 레지스트리 + 정규 클립 포맷 + 균등 혼합 샘플러
   losses.py     SI-log + gradient + temporal consistency (validity 마스킹)
 scripts/
@@ -97,7 +121,8 @@ scripts/
   infer.py      스트리밍 추론 + depth PNG 저장
   prepare_data.py  데이터셋 레이아웃 검증, 비디오 -> 프레임 추출
 configs/        데이터셋별 최적화 학습 설정 (TOML)
-tests/          핵심 주장 검증: mask=0 ⇒ bit-exact state copy
+tests/          핵심 주장 검증: mask=0 ⇒ bit-exact state copy, GMC 정렬 + 피처 게이팅,
+                다중 스트림 독립성, ckpt config 복원
 ```
 
 ## PoC 범위 (로드맵 1단계)

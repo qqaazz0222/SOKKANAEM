@@ -109,6 +109,39 @@ $$\tilde{\Delta}_i = M_i \cdot \Delta_i$$
 * **Budget Loss:** $\mathcal{L}_{budget} = \lambda \cdot \max(0, \bar{M} - \rho)$ — 평균 활성 비율 $\bar{M}$이 목표 예산 $\rho$를 넘지 않도록 유도 (학습형 임계값 사용 시).
 * 사전학습 Depth Anything encoder에서 Mamba 백본으로 증류 후 fine-tuning하면 학습 비용 절감 가능.
 
+### 3.5 이동 카메라 확장: Low-Res GMC + Feature-level Temporal Gating 하이브리드
+
+센서 데이터가 없는 순수 비디오 입력(Pure RGB) 환경에서, 카메라가 움직일 때 발생하는 전처리 병목을 제거하고 실시간성을 사수하기 위한 하이브리드 구조.
+
+**목적 (Objectives):**
+
+* **이동형 카메라(Ego-motion)로의 도메인 확장:** 고정 카메라(CCTV)를 넘어 블랙박스, 드론, 로봇 등 카메라 자체가 움직이는 환경에서도 변화 기반 스킵이 무력화되지 않도록 범용성 확보.
+* **'전처리 병목' 해결:** 카메라 움직임 보정에 무거운 딥러닝 Optical Flow나 고해상도 특징점 연산을 쓰면 배보다 배꼽이 커진다. 전처리 연산량을 최소화하여 SOKKANAEM 고유의 가속화 이득을 100% 보존.
+* **하드웨어 의존성 탈피:** IMU 등 외부 센서 없이 단일 RGB 스트림만으로 구동 — 어떤 영상이 입력되어도 즉각 적용 가능한 소프트웨어 독립성.
+
+**구동 메커니즘:**
+
+```
+[Frame t-1, t (원본)]
+        │
+        ├───> [1단계: Low-Res GMC] (1/4 해상도 축소 ──> 초고속 거시적 정렬 matrix 계산)
+        │            │
+        ▼            ▼
+[Mamba 백본 진입] ──> [2단계: Feature-level Gating] (초기 임베딩 피처 차이 비교로 정적 패치 최종 판정)
+        │
+        ▼
+[Selective Mamba Scan] (솎아진 핵심 활성 패치만 업데이트, 정적 패치는 이전 Hidden State 복사)
+```
+
+**1단계 — Low-Res GMC (거시적 전역 모션 보정):** 입력을 원본의 1/4 이하(예: $128 \times 128$)로 대폭 축소한 뒤, 극소수(30~50개)의 핵심 특징점만 추출하여 RANSAC 기반 호모그래피(Homography) 행렬을 계산. 이 행렬로 프레임 $t-1$을 현재 시점으로 워핑(Warping)하여 정렬한다. 저해상도라 연산 시간이 1~2ms 내외로 극히 짧으면서도, 카메라 이동/회전으로 인한 화면 전체의 거시적 픽셀 흐름을 상쇄한다. 추적 실패 시 항등 변환으로 폴백 — 활성 패치가 늘어날 뿐 오판은 없다.
+
+**2단계 — Feature-level Temporal Gating (미시적 패치 솎아내기):** 1단계에서 정렬된 프레임을 Mamba 백본의 가벼운 초기 인코더(Linear Projection = patch embedding)에 통과시켜, 피처 맵 $F_t$와 워핑된 $F_{t-1}$의 패치별 차이(상대 L1 Norm)로 최종 Active Patch Mask를 확정한다. 맘바 내부의 초기 피처를 그대로 재활용하므로 전처리 오버헤드가 없고, 1단계의 미세한 정렬 오차나 조명 노이즈를 고차원 피처 레벨에서 유연하게 걸러내어 진짜 움직이는 객체가 포함된 패치만 정확하게 솎아낸다. 임계값 처리(hysteresis + dilation + keyframe refresh)는 §3.1의 게이트 로직을 그대로 공유하며, 점수 소스만 픽셀 MSE에서 피처 상대 L1으로 교체된다.
+
+**기대 효과 및 학술적 의의:**
+
+* **FLOPs 절감율 유지:** 카메라가 움직여도 배경·카메라 모션과 일치하는 정적 패치를 스킵하므로 이동형 영상에서도 50% 이상의 연산량 감소 및 FPS 향상 기대.
+* **노이즈에 강인한 맘바 구조 입증 (Novelty):** 전처리 단에서 고의로 해상도를 낮춰 속도를 챙기는 대신 미세한 정렬 오차가 발생할 수 있지만, Mamba 고유의 순차적 Hidden State 전파가 이러한 노이즈를 스스로 흡수하며 매끄러운 깊이를 추정한다 — 논문의 핵심 기여로 어필 가능.
+
 ---
 
 ## 4. 실험 계획 (Evaluation Plan)
@@ -141,6 +174,7 @@ Depth Anything v2(프레임 독립), Video Depth Anything, NVDS, VideoMamba(마�
 | 변화 감지기 | MSE vs cosine vs feature-space |
 | Keyframe 주기 $K$ | 드리프트 vs 연산량 |
 | Refinement | 없음 vs conv vs guided filter |
+| 마스크 분포 | i.i.d. 랜덤 마스크 학습만 vs detector/GMC-driven 마스크로 fine-tune (학습-배포 분포 일치) |
 
 ---
 
@@ -148,7 +182,7 @@ Depth Anything v2(프레임 독립), Video Depth Anything, NVDS, VideoMamba(마�
 
 | 리스크 | 내용 | 대응 |
 |---|---|---|
-| **카메라 모션** | 이동 카메라에서는 전 패치가 활성화되어 이득 소멸 | (1) 주 타깃을 고정 카메라로 명시적 포지셔닝. (2) 확장: 저비용 global motion compensation(호모그래피 정렬) 후 잔차 변화만 감지 |
+| **카메라 모션** | 이동 카메라에서는 전 패치가 활성화되어 이득 소멸 | (1) 주 타깃을 고정 카메라로 명시적 포지셔닝. (2) 확장: Low-Res GMC + feature-level gating 하이브리드 (§3.5) — 호모그래피 정렬 후 피처 레벨 잔차 변화만 감지 |
 | **불규칙 희소성의 GPU 비효율** | 이론 FLOPs 절감이 실제 속도로 안 이어질 수 있음 | 패치 마스크는 블록 단위 희소성이므로 gather–compute–scatter로 dense 커널 재사용. Mamba 스캔은 선형 순차 구조라 Transformer 대비 스킵 커널 구현이 단순 |
 | **저속 변화 드리프트** | 임계값 이하의 미세 변화 누적(조명 등) | Keyframe refresh + 변화 점수 누적 카운터(sub-threshold 누적치가 $\tau$ 초과 시 활성화) |
 | **경계 아티팩트** | 활성/정적 경계의 깊이 불연속 | Dilation + refinement decoder + gradient loss (§3.1, §3.3) |
@@ -161,6 +195,7 @@ Depth Anything v2(프레임 독립), Video Depth Anything, NVDS, VideoMamba(마�
 1. **$\Delta$-Gating:** Mamba 이산화 수식에 변화 마스크를 개입시켜 "연산 스킵 = 정확한 상태 유지"를 수식 레벨에서 달성하는 최초의 조건부 SSM 게이팅 기법.
 2. **시간 일관성의 구조적 확보:** hidden state가 프레임 간 시각적 기억을 유지하므로, 후처리 없이 플리커 없는 비디오 깊이 추정 — 스킵할수록 오히려 정적 영역의 깊이가 안정.
 3. **입력 적응적 연산량:** 연산 비용이 장면 변화율에 비례. 고정 카메라 환경에서 FLOPs 대폭 절감, 에지 디바이스 실시간 3D 인지(가상 공간 모니터링, 실시간 공간 복원) 병목 해소.
+4. **센서리스 이동 카메라 확장 (§3.5):** Low-Res GMC + feature-level temporal gating 하이브리드로, IMU 없이 순수 RGB만으로 ego-motion 환경에서도 스킵 이득을 유지. 저해상도 정렬의 미세 오차는 Mamba hidden state 전파가 흡수 — 노이즈 강인성 자체가 기여점.
 
 ---
 

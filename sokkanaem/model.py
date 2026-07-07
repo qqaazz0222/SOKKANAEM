@@ -13,6 +13,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 from .detector import ChangeDetector
+from .gmc import GlobalMotionCompensator
 from .ssm import SelectiveSSM, BiSpatialSSM
 
 
@@ -70,10 +71,16 @@ class Decoder(nn.Module):
 
 class SOKKANAEM(nn.Module):
     def __init__(self, dim=192, depth=4, d_state=16, patch_size=16,
-                 tau_on=0.02, tau_off=0.01, keyframe_every=30):
+                 tau_on=0.02, tau_off=0.01, keyframe_every=30,
+                 gmc=False, gmc_lowres=128, gmc_corners=50):
+        """gmc=True enables the ego-motion path (IDEA.md §3.5): Low-Res GMC
+        warps frame t-1 onto t, then the change score is the relative L1
+        between the *embed features* of both — not pixel MSE — so tau_on/
+        tau_off are on the feature scale (see configs)."""
         super().__init__()
         self.p = patch_size
         self.dim = dim
+        self.gmc = GlobalMotionCompensator(gmc_lowres, gmc_corners) if gmc else None
         self.embed = nn.Conv2d(3, dim, patch_size, stride=patch_size)
         # interleave T, S, T, S, ...
         self.blocks = nn.ModuleList(
@@ -98,24 +105,43 @@ class SOKKANAEM(nn.Module):
 
     def step(self, frame, state=None):
         """One streaming inference/training step.
-        frame: (B, 3, H, W) in [0,1]. state: dict or None (resets detector).
+        frame: (B, 3, H, W) in [0,1]. state: dict or None (stream start).
+        All per-stream state (SSM hidden, detector bookkeeping, prev frame)
+        lives in the dict — one model can serve interleaved streams.
         Returns depth (B,1,H,W), state, info dict."""
         B, _, H, W = frame.shape
         gh, gw = H // self.p, W // self.p
         if state is None:
-            self.detector.reset()
-            state = {"hs": None}
+            state = {"hs": None, "prev": None, "det": None}
 
-        mask = self.detector(frame)                       # (B, N)
         tokens = self.embed(frame).flatten(2).transpose(1, 2)  # (B, N, D)
         # ponytail: embedding of static patches is recomputed here; caching it
         # is a trivial win for the phase-3 kernel, irrelevant to PoC accuracy.
+        if self.gmc is not None:
+            # §3.5: GMC-align prev frame, gate on embed-feature diff.
+            # Keyframes are all-active regardless — skip the warp + embed.
+            score = None
+            if not self.detector.is_keyframe(state["det"]) \
+                    and state["prev"] is not None:
+                with torch.no_grad():
+                    warped = self.gmc(state["prev"], frame)
+                    fw = self.embed(warped).flatten(2).transpose(1, 2)
+                    # relative L1 per patch — scale-free, robust to feature
+                    # magnitude drift across training
+                    num = (tokens - fw).abs().mean(-1)
+                    den = tokens.abs().mean(-1) + fw.abs().mean(-1) + 1e-6
+                    score = (num / den).view(B, gh, gw)
+            mask, det = self.detector.gate(score, B, gh, gw,
+                                           frame.device, state["det"])
+        else:
+            mask, det = self.detector(frame, state["det"])  # (B, N)
         tokens, hs = self._forward_tokens(tokens, mask, state["hs"])
 
         feat2d = tokens.transpose(1, 2).reshape(B, self.dim, gh, gw)
         depth = self.decoder(feat2d)
         info = {"mask": mask, "active_ratio": mask.mean().item()}
-        return depth, {"hs": hs}, info
+        return depth, {"hs": hs, "det": det,
+                       "prev": frame if self.gmc is not None else None}, info
 
     def forward_clip(self, clip, force_mask=None):
         """Training helper. clip: (B, T, 3, H, W). force_mask: (B, T, N) to
@@ -139,3 +165,22 @@ class SOKKANAEM(nn.Module):
             depths.append(depth)
             masks.append(mask)
         return torch.stack(depths, 1), torch.stack(masks, 1)
+
+
+def from_checkpoint(ckpt, device="cpu", **overrides):
+    """Rebuild the model with the [model] kwargs recorded next to the
+    checkpoint (work_dirs/<name>/config.toml, saved by train.py), load
+    weights, return it. overrides win — e.g. gmc=True with feature-scale
+    taus replaces the trained pixel-scale ones."""
+    import tomllib
+    from pathlib import Path
+
+    kw = {}
+    cfg = Path(ckpt).parent / "config.toml"
+    if cfg.exists():
+        with open(cfg, "rb") as f:
+            kw = tomllib.load(f).get("model", {})
+    kw.update(overrides)
+    model = SOKKANAEM(**kw).to(device)
+    model.load_state_dict(torch.load(ckpt, map_location=device))
+    return model

@@ -34,17 +34,55 @@ def test_static_scene_skips_and_depth_stable():
 def test_detector_hysteresis_and_keyframe():
     det = ChangeDetector(patch_size=16, tau_on=0.02, tau_off=0.01, keyframe_every=3)
     f = torch.zeros(1, 3, 64, 64)
-    assert det(f).mean() == 1.0        # frame 0: keyframe
-    assert det(f).mean() == 0.0        # frame 1: static
+    m, st = det(f)                     # frame 0: keyframe
+    assert m.mean() == 1.0
+    m, st = det(f, st)                 # frame 1: static
+    assert m.mean() == 0.0
     f2 = f.clone()
     f2[:, :, :16, :16] = 1.0
-    m = det(f2)                        # frame 2: one patch changed (+dilation)
+    m, st = det(f2, st)                # frame 2: one patch changed (+dilation)
     assert 0 < m.mean() < 1.0
-    assert det(f2).mean() == 1.0       # frame 3: keyframe refresh
+    m, st = det(f2, st)                # frame 3: keyframe refresh
+    assert m.mean() == 1.0
+    # per-stream state is external: a fresh stream starts at frame 0
+    m2, _ = det(f)
+    assert m2.mean() == 1.0 and st["frame_idx"] == 4
+
+
+def test_interleaved_streams_independent():
+    """All per-stream state lives in the state dict — two streams through
+    one model must not contaminate each other's masks."""
+    torch.manual_seed(0)
+    model = SOKKANAEM(keyframe_every=1000).eval()
+    fa = torch.rand(1, 3, 64, 64)
+    fb = torch.rand(1, 3, 64, 64)
+    with torch.no_grad():
+        _, sa, _ = model.step(fa, None)
+        _, sb, _ = model.step(fb, None)            # stream B interleaved
+        _, sa, ia = model.step(fa.clone(), sa)     # A unchanged -> static
+        _, sb, ib = model.step(torch.rand(1, 3, 64, 64), sb)  # B changed
+    assert ia["active_ratio"] == 0.0
+    assert ib["active_ratio"] > 0.5
+
+
+def test_from_checkpoint_restores_config(tmp_path):
+    """eval/infer must rebuild with the trained [model] kwargs."""
+    import torch as t
+    from sokkanaem import from_checkpoint
+    model = SOKKANAEM(dim=64, keyframe_every=7)
+    t.save(model.state_dict(), tmp_path / "latest.pt")
+    (tmp_path / "config.toml").write_text(
+        "[model]\ndim = 64\nkeyframe_every = 7\n")
+    m = from_checkpoint(tmp_path / "latest.pt")
+    assert m.dim == 64 and m.detector.keyframe_every == 7
+    # overrides win (e.g. --gmc feature-scale taus)
+    m = from_checkpoint(tmp_path / "latest.pt", keyframe_every=9)
+    assert m.detector.keyframe_every == 9
 
 
 if __name__ == "__main__":
     test_delta_gating_exact_state_copy()
     test_static_scene_skips_and_depth_stable()
     test_detector_hysteresis_and_keyframe()
+    test_interleaved_streams_independent()
     print("all gating tests passed")
