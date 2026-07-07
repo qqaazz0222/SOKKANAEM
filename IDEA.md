@@ -254,6 +254,19 @@ DPT-SwinV2-Tiny(40.9M) 371 FPS, DA V1 Small(24.8M) 280 FPS vs 본 모델(2.8M) �
 **366 FPS**, 정적 스트림+캐시 **460 FPS**, 128px 그래프 **1075 FPS**. 단일 GPU FPS는 동급 —
 차별점은 연산량∝변화율(에지 전력·멀티스트림)과 내장 시간 일관성. Jetson 실측이 결정적.
 
+**Ablation — eval-only 항목 (§4.4, vkitti2 32프레임 클립, 60클립):**
+
+- **Keyframe 주기 $K$**: $K$=5→1000에서 AbsRel 0.2888→0.2892, $\delta_1$ 변화 <0.001 —
+  **32프레임 범위 드리프트 실질 0**. $\Delta$-gating 상태 복사 + hysteresis만으로 안정 유지,
+  $K$=10(config)은 보수적, $K$=30이면 active 2.7%p 추가 절감 공짜. 수백 프레임 장기 스트림은 미검증.
+- **변화 감지기 MSE vs cosine** (iso-active): MSE $\tau$=0.05 → active 69.2%, AbsRel 0.2890 /
+  cosine $\tau$=0.3 → active 59.8%, AbsRel 0.2897. **동급 — 감지기 선택 둔감**, 더 싼 MSE 유지.
+  cosine은 점수 분포가 압축돼 $\tau$ 스케일만 다름 (0.3 ≈ MSE 0.05).
+- 학습 필요 항목(마스크 분포 3-arm: no-skip / detector-driven fine-tune / max_skip 0.8)은 진행 중.
+- 패치 크기·게이팅 위치 변형은 모델 개조 필요로 보류 (Decoder patch 16 고정).
+- (프로토콜 주: 32프레임 클립은 median scaling 1회/클립이라 8프레임 대비 절대 수치 낮음 —
+  항목 내 상대 비교만 유효.)
+
 ---
 
 ## 5. 예상 리스크 및 대응 (Risks & Mitigations)
