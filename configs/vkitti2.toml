@@ -2,7 +2,8 @@
 # Same motion profile as kitti.toml; dense depth makes it a good warm-up
 # source before real-KITTI fine-tune.
 data = ["vkitti2:/data/vkitti2"]
-size = 128        # ponytail: square resize distorts wide frames; aspect crop past PoC
+holdout = ["Scene06"]  # val split: never trained on, eval.py --holdout Scene06
+size = 128        # aspect-preserving shorter-side resize + center crop
 clip_len = 4
 batch = 8
 lr = 3e-4

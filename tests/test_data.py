@@ -59,6 +59,38 @@ def test_vkitti2_layout_and_sky(tmp_path):
     assert valid.min() == 0  # sky marked invalid
 
 
+def test_holdout_split(tmp_path):
+    _fake_dataset(tmp_path / "a", n_seq=3)
+    spec = [f"folder:{tmp_path/'a'}"]
+    full, _ = build_mixed(spec, clip_len=4, size=64)
+    train, _ = build_mixed(spec, clip_len=4, size=64, holdout=["seq1"])
+    val, _ = build_mixed(spec, clip_len=4, size=64, holdout=["seq1"], val=True)
+    assert len(train) + len(val) == len(full)
+    assert len(val) == len(full) // 3  # 1 of 3 identical seqs
+    # no path overlap between splits
+    train_paths = {p for d in train.datasets for s, *_ in d.clips for p, _ in s}
+    val_paths = {p for d in val.datasets for s, *_ in d.clips for p, _ in s}
+    assert not (train_paths & val_paths)
+
+
+def test_aspect_preserving_crop(tmp_path):
+    # 128x64 wide frame -> size 64: shorter side fits, width center-cropped
+    rgb = tmp_path / "seq0" / "rgb"
+    dep = tmp_path / "seq0" / "depth"
+    rgb.mkdir(parents=True)
+    dep.mkdir(parents=True)
+    for t in range(4):
+        img = np.zeros((64, 128, 3), dtype=np.uint8)
+        img[:, :32] = 255  # left quarter white; must be cropped away
+        Image.fromarray(img).save(rgb / f"{t:06d}.png")
+        Image.fromarray(np.full((64, 128), 3000, dtype=np.uint16)).save(
+            dep / f"{t:06d}.png")
+    mixed, _ = build_mixed([f"folder:{tmp_path}"], clip_len=4, size=64)
+    frames, depth, _ = mixed[0]
+    assert frames.shape == (4, 3, 64, 64) and depth.shape == (4, 1, 64, 64)
+    assert frames.max() == 0.0  # center crop of a wide frame drops the left edge
+
+
 def test_train_step_on_fake_data(tmp_path):
     _fake_dataset(tmp_path / "a")
     from sokkanaem import SOKKANAEM

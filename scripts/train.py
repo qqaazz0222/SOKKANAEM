@@ -45,6 +45,9 @@ def main():
     ap.add_argument("--detector-mask", action="store_true",
                     help="train with detector-driven masks instead of iid "
                          "random (§4.4 mask-distribution ablation)")
+    ap.add_argument("--holdout", action="append", default=None,
+                    help="path substring for the val split (repeatable); "
+                         "matching sequences are excluded from training")
     ap.add_argument("--resume", default=None, help="checkpoint to resume from")
     ap.add_argument("--work-dir", default=None,
                     help="output dir; default work_dirs/<config name>")
@@ -83,7 +86,7 @@ def main():
 
     if args.data:
         dataset, sampler = build_mixed(args.data, clip_len=args.clip_len,
-                                       size=args.size)
+                                       size=args.size, holdout=args.holdout)
         loader = torch.utils.data.DataLoader(
             dataset, batch_size=args.batch, sampler=sampler,
             num_workers=args.workers, drop_last=True)
@@ -120,6 +123,8 @@ def main():
             if step % 50 == 0:
                 log(f"step {step:4d}  loss {loss.item():.4f}  skip {skip:.2f}")
             step += 1
+            if step % 2000 == 0:  # crash insurance for long runs
+                torch.save(model.state_dict(), work / "latest.pt")
 
     ckpt = work / "latest.pt"
     torch.save(model.state_dict(), ckpt)

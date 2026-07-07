@@ -56,6 +56,9 @@ def main():
                     help="ego-motion mode: Low-Res GMC + feature gating (§3.5)")
     ap.add_argument("--spatial-cache", action="store_true",
                     help="reuse static-patch spatial outputs (§4.5 wall-clock)")
+    ap.add_argument("--holdout", action="append", default=None,
+                    help="path substring of the val split (repeatable); "
+                         "evaluates ONLY matching sequences")
     args = ap.parse_args()
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
@@ -66,7 +69,8 @@ def main():
     model = from_checkpoint(args.ckpt, dev, **kw).eval()
 
     dataset, _ = build_mixed(args.data, clip_len=args.clip_len,
-                             clip_stride=args.clip_len, size=args.size)
+                             clip_stride=args.clip_len, size=args.size,
+                             holdout=args.holdout, val=True)
     loader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
 
     out = Path(args.ckpt).parent / "eval.txt"

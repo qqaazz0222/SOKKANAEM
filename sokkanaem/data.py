@@ -117,15 +117,22 @@ class ClipDataset(Dataset):
     def __len__(self):
         return len(self.clips)
 
+    def _fit(self, img, resample):
+        """Aspect-preserving: resize shorter side to self.size, center-crop."""
+        w, h = img.size
+        s = self.size / min(w, h)
+        img = img.resize((max(self.size, round(w * s)),
+                          max(self.size, round(h * s))), resample)
+        left = (img.width - self.size) // 2
+        top = (img.height - self.size) // 2
+        return img.crop((left, top, left + self.size, top + self.size))
+
     def _rgb(self, path):
-        img = Image.open(path).convert("RGB").resize(
-            (self.size, self.size), Image.BILINEAR)
-        # ponytail: square resize distorts wide frames (KITTI); switch to
-        # aspect-preserving crop past PoC.
+        img = self._fit(Image.open(path).convert("RGB"), Image.BILINEAR)
         return torch.from_numpy(np.asarray(img).copy()).permute(2, 0, 1).float() / 255
 
     def _depth(self, path):
-        img = Image.open(path).resize((self.size, self.size), Image.NEAREST)
+        img = self._fit(Image.open(path), Image.NEAREST)
         d = np.asarray(img).astype(np.float32)
         d[d == 65535] = 0  # 16-bit saturation = no reading (vkitti2 sky)
         return (torch.from_numpy(d) / self.scale).unsqueeze(0)
@@ -169,8 +176,11 @@ class SynthClips(torch.utils.data.IterableDataset):
             yield f, d, torch.ones_like(d)
 
 
-def build_mixed(specs, **kw):
+def build_mixed(specs, holdout=None, val=False, **kw):
     """specs: ["scannet:/path", "folder:/path:2000", ...].
+    holdout: list of path substrings (e.g. ["Scene06"]) naming the val
+    split; sequences whose paths match go to val. val=False returns the
+    train split (matches excluded), val=True the val split (matches only).
     Returns (ConcatDataset, sampler) — sampler equalizes per-dataset draw
     probability so a huge dataset doesn't drown a small one."""
     datasets = []
@@ -180,9 +190,14 @@ def build_mixed(specs, **kw):
         fn, scale = ADAPTERS[name]
         if len(parts) > 2:
             scale = float(parts[2])
-        ds = ClipDataset(fn(root), scale, **kw)
+        seqs = fn(root)
+        if holdout:
+            seqs = [s for s in seqs
+                    if any(h in s[0][0] for h in holdout) == val]
+        ds = ClipDataset(seqs, scale, **kw)
         if len(ds) == 0:
-            raise ValueError(f"no clips found for {spec}")
+            raise ValueError(f"no clips found for {spec}"
+                             + (f" (holdout={holdout}, val={val})" if holdout else ""))
         datasets.append(ds)
     mixed = ConcatDataset(datasets)
     weights = torch.cat([torch.full((len(d),), 1.0 / len(d)) for d in datasets])
