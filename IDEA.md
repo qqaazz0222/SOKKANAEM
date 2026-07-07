@@ -262,6 +262,12 @@ DPT-SwinV2-Tiny(40.9M) 371 FPS, DA V1 Small(24.8M) 280 FPS vs 본 모델(2.8M) �
 - **변화 감지기 MSE vs cosine** (iso-active): MSE $\tau$=0.05 → active 69.2%, AbsRel 0.2890 /
   cosine $\tau$=0.3 → active 59.8%, AbsRel 0.2897. **동급 — 감지기 선택 둔감**, 더 싼 MSE 유지.
   cosine은 점수 분포가 압축돼 $\tau$ 스케일만 다름 (0.3 ≈ MSE 0.05).
+- **장기 스트림 드리프트 (270프레임 × 4 시퀀스, Scene06 스트리밍)**: keyframe을 완전히 꺼도
+  ($K$=∞) late-frame AbsRel이 early 대비 **−3.8% (개선)** — 저속 드리프트(§5 리스크) vkitti2
+  스케일에서 미발현, hidden state 워밍업이 오히려 이득. 본 학습 $K$=30+ 안전.
+- **스트리밍 실측 active 20–28%** ($\tau$=0.05) vs 클립 평가 68% — 클립마다 keyframe이 리셋되는
+  평가 프로토콜이 스킵률을 심하게 과소평가. 실배포 이득은 클립 지표보다 큼; 본 학습 평가에
+  장클립/스트리밍 프로토콜 병기 필요.
 - 학습 필요 항목(마스크 분포 3-arm: no-skip / detector-driven fine-tune / max_skip 0.8)은 진행 중.
 - 패치 크기·게이팅 위치 변형은 모델 개조 필요로 보류 (Decoder patch 16 고정).
 - (프로토콜 주: 32프레임 클립은 median scaling 1회/클립이라 8프레임 대비 절대 수치 낮음 —
