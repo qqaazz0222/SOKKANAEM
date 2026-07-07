@@ -58,10 +58,12 @@ def main():
     ap.add_argument("--tau-on", type=float, default=None,
                     help="gate threshold override (feature scale with --gmc)")
     ap.add_argument("--tau-off", type=float, default=None)
+    ap.add_argument("--spatial-cache", action="store_true",
+                    help="reuse static-patch spatial outputs (§4.5 wall-clock)")
     args = ap.parse_args()
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
-    kw = {"gmc": args.gmc}
+    kw = {"gmc": args.gmc, "spatial_cache": args.spatial_cache}
     if args.gmc:  # feature-scale defaults (relative L1), not pixel MSE
         kw.update(tau_on=0.1, tau_off=0.05)
     if args.tau_on is not None:

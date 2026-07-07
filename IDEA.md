@@ -223,11 +223,24 @@ trade-off 곡선의 형태가 검증 대상이며, 절대 성능은 본 학습(�
 - 최초 프로파일에서 spatial 블록의 Python 순차 스캔이 지연의 95–99%로 확인 →
   **청크 segment-sum 스캔**(Mamba-2 스타일, 수식 동일·수치 안정)으로 교체.
   104 → 372 FPS (**3.6×**), 512px에서는 137 → 19 ms/frame (**7×**). 학습 forward도 동일 경로라 함께 가속.
-- **스킵→속도 전환은 아직 0** — 예상대로(§5 리스크). 현재 구현은 마스크드 게이팅(전 위치 연산 후
-  $\Delta$ 게이트)이라 active%가 wall-clock에 반영 안 됨. 남은 병목도 spatial(풀 연산 설계, 75–92%)이므로
-  스킵 이득의 실속도 전환은 spatial 블록의 static-patch 출력 캐싱(phase 3)이 관문 —
-  정확도 근거는 §4.5 sweep으로 이미 확보됨.
 - GMC 오버헤드 +0.8 ms/frame — §3.5의 1–2ms 예산 내 (128px라 무축소 경로).
+
+**Static-patch 출력 캐싱 (phase 3, `--spatial-cache`):** spatial 블록에서 active 패치만
+gather→scan→scatter, static 패치는 직전 출력 토큰 재사용 (키프레임마다 전체 리프레시).
+temporal $\Delta$-gating과 달리 **근사** — sparse scan이 static 패치의 문맥 기여를 생략.
+
+| 지점 (GMC, vkitti2) | active% | FPS 128px | FPS 512px | AbsRel | t-delta |
+|---|---|---|---|---|---|
+| 캐시 없음, $\tau$=0.8 | ~12–33 | 292 | 40.2 | 0.2098 | 0.076 |
+| 캐시 + $\tau$=0.8 | ~12–33 | **516** | **70.7** | 0.2185 | **0.068** |
+| 캐시 + $\tau$=0.2–0.4 (중간 active) | 54–72 | 316–374 | 34–41 | 0.235–0.245 | 0.54–0.79 |
+
+- **저-active 운영점(≤15%)에서 유효**: 1.8× 속도, AbsRel +4%(상대), t-delta는 오히려 개선
+  (frozen 출력 = 플리커 0). **중간 active%(40–80%)는 U자형 악화** — fresh/stale 토큰 경계의
+  문맥 불일치로 t-delta 6× 폭증. 속도 이득도 (1−active%)에 비례라 이 구간은 켤 이유 없음.
+- vkitti2(주행)는 캐시에 최악 조건 — 주 타깃(고정 CCTV, active 5–10% 상시)이 정확히
+  캐시가 무손실·최고속인 구간. 고정 카메라 데이터 확보 후 재검증.
+- 학습은 항상 풀 spatial (inference-only 최적화). 잔여 개선 여지: 캐시 사용 시 keyframe 주기 단축.
 
 ---
 

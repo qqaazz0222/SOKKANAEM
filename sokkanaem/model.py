@@ -35,10 +35,12 @@ class TemporalBlock(nn.Module):
 
 
 class SpatialBlock(nn.Module):
-    """In-frame context mixing. Full compute in PoC.
-    # ponytail: static-patch output caching (gather-compute-scatter) is
-    # phase-3 kernel work; here spatial is O(N) and not the bottleneck.
-    """
+    """In-frame context mixing. Full compute by default; with a cache of
+    last outputs, active patches are gathered (raster order preserved),
+    scanned as a subsequence, and scattered back — static patches reuse
+    their cached output token (phase 3, IDEA.md §4.5). Approximation:
+    the sparse scan skips static patches' context contribution; their
+    context is frozen in the cache and refreshed on every keyframe."""
 
     def __init__(self, dim, d_state=16):
         super().__init__()
@@ -47,6 +49,20 @@ class SpatialBlock(nn.Module):
 
     def forward(self, tokens):
         return tokens + self.ssm(self.norm(tokens))
+
+    def forward_cached(self, tokens, mask, cache):
+        """tokens: (B, N, D), mask: (B, N) 0/1, cache: (B, N, D) previous
+        outputs. Returns (out, new_cache) — they are the same tensor."""
+        if cache is None or bool(mask.all()):
+            out = self.forward(tokens)
+            return out, out
+        out = cache.clone()
+        for b in range(tokens.shape[0]):
+            idx = mask[b].nonzero(as_tuple=True)[0]
+            if idx.numel():
+                sub = tokens[b:b + 1, idx]
+                out[b, idx] = (sub + self.ssm(self.norm(sub)))[0]
+        return out, out
 
 
 class Decoder(nn.Module):
@@ -72,7 +88,8 @@ class Decoder(nn.Module):
 class SOKKANAEM(nn.Module):
     def __init__(self, dim=192, depth=4, d_state=16, patch_size=16,
                  tau_on=0.02, tau_off=0.01, keyframe_every=30,
-                 gmc=False, gmc_lowres=128, gmc_corners=50):
+                 gmc=False, gmc_lowres=128, gmc_corners=50,
+                 spatial_cache=False):
         """gmc=True enables the ego-motion path (IDEA.md §3.5): Low-Res GMC
         warps frame t-1 onto t, then the change score is the relative L1
         between the *embed features* of both — not pixel MSE — so tau_on/
@@ -80,6 +97,7 @@ class SOKKANAEM(nn.Module):
         super().__init__()
         self.p = patch_size
         self.dim = dim
+        self.spatial_cache = spatial_cache  # inference-only (§4.5 wall-clock)
         self.gmc = GlobalMotionCompensator(gmc_lowres, gmc_corners) if gmc else None
         self.embed = nn.Conv2d(3, dim, patch_size, stride=patch_size)
         # interleave T, S, T, S, ...
@@ -91,17 +109,23 @@ class SOKKANAEM(nn.Module):
         self.detector = ChangeDetector(patch_size, tau_on, tau_off,
                                        keyframe_every=keyframe_every)
 
-    def _forward_tokens(self, tokens, mask, hs):
-        """Run backbone. hs: list of temporal states (one per TemporalBlock)."""
-        new_hs, ti = [], 0
+    def _forward_tokens(self, tokens, mask, hs, sp=None):
+        """Run backbone. hs: list of temporal states (one per TemporalBlock),
+        sp: list of spatial output caches (one per SpatialBlock) or None
+        (full spatial compute, no caching)."""
+        new_hs, new_sp, ti, si = [], [], 0, 0
         for blk in self.blocks:
             if isinstance(blk, TemporalBlock):
                 tokens, h = blk.step(tokens, mask, hs[ti] if hs else None)
                 new_hs.append(h)
                 ti += 1
+            elif sp is not None:
+                tokens, c = blk.forward_cached(tokens, mask, sp[si])
+                new_sp.append(c)
+                si += 1
             else:
                 tokens = blk(tokens)
-        return tokens, new_hs
+        return tokens, new_hs, new_sp
 
     def step(self, frame, state=None):
         """One streaming inference/training step.
@@ -112,7 +136,8 @@ class SOKKANAEM(nn.Module):
         B, _, H, W = frame.shape
         gh, gw = H // self.p, W // self.p
         if state is None:
-            state = {"hs": None, "prev": None, "det": None}
+            n_sp = sum(isinstance(b, SpatialBlock) for b in self.blocks)
+            state = {"hs": None, "prev": None, "det": None, "sp": [None] * n_sp}
 
         tokens = self.embed(frame).flatten(2).transpose(1, 2)  # (B, N, D)
         # ponytail: embedding of static patches is recomputed here; caching it
@@ -135,12 +160,14 @@ class SOKKANAEM(nn.Module):
                                            frame.device, state["det"])
         else:
             mask, det = self.detector(frame, state["det"])  # (B, N)
-        tokens, hs = self._forward_tokens(tokens, mask, state["hs"])
+        tokens, hs, sp = self._forward_tokens(
+            tokens, mask, state["hs"],
+            sp=state["sp"] if self.spatial_cache else None)
 
         feat2d = tokens.transpose(1, 2).reshape(B, self.dim, gh, gw)
         depth = self.decoder(feat2d)
         info = {"mask": mask, "active_ratio": mask.mean().item()}
-        return depth, {"hs": hs, "det": det,
+        return depth, {"hs": hs, "det": det, "sp": sp or state["sp"],
                        "prev": frame if self.gmc is not None else None}, info
 
     def forward_clip(self, clip, force_mask=None):
@@ -156,7 +183,7 @@ class SOKKANAEM(nn.Module):
                     state = {"hs": None}
                 mask = force_mask[:, t]
                 tokens = self.embed(clip[:, t]).flatten(2).transpose(1, 2)
-                tokens, state["hs"] = self._forward_tokens(tokens, mask, state["hs"])
+                tokens, state["hs"], _ = self._forward_tokens(tokens, mask, state["hs"])
                 gh, gw = clip.shape[-2] // self.p, clip.shape[-1] // self.p
                 depth = self.decoder(tokens.transpose(1, 2).reshape(B, self.dim, gh, gw))
             else:

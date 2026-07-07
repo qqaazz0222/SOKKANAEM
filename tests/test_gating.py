@@ -86,3 +86,30 @@ if __name__ == "__main__":
     test_detector_hysteresis_and_keyframe()
     test_interleaved_streams_independent()
     print("all gating tests passed")
+
+
+def test_spatial_cache_matches_full_compute():
+    """Static frames: cached spatial outputs must equal full recompute.
+    Partially-active frames: cached path must refresh active patches."""
+    torch.manual_seed(0)
+    kw = dict(keyframe_every=1000, tau_on=0.02, tau_off=0.01)
+    m_full = SOKKANAEM(**kw).eval()
+    m_cache = SOKKANAEM(**kw, spatial_cache=True).eval()
+    m_cache.load_state_dict(m_full.state_dict())
+
+    frame = torch.rand(1, 3, 64, 64)
+    with torch.no_grad():
+        d1, s1, _ = m_full.step(frame, None)
+        d2, s2, _ = m_cache.step(frame, None)
+        assert torch.allclose(d1, d2, atol=1e-5), "first frame is full compute"
+        # identical frame -> all static -> cache path returns cached tokens
+        d1b, s1, _ = m_full.step(frame.clone(), s1)
+        d2b, s2, i2 = m_cache.step(frame.clone(), s2)
+        assert i2["active_ratio"] == 0.0
+        assert torch.allclose(d1b, d2b, atol=1e-5), \
+            "static scene: cache must reproduce full compute"
+        # perturb one region -> partial activity, depth must move there
+        frame2 = frame.clone()
+        frame2[..., :32, :32] = torch.rand(1, 3, 32, 32)
+        _, _, i3 = m_cache.step(frame2, s2)
+        assert 0.0 < i3["active_ratio"] < 1.0, "partial change expected"

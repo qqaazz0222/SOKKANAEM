@@ -54,10 +54,14 @@ def main():
                     help="sweep detector threshold: skip-vs-accuracy curve")
     ap.add_argument("--gmc", action="store_true",
                     help="ego-motion mode: Low-Res GMC + feature gating (§3.5)")
+    ap.add_argument("--spatial-cache", action="store_true",
+                    help="reuse static-patch spatial outputs (§4.5 wall-clock)")
     args = ap.parse_args()
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     kw = {"gmc": True, "tau_on": 0.1, "tau_off": 0.05} if args.gmc else {}
+    if args.spatial_cache:
+        kw["spatial_cache"] = True
     # trained [model] kwargs come from config.toml next to the ckpt
     model = from_checkpoint(args.ckpt, dev, **kw).eval()
 
