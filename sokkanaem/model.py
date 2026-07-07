@@ -98,6 +98,7 @@ class SOKKANAEM(nn.Module):
         self.p = patch_size
         self.dim = dim
         self.spatial_cache = spatial_cache  # inference-only (§4.5 wall-clock)
+        self._core = None  # CUDA-graph-captured full-compute path (opt-in)
         self.gmc = GlobalMotionCompensator(gmc_lowres, gmc_corners) if gmc else None
         self.embed = nn.Conv2d(3, dim, patch_size, stride=patch_size)
         # interleave T, S, T, S, ...
@@ -108,6 +109,24 @@ class SOKKANAEM(nn.Module):
         self.decoder = Decoder(dim, patch_size)
         self.detector = ChangeDetector(patch_size, tau_on, tau_off,
                                        keyframe_every=keyframe_every)
+
+    def _step_core(self, frame, mask, hs):
+        """Full-compute streaming step as one pure-tensor function (embed →
+        blocks → decoder). No CPU-dependent branching, so it is capturable
+        by CUDA graphs via torch.compile(mode='reduce-overhead')."""
+        B, _, H, W = frame.shape
+        tokens = self.embed(frame).flatten(2).transpose(1, 2)
+        tokens, new_hs, _ = self._forward_tokens(tokens, mask, hs)
+        feat2d = tokens.transpose(1, 2).reshape(B, self.dim, H // self.p, W // self.p)
+        return self.decoder(feat2d), new_hs
+
+    def enable_cuda_graphs(self):
+        """Route the full-compute path through CUDA graphs (inference only).
+        The sparse spatial-cache path has dynamic shapes and stays eager —
+        with spatial_cache=True this only accelerates keyframes' full pass
+        never taken here, so it is a no-op; use on full-compute models."""
+        self._core = torch.compile(self._step_core, mode="reduce-overhead")
+        return self
 
     def _forward_tokens(self, tokens, mask, hs, sp=None):
         """Run backbone. hs: list of temporal states (one per TemporalBlock),
@@ -139,10 +158,11 @@ class SOKKANAEM(nn.Module):
             n_sp = sum(isinstance(b, SpatialBlock) for b in self.blocks)
             state = {"hs": None, "prev": None, "det": None, "sp": [None] * n_sp}
 
-        tokens = self.embed(frame).flatten(2).transpose(1, 2)  # (B, N, D)
+        tokens = None
         # ponytail: embedding of static patches is recomputed here; caching it
         # is a trivial win for the phase-3 kernel, irrelevant to PoC accuracy.
         if self.gmc is not None:
+            tokens = self.embed(frame).flatten(2).transpose(1, 2)  # (B, N, D)
             # §3.5: GMC-align prev frame, gate on embed-feature diff.
             # Keyframes are all-active regardless — skip the warp + embed.
             score = None
@@ -160,12 +180,22 @@ class SOKKANAEM(nn.Module):
                                            frame.device, state["det"])
         else:
             mask, det = self.detector(frame, state["det"])  # (B, N)
-        tokens, hs, sp = self._forward_tokens(
-            tokens, mask, state["hs"],
-            sp=state["sp"] if self.spatial_cache else None)
 
-        feat2d = tokens.transpose(1, 2).reshape(B, self.dim, gh, gw)
-        depth = self.decoder(feat2d)
+        if self._core is not None and not self.spatial_cache:
+            depth, hs = self._core(frame, mask, state["hs"])
+            # cudagraph-trees reuse output buffers across replays; detach
+            # results from the static pool before they get overwritten
+            depth = depth.clone()
+            hs = [h.clone() for h in hs]
+            sp = state["sp"]
+        else:
+            if tokens is None:
+                tokens = self.embed(frame).flatten(2).transpose(1, 2)  # (B, N, D)
+            tokens, hs, sp = self._forward_tokens(
+                tokens, mask, state["hs"],
+                sp=state["sp"] if self.spatial_cache else None)
+            depth = self.decoder(
+                tokens.transpose(1, 2).reshape(B, self.dim, gh, gw))
         info = {"mask": mask, "active_ratio": mask.mean().item()}
         return depth, {"hs": hs, "det": det, "sp": sp or state["sp"],
                        "prev": frame if self.gmc is not None else None}, info

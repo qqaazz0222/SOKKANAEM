@@ -242,6 +242,18 @@ temporal $\Delta$-gating과 달리 **근사** — sparse scan이 static 패치�
   캐시가 무손실·최고속인 구간. 고정 카메라 데이터 확보 후 재검증.
 - 학습은 항상 풀 spatial (inference-only 최적화). 잔여 개선 여지: 캐시 사용 시 keyframe 주기 단축.
 
+**CUDA graph 캡처 (`enable_cuda_graphs()`):** full-compute 경로(embed→blocks→decoder)를
+순수 텐서 함수로 분리, `torch.compile(mode="reduce-overhead")`로 그래프 캡처. Python
+오케스트레이션·커널 런치 오버헤드 제거 — 128px 370→**1075 FPS** (2.9×), 256px 154→**366 FPS**
+(2.4×), 512px는 compute-bound라 무이득. 수치: inductor 재배열로 상대 ~1e-3 노이즈, eval 지표
+소수 4자리 동일 확인. sparse 캐시 경로는 동적 shape라 eager 유지 (두 최적화는 상보적:
+그래프=풀연산·키프레임, 캐시=정적 구간).
+
+**경량 모델 대비 (256px급, fp16+compile, batch 1, 4090):** DA V2 Small(24.8M) 380 FPS,
+DPT-SwinV2-Tiny(40.9M) 371 FPS, DA V1 Small(24.8M) 280 FPS vs 본 모델(2.8M) 풀연산+그래프
+**366 FPS**, 정적 스트림+캐시 **460 FPS**, 128px 그래프 **1075 FPS**. 단일 GPU FPS는 동급 —
+차별점은 연산량∝변화율(에지 전력·멀티스트림)과 내장 시간 일관성. Jetson 실측이 결정적.
+
 ---
 
 ## 5. 예상 리스크 및 대응 (Risks & Mitigations)
