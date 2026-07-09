@@ -29,27 +29,49 @@ need_space_gb() { # fail early if less than $1 GB free
 }
 
 tartanair() {
-    # TartanAir V2 via the official pypi package (v1 Azure blob is gone —
-    # NXDOMAIN). HF-hosted, resumable. 10 diverse envs, front cam,
-    # image+depth, easy — ~0.3M-frame scale of the VDA training mix.
-    # Add envs to scale up (73 available: python -c "...ta.list_envs()").
+    # TartanAir V2, direct from HF resolve URLs + wget -c — NOT the official
+    # pypi package. That package wraps huggingface_hub's snapshot_download,
+    # which on this network kept abandoning stalled multi-GB downloads and
+    # restarting from byte 0 under a NEW randomly-suffixed .incomplete file
+    # instead of resuming the existing one (confirmed: multiple same-content
+    # .incomplete files per blob, hours apart, none growing). wget -c against
+    # the plain resolve URL (HF redirects to a signed, Range-capable CDN
+    # URL) was verified to resume correctly across a kill mid-transfer.
+    #
+    # 10 diverse envs, front cam, image+depth, easy — ~0.3M-frame scale of
+    # the VDA training mix. Add envs to scale up (73 available upstream).
     need_space_gb 400
-    pip show tartanair >/dev/null 2>&1 || pip install -q tartanair
-    python - <<'EOF'
-import tartanair as ta
-
-ta.init("/archive/Dataset_SOKKANAEM/tartanair_v2")
-ta.download(
-    env=["AbandonedFactory", "AmusementPark", "Hospital", "JapaneseAlley",
-         "ModularNeighborhood", "Office", "OldTownFall",
-         "SeasonalForestSpring", "Downtown", "Supermarket"],
-    difficulty=["easy"],
-    modality=["image", "depth"],
-    camera_name=["lcam_front"],
-    unzip=True, delete_zip=True, num_workers=4,
-)
-EOF
-    echo "tartanair_v2 done -> $ROOT/tartanair_v2"
+    local repo=https://huggingface.co/datasets/theairlabcmu/tartanair2/resolve/main
+    local envs=(AbandonedFactory AmusementPark Hospital JapaneseAlley
+                ModularNeighborhood Office OldTownFall SeasonalForestSpring
+                Downtown Supermarket)
+    local out=$ROOT/tartanair_v2
+    local zips=$out/_zips
+    mkdir -p "$zips"
+    for env in "${envs[@]}"; do
+        for mod in image depth; do
+            # already extracted for this env+modality? skip.
+            if find "$out/$env/Data_easy" -mindepth 2 -maxdepth 2 \
+                    -type d -name "${mod}_lcam_front" -print -quit \
+                    2>/dev/null | grep -q .; then
+                echo "== $env/$mod already extracted, skip"
+                continue
+            fi
+            local zip=$zips/${env}_${mod}.zip
+            local url=$repo/$env/Data_easy/${mod}_lcam_front.zip
+            echo "== $url"
+            # --timeout: wget has no read-timeout by default, so a
+            # connection that goes silent without closing (the CLOSE-WAIT
+            # stall we hit with the hf_hub-based downloader) would hang
+            # forever; this makes wget itself detect and retry it.
+            wget -c -q --show-progress --tries=0 --retry-connrefused \
+                --timeout=60 --waitretry=5 -O "$zip" "$url" \
+                || { echo "FAILED (will retry on next run): $url" >&2; continue; }
+            mkdir -p "$out/$env"
+            unzip -n -q "$zip" -d "$out/$env" && rm -f "$zip"
+        done
+    done
+    echo "tartanair_v2 done -> $out"
 }
 
 pointodyssey() {

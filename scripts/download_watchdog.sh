@@ -16,7 +16,11 @@ LOG=$ROOT/watchdog.log
 log() { echo "$(date '+%F %T') $*" | tee -a "$LOG"; }
 
 newest_mtime() {
-    find "$ROOT" -name "*.incomplete" -printf '%T@\n' 2>/dev/null \
+    # Any regular file's mtime, not just *.incomplete — wget writes
+    # straight to the target zip (no special suffix), hf_hub uses
+    # *.incomplete. Excluding logs keeps our own tee/log writes from
+    # masking a stalled download.
+    find "$ROOT" -type f ! -name "*.log" -printf '%T@\n' 2>/dev/null \
         | sort -rn | head -1
 }
 
