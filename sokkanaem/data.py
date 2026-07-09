@@ -20,6 +20,13 @@ Spec strings (CLI): "name:/path" or "folder:/path:scale"
     vkitti2:/data/vkitti2     Scene*/<variation>/frames/rgb/Camera_*/*.jpg +
                               frames/depth/Camera_*/*.png (cm, scale 100;
                               rgb+depth tars extracted into one root)
+    tartanair2:/data/tartanair_v2   <Env>/Data_easy/P*/image_lcam_front/*.png +
+                              depth_lcam_front/*.png (depth: RGBA bytes are a
+                              packed float32 meters value, not u16 — see
+                              "packed_f32" mode below; ~8248 sentinel = sky)
+    pointodyssey:/data/pointodyssey  {train,val,test,sample}/<scene>/rgbs/rgb_%05d.jpg +
+                              depths/depth_%05d.png (u16, scale 65.535 per the
+                              official PIPs++ loader: depth_m = raw/65535*1000)
     folder:/data/mine:1000    generic: */rgb/* + */depth/*, custom scale
 
 Metric ranges differ across datasets (indoor ~10m vs KITTI ~80m); mixing is
@@ -90,14 +97,39 @@ def vkitti2(root):
     return seqs
 
 
+def tartanair2(root):
+    """One sequence per <Env>/Data_easy/P<NNN> trajectory."""
+    seqs = []
+    for rgb in sorted(glob.glob(os.path.join(root, "*/Data_easy/P*/image_lcam_front"))):
+        dep = os.path.join(os.path.dirname(rgb), "depth_lcam_front")
+        if os.path.isdir(dep):
+            seqs.append(_pair_sorted(rgb, dep))
+    return seqs
+
+
+def pointodyssey(root):
+    """One sequence per {train,val,test,sample}/<scene>."""
+    seqs = []
+    for rgb in sorted(glob.glob(os.path.join(root, "*/*/rgbs"))):
+        dep = os.path.join(os.path.dirname(rgb), "depths")
+        if os.path.isdir(dep):
+            seqs.append(_pair_sorted(rgb, dep))
+    return seqs
+
+
+# (loader, scale, depth_mode) — depth_mode "u16" (default): 16-bit PNG / scale
+# = meters. "packed_f32": RGBA bytes reinterpreted as one packed float32
+# meters value (TartanAir V2's format); scale is unused for that mode.
 ADAPTERS = {
-    "scannet": (scannet, 1000.0),
-    "tum": (tum, 5000.0),
-    "bonn": (tum, 5000.0),   # identical layout
-    "nyu": (tum, 1000.0),    # extracted-frames layout
-    "kitti": (kitti, 256.0),
-    "vkitti2": (vkitti2, 100.0),  # depth in cm
-    "folder": (tum, 1000.0),  # generic */rgb + */depth, scale via spec
+    "scannet": (scannet, 1000.0, "u16"),
+    "tum": (tum, 5000.0, "u16"),
+    "bonn": (tum, 5000.0, "u16"),   # identical layout
+    "nyu": (tum, 1000.0, "u16"),    # extracted-frames layout
+    "kitti": (kitti, 256.0, "u16"),
+    "vkitti2": (vkitti2, 100.0, "u16"),  # depth in cm
+    "tartanair2": (tartanair2, 1.0, "packed_f32"),
+    "pointodyssey": (pointodyssey, 65.535, "u16"),  # raw/65535*1000 = meters
+    "folder": (tum, 1000.0, "u16"),  # generic */rgb + */depth, scale via spec
 }
 
 
@@ -105,8 +137,9 @@ class ClipDataset(Dataset):
     """Slices sequences into fixed-length clips; loads and resizes on access."""
 
     def __init__(self, sequences, depth_scale, clip_len=4, frame_stride=1,
-                 clip_stride=2, size=128):
+                 clip_stride=2, size=128, depth_mode="u16"):
         self.scale = depth_scale
+        self.mode = depth_mode
         self.T = clip_len
         self.size = size
         span = clip_len * frame_stride
@@ -132,6 +165,15 @@ class ClipDataset(Dataset):
         return torch.from_numpy(np.asarray(img).copy()).permute(2, 0, 1).float() / 255
 
     def _depth(self, path):
+        if self.mode == "packed_f32":
+            # TartanAir V2: RGBA bytes ARE a packed float32 meters value —
+            # decode to float BEFORE resizing (resizing the raw RGBA bytes
+            # first would corrupt the packing).
+            raw = np.asarray(Image.open(path))
+            d = raw.view(np.float32).reshape(raw.shape[:2]).copy()
+            d[d >= 8000] = 0  # ~8248.1 sentinel = sky / no hit
+            img = self._fit(Image.fromarray(d, mode="F"), Image.NEAREST)
+            return torch.from_numpy(np.asarray(img).copy()).unsqueeze(0)
         img = self._fit(Image.open(path), Image.NEAREST)
         d = np.asarray(img).astype(np.float32)
         d[d == 65535] = 0  # 16-bit saturation = no reading (vkitti2 sky)
@@ -187,14 +229,14 @@ def build_mixed(specs, holdout=None, val=False, **kw):
     for spec in specs:
         parts = spec.split(":")
         name, root = parts[0], parts[1]
-        fn, scale = ADAPTERS[name]
+        fn, scale, mode = ADAPTERS[name]
         if len(parts) > 2:
             scale = float(parts[2])
         seqs = fn(root)
         if holdout:
             seqs = [s for s in seqs
                     if any(h in s[0][0] for h in holdout) == val]
-        ds = ClipDataset(seqs, scale, **kw)
+        ds = ClipDataset(seqs, scale, depth_mode=mode, **kw)
         if len(ds) == 0:
             raise ValueError(f"no clips found for {spec}"
                              + (f" (holdout={holdout}, val={val})" if holdout else ""))

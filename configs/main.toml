@@ -1,0 +1,27 @@
+# Main training — Video Depth Anything (CVPR 2025) style synthetic mix:
+# TartanAir V2 (large camera motion, diverse envs) + PointOdyssey (follow-cam,
+# dynamic characters) + vkitti2 (driving, already PoC'd). Dense GT throughout
+# — required for the skip-boundary supervision Δ-gating depends on.
+# Recipe from PoC ablations (IDEA.md §4.5): iid random mask @ max_skip 0.5
+# beat both no-mask-training and detector-driven fine-tune; keyframe_every=30
+# showed zero drift over 270 streamed frames; 256px trains OK with the
+# gradient-checkpointed spatial scan (smoke-tested).
+data = [
+    "vkitti2:/workspace/SOKKANAEM/data/vkitti2",
+    "tartanair2:/archive/Dataset_SOKKANAEM/tartanair_v2",
+    "pointodyssey:/archive/Dataset_SOKKANAEM/pointodyssey",
+]
+# held out entirely from training: one vkitti2 scene, one full tartanair env
+# (unseen-environment generalization), pointodyssey's own val/test splits
+holdout = ["Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"]
+size = 256
+clip_len = 4
+batch = 4          # 256px + grad-checkpointed spatial scan; smoke-tested on this GPU
+lr = 3e-4
+steps = 100000      # ~14-15h on RTX 4090 at this size/batch
+max_skip = 0.5      # 3-arm ablation winner — see IDEA.md §4.5
+
+[model]
+tau_on = 0.05
+tau_off = 0.025
+keyframe_every = 30   # 270-frame streaming test: zero drift at this period

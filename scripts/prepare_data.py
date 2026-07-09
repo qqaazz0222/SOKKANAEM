@@ -19,12 +19,13 @@ def cmd_check(args):
     for spec in args.data:
         parts = spec.split(":")
         name, root = parts[0], parts[1]
-        fn, scale = ADAPTERS[name]
+        fn, scale, mode = ADAPTERS[name]
         if len(parts) > 2:
             scale = float(parts[2])
         seqs = fn(root)
         n_frames = sum(len(s) for s in seqs)
-        ds = ClipDataset(seqs, scale, clip_len=args.clip_len, size=args.size)
+        ds = ClipDataset(seqs, scale, depth_mode=mode,
+                         clip_len=args.clip_len, size=args.size)
         print(f"\n[{spec}]")
         print(f"  sequences {len(seqs)}  frames {n_frames}  "
               f"clips(T={args.clip_len}) {len(ds)}")

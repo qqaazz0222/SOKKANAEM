@@ -76,6 +76,7 @@ python scripts/eval.py --ckpt work_dirs/kitti/latest.pt --data kitti:/data/kitti
 | `kitti.toml` | 주행 (전역 모션) | 0.5 | 0.05 | keyframe 10 |
 | `vkitti2.toml` | 합성 주행 (dense GT) | 0.5 | 0.05 | kitti와 동일 프로파일 |
 | `mixed.toml` | 전체 혼합 (generalist) | 0.7 | 0.02 | 이후 개별 config로 fine-tune |
+| `main.toml` | **본 학습**: TartanAir V2 + PointOdyssey + vkitti2 | 0.5 | 0.05 | 256px, 100k steps, PoC ablation 결과 반영 (§4.5) |
 
 ## 산출물 (`work_dirs/<이름>/`)
 
