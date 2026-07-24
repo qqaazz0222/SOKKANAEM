@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Spatial-temporal Optimized Key-patch Kernel for Adaptive Network Architecture and Efficient Mamba"
 requires-python = ">=3.10"
 dependencies = [
-    "torch>=2.3",
+    # <2.9: 2.13.0+cu130's bundled nvidia-cudnn-cu13 hits CUDNN_STATUS_SUBLIBRARY_VERSION_MISMATCH
+    # on conv2d on this driver; 2.8.0+cu128 (cudnn 9.10) verified working.
+    "torch>=2.3,<2.9",
     "numpy",
     "pillow",
 ]
