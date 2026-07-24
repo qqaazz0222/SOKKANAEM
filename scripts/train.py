@@ -80,9 +80,18 @@ def main():
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     model = SOKKANAEM(**model_kw).to(dev)
-    if args.resume:
-        model.load_state_dict(torch.load(args.resume, map_location=dev))
     opt = torch.optim.AdamW(model.parameters(), lr=args.lr)
+    start_step = 0
+    if args.resume:
+        ckpt = torch.load(args.resume, map_location=dev)
+        if "model" in ckpt:  # new-format checkpoint: model + optim + step
+            model.load_state_dict(ckpt["model"])
+            opt.load_state_dict(ckpt["optim"])
+            start_step = ckpt["step"]
+            log(f"resumed from {args.resume} at step {start_step}")
+        else:  # legacy: raw state_dict, no step/optim -> restart schedule
+            model.load_state_dict(ckpt)
+            log(f"resumed from {args.resume} (legacy format, step 0)")
 
     if args.data:
         dataset, sampler = build_mixed(args.data, clip_len=args.clip_len,
@@ -96,7 +105,7 @@ def main():
             SynthClips(args.size, args.clip_len), batch_size=args.batch)
 
     N = (args.size // 16) ** 2
-    step = 0
+    step = start_step
     while step < args.steps:
         for clip, gt, valid in loader:
             if step >= args.steps:
@@ -124,11 +133,14 @@ def main():
                 log(f"step {step:4d}  loss {loss.item():.4f}  skip {skip:.2f}")
             step += 1
             if step % 2000 == 0:  # crash insurance for long runs
-                torch.save(model.state_dict(), work / "latest.pt")
+                torch.save({"model": model.state_dict(),
+                            "optim": opt.state_dict(), "step": step},
+                           work / "latest.pt")
 
-    ckpt = work / "latest.pt"
-    torch.save(model.state_dict(), ckpt)
-    log(f"saved -> {ckpt}")
+    ckpt_path = work / "latest.pt"
+    torch.save({"model": model.state_dict(), "optim": opt.state_dict(),
+                "step": step}, ckpt_path)
+    log(f"saved -> {ckpt_path}")
 
 
 if __name__ == "__main__":

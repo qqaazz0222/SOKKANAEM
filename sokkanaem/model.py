@@ -245,5 +245,6 @@ def from_checkpoint(ckpt, device="cpu", **overrides):
             kw = tomllib.load(f).get("model", {})
     kw.update(overrides)
     model = SOKKANAEM(**kw).to(device)
-    model.load_state_dict(torch.load(ckpt, map_location=device))
+    state = torch.load(ckpt, map_location=device)
+    model.load_state_dict(state["model"] if "model" in state else state)
     return model
