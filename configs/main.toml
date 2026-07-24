@@ -7,7 +7,7 @@
 # showed zero drift over 270 streamed frames; 256px trains OK with the
 # gradient-checkpointed spatial scan (smoke-tested).
 data = [
-    "vkitti2:/workspace/SOKKANAEM/data/vkitti2",
+    "vkitti2:/archive/Dataset_SOKKANAEM/vkitti2",
     "tartanair2:/archive/Dataset_SOKKANAEM/tartanair_v2",
     "pointodyssey:/archive/Dataset_SOKKANAEM/pointodyssey",
 ]

@@ -2,7 +2,7 @@
 # Main-training dataset downloader -> /archive/Dataset_SOKKANAEM
 #
 # Mix follows Video Depth Anything (CVPR 2025): TartanAir + PointOdyssey
-# (+ IRS, Dynamic Replica) alongside the vkitti2 already in data/.
+# (+ IRS, Dynamic Replica) alongside the vkitti2 already in $ROOT/vkitti2.
 #
 # Usage:
 #   scripts/download_data.sh tartanair      # ~8 envs, Easy, left cam (~250GB)

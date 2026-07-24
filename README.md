@@ -84,6 +84,9 @@ python scripts/eval.py --ckpt work_dirs/kitti/latest.pt --data kitti:/data/kitti
 
 ## 데이터셋
 
+본 학습(`main.toml`)용 실 데이터셋은 `/archive/Dataset_SOKKANAEM`에 있음
+(vkitti2, tartanair_v2, pointodyssey — `scripts/download_data.sh`로 받음).
+
 모든 데이터셋은 정규 포맷 `(frames, depth[m], valid)` 클립으로 환원.
 어댑터는 "(rgb, depth) 경로 쌍 시퀀스 + depth 스케일"만 제공 (`sokkanaem/data.py`).
 

@@ -1,7 +1,7 @@
 # Virtual KITTI 2 — synthetic driving, dense GT (KITTI is sparse LiDAR).
 # Same motion profile as kitti.toml; dense depth makes it a good warm-up
 # source before real-KITTI fine-tune.
-data = ["vkitti2:/data/vkitti2"]
+data = ["vkitti2:/archive/Dataset_SOKKANAEM/vkitti2"]
 holdout = ["Scene06"]  # val split: never trained on, eval.py --holdout Scene06
 size = 128        # aspect-preserving shorter-side resize + center crop
 clip_len = 4
