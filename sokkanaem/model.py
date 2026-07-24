@@ -246,5 +246,7 @@ def from_checkpoint(ckpt, device="cpu", **overrides):
     kw.update(overrides)
     model = SOKKANAEM(**kw).to(device)
     state = torch.load(ckpt, map_location=device)
-    model.load_state_dict(state["model"] if "model" in state else state)
+    # ema (if present) is the eval-time shadow copy — prefer it over raw
+    # training weights (self-ensembling, IDEA.md §6 style accuracy bump)
+    model.load_state_dict(state.get("ema") or state.get("model") or state)
     return model

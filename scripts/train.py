@@ -25,7 +25,9 @@ import torch
 
 from sokkanaem import SOKKANAEM
 from sokkanaem.data import SynthClips, build_mixed
-from sokkanaem.losses import grad_loss, si_log_loss, temporal_loss
+from sokkanaem.ema import ema_update_
+from sokkanaem.losses import grad_loss, normal_loss, si_log_loss, temporal_loss
+from sokkanaem.schedule import lr_at, parse_size_schedule, size_for_step
 
 
 def main():
@@ -51,6 +53,23 @@ def main():
     ap.add_argument("--resume", default=None, help="checkpoint to resume from")
     ap.add_argument("--work-dir", default=None,
                     help="output dir; default work_dirs/<config name>")
+    ap.add_argument("--ema-decay", type=float, default=0.999,
+                    help="eval-time shadow-weight EMA decay (0 disables)")
+    ap.add_argument("--auto-loss-weight", action="store_true",
+                    help="Kendall multi-task uncertainty weighting instead "
+                         "of the fixed si_log/grad/temporal/normal weights")
+    ap.add_argument("--normal-weight", type=float, default=0.0,
+                    help="surface-normal loss weight (ignored if "
+                         "--auto-loss-weight; 0 = off, matches old default)")
+    ap.add_argument("--size-schedule", default=None,
+                    help="progressive resolution curriculum: "
+                         "'step:size,step:size,...' e.g. '0:128,20000:256' "
+                         "(default: fixed --size throughout)")
+    ap.add_argument("--warmup", type=int, default=2000,
+                    help="LR linear-warmup steps before cosine decay "
+                         "(--warmup 0 disables the whole schedule -> flat lr)")
+    ap.add_argument("--grad-clip", type=float, default=1.0,
+                    help="max grad norm (0 disables)")
 
     # config sets defaults, explicit CLI flags win
     pre, _ = ap.parse_known_args()
@@ -80,35 +99,68 @@ def main():
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     model = SOKKANAEM(**model_kw).to(dev)
-    opt = torch.optim.AdamW(model.parameters(), lr=args.lr)
+    # Kendall multi-task uncertainty weighting (§ auto-loss-weight): learnable
+    # log-variance per loss term instead of fixed 1 / 0.5 / 0.1 / normal_weight
+    log_vars = (torch.zeros(4, device=dev, requires_grad=True)
+                if args.auto_loss_weight else None)
+    params = list(model.parameters()) + ([log_vars] if log_vars is not None else [])
+    opt = torch.optim.AdamW(params, lr=args.lr)
     start_step = 0
+    ema_state = None
     if args.resume:
         ckpt = torch.load(args.resume, map_location=dev)
         if "model" in ckpt:  # new-format checkpoint: model + optim + step
             model.load_state_dict(ckpt["model"])
             opt.load_state_dict(ckpt["optim"])
             start_step = ckpt["step"]
+            ema_state = ckpt.get("ema")
+            if log_vars is not None and ckpt.get("log_vars") is not None:
+                # log_vars live outside model.state_dict(); optim only holds
+                # their momentum, not values — restore explicitly or they
+                # silently reset to zero on resume
+                with torch.no_grad():
+                    log_vars.copy_(ckpt["log_vars"].to(dev))
             log(f"resumed from {args.resume} at step {start_step}")
         else:  # legacy: raw state_dict, no step/optim -> restart schedule
             model.load_state_dict(ckpt)
             log(f"resumed from {args.resume} (legacy format, step 0)")
+    if ema_state is None:
+        ema_state = {k: v.detach().clone() for k, v in model.state_dict().items()}
 
-    if args.data:
-        dataset, sampler = build_mixed(args.data, clip_len=args.clip_len,
-                                       size=args.size, holdout=args.holdout)
-        loader = torch.utils.data.DataLoader(
-            dataset, batch_size=args.batch, sampler=sampler,
-            num_workers=args.workers, drop_last=True)
-        log(f"mixed dataset: {len(dataset)} clips from {len(args.data)} sources")
-    else:
-        loader = torch.utils.data.DataLoader(
-            SynthClips(args.size, args.clip_len), batch_size=args.batch)
+    def make_loader(size):
+        if args.data:
+            dataset, sampler = build_mixed(args.data, clip_len=args.clip_len,
+                                           size=size, holdout=args.holdout)
+            ld = torch.utils.data.DataLoader(
+                dataset, batch_size=args.batch, sampler=sampler,
+                num_workers=args.workers, drop_last=True)
+            log(f"mixed dataset: {len(dataset)} clips from "
+                f"{len(args.data)} sources (size {size})")
+        else:
+            ld = torch.utils.data.DataLoader(
+                SynthClips(size, args.clip_len), batch_size=args.batch)
+        return ld
 
-    N = (args.size // 16) ** 2
+    size_schedule = parse_size_schedule(args.size_schedule, args.size)
+    cur_size = size_for_step(size_schedule, start_step)
+    loader = make_loader(cur_size)
+
+    def save(path):
+        torch.save({"model": model.state_dict(), "optim": opt.state_dict(),
+                    "step": step, "ema": ema_state,
+                    "log_vars": None if log_vars is None else log_vars.detach()},
+                   path)
+
+    N = (cur_size // 16) ** 2
     step = start_step
     while step < args.steps:
+        new_size = size_for_step(size_schedule, step)
+        if new_size != cur_size:
+            cur_size = new_size
+            loader = make_loader(cur_size)
+            N = (cur_size // 16) ** 2
         for clip, gt, valid in loader:
-            if step >= args.steps:
+            if step >= args.steps or size_for_step(size_schedule, step) != cur_size:
                 break
             clip, gt, valid = clip.to(dev), gt.to(dev), valid.to(dev)
             B, T = clip.shape[:2]
@@ -122,24 +174,35 @@ def main():
                 fm = (torch.rand(B, T, N, device=dev) > skip).float()
                 fm[:, 0] = 1.0  # first frame always full
                 depths, masks = model.forward_clip(clip, force_mask=fm)
-            loss = (si_log_loss(depths, gt, valid)
-                    + 0.5 * grad_loss(depths, gt, valid)
-                    + 0.1 * temporal_loss(depths, masks))
+            losses = [si_log_loss(depths, gt, valid), grad_loss(depths, gt, valid),
+                      temporal_loss(depths, masks), normal_loss(depths, gt, valid)]
+            if log_vars is not None:
+                loss = sum(torch.exp(-lv) * l + lv for lv, l in zip(log_vars, losses))
+            else:
+                loss = (losses[0] + 0.5 * losses[1] + 0.1 * losses[2]
+                        + args.normal_weight * losses[3])
+            if args.warmup > 0:  # warmup+cosine; flat lr if --warmup 0
+                lr = lr_at(step, args.lr, args.steps, args.warmup)
+                for g in opt.param_groups:
+                    g["lr"] = lr
             opt.zero_grad()
             loss.backward()
+            if args.grad_clip > 0:
+                torch.nn.utils.clip_grad_norm_(params, args.grad_clip)
             opt.step()
+            if args.ema_decay > 0:
+                ema_update_(ema_state, model.state_dict(), args.ema_decay)
 
             if step % 50 == 0:
-                log(f"step {step:4d}  loss {loss.item():.4f}  skip {skip:.2f}")
+                cur_lr = opt.param_groups[0]["lr"]
+                log(f"step {step:4d}  loss {loss.item():.4f}  "
+                    f"skip {skip:.2f}  lr {cur_lr:.2e}")
             step += 1
             if step % 2000 == 0:  # crash insurance for long runs
-                torch.save({"model": model.state_dict(),
-                            "optim": opt.state_dict(), "step": step},
-                           work / "latest.pt")
+                save(work / "latest.pt")
 
     ckpt_path = work / "latest.pt"
-    torch.save({"model": model.state_dict(), "optim": opt.state_dict(),
-                "step": step}, ckpt_path)
+    save(ckpt_path)
     log(f"saved -> {ckpt_path}")
 
 

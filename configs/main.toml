@@ -15,11 +15,13 @@ data = [
 # (unseen-environment generalization), pointodyssey's own val/test splits
 holdout = ["Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"]
 size = 256
+size_schedule = "0:128,20000:256"  # progressive curriculum: cheap 128px warmup
 clip_len = 4
 batch = 4          # 256px + grad-checkpointed spatial scan; smoke-tested on this GPU
 lr = 3e-4
 steps = 100000      # ~14-15h on RTX 4090 at this size/batch
 max_skip = 0.5      # 3-arm ablation winner — see IDEA.md §4.5
+auto_loss_weight = true  # Kendall uncertainty weighting incl. surface-normal term
 
 [model]
 tau_on = 0.05
