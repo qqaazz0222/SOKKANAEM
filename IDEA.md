@@ -157,7 +157,9 @@ $$\tilde{\Delta}_i = M_i \cdot \Delta_i$$
 ### 4.2 지표
 
 * **정확도:** AbsRel, RMSE, $\delta < 1.25$.
-* **시간 일관성:** TAE(Temporal Alignment Error), OPW(Optical-flow-based Warping error).
+* **시간 일관성:** OPW(광학흐름 워핑 오차, RAFT) + **TCE**(같은 워프를 GT 잔차 기준으로 —
+  t-delta·OPW가 상수 출력에 퇴화하는 문제 때문에 추가, REPORT §4.10). TAE는 pose/intrinsic
+  배관이 없어 미구현. 모든 표에 상수 예측 제어행(`--control`) 병기.
 * **효율:** FLOPs(변화율 대비 곡선), FPS/latency — RTX 4090 + **Jetson Orin(에지 타깃)** 실측. 이론 FLOPs가 아닌 wall-clock 필수(희소 연산은 GPU 활용률이 관건).
 
 ### 4.3 베이스라인
@@ -166,15 +168,16 @@ Depth Anything v2(프레임 독립), Video Depth Anything, NVDS, VideoMamba(마�
 
 ### 4.4 Ablation
 
-| 항목 | 변수 |
-|---|---|
-| 임계값 $\tau$ | 정확도–연산량 trade-off 곡선 (핵심 그림) |
-| 패치 크기 | 8 / 16 / 32 |
-| 게이팅 위치 | $\Delta$-gating vs 입력 토큰 drop vs 출력 캐시만 |
-| 변화 감지기 | MSE vs cosine vs feature-space |
-| Keyframe 주기 $K$ | 드리프트 vs 연산량 |
-| Refinement | 없음 vs conv vs guided filter |
-| 마스크 분포 | i.i.d. 랜덤 마스크 학습만 vs detector/GMC-driven 마스크로 fine-tune (학습-배포 분포 일치) |
+| 항목 | 변수 | 상태 |
+|---|---|---|
+| 임계값 $\tau$ | 정확도–연산량 trade-off 곡선 (핵심 그림) | ✅ REPORT §4.13 (1,000 클립) |
+| 패치 크기 | 8 / 16 / 32 | ⬜ 재학습 필요, 보류 |
+| 게이팅 위치 | $\Delta$-gating vs 입력 토큰 drop vs 출력 캐시만 | ✅ REPORT §4.14 (drop 대비 AbsRel 4.0배 차) |
+| 변화 감지기 | MSE vs cosine vs feature-space | ✅ §4.5 (동급, MSE 유지) |
+| Keyframe 주기 $K$ | 드리프트 vs 연산량 | ✅ §4.5 ($K$ 둔감) |
+| Refinement | 없음 vs conv vs guided filter | ⬜ 재학습 필요, 보류 |
+| 마스크 분포 | i.i.d. 랜덤 마스크 학습만 vs detector/GMC-driven 마스크로 fine-tune (학습-배포 분포 일치) | ✅ §4.5 (iid 승, 통념 기각) |
+| FLOPs 회계 | Δ-gating / +캐시 / 이상적 비례 | ✅ REPORT §4.11 (기여 3 재서술) |
 
 ### 4.5 PoC 결과 — Virtual KITTI 2 (2026-07-07)
 
@@ -314,3 +317,12 @@ DPT-SwinV2-Tiny(40.9M) 371 FPS, DA V1 Small(24.8M) 280 FPS vs 본 모델(2.8M) �
 2. **본 학습 (8주):** T/S-Mamba 교차 백본. Stage 1: TIMo 지도 학습 → Stage 2: VIRAT pseudo-GT distillation (§3.4). 전체 벤치마크.
 3. **시스템 (4주):** 블록 희소 커널(Triton) 구현, Jetson Orin 실측, 데모(CCTV 실시간 깊이 스트림).
 4. **논문화:** 타깃 — CVPR/ICCV (efficiency track) 또는 실시간 시스템 강조 시 CoRL/IROS.
+
+---
+
+## 8. Future Work (검토했으나 보류)
+
+* **쿼드트리(4분할 트리) 기반 적응적 패치 그래뉼래리티:** 정적 배경(하늘·벽·도로처럼 균일한 영역)은 큰 블록 하나로, 변화가 있는 영역만 세분화 — 변화 감지 비용을 계층적으로 줄이고 토큰 수 자체도 장면에 맞춰 적응시키자는 아이디어.
+  * **막힌 지점:** §3.2의 핵심 주장("mask=0 ⇒ hidden state 정확한 항등 복사")은 `TemporalBlock`이 각 패치 **위치**가 프레임 전체에 걸쳐 고정된 자기 hidden state를 갖는다는 전제에 의존한다. 쿼드트리는 프레임마다 블록 크기·개수가 바뀌므로, 이전 프레임의 큰 정적 블록 하나가 이번 프레임에 4개로 쪼개질 때 그 4개 자식이 물려받을 hidden state가 없다 — 부모 state를 복제해 나눠주면 그 순간 "정확한(exact)" 상태 유지가 근사로 바뀌어 기여 1(§6)이 흔들린다.
+  * **비용 대비 이득도 낮음:** 변화 감지 자체는 이미 순수 픽셀 연산으로 "비용 무시 가능"(§3.1) 수준이라, 감지 단계만 계층적으로 빨리해도 실익이 적다. 실제 병목은 이미 3.6×(청크 스캔)·2.9×(CUDA graph) 가속해둔 SSM 스캔 쪽(§4.5).
+  * **재검토 조건:** temporal state layout을 위치 고정형에서 다른 방식(예: 계층별 별도 state, 또는 병합/분할 시 state 재투영 규칙)으로 재설계할 의향이 생기면 그때 다시 검토. 지금 학습 파이프라인·§6 기여도 주장엔 손대지 않는 게 맞음.
