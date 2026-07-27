@@ -54,3 +54,39 @@ def temporal_loss(depths, masks, patch=16):
                       scale_factor=patch, mode="nearest")
     diff = (depths[:, 1:] - depths[:, :-1]).reshape(B * (T - 1), 1, *depths.shape[-2:])
     return (diff.abs() * m).sum() / m.sum().clamp(min=1)
+
+
+def _norm_disp(depth, valid):
+    """Scale-shift normalized disparity, MiDaS style: median-center and
+    mean-absolute-deviation scale, computed over valid pixels only. Puts every
+    scene on one comparable footing, which matters here because TartanAir V2
+    spans 0.5-129 m in a single frame while Bonn spans 1.5-4 m."""
+    d = 1.0 / depth.clamp(min=1e-3)
+    v = valid.bool()
+    if not bool(v.any()):
+        return d * 0
+    t = d[v].median()
+    s = (d[v] - t).abs().mean().clamp(min=1e-6)
+    return (d - t) / s
+
+
+def multiscale_grad_loss(pred, gt, valid, scales=4):
+    """Gradient matching on normalized disparity across a resolution pyramid
+    (MiDaS's L_reg). Single-scale gradient matching only sees 1-pixel edges;
+    the pyramid also penalizes low-frequency shape error, which is what makes
+    high-precision depth models look sharp instead of blurry."""
+    p, g = _norm_disp(pred, gt), _norm_disp(gt, gt)
+    v = valid
+    # collapse leading dims so avg_pool2d sees (N,1,H,W)
+    p, g, v = (x.reshape(-1, 1, *x.shape[-2:]) for x in (p, g, v))
+    total = p.sum() * 0
+    for k in range(scales):
+        if k:
+            p, g = F.avg_pool2d(p * v, 2), F.avg_pool2d(g * v, 2)
+            vn = F.avg_pool2d(v, 2)
+            p, g = p / vn.clamp(min=1e-6), g / vn.clamp(min=1e-6)
+            v = (vn > 0.99).float()   # keep only fully-valid coarse pixels
+        if min(p.shape[-2:]) < 4:
+            break
+        total = total + grad_loss(p, g, v)
+    return total / scales

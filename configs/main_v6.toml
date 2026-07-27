@@ -1,0 +1,43 @@
+# v6 — the efficiency fix. Same data/recipe as main.toml (v5); two changes,
+# both aimed at contribution 3 (compute proportional to change rate), which
+# the measured FLOPs curve showed v1-v5 do NOT deliver (REPORT.md §4.10:
+# 96.4% of full compute at active=0%).
+#
+# 1. decoder = "shuffle". The original decoder upsamples first and then runs
+#    64->32 and 32->1 convs at full resolution: 1.59 of 2.34 GMAC per 256px
+#    frame (68%), against IDEA.md §3.3's own "decoder <= 10% of backbone"
+#    budget. ShuffleDecoder keeps all channel work at patch resolution and
+#    pixel-shuffles up, leaving one thin 1->16->1 full-res refinement:
+#    decoder share 68% -> 7%, so patch skipping can actually move the total.
+# 2. spatial_cache = true DURING TRAINING. Static-patch spatial output reuse
+#    was inference-only and therefore an untrained approximation (§3.3's
+#    U-shaped degradation at mid active%). Training with it on makes the
+#    sparse spatial path the one the weights were fit for. This is the arm
+#    that converts skip into FLOPs: with it, projected compute at active
+#    16.6% is 38.6% of full (vs 78.8% for the v3/v5 architecture).
+#
+# Everything else is deliberately identical to v5 so the v5->v6 delta is
+# attributable: same 3-source mix, same holdout, same fixed loss weights,
+# same iid random mask @ max_skip 0.5, same 128->256 curriculum.
+data = [
+    "vkitti2:/home/hyunsu/dataset_ssd/vkitti2",
+    "tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2",
+    "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey",
+]
+holdout = ["Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"]
+size = 256
+size_schedule = "0:128,20000:256"
+clip_len = 4
+batch = 4
+lr = 3e-4
+steps = 100000
+max_skip = 0.5
+normal_weight = 0.05
+
+[model]
+dim = 384
+decoder = "shuffle"
+spatial_cache = true
+tau_on = 0.05
+tau_off = 0.025
+keyframe_every = 30

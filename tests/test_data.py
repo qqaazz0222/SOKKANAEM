@@ -106,6 +106,17 @@ def test_train_step_on_fake_data(tmp_path):
     assert torch.isfinite(loss)
 
 
+def test_corrupt_frame_is_skipped_not_fatal(tmp_path):
+    # scraped-dataset reality check: a truncated PNG must not kill the run
+    _fake_dataset(tmp_path / "a", n_seq=3)
+    mixed, _ = build_mixed([f"folder:{tmp_path/'a'}"], clip_len=4, size=64)
+    bad_path = mixed.datasets[0].clips[0][0][0][0]
+    with open(bad_path, "wb") as f:
+        f.write(b"not a real png")
+    frames, depth, valid = mixed[0]  # must not raise
+    assert frames.shape == (4, 3, 64, 64)
+
+
 if __name__ == "__main__":
     import tempfile
     from pathlib import Path
@@ -114,3 +125,74 @@ if __name__ == "__main__":
         test_vkitti2_layout_and_sky(Path(d) / "v")
         test_train_step_on_fake_data(Path(d) / "y")
     print("data tests passed")
+
+
+def test_timestamp_pairing_beats_sorted_order(tmp_path):
+    """TUM/Bonn: unequal counts + offset capture times. Sorted-order pairing
+    misaligns GT; _pair_by_timestamp must match nearest within 0.02s and drop
+    rgb frames that have no depth in the window."""
+    import os
+
+    from sokkanaem.data import _pair_by_timestamp, _pair_sorted
+
+    rgb, dep = tmp_path / "rgb", tmp_path / "depth"
+    rgb.mkdir(), dep.mkdir()
+    # depth is missing the 3rd frame and lags rgb by 5ms
+    for t in (100.000, 100.033, 100.066, 100.100):
+        (rgb / f"{t:.6f}.png").write_bytes(b"")
+    for t in (100.005, 100.038, 100.105):
+        (dep / f"{t:.6f}.png").write_bytes(b"")
+
+    pairs = _pair_by_timestamp(str(rgb), str(dep))
+    got = [(os.path.basename(r), os.path.basename(d)) for r, d in pairs]
+    assert got == [("100.000000.png", "100.005000.png"),
+                   ("100.033000.png", "100.038000.png"),
+                   ("100.100000.png", "100.105000.png")], got
+    # the dropped frame is exactly what sorted-order pairing would mismatch
+    srt = [(os.path.basename(r), os.path.basename(d))
+           for r, d in _pair_sorted(str(rgb), str(dep))]
+    assert srt[2] == ("100.066000.png", "100.105000.png"), srt
+
+
+def test_augmentation_is_clip_consistent_and_geometry_matched(tmp_path):
+    """Augmentation must be drawn once per clip (temporal structure survives)
+    and applied identically to rgb and depth (geometry stays aligned)."""
+    import torch
+
+    # depth encodes the pixel's own column index, so any geometric transform
+    # applied to rgb must show up identically in depth
+    for s in range(1):
+        rgb = tmp_path / f"seq{s}" / "rgb"
+        dep = tmp_path / f"seq{s}" / "depth"
+        rgb.mkdir(parents=True)
+        dep.mkdir(parents=True)
+        col = np.tile(np.arange(64, dtype=np.uint16) * 10 + 100, (48, 1))
+        for t in range(8):
+            img = np.stack([col / 640 * 255] * 3, -1).astype(np.uint8)
+            Image.fromarray(img).save(rgb / f"{t:06d}.png")
+            Image.fromarray(col).save(dep / f"{t:06d}.png")
+
+    plain, _ = build_mixed([f"folder:{tmp_path}"], clip_len=4, size=64)
+    aug, _ = build_mixed([f"folder:{tmp_path}"], clip_len=4, size=64, augment=True)
+
+    f0, d0, _ = plain[0]
+    torch.manual_seed(0)
+    fa, da, _ = aug[0]
+    assert fa.shape == f0.shape and da.shape == d0.shape
+
+    # every frame of the clip got the SAME transform: identical inputs in,
+    # identical outputs out (the fake sequence is static)
+    assert torch.allclose(fa[0], fa[1]) and torch.allclose(da[0], da[3])
+
+    # rgb and depth stay geometrically aligned: both monotonic in x, and the
+    # flip/crop shows in both or neither
+    rgb_row = fa[0, 0, 32]
+    dep_row = da[0, 0, 32]
+    # depth resamples nearest, so it has plateaus and cannot be strictly
+    # monotonic — the invariant is that both agree on *direction* (a flip
+    # shows in both or neither)
+    assert (torch.sign(rgb_row.diff()).sum()
+            * torch.sign(dep_row.diff()).sum()) > 0
+
+    # photometric jitter touches rgb only, so depth values stay real metres
+    assert 0.05 < da.max().item() < 1.0

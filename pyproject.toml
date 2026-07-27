@@ -14,6 +14,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest"]
 video = ["opencv-python"]
+baseline = ["transformers", "torchvision==0.23.0"]  # scripts/eval_baseline_da2.py only
 
 [build-system]
 requires = ["setuptools>=64"]

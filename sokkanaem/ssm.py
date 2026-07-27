@@ -92,17 +92,54 @@ class SelectiveSSM(nn.Module):
         return out.squeeze(1), h
 
 
+def column_major_order(idx, gh, gw):
+    """Permutation that reorders raster-ordered flat patch indices into
+    column-major order. idx: (L,) long, values in [0, gh*gw).
+
+    Works for a *subset* of the grid too (the sparse spatial path gathers
+    active patches only), which is why this takes indices, not a shape."""
+    return torch.argsort((idx % gw) * gh + torch.div(idx, gw, rounding_mode="floor"))
+
+
 class BiSpatialSSM(nn.Module):
-    """Bidirectional raster scan over patches within one frame.
-    # ponytail: 2 directions, not VMamba's 4-way cross-scan; add if accuracy demands.
+    """Raster scan over patches within one frame.
+
+    directions=2 (v1-v7): forward + backward raster scan. A raster flatten
+    puts vertical neighbours gw apart in the sequence, so the SSM sees them
+    as ~16 steps of decay away — this is what smears horizontal depth
+    boundaries.
+    directions=4: VMamba/Vim-style SS2D cross-scan — the same pair repeated
+    on the column-major token order, so vertical neighbours are adjacent in
+    a sequence too. Costs 2x the spatial scan, which is deliberate: the
+    spatial path is the one that shrinks with active% under the sparse
+    cache, unlike the dense decoder.
+
+    Params keep the v1-v7 names (fwd/bwd) so old checkpoints still load;
+    the vertical pair is extra state, absent at directions=2.
     """
 
-    def __init__(self, dim, d_state=16):
+    def __init__(self, dim, d_state=16, directions=2):
         super().__init__()
+        assert directions in (2, 4)
+        self.directions = directions
         self.fwd = SelectiveSSM(dim, d_state)
         self.bwd = SelectiveSSM(dim, d_state)
+        if directions == 4:
+            self.vfwd = SelectiveSSM(dim, d_state)
+            self.vbwd = SelectiveSSM(dim, d_state)
 
-    def forward(self, u):
-        yf, _ = self.fwd(u)
-        yb, _ = self.bwd(u.flip(1))
+    @staticmethod
+    def _pair(f, b, u):
+        yf, _ = f(u)
+        yb, _ = b(u.flip(1))
         return yf + yb.flip(1)
+
+    def forward(self, u, order=None):
+        """u: (B, L, D) in raster order. order: (L,) column-major permutation
+        of the same token set — required at directions=4."""
+        y = self._pair(self.fwd, self.bwd, u)
+        if self.directions == 4:
+            assert order is not None, "4-way cross-scan needs a column-major order"
+            inv = order.argsort()
+            y = y + self._pair(self.vfwd, self.vbwd, u[:, order])[:, inv]
+        return y

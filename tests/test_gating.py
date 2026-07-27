@@ -88,6 +88,42 @@ if __name__ == "__main__":
     print("all gating tests passed")
 
 
+def test_gate_mode_drop_bypasses_static_tokens():
+    """§4.4 gating-position arm: "drop" must make a static token pass the
+    temporal block unchanged, while Δ-gating keeps reading the retained
+    state — the two arms must therefore disagree at identical active%."""
+    torch.manual_seed(0)
+    kw = dict(keyframe_every=1000, tau_on=0.02, tau_off=0.01)
+    m_delta = SOKKANAEM(**kw).eval()
+    m_drop = SOKKANAEM(**kw, gate_mode="drop").eval()
+    m_drop.load_state_dict(m_delta.state_dict())
+
+    blk = m_drop.blocks[0]
+    tokens = torch.randn(1, 4, m_drop.dim)
+    mask = torch.tensor([[1.0, 0.0, 1.0, 0.0]])
+    with torch.no_grad():
+        out_drop, h_drop = blk.step(tokens, mask, None, "drop")
+        out_delta, h_delta = blk.step(tokens, mask, None, "delta")
+    static = mask[0] == 0
+    assert torch.equal(out_drop[0, static], tokens[0, static]), \
+        "drop must bypass the block for static tokens"
+    assert not torch.allclose(out_delta[0, static], tokens[0, static]), \
+        "Δ-gating must still read the retained state for static tokens"
+    assert torch.equal(h_drop, h_delta), "both arms freeze the state identically"
+
+    # end to end: same masks, different depth -> the arms are separable
+    frame = torch.rand(1, 3, 64, 64)
+    with torch.no_grad():
+        _, sa, _ = m_delta.step(frame, None)
+        _, sb, _ = m_drop.step(frame, None)
+        f2 = frame.clone()
+        f2[..., :16, :16] = torch.rand(1, 3, 16, 16)
+        da, _, ia = m_delta.step(f2, sa)
+        db, _, ib = m_drop.step(f2, sb)
+    assert ia["active_ratio"] == ib["active_ratio"], "iso-active comparison"
+    assert not torch.allclose(da, db, atol=1e-5)
+
+
 def test_spatial_cache_matches_full_compute():
     """Static frames: cached spatial outputs must equal full recompute.
     Partially-active frames: cached path must refresh active patches."""
@@ -113,3 +149,63 @@ def test_spatial_cache_matches_full_compute():
         frame2[..., :32, :32] = torch.rand(1, 3, 32, 32)
         _, _, i3 = m_cache.step(frame2, s2)
         assert 0.0 < i3["active_ratio"] < 1.0, "partial change expected"
+
+
+def test_shuffle_decoder_is_cheaper_and_same_shape():
+    """v6 decoder: same output contract, an order of magnitude fewer MACs."""
+    from sokkanaem.model import Decoder, ShuffleDecoder
+    feat = torch.randn(2, 192, 16, 16)
+    heavy, cheap = Decoder(192).eval(), ShuffleDecoder(192).eval()
+    with torch.no_grad():
+        a, b = heavy(feat), cheap(feat)
+    assert a.shape == b.shape == (2, 1, 256, 256)
+    assert (b > 0).all(), "softplus keeps depth positive"
+
+
+def test_trainable_spatial_cache_flows_gradients():
+    """v6(b): the sparse spatial path must be differentiable end to end, or
+    training with the cache on silently optimizes nothing in those blocks."""
+    torch.manual_seed(0)
+    model = SOKKANAEM(dim=32, spatial_cache=True, decoder="shuffle")
+    model.train()
+    clip = torch.rand(1, 3, 3, 64, 64)
+    N = (64 // 16) ** 2
+    fm = (torch.rand(1, 3, N) > 0.5).float()
+    fm[:, 0] = 1.0  # keyframe seeds the cache, as train.py does
+    depths, masks = model.forward_clip(clip, force_mask=fm)
+    depths.mean().backward()
+    spatial = [b for b in model.blocks if not hasattr(b, "step")]
+    grads = [p.grad for b in spatial for p in b.parameters()]
+    assert grads and all(g is not None for g in grads), "spatial blocks got no grad"
+    assert any(g.abs().sum() > 0 for g in grads), "spatial grads are all zero"
+
+
+def test_dpt_decoder_shape_params_and_gating_intact():
+    """v8 decoder: multi-scale fusion must keep the streaming contract (and
+    therefore the Δ-gating claim) intact — identical frames still fully static
+    and stable depth."""
+    torch.manual_seed(0)
+    m = SOKKANAEM(dim=64, decoder="dpt", keyframe_every=1000).eval()
+    frame = torch.rand(1, 3, 64, 64)
+    with torch.no_grad():
+        d1, st, i1 = m.step(frame, None)
+        d2, st, i2 = m.step(frame.clone(), st)
+    assert d1.shape == (1, 1, 64, 64)
+    assert i1["active_ratio"] == 1.0 and i2["active_ratio"] == 0.0
+    assert torch.allclose(d1, d2, atol=1e-5), "static scene must stay stable"
+    assert (d1 > 0).all(), "disparity head must yield positive depth"
+    dec = sum(p.numel() for p in m.decoder.parameters())
+    assert dec < 1_000_000, f"decoder budget blown: {dec}"
+
+
+def test_dpt_decoder_trains_through_forward_clip():
+    torch.manual_seed(0)
+    m = SOKKANAEM(dim=32, decoder="dpt").train()
+    clip = torch.rand(1, 3, 3, 64, 64)
+    N = (64 // 16) ** 2
+    fm = (torch.rand(1, 3, N) > 0.5).float()
+    fm[:, 0] = 1.0
+    depths, _ = m.forward_clip(clip, force_mask=fm)
+    depths.mean().backward()
+    assert all(p.grad is not None for p in m.decoder.parameters())
+    assert any(p.grad.abs().sum() > 0 for p in m.embed.parameters())

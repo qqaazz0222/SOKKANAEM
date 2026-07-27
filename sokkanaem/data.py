@@ -32,8 +32,10 @@ Spec strings (CLI): "name:/path" or "folder:/path:scale"
 Metric ranges differ across datasets (indoor ~10m vs KITTI ~80m); mixing is
 safe because training uses scale-invariant log loss.
 """
+import bisect
 import glob
 import os
+import random
 
 import numpy as np
 import torch
@@ -61,6 +63,34 @@ def _pair_by_name(rgb_dir, depth_dir):
     return pairs
 
 
+def _pair_by_timestamp(rgb_dir, depth_dir, max_dt=0.02):
+    """Pair by nearest capture time (TUM/Bonn: filenames ARE timestamps, the
+    two streams have different rates AND different counts, so sorted-order
+    pairing silently drifts the GT out of alignment). 0.02s window is TUM's
+    own associate.py default; unmatched rgb frames are dropped."""
+    def stamped(d):
+        out = []
+        for p in glob.glob(os.path.join(d, "*")):
+            try:
+                out.append((float(os.path.splitext(os.path.basename(p))[0]), p))
+            except ValueError:
+                continue  # not a timestamp-named file
+        return sorted(out)
+
+    rgbs, deps = stamped(rgb_dir), stamped(depth_dir)
+    if not deps:
+        return []
+    times = [t for t, _ in deps]
+    pairs = []
+    for t, r in rgbs:
+        j = bisect.bisect_left(times, t)
+        k = min((k for k in (j - 1, j) if 0 <= k < len(times)),
+                key=lambda k: abs(times[k] - t), default=None)
+        if k is not None and abs(times[k] - t) <= max_dt:
+            pairs.append((r, deps[k][1]))
+    return pairs
+
+
 def _subdirs_seqs(root, rgb_sub, depth_sub, pair=_pair_sorted):
     seqs = []
     for d in sorted(glob.glob(os.path.join(root, "*"))):
@@ -75,9 +105,9 @@ def scannet(root):
 
 
 def tum(root):
-    # ponytail: sorted-order pairing, not timestamp association; use
-    # associate.py output layout if frames drop.
-    return _subdirs_seqs(root, "rgb", "depth")
+    """TUM RGB-D layout (Bonn Dynamic and the fr3 *_static sequences share
+    it). Timestamp-associated, not sorted-order — see _pair_by_timestamp."""
+    return _subdirs_seqs(root, "rgb", "depth", pair=_pair_by_timestamp)
 
 
 def kitti(root):
@@ -134,14 +164,24 @@ ADAPTERS = {
 
 
 class ClipDataset(Dataset):
-    """Slices sequences into fixed-length clips; loads and resizes on access."""
+    """Slices sequences into fixed-length clips; loads and resizes on access.
+
+    augment=True adds clip-consistent geometric + photometric jitter. Clip
+    consistent is the whole point: one transform is drawn per clip and applied
+    to every frame in it, so temporal structure (and therefore the change
+    detector's masks and the temporal loss) stays valid. Without it the model
+    fits its training scenes and does not transfer — measured on v7: AbsRel
+    0.192 / d1 0.707 on seen clips vs 0.356 / 0.519 on the holdout, with no
+    augmentation of any kind in the pipeline.
+    """
 
     def __init__(self, sequences, depth_scale, clip_len=4, frame_stride=1,
-                 clip_stride=2, size=128, depth_mode="u16"):
+                 clip_stride=2, size=128, depth_mode="u16", augment=False):
         self.scale = depth_scale
         self.mode = depth_mode
         self.T = clip_len
         self.size = size
+        self.augment = augment
         span = clip_len * frame_stride
         self.clips = [(seq, s, frame_stride)
                       for seq in sequences if len(seq) >= span
@@ -150,21 +190,54 @@ class ClipDataset(Dataset):
     def __len__(self):
         return len(self.clips)
 
-    def _fit(self, img, resample):
-        """Aspect-preserving: resize shorter side to self.size, center-crop."""
+    def _draw_aug(self):
+        """One geometric+photometric draw, reused for every frame of the clip."""
+        if not self.augment:
+            return None
+        return {
+            "zoom": random.uniform(0.55, 1.0),  # random-resized-crop scale
+            "cx": random.random(), "cy": random.random(),
+            "flip": random.random() < 0.5,
+            # photometric: RGB only, depth is untouched
+            "bright": random.uniform(0.75, 1.3),
+            "contrast": random.uniform(0.75, 1.3),
+            "sat": random.uniform(0.7, 1.4),
+            "gamma": random.uniform(0.8, 1.25),
+        }
+
+    def _fit(self, img, resample, aug=None):
+        """Aspect-preserving: resize shorter side to self.size, center-crop.
+        With aug: crop a random `zoom` fraction at a random position first, so
+        the model sees varied scale and framing instead of one fixed view."""
         w, h = img.size
+        if aug is not None:
+            side = max(8, int(round(min(w, h) * aug["zoom"])))
+            left = int(round((w - side) * aug["cx"]))
+            top = int(round((h - side) * aug["cy"]))
+            img = img.crop((left, top, left + side, top + side))
+            w, h = img.size
         s = self.size / min(w, h)
         img = img.resize((max(self.size, round(w * s)),
                           max(self.size, round(h * s))), resample)
         left = (img.width - self.size) // 2
         top = (img.height - self.size) // 2
-        return img.crop((left, top, left + self.size, top + self.size))
+        img = img.crop((left, top, left + self.size, top + self.size))
+        if aug is not None and aug["flip"]:
+            img = img.transpose(Image.FLIP_LEFT_RIGHT)
+        return img
 
-    def _rgb(self, path):
-        img = self._fit(Image.open(path).convert("RGB"), Image.BILINEAR)
-        return torch.from_numpy(np.asarray(img).copy()).permute(2, 0, 1).float() / 255
+    def _rgb(self, path, aug=None):
+        img = self._fit(Image.open(path).convert("RGB"), Image.BILINEAR, aug)
+        x = torch.from_numpy(np.asarray(img).copy()).permute(2, 0, 1).float() / 255
+        if aug is not None:
+            x = x.pow(aug["gamma"]) * aug["bright"]
+            gray = x.mean(0, keepdim=True)
+            x = gray + (x - gray) * aug["sat"]                 # saturation
+            x = x.mean() + (x - x.mean()) * aug["contrast"]    # contrast
+            x = x.clamp(0, 1)
+        return x
 
-    def _depth(self, path):
+    def _depth(self, path, aug=None):
         if self.mode == "packed_f32":
             # TartanAir V2: RGBA bytes ARE a packed float32 meters value —
             # decode to float BEFORE resizing (resizing the raw RGBA bytes
@@ -172,20 +245,35 @@ class ClipDataset(Dataset):
             raw = np.asarray(Image.open(path))
             d = raw.view(np.float32).reshape(raw.shape[:2]).copy()
             d[d >= 8000] = 0  # ~8248.1 sentinel = sky / no hit
-            img = self._fit(Image.fromarray(d, mode="F"), Image.NEAREST)
+            img = self._fit(Image.fromarray(d, mode="F"), Image.NEAREST, aug)
             return torch.from_numpy(np.asarray(img).copy()).unsqueeze(0)
-        img = self._fit(Image.open(path), Image.NEAREST)
+        img = self._fit(Image.open(path), Image.NEAREST, aug)
         d = np.asarray(img).astype(np.float32)
         d[d == 65535] = 0  # 16-bit saturation = no reading (vkitti2 sky)
         return (torch.from_numpy(d) / self.scale).unsqueeze(0)
 
-    def __getitem__(self, i):
-        seq, start, fs = self.clips[i]
-        pairs = seq[start:start + self.T * fs:fs]
-        frames = torch.stack([self._rgb(r) for r, _ in pairs])
-        depth = torch.stack([self._depth(d) for _, d in pairs])
-        valid = (depth > 0).float()
-        return frames, depth, valid
+    def __getitem__(self, i, _retries=0, _same_retries=0):
+        # "corrupt" reads observed in practice were transient — re-scanning
+        # the exact same files outside the DataLoader (no worker contention)
+        # found them perfectly readable. So retry the SAME clip a couple
+        # times first (cheap, likely just I/O contention from num_workers>1
+        # hitting /archive concurrently) before giving up and jumping to a
+        # different random clip (in case a file really is dead).
+        try:
+            seq, start, fs = self.clips[i]
+            pairs = seq[start:start + self.T * fs:fs]
+            aug = self._draw_aug()  # one draw for the whole clip
+            frames = torch.stack([self._rgb(r, aug) for r, _ in pairs])
+            depth = torch.stack([self._depth(d, aug) for _, d in pairs])
+            valid = (depth > 0).float()
+            return frames, depth, valid
+        except (OSError, ValueError) as e:
+            if _same_retries < 2:
+                return self.__getitem__(i, _retries, _same_retries + 1)
+            if _retries >= 10:
+                raise
+            print(f"WARNING: skipping unreadable clip {i} after retries ({e})")
+            return self.__getitem__(random.randrange(len(self)), _retries + 1)
 
 
 class SynthClips(torch.utils.data.IterableDataset):
