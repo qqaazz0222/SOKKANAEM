@@ -30,8 +30,8 @@ from sokkanaem.distill import (affine_invariant_loss, dinov2_features,
                                distill_loss, load_frozen_dinov2,
                                load_frozen_teacher, teacher_disparity)
 from sokkanaem.ema import ema_update_
-from sokkanaem.losses import (grad_loss, multiscale_grad_loss, normal_loss,
-                              si_log_loss, temporal_loss)
+from sokkanaem.losses import (bin_ce_loss, grad_loss, multiscale_grad_loss,
+                              normal_loss, si_log_loss, temporal_loss)
 from sokkanaem.schedule import lr_at, parse_size_schedule, size_for_step
 
 
@@ -111,6 +111,13 @@ def main():
                          "touching the metric scale the GT provides")
     ap.add_argument("--teacher-model",
                     default="depth-anything/Depth-Anything-V2-Small-hf")
+    ap.add_argument("--bin-weight", type=float, default=0.0,
+                    help="soft cross-entropy on the depth-bin distribution "
+                         "(0 = off; needs a bins>0 dpt decoder). Without it "
+                         "the head is supervised only through its expectation "
+                         "and degenerates into scalar regression behind a "
+                         "softmax — measured entropy 0.77 of maximum, "
+                         "identical at boundaries and in flat regions")
 
     # config sets defaults, explicit CLI flags win
     pre, _ = ap.parse_known_args()
@@ -145,6 +152,15 @@ def main():
     # encoder via a trainable projection head, matched by cosine loss.
     dinov2 = load_frozen_dinov2(args.distill_model, dev) if args.distill_weight > 0 else None
     teacher = load_frozen_teacher(args.teacher_model, dev) if args.teacher_weight > 0 else None
+    # bin logits are internal to the decoder head; a forward hook collects one
+    # entry per frame (forward_clip calls the decoder T times) without
+    # threading them through every return signature
+    bin_logits = []
+    if args.bin_weight > 0:
+        assert getattr(model.decoder, "bins", 0), \
+            "--bin-weight needs decoder = 'dpt' with bins > 0"
+        model.decoder.head.register_forward_hook(
+            lambda mod, inp, out: bin_logits.append(out))
     distill_proj = (torch.nn.Linear(model.dim, dinov2.config.hidden_size).to(dev)
                     if dinov2 is not None else None)
     # Kendall multi-task uncertainty weighting (§ auto-loss-weight): learnable
@@ -233,6 +249,7 @@ def main():
                 break
             clip, gt, valid = clip.to(dev), gt.to(dev), valid.to(dev)
             B, T = clip.shape[:2]
+            bin_logits.clear()
 
             tokens = None
             if args.detector_mask:
@@ -258,6 +275,14 @@ def main():
             if args.msgrad_weight > 0:
                 loss = loss + args.msgrad_weight * multiscale_grad_loss(
                     depths, gt, valid)
+            if args.bin_weight > 0:
+                # hook order is frame-major (t0 batch, t1 batch, ...), so the
+                # targets must be transposed to match before flattening
+                lg = torch.cat(bin_logits, 0)
+                g = gt.transpose(0, 1).reshape(B * T, 1, *gt.shape[-2:])
+                v = valid.transpose(0, 1).reshape(B * T, 1, *valid.shape[-2:])
+                loss = loss + args.bin_weight * bin_ce_loss(
+                    lg, model.decoder.bin_centres(), g, v)
             if teacher is not None:
                 # dense target on every pixel, including where the Kinect GT
                 # has holes — the loss is affine-invariant so the two

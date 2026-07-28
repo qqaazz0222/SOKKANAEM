@@ -42,3 +42,38 @@ def test_multiscale_grad_loss_scale_invariant():
     valid = torch.ones_like(gt)
     a = multiscale_grad_loss(gt * 3.0, gt, valid)
     assert a < 1e-4, "normalized disparity must absorb a global scale factor"
+
+
+def test_bin_ce_loss_prefers_the_right_bin():
+    """A distribution peaked on the GT bin must beat a uniform one, and a
+    peak on the wrong bin must be worse than uniform."""
+    import math
+    import torch
+    from sokkanaem.losses import bin_ce_loss
+
+    bins = 16
+    centres = torch.linspace(math.log(0.5), math.log(50.0), bins)
+    gt = torch.full((2, 1, 8, 8), 5.0)
+    valid = torch.ones_like(gt)
+    k = int(torch.searchsorted(centres, torch.tensor(math.log(5.0))))
+
+    uniform = torch.zeros(2, bins, 4, 4)
+    right = uniform.clone()
+    right[:, k - 1:k + 1] = 6.0          # mass on the two bracketing centres
+    wrong = uniform.clone()
+    wrong[:, 0] = 6.0
+
+    lu = bin_ce_loss(uniform, centres, gt, valid)
+    lr = bin_ce_loss(right, centres, gt, valid)
+    lw = bin_ce_loss(wrong, centres, gt, valid)
+    assert lr < lu < lw, f"right {lr:.3f} uniform {lu:.3f} wrong {lw:.3f}"
+    assert abs(lu.item() - math.log(bins)) < 1e-4, "uniform CE must be log(bins)"
+
+    # invalid pixels are ignored, not counted as zeros
+    assert torch.allclose(bin_ce_loss(right, centres, gt, valid * 0),
+                          torch.zeros(()))
+    # gradient reaches the logits but not the (detached) centres
+    c = centres.clone().requires_grad_(True)
+    p = uniform.clone().requires_grad_(True)
+    bin_ce_loss(p, c, gt, valid).backward()
+    assert p.grad.abs().sum() > 0 and c.grad is None

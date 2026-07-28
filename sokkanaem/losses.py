@@ -56,6 +56,42 @@ def temporal_loss(depths, masks, patch=16):
     return (diff.abs() * m).sum() / m.sum().clamp(min=1)
 
 
+def bin_ce_loss(logits, centres, gt, valid):
+    """Soft cross-entropy tying the depth-bin distribution to the GT bin.
+
+    Measured on v8 (bins=64): the head's distribution has normalized entropy
+    0.77 and a 1.02 log-depth sigma, identical at depth boundaries and in flat
+    regions, and 99.9% of pixels have no bin holding half the mass. With the
+    supervision only on the expectation, a broad distribution whose mean is
+    right is a perfectly good optimum, so binning degenerates into scalar
+    regression through a softmax bottleneck. AdaBins/BinsFormer avoid this by
+    supervising the distribution itself; this is that term.
+
+    logits: (N, bins, h, w) raw head output. centres: (bins,) log-depth, must
+    be ascending. gt/valid: (N, 1, H, W) at any resolution >= (h, w).
+    Target mass is split linearly between the two centres bracketing log(gt),
+    which keeps the loss sub-bin-accurate instead of snapping to one index.
+    Centres are detached: the CE shapes the distribution, and the bin
+    positions keep being learned by the depth losses through the expectation.
+    """
+    n, bins, h, w = logits.shape
+    c = centres.detach()
+    g = F.adaptive_avg_pool2d(gt * valid, (h, w))
+    v = F.adaptive_avg_pool2d(valid, (h, w))
+    keep = v > 0.99                                   # fully-valid cells only
+    if not bool(keep.any()):
+        return logits.sum() * 0
+    lg = torch.log((g / v.clamp(min=1e-6)).clamp(min=1e-3))
+    hi = torch.searchsorted(c, lg.flatten().contiguous()).clamp(1, bins - 1)
+    lo = hi - 1
+    t = ((lg.flatten() - c[lo]) / (c[hi] - c[lo])).clamp(0, 1)
+    logp = F.log_softmax(logits, 1).permute(0, 2, 3, 1).reshape(-1, bins)
+    ce = -((1 - t) * logp.gather(1, lo[:, None])[:, 0]
+           + t * logp.gather(1, hi[:, None])[:, 0])
+    k = keep.flatten()
+    return (ce * k).sum() / k.sum().clamp(min=1)
+
+
 def _norm_disp(depth, valid):
     """Scale-shift normalized disparity, MiDaS style: median-center and
     mean-absolute-deviation scale, computed over valid pixels only. Puts every

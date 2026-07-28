@@ -34,12 +34,22 @@
 #    its block output is reused. Trained on, like the spatial cache.
 #    Measured accounting at 256px (scripts/flops.py): active 16.6% costs 37.9%
 #    of full compute (v7 architecture: 78.8%), active 0% costs 25.5% (96.4%).
-# 6. --teacher-weight 0.5 — output-level distillation from frozen DA v2 Small,
-#    affine-invariant so it teaches geometry without touching metric scale.
-#    Training-only, zero inference cost. This targets the diagnosed wall
-#    (REPORT §4.17: generalization, not capacity) with the same trick DA v2
-#    itself used, and it supervises pixels where the Kinect GT has holes.
-#    Costs teacher forward time per step; drop it if throughput matters more.
+# 6. bin_weight = 0.2 — soft cross-entropy on the bin distribution itself.
+#    Without it the head is supervised only through its expectation, and a
+#    broad distribution with the right mean is a perfectly good optimum:
+#    measured on the first v8 run, normalized entropy 0.77 of maximum and
+#    IDENTICAL at depth boundaries and in flat regions, i.e. binning had
+#    degenerated into scalar regression behind a softmax. With the term on,
+#    entropy drops to 0.41/0.35 (boundary/flat) — wider at boundaries, which
+#    is the behaviour the bins exist for. Zero inference cost.
+#
+# REMOVED after measurement: --teacher-weight (frozen DA v2 output distillation).
+# It was in the first v8 run and a 3-arm probe (8k steps each, same init, same
+# 500/487-clip evals) showed it HURTS both domains:
+#   real   d1 0.8156 (teacher) -> 0.8405 (off);  synthetic d1 0.4155 -> 0.5629
+# The affine-invariant match to DA v2's relative disparity drags the far-range
+# structure that TartanAir's 0.5-129 m scenes need. The real-domain gain first
+# credited to the teacher actually came from the architecture changes above.
 #
 # Init from v7's EMA weights: the 2 extra scan directions, the depthwise
 # convs and the bin head are new parameters, so load non-strict:
@@ -65,7 +75,7 @@ warmup = 1000
 max_skip = 0.5
 normal_weight = 0.05
 msgrad_weight = 0.5
-teacher_weight = 0.5
+bin_weight = 0.2
 
 [model]
 tau_on = 0.05
