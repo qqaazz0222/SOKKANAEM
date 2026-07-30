@@ -14,7 +14,7 @@ from pathlib import Path
 
 import torch
 
-from sokkanaem import from_checkpoint
+from sokkanaem import checkpoint_config, from_checkpoint
 from sokkanaem.data import build_mixed
 from sokkanaem.metrics import clip_scores, pooled
 
@@ -25,7 +25,8 @@ def eval_once(model, loader, dev, max_clips, constant=False):
     constant depth — the degenerate control. It scores t-delta 0 and OPW 0
     while being useless, which is exactly why TCE is reported (metrics.py)."""
     acc = {k: [] for k in ("absrel", "rmse", "delta1", "temporal_delta",
-                           "opw", "tce", "active_ratio", "_pooled")}
+                           "opw", "tce", "active_ratio", "absrel_metric",
+                           "scale", "scale_drift", "_pooled")}
     skipped = 0
     for ci, (clip, gt, valid) in enumerate(loader):
         if ci >= max_clips:
@@ -45,16 +46,32 @@ def eval_once(model, loader, dev, max_clips, constant=False):
         for k, val in sc.items():
             acc[k].append(val)
         acc["active_ratio"].append(masks[:, 1:].mean().item())  # frame 0 full
+        # Median scaling scores relative structure only. A fixed camera needs
+        # metres, so report the UNSCALED error too, plus how far the per-clip
+        # scale sits from 1 and how much it moves inside the clip (short-
+        # horizon scale drift — the thing a long stream accumulates).
+        acc["absrel_metric"].append(
+            ((depths[v] - gt[v]).abs() / gt[v].clamp(min=1e-6)).mean().item())
+        acc["scale"].append(s.item())
+        fs = [(gt[0, t][vt].median()
+               / depths[0, t][vt].median().clamp(min=1e-6)).item()
+              for t in range(gt.shape[1]) if (vt := v[0, t]).any()]
+        fs = torch.tensor(fs)
+        acc["scale_drift"].append(
+            (fs.std() / fs.mean().clamp(min=1e-6)).item() if len(fs) > 1 else 0.0)
     # pixel-pooled dataset-level metrics are the primary numbers (convention,
     # and not hostage to a few blown-up clips); per-clip std reports spread
-    out = dict(pooled(acc.pop("_pooled")))
+    sums = acc.pop("_pooled")
+    out = dict(pooled(sums))
     t = {k: torch.tensor(v) for k, v in acc.items()}
-    out["active_ratio"] = t["active_ratio"].mean().item()
+    for k in ("active_ratio", "absrel_metric", "scale", "scale_drift"):
+        out[k] = t[k].mean().item()
     out["n"] = len(t["absrel"])
     out["skipped"] = skipped
     out["absrel_std"] = t["absrel"].std().item() if out["n"] > 1 else 0.0
     out["absrel_clip"] = t["absrel"].mean().item()
     out["per_clip"] = {k: v.tolist() for k, v in t.items()}
+    out["sums"] = sums  # kept so several sources can be re-pooled by pixel
     return out
 
 
@@ -63,15 +80,24 @@ def main():
     ap.add_argument("--ckpt", required=True)
     ap.add_argument("--data", action="append", required=True,
                     help="dataset spec 'name:/root[:scale]', repeatable")
-    ap.add_argument("--size", type=int, default=128)
+    ap.add_argument("--size", type=int, default=None,
+                    help="eval resolution; default = the checkpoint's "
+                         "training size (128 if unrecorded)")
     ap.add_argument("--clip-len", type=int, default=8)
-    ap.add_argument("--max-clips", type=int, default=100)
+    ap.add_argument("--max-clips", type=int, default=100,
+                    help="clips PER SOURCE. Reading one concatenated stream "
+                         "instead made 'synthetic 500' mean 'VKITTI2 500' "
+                         "(reports/20260729.md §7.1)")
     ap.add_argument("--sweep-tau", action="store_true",
                     help="sweep detector threshold: skip-vs-accuracy curve")
     ap.add_argument("--gmc", action="store_true",
                     help="ego-motion mode: Low-Res GMC + feature gating (§3.5)")
-    ap.add_argument("--spatial-cache", action="store_true",
-                    help="reuse static-patch spatial outputs (§4.5 wall-clock)")
+    ap.add_argument("--spatial-cache", action=argparse.BooleanOptionalAction,
+                    default=None,
+                    help="reuse static-patch spatial outputs (§4.5 wall-clock); "
+                         "default = whatever the checkpoint was trained with")
+    ap.add_argument("--temporal-cache", action=argparse.BooleanOptionalAction,
+                    default=None, help="reuse static-patch temporal readout")
     ap.add_argument("--gate-mode", default="delta", choices=["delta", "drop"],
                     help="§4.4 gating-position ablation: Δ-gating vs token drop")
     ap.add_argument("--scores-tag", default=None,
@@ -84,9 +110,13 @@ def main():
     args = ap.parse_args()
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
+    cfg = checkpoint_config(args.ckpt)
+    if args.size is None:
+        args.size = cfg.get("size", 128)
     kw = {"gmc": True, "tau_on": 0.1, "tau_off": 0.05} if args.gmc else {}
-    if args.spatial_cache:
-        kw["spatial_cache"] = True
+    kw.update({k: v for k, v in (("spatial_cache", args.spatial_cache),
+                                 ("temporal_cache", args.temporal_cache))
+               if v is not None})
     kw["gate_mode"] = args.gate_mode
     # trained [model] kwargs come from config.toml next to the ckpt
     model = from_checkpoint(args.ckpt, dev, **kw).eval()
@@ -94,11 +124,17 @@ def main():
     dataset, _ = build_mixed(args.data, clip_len=args.clip_len,
                              clip_stride=args.clip_len, size=args.size,
                              holdout=args.holdout, val=True)
-    loader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
+    # one loader per source: build_mixed concatenates in spec order, and a
+    # single stream truncated at --max-clips only ever reached the first one
+    sources = [(spec.split(":")[0],
+                torch.utils.data.DataLoader(ds, batch_size=1, shuffle=False))
+               for spec, ds in zip(args.data, dataset.datasets)]
 
     out = Path(args.ckpt).parent / "eval.txt"
     lines = [f"ckpt={args.ckpt} data={args.data} clips={len(dataset)} "
-             f"max={args.max_clips}"]
+             f"size={args.size} max={args.max_clips}/source "
+             f"spatial_cache={model.spatial_cache} "
+             f"temporal_cache={model.temporal_cache}"]
 
     if not args.sweep_tau:
         taus = [(model.detector.tau_on, model.detector.tau_off)]
@@ -109,28 +145,60 @@ def main():
         taus = [(0.0, 0.0), (0.005, 0.0025), (0.01, 0.005), (0.02, 0.01),
                 (0.05, 0.025), (0.1, 0.05)]
 
-    # pooled = pixel-weighted over the whole set; clipAbsRel/std = per-clip
-    hdr = ("tau_on   active%  AbsRel   RMSE     d1      t-delta  OPW     "
-           "TCE     clipAbsRel(std)  n")
+    # pooled = pixel-weighted; clipAbsRel/std = per-clip. mAbsRel/scale/drift
+    # are the UNSCALED numbers: median scaling hides absolute-scale error.
+    hdr = ("tau_on   source        active%  AbsRel   RMSE     d1      t-delta  "
+           "OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n")
     lines += [hdr, "-" * len(hdr)]
     per_clip = {}
 
-    def row(label, m):
-        per_clip[label] = m.pop("per_clip")
-        lines.append(f"{label:<8} {m['active_ratio']*100:6.1f}  "
+    def row(label, src, m):
+        pc = m.pop("per_clip", None)
+        if pc is not None:
+            per_clip[f"{label}/{src}"] = pc
+        lines.append(f"{label:<8} {src:<13} {m['active_ratio']*100:6.1f}  "
                      f"{m['absrel']:.4f}  {m['rmse']:7.4f}  {m['delta1']:.4f}  "
                      f"{m['temporal_delta']:.4f}   {m['opw']:.4f}  "
-                     f"{m['tce']:.4f}  {m['absrel_clip']:.4f} "
+                     f"{m['tce']:.4f}  {m['absrel_metric']:.4f}  "
+                     f"{m['scale']:.3f}  {m['scale_drift']:.4f}  "
+                     f"{m['absrel_clip']:.4f} "
                      f"({m['absrel_std']:.3f})  {m['n']}"
                      + (f" (+{m['skipped']} no-GT)" if m["skipped"] else ""))
 
+    CLIPK = ("active_ratio", "absrel_metric", "scale", "scale_drift",
+             "absrel_clip", "absrel_std")
+
+    def combine(ms, by_pixel):
+        """by_pixel=True: one number over every pixel of every source, so the
+        biggest dataset dominates. False: equal weight per source. Report both
+        — they are different claims and the old single row conflated them."""
+        n = [m["n"] for m in ms]
+        w = ([x / max(sum(n), 1) for x in n] if by_pixel
+             else [1 / len(ms)] * len(ms))
+        keys = ("absrel", "rmse", "delta1", "temporal_delta", "opw", "tce")
+        c = (dict(pooled([s for m in ms for s in m["sums"]])) if by_pixel
+             else {k: sum(wi * m[k] for wi, m in zip(w, ms)) for k in keys})
+        c.update({k: sum(wi * m[k] for wi, m in zip(w, ms)) for k in CLIPK})
+        c["n"], c["skipped"] = sum(n), sum(m["skipped"] for m in ms)
+        return c
+
+    def run(label, **kw):
+        ms = []
+        for src, loader in sources:
+            m = eval_once(model, loader, dev, args.max_clips, **kw)
+            row(label, src, m)
+            ms.append(m)
+        if len(ms) > 1:
+            row(label, "MEAN(src)", combine(ms, by_pixel=False))
+            row(label, "POOLED(px)", combine(ms, by_pixel=True))
+
     for tau_on, tau_off in taus:
         model.detector.tau_on, model.detector.tau_off = tau_on, tau_off
-        row(f"{tau_on:g}", eval_once(model, loader, dev, args.max_clips))
+        run(f"{tau_on:g}")
     if args.control:
         # degenerate constant-depth control: proves t-delta/OPW alone can be
         # gamed, and that TCE cannot (REPORT.md §4.6 collapse scored 0.0000)
-        row("const", eval_once(model, loader, dev, args.max_clips, constant=True))
+        run("const", constant=True)
 
     report = "\n".join(lines)
     print(report)

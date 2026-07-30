@@ -12,12 +12,15 @@ Run:
 Config: TOML file sets defaults; explicit CLI flags override. [model]
 table is passed to SOKKANAEM(**model) — detector thresholds live there.
 
-Outputs (checkpoint latest.pt, train.log, config.toml copy) go to
+Outputs (checkpoint latest.pt, train.log, effective config.toml) go to
 work_dirs/<config name>/ (override with --work-dir).
 """
 import argparse
+import json
 import logging
-import shutil
+import random
+import subprocess
+import sys
 import tomllib
 from pathlib import Path
 
@@ -33,6 +36,46 @@ from sokkanaem.ema import ema_update_
 from sokkanaem.losses import (bin_ce_loss, grad_loss, multiscale_grad_loss,
                               normal_loss, si_log_loss, temporal_loss)
 from sokkanaem.schedule import lr_at, parse_size_schedule, size_for_step
+
+
+def write_config(path, args, model_kw):
+    """Write the EFFECTIVE config — the merged CLI+TOML values the run really
+    used — plus the provenance to reproduce it, and return the [meta] table.
+
+    Copying the input TOML instead recorded intent, not fact: arm1/arm2's
+    config.toml still claims teacher_weight = 0.5 although both ran with the
+    flag overridden to 0 (reports/20260729.md §8.3). from_checkpoint() reads
+    this file, so [model] must keep its shape."""
+    def fmt(v):
+        if isinstance(v, bool):
+            return "true" if v else "false"
+        if isinstance(v, (int, float)):
+            return repr(v)
+        if isinstance(v, (list, tuple)):
+            return "[" + ", ".join(fmt(x) for x in v) + "]"
+        return json.dumps(str(v))
+
+    def table(name, d):
+        return ([f"\n[{name}]"] if name else []) + [
+            f"{k} = {fmt(v)}" for k, v in d.items() if v is not None]
+
+    git = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True,
+                         text=True, cwd=Path(__file__).resolve().parent)
+    meta = {"command": " ".join(sys.argv),
+            "git_commit": git.stdout.strip() or "unknown",
+            # str(): torch.__version__ is a TorchVersion object, and this dict
+            # also goes into the checkpoint — weights_only=True (the torch 2.6+
+            # default) refuses to unpickle it, i.e. the run would train for
+            # 14 h and then fail to load
+            "torch": str(torch.__version__),
+            "cuda": torch.version.cuda or "cpu",
+            "gpu": (torch.cuda.get_device_name(0)
+                    if torch.cuda.is_available() else "cpu")}
+    path.write_text("\n".join(
+        ["# effective config (merged CLI + TOML), written by train.py"]
+        + table(None, {k: v for k, v in vars(args).items() if k != "config"})
+        + table("model", model_kw) + table("meta", meta)) + "\n")
+    return meta
 
 
 def main():
@@ -70,6 +113,12 @@ def main():
                          "depthwise convs and bin head have no v7 counterpart)")
     ap.add_argument("--work-dir", default=None,
                     help="output dir; default work_dirs/<config name>")
+    ap.add_argument("--seed", type=int, default=0,
+                    help="seeds torch and random (DataLoader workers derive "
+                         "theirs from torch's). The 3-arm probe ran unseeded, "
+                         "so sampler order, augmentation and random masks all "
+                         "differed between arms — small gaps like bin CE's "
+                         "were not separable from seed variance")
     ap.add_argument("--ema-decay", type=float, default=0.999,
                     help="eval-time shadow-weight EMA decay (0 disables)")
     ap.add_argument("--auto-loss-weight", action="store_true",
@@ -133,17 +182,19 @@ def main():
         ap.set_defaults(**cfg)
     args = ap.parse_args()
 
+    random.seed(args.seed)
+    torch.manual_seed(args.seed)
+
     name = Path(args.config).stem if args.config else "default"
     work = Path(args.work_dir or f"work_dirs/{name}")
     work.mkdir(parents=True, exist_ok=True)
-    if args.config:
-        shutil.copy(args.config, work / "config.toml")
+    meta = write_config(work / "config.toml", args, model_kw)
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s %(message)s",
         handlers=[logging.StreamHandler(),
                   logging.FileHandler(work / "train.log")])
     log = logging.getLogger("train").info
-    log(f"work dir: {work}")
+    log(f"work dir: {work}  seed {args.seed}  commit {meta['git_commit'][:8]}")
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     model = SOKKANAEM(**model_kw).to(dev)
@@ -229,7 +280,10 @@ def main():
     loader = make_loader(cur_size)
 
     def save(path):
-        torch.save({"model": model.state_dict(), "optim": opt.state_dict(),
+        # provenance travels with the weights: a checkpoint that outlives its
+        # work dir still names its commit, seed and exact arguments
+        torch.save({"meta": {**meta, "args": vars(args), "model": model_kw},
+                    "model": model.state_dict(), "optim": opt.state_dict(),
                     "step": step, "ema": ema_state,
                     "log_vars": None if log_vars is None else log_vars.detach(),
                     "distill_proj": None if distill_proj is None else distill_proj.state_dict()},

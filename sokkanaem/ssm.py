@@ -46,7 +46,11 @@ class SelectiveSSM(nn.Module):
         x, z = self.in_proj(u).chunk(2, dim=-1)          # (B, L, d_inner)
         dt = F.softplus(self.dt_proj(x))                  # (B, L, d_inner)
         if mask is not None:
-            dt = dt * mask.unsqueeze(-1)                  # Δ-gating: the core trick
+            # .to(dt): the detector builds masks in fp32 regardless of the
+            # model's dtype, and multiplying by one promotes the whole scan
+            # back to fp32 — half the tensors downstream then mismatch and
+            # a half-precision model cannot run at all
+            dt = dt * mask.unsqueeze(-1).to(dt.dtype)     # Δ-gating: the core trick
         Bp, Cp = self.bc_proj(x).chunk(2, dim=-1)         # (B, L, d_state)
         return x, z, dt, Bp, Cp
 

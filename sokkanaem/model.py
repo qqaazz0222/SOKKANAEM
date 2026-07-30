@@ -72,7 +72,7 @@ class TemporalBlock(nn.Module):
         u = self.norm(tokens).reshape(B * N, D)   # each position = one stream
         y, h = self.ssm.step(u, m, h)
         if gate_mode == "drop":
-            y = y * m.unsqueeze(-1)
+            y = y * m.unsqueeze(-1).to(y.dtype)
         return tokens + y.reshape(B, N, D), h
 
 
@@ -460,6 +460,11 @@ class SOKKANAEM(nn.Module):
             mask, det = self.detector(frame, state["det"])  # (B, N)
 
         if self._core is not None and not self.spatial_cache:
+            # populate the cross-scan permutation cache OUTSIDE the graph: a
+            # tensor first created inside a captured region lives in the
+            # cudagraph pool, and the next replay overwrites the entry this
+            # dict still points at (4-way scan + --compile died on exactly that)
+            self._dense_order((gh, gw), frame.device)
             depth, hs = self._core(frame, mask, state["hs"])
             # cudagraph-trees reuse output buffers across replays; detach
             # results from the static pool before they get overwritten
@@ -521,19 +526,29 @@ class SOKKANAEM(nn.Module):
         return out + (torch.stack(all_tokens, 1),) if return_tokens else out
 
 
+def checkpoint_config(ckpt):
+    """The whole sidecar config next to a checkpoint (work_dirs/<name>/
+    config.toml, written by train.py), or {} when absent.
+
+    Callers need the top-level training args, not only [model]: `size`
+    especially — inference at a resolution the model was never trained at is
+    silent, and the 128 default used to override a 256px run."""
+    import tomllib
+    from pathlib import Path
+
+    cfg = Path(ckpt).parent / "config.toml"
+    if not cfg.exists():
+        return {}
+    with open(cfg, "rb") as f:
+        return tomllib.load(f)
+
+
 def from_checkpoint(ckpt, device="cpu", **overrides):
     """Rebuild the model with the [model] kwargs recorded next to the
     checkpoint (work_dirs/<name>/config.toml, saved by train.py), load
     weights, return it. overrides win — e.g. gmc=True with feature-scale
     taus replaces the trained pixel-scale ones."""
-    import tomllib
-    from pathlib import Path
-
-    kw = {}
-    cfg = Path(ckpt).parent / "config.toml"
-    if cfg.exists():
-        with open(cfg, "rb") as f:
-            kw = tomllib.load(f).get("model", {})
+    kw = checkpoint_config(ckpt).get("model", {})
     kw.update(overrides)
     model = SOKKANAEM(**kw).to(device)
     state = torch.load(ckpt, map_location=device)

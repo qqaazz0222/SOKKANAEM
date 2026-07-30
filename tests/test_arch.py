@@ -160,6 +160,20 @@ def test_v8_trains_end_to_end():
         assert g is not None and g.abs().sum() > 0, f"{p} got no gradient"
 
 
+def test_half_precision_streaming():
+    """fp16 is the deployment dtype, and the detector emits fp32 masks whatever
+    the model's dtype: multiplying Δ by one promoted the entire scan back to
+    fp32 and the next einsum died on the mismatch. Frame 2 is the failing path
+    (frame 1 is all-active, mask all ones)."""
+    m = SOKKANAEM(dim=32, depth=2, patch_size=16, spatial_cache=True,
+                  temporal_cache=True).half().eval()
+    frame = torch.rand(1, 3, 64, 64).half()
+    depth, state, _ = m.step(frame)
+    depth, state, info = m.step(frame, state)
+    assert info["active_ratio"] == 0.0          # identical frame -> nothing active
+    assert depth.dtype == torch.float16 and torch.isfinite(depth).all()
+
+
 if __name__ == "__main__":
     for name, fn in sorted(globals().items()):
         if name.startswith("test_"):

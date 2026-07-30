@@ -16,7 +16,7 @@ import numpy as np
 import torch
 from PIL import Image
 
-from sokkanaem import SOKKANAEM, from_checkpoint
+from sokkanaem import SOKKANAEM, checkpoint_config, from_checkpoint
 from sokkanaem.data import SynthClips
 
 
@@ -51,19 +51,34 @@ def main():
     ap.add_argument("--save-dir", default=None,
                     help="depth PNG output dir; default <ckpt dir>/viz when "
                          "--ckpt given, 'none' disables")
-    ap.add_argument("--size", type=int, default=128)
+    ap.add_argument("--size", type=int, default=None,
+                    help="inference resolution; default = the checkpoint's "
+                         "training size (128 without a checkpoint)")
     ap.add_argument("--frames", type=int, default=60)
-    ap.add_argument("--gmc", action="store_true",
+    ap.add_argument("--gmc", action=argparse.BooleanOptionalAction, default=None,
                     help="ego-motion mode: Low-Res GMC + feature gating (§3.5)")
     ap.add_argument("--tau-on", type=float, default=None,
                     help="gate threshold override (feature scale with --gmc)")
     ap.add_argument("--tau-off", type=float, default=None)
-    ap.add_argument("--spatial-cache", action="store_true",
-                    help="reuse static-patch spatial outputs (§4.5 wall-clock)")
+    # tri-state on purpose: a plain store_true default of False overrode the
+    # checkpoint's trained spatial_cache=true, so the default run silently took
+    # the dense path (89.8% of full MACs instead of 38.9%)
+    ap.add_argument("--spatial-cache", action=argparse.BooleanOptionalAction,
+                    default=None,
+                    help="reuse static-patch spatial outputs (§4.5 wall-clock); "
+                         "default = whatever the checkpoint was trained with")
+    ap.add_argument("--temporal-cache", action=argparse.BooleanOptionalAction,
+                    default=None, help="reuse static-patch temporal readout")
     args = ap.parse_args()
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
-    kw = {"gmc": args.gmc, "spatial_cache": args.spatial_cache}
+    cfg = checkpoint_config(args.ckpt) if args.ckpt else {}
+    if args.size is None:
+        args.size = cfg.get("size", 128)
+    kw = {k: v for k, v in (("gmc", args.gmc),
+                            ("spatial_cache", args.spatial_cache),
+                            ("temporal_cache", args.temporal_cache))
+          if v is not None}
     if args.gmc:  # feature-scale defaults (relative L1), not pixel MSE
         kw.update(tau_on=0.1, tau_off=0.05)
     if args.tau_on is not None:
@@ -75,6 +90,9 @@ def main():
         model = from_checkpoint(args.ckpt, dev, **kw).eval()
     else:
         model = SOKKANAEM(**kw).to(dev).eval()
+    print(f"size {args.size}  spatial_cache {model.spatial_cache}  "
+          f"temporal_cache {model.temporal_cache}  "
+          f"tau_on {model.detector.tau_on:g}")
     if args.save_dir is None and args.ckpt:
         args.save_dir = os.path.join(os.path.dirname(args.ckpt) or ".", "viz")
     if args.save_dir == "none":
