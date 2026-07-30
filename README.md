@@ -62,6 +62,12 @@ python scripts/infer.py --ckpt work_dirs/scannet/latest.pt --frames-dir data/cct
 # 실측 속도 — active ratio별 latency/FPS, cache on/off, peak VRAM, 스트림당 state
 python scripts/bench.py --ckpt work_dirs/main_v8/latest.pt
 python scripts/bench.py --ckpt work_dirs/main_v8/latest.pt --half --streams 4
+# --bucket N: 모아온 active 토큰 수를 N의 배수로 올림 패딩(결과 불변, 패드는 Δ-gating으로
+# 꺼짐). 희소 경로가 프레임마다 새 shape이던 문제를 없애 --compile이 의미를 갖게 한다.
+python scripts/bench.py --ckpt work_dirs/main_v8/latest.pt --bucket 64 --compile
+
+# head의 양자화 바닥을 깊이 구간별로 측정 — bin 개수/범위를 바꾸기 전에 먼저 볼 것
+python scripts/bin_probe.py --data vkitti2:/data/vkitti2 --holdout Scene06
 
 # 이동 카메라 (ego-motion): Low-Res GMC + feature gating (IDEA.md §3.5)
 python scripts/infer.py --ckpt work_dirs/kitti/latest.pt --video dashcam.mp4 --gmc
@@ -82,6 +88,12 @@ python scripts/eval.py --ckpt work_dirs/kitti/latest.pt --data kitti:/data/kitti
 | `vkitti2.toml` | 합성 주행 (dense GT) | 0.5 | 0.05 | kitti와 동일 프로파일 |
 | `mixed.toml` | 전체 혼합 (generalist) | 0.7 | 0.02 | 이후 개별 config로 fine-tune |
 | `main.toml` | **본 학습**: TartanAir V2 + PointOdyssey + vkitti2 | 0.5 | 0.05 | 256px, 100k steps, PoC ablation 결과 반영 (§4.5) |
+| `main_v8.toml` | **현행 본 학습**: 실촬(TUM/Bonn) + 합성 3종 | 0.5 | 0.05 | 4방향 scan, local conv, DPT, 64 bin + bin CE |
+| `t1_binrange.toml` / `t1_bin128.toml` | T1-5 원거리 ablation | | | `d_max` 150→600 (+ bins 128) — PLAN.md T1-5 |
+
+기본 꺼져 있는 손실 두 개(`--warp-weight` / `--edge-weight`): 전자는 RAFT flow로 워프한
+log-depth 잔차를 GT 잔차에 맞추는 TCE의 학습판, 후자는 GT depth gradient 밴드에 가중한
+log L1(전경 물체용). 둘 다 PLAN.md Tier 1에서 검증 중.
 
 ## 산출물 (`work_dirs/<이름>/`)
 
