@@ -27,7 +27,7 @@ import torch
 import torch.nn.functional as F
 from depth_anything_3.api import DepthAnything3
 
-from sokkanaem.data import build_mixed
+from sokkanaem.data import build_mixed, eval_set_from_env
 from sokkanaem.metrics import clip_scores, report
 
 CKPT = "depth-anything/DA3-BASE"
@@ -37,13 +37,13 @@ def main():
     dev = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = DepthAnything3.from_pretrained(CKPT).to(device=dev)
 
-    dataset, _ = build_mixed(
+    specs, holdout, tag = eval_set_from_env(
         ["vkitti2:/home/hyunsu/dataset_ssd/vkitti2",
          "tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2",
          "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey"],
-        clip_len=8, clip_stride=8, size=256,
-        holdout=["Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"],
-        val=True)
+        ["Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"])
+    dataset, _ = build_mixed(
+        specs, clip_len=8, clip_stride=8, size=256, holdout=holdout, val=True)
     loader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
 
     # 1000, not 100: on the identical protocol SOKKANAEM's own delta1 moved
@@ -80,7 +80,7 @@ def main():
         if (ci + 1) % 100 == 0:
             print(f"  {ci+1}/{max_clips} clips...", file=sys.stderr)
 
-    report("DA3-BASE (0.12B)", acc)
+    report(f"DA3-BASE (0.12B){tag}", acc)
 
 
 if __name__ == "__main__":

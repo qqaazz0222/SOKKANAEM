@@ -56,6 +56,60 @@ def temporal_loss(depths, masks, patch=16):
     return (diff.abs() * m).sum() / m.sum().clamp(min=1)
 
 
+def warp_residual_loss(frames, pred, gt, valid, min_px=128):
+    """Training-time TCE: match the flow-warped residual of the prediction to
+    GT's own warped residual (REPORT §4.20b — bin CE buys accuracy by paying
+    8-12% temporal stability, and `temporal_loss` cannot buy it back because it
+    only sees *static* patches and a constant output is its global optimum).
+
+    Everything is in log-depth, so the term is invariant to a per-clip scale:
+    only the frame-to-frame *change* along a flow track is supervised.
+
+    frames (B,T,3,H,W) in [0,1]; pred/gt/valid (B,T,1,H,W). The RAFT flow is
+    computed under no_grad and reused as a fixed correspondence, exactly like
+    the eval metric, so the gradient flows through grid_sample only.
+    """
+    from .metrics import warp, warp_grids
+
+    B, T = pred.shape[:2]
+    if T < 2 or min(pred.shape[-2:]) < min_px:
+        return pred.sum() * 0                    # RAFT needs >=128px
+    lp, lg = pred.clamp(min=1e-3).log(), gt.clamp(min=1e-3).log()
+    total, denom = pred.sum() * 0, 0.0
+    for b in range(B):
+        grid, inb = warp_grids(frames[b])
+        m = inb * valid[b, 1:] * warp(valid[b, :-1], grid)
+        if m.sum() < 1:
+            continue
+        rp = warp(lp[b, :-1], grid) - lp[b, 1:]
+        rg = warp(lg[b, :-1], grid) - lg[b, 1:]
+        total = total + ((rp - rg).abs() * m).sum() / m.sum()
+        denom += 1
+    return total / max(denom, 1.0)
+
+
+def edge_weighted_loss(pred, gt, valid, dilate=3):
+    """Log-depth L1 weighted towards depth discontinuities.
+
+    Foreground objects are exactly the pixels with a large GT depth gradient,
+    and a 32px constant-per-block oracle beats this model there (§4.17): the
+    global si-log average is dominated by the large smooth background, so the
+    boundary band contributes almost nothing to the gradient. Weight is the
+    max-pooled GT log-depth gradient magnitude, normalized to mean 1 over the
+    valid pixels so the term's scale does not depend on the scene's depth range.
+    """
+    lp, lg = pred.clamp(min=1e-3).log(), gt.clamp(min=1e-3).log()
+    f = lambda x: x.reshape(-1, 1, *x.shape[-2:])
+    lp, lg, v = f(lp), f(lg), f(valid)
+    gy = (lg[..., 1:, :] - lg[..., :-1, :]).abs() * (v[..., 1:, :] * v[..., :-1, :])
+    gx = (lg[..., :, 1:] - lg[..., :, :-1]).abs() * (v[..., :, 1:] * v[..., :, :-1])
+    g = F.pad(gy, (0, 0, 0, 1)) + F.pad(gx, (0, 1))
+    w = F.max_pool2d(g, dilate, stride=1, padding=dilate // 2)   # boundary band
+    w = w * v
+    w = w / (w.sum() / v.sum().clamp(min=1)).clamp(min=1e-6)     # mean 1
+    return ((lp - lg).abs() * w).sum() / v.sum().clamp(min=1)
+
+
 def bin_ce_loss(logits, centres, gt, valid):
     """Soft cross-entropy tying the depth-bin distribution to the GT bin.
 

@@ -309,7 +309,8 @@ class SOKKANAEM(nn.Module):
                  gmc=False, gmc_lowres=128, gmc_corners=50,
                  spatial_cache=False, gate_mode="delta", decoder="conv",
                  scan_directions=2, local_conv=False, bins=0,
-                 temporal_cache=False):
+                 temporal_cache=False, dense_above=0.4,
+                 d_min=0.3, d_max=150.0):
         """gmc=True enables the ego-motion path (IDEA.md §3.5): Low-Res GMC
         warps frame t-1 onto t, then the change score is the relative L1
         between the *embed features* of both — not pixel MSE — so tau_on/
@@ -325,6 +326,13 @@ class SOKKANAEM(nn.Module):
         self.p = patch_size
         self.dim = dim
         self._order = {}  # grid -> dense column-major permutation (4-way scan)
+        # Output caching is only a win while most patches are static. Measured
+        # (REPORT §3.3): at active 12-33% it is 1.8x faster with t-delta even
+        # slightly better, but at 54-72% the fresh/stale context mismatch blows
+        # t-delta up 6x — a U-shaped degradation the docs had to warn about.
+        # Above this ratio the frame takes the dense path instead, which also
+        # refreshes every cache entry, so the next sparse frame starts clean.
+        self.dense_above = dense_above
         self.spatial_cache = spatial_cache  # inference-only (§4.5 wall-clock)
         self.temporal_cache = temporal_cache  # skip static tokens' readout too
         assert not (temporal_cache and gate_mode == "drop"), \
@@ -344,7 +352,11 @@ class SOKKANAEM(nn.Module):
         # and the frame, so it takes a different call signature)
         self.decoder_kind = decoder
         if decoder == "dpt":
-            self.decoder = DPTDecoder(dim, patch_size, bins=bins)
+            # d_max is a real accuracy knob, not a formality: at 150 the top
+            # bin centre sits at 115 m, and on vkitti2 the 0.8% of pixels past
+            # that carry 54% of the squared error (scripts/bin_probe.py)
+            self.decoder = DPTDecoder(dim, patch_size, bins=bins,
+                                      d_min=d_min, d_max=d_max)
             self.decoder.set_n_blocks(depth)
         else:
             assert not bins, "bins head lives in the dpt decoder"
@@ -458,6 +470,12 @@ class SOKKANAEM(nn.Module):
                                            frame.device, state["det"])
         else:
             mask, det = self.detector(frame, state["det"])  # (B, N)
+
+        if (self.spatial_cache or self.temporal_cache) and 0 < self.dense_above \
+                and mask.mean() > self.dense_above:
+            # too much motion for the caches to pay off — run the frame dense.
+            # active_ratio reports 1.0 because that is the compute we paid.
+            mask = torch.ones_like(mask)
 
         if self._core is not None and not self.spatial_cache:
             # populate the cross-scan permutation cache OUTSIDE the graph: a

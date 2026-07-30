@@ -306,6 +306,17 @@ class SynthClips(torch.utils.data.IterableDataset):
             yield f, d, torch.ones_like(d)
 
 
+def eval_set_from_env(specs, holdout, tag=""):
+    """(specs, holdout, tag) with EVAL_SPECS / EVAL_HOLDOUT / EVAL_TAG applied
+    (comma-separated). The baseline scripts hardcode the mixed holdout; this
+    lets the same script be run once per source, which is what scripts/eval.py
+    now reports and the only way the two tables stay comparable."""
+    env = os.environ.get
+    return (env("EVAL_SPECS", ",".join(specs)).split(","),
+            env("EVAL_HOLDOUT", ",".join(holdout)).split(","),
+            env("EVAL_TAG", tag))
+
+
 def build_mixed(specs, holdout=None, val=False, **kw):
     """specs: ["scannet:/path", "folder:/path:2000", ...].
     holdout: list of path substrings (e.g. ["Scene06"]) naming the val

@@ -33,8 +33,9 @@ from sokkanaem.distill import (affine_invariant_loss, dinov2_features,
                                distill_loss, load_frozen_dinov2,
                                load_frozen_teacher, teacher_disparity)
 from sokkanaem.ema import ema_update_
-from sokkanaem.losses import (bin_ce_loss, grad_loss, multiscale_grad_loss,
-                              normal_loss, si_log_loss, temporal_loss)
+from sokkanaem.losses import (bin_ce_loss, edge_weighted_loss, grad_loss,
+                              multiscale_grad_loss, normal_loss, si_log_loss,
+                              temporal_loss, warp_residual_loss)
 from sokkanaem.schedule import lr_at, parse_size_schedule, size_for_step
 
 
@@ -132,6 +133,13 @@ def main():
     ap.add_argument("--normal-weight", type=float, default=0.0,
                     help="surface-normal loss weight (ignored if "
                          "--auto-loss-weight; 0 = off, matches old default)")
+    ap.add_argument("--warp-weight", type=float, default=0.0,
+                    help="flow-warped residual loss, the training-time version "
+                         "of the TCE metric (0 = off). Costs one RAFT-small "
+                         "forward per clip per step")
+    ap.add_argument("--edge-weight", type=float, default=0.0,
+                    help="GT-depth-gradient weighted log L1, aimed at "
+                         "foreground objects at depth discontinuities (0 = off)")
     ap.add_argument("--size-schedule", default=None,
                     help="progressive resolution curriculum: "
                          "'step:size,step:size,...' e.g. '0:128,20000:256' "
@@ -230,6 +238,15 @@ def main():
             # new-arch init: take whatever weights match, leave the rest at
             # their fresh init, and start the schedule from scratch
             sd = ckpt.get("ema") or ckpt.get("model") or ckpt
+            # strict=False only forgives missing/unexpected KEYS, not changed
+            # shapes (bins 64 -> 128 is three of those), so drop those here.
+            # log_range is special-cased: it is a buffer holding the config's
+            # [d_min, d_max] and its shape always matches, so restoring it
+            # would silently cancel a d_max change.
+            cur = model.state_dict()
+            sd = {k: v for k, v in sd.items()
+                  if k != "decoder.log_range"
+                  and k in cur and cur[k].shape == v.shape}
             miss, extra = model.load_state_dict(sd, strict=False)
             log(f"partial init from {args.resume}: {len(miss)} new tensors "
                 f"kept at init, {len(extra)} checkpoint tensors unused")
@@ -328,6 +345,12 @@ def main():
                         + args.normal_weight * losses[3])
             if args.msgrad_weight > 0:
                 loss = loss + args.msgrad_weight * multiscale_grad_loss(
+                    depths, gt, valid)
+            if args.warp_weight > 0:
+                loss = loss + args.warp_weight * warp_residual_loss(
+                    clip, depths, gt, valid)
+            if args.edge_weight > 0:
+                loss = loss + args.edge_weight * edge_weighted_loss(
                     depths, gt, valid)
             if args.bin_weight > 0:
                 # hook order is frame-major (t0 batch, t1 batch, ...), so the

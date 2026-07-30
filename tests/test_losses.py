@@ -77,3 +77,36 @@ def test_bin_ce_loss_prefers_the_right_bin():
     p = uniform.clone().requires_grad_(True)
     bin_ce_loss(p, c, gt, valid).backward()
     assert p.grad.abs().sum() > 0 and c.grad is None
+
+
+def test_warp_residual_loss_is_scale_invariant_and_catches_flicker():
+    """The training-time TCE. A per-clip scale factor must be free (it cancels
+    in the log residual); a per-frame one must not (that IS the flicker)."""
+    from sokkanaem.losses import warp_residual_loss
+    torch.manual_seed(0)
+    # a static scene: zero flow, so the warp is the identity and the residual
+    # of a temporally consistent prediction is exactly GT's
+    frames = torch.rand(1, 3, 3, 128, 128).expand(1, 3, 3, 128, 128).contiguous()
+    gt = torch.rand(1, 1, 1, 128, 128).expand(1, 3, 1, 128, 128) * 4 + 1
+    valid = torch.ones_like(gt)
+    assert warp_residual_loss(frames, gt, gt, valid).item() < 1e-4
+    assert warp_residual_loss(frames, gt * 3.0, gt, valid).item() < 1e-4, \
+        "one scale for the whole clip must be free"
+    flicker = gt.clone()
+    flicker[:, 1] = flicker[:, 1] * 1.5              # frame 1 only
+    assert warp_residual_loss(frames, flicker, gt, valid).item() > 0.1
+
+
+def test_edge_weighted_loss_targets_the_discontinuity():
+    """Same total error, concentrated at the depth edge vs in the flat region:
+    the edge one must cost more, otherwise the term does nothing."""
+    from sokkanaem.losses import edge_weighted_loss
+    gt = torch.ones(1, 1, 1, 16, 16)
+    gt[..., 8:, :] = 5.0                              # step edge at row 8
+    valid = torch.ones_like(gt)
+    assert edge_weighted_loss(gt, gt, valid).item() < 1e-6
+    at_edge, in_flat = gt.clone(), gt.clone()
+    at_edge[..., 7:9, :] *= 1.5
+    in_flat[..., 0:2, :] *= 1.5
+    assert (edge_weighted_loss(at_edge, gt, valid).item()
+            > 3 * edge_weighted_loss(in_flat, gt, valid).item())

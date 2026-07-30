@@ -1,0 +1,38 @@
+# T1-5b: 128 bins AND range 600 m. Isolates whether the wider log
+# range needs more bins to keep near-field resolution (widths are a learned
+# softmax, so the model can in principle reallocate on its own).
+
+data = [
+    "tum:/home/hyunsu/dataset_ssd/tum_static",
+    "bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset",
+    "vkitti2:/home/hyunsu/dataset_ssd/vkitti2",
+    "tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2",
+    "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey",
+]
+holdout = [
+    "walking_static", "rgbd_bonn_crowd2", "rgbd_bonn_person_tracking2",
+    "rgbd_bonn_static_close_far",
+    "Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/",
+]
+size = 256
+clip_len = 4
+batch = 4
+lr = 3e-4
+steps = 60000
+warmup = 1000
+max_skip = 0.5
+normal_weight = 0.05
+msgrad_weight = 0.5
+bin_weight = 0.2
+
+[model]
+tau_on = 0.05
+tau_off = 0.025
+keyframe_every = 30
+decoder = "dpt"
+bins = 128
+scan_directions = 4
+local_conv = true
+spatial_cache = true
+temporal_cache = true
+d_max = 600.0

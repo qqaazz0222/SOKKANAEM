@@ -33,7 +33,7 @@ import sys
 import numpy as np
 import torch
 
-from sokkanaem.data import build_mixed
+from sokkanaem.data import build_mixed, eval_set_from_env
 from sokkanaem.metrics import clip_scores, report
 
 
@@ -53,13 +53,13 @@ def main():
         strict=True)
     model = model.to(dev).eval()
 
-    dataset, _ = build_mixed(
+    specs, holdout, tag = eval_set_from_env(
         ["vkitti2:/home/hyunsu/dataset_ssd/vkitti2",
          "tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2",
          "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey"],
-        clip_len=8, clip_stride=8, size=256,
-        holdout=["Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"],
-        val=True)
+        ["Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"])
+    dataset, _ = build_mixed(
+        specs, clip_len=8, clip_stride=8, size=256, holdout=holdout, val=True)
     loader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
 
     # 1000, not 100: 1.1% of the holdout was not a representative sample
@@ -89,7 +89,7 @@ def main():
         if (ci + 1) % 100 == 0:
             print(f"  {ci+1}/{max_clips} clips...", file=sys.stderr)
 
-    report("Video-Depth-Anything-Small metric (~28.4M)", acc)
+    report(f"Video-Depth-Anything-Small metric (~28.4M){tag}", acc)
 
 
 if __name__ == "__main__":

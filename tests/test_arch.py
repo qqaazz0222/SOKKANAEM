@@ -70,7 +70,9 @@ def test_v8_partial_activity_matches_full_compute_on_changed_region():
     only approximation allowed is the frozen cache at static patches."""
     torch.manual_seed(0)
     full = SOKKANAEM(**V8).eval()
-    cached = SOKKANAEM(**V8, spatial_cache=True).eval()
+    # dense_above=0: this test is about the cache mechanics themselves, so the
+    # high-motion dense fallback must not step in
+    cached = SOKKANAEM(**V8, spatial_cache=True, dense_above=0).eval()
     cached.load_state_dict(full.state_dict())
     frame = torch.rand(1, 3, 64, 64)
     frame2 = frame.clone()
@@ -158,6 +160,28 @@ def test_v8_trains_end_to_end():
               "decoder.bin_logits"):
         g = named[p].grad
         assert g is not None and g.abs().sum() > 0, f"{p} got no gradient"
+
+
+def test_high_motion_frame_falls_back_to_dense():
+    """The output caches only pay off while most patches are static; past
+    dense_above the frame must take the dense path (and refresh the caches),
+    otherwise the fresh/stale context mismatch wrecks temporal stability."""
+    torch.manual_seed(0)
+    m = SOKKANAEM(dim=32, depth=2, patch_size=16, keyframe_every=1000,
+                  spatial_cache=True, temporal_cache=True,
+                  dense_above=0.4).eval()
+    a = torch.rand(1, 3, 128, 128)
+    b = a.clone()
+    b[..., :64, :] = torch.rand(1, 3, 64, 128)   # top half moves: ~60% active
+
+    _, state, _ = m.step(a)
+    _, _, info = m.step(b, state)
+    assert info["active_ratio"] == 1.0, "over threshold -> dense, and say so"
+
+    m.dense_above = 0.0                                    # policy off
+    _, state2, _ = m.step(a)
+    _, _, info2 = m.step(b, state2)
+    assert 0.4 < info2["active_ratio"] < 1.0, "detector's own partial mask"
 
 
 def test_half_precision_streaming():

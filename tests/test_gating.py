@@ -130,7 +130,7 @@ def test_spatial_cache_matches_full_compute():
     torch.manual_seed(0)
     kw = dict(keyframe_every=1000, tau_on=0.02, tau_off=0.01)
     m_full = SOKKANAEM(**kw).eval()
-    m_cache = SOKKANAEM(**kw, spatial_cache=True).eval()
+    m_cache = SOKKANAEM(**kw, spatial_cache=True, dense_above=0).eval()
     m_cache.load_state_dict(m_full.state_dict())
 
     frame = torch.rand(1, 3, 64, 64)
