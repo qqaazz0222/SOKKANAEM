@@ -50,24 +50,36 @@ GPU는 RTX 4090 1장.
 
 ## Tier 1 — 정확도 (~1주, 대부분 GPU 대기)
 
-- [ ] **T1-5 · W6 bin 설계 ablation** (8k×4 ≈ 7h). 기준: 합성 RMSE 15.20 → 14.60 미만.
-  - [ ] bin 128개
-  - [ ] log-disparity 공간 binning (원거리 해상도 자동 확보 — 가장 유력)
-  - [ ] 데이터셋별 depth range 정규화
-  - [ ] per-image adaptive bin (앞 3개 실패 시에만)
-- [ ] **T1-6 · W2 시간 손실 교체.** 현 `temporal_loss`는 정적 마스크에서 출력 변화를 벌점해
-  t-delta만 최적화한다. `metrics.warp_grids`의 RAFT flow를 재사용해 **warp residual을 GT
-  residual에 맞추는 손실**(TCE의 학습판)을 추가하고 기존 항 가중치를 낮춘다.
-  기준: TCE 0.0710 → 0.06대, t-delta 열화는 2배 이내 허용.
-- [ ] **T1-7 · W7 전경 물체.** ① GT depth gradient 가중 si-log(싼 것 먼저) ② 안 되면
-  patch 16→8 검토. 기준: 32px 블록 상수 oracle(AbsRel 0.1459) 추월.
-- [ ] **T1-8 최종 60k 재학습** (14.5h): T1-5~7에서 이긴 조합만.
+**측정된 seed 노이즈 기준선**(T0-2): 실촬 AbsRel ±0.005, 실촬 δ1 ±0.004, 합성 δ1 ±0.015.
+이보다 작은 차이는 채택 근거로 쓰지 않는다. 대조군은 `work_dirs/t0-seed0-bin0.2`.
+
+- [~] **T1-5 · W6 원거리 RMSE — bin 개수가 아니라 범위 문제로 판명.** `scripts/bin_probe.py`가
+  head의 양자화 바닥을 깊이 구간별로 측정: 80 m 미만은 이미 AbsRel 0.0000(= bin 개수는
+  병목이 아님), 반면 vkitti2 픽셀의 0.8%가 최상위 bin 중심(115 m, `d_max=150`에서 파생)을
+  넘어가고 **그 0.8%가 제곱오차의 54%**를 낸다. 원래 계획의 128 bin·log-disparity·per-image
+  adaptive는 근거가 사라져 폐기하고 2개 arm만 돌린다.
+  - [-] log-disparity binning — log-depth와 부호만 다른 동일 분할이라 무의미.
+  - [-] per-image adaptive bin / 데이터셋별 range 정규화 — 80 m 미만 바닥이 이미 0이라 불필요.
+  - [~] `t1-binrange`: bins 64 유지, `d_max` 150 → 600.
+  - [~] `t1-bin128`: bins 128 + `d_max` 600 (넓힌 로그 범위가 근거리 해상도를 깎는지 분리).
+- [~] **T1-6 · W2 warp residual 손실.** `warp_residual_loss` 구현 — RAFT flow로 워프한
+  log-depth 잔차를 GT의 잔차에 맞춘다(TCE의 학습판). 기존 `temporal_loss`는 정적 패치만 보고
+  상수 출력이 전역 최소라 이걸 못 산다. arm `t1-warp0.5`, `t1-warp2.0`.
+  기준: TCE 0.0344 → 0.030 이하이면서 실촬 AbsRel 열화 0.005 이내.
+- [~] **T1-7 · W7 전경 물체.** `edge_weighted_loss` 구현 — GT log-depth gradient를
+  max-pool로 넓힌 경계 밴드에 가중한 log L1. arm `t1-edge0.5`, `t1-edge2.0`.
+  기준: 32px 블록 상수 oracle(AbsRel 0.1459) 추월.
+- [ ] **T1-8 최종 60k 재학습** (14.5h): T1-5~7에서 seed 노이즈를 넘어선 조합만.
 
 ## Tier 2 — 시스템 (~2주). 여기가 실제 기여
 
-- [ ] **T2-9 · W4 버킷 패딩으로 static shape 확보.** active 토큰 수를 {32,64,128,256}
-  버킷으로 올림 패딩하면 shape이 고정돼 CUDA graph 캡처 가능. Triton 없이 우위 회복이
-  목표. 기준: active 22%에서 compiled dense(4.67 ms)의 절반 이하.
+- [~] **T2-9 · W4 버킷 패딩으로 static shape 확보.** 구현 완료: `pad_to_bucket`이 모아온
+  active 토큰 수를 `bucket`의 배수로 올림하고, 패드는 Δ-gating으로 꺼서 **결과가 비트 수준
+  동일**(역방향 스캔이 패드를 먼저 방문해도 상태가 안 움직임 —
+  `tests/test_arch.py::test_bucket_padding_does_not_change_the_result`).
+  `compile_sparse()`가 그 위에서 스캔만 컴파일한다(gather는 `nonzero`라 데이터 의존적이라
+  eager 유지). 측정은 Tier 1이 GPU를 놓으면 자동 실행(`work_dirs/tier2-bench.sh`).
+  기준: active 22%에서 compiled dense(4.67 ms)의 절반 이하.
 - [ ] **T2-10 · W4 Triton 블록 희소 커널.** T2-9로 부족할 때만.
 - [ ] **T2-11 · W5 Jetson Orin 실측.** `scripts/bench.py` 그대로 사용(기기 확보가 선행).
   latency, FPS, power, energy/frame, active별 곡선.

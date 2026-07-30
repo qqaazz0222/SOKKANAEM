@@ -105,10 +105,14 @@ def main():
     ap.add_argument("--cache", default="both", choices=["both", "on", "off"],
                     help="spatial+temporal output caches (the sparse path)")
     ap.add_argument("--half", action="store_true")
+    ap.add_argument("--bucket", type=int, default=0,
+                    help="round the gathered active-token count up to a "
+                         "multiple of this (0 = off). Static shapes are what "
+                         "the sparse path needs to be compilable at all")
     ap.add_argument("--compile", action="store_true",
-                    help="CUDA-graph the full-compute path; the sparse path "
-                         "has dynamic shapes and stays eager, so this only "
-                         "moves the --cache off numbers")
+                    help="CUDA-graph the full-compute path; without "
+                         "--bucket the sparse path has a new shape every "
+                         "frame and stays eager")
     args = ap.parse_args()
 
     assert torch.cuda.is_available(), "wall-clock numbers need the GPU"
@@ -120,14 +124,17 @@ def main():
     print(f"{args.ckpt}  {args.size}px  streams {args.streams}  "
           f"{'fp16' if args.half else 'fp32'}  "
           f"{'compiled' if args.compile else 'eager'}  "
+          f"bucket {args.bucket or 'off'}  "
           f"{torch.cuda.get_device_name(0)}")
     hdr = "cache  active%   ms/frame     FPS   peakVRAM_MB  state_MB/stream"
     print(hdr + "\n" + "-" * len(hdr))
     for cache in configs:
         model = from_checkpoint(args.ckpt, "cuda", spatial_cache=cache,
-                                temporal_cache=cache).eval().to(dtype)
+                                temporal_cache=cache,
+                                bucket=args.bucket).eval().to(dtype)
         if args.compile:
-            model.enable_cuda_graphs()
+            model.compile_sparse() if cache and args.bucket else \
+                model.enable_cuda_graphs()
         for ratio in args.active:
             r = bench(model, args.size, ratio, args.streams, dtype,
                       args.iters, args.repeat)

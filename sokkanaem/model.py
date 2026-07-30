@@ -28,7 +28,7 @@ class TemporalBlock(nn.Module):
         self.norm = nn.LayerNorm(dim)
         self.ssm = SelectiveSSM(dim, d_state)
 
-    def step_cached(self, tokens, mask, h, cache):
+    def step_cached(self, tokens, mask, h, cache, bucket=0):
         """Sparse counterpart of step(): only active positions are scanned.
 
         Δ-gating already makes the *state* update free for static patches, but
@@ -49,7 +49,14 @@ class TemporalBlock(nn.Module):
         flat = tokens.reshape(B * N, D)
         idx = mask.reshape(B * N).nonzero(as_tuple=True)[0]
         out = cache.clone()
-        if idx.numel():
+        n = idx.numel()
+        if n:
+            if bucket > 0 and n % bucket:
+                # every position here is an independent stream, so padding with
+                # repeats of the last index needs no mask: the duplicates
+                # recompute one stream and index_copy writes it the same value
+                idx = torch.cat(
+                    [idx, idx[-1:].expand(-(-n // bucket) * bucket - n)])
             y, h_act = self.ssm.step(self.norm(flat[idx]), None, h[idx])
             h = h.index_copy(0, idx, h_act)
             out = out.reshape(B * N, D).index_copy(
@@ -74,6 +81,39 @@ class TemporalBlock(nn.Module):
         if gate_mode == "drop":
             y = y * m.unsqueeze(-1).to(y.dtype)
         return tokens + y.reshape(B, N, D), h
+
+
+def pad_to_bucket(sub, order, bucket):
+    """(1, n, D) gathered tokens -> (1, L, D) with L rounded up to a multiple
+    of `bucket`, plus the Δ-gating mask that makes the pad free of side effects.
+
+    The sparse path's whole problem as a *kernel* is that n changes every
+    frame, so nothing can be captured in a CUDA graph and torch.compile
+    re-traces (REPORT §4.19f: compiled dense already matches the sparse path
+    at real-footage active rates). Padding to a handful of static shapes is
+    the cheap half of the fix; a block-sparse Triton kernel is the other half.
+
+    Exact, not an approximation: pads sit at the end with mask 0, so Δ=0
+    freezes their state contribution in every scan direction — including the
+    reversed one, where they are visited first and simply leave the initial
+    state untouched. The pad tokens are copies of the last real token rather
+    than zeros so nothing in the params path sees an out-of-distribution
+    magnitude (their output is discarded either way).
+    """
+    n = sub.shape[1]
+    if bucket <= 0:
+        return sub, order, None
+    L = -(-n // bucket) * bucket        # multiples, not powers of two: at 256
+    if L == n:                          # tokens a bucket of 64 gives 4 shapes
+        return sub, order, None         # and wastes <64 tokens, never 2x
+
+    pad = L - n
+    sub = torch.cat([sub, sub[:, -1:].expand(-1, pad, -1)], 1)
+    if order is not None:
+        tail = torch.arange(n, L, device=order.device)
+        order = torch.cat([order, tail])
+    m = torch.cat([sub.new_ones(1, n), sub.new_zeros(1, pad)], 1)
+    return sub, order, m
 
 
 class SpatialBlock(nn.Module):
@@ -102,14 +142,14 @@ class SpatialBlock(nn.Module):
                 nn.Conv2d(dim, dim, 3, padding=1, groups=dim), nn.GELU(),
                 nn.Conv2d(dim, dim, 3, padding=1, groups=dim))
 
-    def _mix(self, tokens, order):
+    def _mix(self, tokens, order, mask=None):
         if self.training and tokens.requires_grad:
             # chunked scan keeps (B, C, C, P, S) pairwise tensors alive for
             # backward — OOMs at 256px+. Recompute them instead.
             return torch.utils.checkpoint.checkpoint(
-                lambda t: self.ssm(self.norm(t), order), tokens,
+                lambda t: self.ssm(self.norm(t), order, mask), tokens,
                 use_reentrant=False)
-        return self.ssm(self.norm(tokens), order)
+        return self.ssm(self.norm(tokens), order, mask)
 
     def _local(self, tokens, grid):
         """(B, N, D) -> (B, N, D) local 3x3 refinement, or None if disabled."""
@@ -125,11 +165,15 @@ class SpatialBlock(nn.Module):
         loc = self._local(tokens, grid)
         return out if loc is None else out + loc
 
-    def forward_cached(self, tokens, mask, cache, grid, order=None):
+    def forward_cached(self, tokens, mask, cache, grid, order=None, bucket=0):
         """tokens: (B, N, D), mask: (B, N) 0/1, cache: (B, N, D) previous
         outputs. Returns (out, new_cache) — they are the same tensor.
         Differentiable, so this path can also be *trained* (v6): the cache
-        stops being an untrained inference-time approximation."""
+        stops being an untrained inference-time approximation.
+
+        bucket>0 rounds the gathered length up to a power of two (>= bucket)
+        with Δ-gated pad tokens, so the scan sees one of ~4 shapes instead of a
+        new one every frame — see `pad_to_bucket`."""
         if cache is None or bool(mask.all()):
             out = self.forward(tokens, grid, order)
             return out, out
@@ -138,12 +182,14 @@ class SpatialBlock(nn.Module):
         gh, gw = grid
         for b in range(tokens.shape[0]):
             idx = mask[b].nonzero(as_tuple=True)[0]
-            if idx.numel():
+            n = idx.numel()
+            if n:
                 sub = tokens[b:b + 1, idx]
                 # the gathered subsequence has its own column-major order
                 sub_order = (column_major_order(idx, gh, gw)
                              if self.ssm.directions == 4 else None)
-                new = (sub + self._mix(sub, sub_order))[0]
+                sub, sub_order, m = pad_to_bucket(sub, sub_order, bucket)
+                new = (sub + self._mix(sub, sub_order, m))[0, :n]
                 out[b, idx] = new if loc is None else new + loc[b, idx]
         return out, out
 
@@ -310,7 +356,7 @@ class SOKKANAEM(nn.Module):
                  spatial_cache=False, gate_mode="delta", decoder="conv",
                  scan_directions=2, local_conv=False, bins=0,
                  temporal_cache=False, dense_above=0.4,
-                 d_min=0.3, d_max=150.0):
+                 d_min=0.3, d_max=150.0, bucket=0):
         """gmc=True enables the ego-motion path (IDEA.md §3.5): Low-Res GMC
         warps frame t-1 onto t, then the change score is the relative L1
         between the *embed features* of both — not pixel MSE — so tau_on/
@@ -326,13 +372,19 @@ class SOKKANAEM(nn.Module):
         self.p = patch_size
         self.dim = dim
         self._order = {}  # grid -> dense column-major permutation (4-way scan)
-        # Output caching is only a win while most patches are static. Measured
-        # (REPORT §3.3): at active 12-33% it is 1.8x faster with t-delta even
-        # slightly better, but at 54-72% the fresh/stale context mismatch blows
-        # t-delta up 6x — a U-shaped degradation the docs had to warn about.
-        # Above this ratio the frame takes the dense path instead, which also
-        # refreshes every cache entry, so the next sparse frame starts clean.
+        # Above this active ratio a frame takes the dense path instead, which
+        # also refreshes every cache entry so the next sparse frame starts
+        # clean. Measured on the 60k checkpoint (REPORT §4.20a): real-footage
+        # AbsRel 0.1685 -> 0.1633 and delta1 0.8083 -> 0.8211, paid for with
+        # active 22.2% -> 32.2%. (The original motivation, §3.3's U-shaped
+        # t-delta blowup at 54-72% active, was a v6 artifact of an untrained
+        # cache path and no longer reproduces — the gain that remains is
+        # cutting stale context on medium-motion real footage.)
         self.dense_above = dense_above
+        # round the gathered active-token count up to a multiple of this so the
+        # sparse scan sees a handful of static shapes (0 = off, see
+        # pad_to_bucket). Purely a kernel-shape knob: results are unchanged.
+        self.bucket = bucket
         self.spatial_cache = spatial_cache  # inference-only (§4.5 wall-clock)
         self.temporal_cache = temporal_cache  # skip static tokens' readout too
         assert not (temporal_cache and gate_mode == "drop"), \
@@ -384,6 +436,22 @@ class SOKKANAEM(nn.Module):
         self._core = torch.compile(self._step_core, mode="reduce-overhead")
         return self
 
+    def compile_sparse(self):
+        """Compile the sparse path's inner scans (inference only, needs
+        bucket>0). The gather itself stays eager — `mask.nonzero()` has a
+        data-dependent output shape and nothing can capture that — but with
+        bucketing everything downstream of it sees one of a handful of static
+        shapes, so each gets its own specialization instead of a re-trace per
+        frame. Plain compile, not reduce-overhead: cudagraphs would hand back
+        pooled output buffers that the caches then hold across replays."""
+        assert self.bucket > 0, "compile_sparse without bucket>0 re-traces per frame"
+        for blk in self.blocks:
+            if isinstance(blk, SpatialBlock):
+                blk._mix = torch.compile(blk._mix, dynamic=False)
+            else:
+                blk.ssm.step = torch.compile(blk.ssm.step, dynamic=False)
+        return self
+
     def _dense_order(self, grid, device):
         """Column-major permutation of the full grid, cached per grid size
         (only needed by the 4-way cross-scan)."""
@@ -408,14 +476,16 @@ class SOKKANAEM(nn.Module):
             if isinstance(blk, TemporalBlock):
                 h_in = hs[ti] if hs else None
                 if tc is not None:
-                    tokens, h, c = blk.step_cached(tokens, mask, h_in, tc[ti])
+                    tokens, h, c = blk.step_cached(tokens, mask, h_in, tc[ti],
+                                                   self.bucket)
                     new_tc.append(c)
                 else:
                     tokens, h = blk.step(tokens, mask, h_in, self.gate_mode)
                 new_hs.append(h)
                 ti += 1
             elif sp is not None:
-                tokens, c = blk.forward_cached(tokens, mask, sp[si], grid, order)
+                tokens, c = blk.forward_cached(tokens, mask, sp[si], grid,
+                                              order, self.bucket)
                 new_sp.append(c)
                 si += 1
             else:

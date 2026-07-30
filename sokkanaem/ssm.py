@@ -133,17 +133,22 @@ class BiSpatialSSM(nn.Module):
             self.vbwd = SelectiveSSM(dim, d_state)
 
     @staticmethod
-    def _pair(f, b, u):
-        yf, _ = f(u)
-        yb, _ = b(u.flip(1))
+    def _pair(f, b, u, mask=None):
+        yf, _ = f(u, mask)
+        yb, _ = b(u.flip(1), None if mask is None else mask.flip(1))
         return yf + yb.flip(1)
 
-    def forward(self, u, order=None):
+    def forward(self, u, order=None, mask=None):
         """u: (B, L, D) in raster order. order: (L,) column-major permutation
-        of the same token set — required at directions=4."""
-        y = self._pair(self.fwd, self.bwd, u)
+        of the same token set — required at directions=4. mask: (B, L) 0/1,
+        Δ-gating positions off — used to pad a gathered subsequence up to a
+        fixed bucket length without changing its result (model.py `bucket`).
+        The mask must be flipped/permuted with u, hence it travels here rather
+        than being applied by the caller."""
+        y = self._pair(self.fwd, self.bwd, u, mask)
         if self.directions == 4:
             assert order is not None, "4-way cross-scan needs a column-major order"
             inv = order.argsort()
-            y = y + self._pair(self.vfwd, self.vbwd, u[:, order])[:, inv]
+            y = y + self._pair(self.vfwd, self.vbwd, u[:, order],
+                               None if mask is None else mask[:, order])[:, inv]
         return y

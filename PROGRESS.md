@@ -203,11 +203,30 @@ temporal cache가 hidden state를 bit-identical로 유지, bin 중심 단조·�
   승격) ② 4방향 scan + `--compile`이 cudagraph pool 덮어쓰기로 사망. 체크포인트 `[meta]`의
   `TorchVersion`이 `weights_only=True` 로드를 막던 문제도 수정, 셋 다 회귀 테스트 추가.
 
+### 2026-07-30 — 약점 해소 계획([PLAN.md](PLAN.md)) 수립 + Tier 0 완주 (REPORT §4.20)
+
+외부 모델 대비 약점 12개(W1–W12)를 Tier 0~3 체크박스로 정리하고, Tier 0을 detached 큐
+(`work_dirs/tier0.sh`, 03:47–14:20)로 완주했다.
+
+- **고활동 dense 폴백 채택**(`dense_above=0.4`): 실촬 AbsRel 0.1685→**0.1633**, δ1
+  0.8083→**0.8211**. 대가는 active 22.2%→32.2%와 t-delta 0.0881→0.0915이고, 이득은 전부
+  Bonn에서 나온다. **속도 주장은 이제 active 32% 기준으로 인용해야 한다.**
+- **seed 분산 분리**(8k × 6): bin CE의 실촬 이득은 seed 분산의 3~6배로 재현. 새로 드러난
+  대가는 t-delta +8%·TCE +12%. **합성 δ1의 seed 표준편차 ±0.015**가 앞으로의 판정 기준.
+- **baseline 재생성**: DA3-Base(0.12B)는 실촬 정확도·TCE에서 우리보다 낫고 t-delta만 열위.
+  **동급 크기 DA v2 Small(24.8M)에는 AbsRel·RMSE·t-delta·TCE 모두 우리가 앞선다**(δ1만 열위).
+- **scale drift**: 8→32프레임에서 drift ×1.7~1.9(랜덤워크 ×2보다 낮음 = 확산).
+- **`scripts/bin_probe.py` 신설**로 T1-5 재설계: head의 양자화 바닥이 80 m 미만에서 이미
+  AbsRel 0.0000이라 **bin 개수는 병목이 아니고**, `d_max=150`이 만드는 115 m 상한을 넘는
+  vkitti2 픽셀 0.8%가 제곱오차의 54%를 낸다. 128 bin·log-disparity·adaptive bin 계획 폐기.
+- **Tier 1 착수**(`work_dirs/tier1.sh`, 6 arm × 8k): `d_max` 600 계열 2개, 신규
+  `warp_residual_loss`(TCE의 학습판) 2개, 신규 `edge_weighted_loss`(전경 경계 가중) 2개.
+
 ## 다음 액션
 
-1. seed 0/1/2 반복으로 bin CE 효과와 seed 분산 분리
-2. 최신 체크포인트로 외부 baseline 공통표(§4.15) 재생성
-3. 합성 RMSE 열위 파고들기: 소스·거리 구간별 분해, bin 수/범위/log-depth vs disparity ablation
-5. `tartanair_v2/Hospital` 일부 파일의 간헐적 read 실패 — 재발하면 `num_workers` 조정
-6. 3단계(Triton 희소 커널, Jetson Orin 실측) 착수 여부 결정 — Jetson 실기기 접근 확인 필요
-7. `baselines`/`vda` conda env는 재현용으로 남겨둠 — 정리하려면 `conda env remove -n baselines`/`-n vda`
+1. Tier 1 6 arm 결과를 seed 노이즈(실촬 AbsRel ±0.005, 합성 δ1 ±0.015)와 대조해 채택 판정
+2. 이긴 조합으로 T1-8 최종 60k 재학습
+3. T2-9 버킷 패딩(static shape → CUDA graph)로 compiled dense 대비 우위 회복
+4. `tartanair_v2/Hospital` 일부 파일의 간헐적 read 실패 — 재발하면 `num_workers` 조정
+5. Jetson Orin 실기기 접근 확인(T2-11), VDA 재클론 여부 결정(T0-1 잔여)
+6. `baselines` env는 `transformers`가 사라져 DA2를 `sokkanaem` env로 돌렸다 — 재현성 정리 필요

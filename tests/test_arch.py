@@ -203,3 +203,26 @@ if __name__ == "__main__":
         if name.startswith("test_"):
             fn()
     print("all v8 arch tests passed")
+
+
+def test_bucket_padding_does_not_change_the_result():
+    """T2-9: padding the gathered subsequence up to a fixed shape is a kernel
+    concern, not an approximation — Δ-gated pads must leave every scan
+    direction (including the reversed one, which visits them first) untouched.
+    Checked with the 4-way cross-scan on, since that is the path where the pad
+    also has to be threaded through the column-major permutation."""
+    torch.manual_seed(0)
+    kw = dict(**V8, spatial_cache=True, temporal_cache=True, dense_above=0)
+    plain = SOKKANAEM(**kw).eval()
+    padded = SOKKANAEM(**kw, bucket=64).eval()
+    padded.load_state_dict(plain.state_dict())
+
+    a = torch.rand(1, 3, 128, 128)
+    b = a.clone()
+    b[..., :48, :80] = torch.rand(1, 3, 48, 80)      # partial, non-bucket count
+    sa = sb = None
+    for f in (a, b, b.clone(), a):
+        da, sa, ia = plain.step(f, sa)
+        db, sb, ib = padded.step(f, sb)
+        assert ia["active_ratio"] == ib["active_ratio"]
+        assert torch.allclose(da, db, atol=1e-5), "bucket padding changed depth"
