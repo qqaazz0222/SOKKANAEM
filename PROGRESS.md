@@ -8,9 +8,9 @@
 | 단계 | 상태 | 비고 |
 |---|---|---|
 | 1. PoC (4주) | ✅ 완료 (Go) | vkitti2, 스킵 55%에서 AbsRel 열화 +0.15% — 기준(5% 이내) 크게 상회 |
-| 2. 본 학습 (8주) | 🟡 정확도 개선 중 (v5) | v3 완료(δ1 0.40) → 외부 SOTA 대비 정확도 격차 확인 → v4 distillation 시도 실패(효과 없음) → v5 모델 용량 증가(dim 192→384, 9.92M) 진행 중 |
-| 3. 시스템 (4주) | ⬜ 미착수 | Triton 블록 희소 커널, Jetson Orin 실측, 데모 |
-| 4. 논문화 | ⬜ 미착수 | CVPR/ICCV(efficiency) 또는 CoRL/IROS(실시간 시스템) |
+| 2. 본 학습 (8주) | 🟡 최종 체크포인트 학습 중 | v3(δ1 0.40) → v5(dim 384) 보류 → v7(실촬 혼합) → v8(60k, 정밀화 4종) → 3-arm으로 teacher 제거·bin CE 확정 → **teacher-free 60k 재학습 진행 중**(`work_dirs/v8-teacherfree-60k`) |
+| 3. 시스템 (4주) | 🟡 계측 도구만 확보 | `scripts/bench.py`(latency/FPS/VRAM/state) 신설, 확정 측정은 GPU 여유 시. Triton 블록 희소 커널·Jetson Orin 미착수 |
+| 4. 논문화 | ⬜ 미착수 | CVPR/ICCV(efficiency) 또는 CoRL/IROS(실시간 시스템). 초안은 v7 기준이라 최신 결과 반영 필요 |
 
 ## 현재 상태 (2026-07-24 기준)
 
@@ -175,10 +175,39 @@ temporal cache가 hidden state를 bit-identical로 유지, bin 중심 단조·�
 판정 ② v4 특징 증류 실패 원인 규명(단일 블록·cosine only였음) ③ 그래도 필요하면 자기지도
 사전학습(IN-1k 지도 사전학습은 dense task 정렬·비용·시간축 블록 미사용 때문에 후순위).
 
+### 2026-07-29 — 감사 P0/P2 반영: 소스별 평가, 재현성 배관, wall-clock 도구 (수치는 REPORT §4.19)
+
+- **`reports/20260729.md` 감사 수행** 후 코드 정정. first-N 표본 편향으로 "합성 500클립"이
+  실제로는 VKITTI2 500클립이었던 문제를 `eval.py` 소스별 loader로 해결(`--max-clips`는
+  소스당, `MEAN(src)`/`POOLED(px)` 통합행 분리, unscaled metric·scale drift 컬럼 추가).
+- **active ratio가 소스별로 14.5%~70.3%** — "15.4%"는 VKITTI2 값이었다. 두 cache 기준
+  해석적 MAC은 실촬 42.1%, 합성 53.1%(TartanAir 단독 77.9%)로 정정.
+- **§4.18의 "합성 시간 안정성 후퇴" 판정 철회**: 데이터셋 균등 평균에서는 arm2가 v7 대비
+  t-delta·OPW·TCE 모두 우위. RMSE 열위는 유지.
+- **재현성**: `--seed` 추가, work dir `config.toml`을 실효 설정(+`[meta]` git commit/버전/
+  실행 명령)으로 기록, 같은 메타를 체크포인트에도 저장. arm1/arm2 config의 잘못된
+  `teacher_weight=0.5` 정정.
+- **기본 추론이 희소 경로를 껐던 버그 수정**: `--spatial-cache`/`--temporal-cache` tri-state,
+  `--size`를 체크포인트 학습 해상도에서 복원(128→256).
+- **`scripts/bench.py` 신설**: active ratio별 latency/FPS, cache on/off, fp16, 멀티스트림,
+  peak VRAM, 스트림당 state.
+- **teacher-free 60k 재학습 완주** (07-29 06:55→21:26, 14h31m):
+  `work_dirs/v8-teacherfree-60k`, seed 0, v7 EMA partial init. 실촬 AbsRel **0.1685** /
+  δ1 **0.8083**(MEAN(src))로 arm2와 동급 — **arm2 수치가 회복 학습 아티팩트가 아님이
+  재현 확인**. 합성 RMSE 열위는 세 체크포인트 공통으로 남음.
+- **확정 wall-clock**(GPU 단독 점유, 256px, 4090): 실촬 평균 active 22.2%에서 4.94 ms /
+  **203 FPS**, dense 11.67 ms 대비 **2.36배** — 해석적 예측 2.38배와 일치. §4.11의
+  "MAC 절감이 FPS로 안 나온다" 판정은 v8 구조에서 뒤집혔다. 단 compiled dense가 4.67 ms라
+  실촬 평균에서 희소 경로와 동률 — Triton 블록 희소 커널 필요 근거.
+- **배포 경로 버그 2건 수정**: ① fp16 추론 전체 불가(detector의 fp32 mask가 스캔을 fp32로
+  승격) ② 4방향 scan + `--compile`이 cudagraph pool 덮어쓰기로 사망. 체크포인트 `[meta]`의
+  `TorchVersion`이 `weights_only=True` 로드를 막던 문제도 수정, 셋 다 회귀 테스트 추가.
+
 ## 다음 액션
 
-1. v5(용량 증가, dim=384, ~16h 예상) 완주 대기 — 완주되면 holdout eval 재실행, v3/v4와 비교
-2. v5도 효과 없으면: distill 위치를 초기 임베딩 단으로 옮기거나, 데이터 스케일(더 많은 step/데이터) 쪽 검토
-3. `tartanair_v2/Hospital` 일부 파일의 간헐적 read 실패(추정: `/archive` 동시접근 경합) — 재발하면 `num_workers` 낮추거나 원인 더 깊이 조사
-4. 3단계(시스템: Triton 희소 커널, Jetson Orin 실측) 착수 여부 결정 — Jetson 실기기 접근 여부 확인 필요
-5. `baselines`/`vda` conda env는 재현용으로 남겨둠 — 정리하려면 `conda env remove -n baselines`/`-n vda`
+1. seed 0/1/2 반복으로 bin CE 효과와 seed 분산 분리
+2. 최신 체크포인트로 외부 baseline 공통표(§4.15) 재생성
+3. 합성 RMSE 열위 파고들기: 소스·거리 구간별 분해, bin 수/범위/log-depth vs disparity ablation
+5. `tartanair_v2/Hospital` 일부 파일의 간헐적 read 실패 — 재발하면 `num_workers` 조정
+6. 3단계(Triton 희소 커널, Jetson Orin 실측) 착수 여부 결정 — Jetson 실기기 접근 확인 필요
+7. `baselines`/`vda` conda env는 재현용으로 남겨둠 — 정리하려면 `conda env remove -n baselines`/`-n vda`

@@ -624,6 +624,140 @@ t-delta·TCE도 열위. RMSE는 원거리 오차에 민감하므로 log-depth bi
 0.1459 / 0.8141 대비 모델은 0.2511 / 0.7446(v8) — **32px 블록 상수보다 나쁘다**. 고주파가
 없어서가 아니라 값이 틀려서 GT와 겹치지 않는 것이고, 남은 격차는 표현 품질 쪽이다.
 
+### 4.19 평가 프로토콜 정정 + 재현성 배관 + wall-clock 도구 (2026-07-29)
+
+`reports/20260729.md` 감사의 P0/P2 항목을 코드에 반영했다.
+
+**(a) 소스별 평가로 전환 — "합성 500클립"은 VKITTI2 500클립이었다.**
+`scripts/eval.py`가 `ConcatDataset`을 순서대로 읽고 `--max-clips`에서 끊었기 때문에,
+first-N 표본이 첫 데이터셋만 담았다. 이제 소스마다 loader를 만들고 `--max-clips`는
+**소스당** 개수이며, 통합행을 두 개로 분리한다. `MEAN(src)`는 데이터셋 균등 평균,
+`POOLED(px)`는 전체 픽셀 가중이다.
+
+**(b) active ratio가 소스마다 4배 이상 다르다** — 효율 주장의 기준점이 바뀐다.
+
+| 소스 | tum | bonn | vkitti2 | pointodyssey | tartanair2 |
+|---|---:|---:|---:|---:|---:|
+| active @ tau 0.05 | 14.5% | 29.9% | 16.6% | 24.0% | 70.3% |
+
+기존 "합성 15.4%"는 VKITTI2 단일 소스 값이었다. 데이터셋 균등 기준 합성 평균은 **37.0%**,
+실촬 평균은 **22.2%**다. 이를 두 cache 사용 시 해석적 MAC(`scripts/flops.py`, v8 구조,
+full 1.644 GMAC)에 대입하면:
+
+| 소스 | tum | vkitti2 | pointodyssey | bonn | tartanair2 | 실촬 평균 | 합성 평균 |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| GMAC | 0.597 | 0.623 | 0.714 | 0.786 | 1.280 | 0.692 | 0.873 |
+| 풀연산 대비 | 36.3% | 37.9% | 43.4% | 47.8% | **77.9%** | **42.1%** | **53.1%** |
+
+즉 "37–39%"는 가장 정적인 소스의 값이다. 이동량이 큰 TartanAir에서는 78%로 희소 경로의
+이득이 거의 사라진다 — **효율 주장은 항상 장면 변화율과 함께 보고해야 한다.**
+
+**(c) 같은 프로토콜로 v7 vs arm2 재측정** (소스당 100클립, 256px, tau 0.05, clip_len 8).
+`scale`은 clip median 정합 배율(1이면 절대 스케일 일치), `drift`는 클립 내 프레임별
+배율의 변동계수, `mAbsRel`은 median scaling **없는** 절대 오차다.
+
+| 도메인 | 모델 | AbsRel ↓ | RMSE ↓ | δ1 ↑ | t-delta ↓ | OPW ↓ | TCE ↓ | mAbsRel ↓ | scale | drift ↓ |
+|---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| 실촬 MEAN(src) | v7 | 0.2362 | 0.7345 | 0.7568 | **0.0655** | 0.0256 | 0.0330 | 0.2477 | 1.182 | 0.0240 |
+| 실촬 MEAN(src) | **arm2** | **0.1760** | **0.6578** | **0.8027** | 0.0690 | **0.0242** | **0.0324** | **0.1859** | **1.053** | **0.0249** |
+| 합성 MEAN(src) | v7 | 0.4141 | **14.60** | 0.4520 | 0.2064 | 0.0467 | 0.0766 | 0.4716 | 1.885 | 0.0803 |
+| 합성 MEAN(src) | **arm2** | **0.3810** | 15.69 | **0.4580** | **0.1971** | **0.0353** | **0.0663** | **0.4410** | **1.380** | **0.0824** |
+
+소스별로 보면 arm2는 tum 0.1304 / bonn 0.2217, vkitti2 0.3676 / pointodyssey 0.2684 /
+tartanair2 0.5069이다. **§4.18의 "합성에서 시간 안정성이 후퇴했다"는 판정은 표본 편향이었다**
+— VKITTI2 단독으로는 t-delta·TCE가 v7보다 나쁘지만, 세 합성 소스를 균등 평균하면 arm2가
+t-delta·OPW·TCE 모두 앞선다. 반면 **RMSE 열위는 균등 기준에서도 남는다**(15.69 vs 14.60).
+
+절대 스케일: arm2는 median 정합 배율이 실촬 1.053, 합성 1.380으로 v7(1.182 / 1.885)보다
+1에 가깝다. 즉 상대 구조뿐 아니라 metric scale도 개선됐지만, 합성 원거리는 여전히 38%
+과소추정이다(TartanAir 배율 1.798). 고정 CCTV에서 미터 단위가 필요하면 이 숫자가 기준이다.
+
+주의: 이 표는 소스당 앞 100클립 표본이라 §4.18의 487/500클립 표와 **직접 비교 불가**하다.
+v7·arm2를 같은 프로토콜로 다시 돌렸으므로 모델 간 비교만 유효하다.
+
+**(d) 재현성 배관.** `train.py`가 이제 (i) `--seed`로 torch/random을 고정하고,
+(ii) work dir의 `config.toml`을 입력 TOML 복사본이 아니라 **실효 설정**(CLI+TOML 병합값 +
+`[model]` + `[meta]` git commit·torch/CUDA 버전·GPU·실행 명령)으로 쓰고, (iii) 같은 메타를
+체크포인트에도 함께 저장한다. 기존 `arm1/arm2/config.toml`이 실제 실행과 달리
+`teacher_weight = 0.5`를 남겨 두던 문제는 해당 파일에 정정 주석과 함께 수정했다.
+
+**(e) 기본 추론이 희소 경로를 껐던 문제.** `infer.py --spatial-cache`가 store_true라서
+기본값 False가 체크포인트의 `spatial_cache=true`를 덮어썼고, `--size` 기본값 128이 256px
+학습 모델을 128px로 돌렸다. 두 플래그를 tri-state(`--no-spatial-cache`로만 끔)로 바꾸고
+해상도를 sidecar config에서 복원한다. 기본 실행이 이제 `size 256 spatial_cache True
+temporal_cache True`를 출력한다. `eval.py`도 동일하게 수정.
+
+**(f) `scripts/bench.py` 신설 + 확정 wall-clock** — active ratio별 latency/FPS,
+cache on/off, fp16, 다중 스트림, peak VRAM, 스트림당 영속 state를 실측한다. active ratio는
+detector 대신 고정 비율 stub으로 강제해 x축을 정확히 만들고, 각 지점을 3회 측정해 최솟값을
+쓴다(다른 작업이 GPU에 있으면 느려지기만 하므로 — 실제로 오염된 측정에서 같은 dense 경로가
+13 ms와 47 ms로 튀었다). 아래는 **GPU 단독 점유** 상태에서 `v8-teacherfree-60k`로 측정한
+값(256px, batch 1, RTX 4090).
+
+| active | fp32 두 cache | fp32 cache off | fp16 두 cache | fp16 cache off |
+|---:|---:|---:|---:|---:|
+| 0% | **0.64 ms / 1571 FPS** | 11.58 ms | 0.68 ms / 1474 FPS | 12.07 ms |
+| 14.9% | 4.27 ms / 234 FPS | 11.50 ms | 4.50 ms / 222 FPS | 12.07 ms |
+| 22.2% (실촬 평균) | 4.94 ms / 203 FPS | 11.67 ms | 5.19 ms / 193 FPS | 12.03 ms |
+| 37.0% (합성 평균) | 6.44 ms / 155 FPS | 11.52 ms | 7.18 ms / 139 FPS | 12.12 ms |
+| 100% | 11.89 ms / 84 FPS | 11.38 ms | 12.10 ms | 11.98 ms |
+| peak VRAM | 87.8 MB | 87.0 MB | 48.0 MB | 47.6 MB |
+| 스트림당 state | 12.75 MB | 12.00 MB | 6.38 MB | 6.00 MB |
+
+읽을 점 네 가지.
+
+1. **dense 경로는 active와 무관하게 평평**(11.4–11.7 ms)하고 희소 경로만 변화율을 따라간다.
+   실촬 평균 22.2%에서 11.67 → 4.94 ms, **2.36배**다. 해석적 MAC 예측(42.1% = 2.38배)과
+   사실상 일치한다 — **§4.11의 "launch-bound라 MAC 절감이 FPS로 이어지지 않는다"는 판정은
+   v8 구조에서 뒤집혔다.** DPT decoder로 dense 바닥을 낮추고 두 cache를 넣은 결과다.
+2. **fp16은 속도 이득이 없다**(12.07 vs 11.58 ms) — 여전히 launch-bound라는 증거다. 대신
+   peak VRAM과 스트림 state가 정확히 반감한다(87→48 MB, 12.75→6.38 MB/stream). 스트림당
+   state 실측 12.75 MB는 §6.4 이론값 14.16 MB와 부합한다.
+3. **`--compile`(CUDA graph)은 dense 경로를 fp32 11.58 → 4.67 ms(214 FPS),
+   fp16 → 3.81 ms(263 FPS)로 줄인다.** 즉 dense 시간의 약 60%가 커널 런치 오버헤드였다.
+   희소 경로는 동적 shape이라 아직 compile 불가이므로 **현재 희소 이득은 "eager 대비"이고,
+   compiled dense(4.67 ms)와 비교하면 실촬 평균에서 거의 동률(4.94 ms)이다.** Triton 블록
+   희소 커널이 필요한 이유가 이 한 줄이다 — 그 전까지 희소 경로의 실질 우위는 저활동 구간
+   (active < 15%, 0%에서 18배)에 있다.
+4. **멀티스트림에서 효율이 붙는다**: fp16 batch 4, active 15.1%에서 14.2 ms/frame =
+   **281 FPS**(같은 조건 dense 200 FPS), peak VRAM 98.6 MB. 고정 CCTV 다중 채널이 타깃이면
+   배치가 런치 오버헤드를 분담하는 이 구간이 실제 운용점이다.
+
+**(g) teacher-free 60k 재학습 완주** (`work_dirs/v8-teacherfree-60k`, 14h31m, seed 0,
+v7 EMA partial init, teacher 없음 + bin CE). arm2의 "8k 회복 학습" 한계를 없애기 위한 P1
+실행이었고, 같은 소스별 프로토콜 결과는:
+
+| 도메인 | 지표 | v7 | arm2 (8k 회복) | **60k 정식** |
+|---|---|---:|---:|---:|
+| 실촬 MEAN(src) | AbsRel ↓ | 0.2362 | 0.1760 | **0.1685** |
+| 실촬 MEAN(src) | δ1 ↑ | 0.7568 | 0.8027 | **0.8083** |
+| 실촬 MEAN(src) | mAbsRel ↓ | 0.2477 | 0.1859 | **0.1743** |
+| 실촬 MEAN(src) | TCE ↓ | 0.0330 | **0.0324** | 0.0354 |
+| 합성 MEAN(src) | AbsRel ↓ | 0.4141 | **0.3810** | 0.3842 |
+| 합성 MEAN(src) | δ1 ↑ | 0.4520 | 0.4580 | **0.4656** |
+| 합성 MEAN(src) | RMSE ↓ | **14.60** | 15.69 | 15.20 |
+| 합성 MEAN(src) | TCE ↓ | 0.0766 | **0.0663** | 0.0710 |
+
+정확도는 소폭 우위, 시간 안정성은 소폭 열위다. 중요한 것은 순위가 아니라 **arm2의 수치가
+회복 학습 아티팩트가 아니라 레시피 자체의 성질임이 재현으로 확인된 것**이다(감사 §10 최우선
+리스크 2 해소). 반대로 **합성 RMSE 열위는 세 체크포인트 모두에 남는다** — 원거리 bin 해상도
+가설은 여전히 유효하고, 이건 학습 레시피가 아니라 head 설계 쪽 문제다.
+
+**(h) 배포 경로 버그 2건** — 둘 다 이번 계측에서 처음 드러났다.
+
+1. **fp16 추론이 아예 불가능했다.** detector는 모델 dtype과 무관하게 fp32 mask를 만들고,
+   Δ-gating의 `dt * mask`가 스캔 전체를 fp32로 승격시켜 다음 einsum이
+   `expected scalar type Float but found Half`로 죽었다. `ssm.py`에서 mask를 dt dtype으로
+   캐스팅해 모든 호출자를 한 번에 고쳤다(`gate_mode="drop"` 경로도 동일).
+2. **4방향 scan + `--compile`이 CUDA graph에서 죽었다.** cross-scan 순열 텐서가 캡처된 영역
+   안에서 처음 생성돼 cudagraph pool에 들어가고, 다음 replay가 그 버퍼를 덮어썼다. 순열
+   캐시를 graph 밖에서 채우도록 수정.
+
+체크포인트 저장에도 같은 종류의 함정이 있었다: `[meta]`의 `torch.__version__`은
+`TorchVersion`(str **서브클래스**)이라 torch 2.6+의 `weights_only=True` 기본값이 로드를
+거부했다 — 14시간 학습이 끝난 뒤에야 드러나는 실패라 회귀 테스트를 붙였다
+(`tests/test_repro.py`, `tests/test_arch.py::test_half_precision_streaming`).
+
 ## 5. 한계 및 미검증 사항
 
 - PoC 해상도(128px, 정사각 resize) + 30k step 제약으로 절대 정확도($\delta_1$ 0.68)는 낮음 — trade-off
@@ -632,9 +766,14 @@ t-delta·TCE도 열위. RMSE는 원거리 오차에 민감하므로 log-depth bi
 - Jetson Orin 실측 미실시 (로드맵 3단계, 미착수). 4090에서는 모델이 launch-bound라
   (§4.11) FLOPs 절감이 FPS로 안 나타남 — 에지 전력 이득 주장은 Jetson 실측 없이는 미검증.
 - TAE(pose 워프 기반 시간 지표) 미구현 — 어댑터에 extrinsic/intrinsic 배관 필요(§4.10).
-- 실촬 데이터 검증은 TUM `fr3/sitting_static` 1개 시퀀스(680프레임)뿐 — Bonn RGB-D Dynamic
-  다운로드 중, 실촬 실내 학습(v7) 미실시. 현 체크포인트는 실촬 실내에서 상수 예측기에 패배(§4.12).
+- 실촬 학습·평가는 TUM/Bonn holdout 시퀀스로 확보됐다(§4.18–4.19). 다만 같은 데이터셋의
+  다른 시퀀스가 학습에 포함되므로 **외부 도메인 zero-shot이 아니라 sequence holdout**이다.
 - 수백 프레임 초장기 스트림 드리프트는 270프레임 범위까지만 확인.
 - 패치 크기(8/16/32), 게이팅 위치(Δ-gating vs 토큰 drop vs 출력 캐시만) ablation은 모델 개조 필요로 보류.
-- 본 학습 완주 전이므로 §4.2 전체 지표(TAE, OPW, 베이스라인 대비 정량 비교)는 아직 없음.
+- 외부 baseline 공통 비교는 아직 v3 기준(§4.15) — arm2/신규 60k 체크포인트로 재생성 필요.
+- seed 반복 실험 부재: `--seed`는 생겼지만 arm0/arm1/arm2는 무작위 seed로 1회씩 돌았다.
+  teacher 제거 효과는 크기가 커서 안전하나, bin CE의 작은 차이는 seed 분산과 미분리다.
+- 4090 wall-clock은 확정됐지만(§4.19f) **Jetson Orin latency·energy/frame은 미측정**이고,
+  희소 경로는 compile 불가라 compiled dense와 실촬 평균에서 동률 — Triton 블록 희소 커널
+  전까지 시스템 기여 주장은 저활동 구간(active < 15%)에 한정된다.
 - Kendall auto-loss-weight는 §4.6 붕괴 사건으로 **사용 중단** — 트리비얼 최솟값이 있는 loss 항(temporal_loss 등)엔 부적합함이 실증됨. 재시도하려면 항별 클램프 범위를 훨씬 좁히거나(예: [-2,2]), 그런 항은 auto-weight 대상에서 제외해야 함.

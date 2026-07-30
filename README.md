@@ -48,15 +48,20 @@ python scripts/train.py --config configs/synthetic.toml
 python scripts/train.py --config configs/scannet.toml --data scannet:/my/scannet
 python scripts/train.py --config configs/mixed.toml   # 멀티 데이터셋 혼합
 
-# 검증/추론 공통: ckpt 옆 config.toml에서 학습 시 [model] 설정(dim, tau, keyframe 등)
-# 자동 복원 — CLI 플래그(--gmc, --tau-on)가 우선.
-# 검증 — AbsRel/RMSE/δ1 + 시간 안정성 + active ratio, eval.txt에 기록
+# 검증/추론 공통: ckpt 옆 config.toml(train.py가 기록한 실효 설정)에서 [model] 설정
+# (dim, tau, keyframe, spatial/temporal cache)과 학습 해상도 size를 자동 복원 —
+# CLI 플래그(--gmc, --tau-on, --size, --no-spatial-cache)를 준 경우에만 덮어씀.
+# 검증 — 소스별 행 + MEAN(src)/POOLED(px) 통합행, --max-clips는 소스당 개수
 python scripts/eval.py --ckpt work_dirs/scannet/latest.pt --data scannet:/data/scannet
 python scripts/eval.py --ckpt work_dirs/scannet/latest.pt --data scannet:/data/scannet --sweep-tau  # Go/No-Go 곡선
 
 # 추론 — depth PNG는 기본 <ckpt dir>/viz/ 저장 ('none'으로 비활성)
 python scripts/infer.py --ckpt work_dirs/scannet/latest.pt --video cam.mp4
 python scripts/infer.py --ckpt work_dirs/scannet/latest.pt --frames-dir data/cctv/seq0/rgb
+
+# 실측 속도 — active ratio별 latency/FPS, cache on/off, peak VRAM, 스트림당 state
+python scripts/bench.py --ckpt work_dirs/main_v8/latest.pt
+python scripts/bench.py --ckpt work_dirs/main_v8/latest.pt --half --streams 4
 
 # 이동 카메라 (ego-motion): Low-Res GMC + feature gating (IDEA.md §3.5)
 python scripts/infer.py --ckpt work_dirs/kitti/latest.pt --video dashcam.mp4 --gmc
@@ -80,7 +85,9 @@ python scripts/eval.py --ckpt work_dirs/kitti/latest.pt --data kitti:/data/kitti
 
 ## 산출물 (`work_dirs/<이름>/`)
 
-`latest.pt`(가중치), `train.log`, `config.toml`(사본), `eval.txt`(검증 기록 누적), `viz/`(depth PNG).
+`latest.pt`(가중치 + 재현 메타), `train.log`, `config.toml`(**실효 설정**: CLI+TOML 병합값,
+`[model]`, `[meta]`에 git commit/seed/torch·CUDA 버전/실행 명령), `eval.txt`(검증 기록 누적),
+`viz/`(depth PNG).
 
 ## 데이터셋
 
@@ -121,8 +128,9 @@ sokkanaem/
   losses.py     SI-log + gradient + temporal consistency (validity 마스킹)
 scripts/
   train.py      학습 (config 기반, 랜덤 마스크 스케줄링 §3.4)
-  eval.py       검증 (정확도/시간 안정성/tau sweep)
+  eval.py       검증 (소스별 정확도/시간 안정성/tau sweep/unscaled metric·scale drift)
   infer.py      스트리밍 추론 + depth PNG 저장
+  bench.py      실측 wall-clock: active ratio별 latency/FPS, cache on/off, VRAM
   prepare_data.py  데이터셋 레이아웃 검증, 비디오 -> 프레임 추출
 configs/        데이터셋별 최적화 학습 설정 (TOML)
 tests/          핵심 주장 검증: mask=0 ⇒ bit-exact state copy, GMC 정렬 + 피처 게이팅,
