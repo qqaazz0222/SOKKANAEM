@@ -60,27 +60,35 @@ GPU는 RTX 4090 1장.
   adaptive는 근거가 사라져 폐기하고 2개 arm만 돌린다.
   - [-] log-disparity binning — log-depth와 부호만 다른 동일 분할이라 무의미.
   - [-] per-image adaptive bin / 데이터셋별 range 정규화 — 80 m 미만 바닥이 이미 0이라 불필요.
-  - [~] `t1-binrange`: bins 64 유지, `d_max` 150 → 600.
-  - [~] `t1-bin128`: bins 128 + `d_max` 600 (넓힌 로그 범위가 근거리 해상도를 깎는지 분리).
-- [~] **T1-6 · W2 warp residual 손실.** `warp_residual_loss` 구현 — RAFT flow로 워프한
-  log-depth 잔차를 GT의 잔차에 맞춘다(TCE의 학습판). 기존 `temporal_loss`는 정적 패치만 보고
-  상수 출력이 전역 최소라 이걸 못 산다. arm `t1-warp0.5`, `t1-warp2.0`.
-  기준: TCE 0.0344 → 0.030 이하이면서 실촬 AbsRel 열화 0.005 이내.
-- [~] **T1-7 · W7 전경 물체.** `edge_weighted_loss` 구현 — GT log-depth gradient를
-  max-pool로 넓힌 경계 밴드에 가중한 log L1. arm `t1-edge0.5`, `t1-edge2.0`.
-  기준: 32px 블록 상수 oracle(AbsRel 0.1459) 추월.
-- [ ] **T1-8 최종 60k 재학습** (14.5h): T1-5~7에서 seed 노이즈를 넘어선 조합만.
+  - [-] `t1-binrange`(`d_max` 600): 어느 지표도 seed 노이즈를 못 넘음(합성 RMSE 15.53→15.37).
+    상한을 풀어줘도 모델이 그 범위를 안 쓴다 — 원거리 열위는 head 표현력이 아니라 256px에서
+    300~600 m를 못 보는 정보 한계로 판정. `d_max`는 kwarg로 남기고 기본 150 유지.
+  - [-] `t1-bin128`: 양쪽 도메인 모두 악화. 기각.
+  - [x] **목표치는 엉뚱한 곳에서 달성됐다**: T1-7의 edge 2.0이 bin을 안 건드리고 합성 RMSE
+    15.53→**14.51**(목표 14.60)을 냈다. → REPORT §4.21a, c
+- [~] **T1-6 · W2 warp residual 손실 — 효과 확인, 용량 탐색 중.** 가중치를 올릴수록 시간
+  지표가 단조 개선되고 실촬 정확도가 단조 악화. 0.5에서 TCE −5%(정확도 열화는 노이즈 내),
+  2.0에서 TCE −12%·OPW −16%·합성 t-delta −26%인 대신 실촬 δ1 −0.0095(노이즈 밖).
+  §4.20b가 드러낸 "bin CE가 시간 안정성을 판다"를 정확히 되산다. → REPORT §4.21b
+  - [~] `t1-warp1.0`, `t1-edge2-warp1`, `t1-edge2-warp2` (tier1b 큐)
+- [x] **T1-7 · W7 edge 가중 손실 — 채택.** edge 2.0: 실촬 AbsRel 0.1773→**0.1745**,
+  δ1 0.8082→**0.8107**, 합성 RMSE 15.53→**14.51**. 대가는 합성 t-delta +32%로 T1-6이
+  상쇄할 수 있는 종류. TUM 단독 AbsRel 0.1447→0.1358. 32px oracle(0.1459)은 프로토콜이
+  달라 직접 비교로 쓰지 않는다. → REPORT §4.21c
+- [~] **T1-8 최종 60k 재학습** (14.5h): tier1b가 **실촬 AbsRel 대조군 +1σ 이내 arm 중 실촬
+  TCE 최소**를 자동 선택해 `work_dirs/v9-60k`로 이어 돌린다.
 
 ## Tier 2 — 시스템 (~2주). 여기가 실제 기여
 
-- [~] **T2-9 · W4 버킷 패딩으로 static shape 확보.** 구현 완료: `pad_to_bucket`이 모아온
-  active 토큰 수를 `bucket`의 배수로 올림하고, 패드는 Δ-gating으로 꺼서 **결과가 비트 수준
-  동일**(역방향 스캔이 패드를 먼저 방문해도 상태가 안 움직임 —
-  `tests/test_arch.py::test_bucket_padding_does_not_change_the_result`).
-  `compile_sparse()`가 그 위에서 스캔만 컴파일한다(gather는 `nonzero`라 데이터 의존적이라
-  eager 유지). 측정은 Tier 1이 GPU를 놓으면 자동 실행(`work_dirs/tier2-bench.sh`).
-  기준: active 22%에서 compiled dense(4.67 ms)의 절반 이하.
-- [ ] **T2-10 · W4 Triton 블록 희소 커널.** T2-9로 부족할 때만.
+- [x] **T2-9 · W4 버킷 패딩 — 희소 경로가 compiled dense를 다시 앞선다(합격선은 미달).**
+  `pad_to_bucket`이 active 토큰 수를 64의 배수로 올리고 패드를 Δ-gating으로 꺼서 **결과 불변**
+  (`tests/test_arch.py::test_bucket_padding_does_not_change_the_result`), `compile_sparse()`가
+  그 위에서 스캔만 컴파일한다. active 22%에서 4.87 → **2.99 ms**(334 FPS)로 compiled
+  dense(4.70 ms) 대비 **1.57배**, 실촬 평균 32%에서 3.94 ms로 1.19배.
+  기준(2.34 ms)에는 미달이고 active 50%에서 동률·70%에서는 dense가 낫다 — 그 오른쪽 끝은
+  T0-3 폴백이 자동 처리. 버킷만 켜고 컴파일 안 하면 항상 느리다. → REPORT §4.22
+- [ ] **T2-10 · W4 Triton 블록 희소 커널** — 합격선까지 남은 몫. gather(`nonzero`)가 eager로
+  남는 한 이 이상은 안 나온다.
 - [ ] **T2-11 · W5 Jetson Orin 실측.** `scripts/bench.py` 그대로 사용(기기 확보가 선행).
   latency, FPS, power, energy/frame, active별 곡선.
 - [ ] **T2-12 · W3 운용 범위 명시.** active-vs-speedup 곡선(측정 완료)을 싣고 "active>50%는

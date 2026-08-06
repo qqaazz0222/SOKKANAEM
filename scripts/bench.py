@@ -72,6 +72,11 @@ def bench(model, size, ratio, streams, dtype, iters, repeat=3, warmup=20):
 def _timed(model, size, ratio, streams, dtype, iters, warmup=20):
     dev = next(model.parameters()).device
     model.detector = FixedRatio(ratio, model.p)
+    # this benchmark sweeps a FORCED active ratio, so the deployment policy
+    # that reroutes high-motion frames to the dense path (dense_above, REPORT
+    # §4.20a) has to be off — otherwise every ratio past it silently measures
+    # the dense path instead, which is what --cache off already reports
+    model.dense_above = 0.0
     frame = torch.rand(streams, 3, size, size, device=dev, dtype=dtype)
     state, active, t0 = None, [], 0.0
     for i in range(warmup + iters):
