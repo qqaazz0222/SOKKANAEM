@@ -65,6 +65,9 @@ python scripts/bench.py --ckpt work_dirs/main_v8/latest.pt --half --streams 4
 # --bucket N: 모아온 active 토큰 수를 N의 배수로 올림 패딩(결과 불변, 패드는 Δ-gating으로
 # 꺼짐). 희소 경로가 프레임마다 새 shape이던 문제를 없애 --compile이 의미를 갖게 한다.
 python scripts/bench.py --ckpt work_dirs/main_v8/latest.pt --bucket 64 --compile
+# 주의(REPORT §4.24): 융합 스캔 커널 이후 4090에서는 dense 경로가 항상 더 빠르다
+# (1.29 ms vs 희소 2.0~2.2 ms). 희소 경로의 이득은 연산량(37.0%)과 스트림당 state로
+# 한정되며, 그것이 시간으로 환산되는지는 에지 기기 실측 전까지 미검증이다.
 
 # head의 양자화 바닥을 깊이 구간별로 측정 — bin 개수/범위를 바꾸기 전에 먼저 볼 것
 python scripts/bin_probe.py --data vkitti2:/data/vkitti2 --holdout Scene06
@@ -88,12 +91,20 @@ python scripts/eval.py --ckpt work_dirs/kitti/latest.pt --data kitti:/data/kitti
 | `vkitti2.toml` | 합성 주행 (dense GT) | 0.5 | 0.05 | kitti와 동일 프로파일 |
 | `mixed.toml` | 전체 혼합 (generalist) | 0.7 | 0.02 | 이후 개별 config로 fine-tune |
 | `main.toml` | **본 학습**: TartanAir V2 + PointOdyssey + vkitti2 | 0.5 | 0.05 | 256px, 100k steps, PoC ablation 결과 반영 (§4.5) |
-| `main_v8.toml` | **현행 본 학습**: 실촬(TUM/Bonn) + 합성 3종 | 0.5 | 0.05 | 4방향 scan, local conv, DPT, 64 bin + bin CE |
+| `main_v8.toml` | **본 학습**: 실촬(TUM/Bonn) + 합성 3종 | 0.5 | 0.05 | 4방향 scan, local conv, DPT, 64 bin + bin CE |
 | `t1_binrange.toml` / `t1_bin128.toml` | T1-5 원거리 ablation | | | `d_max` 150→600 (+ bins 128) — PLAN.md T1-5 |
 
 기본 꺼져 있는 손실 두 개(`--warp-weight` / `--edge-weight`): 전자는 RAFT flow로 워프한
 log-depth 잔차를 GT 잔차에 맞추는 TCE의 학습판, 후자는 GT depth gradient 밴드에 가중한
-log L1(전경 물체용). 둘 다 PLAN.md Tier 1에서 검증 중.
+log L1(전경 물체용). **확정 체크포인트 `work_dirs/v9-60k`는 둘 다 2.0으로 켜고 학습**했다
+(REPORT §4.23):
+
+```bash
+python scripts/train.py --config configs/main_v8.toml \
+    --resume work_dirs/main_v8/latest.pt --resume-partial \
+    --steps 60000 --seed 0 --warp-weight 2.0 --edge-weight 2.0 \
+    --work-dir work_dirs/v9-60k
+```
 
 ## 산출물 (`work_dirs/<이름>/`)
 
@@ -133,6 +144,9 @@ sokkanaem/
   detector.py   변화 감지: MSE + hysteresis + dilation + keyframe refresh (§3.1)
   gmc.py        Low-Res GMC: 저해상도 특징점 + RANSAC 호모그래피 + full-res 워핑 (§3.5)
   ssm.py        Selective SSM + Δ-gating, 순수 PyTorch 레퍼런스 스캔 (§3.2)
+  scan_triton.py  융합 selective-scan 커널 (추론 전용). 레퍼런스 스캔의 청크별
+                (B,C,C,P,S) 쌍별 텐서를 없애 재귀를 레지스터에서 돈다 —
+                Δ-gating bit-exactness·평가 지표 불변, dense 11.4→1.98 ms
   model.py      T-Mamba/S-Mamba 교차 백본 + 경량 디코더, 스트리밍 API (§3.0-3.3)
                 스트림별 상태(SSM hidden/detector/prev frame)는 전부 state dict에 —
                 모델 하나로 다중 스트림 처리 가능. from_checkpoint()가 config 복원 로드
@@ -152,5 +166,6 @@ tests/          핵심 주장 검증: mask=0 ⇒ bit-exact state copy, GMC 정�
 ## PoC 범위 (로드맵 1단계)
 
 포함: Δ-gating 수학 검증, 스킵 비율 측정, 스트리밍 추론, 시간 일관성 loss.
-제외 (3단계): Triton 블록 희소 커널(wall-clock 가속), 실제 데이터셋 학습, teacher 증류.
-순수 PyTorch 스캔이라 스킵은 **논리적**(연산량 비율 측정)이며 실측 속도 향상은 커널 구현 후.
+이후 실제 데이터셋 학습(§4)과 융합 스캔 커널(`scan_triton.py`, REPORT §4.24)까지 완료.
+**남은 것은 에지 기기 실측**: 4090에서는 커널 이후 모델이 오버헤드에 묶여 FLOPs 절감이
+시간으로 나타나지 않는다 — 스킵의 이득은 현재 연산량과 스트림당 state로만 입증돼 있다.

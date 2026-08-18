@@ -17,6 +17,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from . import scan_triton
+
 
 class SelectiveSSM(nn.Module):
     """One selective-scan mixer. Used for both spatial and temporal axes."""
@@ -64,6 +66,11 @@ class SelectiveSSM(nn.Module):
         B, L, _ = u.shape
         x, z, dt, Bp, Cp = self._params(u, mask)
         A = -torch.exp(self.A_log)                        # (d_inner, d_state)
+
+        if scan_triton.usable(dt):
+            # Fused kernel: same recurrence, no (B, C, C, P, S) intermediate.
+            y, h = scan_triton.selective_scan(dt, x, A, Bp, Cp, h0)
+            return self._finish(y, x, z), h
 
         h = h0 if h0 is not None else u.new_zeros(B, self.d_inner, self.d_state)
         s = dt.unsqueeze(-1) * A                          # (B, L, P, S), all ≤ 0

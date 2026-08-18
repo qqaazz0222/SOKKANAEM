@@ -8,8 +8,8 @@
 | 단계 | 상태 | 비고 |
 |---|---|---|
 | 1. PoC (4주) | ✅ 완료 (Go) | vkitti2, 스킵 55%에서 AbsRel 열화 +0.15% — 기준(5% 이내) 크게 상회 |
-| 2. 본 학습 (8주) | 🟡 최종 체크포인트 학습 중 | v3(δ1 0.40) → v5(dim 384) 보류 → v7(실촬 혼합) → v8(60k, 정밀화 4종) → 3-arm으로 teacher 제거·bin CE 확정 → **teacher-free 60k 재학습 진행 중**(`work_dirs/v8-teacherfree-60k`) |
-| 3. 시스템 (4주) | 🟡 계측 도구만 확보 | `scripts/bench.py`(latency/FPS/VRAM/state) 신설, 확정 측정은 GPU 여유 시. Triton 블록 희소 커널·Jetson Orin 미착수 |
+| 2. 본 학습 (8주) | ✅ 확정 체크포인트 `work_dirs/v9-60k` | v3(δ1 0.40) → v5(dim 384) 보류 → v7(실촬 혼합) → v8(60k, 정밀화 4종) → 3-arm으로 teacher 제거·bin CE 확정 → teacher-free 60k → **v9-60k(edge 2.0 + warp 2.0, 실촬 AbsRel 0.1595 / δ1 0.8262 / TCE 0.0323)** |
+| 3. 시스템 (4주) | 🟡 희소 경로가 compiled dense 대비 우위 회복 | 버킷 패딩 + `compile_sparse()`로 active 22%에서 2.99 ms(334 FPS, 1.57배), 실촬 평균 32%에서 1.19배 — PLAN 합격선(2.34 ms)은 미달. Triton 블록 희소 커널·Jetson Orin 미착수 |
 | 4. 논문화 | ⬜ 미착수 | CVPR/ICCV(efficiency) 또는 CoRL/IROS(실시간 시스템). 초안은 v7 기준이라 최신 결과 반영 필요 |
 
 ## 현재 상태 (2026-07-24 기준)
@@ -222,11 +222,34 @@ temporal cache가 hidden state를 bit-identical로 유지, bin 중심 단조·�
 - **Tier 1 착수**(`work_dirs/tier1.sh`, 6 arm × 8k): `d_max` 600 계열 2개, 신규
   `warp_residual_loss`(TCE의 학습판) 2개, 신규 `edge_weighted_loss`(전경 경계 가중) 2개.
 
+### 2026-08-06~07 — Tier 1 완주(v9-60k 확정) + T2-9 버킷 패딩 (REPORT §4.22, §4.23)
+
+- **T2-9 버킷 패딩 채택**: `pad_to_bucket`이 active 토큰 수를 64의 배수로 올리고 패드를
+  Δ-gating으로 꺼서 **결과 불변**(테스트로 고정), 그 위에서 `compile_sparse()`가 스캔만
+  컴파일한다. active 22%에서 4.87→**2.99 ms**(334 FPS)로 compiled dense 대비 **1.57배**,
+  실촬 평균 32%에서 1.19배. **교차점은 active 50%**이고 70%에서는 dense가 낫다 — 그 오른쪽
+  끝은 T0-3 dense 폴백이 자동 처리한다. 버킷만 켜고 컴파일 안 하면 항상 느리다.
+- **T1-8 최종 60k 확정 — `work_dirs/v9-60k`**(edge 2.0 + warp 2.0, 13h11m). 직전 확정
+  체크포인트 대비 **연산 증가 없이**(active 32.2% 동일) 실촬 AbsRel 0.1633→**0.1595**,
+  δ1 0.8211→**0.8262**, t-delta 0.0915→**0.0751**, TCE 0.0351→**0.0323**, 합성 RMSE
+  15.18→**14.22**·OPW −32%. DA3 대비 AbsRel 격차 +31%→**+28%**, 원시 t-delta 우위
+  1.12배→**1.36배**.
+- **8k 프로브가 60k를 예측하지 못했다**: 8k에서 edge2+warp2는 대조군보다 실촬 AbsRel이
+  나빴는데(0.1822 vs 0.1773) 60k에서는 앞선다. warp residual은 수렴 후기에 비용을 회수한다.
+  → **8k arm 스크리닝은 손실 항의 부호는 정해도 크기는 못 정한다.**
+- **귀인 한계 명시**: v9-60k와 대조군은 init 계보(main_v8 vs main_v7)와 누적 step이 달라
+  60k 수준의 깨끗한 손실 ablation이 아니다. 최고 체크포인트로만 확정하고 인과 주장은 보류.
+- **`v9-edge-60k`(edge 단독 대조 arm) 폐기**: step 23100/60000에서 원인 미상으로 죽은 채
+  10일 방치됐고, 큐에 넣은 근거(8k 정확도 1위)가 위 반전으로 무너져 재개하지 않는다.
+  디렉터리는 부분 학습 상태로 보존. 같은 큐의 32프레임 drift eval도 미실행으로 남긴다.
+
 ## 다음 액션
 
-1. Tier 1 6 arm 결과를 seed 노이즈(실촬 AbsRel ±0.005, 합성 δ1 ±0.015)와 대조해 채택 판정
-2. 이긴 조합으로 T1-8 최종 60k 재학습
-3. T2-9 버킷 패딩(static shape → CUDA graph)로 compiled dense 대비 우위 회복
-4. `tartanair_v2/Hospital` 일부 파일의 간헐적 read 실패 — 재발하면 `num_workers` 조정
+1. T2-10 Triton 블록 희소 커널 — PLAN 합격선(2.34 ms)까지 남은 몫. gather(`nonzero`)가 eager로
+   남는 한 이 이상은 안 나온다
+2. T3-13 cross-domain zero-shot(NYU/ScanNet/KITTI raw) — 어댑터는 이미 있음, 결과가 나빠도 기록
+3. v9-60k 32프레임 drift eval(20분) — T0-4 수치가 아직 `v8-teacherfree-60k` 기준
+4. §4.22 wall-clock을 v9-60k 체크포인트로 재측정(구조 동일이라 수치 불변 예상, 확인만)
 5. Jetson Orin 실기기 접근 확인(T2-11), VDA 재클론 여부 결정(T0-1 잔여)
-6. `baselines` env는 `transformers`가 사라져 DA2를 `sokkanaem` env로 돌렸다 — 재현성 정리 필요
+6. `tartanair_v2/Hospital` 일부 파일의 간헐적 read 실패 — 재발하면 `num_workers` 조정
+7. `baselines` env는 `transformers`가 사라져 DA2를 `sokkanaem` env로 돌렸다 — 재현성 정리 필요

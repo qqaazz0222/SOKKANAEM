@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 480" width="860" height="480" font-family="Helvetica, Arial, 'Noto Sans KR', sans-serif">
+  <rect width="860" height="480" fill="#ffffff"/>
+
+  <text x="40" y="32" font-size="15" font-weight="600" fill="#111111">Figure. 변화 패치 비율에 따른 프레임당 지연 시간</text>
+  <text x="40" y="50" font-size="10.5" fill="#666666">단일 GPU · 입력 256×256 · 단일 스트림 · 단정밀도 · 3회 측정 최솟값</text>
+
+  <!-- region where dense is preferable -->
+  <rect x="470" y="62" width="190" height="318" fill="#f0f0f0"/>
+
+  <!-- grid -->
+  <g stroke="#e8e8e8" stroke-width="0.9">
+    <line x1="90" y1="325" x2="660" y2="325"/>
+    <line x1="90" y1="270" x2="660" y2="270"/>
+    <line x1="90" y1="215" x2="660" y2="215"/>
+    <line x1="90" y1="160" x2="660" y2="160"/>
+    <line x1="90" y1="105" x2="660" y2="105"/>
+    <line x1="90" y1="62" x2="660" y2="62"/>
+  </g>
+
+  <!-- axes -->
+  <line x1="90" y1="380" x2="660" y2="380" stroke="#333333" stroke-width="1.2"/>
+  <line x1="90" y1="62" x2="90" y2="380" stroke="#333333" stroke-width="1.2"/>
+  <g stroke="#333333" stroke-width="1">
+    <line x1="86" y1="380" x2="90" y2="380"/><line x1="86" y1="325" x2="90" y2="325"/>
+    <line x1="86" y1="270" x2="90" y2="270"/><line x1="86" y1="215" x2="90" y2="215"/>
+    <line x1="86" y1="160" x2="90" y2="160"/><line x1="86" y1="105" x2="90" y2="105"/>
+    <line x1="128" y1="380" x2="128" y2="384"/><line x1="166" y1="380" x2="166" y2="384"/>
+    <line x1="257.2" y1="380" x2="257.2" y2="384"/><line x1="333.2" y1="380" x2="333.2" y2="384"/>
+    <line x1="470" y1="380" x2="470" y2="384"/><line x1="622" y1="380" x2="622" y2="384"/>
+  </g>
+  <g font-size="10.5" fill="#444444" text-anchor="end">
+    <text x="80" y="384">0</text><text x="80" y="329">2</text><text x="80" y="274">4</text>
+    <text x="80" y="219">6</text><text x="80" y="164">8</text><text x="80" y="109">10</text>
+  </g>
+  <text x="34" y="221" font-size="11" fill="#333333" text-anchor="middle" transform="rotate(-90 34 221)">프레임당 지연 시간 (ms)</text>
+  <g font-size="10.5" fill="#444444" text-anchor="middle">
+    <text x="128" y="398">5</text><text x="166" y="398">10</text><text x="257.2" y="398">22</text>
+    <text x="333.2" y="398">32</text><text x="470" y="398">50</text><text x="622" y="398">70</text>
+  </g>
+  <text x="375" y="420" font-size="11" fill="#333333" text-anchor="middle">변화 패치 비율 (%)</text>
+
+  <!-- crossover -->
+  <line x1="470" y1="62" x2="470" y2="380" stroke="#555555" stroke-width="1.1" stroke-dasharray="5 4"/>
+  <text x="565" y="78" font-size="10.5" fill="#555555" text-anchor="middle">전체 연산이 유리한 구간</text>
+  <text x="565" y="92" font-size="10.5" fill="#555555" text-anchor="middle">(고활동 폴백이 담당)</text>
+
+  <!-- dense eager -->
+  <polyline points="128,65.4 166,67.3 257.2,67.0 333.2,65.9 470,67.3 622,65.7"
+            fill="none" stroke="#bbbbbb" stroke-width="1.4" stroke-dasharray="2 3"/>
+  <g fill="#bbbbbb">
+    <circle cx="128" cy="65.4" r="2.6"/><circle cx="166" cy="67.3" r="2.6"/><circle cx="257.2" cy="67.0" r="2.6"/>
+    <circle cx="333.2" cy="65.9" r="2.6"/><circle cx="470" cy="67.3" r="2.6"/><circle cx="622" cy="65.7" r="2.6"/>
+  </g>
+
+  <!-- sparse eager -->
+  <polyline points="128,295.6 166,275.5 257.2,246.1 333.2,217.2 470,174.3 622,120.7"
+            fill="none" stroke="#8c8c8c" stroke-width="1.5" stroke-dasharray="6 3"/>
+  <g fill="#8c8c8c">
+    <circle cx="128" cy="295.6" r="3"/><circle cx="166" cy="275.5" r="3"/><circle cx="257.2" cy="246.1" r="3"/>
+    <circle cx="333.2" cy="217.2" r="3"/><circle cx="470" cy="174.3" r="3"/><circle cx="622" cy="120.7" r="3"/>
+  </g>
+
+  <!-- dense compiled -->
+  <polyline points="128,250.8 166,250.8 257.2,250.8 333.2,250.8 470,250.8 622,251.0"
+            fill="none" stroke="#c0670c" stroke-width="1.9"/>
+  <g fill="#ffffff" stroke="#c0670c" stroke-width="1.5">
+    <circle cx="128" cy="250.8" r="3.2"/><circle cx="166" cy="250.8" r="3.2"/><circle cx="257.2" cy="250.8" r="3.2"/>
+    <circle cx="333.2" cy="250.8" r="3.2"/><circle cx="470" cy="250.8" r="3.2"/><circle cx="622" cy="251.0" r="3.2"/>
+  </g>
+
+  <!-- sparse bucket compiled -->
+  <polyline points="128,299.4 166,300.8 257.2,297.8 333.2,271.7 470,254.1 622,232.1"
+            fill="none" stroke="#0f5c96" stroke-width="2.4"/>
+  <g fill="#0f5c96">
+    <circle cx="128" cy="299.4" r="3.4"/><circle cx="166" cy="300.8" r="3.4"/>
+    <circle cx="470" cy="254.1" r="3.4"/><circle cx="622" cy="232.1" r="3.4"/>
+  </g>
+  <g fill="#0f5c96" stroke="#ffffff" stroke-width="1.4">
+    <circle cx="257.2" cy="297.8" r="5"/><circle cx="333.2" cy="271.7" r="5"/>
+  </g>
+
+  <!-- direct point labels (no leader lines crossing the curves) -->
+  <text x="257.2" y="320" font-size="10.5" font-weight="600" fill="#0b3f68" text-anchor="middle">2.99 ms · 334 FPS · 1.57배</text>
+  <text x="348" y="292" font-size="10.5" font-weight="600" fill="#0b3f68">3.94 ms · 254 FPS · 1.19배</text>
+  <text x="348" y="306" font-size="10" fill="#555555">실내 영상 평균 지점</text>
+
+  <!-- direct series labels at the right -->
+  <text x="668" y="70" font-size="10.5" fill="#999999">전체 연산 (컴파일 없음)</text>
+  <text x="668" y="124" font-size="10.5" fill="#777777">희소 경로 (형태 가변)</text>
+  <text x="668" y="228" font-size="10.5" font-weight="600" fill="#0b3f68">희소 + 버킷 + 컴파일</text>
+  <text x="668" y="264" font-size="10.5" font-weight="600" fill="#8a4a08">전체 연산 (컴파일)</text>
+
+  <!-- notes -->
+  <line x1="40" y1="436" x2="820" y2="436" stroke="#dddddd" stroke-width="1"/>
+  <text x="40" y="454" font-size="10" fill="#666666">토큰 수를 64의 배수로 채워 텐서 형태를 고정한 뒤 컴파일해야 이득이 발생한다. 채우기만 적용하고 컴파일하지 않으면 오히려 항상 느려진다.</text>
+  <text x="40" y="470" font-size="10" fill="#666666">목표선인 전체 연산의 절반(2.34 ms)에는 아직 미달이며, 토큰 수집 연산이 컴파일되지 않는 한 전용 블록 희소 커널이 필요하다.</text>
+</svg>
