@@ -65,12 +65,23 @@ python scripts/bench.py --ckpt work_dirs/main_v8/latest.pt --half --streams 4
 # --bucket N: 모아온 active 토큰 수를 N의 배수로 올림 패딩(결과 불변, 패드는 Δ-gating으로
 # 꺼짐). 희소 경로가 프레임마다 새 shape이던 문제를 없애 --compile이 의미를 갖게 한다.
 python scripts/bench.py --ckpt work_dirs/main_v8/latest.pt --bucket 64 --compile
-# 주의(REPORT §4.24): 융합 스캔 커널 이후 4090에서는 dense 경로가 항상 더 빠르다
-# (1.29 ms vs 희소 2.0~2.2 ms). 희소 경로의 이득은 연산량(37.0%)과 스트림당 state로
-# 한정되며, 그것이 시간으로 환산되는지는 에지 기기 실측 전까지 미검증이다.
+# 주의(REPORT §4.24, §4.27b): 융합 스캔 커널 이후 4090에서는 dense 경로가 항상 더 빠르다
+# (fp32 1.29 ms vs 희소 2.0~2.2 ms). fp16+compile dense는 0.378 ms / 2646 FPS로
+# DA v2 Small(0.816 ms / 1226 FPS)보다 2.2배 빠르고 VRAM은 2.4배 적다.
+# 희소 경로의 이득은 연산량(37.0%)과 스트림당 state로 한정되며, 그것이 시간으로
+# 환산되는지는 에지 기기 실측 전까지 미검증이다.
 
 # head의 양자화 바닥을 깊이 구간별로 측정 — bin 개수/범위를 바꾸기 전에 먼저 볼 것
 python scripts/bin_probe.py --data vkitti2:/data/vkitti2 --holdout Scene06
+
+# 출력 구조의 상한 — GT를 같은 토큰 그리드 병목에 통과시켜 "완벽한 head"의 점수를 잰다.
+# 모델이 상한 근처면 패치/해상도가 병목, 한참 아래면 용량·학습이 병목 (REPORT §4.27a)
+python scripts/ceiling_probe.py --data tum:/data/tum --patch 16 8
+
+# 검출기만 따로 측정 — infer.py는 '지불한 연산'을 보고하므로 dense 폴백이 가져간 프레임이
+# 100%로 찍힌다. 폴백을 끄고 tau를 스윕해 게이팅 전략끼리 같은 축에서 비교 (REPORT §4.26)
+python scripts/gate_probe.py --ckpt work_dirs/v9-60k/latest.pt \
+    --frames-dir /data/kitti/2011_09_26_drive_0002_sync/image_02/data
 
 # 이동 카메라 (ego-motion): Low-Res GMC + feature gating (IDEA.md §3.5)
 python scripts/infer.py --ckpt work_dirs/kitti/latest.pt --video dashcam.mp4 --gmc
@@ -157,6 +168,8 @@ scripts/
   eval.py       검증 (소스별 정확도/시간 안정성/tau sweep/unscaled metric·scale drift)
   infer.py      스트리밍 추론 + depth PNG 저장
   bench.py      실측 wall-clock: active ratio별 latency/FPS, cache on/off, VRAM
+  ceiling_probe.py  출력 구조 상한(GT를 토큰 그리드에 통과) — 다음 개선을 어디에 쓸지 결정
+  gate_probe.py     폴백 끈 순수 검출기 active 비율, tau 스윕 (게이팅 전략 비교용)
   prepare_data.py  데이터셋 레이아웃 검증, 비디오 -> 프레임 추출
 configs/        데이터셋별 최적화 학습 설정 (TOML)
 tests/          핵심 주장 검증: mask=0 ⇒ bit-exact state copy, GMC 정렬 + 피처 게이팅,

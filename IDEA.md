@@ -252,10 +252,13 @@ temporal $\Delta$-gating과 달리 **근사** — sparse scan이 static 패치�
 소수 4자리 동일 확인. sparse 캐시 경로는 동적 shape라 eager 유지 (두 최적화는 상보적:
 그래프=풀연산·키프레임, 캐시=정적 구간).
 
-**경량 모델 대비 (256px급, fp16+compile, batch 1, 4090):** DA V2 Small(24.8M) 380 FPS,
-DPT-SwinV2-Tiny(40.9M) 371 FPS, DA V1 Small(24.8M) 280 FPS vs 본 모델(2.8M) 풀연산+그래프
-**366 FPS**, 정적 스트림+캐시 **460 FPS**, 128px 그래프 **1075 FPS**. 단일 GPU FPS는 동급 —
-차별점은 연산량∝변화율(에지 전력·멀티스트림)과 내장 시간 일관성. Jetson 실측이 결정적.
+~~**경량 모델 대비 (256px급, fp16+compile, batch 1, 4090):** DA V2 Small(24.8M) 380 FPS ...
+단일 GPU FPS는 동급~~ — **이 문단은 v3(2.8M) 시절 수치로 양쪽 다 낡았다. REPORT §4.27b를
+인용할 것**: 융합 스캔 커널(`scan_triton.py`) 이후 본 모델은 fp16+compile에서
+**0.378 ms / 2646 FPS**(VRAM 20.6 MB), 같은 조건 DA v2 Small은 **0.816 ms / 1226 FPS**
+(49.6 MB)로 **2.2배 앞선다**. 정확도도 실촬 0.1595 vs 0.2256으로 우위다.
+다만 이 값은 **dense 경로**의 것이며, 희소 경로는 4090에서 항상 더 느리다(§4.24d) —
+연산량∝변화율의 이득은 연산량·스트림당 state로만 입증돼 있고 Jetson 실측이 여전히 결정적.
 
 **Ablation — eval-only 항목 (§4.4, vkitti2 32프레임 클립, 60클립):**
 
@@ -313,9 +316,16 @@ DPT-SwinV2-Tiny(40.9M) 371 FPS, DA V1 Small(24.8M) 280 FPS vs 본 모델(2.8M) �
 
 ## 7. 로드맵 (Roadmap)
 
+> **로드맵 현황(2026-08-18)**: 1·2단계 완료, 3단계는 커널만 완료하고 에지 실측 보류,
+> 4단계 진행 중. 아래 서술 중 절대 수치는 v3 시절 값이 섞여 있으므로 최신 수치는
+> [REPORT.md](REPORT.md) §4.23~§4.27과 [PLAN.md](PLAN.md)를 기준으로 한다.
+
 1. **PoC (4주):** 변화 감지기 + $\Delta$-gating을 기존 Vision Mamba(Vim/VMamba) 체크포인트에 주입, ScanNet 정적 구간에서 스킵 비율–정확도 곡선 확인. *Go/No-Go 지점: 스킵 50%에서 AbsRel 열화 5% 이내.* → **✅ Go 달성 (vkitti2, §4.5): 스킵 55%에서 AbsRel 열화 +0.15%.**
 2. **본 학습 (8주):** T/S-Mamba 교차 백본. Stage 1: TIMo 지도 학습 → Stage 2: VIRAT pseudo-GT distillation (§3.4). 전체 벤치마크.
-3. **시스템 (4주):** 블록 희소 커널(Triton) 구현, Jetson Orin 실측, 데모(CCTV 실시간 깊이 스트림).
+3. **시스템 (4주):** ~~블록 희소 커널(Triton) 구현~~ → **융합 selective-scan 커널로 대체 완료**
+   (`sokkanaem/scan_triton.py`, REPORT §4.24). 병목이 gather가 아니라 스캔이었고, 커널이
+   dense를 11.4→1.98 ms로 줄이면서 **희소 경로의 wall-clock 우위 자체를 없앴다.**
+   Jetson Orin 실측은 기기 미확보로 보류(PLAN T2-11). 데모 미착수.
 4. **논문화:** 타깃 — CVPR/ICCV (efficiency track) 또는 실시간 시스템 강조 시 CoRL/IROS.
 
 ---
