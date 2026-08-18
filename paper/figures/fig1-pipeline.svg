@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 470" width="940" height="470" font-family="Helvetica, Arial, sans-serif">
+  <rect width="940" height="470" fill="#ffffff"/>
+
+  <defs>
+    <marker id="arw" markerWidth="8" markerHeight="8" refX="7.2" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7.2,3 L0,6 z" fill="#333333"/>
+    </marker>
+    <marker id="arwS" markerWidth="8" markerHeight="8" refX="7.2" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7.2,3 L0,6 z" fill="#666666"/>
+    </marker>
+    <marker id="arwSb" markerWidth="8" markerHeight="8" refX="0.8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M7.2,0 L0,3 L7.2,6 z" fill="#666666"/>
+    </marker>
+  </defs>
+
+  <text x="40" y="34" font-size="15" font-weight="600" fill="#111111">Streaming pipeline</text>
+
+  <!-- ===== connectors (drawn first, under the boxes) ===== -->
+  <g stroke="#333333" stroke-width="1.4" fill="none" marker-end="url(#arw)">
+    <path d="M140,200 H196"/>
+    <path d="M330,200 H386"/>
+    <path d="M590,200 H646"/>
+    <path d="M760,200 H816"/>
+    <path d="M265,124 V162"/>
+    <path d="M265,234 V296"/>
+    <path d="M317,339 H490 V264"/>
+  </g>
+  <g stroke="#666666" stroke-width="1.2" fill="none" stroke-dasharray="4 3" marker-end="url(#arw)">
+    <path d="M170,200 V93 H201"/>
+  </g>
+  <circle cx="170" cy="200" r="2.6" fill="#333333"/>
+
+  <!-- cache: bidirectional -->
+  <g stroke="#666666" stroke-width="1.2" fill="none" marker-end="url(#arwS)" marker-start="url(#arwSb)">
+    <path d="M437,126 V138"/>
+    <path d="M543,126 V138"/>
+  </g>
+
+  <!-- ===== top band ===== -->
+  <rect x="205" y="62" width="120" height="62" rx="2" fill="#fdf3e8" stroke="#c0670c" stroke-width="1.2" stroke-dasharray="5 3"/>
+  <text x="265" y="84" font-size="11.5" font-weight="600" fill="#8a4a08" text-anchor="middle">Global motion comp.</text>
+  <text x="265" y="100" font-size="10" fill="#8a4a08" text-anchor="middle">low-res point tracking</text>
+  <text x="265" y="114" font-size="10" fill="#8a4a08" text-anchor="middle">+ robust homography</text>
+  <text x="40" y="80" font-size="10" fill="#8a4a08">optional branch,</text>
+  <text x="40" y="94" font-size="10" fill="#8a4a08">moving cameras only</text>
+
+  <rect x="390" y="62" width="95" height="62" rx="2" fill="#f2f2f2" stroke="#555555" stroke-width="1.2"/>
+  <text x="437" y="88" font-size="11" font-weight="600" fill="#333333" text-anchor="middle">Spatial cache</text>
+  <text x="437" y="105" font-size="10" fill="#555555" text-anchor="middle">static patch outputs</text>
+
+  <rect x="495" y="62" width="95" height="62" rx="2" fill="#f2f2f2" stroke="#555555" stroke-width="1.2"/>
+  <text x="543" y="88" font-size="11" font-weight="600" fill="#333333" text-anchor="middle">Temporal cache</text>
+  <text x="543" y="105" font-size="10" fill="#555555" text-anchor="middle">per-patch hidden state</text>
+
+  <text x="605" y="88" font-size="10" fill="#555555">the two caches are where</text>
+  <text x="605" y="102" font-size="10" fill="#555555">the MAC saving comes from</text>
+  <text x="605" y="116" font-size="10" font-weight="600" fill="#333333">1.644 → 0.608 GMAC</text>
+
+  <!-- ===== main row ===== -->
+  <rect x="40" y="166" width="100" height="68" rx="2" fill="#f7f7f7" stroke="#333333" stroke-width="1.2"/>
+  <text x="90" y="194" font-size="11.5" font-weight="600" fill="#111111" text-anchor="middle">Input frames</text>
+  <text x="90" y="211" font-size="10" fill="#555555" text-anchor="middle">t-1, t</text>
+
+  <rect x="200" y="166" width="130" height="68" rx="2" fill="#eaf1f8" stroke="#0f5c96" stroke-width="1.2"/>
+  <text x="265" y="190" font-size="11.5" font-weight="600" fill="#0b3f68" text-anchor="middle">Change detector</text>
+  <text x="265" y="206" font-size="10" fill="#0b3f68" text-anchor="middle">patch difference + hysteresis</text>
+  <text x="265" y="221" font-size="10" fill="#0b3f68" text-anchor="middle">+ dilation + keyframe refresh</text>
+
+  <rect x="390" y="140" width="200" height="120" rx="2" fill="#eaf4f0" stroke="#00705a" stroke-width="1.4"/>
+  <text x="490" y="164" font-size="11.5" font-weight="600" fill="#004a3c" text-anchor="middle">State-space backbone</text>
+  <text x="490" y="180" font-size="10" fill="#004a3c" text-anchor="middle">alternating temporal / spatial blocks</text>
+  <rect x="406" y="192" width="168" height="46" rx="2" fill="#ffffff" stroke="#00705a" stroke-width="1.2"/>
+  <text x="490" y="210" font-size="11" font-weight="600" fill="#004a3c" text-anchor="middle">Δ-gating</text>
+  <text x="490" y="228" font-size="12" font-style="italic" fill="#004a3c" text-anchor="middle">Δ̃ = M · Δ</text>
+  <text x="490" y="252" font-size="10" fill="#004a3c" text-anchor="middle">M = 0 preserves the state exactly</text>
+
+  <rect x="650" y="166" width="110" height="68" rx="2" fill="#f7f7f7" stroke="#333333" stroke-width="1.2"/>
+  <text x="705" y="190" font-size="11.5" font-weight="600" fill="#111111" text-anchor="middle">Dense decoder</text>
+  <text x="705" y="207" font-size="10" fill="#555555" text-anchor="middle">64-bin classification</text>
+  <text x="705" y="221" font-size="10" fill="#555555" text-anchor="middle">+ regression</text>
+
+  <rect x="820" y="166" width="80" height="68" rx="2" fill="#333333" stroke="#111111" stroke-width="1.2"/>
+  <text x="860" y="196" font-size="11.5" font-weight="600" fill="#ffffff" text-anchor="middle">Depth map</text>
+  <text x="860" y="213" font-size="10" fill="#dddddd" text-anchor="middle">frame t</text>
+
+  <!-- ===== mask ===== -->
+  <text x="196" y="322" font-size="11" font-weight="600" fill="#0b3f68" text-anchor="end">Activity mask M</text>
+  <text x="196" y="339" font-size="10" fill="#555555" text-anchor="end">compute = 1</text>
+  <text x="196" y="354" font-size="10" fill="#555555" text-anchor="end">skip = 0</text>
+  <g stroke="#8fb4d2" stroke-width="1" fill="#ffffff">
+    <rect x="213" y="300" width="26" height="26"/><rect x="239" y="300" width="26" height="26"/>
+    <rect x="265" y="300" width="26" height="26"/><rect x="291" y="300" width="26" height="26"/>
+    <rect x="213" y="326" width="26" height="26"/><rect x="239" y="326" width="26" height="26" fill="#0f5c96"/>
+    <rect x="265" y="326" width="26" height="26" fill="#0f5c96"/><rect x="291" y="326" width="26" height="26"/>
+    <rect x="213" y="352" width="26" height="26"/><rect x="239" y="352" width="26" height="26"/>
+    <rect x="265" y="352" width="26" height="26"/><rect x="291" y="352" width="26" height="26"/>
+  </g>
+  <text x="343" y="333" font-size="10" fill="#555555">real indoor mean</text>
+  <text x="343" y="347" font-size="10" font-weight="600" fill="#0b3f68">32% computed</text>
+
+  <!-- ===== fallback note ===== -->
+  <rect x="40" y="404" width="860" height="46" rx="2" fill="#fdf3e8" stroke="#c0670c" stroke-width="1.2"/>
+  <text x="56" y="424" font-size="11" font-weight="600" fill="#8a4a08">High-activity fallback</text>
+  <text x="140" y="424" font-size="10.5" fill="#8a4a08">above 40% activity a frame takes the dense path and refreshes both caches.</text>
+  <text x="56" y="441" font-size="10.5" fill="#8a4a08">This avoids the regime where the sparse path loses, and the compute actually paid is reported as-is.</text>
+</svg>
