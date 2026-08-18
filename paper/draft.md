@@ -6,7 +6,7 @@
 
 Video depth models repeatedly process large static regions and often exhibit frame-to-frame flicker. We introduce **SOKKANAEM**, a compact recurrent video-depth model that connects patch-level change detection to the discretization step of a selective state-space model (SSM). Given a binary activity mask \(M\), we replace the SSM step size \(\Delta\) with \(\widetilde{\Delta}=M\Delta\). For a static patch, \(\widetilde{\Delta}=0\) yields \(\bar A=I\) and \(\bar B=0\), so the hidden state is copied exactly rather than approximately reconstructed. A temporal SSM preserves per-location memory, while a spatial SSM and a dense decoder recover spatial context and depth. For moving cameras, low-resolution global motion compensation (GMC) precedes feature-space change detection.
 
-On a 1,000-clip synthetic holdout, a 2.8M-parameter model reduces the active-patch ratio from 99.6% to 24.0% with only a 0.3% relative increase in AbsRel (0.4166 to 0.4174); all three measured temporal errors decrease. Trained on mixed real and synthetic data, a 4.19M-parameter model reaches 0.1595 AbsRel and 0.8262 \(\delta_1\) on a real indoor holdout at 32.2% activity, with lower raw frame-to-frame variation than a 30x larger generalist. An iso-activity token-drop control fails sharply: at 31.6% activity its AbsRel is 1.7178 versus 0.4292 for \(\Delta\)-gating, demonstrating that reading preserved state is essential. SOKKANAEM has substantially lower raw frame-difference error than three larger baselines, but does not lead motion-compensated OPW or GT-referenced TCE. We also show that exact state skipping alone does **not** make end-to-end computation proportional to scene change: in the current architecture, dense readout and decoding dominate. These results establish exact change-gated state preservation as a useful mechanism while delimiting the kernel and system work required for realized efficiency.
+On a 1,000-clip synthetic holdout, a 2.8M-parameter model reduces the active-patch ratio from 99.6% to 24.0% with only a 0.3% relative increase in AbsRel (0.4166 to 0.4174); all three measured temporal errors decrease. Trained on mixed real and synthetic data, a 4.19M-parameter model reaches 0.1595 AbsRel and 0.8262 \(\delta_1\) on a real indoor holdout at 32.2% activity, with lower raw frame-to-frame variation than a 30x larger generalist. An iso-activity token-drop control fails sharply: at 31.6% activity its AbsRel is 1.7178 versus 0.4292 for \(\Delta\)-gating, demonstrating that reading preserved state is essential. SOKKANAEM has substantially lower raw frame-difference error than three larger baselines, but does not lead motion-compensated OPW or GT-referenced TCE. Two negative results delimit the contribution. A fused scan kernel that removes the dominant cost also removes the sparse path's latency advantage on a desktop GPU, leaving sparsity's benefit established in compute and memory rather than measured time. And on unseen real driving footage, accuracy transfers while sparsity does not: activity rises from 26% to 93%, recoverable to 14% only with motion compensation and per-domain threshold calibration. These results establish exact change-gated state preservation as a useful mechanism while delimiting the kernel and system work required for realized efficiency.
 
 ## 1. Introduction
 
@@ -234,9 +234,37 @@ We compare \(\Delta\)-gating with a token-drop arm using the same detector and m
 
 At 31.6% activity, token dropping has 4.0× the AbsRel and 29× the t-delta of \(\Delta\)-gating. The result isolates the benefit: skipping is accurate because the model continues to read a preserved state, not because static tokens can be removed without replacement.
 
-### 5.5 Moving-camera proof of concept
+### 5.5 Cross-domain transfer and real moving cameras
 
-On Virtual KITTI 2 at 128 pixels, pixel gating reaches 44.6% activity with 0.2057 AbsRel versus 0.2054 at full activity. GMC plus feature gating reaches 23.7% activity with 0.2068 AbsRel and 2.3% activity with 0.2098. Raw temporal difference decreases monotonically from 0.1033 at full computation to 0.0762 at the most aggressive GMC point. GMC adds approximately 0.8 ms/frame in this low-resolution setup.
+We evaluate the confirmed checkpoint on five KITTI raw drives (885 frames) that appear in no training split. Only the synthetic clone of this domain was trained on, so the experiment isolates the synthetic-to-real axis rather than an arbitrary domain shift. Ground truth is projected LiDAR: capped near 80 m and 30% valid.
+
+**Table 5. Zero-shot real driving against the in-domain synthetic holdout.**
+
+| Setting | Active (%) | AbsRel | RMSE (m) | \(\delta_1\) | t-delta | TCE | Median scale |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| KITTI raw, zero-shot | **92.8** | 0.2894 | 11.03 | 0.4955 | 2.0716 | 0.0995 | 2.630 |
+| Virtual KITTI 2 holdout, in-domain | 25.8 | 0.3619 | 33.89 | 0.3943 | 0.3115 | 0.0243 | 0.760 |
+
+Accuracy does not collapse; it is nominally better on real footage. That ordering should not be read as a generalization result, because the two rows solve problems of different difficulty: the synthetic holdout contains structure at hundreds of metres that a 256-pixel input cannot resolve, while the LiDAR ground truth is capped and concentrated in the near field. The defensible statement is that representations learned on synthetic driving remain usable on real driving.
+
+**What does not transfer is sparsity.** Activity rises from 25.8% to 92.8% on the same scene type. Measuring the detector alone with the deployment fallback disabled reproduces this: at a pixel threshold of 0.05, synthetic sequences leave 7-10% of patches active while real drives leave 40-74%. Sensor noise, exposure variation, rolling shutter, and compression artifacts all register as change. The skip ratios reported for fixed cameras are therefore measured values for that setting, and the synthetic driving ratios are optimistic.
+
+**Moving-camera gating.** Pixel gating and GMC feature gating operate on different score scales, so comparing them at equal thresholds is meaningless — at their default thresholds the two are indistinguishable in accuracy while GMC uses more computation. The fair comparison is the activity-accuracy curve.
+
+**Table 6. Same 30 clips, both gating strategies swept.**
+
+| Gating | Active (%) | AbsRel | \(\delta_1\) | t-delta | TCE |
+|---|---:|---:|---:|---:|---:|
+| Pixel | 100.0 | 0.3083 | 0.5142 | 3.0852 | 0.1189 |
+| Pixel | 92.7 | 0.3093 | 0.5089 | 3.1016 | 0.1236 |
+| Pixel | 51.1 | 0.3357 | 0.4749 | 2.5108 | 0.1074 |
+| GMC + feature | 87.1 | 0.3065 | 0.5170 | 3.0533 | 0.1173 |
+| **GMC + feature** | **43.8** | **0.3084** | **0.5342** | 1.9319 | 0.0992 |
+| **GMC + feature** | **14.1** | 0.3178 | **0.5341** | **1.2314** | **0.0922** |
+
+At matched activity GMC is clearly better: 43.8% active gives 0.3084 AbsRel and 0.5342 \(\delta_1\) against 0.3357 and 0.4749 for pixel gating at 51.1% — less computation and 8.1% lower relative error. GMC at 14.1% activity still beats the pixel-gating point at 51.1% on every metric. Within the GMC curve, cutting computation sevenfold costs 3.1% relative AbsRel while \(\delta_1\) and both temporal metrics improve monotonically, reproducing on real footage the pattern previously observed only in simulation.
+
+The practical caveat is that GMC's default threshold leaves real driving at 100% activity. The correct statement is not that enabling GMC suffices, but that GMC plus per-domain threshold calibration recovers most of the sparsity that pixel gating loses on real video.
 
 ### 5.6 Compute and wall-clock analysis
 
@@ -287,15 +315,16 @@ The present study has several important limitations.
 3. OPW and TCE do not support a general temporal-consistency lead. Raw t-delta can be gamed by constant predictions and is interpreted only alongside accuracy and the constant control.
 4. A fused scan kernel removed the dominant cost and, in doing so, removed the sparse path's wall-clock advantage on an RTX 4090: compiled full compute is now faster at every activity level. The remaining sparse-path cost is activity-independent bookkeeping. Sparsity's benefit is presently established in MACs and per-stream state, not in measured latency on this device.
 5. Execution on an RTX 4090 is overhead-bound at this model scale, so reduced analytical MACs do not become higher FPS. Jetson Orin latency, energy, and multi-stream measurements have not been performed, and they are the measurement that decides whether the MAC reduction is worth anything in deployment.
-6. GMC was validated on synthetic clean ego-motion, not noisy real mobile video.
-7. The current experiments cover at most 270-frame long streams for drift analysis. Very long streaming behavior is unknown.
-8. Patch-size, refinement, and fully trained decoder/cache ablations remain incomplete.
+6. GMC is validated on real ego-motion (Section 5.5), but only on five driving sequences from one dataset, and only with per-domain threshold calibration; its default threshold is inoperative on real video. Handheld and aerial motion remain untested.
+7. Cross-domain evaluation covers real driving only. Unseen indoor domains (NYU, ScanNet) were not evaluated: the former's host was unreachable and the latter requires a signed agreement. The claim of generalization is therefore limited to the synthetic-to-real axis of one scene type.
+8. The current experiments cover at most 270-frame long streams for drift analysis. Very long streaming behavior is unknown.
+9. Patch-size, refinement, and fully trained decoder/cache ablations remain incomplete.
 
 ## 8. Conclusion
 
 SOKKANAEM demonstrates that patch-level visual change can control an SSM through its discretization step, turning a static observation into an exact identity transition on temporal state. Across synthetic and real RGB-D evaluations, aggressive patch sparsity causes little loss in depth accuracy, and an iso-mask token-drop control confirms that continued readout of preserved state is critical. The model strongly suppresses raw frame-to-frame flicker while remaining much smaller than evaluated depth baselines.
 
-The experiments also reveal the boundary of the idea. Exact state skipping is not synonymous with end-to-end sparse inference: dense readout, spatial context, and decoding remain. Nor does low raw frame variation guarantee motion-correct temporal accuracy. A fused scan kernel closed the kernel gap and, unexpectedly, made dense streaming the faster configuration on a desktop GPU, which relocates the efficiency argument from latency to compute and memory until an edge device settles it. The next decisive steps are therefore edge-device measurement, real moving-camera evaluation, and cross-domain generalization. Within these boundaries, exact \(\Delta\)-gating provides a principled foundation for change-adaptive streaming vision.
+The experiments also reveal the boundary of the idea. Exact state skipping is not synonymous with end-to-end sparse inference: dense readout, spatial context, and decoding remain. Nor does low raw frame variation guarantee motion-correct temporal accuracy. A fused scan kernel closed the kernel gap and, unexpectedly, made dense streaming the faster configuration on a desktop GPU, which relocates the efficiency argument from latency to compute and memory until an edge device settles it. Real moving-camera evaluation and cross-domain transfer are now measured, and both sharpen rather than confirm the picture: change gating is a property of the content and the capture, not of the method alone. The next decisive step is edge-device measurement, which is what determines whether the compute reduction is worth anything in deployment. Within these boundaries, exact \(\Delta\)-gating provides a principled foundation for change-adaptive streaming vision.
 
 ## References
 
