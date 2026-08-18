@@ -187,7 +187,7 @@ The synthetic sweep does not reach low activity because TartanAir stays between 
 
 ![Qualitative results](figures/qualitative/01_tum_0_active3pct.png)
 
-**Figure 3. Qualitative result on held-out real indoor footage** (RGB, prediction, ground truth; 3.5% of patches active on this frame). The prediction is smoother than the ground truth, which is what Section 6.3 quantifies: the model sits well above its own patch-grid ceiling, so the loss of detail is a capacity and training limitation rather than an output-resolution one.
+**Figure 3. Qualitative result on held-out real indoor footage** (RGB, prediction, ground truth; 3.5% of patches active on this frame). The prediction is smoother than the ground truth, which is what Section 6.4 quantifies: the model sits well above its own patch-grid ceiling, so the loss of detail is a capacity and training limitation rather than an output-resolution one.
 
 ### 5.2 Real indoor results
 
@@ -304,7 +304,17 @@ MSE and cosine change scores perform similarly at matched activity. Keyframe int
 
 Matching final backbone tokens to frozen DINOv2-small features does not improve depth accuracy: 0.4315 AbsRel against 0.4292 without it, measured on an earlier checkpoint pair. It yields small improvements in temporal metrics (TCE 0.0846 versus 0.0879), suggesting regularization rather than better geometric representation.
 
-### 6.3 Where the remaining accuracy error lives
+### 6.3 Design decisions behind the reported checkpoint
+
+Three choices in the final recipe were made from measurements rather than intuition, and each carries a cost worth stating.
+
+**Binned depth head.** A 64-bin cross-entropy term alongside the regression loss is worth 8.6% relative AbsRel on real footage (0.1795 against 0.1963), measured across three seeds per arm so the effect is three to six times the seed noise. It is not free: it costs 8% on raw frame difference and 12% on TCE. The reported model keeps it and buys the temporal loss back with the auxiliary terms below.
+
+**Dense fallback.** Routing frames above 40% activity through the dense path improves real accuracy (AbsRel 0.1685 to 0.1633, \(\delta_1\) 0.8083 to 0.8211) at the cost of raising mean activity from 22.2% to 32.2%. The gain is concentrated on the dynamic-object source, so the mechanism is cutting stale spatial context rather than avoiding any instability. All speed claims in this paper are quoted at the resulting 32.2%, not at 22.2%.
+
+**Auxiliary losses, and a methodological caution.** A depth-boundary-weighted term and a flow-warped residual term are both enabled at weight 2.0. Screened at 8k steps, they looked like a trade: the boundary term improved accuracy while worsening temporal metrics, and the warp term did the reverse, degrading \(\delta_1\) beyond the noise floor. At 60k steps the trade disappears and both improve together (Table 2). **The ranking of loss terms at 8k did not survive to convergence.** We report this because short screening runs are standard practice for choosing loss weights, and in our case they were reliable for deciding whether a term helps but not for deciding how strongly to weight it.
+
+### 6.4 Where the remaining accuracy error lives
 
 Pushing ground truth through the model's own output bottleneck — average-pool to the token grid over valid pixels, bilinear back up, median-align — measures what a perfect patch-token head could score. On the real indoor holdout at the current patch size of 16, that ceiling is 0.0844 AbsRel and 0.9140 \(\delta_1\) on TUM and 0.0651 and 0.9442 on Bonn, against our 0.1321 and 0.1869. We are two to three times above our own structural ceiling, and that ceiling already exceeds the 120M baseline's 0.1244 AbsRel.
 
