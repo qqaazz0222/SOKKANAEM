@@ -231,17 +231,27 @@ On Virtual KITTI 2 at 128 pixels, pixel gating reaches 44.6% activity with 0.205
 
 ### 5.6 Compute and wall-clock analysis
 
-The initial implementation used a Python sequential scan. Replacing it with a chunked segment-sum scan increased 128-pixel throughput from 104 to 372 FPS and reduced 512-pixel latency from 137 to 19 ms. Compiling the full-compute path further raised throughput to 1,075 FPS at 128 pixels and 366 FPS at 256 pixels. At 256 pixels, SOKKANAEM runs at 366 FPS in compiled full mode and 460 FPS on a static stream with caching; representative compact baselines were measured at 280–380 FPS.
+Two results in this section point in opposite directions, and both matter.
 
-These speedups come from scan restructuring, graph capture, and caching—not from \(\Delta\)-gating alone. The analytical audit of v3 at 256 pixels gives 2.337 GMAC/frame:
+**Analytical compute.** The current architecture costs 1.644 GMAC/frame at full activity. With both caches, 15.4% activity costs 0.608 GMAC — 37.0% of full. The decoder is 23.1% of the dense floor and patch embedding 2.3%, so the saving is real and comes from the backbone, where sparsity applies.
 
-| Active (%) | \(\Delta\)-gating only | Relative to full | + spatial cache | Relative to full |
-|---:|---:|---:|---:|---:|
-| 100 | 2.337 | 100.0% | 2.337 | 100.0% |
-| 16.6 | 2.266 | 97.0% | 1.842 | 78.8% |
-| 0 | 2.252 | 96.4% | 1.743 | 74.6% |
+**Measured latency.** The scan implementation, not the gather, dominated wall-clock. Profiling a sparse frame at 22% activity attributes 71% of it to the spatial scan and only 6% to gathering and scattering active tokens. The reference scan is chunked and materialises a \((B, C, C, P, S)\) pairwise-decay tensor per chunk: at \(L=64\), \(P=384\), \(S=16\) it moves roughly 25 MB to perform 0.4 MMAC. We therefore replaced it with a fused Triton kernel that keeps the recurrence in registers, used at inference while training retains the differentiable chunked path. \(\Delta\)-gating remains bit-exact through the kernel — \(\widetilde{\Delta}=0\) gives \(\exp(0)=1\) and a zero input term — and every evaluation metric is unchanged to four decimal places.
 
-The decoder accounts for 67.8% of MACs, and a static temporal token retains 58.5% of the active token's block cost because projections and readout remain. A proposed v6 shuffle decoder and trained sparse spatial path reduce the projected cost to 38.6% at 16.6% activity, but that configuration has not completed a comparable training run and is not a measured result.
+Per-frame latency on one RTX 4090 at 256 pixels, single stream, fp32, 22% activity:
+
+| Path | Chunked scan | Fused kernel | Speedup |
+|---|---:|---:|---:|
+| Full compute, eager | 11.38 ms | 1.98 ms | 5.7x |
+| **Full compute, compiled** | 4.70 ms | **1.29 ms** (776 FPS) | 3.6x |
+| Sparse, eager | 4.87 ms | 2.40 ms | 2.0x |
+| Sparse + bucket padding | 5.39 ms | 2.55 ms | 2.1x |
+| Sparse + bucket + compiled | 2.99 ms | 2.04 ms (491 FPS) | 1.5x |
+
+In fp16 the sparse path reaches 1.69 ms (593 FPS) with 37 MB peak memory and 6.38 MB of persistent state per stream; four batched streams run at 2,060 FPS aggregate on the full-compute path.
+
+**The inversion.** Before the kernel, the sparse path was 1.57x faster than compiled full compute at 22% activity. After it, compiled full compute is faster at *every* activity level (1.29 ms against 2.03–2.20 ms). The explanation is immediate: what sparsity saved was the scan, and the scan is now nearly free. What remains is fixed bookkeeping that does not scale with activity — `nonzero` gather, the column-major argsort, bucket padding, cache cloning, scatter, and the host synchronisations these force. Latency is now flat in activity for every path (full compute varies only between 1.973 and 1.994 ms across 5–70% activity), which is the signature of an overhead-bound rather than compute-bound regime.
+
+We report this plainly because it bounds the contribution. Exact state preservation, the MAC reduction, and the kernel itself all stand. The claim that the sparse path is *faster* does not stand on this GPU. Whether a 63% MAC reduction converts into time and energy depends on the hardware being compute-bound, which a 4090 at this model scale is not; settling that requires the edge measurement listed in Section 7.
 
 ## 6. Ablations and Diagnostic Findings
 
@@ -266,8 +276,8 @@ The present study has several important limitations.
 1. The external-baseline table uses the v3 checkpoint; v7 was rerun separately under the same synthetic data protocol but not through every external baseline script in one combined run.
 2. Real indoor v7 evaluation lacks t-delta, OPW, and TCE because that run produced NaNs for temporal metrics. No temporal claim is made from Table 2.
 3. OPW and TCE do not support a general temporal-consistency lead. Raw t-delta can be gamed by constant predictions and is interpreted only alongside accuracy and the constant control.
-4. The current dense decoder and state readout impose a high compute floor. Realized sparse acceleration requires trained spatial sparsity and a dedicated block-sparse kernel.
-5. RTX 4090 execution is launch-bound; reduced analytical MACs do not automatically become higher FPS. Jetson Orin latency, energy, and multi-stream measurements have not been performed.
+4. A fused scan kernel removed the dominant cost and, in doing so, removed the sparse path's wall-clock advantage on an RTX 4090: compiled full compute is now faster at every activity level. The remaining sparse-path cost is activity-independent bookkeeping. Sparsity's benefit is presently established in MACs and per-stream state, not in measured latency on this device.
+5. Execution on an RTX 4090 is overhead-bound at this model scale, so reduced analytical MACs do not become higher FPS. Jetson Orin latency, energy, and multi-stream measurements have not been performed, and they are the measurement that decides whether the MAC reduction is worth anything in deployment.
 6. GMC was validated on synthetic clean ego-motion, not noisy real mobile video.
 7. The current experiments cover at most 270-frame long streams for drift analysis. Very long streaming behavior is unknown.
 8. Patch-size, refinement, and fully trained decoder/cache ablations remain incomplete.
@@ -276,7 +286,7 @@ The present study has several important limitations.
 
 SOKKANAEM demonstrates that patch-level visual change can control an SSM through its discretization step, turning a static observation into an exact identity transition on temporal state. Across synthetic and real RGB-D evaluations, aggressive patch sparsity causes little loss in depth accuracy, and an iso-mask token-drop control confirms that continued readout of preserved state is critical. The model strongly suppresses raw frame-to-frame flicker while remaining much smaller than evaluated depth baselines.
 
-The experiments also reveal the boundary of the idea. Exact state skipping is not synonymous with end-to-end sparse inference: dense readout, spatial context, and decoding remain. Nor does low raw frame variation guarantee motion-correct temporal accuracy. The next decisive steps are therefore a trained sparse spatial path, a lightweight multi-scale decoder, a block-sparse GPU kernel, real moving-camera evaluation, and edge-device measurement. Within these boundaries, exact \(\Delta\)-gating provides a principled foundation for change-adaptive streaming vision.
+The experiments also reveal the boundary of the idea. Exact state skipping is not synonymous with end-to-end sparse inference: dense readout, spatial context, and decoding remain. Nor does low raw frame variation guarantee motion-correct temporal accuracy. A fused scan kernel closed the kernel gap and, unexpectedly, made dense streaming the faster configuration on a desktop GPU, which relocates the efficiency argument from latency to compute and memory until an edge device settles it. The next decisive steps are therefore edge-device measurement, real moving-camera evaluation, and cross-domain generalization. Within these boundaries, exact \(\Delta\)-gating provides a principled foundation for change-adaptive streaming vision.
 
 ## References
 
