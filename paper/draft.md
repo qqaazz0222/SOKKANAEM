@@ -6,7 +6,7 @@
 
 Video depth models repeatedly process large static regions and often exhibit frame-to-frame flicker. We introduce **SOKKANAEM**, a compact recurrent video-depth model that connects patch-level change detection to the discretization step of a selective state-space model (SSM). Given a binary activity mask \(M\), we replace the SSM step size \(\Delta\) with \(\widetilde{\Delta}=M\Delta\). For a static patch, \(\widetilde{\Delta}=0\) yields \(\bar A=I\) and \(\bar B=0\), so the hidden state is copied exactly rather than approximately reconstructed. A temporal SSM preserves per-location memory, while a spatial SSM and a dense decoder recover spatial context and depth. For moving cameras, low-resolution global motion compensation (GMC) precedes feature-space change detection.
 
-On a 1,000-clip synthetic holdout, a 2.8M-parameter model reduces the active-patch ratio from 99.6% to 24.0% with only a 0.3% relative increase in AbsRel (0.4166 to 0.4174); all three measured temporal errors decrease. Fine-tuning on mixed real and synthetic data improves real indoor RGB-D performance to 0.1789 AbsRel and 0.7902 \(\delta_1\) at 17.9% activity, compared with 0.1772 and 0.7953 at full activity. An iso-activity token-drop control fails sharply: at 31.6% activity its AbsRel is 1.7178 versus 0.4292 for \(\Delta\)-gating, demonstrating that reading preserved state is essential. SOKKANAEM has substantially lower raw frame-difference error than three larger baselines, but does not lead motion-compensated OPW or GT-referenced TCE. We also show that exact state skipping alone does **not** make end-to-end computation proportional to scene change: in the current architecture, dense readout and decoding dominate. These results establish exact change-gated state preservation as a useful mechanism while delimiting the kernel and system work required for realized efficiency.
+On a 1,000-clip synthetic holdout, a 2.8M-parameter model reduces the active-patch ratio from 99.6% to 24.0% with only a 0.3% relative increase in AbsRel (0.4166 to 0.4174); all three measured temporal errors decrease. Trained on mixed real and synthetic data, a 4.19M-parameter model reaches 0.1595 AbsRel and 0.8262 \(\delta_1\) on a real indoor holdout at 32.2% activity, with lower raw frame-to-frame variation than a 30x larger generalist. An iso-activity token-drop control fails sharply: at 31.6% activity its AbsRel is 1.7178 versus 0.4292 for \(\Delta\)-gating, demonstrating that reading preserved state is essential. SOKKANAEM has substantially lower raw frame-difference error than three larger baselines, but does not lead motion-compensated OPW or GT-referenced TCE. We also show that exact state skipping alone does **not** make end-to-end computation proportional to scene change: in the current architecture, dense readout and decoding dominate. These results establish exact change-gated state preservation as a useful mechanism while delimiting the kernel and system work required for realized efficiency.
 
 ## 1. Introduction
 
@@ -176,25 +176,24 @@ Table 1 reports the latest v7 checkpoint on the 1,000-clip synthetic holdout.
 
 Reducing activity by 75.9 percentage points changes AbsRel by only +0.0008 (+0.3% relative), while t-delta decreases by 13.6%. OPW and TCE improve slightly rather than degrading. A 32-frame evaluation produces nearly the same activity as the 8-frame protocol, so we do not claim that short clips systematically underestimate deployment sparsity.
 
-### 5.2 Real indoor fine-tuning
+### 5.2 Real indoor results
 
-Zero-shot v3 failed to transfer from synthetic outdoor depth to real indoor Kinect depth and lost to a constant predictor. Mixed-domain v7 fine-tuning reverses this failure.
+Zero-shot v3 failed to transfer from synthetic outdoor depth to real indoor Kinect depth and lost to a constant predictor. Mixed-domain fine-tuning reverses this failure, and two auxiliary losses added at the final training stage — a flow-warped log-depth residual term and a depth-boundary-weighted term — improve accuracy and temporal stability together at unchanged compute.
 
-**Table 2. Held-out real indoor RGB-D, 488 clips. Temporal metrics were not produced in this run.**
+**Table 2. Held-out real indoor RGB-D (TUM and Bonn), 100 clips per source, dataset-balanced mean. The two rows share an activity ratio of 32.2%, so the improvement is not bought with computation.**
 
-| \(\tau_{\mathrm{on}}\) | Active (%) | AbsRel | RMSE (m) | \(\delta_1\) |
-|---:|---:|---:|---:|---:|
-| 0 | 100.0 | 0.1772 | 0.6106 | 0.7953 |
-| 0.02 | 45.5 | 0.1779 | 0.6128 | 0.7930 |
-| 0.05 | 17.9 | 0.1789 | 0.6173 | 0.7902 |
-| 0.1 | 4.9 | 0.1802 | 0.6209 | 0.7883 |
-| Constant control | — | 0.2883 | 1.0423 | 0.5559 |
+| Model | AbsRel | RMSE (m) | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| Previous checkpoint | 0.1633 | 0.6279 | 0.8211 | 0.0915 | 0.0271 | 0.0351 |
+| **Confirmed checkpoint (4.19M)** | **0.1595** | **0.6063** | **0.8262** | **0.0751** | **0.0243** | **0.0323** |
 
-At the default threshold, 82.1% of patch updates are suppressed for a +1.0% relative AbsRel increase. Even at 4.9% activity, the model remains far ahead of the constant control. These results support the fixed-camera activity assumption and show that domain-appropriate fine-tuning is necessary.
+Per source, the confirmed model reaches 0.1321 AbsRel and 0.8426 \(\delta_1\) on TUM at 19.7% activity, and 0.1869 and 0.8098 on Bonn at 44.7%. On the synthetic holdout it reaches 0.3791 AbsRel and 14.22 RMSE.
+
+Two cautions apply. The synthetic \(\delta_1\) difference between these checkpoints lies inside a measured seed standard deviation of \(\pm\)0.015 and is not claimed. More importantly, the two rows differ in initialisation lineage and cumulative steps, so Table 2 is a comparison of checkpoints, not a controlled loss ablation; the controlled ablation exists only at 8k steps, where the ranking was in fact reversed. Short-probe rankings of loss terms did not survive to convergence, which we report as a methodological finding: brief probes can settle whether a term helps but not how strongly to weight it.
 
 ### 5.3 Comparison with larger depth models
 
-The common 1,000-clip comparison was completed with v3; v7 gives slightly better SOKKANAEM numbers under its separate rerun (Table 1).
+Table 3 retains the earlier synthetic-protocol comparison. Table 3b regenerates the comparison against current baseline checkpoints on the real indoor holdout under a single shared protocol, which is the setting the method targets.
 
 **Table 3. Common 1,000-clip baseline comparison. Lower is better except \(\delta_1\).**
 
@@ -206,7 +205,17 @@ The common 1,000-clip comparison was completed with v3; v7 gives slightly better
 | Video Depth Anything Small metric | 28.4M | **0.3274** | 26.99 | 0.7041 | 2.1803 | 0.0590 | 0.0818 |
 | Constant control | — | 0.7434 | 44.75 | 0.2928 | 0.0000 | 0.0000 | 0.0513 |
 
-SOKKANAEM's t-delta is 7.3× lower than DA3, 8.9× lower than VDA, and 38.6× lower than DA V2. This indicates strong suppression of raw flicker. It is not a universal temporal lead: DA3 has lower OPW, while both DA3 and VDA have lower TCE. Accuracy also depends on the metric: VDA leads AbsRel and \(\delta_1\) among the video-oriented entries, and DA3 leads RMSE. SOKKANAEM's advantage is compactness and stable raw output under high patch sparsity, not state-of-the-art depth accuracy.
+**Table 3b. Real indoor holdout, identical protocol for all three models.**
+
+| Model | Params | AbsRel | \(\delta_1\) | t-delta | TCE |
+|---|---:|---:|---:|---:|---:|
+| Depth Anything 3 Base | 120M | **0.1244** | **0.8790** | 0.1024 | **0.0252** |
+| Depth Anything V2 Small | 24.8M | 0.2256 | 0.9050 | 0.9920 | 0.1015 |
+| **SOKKANAEM (ours)** | **4.19M** | 0.1595 | 0.8262 | **0.0751** | 0.0323 |
+
+Against a 30x larger generalist we remain behind on accuracy and on GT-referenced temporal error, though the AbsRel gap narrowed from +31% to +28% relative with the final checkpoint, while raw frame-to-frame variation is 1.36x lower. Against a comparable-size model we lead every metric except \(\delta_1\); Depth Anything V2's high \(\delta_1\) with poor AbsRel and RMSE follows from per-clip scale-and-shift alignment, which ranks most pixels correctly while allowing a few far pixels to dominate squared error.
+
+On the earlier synthetic protocol, SOKKANAEM's t-delta is 7.3× lower than DA3, 8.9× lower than VDA, and 38.6× lower than DA V2. This indicates strong suppression of raw flicker. It is not a universal temporal lead: DA3 has lower OPW, while both DA3 and VDA have lower TCE. Accuracy also depends on the metric: VDA leads AbsRel and \(\delta_1\) among the video-oriented entries, and DA3 leads RMSE. SOKKANAEM's advantage is compactness and stable raw output under high patch sparsity, not state-of-the-art depth accuracy.
 
 ### 5.4 Why exact state readout matters
 
