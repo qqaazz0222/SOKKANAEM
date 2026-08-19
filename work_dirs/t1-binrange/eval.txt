@@ -1,0 +1,17 @@
+ckpt=work_dirs/t1-binrange/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=488 size=256 max=100/source spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.7  0.1422   0.8655  0.8386  0.0846   0.0216  0.0326  0.1616  1.062  0.0116  0.1389 (0.116)  89
+0.05     bonn            44.7  0.2115   0.4933  0.7805  0.0622   0.0297  0.0350  0.2138  1.028  0.0369  0.2141 (0.169)  100
+0.05     MEAN(src)       32.2  0.1768   0.6794  0.8095  0.0734   0.0257  0.0338  0.1877  1.045  0.0242  0.1765 (0.143)  189
+0.05     POOLED(px)      32.9  0.1833   0.6699  0.8041  0.0727   0.0264  0.0340  0.1893  1.044  0.0250  0.1787 (0.144)  189
+
+ckpt=work_dirs/t1-binrange/latest.pt data=['vkitti2:/home/hyunsu/dataset_ssd/vkitti2', 'tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2', 'pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey'] clips=8929 size=256 max=100/source spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     vkitti2         25.8  0.3808  37.5161  0.3714  0.2376   0.0174  0.0259  0.3522  0.790  0.0388  0.3793 (0.196)  100
+0.05     tartanair2      92.1  0.4968   4.1172  0.4523  0.2346   0.0582  0.1220  0.5403  1.763  0.1752  0.5015 (0.263)  100
+0.05     pointodyssey    30.8  0.2442   4.4759  0.5921  0.1681   0.0295  0.0506  0.3796  1.489  0.0440  0.2405 (0.065)  100
+0.05     MEAN(src)       49.6  0.3739  15.3697  0.4719  0.2134   0.0351  0.0662  0.4240  1.347  0.0860  0.3738 (0.175)  300
+0.05     POOLED(px)      49.6  0.3813  21.4382  0.4701  0.2134   0.0359  0.0681  0.4240  1.347  0.0860  0.3738 (0.175)  300
+

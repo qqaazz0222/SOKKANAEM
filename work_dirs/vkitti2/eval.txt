@@ -1,0 +1,85 @@
+ckpt=work_dirs/vkitti2/latest.pt data=['vkitti2:/workspace/SOKKANAEM/data/vkitti2'] clips=5260 max=100
+tau_on   active%  AbsRel   RMSE    d1      t-delta
+--------------------------------------------------
+0.05       68.1  0.2054  12.9315  0.6844  0.1002
+
+ckpt=work_dirs/vkitti2/latest.pt data=['vkitti2:/workspace/SOKKANAEM/data/vkitti2'] clips=5260 max=100
+tau_on   active%  AbsRel   RMSE    d1      t-delta
+--------------------------------------------------
+0         100.0  0.2054  12.9307  0.6844  0.1033
+0.005      92.2  0.2055  12.9315  0.6845  0.1029
+0.01       89.3  0.2055  12.9314  0.6846  0.1027
+0.02       82.6  0.2055  12.9312  0.6845  0.1024
+0.05       68.1  0.2054  12.9315  0.6844  0.1002
+0.1        44.6  0.2057  12.9312  0.6841  0.0962
+
+ckpt=work_dirs/vkitti2/latest.pt data=['vkitti2:/workspace/SOKKANAEM/data/vkitti2'] clips=5260 max=100
+tau_on   active%  AbsRel   RMSE    d1      t-delta
+--------------------------------------------------
+0         100.0  0.2054  12.9307  0.6844  0.1033
+0.05       88.7  0.2056  12.9320  0.6839  0.1026
+0.1        76.3  0.2057  12.9342  0.6842  0.1015
+0.2        54.1  0.2060  12.9381  0.6838  0.0985
+0.4        23.7  0.2068  12.9362  0.6816  0.0918
+0.8         2.3  0.2098  12.9312  0.6774  0.0762
+
+ckpt=work_dirs/vkitti2/latest.pt data=['vkitti2:/workspace/SOKKANAEM/data/vkitti2'] clips=5260 max=100
+tau_on   active%  AbsRel   RMSE    d1      t-delta
+--------------------------------------------------
+0.05       68.1  nan  nan  0.0000  nan
+
+ckpt=work_dirs/vkitti2/latest.pt data=['vkitti2:/workspace/SOKKANAEM/data/vkitti2'] clips=5260 max=100
+tau_on   active%  AbsRel   RMSE    d1      t-delta
+--------------------------------------------------
+0.05       68.1  0.2054  12.9315  0.6844  0.1002
+
+ckpt=work_dirs/vkitti2/latest.pt data=['vkitti2:/workspace/SOKKANAEM/data/vkitti2'] clips=5260 max=100
+tau_on   active%  AbsRel   RMSE    d1      t-delta
+--------------------------------------------------
+0         100.0  0.2054  12.9307  0.6844  0.1033
+0.05       88.7  0.2101  12.9157  0.6681  0.4680
+0.1        76.3  0.2204  13.2992  0.6513  0.6451
+0.2        54.1  0.2454  13.9480  0.6060  0.7948
+0.4        23.7  0.2358  13.5011  0.6335  0.5379
+0.8         2.3  0.2185  12.9251  0.6623  0.0683
+
+ckpt=work_dirs/vkitti2/latest.pt data=['vkitti2:/workspace/SOKKANAEM/data/vkitti2'] clips=5260 max=100
+tau_on   active%  AbsRel   RMSE    d1      t-delta
+--------------------------------------------------
+0         100.0  0.2054  12.9307  0.6844  0.1033
+0.005      92.2  0.2057  12.9001  0.6784  0.3343
+0.01       89.3  0.2068  12.9231  0.6738  0.3928
+0.02       82.6  0.2154  13.0707  0.6579  0.4611
+0.05       68.1  0.2283  13.3219  0.6385  0.6362
+0.1        44.6  0.2404  13.5196  0.6037  0.6312
+
+
+[ablation: keyframe K + cosine detector]
+K=2                      active  83.1%  AbsRel 0.2054  RMSE 12.9301  d1 0.6844  t-delta 0.1024
+K=5                      active  73.6%  AbsRel 0.2054  RMSE 12.9312  d1 0.6844  t-delta 0.1013
+K=10                     active  68.1%  AbsRel 0.2054  RMSE 12.9315  d1 0.6844  t-delta 0.1002
+K=30                     active  68.1%  AbsRel 0.2054  RMSE 12.9315  d1 0.6844  t-delta 0.1002
+K=1000                   active  68.1%  AbsRel 0.2054  RMSE 12.9315  d1 0.6844  t-delta 0.1002
+cosine tau=0.001         active  95.8%  AbsRel 0.2055  RMSE 12.9315  d1 0.6843  t-delta 0.1030
+cosine tau=0.005         active  93.8%  AbsRel 0.2055  RMSE 12.9316  d1 0.6842  t-delta 0.1029
+cosine tau=0.02          active  90.5%  AbsRel 0.2055  RMSE 12.9314  d1 0.6843  t-delta 0.1029
+
+[ablation: keyframe K + cosine detector]
+K=5                      active  73.7%  AbsRel 0.2888  RMSE 14.8777  d1 0.5338  t-delta 0.1185
+K=10                     active  69.2%  AbsRel 0.2890  RMSE 14.8813  d1 0.5332  t-delta 0.1178
+K=30                     active  66.5%  AbsRel 0.2891  RMSE 14.8859  d1 0.5332  t-delta 0.1173
+K=1000                   active  65.1%  AbsRel 0.2892  RMSE 14.8865  d1 0.5331  t-delta 0.1166
+cosine tau=0.02          active  92.3%  AbsRel 0.2881  RMSE 14.8700  d1 0.5345  t-delta 0.1204
+cosine tau=0.05          active  87.7%  AbsRel 0.2882  RMSE 14.8725  d1 0.5342  t-delta 0.1203
+cosine tau=0.1           active  80.6%  AbsRel 0.2884  RMSE 14.8763  d1 0.5336  t-delta 0.1199
+cosine tau=0.3           active  59.8%  AbsRel 0.2897  RMSE 14.8926  d1 0.5313  t-delta 0.1180
+ckpt=work_dirs/vkitti2/latest.pt data=['vkitti2:/workspace/SOKKANAEM/data/vkitti2'] clips=660 max=100
+tau_on   active%  AbsRel   RMSE    d1      t-delta
+--------------------------------------------------
+0         100.0  0.3266  28.0156  0.4268  0.1038
+0.005      34.0  0.3271  28.0221  0.4271  0.0957
+0.01       29.1  0.3271  28.0230  0.4271  0.0952
+0.02       24.8  0.3271  28.0269  0.4271  0.0949
+0.05       17.7  0.3272  28.0287  0.4271  0.0932
+0.1         9.2  0.3275  28.0391  0.4271  0.0917
+

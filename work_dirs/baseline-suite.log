@@ -1,0 +1,93 @@
+
+---- DPT-Large / tum ----
+2026-08-19T01:53:28+00:00
+DPT-Large (343.0M) tum on 89 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1135  RMSE=1.2010  delta1=0.8829  t-delta=0.1529  OPW=0.0312  TCE=0.0397
+
+---- DPT-Large / bonn ----
+2026-08-19T01:54:12+00:00
+DPT-Large (343.0M) bonn on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0869  RMSE=0.3565  delta1=0.9394  t-delta=0.1212  OPW=0.0357  TCE=0.0381
+
+---- DPT-Large / vkitti2 ----
+2026-08-19T01:55:01+00:00
+DPT-Large (343.0M) vkitti2 on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1825  RMSE=61.6707  delta1=0.8133  t-delta=11.5656  OPW=0.0666  TCE=0.0642
+
+---- DPT-Large / tartanair2 ----
+2026-08-19T01:55:50+00:00
+DPT-Large (343.0M) tartanair2 on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=1.0590  RMSE=68.2171  delta1=0.4072  t-delta=4.5164  OPW=0.2794  TCE=0.3349
+
+---- DPT-Large / pointodyssey ----
+2026-08-19T01:56:43+00:00
+DPT-Large (343.0M) pointodyssey on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.2671  RMSE=47.7683  delta1=0.8092  t-delta=9.6844  OPW=0.0913  TCE=0.1017
+
+---- DA-v2-Base / tum ----
+2026-08-19T01:57:32+00:00
+DA-v2-Base (97.5M) tum on 89 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1153  RMSE=5.8185  delta1=0.9095  t-delta=0.6970  OPW=0.0430  TCE=0.0517
+
+---- DA-v2-Base / bonn ----
+2026-08-19T01:58:15+00:00
+DA-v2-Base (97.5M) bonn on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0966  RMSE=0.4605  delta1=0.9269  t-delta=0.1135  OPW=0.0298  TCE=0.0332
+
+---- DA-v2-Base / vkitti2 ----
+2026-08-19T01:59:02+00:00
+DA-v2-Base (97.5M) vkitti2 on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0895  RMSE=39.2906  delta1=0.9436  t-delta=8.7268  OPW=0.0439  TCE=0.0349
+
+---- DA-v2-Base / tartanair2 ----
+2026-08-19T01:59:49+00:00
+DA-v2-Base (97.5M) tartanair2 on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.9148  RMSE=60.1626  delta1=0.4217  t-delta=8.5561  OPW=0.2858  TCE=0.3372
+
+---- DA-v2-Base / pointodyssey ----
+2026-08-19T02:00:39+00:00
+DA-v2-Base (97.5M) pointodyssey on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1060  RMSE=4.7202  delta1=0.8671  t-delta=0.6103  OPW=0.0504  TCE=0.0506
+
+---- DA-v1-Small / tum ----
+2026-08-19T02:01:25+00:00
+DA-v1-Small (24.8M) tum on 89 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0857  RMSE=0.8771  delta1=0.9009  t-delta=0.1229  OPW=0.0241  TCE=0.0326
+
+---- DA-v1-Small / bonn ----
+2026-08-19T02:02:02+00:00
+DA-v1-Small (24.8M) bonn on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0614  RMSE=0.2494  delta1=0.9691  t-delta=0.0919  OPW=0.0253  TCE=0.0281
+
+---- DA-v1-Small / vkitti2 ----
+2026-08-19T02:02:42+00:00
+DA-v1-Small (24.8M) vkitti2 on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1878  RMSE=59.3613  delta1=0.8557  t-delta=6.2934  OPW=0.0397  TCE=0.0350
+
+---- DA-v1-Small / tartanair2 ----
+2026-08-19T02:03:23+00:00
+DA-v1-Small (24.8M) tartanair2 on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.9596  RMSE=64.7540  delta1=0.4165  t-delta=7.0155  OPW=0.2763  TCE=0.3298
+
+---- DA-v1-Small / pointodyssey ----
+2026-08-19T02:04:07+00:00
+DA-v1-Small (24.8M) pointodyssey on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1156  RMSE=3.9539  delta1=0.8606  t-delta=0.3487  OPW=0.0441  TCE=0.0500
+
+---- ZoeDepth-NK / tum ----
+2026-08-19T02:04:48+00:00
+
+---- ZoeDepth-NK / bonn ----
+2026-08-19T02:04:51+00:00
+
+---- ZoeDepth-NK / vkitti2 ----
+2026-08-19T02:04:55+00:00
+
+---- ZoeDepth-NK / tartanair2 ----
+2026-08-19T02:04:59+00:00
+
+---- ZoeDepth-NK / pointodyssey ----
+2026-08-19T02:05:03+00:00
+
+BASELINE SUITE DONE
+2026-08-19T02:05:07+00:00

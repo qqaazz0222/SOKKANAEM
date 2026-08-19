@@ -1,0 +1,32 @@
+######## bin distribution after supervision (arm2) ########
+bins=64  log-depth range -1.17..4.98 (0.31m..145.4m)  n=120 clips
+
+expectation  AbsRel 0.1961  d1 0.7782  RMSE 0.7610
+mode         AbsRel 0.2203  d1 0.7650  RMSE 0.8261
+top3         AbsRel 0.2094  d1 0.7723  RMSE 0.8103
+
+normalized entropy   boundary 0.408   flat 0.354
+distribution spread  boundary 0.296   flat 0.229  (log-depth sigma; 0.1 = +-10% depth)
+pixels whose top bin holds <50% of the mass: 58.4%
+######## v7 on the same synthetic 500 clips ########
+ckpt=work_dirs/main_v7/latest.pt data=['vkitti2:/home/hyunsu/dataset_ssd/vkitti2', 'tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2', 'pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey'] clips=8929 max=500
+tau_on   active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     clipAbsRel(std)  n
+---------------------------------------------------------------------------------------
+0.05       15.4  0.2895  31.7672  0.5923  0.1591   0.0185  0.0251  0.2862 (0.175)  500
+
+appended -> work_dirs/main_v7/eval.txt
+per-clip -> work_dirs/main_v7/scores_holdout500.json
+######## viz panels for arm2 ########
+outputs/arm2-binloss/01_tum_0_active3pct.png  active   2.6%  clip 0/89
+outputs/arm2-binloss/02_tum_1_active27pct.png  active  27.0%  clip 88/89
+outputs/arm2-binloss/03_bonn_0_active23pct.png  active  22.6%  clip 0/399
+outputs/arm2-binloss/04_bonn_1_active4pct.png  active   3.6%  clip 398/399
+outputs/arm2-binloss/05_vkitti2_0_active16pct.png  active  16.1%  clip 0/660
+outputs/arm2-binloss/06_vkitti2_1_active44pct.png  active  43.5%  clip 659/660
+outputs/arm2-binloss/07_tartanair2_0_active98pct.png  active  97.9%  clip 0/284
+outputs/arm2-binloss/08_tartanair2_1_active94pct.png  active  94.0%  clip 283/284
+outputs/arm2-binloss/09_pointodyssey_0_active68pct.png  active  68.2%  clip 0/7985
+outputs/arm2-binloss/10_pointodyssey_1_active62pct.png  active  61.9%  clip 7984/7985
+
+10 panels -> outputs/arm2-binloss
+######## DONE ########

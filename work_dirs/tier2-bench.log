@@ -1,0 +1,76 @@
+pid, used_gpu_memory [MiB]
+
+################ --cache off ################
+2026-08-06T06:30:48+00:00
+work_dirs/v8-teacherfree-60k/latest.pt  256px  streams 1  fp32  eager  bucket off  NVIDIA GeForce RTX 4090
+cache  active%   ms/frame     FPS   peakVRAM_MB  state_MB/stream
+----------------------------------------------------------------
+off      5.2     11.437     87.4         87.0            12.00
+off     10.1     11.370     87.9         87.0            12.00
+off     21.8     11.384     87.8         87.0            12.00
+off     32.0     11.419     87.6         87.0            12.00
+off     49.8     11.365     88.0         87.0            12.00
+off     69.9     11.433     87.5         87.0            12.00
+
+################ --cache off --compile ################
+2026-08-06T06:31:14+00:00
+work_dirs/v8-teacherfree-60k/latest.pt  256px  streams 1  fp32  compiled  bucket off  NVIDIA GeForce RTX 4090
+cache  active%   ms/frame     FPS   peakVRAM_MB  state_MB/stream
+----------------------------------------------------------------
+off      4.9      4.694    213.1         41.2            12.00
+off      9.9      4.696    212.9         41.2            12.00
+off     22.5      4.698    212.9         41.2            12.00
+off     32.2      4.698    212.9         41.2            12.00
+off     49.6      4.697    212.9         41.2            12.00
+off     69.5      4.694    213.0         41.2            12.00
+
+################ --cache on ################
+2026-08-06T06:31:30+00:00
+work_dirs/v8-teacherfree-60k/latest.pt  256px  streams 1  fp32  eager  bucket off  NVIDIA GeForce RTX 4090
+cache  active%   ms/frame     FPS   peakVRAM_MB  state_MB/stream
+----------------------------------------------------------------
+on       4.7      3.074    325.3         65.5            12.75
+on      10.4      3.797    263.4         72.0            12.75
+on      22.1      4.873    205.2         76.1            12.75
+on      31.9      5.924    168.8         75.7            12.75
+on      50.0      7.484    133.6         80.4            12.75
+on      70.4      9.429    106.1         84.1            12.75
+
+################ --cache on --bucket 64 ################
+2026-08-06T06:31:44+00:00
+work_dirs/v8-teacherfree-60k/latest.pt  256px  streams 1  fp32  eager  bucket 64  NVIDIA GeForce RTX 4090
+cache  active%   ms/frame     FPS   peakVRAM_MB  state_MB/stream
+----------------------------------------------------------------
+on       5.2      5.064    197.5         74.3            12.75
+on      10.1      5.011    199.6         74.3            12.75
+on      22.3      5.388    185.6         77.4            12.75
+on      32.4      7.330    136.4         77.4            12.75
+on      49.8      8.364    119.6         82.1            12.75
+on      70.2      9.682    103.3         94.0            12.75
+
+################ --cache on --bucket 64 --compile ################
+2026-08-06T06:32:00+00:00
+/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/torch/_inductor/compile_fx.py:282: UserWarning: TensorFloat32 tensor cores for float32 matrix multiplication available but not enabled. Consider setting `torch.set_float32_matmul_precision('high')` for better performance.
+  warnings.warn(
+work_dirs/v8-teacherfree-60k/latest.pt  256px  streams 1  fp32  compiled  bucket 64  NVIDIA GeForce RTX 4090
+cache  active%   ms/frame     FPS   peakVRAM_MB  state_MB/stream
+----------------------------------------------------------------
+on       5.1      2.934    340.8         70.3            12.75
+on      10.0      2.879    347.3         70.3            12.75
+on      21.9      2.994    334.0         75.1            12.75
+on      32.2      3.940    253.8         75.1            12.75
+on      50.1      4.581    218.3         76.5            12.75
+on      70.2      5.379    185.9         79.4            12.75
+
+################ --cache on --bucket 64 --compile --half ################
+2026-08-06T06:32:44+00:00
+work_dirs/v8-teacherfree-60k/latest.pt  256px  streams 1  fp16  compiled  bucket 64  NVIDIA GeForce RTX 4090
+cache  active%   ms/frame     FPS   peakVRAM_MB  state_MB/stream
+----------------------------------------------------------------
+on       4.9      2.963    337.4         39.0             6.38
+on      10.2      2.972    336.5         39.0             6.38
+on      21.7      3.048    328.1         41.6             6.38
+on      31.9      3.898    256.5         41.6             6.38
+on      49.9      4.641    215.5         42.7             6.38
+on      70.2      5.335    187.4         43.8             6.38
+T2-9 BENCH DONE

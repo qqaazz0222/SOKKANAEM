@@ -1,11 +1,25 @@
-# outputs
-work_dirs/
+# Experiment records ARE part of the repo: eval tables, training logs, the
+# effective config each run used, per-clip score dumps and the queue scripts
+# are how a result stays checkable months later. Only the things that are big
+# and reproducible from them are excluded.
+
+# model weights and optimizer state (~67 MB each, 2.1 GB total)
 *.pt
 *.pth
 *.ckpt
+*.safetensors
+*.onnx
 
-# datasets (README examples extract into data/)
+# archives and datasets
+*.zip
+*.tar
+*.tar.*
+*.7z
 data/
+
+# anything a run can regenerate cheaply and that bloats the tree
+work_dirs/**/viz/
+outputs/**/*.png
 
 # python
 __pycache__/

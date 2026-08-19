@@ -1,0 +1,10 @@
+ckpt=work_dirs/arm1-noteacher/latest.pt data=['vkitti2:/home/hyunsu/dataset_ssd/vkitti2', 'tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2', 'pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey'] clips=8929 max=500
+tau_on   active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     clipAbsRel(std)  n
+---------------------------------------------------------------------------------------
+0.05       15.4  0.2867  38.8223  0.5629  0.1711   0.0179  0.0263  0.2853 (0.159)  500
+
+ckpt=work_dirs/arm1-noteacher/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=488 max=500
+tau_on   active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     clipAbsRel(std)  n
+---------------------------------------------------------------------------------------
+0.05       17.9  0.1482   0.5410  0.8405  0.0410   0.0159  0.0220  0.1472 (0.111)  487 (+1 no-GT)
+

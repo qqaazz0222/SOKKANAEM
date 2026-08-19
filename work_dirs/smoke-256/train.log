@@ -1,0 +1,11 @@
+2026-07-08 01:30:20,209 work dir: work_dirs/smoke-256
+2026-07-08 01:30:21,058 mixed dataset: 18440 clips from 1 sources
+2026-07-08 01:31:13,101 work dir: work_dirs/smoke-256
+2026-07-08 01:31:13,940 mixed dataset: 18440 clips from 1 sources
+2026-07-08 01:31:15,221 step    0  loss 8.6633  skip 0.00
+2026-07-08 01:31:42,850 step   50  loss 1.6463  skip 0.27
+2026-07-08 01:32:08,919 step  100  loss 1.8754  skip 0.53
+2026-07-08 01:32:35,271 step  150  loss 2.2959  skip 0.80
+2026-07-08 01:33:01,618 step  200  loss 3.2350  skip 0.80
+2026-07-08 01:33:27,934 step  250  loss 1.5171  skip 0.80
+2026-07-08 01:33:53,909 saved -> work_dirs/smoke-256/latest.pt

@@ -1,0 +1,47 @@
+# effective config (merged CLI + TOML), written by train.py
+data = ["tum:/home/hyunsu/dataset_ssd/tum_static", "bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset", "vkitti2:/home/hyunsu/dataset_ssd/vkitti2", "tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2", "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey"]
+steps = 8000
+batch = 4
+lr = 0.0003
+size = 256
+clip_len = 4
+workers = 16
+max_skip = 0.5
+augment = true
+detector_mask = false
+holdout = ["walking_static", "rgbd_bonn_crowd2", "rgbd_bonn_person_tracking2", "rgbd_bonn_static_close_far", "Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"]
+resume = "work_dirs/main_v8/latest.pt"
+resume_partial = true
+work_dir = "work_dirs/t0-seed0-bin0.0"
+seed = 0
+ema_decay = 0.999
+auto_loss_weight = false
+msgrad_weight = 0.5
+normal_weight = 0.05
+warmup = 1000
+grad_clip = 1.0
+collapse_patience = 1000
+collapse_eps = 0.0001
+distill_weight = 0.0
+distill_model = "facebook/dinov2-small"
+teacher_weight = 0.0
+teacher_model = "depth-anything/Depth-Anything-V2-Small-hf"
+bin_weight = 0.0
+
+[model]
+tau_on = 0.05
+tau_off = 0.025
+keyframe_every = 30
+decoder = "dpt"
+bins = 64
+scan_directions = 4
+local_conv = true
+spatial_cache = true
+temporal_cache = true
+
+[meta]
+command = "scripts/train.py --config configs/main_v8.toml --resume work_dirs/main_v8/latest.pt --resume-partial --steps 8000 --seed 0 --bin-weight 0.0 --work-dir work_dirs/t0-seed0-bin0.0"
+git_commit = "396d5514a1d266ad5d5c61bcbd82818c3d284565"
+torch = "2.8.0+cu128"
+cuda = "12.8"
+gpu = "NVIDIA GeForce RTX 4090"

@@ -1,0 +1,45 @@
+
+################ T0-1 baseline da2 — vkitti2 ################
+2026-07-30T18:38:44+00:00
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 6923.36it/s]
+  100/100 clips...
+DA-v2-Small (24.8M) [vkitti2] on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1220  RMSE=63.7223  delta1=0.8992  t-delta=7.9063  OPW=0.0431  TCE=0.0359
+  clipavg: AbsRel=0.1223 (std 0.0609)  delta1=0.8981
+  per-clip values -> work_dirs/baselines/da-v2-small-24-8m-vkitti2.json
+
+################ T0-1 baseline da2 — tartanair2 ################
+2026-07-30T18:39:25+00:00
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 21047.05it/s]
+  100/100 clips...
+DA-v2-Small (24.8M) [tartanair2] on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.9145  RMSE=62.9119  delta1=0.4195  t-delta=6.5050  OPW=0.2380  TCE=0.2911
+  clipavg: AbsRel=0.8818 (std 2.5518)  delta1=0.4182
+  per-clip values -> work_dirs/baselines/da-v2-small-24-8m-tartanair2.json
+
+################ T0-1 baseline da2 — pointodyssey ################
+2026-07-30T18:40:11+00:00
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 17599.42it/s]
+  100/100 clips...
+DA-v2-Small (24.8M) [pointodyssey] on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1088  RMSE=4.5424  delta1=0.8717  t-delta=0.6259  OPW=0.0500  TCE=0.0525
+  clipavg: AbsRel=0.1063 (std 0.0488)  delta1=0.8769
+  per-clip values -> work_dirs/baselines/da-v2-small-24-8m-pointodyssey.json
+
+################ T0-1 baseline da2 — tum ################
+2026-07-30T18:40:51+00:00
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 20129.18it/s]
+DA-v2-Small (24.8M) [tum] on 89 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.3557  RMSE=24.3110  delta1=0.8828  t-delta=1.8697  OPW=0.1598  TCE=0.1679
+  clipavg: AbsRel=0.3463 (std 0.9496)  delta1=0.8828
+  per-clip values -> work_dirs/baselines/da-v2-small-24-8m-tum.json
+
+################ T0-1 baseline da2 — bonn ################
+2026-07-30T18:41:31+00:00
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 16934.64it/s]
+  100/100 clips...
+DA-v2-Small (24.8M) [bonn] on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0954  RMSE=0.3425  delta1=0.9271  t-delta=0.1142  OPW=0.0317  TCE=0.0350
+  clipavg: AbsRel=0.0961 (std 0.0434)  delta1=0.9260
+  per-clip values -> work_dirs/baselines/da-v2-small-24-8m-bonn.json
+DA2 DONE

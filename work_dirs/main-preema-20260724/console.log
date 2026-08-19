@@ -1,0 +1,70 @@
+2026-07-24 06:37:15,184 step 6100  loss 0.4318  skip 0.06
+2026-07-24 06:37:49,906 step 6150  loss 1.9992  skip 0.06
+2026-07-24 06:38:18,954 step 6200  loss 4.8057  skip 0.06
+2026-07-24 06:38:55,260 step 6250  loss 0.6322  skip 0.06
+2026-07-24 06:39:28,173 step 6300  loss 0.5825  skip 0.06
+2026-07-24 06:40:01,854 step 6350  loss 2.8730  skip 0.06
+2026-07-24 06:40:35,183 step 6400  loss 0.5527  skip 0.06
+2026-07-24 06:41:07,526 step 6450  loss 0.8131  skip 0.06
+2026-07-24 06:41:41,186 step 6500  loss 1.3906  skip 0.07
+2026-07-24 06:42:14,756 step 6550  loss 2.2487  skip 0.07
+2026-07-24 06:42:52,398 step 6600  loss 0.8037  skip 0.07
+2026-07-24 06:43:24,440 step 6650  loss 4.6154  skip 0.07
+2026-07-24 06:43:54,273 step 6700  loss 0.3284  skip 0.07
+2026-07-24 06:44:27,807 step 6750  loss 0.3754  skip 0.07
+2026-07-24 06:45:04,599 step 6800  loss 0.4202  skip 0.07
+2026-07-24 06:45:36,301 step 6850  loss 0.4600  skip 0.07
+2026-07-24 06:46:11,723 step 6900  loss 0.7374  skip 0.07
+2026-07-24 06:46:45,886 step 6950  loss 1.2467  skip 0.07
+2026-07-24 06:47:19,358 step 7000  loss 0.8944  skip 0.07
+2026-07-24 06:47:52,429 step 7050  loss 0.2926  skip 0.07
+2026-07-24 06:48:26,828 step 7100  loss 0.9662  skip 0.07
+2026-07-24 06:48:57,673 step 7150  loss 1.0320  skip 0.07
+2026-07-24 06:49:31,640 step 7200  loss 0.4783  skip 0.07
+2026-07-24 06:50:04,082 step 7250  loss 3.1529  skip 0.07
+2026-07-24 06:50:36,645 step 7300  loss 1.4687  skip 0.07
+2026-07-24 06:51:08,370 step 7350  loss 1.6078  skip 0.07
+2026-07-24 06:51:44,298 step 7400  loss 0.9246  skip 0.07
+2026-07-24 06:52:12,879 step 7450  loss 2.1054  skip 0.07
+2026-07-24 06:52:44,161 step 7500  loss 0.4524  skip 0.07
+2026-07-24 06:53:16,813 step 7550  loss 2.9255  skip 0.08
+2026-07-24 06:53:49,509 step 7600  loss 0.3009  skip 0.08
+2026-07-24 06:54:19,760 step 7650  loss 0.7009  skip 0.08
+2026-07-24 06:54:51,396 step 7700  loss 1.7921  skip 0.08
+^CTraceback (most recent call last):
+  File "/workspace/SOKKANAEM/scripts/train.py", line 147, in <module>
+    main()
+  File "/workspace/SOKKANAEM/scripts/train.py", line 110, in main
+    for clip, gt, valid in loader:
+  File "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 734, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 1492, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 1454, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 1285, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/multiprocessing/queues.py", line 113, in get
+    if not self._poll(timeout):
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/multiprocessing/connection.py", line 257, in poll
+    return self._poll(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/multiprocessing/connection.py", line 440, in _poll
+    r = wait([self], timeout)
+        ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/multiprocessing/connection.py", line 948, in wait
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+
+CondaError: KeyboardInterrupt
+
+[?2004h[01;32mhyunsu@plass[00m:[01;34m/workspace/SOKKANAEM[00m$ 

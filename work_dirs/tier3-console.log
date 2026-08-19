@@ -1,0 +1,46 @@
+################ T3-13 zero-shot: KITTI raw, no GMC ################
+2026-08-18T05:37:25+00:00
+ckpt=work_dirs/v9-60k/latest.pt data=['kitti:/home/hyunsu/dataset_ssd/kitti_zs'] clips=109 size=256 max=100/source spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     kitti           92.8  0.2894  11.0290  0.4955  2.0716   0.1045  0.0995  0.5588  2.630  0.1190  0.2974 (0.082)  100
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_zs-kitti.json
+
+################ T3-14 same drives, GMC on ################
+2026-08-18T05:37:39+00:00
+ckpt=work_dirs/v9-60k/latest.pt data=['kitti:/home/hyunsu/dataset_ssd/kitti_zs'] clips=109 size=256 max=100/source spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.1      kitti          100.0  0.2884  11.1763  0.4991  2.0635   0.1032  0.0969  0.5566  2.607  0.1160  0.2968 (0.080)  100
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_zs-kitti-gmc.json
+
+################ T3-14b tau sweep with GMC ################
+2026-08-18T05:37:54+00:00
+ckpt=work_dirs/v9-60k/latest.pt data=['kitti:/home/hyunsu/dataset_ssd/kitti_zs'] clips=109 size=256 max=30/source spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0        kitti          100.0  0.3083  12.1484  0.5142  3.0852   0.1347  0.1189  0.6912  4.113  0.1487  0.3177 (0.093)  30
+0.05     kitti          100.0  0.3083  12.1484  0.5142  3.0852   0.1347  0.1189  0.6912  4.113  0.1487  0.3177 (0.093)  30
+0.1      kitti          100.0  0.3083  12.1484  0.5142  3.0852   0.1347  0.1189  0.6912  4.113  0.1487  0.3177 (0.093)  30
+0.2      kitti           87.1  0.3065  12.1649  0.5170  3.0533   0.1321  0.1173  0.6930  4.137  0.1380  0.3163 (0.095)  30
+0.4      kitti           43.8  0.3084  11.3549  0.5342  1.9319   0.1111  0.0992  0.6968  4.198  0.0839  0.3173 (0.107)  30
+0.8      kitti           14.1  0.3178  12.9665  0.5341  1.2314   0.1034  0.0922  0.6992  4.331  0.0664  0.3239 (0.122)  30
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_delta.json
+
+################ in-domain reference: vkitti2 holdout ################
+2026-08-18T05:38:20+00:00
+ckpt=work_dirs/v9-60k/latest.pt data=['vkitti2:/home/hyunsu/dataset_ssd/vkitti2'] clips=660 size=256 max=100/source spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     vkitti2         25.8  0.3619  33.8931  0.3943  0.3115   0.0160  0.0243  0.3316  0.760  0.0325  0.3601 (0.206)  100
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_zs-vkitti-ref.json
+TIER 3 DONE
+2026-08-18T05:38:33+00:00

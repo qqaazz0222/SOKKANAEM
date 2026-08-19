@@ -1,0 +1,79 @@
+# v8 — precision upgrades imported from the Mamba-depth literature, all of
+# them placed so the sparsity claim survives. v7 recipe (real+synthetic mix,
+# PROGRESS 2026-07-27) plus four changes:
+#
+# 1. scan_directions = 4 — Vim/VMamba SS2D cross-scan. A raster flatten puts
+#    vertically adjacent patches gw=16 steps apart in the sequence, so the
+#    spatial SSM decays them apart and horizontal depth boundaries smear.
+#    The extra pair scans column-major order. Cost: 2x the spatial scan —
+#    and the spatial scan is exactly the path that shrinks with active% under
+#    spatial_cache, so the change-proportional-compute story is unharmed
+#    (it is the dense decoder that broke it, REPORT.md §4.11).
+# 2. local_conv = true — CNN half of a CNN-Mamba hybrid: depthwise 3x3 x2 on
+#    the token grid, parallel to the scan. SSMs get global context cheaply
+#    but are weak on local texture/edges. Dense, but 2*dim*9 MAC/token is
+#    ~0.6% of one scan, and it stays *exact* under sparsity: its input is
+#    the temporal block's dense readout, only the write is mask-gated.
+# 3. decoder = "dpt" — multi-scale fusion with RGB stem skips (nothing else
+#    in the network ever sees detail finer than a 16px patch).
+# 4. bins = 64 — AdaBins-style classification-regression head: softmax over
+#    64 learned log-depth bin centres, depth = its expectation. Scalar
+#    regression averages across occlusion boundaries; a distribution can be
+#    bimodal there and still resolve to one sharp value. Bins are global and
+#    learned, so inference cost is 16*64 vs 16*1 in the last 3x3 at 1/2 res.
+#
+# spatial_cache = true (v6) is kept ON so the 4-way scan trains in the sparse
+# regime it will be deployed in. Two further additions, both outside the list
+# above:
+#
+# 5. temporal_cache = true — Δ-gating makes a static token's *state* update
+#    free, but its readout (in_proj/out_proj/C) was still paid densely: 58.5%
+#    of an active token, and the single largest remaining gap to
+#    "compute proportional to change rate". A static patch's readout inputs
+#    move by less than tau by definition and its state is bit-identical, so
+#    its block output is reused. Trained on, like the spatial cache.
+#    Measured accounting at 256px (scripts/flops.py): active 16.6% costs 37.9%
+#    of full compute (v7 architecture: 78.8%), active 0% costs 25.5% (96.4%).
+# 6. --teacher-weight 0.5 — output-level distillation from frozen DA v2 Small,
+#    affine-invariant so it teaches geometry without touching metric scale.
+#    Training-only, zero inference cost. This targets the diagnosed wall
+#    (REPORT §4.17: generalization, not capacity) with the same trick DA v2
+#    itself used, and it supervises pixels where the Kinect GT has holes.
+#    Costs teacher forward time per step; drop it if throughput matters more.
+#
+# Init from v7's EMA weights: the 2 extra scan directions, the depthwise
+# convs and the bin head are new parameters, so load non-strict:
+#   python scripts/train.py --config configs/main_v8.toml --resume work_dirs/main_v7/latest.pt --resume-partial
+data = [
+    "tum:/home/hyunsu/dataset_ssd/tum_static",
+    "bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset",
+    "vkitti2:/home/hyunsu/dataset_ssd/vkitti2",
+    "tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2",
+    "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey",
+]
+holdout = [
+    "walking_static", "rgbd_bonn_crowd2", "rgbd_bonn_person_tracking2",
+    "rgbd_bonn_static_close_far",
+    "Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/",
+]
+size = 256
+clip_len = 4
+batch = 4
+lr = 3e-4
+steps = 60000
+warmup = 1000
+max_skip = 0.5
+normal_weight = 0.05
+msgrad_weight = 0.5
+teacher_weight = 0.5
+
+[model]
+tau_on = 0.05
+tau_off = 0.025
+keyframe_every = 30
+decoder = "dpt"
+bins = 64
+scan_directions = 4
+local_conv = true
+spatial_cache = true
+temporal_cache = true

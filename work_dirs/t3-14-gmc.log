@@ -1,0 +1,107 @@
+
+======== 2011_09_26_drive_0002_sync ========
+-- pixel gating tau_on=0.02
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- pixel gating tau_on=0.05
+
+avg active ratio 61.1%  ->  temporal-backbone compute ~61.1% of full
+-- pixel gating tau_on=0.1
+
+avg active ratio 16.4%  ->  temporal-backbone compute ~16.4% of full
+-- pixel gating tau_on=0.2
+
+avg active ratio 5.1%  ->  temporal-backbone compute ~5.1% of full
+-- GMC + feature gating tau_on=0.05
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.1
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.2
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.4
+
+avg active ratio 72.9%  ->  temporal-backbone compute ~72.9% of full
+
+======== 2011_09_26_drive_0005_sync ========
+-- pixel gating tau_on=0.02
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- pixel gating tau_on=0.05
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- pixel gating tau_on=0.1
+
+avg active ratio 69.9%  ->  temporal-backbone compute ~69.9% of full
+-- pixel gating tau_on=0.2
+
+avg active ratio 11.6%  ->  temporal-backbone compute ~11.6% of full
+-- GMC + feature gating tau_on=0.05
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.1
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.2
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.4
+
+avg active ratio 57.0%  ->  temporal-backbone compute ~57.0% of full
+
+======== 2011_09_26_drive_0013_sync ========
+-- pixel gating tau_on=0.02
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- pixel gating tau_on=0.05
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- pixel gating tau_on=0.1
+
+avg active ratio 82.0%  ->  temporal-backbone compute ~82.0% of full
+-- pixel gating tau_on=0.2
+
+avg active ratio 16.1%  ->  temporal-backbone compute ~16.1% of full
+-- GMC + feature gating tau_on=0.05
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.1
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.2
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.4
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+
+======== 2011_09_26_drive_0020_sync ========
+-- pixel gating tau_on=0.02
+
+avg active ratio 87.5%  ->  temporal-backbone compute ~87.5% of full
+-- pixel gating tau_on=0.05
+
+avg active ratio 64.3%  ->  temporal-backbone compute ~64.3% of full
+-- pixel gating tau_on=0.1
+
+avg active ratio 20.8%  ->  temporal-backbone compute ~20.8% of full
+-- pixel gating tau_on=0.2
+
+avg active ratio 6.4%  ->  temporal-backbone compute ~6.4% of full
+-- GMC + feature gating tau_on=0.05
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.1
+
+avg active ratio 100.0%  ->  temporal-backbone compute ~100.0% of full
+-- GMC + feature gating tau_on=0.2
+
+avg active ratio 69.7%  ->  temporal-backbone compute ~69.7% of full
+-- GMC + feature gating tau_on=0.4
+
+avg active ratio 23.3%  ->  temporal-backbone compute ~23.3% of full
+
+T3-14 DONE
+2026-08-18T02:01:34+00:00

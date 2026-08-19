@@ -1,0 +1,13 @@
+ckpt=work_dirs/v9-60k/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset', 'vkitti2:/home/hyunsu/dataset_ssd/vkitti2', 'tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2', 'pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey'] clips=9417 size=256 max=100/source spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.7  0.1299   0.8114  0.8201  0.0699   0.0168  0.0280  0.1530  1.058  0.0104  0.1274 (0.096)  89
+0.05     bonn            44.7  0.1344   0.4641  0.8334  0.0731   0.0290  0.0339  0.1907  1.001  0.0306  0.1355 (0.079)  100
+0.05     vkitti2         25.8  0.2983  36.0164  0.6410  0.3205   0.0163  0.0241  0.3316  0.760  0.0325  0.2978 (0.165)  100
+0.05     tartanair2      92.1  0.6298  34.1563  0.3460  4.2321   0.1862  0.2515  0.5251  1.632  0.1634  0.6445 (0.583)  100
+0.05     pointodyssey    30.8  0.3739  42.1719  0.6602  0.6062   0.0616  0.0826  0.3698  1.471  0.0420  0.3926 (0.790)  100
+0.05     MEAN(src)       42.6  0.3132  22.7240  0.6601  1.0604   0.0620  0.0840  0.3140  1.184  0.0558  0.3196 (0.343)  489
+0.05     POOLED(px)      43.1  0.3263  29.4647  0.6477  1.0827   0.0658  0.0888  0.3176  1.187  0.0568  0.3239 (0.348)  489
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_ss.json

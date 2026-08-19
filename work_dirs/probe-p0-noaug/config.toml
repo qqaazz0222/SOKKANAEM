@@ -1,0 +1,35 @@
+# Accuracy probe, shared base. 128px / 15k steps so an arm finishes in ~45min
+# and recipe changes can be compared before committing to a 10h+ run.
+# Same 5-source mix and holdout as v7 (configs/main_v7.toml).
+#
+# Diagnosis this probes (2026-07-27): v7 reaches AbsRel 0.192 / d1 0.707 on
+# clips it trained on but 0.356 / 0.519 on the holdout, while the 16x16 token
+# grid's own ceiling is 0.175 / 0.854 — so the model fits and the loss is not
+# the wall; generalization is. Arms: no-aug (this file, --no-augment),
+# +augmentation, +augmentation +DPT decoder +multi-scale gradient loss
+# (configs/probe_dpt.toml).
+data = [
+    "tum:/home/hyunsu/dataset_ssd/tum_static",
+    "bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset",
+    "vkitti2:/home/hyunsu/dataset_ssd/vkitti2",
+    "tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2",
+    "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey",
+]
+holdout = [
+    "walking_static", "rgbd_bonn_crowd2", "rgbd_bonn_person_tracking2",
+    "rgbd_bonn_static_close_far",
+    "Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/",
+]
+size = 128
+clip_len = 4
+batch = 8
+lr = 3e-4
+steps = 15000
+warmup = 500
+max_skip = 0.5
+normal_weight = 0.05
+
+[model]
+tau_on = 0.05
+tau_off = 0.025
+keyframe_every = 30

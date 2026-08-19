@@ -1,0 +1,10 @@
+ckpt=work_dirs/main/latest.pt data=['vkitti2:/archive/Dataset_SOKKANAEM/vkitti2', 'tartanair2:/archive/Dataset_SOKKANAEM/tartanair_v2', 'pointodyssey:/archive/Dataset_SOKKANAEM/pointodyssey'] clips=8929 max=100
+tau_on   active%  AbsRel   RMSE    d1      t-delta
+--------------------------------------------------
+0         100.0  0.8031  48.6186  0.1152  0.0000
+0.005      29.0  0.8031  48.6186  0.1152  0.0000
+0.01       26.6  0.8031  48.6186  0.1152  0.0000
+0.02       23.0  0.8031  48.6186  0.1152  0.0000
+0.05       16.6  0.8031  48.6186  0.1152  0.0000
+0.1        11.2  0.8031  48.6186  0.1152  0.0000
+

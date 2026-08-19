@@ -1,0 +1,47 @@
+# v7 — real-sensor fine-tune. Fixes the transfer failure found on 2026-07-26:
+# zero-shot on real indoor fixed-camera data, v3 LOSES to a constant-depth
+# predictor on both real datasets (REPORT.md §4.12):
+#   TUM fr3 static (174 clips): AbsRel 0.396 vs const 0.249, d1 0.375 vs 0.619
+#   Bonn Dynamic (1000 clips):  AbsRel 0.572 vs const 0.237, d1 0.421 vs 0.685
+# Synthetic outdoor training (vkitti2/tartanair, depth to ~80m) does not carry
+# to real Kinect indoor depth (1.5-9m) — the primary claimed deployment domain
+# (IDEA.md §1.2/§4.1, whose TIMo/VIRAT stage-1/2 was never run).
+#
+# Real + synthetic MIXED, not real-only: build_mixed's sampler equalizes the
+# per-dataset draw probability, so the two real sources get ~2/5 of samples
+# despite being ~30k frames against ~200k synthetic clips. Mixing keeps the
+# synthetic holdout table (§4.15) comparable instead of trading one domain
+# for the other.
+#
+# Init: work_dirs/v7-init.pt — v3's EMA weights saved as a bare state_dict so
+# train.py's legacy --resume path restarts the schedule at step 0.
+# Run:
+#   python scripts/train.py --config configs/main_v7.toml --resume work_dirs/v7-init.pt
+data = [
+    "tum:/archive/Dataset_SOKKANAEM/tum_static",
+    "bonn:/archive/Dataset_SOKKANAEM/bonn/rgbd_bonn_dataset",
+    "vkitti2:/archive/Dataset_SOKKANAEM/vkitti2",
+    "tartanair2:/archive/Dataset_SOKKANAEM/tartanair_v2",
+    "pointodyssey:/archive/Dataset_SOKKANAEM/pointodyssey",
+]
+# unseen real sequences held out for eval, on top of the synthetic holdout so
+# the §4.15 table stays valid. rgbd_bonn_static_close_far is a static-camera
+# sequence — the closest thing here to the CCTV deployment target.
+holdout = [
+    "walking_static", "rgbd_bonn_crowd2", "rgbd_bonn_person_tracking2",
+    "rgbd_bonn_static_close_far",
+    "Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/",
+]
+size = 256
+clip_len = 4
+batch = 4
+lr = 1e-4          # fine-tune, not from scratch
+steps = 15000
+warmup = 500
+max_skip = 0.5
+normal_weight = 0.05
+
+[model]
+tau_on = 0.05
+tau_off = 0.025
+keyframe_every = 30

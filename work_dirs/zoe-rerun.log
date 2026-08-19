@@ -1,0 +1,16 @@
+
+---- ZoeDepth-NK / tum ----
+  pooled : AbsRel=0.1240  RMSE=1.2864  delta1=0.8391  t-delta=0.1089  OPW=0.0237  TCE=0.0321
+
+---- ZoeDepth-NK / bonn ----
+  pooled : AbsRel=0.0754  RMSE=0.2207  delta1=0.9429  t-delta=0.0938  OPW=0.0244  TCE=0.0261
+
+---- ZoeDepth-NK / vkitti2 ----
+  pooled : AbsRel=0.2827  RMSE=37.3039  delta1=0.5244  t-delta=1.7350  OPW=0.0572  TCE=0.0555
+
+---- ZoeDepth-NK / tartanair2 ----
+  pooled : AbsRel=0.5595  RMSE=4.1964  delta1=0.3066  t-delta=0.7279  OPW=0.1956  TCE=0.2490
+
+---- ZoeDepth-NK / pointodyssey ----
+  pooled : AbsRel=0.2389  RMSE=5.3360  delta1=0.6752  t-delta=0.3937  OPW=0.0677  TCE=0.0850
+ZOE DONE

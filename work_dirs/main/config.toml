@@ -1,0 +1,48 @@
+# Main training — Video Depth Anything (CVPR 2025) style synthetic mix:
+# TartanAir V2 (large camera motion, diverse envs) + PointOdyssey (follow-cam,
+# dynamic characters) + vkitti2 (driving, already PoC'd). Dense GT throughout
+# — required for the skip-boundary supervision Δ-gating depends on.
+# Recipe from PoC ablations (IDEA.md §4.5): iid random mask @ max_skip 0.5
+# beat both no-mask-training and detector-driven fine-tune; keyframe_every=30
+# showed zero drift over 270 streamed frames; 256px trains OK with the
+# gradient-checkpointed spatial scan (smoke-tested).
+data = [
+    "vkitti2:/archive/Dataset_SOKKANAEM/vkitti2",
+    "tartanair2:/archive/Dataset_SOKKANAEM/tartanair_v2",
+    "pointodyssey:/archive/Dataset_SOKKANAEM/pointodyssey",
+]
+# held out entirely from training: one vkitti2 scene, one full tartanair env
+# (unseen-environment generalization), pointodyssey's own val/test splits
+holdout = ["Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"]
+size = 256
+size_schedule = "0:128,20000:256"  # progressive curriculum: cheap 128px warmup
+clip_len = 4
+batch = 4          # 256px + grad-checkpointed spatial scan; smoke-tested on this GPU
+lr = 3e-4
+steps = 100000      # ~14-15h on RTX 4090 at this size/batch
+max_skip = 0.5      # 3-arm ablation winner — see IDEA.md §4.5
+# auto_loss_weight DISABLED — the first 100k-step run of this config used it
+# and collapsed to a constant-depth output (std=0 across every pixel/frame).
+# temporal_loss's global optimum is trivially "predict a constant" (exact 0
+# loss); Kendall pushed its weight to the exp(8)~=2981x clamp ceiling vs
+# ~0.5-0.6x on si_log/grad, so that's the only thing the model optimized.
+# Reverting to the fixed weights every prior successful run (IDEA.md §4.5
+# ablations) used: si_log + 0.5*grad + 0.1*temporal + normal_weight*normal.
+normal_weight = 0.05
+# v4 (DINOv2 feature distillation, distill_weight=0.1) landed: delta1 0.384
+# vs v3's 0.397 — no accuracy gain (REPORT.md §4.9). distill_weight left at
+# 0 (default/off) here.
+#
+# v5: model capacity instead. dim 192->384 (depth/d_state unchanged — a
+# speed sweep found depth and d_state cost far more per-unit than dim: e.g.
+# dim256/depth6/d_state32 (6.95M) ran 1577ms/step vs dim384/depth4/d_state16
+# (9.92M, MORE params) at 693ms/step). 9.92M is still below every external
+# baseline (DA v2 24.8M, VDA 28.4M, DA3 120M). ~2.4x slower at 256px, but
+# the 128px curriculum phase is actually faster than baseline (more tokens
+# at depth4 = more parallel work per kernel launch) — est. ~16h total
+# (128px steps ~51min + 256px steps ~15.4h) vs v3/v4's ~8h.
+[model]
+dim = 384
+tau_on = 0.05
+tau_off = 0.025
+keyframe_every = 30   # 270-frame streaming test: zero drift at this period
