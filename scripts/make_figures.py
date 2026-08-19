@@ -431,9 +431,9 @@ def fig_latency():
 FIGURES = {
     "fig3-tradeoff.svg": fig_tradeoff,
     "fig4-comparison.svg": fig_comparison,
-    "fig5-drift.svg": fig_drift,
-    "figA1-gating.svg": fig_gating,
-    "figA2-latency.svg": fig_latency,
+    "fig7-drift.svg": fig_drift,
+    "fig5-gating.svg": fig_gating,
+    "fig6-latency.svg": fig_latency,
 }
 
 
