@@ -121,6 +121,11 @@ def main():
                     help="§4.4 gating-position ablation: Δ-gating vs token drop")
     ap.add_argument("--scores-tag", default=None,
                     help="name for the per-clip JSON dump (default: gate mode)")
+    ap.add_argument("--keyframe-every", type=int, default=None,
+                    help="override the checkpoint's keyframe refresh period. "
+                         "REPORT 4.30 shows accuracy sawtooths between "
+                         "keyframes, so this is an accuracy/compute knob, not "
+                         "just a safety valve")
     ap.add_argument("--align", default="median",
                     choices=["median", "scaleshift"],
                     help="per-clip alignment. median (default) is 1-DOF and "
@@ -144,6 +149,8 @@ def main():
                                  ("temporal_cache", args.temporal_cache))
                if v is not None})
     kw["gate_mode"] = args.gate_mode
+    if args.keyframe_every is not None:
+        kw["keyframe_every"] = args.keyframe_every
     # trained [model] kwargs come from config.toml next to the ckpt
     model = from_checkpoint(args.ckpt, dev, **kw).eval()
 
