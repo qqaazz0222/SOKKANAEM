@@ -198,9 +198,9 @@ On real footage, cutting computation by a factor of thirteen — 96.2% to 7.1% a
 
 The synthetic sweep does not reach low activity because TartanAir stays between 80% and 100% active regardless of threshold. This is the same phenomenon quantified in Section 5.5: how much a stream can skip is a property of the capture, not only of the method.
 
-![Qualitative results](figures/qualitative/01_tum_0_active3pct.png)
+![Activity–accuracy trade-off](figures/fig3-tradeoff.svg)
 
-**Figure 3. Qualitative result on held-out real indoor footage** (RGB, prediction, ground truth; 3.5% of patches active on this frame). The prediction is smoother than the ground truth, which is what Section 6.4 quantifies: the model sits well above its own patch-grid ceiling, so the loss of detail is a capacity and training limitation rather than an output-resolution one.
+**Figure 3. Activity against accuracy on both domains.** Accuracy is nearly flat until roughly 30% activity and then bends. The constant-depth control lies far above both panels and is marked off scale, so the vertical axis can resolve the curve it exists to show.
 
 ### 5.2 Real indoor results `[CHECKPOINT-DEPENDENT]`
 
@@ -222,6 +222,10 @@ Two cautions apply. The synthetic \(\delta_1\) difference between these checkpoi
 Table 3 compares against current baseline checkpoints under one shared protocol on both domains: 100 clips per source, identical holdout sequences, identical metric implementation, per-clip median alignment.
 
 **Table 3. The commonly cited comparison group, all measured under one protocol: same holdout clips, 256px input, same metric implementation. Relative-depth models receive the 2-DOF disparity-space scale+shift fit they are designed for; metric models and ours receive 1-DOF per-clip median scaling. Our model is reported under both so the alignment rule does not carry the result. "med" is the per-clip median AbsRel, which is robust to the alignment blow-ups discussed below.**
+
+![Comparison group](figures/fig4-comparison.svg)
+
+**Figure 4. Accuracy against stability across the comparison group**, marker area scaling with parameter count. Down and to the left is better on both axes. Our model is the smallest marker in each panel, lowest on the stability axis and rightmost on accuracy.
 
 *Real indoor holdout (TUM, Bonn):*
 
@@ -286,6 +290,10 @@ Accuracy does not collapse; it is nominally better on real footage. That orderin
 
 **Moving-camera gating.** Pixel gating and GMC feature gating operate on different score scales, so comparing them at equal thresholds is meaningless — at their default thresholds the two are indistinguishable in accuracy while GMC uses more computation. The fair comparison is the activity-accuracy curve.
 
+![Gating strategies](figures/figA1-gating.svg)
+
+**Figure 5. Pixel gating against GMC feature gating as curves.** The two score change on different scales, so only the curves are comparable, not points at equal thresholds.
+
 **Table 6. Same 30 clips, both gating strategies swept.**
 
 | Gating | Active (%) | AbsRel | \(\delta_1\) | t-delta | TCE |
@@ -308,6 +316,10 @@ Two results in this section point in opposite directions, and both matter.
 **Analytical compute.** The current architecture costs 1.644 GMAC/frame at full activity. With both caches, 15.4% activity costs 0.608 GMAC — 37.0% of full. The decoder is 23.1% of the dense floor and patch embedding 2.3%, so the saving is real and comes from the backbone, where sparsity applies.
 
 **Measured latency.** The scan implementation, not the gather, dominated wall-clock. Profiling a sparse frame at 22% activity attributes 71% of it to the spatial scan and only 6% to gathering and scattering active tokens. The reference scan is chunked and materialises a \((B, C, C, P, S)\) pairwise-decay tensor per chunk: at \(L=64\), \(P=384\), \(S=16\) it moves roughly 25 MB to perform 0.4 MMAC. We therefore replaced it with a fused Triton (Tillet et al., 2019) kernel that keeps the recurrence in registers, used at inference while training retains the differentiable chunked path. \(\Delta\)-gating remains bit-exact through the kernel — \(\widetilde{\Delta}=0\) gives \(\exp(0)=1\) and a zero input term — and every evaluation metric is unchanged to four decimal places.
+
+![Latency before and after the fused kernel](figures/figA2-latency.svg)
+
+**Figure 6. Per-frame latency before and after the fused scan kernel**, at 22% activity. Every path became faster, and the ordering inverted: the dense path is now the fastest.
 
 Per-frame latency on one RTX 4090 at 256 pixels, single stream, fp32, 22% activity:
 
@@ -332,6 +344,10 @@ We report this plainly because it bounds the contribution. Exact state preservat
 Every number above, and every number we have previously reported, is an eight-frame clip mean. A streaming model is supposed to accumulate evidence across frames, so depth at frame 7 should be better than at frame 0 — that is the reason to carry state at all. We had never measured it.
 
 Scoring by frame index inside a 32-frame clip, with each frame aligned independently so the curve is not an artefact of one clip-level fit:
+
+![Streaming drift](figures/fig5-drift.svg)
+
+**Figure 7. Accuracy decays between keyframes.** Panel (a) scores by frame index inside a 32-frame clip; the recovery at frame 31 is the keyframe firing at frame 30. Panel (b) sweeps the refresh period, showing that accuracy and stability trade against each other.
 
 **Table 7. AbsRel by frame index. Keyframe refresh is every 30 frames.**
 

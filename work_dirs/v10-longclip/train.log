@@ -120,3 +120,7 @@
 2026-08-19 08:37:19,216 step 5800  loss 2.4261  skip 0.23  lr 2.71e-04  depth_std 6.2280
 2026-08-19 08:39:58,593 step 5850  loss 1.4572  skip 0.23  lr 2.71e-04  depth_std 6.4013
 2026-08-19 08:42:39,496 step 5900  loss 4.6216  skip 0.24  lr 2.70e-04  depth_std 9.2886
+2026-08-19 08:45:19,342 step 5950  loss 1.0501  skip 0.24  lr 2.70e-04  depth_std 0.8845
+2026-08-19 08:47:59,290 step 6000  loss 1.3750  skip 0.24  lr 2.69e-04  depth_std 7.2058
+2026-08-19 08:50:39,194 step 6050  loss 1.0956  skip 0.24  lr 2.68e-04  depth_std 1.0054
+2026-08-19 08:53:19,046 step 6100  loss 2.0007  skip 0.24  lr 2.68e-04  depth_std 19.7928

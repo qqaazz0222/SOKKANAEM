@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400" font-family="Arial, Helvetica, sans-serif">
+<rect width="900" height="400" fill="#ffffff"/>
+<line x1="78" y1="274.0" x2="428" y2="274.0" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="78" y1="216.5" x2="428" y2="216.5" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="78" y1="159.0" x2="428" y2="159.0" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="78" y1="101.5" x2="428" y2="101.5" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="78" y1="44.0" x2="428" y2="44.0" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="78" y1="274" x2="428" y2="274" stroke="#333333" stroke-width="1"/>
+<line x1="78" y1="44" x2="78" y2="274" stroke="#333333" stroke-width="1"/>
+<line x1="78.0" y1="274" x2="78.0" y2="278" stroke="#333333" stroke-width="1"/>
+<text x="78.0" y="291.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">0</text>
+<line x1="161.3" y1="274" x2="161.3" y2="278" stroke="#333333" stroke-width="1"/>
+<text x="161.3" y="291.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">25</text>
+<line x1="244.7" y1="274" x2="244.7" y2="278" stroke="#333333" stroke-width="1"/>
+<text x="244.7" y="291.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">50</text>
+<line x1="328.0" y1="274" x2="328.0" y2="278" stroke="#333333" stroke-width="1"/>
+<text x="328.0" y="291.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">75</text>
+<line x1="411.3" y1="274" x2="411.3" y2="278" stroke="#333333" stroke-width="1"/>
+<text x="411.3" y="291.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">100</text>
+<line x1="74" y1="274.0" x2="78" y2="274.0" stroke="#333333" stroke-width="1"/>
+<text x="70.0" y="278.0" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.30</text>
+<line x1="74" y1="216.5" x2="78" y2="216.5" stroke="#333333" stroke-width="1"/>
+<text x="70.0" y="220.5" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.31</text>
+<line x1="74" y1="159.0" x2="78" y2="159.0" stroke="#333333" stroke-width="1"/>
+<text x="70.0" y="163.0" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.32</text>
+<line x1="74" y1="101.5" x2="78" y2="101.5" stroke="#333333" stroke-width="1"/>
+<text x="70.0" y="105.5" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.33</text>
+<line x1="74" y1="44.0" x2="78" y2="44.0" stroke="#333333" stroke-width="1"/>
+<text x="70.0" y="48.0" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.34</text>
+<text x="253.0" y="310.0" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="normal" font-style="normal">Active patches (%)</text>
+<text x="32.0" y="159.0" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="normal" font-style="normal" transform="rotate(-90 32 159.0)">AbsRel</text>
+<text x="78.0" y="32.0" font-size="12.5" fill="#1a1a1a" text-anchor="start" font-weight="bold" font-style="normal">(a) Accuracy</text>
+<polyline points="411.3,226.3 387.0,220.5 248.3,68.7" fill="none" stroke="#8c8c8c" stroke-width="1.8" stroke-dasharray="5 4"/>
+<circle cx="411.3" cy="226.3" r="3.2" fill="#8c8c8c" stroke="#8c8c8c" stroke-width="1.4"/>
+<circle cx="387.0" cy="220.5" r="3.2" fill="#8c8c8c" stroke="#8c8c8c" stroke-width="1.4"/>
+<circle cx="248.3" cy="68.7" r="3.2" fill="#8c8c8c" stroke="#8c8c8c" stroke-width="1.4"/>
+<polyline points="368.3,236.6 224.0,225.7 125.0,171.6" fill="none" stroke="#1f4e79" stroke-width="1.8"/>
+<circle cx="368.3" cy="236.6" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="224.0" cy="225.7" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="125.0" cy="171.6" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<line x1="538" y1="274.0" x2="888" y2="274.0" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="538" y1="197.3" x2="888" y2="197.3" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="538" y1="120.7" x2="888" y2="120.7" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="538" y1="44.0" x2="888" y2="44.0" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="538" y1="274" x2="888" y2="274" stroke="#333333" stroke-width="1"/>
+<line x1="538" y1="44" x2="538" y2="274" stroke="#333333" stroke-width="1"/>
+<line x1="538.0" y1="274" x2="538.0" y2="278" stroke="#333333" stroke-width="1"/>
+<text x="538.0" y="291.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">0</text>
+<line x1="621.3" y1="274" x2="621.3" y2="278" stroke="#333333" stroke-width="1"/>
+<text x="621.3" y="291.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">25</text>
+<line x1="704.7" y1="274" x2="704.7" y2="278" stroke="#333333" stroke-width="1"/>
+<text x="704.7" y="291.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">50</text>
+<line x1="788.0" y1="274" x2="788.0" y2="278" stroke="#333333" stroke-width="1"/>
+<text x="788.0" y="291.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">75</text>
+<line x1="871.3" y1="274" x2="871.3" y2="278" stroke="#333333" stroke-width="1"/>
+<text x="871.3" y="291.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">100</text>
+<line x1="534" y1="274.0" x2="538" y2="274.0" stroke="#333333" stroke-width="1"/>
+<text x="530.0" y="278.0" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.46</text>
+<line x1="534" y1="197.3" x2="538" y2="197.3" stroke="#333333" stroke-width="1"/>
+<text x="530.0" y="201.3" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.49</text>
+<line x1="534" y1="120.7" x2="538" y2="120.7" stroke="#333333" stroke-width="1"/>
+<text x="530.0" y="124.7" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.52</text>
+<line x1="534" y1="44.0" x2="538" y2="44.0" stroke="#333333" stroke-width="1"/>
+<text x="530.0" y="48.0" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.55</text>
+<text x="713.0" y="310.0" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="normal" font-style="normal">Active patches (%)</text>
+<text x="492.0" y="159.0" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="normal" font-style="normal" transform="rotate(-90 492 159.0)">delta-1</text>
+<text x="538.0" y="32.0" font-size="12.5" fill="#1a1a1a" text-anchor="start" font-weight="bold" font-style="normal">(b) Ratio accuracy</text>
+<polyline points="871.3,135.5 847.0,149.0 708.3,235.9" fill="none" stroke="#8c8c8c" stroke-width="1.8" stroke-dasharray="5 4"/>
+<circle cx="871.3" cy="135.5" r="3.2" fill="#8c8c8c" stroke="#8c8c8c" stroke-width="1.4"/>
+<circle cx="847.0" cy="149.0" r="3.2" fill="#8c8c8c" stroke="#8c8c8c" stroke-width="1.4"/>
+<circle cx="708.3" cy="235.9" r="3.2" fill="#8c8c8c" stroke="#8c8c8c" stroke-width="1.4"/>
+<polyline points="828.3,128.3 684.0,84.4 585.0,84.6" fill="none" stroke="#1f4e79" stroke-width="1.8"/>
+<circle cx="828.3" cy="128.3" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="684.0" cy="84.4" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="585.0" cy="84.6" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<line x1="96" y1="62" x2="118" y2="62" stroke="#1f4e79" stroke-width="1.8"/>
+<circle cx="107" cy="62" r="3.2" fill="#1f4e79"/>
+<text x="124.0" y="66.0" font-size="11" fill="#1a1a1a" text-anchor="start" font-weight="normal" font-style="normal">GMC + feature gating</text>
+<line x1="96" y1="78" x2="118" y2="78" stroke="#8c8c8c" stroke-width="1.8" stroke-dasharray="5 4"/>
+<text x="124.0" y="82.0" font-size="11" fill="#1a1a1a" text-anchor="start" font-weight="normal" font-style="normal">Pixel gating</text>
+<text x="84.0" y="348.0" font-size="11" fill="#666666" text-anchor="start" font-weight="normal" font-style="normal">The two strategies score change on different scales, so only the curves are comparable, not points at equal thresholds. At matched</text>
+<text x="84.0" y="364.0" font-size="11" fill="#666666" text-anchor="start" font-weight="normal" font-style="normal">activity GMC is better on both axes, and it reaches 14% activity while still beating pixel gating at 51%.</text>
+</svg>
