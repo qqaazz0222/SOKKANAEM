@@ -54,7 +54,7 @@ State-space sequence models (Gu et al., 2022) with input-dependent selection (Gu
 
 ![Streaming pipeline](figures/fig1-pipeline.svg)
 
-**Figure 1. Streaming pipeline.** A change detector produces a patch activity mask, which reaches the backbone as the \(\Delta\)-gating signal. Two caches — spatial outputs and temporal hidden state — are where the MAC reduction comes from. The global-motion-compensation branch is used only for moving cameras. Frames above 40% activity take the dense path.
+**Figure 1. Streaming pipeline.** A change detector compares consecutive frames patch-wise and emits a binary activity mask, which reaches the backbone as the \(\Delta\)-gating signal. Static patches retain their hidden state exactly and their computation is skipped. Two caches — spatial outputs and temporal hidden state — are where the reduction in multiply–accumulate operations comes from, taking a frame from 1.644 to 0.608 GMAC at 15.4% activity. The global motion compensation branch is used only for moving cameras. Frames above 40% activity are routed through the dense path instead.
 
 For frames \(I_{t-1}\) and \(I_t\), the model:
 
@@ -92,7 +92,7 @@ We dilate active regions by one patch to protect object boundaries and force a f
 
 ![Delta-gating](figures/fig2-delta-gating.svg)
 
-**Figure 2. \(\Delta\)-gating.** The mask multiplies the discretization step, so a static patch takes the identity transition and its input term vanishes. Skipping is not compensated for; it is algebraically identical to preserving the state.
+**Figure 2. Exact \(\Delta\)-gating.** The activity mask multiplies the discretization step, \(\widetilde{\Delta} = M\Delta\). A changed patch takes the standard selective-SSM update. A static patch takes \(\bar A = I\) and \(\bar B = 0\), so its hidden state is copied rather than reconstructed: skipping the computation is not compensated for, it is algebraically identical to preserving the state. Early exit and token dropping instead substitute zero or an approximation, and that error accumulates across frames.
 
 For a continuous SSM with state matrix \(A\), input projection \(B\), and step \(\Delta_i\), zero-order-hold discretization gives
 
@@ -200,7 +200,7 @@ The synthetic sweep does not reach low activity because TartanAir stays between 
 
 ![Activity–accuracy trade-off](figures/fig3-tradeoff.svg)
 
-**Figure 3. Activity against accuracy on both domains.** Accuracy is nearly flat until roughly 30% activity and then bends. The constant-depth control lies far above both panels and is marked off scale, so the vertical axis can resolve the curve it exists to show.
+**Figure 3. Activity against accuracy** on the real indoor and synthetic holdouts, sweeping the detector threshold. Accuracy is nearly flat until roughly 30% activity and then bends. On real footage, cutting computation thirteenfold costs 13% relative AbsRel, and the default operating point (circled) costs 2.8%. The per-clip optimal constant-depth control lies far above both panels and is marked off scale, so the vertical axis can resolve the curve the panel exists to show.
 
 ### 5.2 Real indoor results `[CHECKPOINT-DEPENDENT]`
 
@@ -225,7 +225,7 @@ Table 3 compares against current baseline checkpoints under one shared protocol 
 
 ![Comparison group](figures/fig4-comparison.svg)
 
-**Figure 4. Accuracy against stability across the comparison group**, marker area scaling with parameter count. Down and to the left is better on both axes. Our model is the smallest marker in each panel, lowest on the stability axis and rightmost on accuracy.
+**Figure 4. Accuracy against temporal stability across the comparison group**, with marker area scaling as the logarithm of parameter count. Down and to the left is better on both axes. Our model is the smallest marker in each panel, lowest on the stability axis and rightmost on accuracy. The stability axis is logarithmic because t-delta spans two orders of magnitude across the group: the gap to the next best model is a factor of 1.35 on real footage and 4.2 on synthetic.
 
 *Real indoor holdout (TUM, Bonn):*
 
@@ -292,7 +292,7 @@ Accuracy does not collapse; it is nominally better on real footage. That orderin
 
 ![Gating strategies](figures/figA1-gating.svg)
 
-**Figure 5. Pixel gating against GMC feature gating as curves.** The two score change on different scales, so only the curves are comparable, not points at equal thresholds.
+**Figure 5. Pixel gating against global-motion-compensated feature gating** on real driving footage, swept as curves. The two strategies score change on different scales, so only the curves are comparable and points at equal thresholds are not. At matched activity the compensated variant is better on both axes, and it reaches 14% activity while still beating pixel gating at 51%.
 
 **Table 6. Same 30 clips, both gating strategies swept.**
 
@@ -319,7 +319,7 @@ Two results in this section point in opposite directions, and both matter.
 
 ![Latency before and after the fused kernel](figures/figA2-latency.svg)
 
-**Figure 6. Per-frame latency before and after the fused scan kernel**, at 22% activity. Every path became faster, and the ordering inverted: the dense path is now the fastest.
+**Figure 6. Per-frame latency before and after the fused scan kernel**, measured at 22% activity on one RTX 4090 at 256 pixels, batch size one, fp32. Every path became faster and the ordering inverted: what sparsity was saving was the scan, and the scan is now nearly free, leaving the sparse path with bookkeeping that does not scale with activity.
 
 Per-frame latency on one RTX 4090 at 256 pixels, single stream, fp32, 22% activity:
 
@@ -347,7 +347,7 @@ Scoring by frame index inside a 32-frame clip, with each frame aligned independe
 
 ![Streaming drift](figures/fig5-drift.svg)
 
-**Figure 7. Accuracy decays between keyframes.** Panel (a) scores by frame index inside a 32-frame clip; the recovery at frame 31 is the keyframe firing at frame 30. Panel (b) sweeps the refresh period, showing that accuracy and stability trade against each other.
+**Figure 7. Accuracy decays between keyframes.** Panel (a) scores by frame index within a 32-frame clip, with each frame aligned independently. Carried state does not accumulate accuracy: the dynamic-object source degrades 61% from frame 0 to frame 28, and the recovery at frame 31 is the keyframe firing at frame 30. Panel (b) sweeps the refresh period, showing that the remedy is already in the architecture and merely applied too rarely, and that a period below 10 forfeits the stability lead the model is built for.
 
 **Table 7. AbsRel by frame index. Keyframe refresh is every 30 frames.**
 

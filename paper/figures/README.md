@@ -16,6 +16,11 @@ figures serve are tagged `[UNDER TEST]`.
 
     python scripts/make_figures.py --out paper/figures
 
+**Captions live in `caption.md`, not in the artwork.** The SVGs carry only axis
+labels, panel letters and element annotations, so the files can be submitted
+as-is and the journal typesets the caption. `caption.md` is the authoritative
+wording and the inline captions in `../draft.md` mirror it.
+
 ## Have
 
 | # | File | Section | Shows |

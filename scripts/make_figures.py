@@ -268,7 +268,7 @@ def fig_tradeoff():
     operating point, so plotting it in range flattens the curve into the axis
     and hides the only thing the panel is for. It is marked off-scale instead.
     """
-    W, H = 900, 390
+    W, H = 900, 340
     o = []
     for i, (data, const, lim, ticks, name) in enumerate([
             (SWEEP_REAL, CONST_REAL, (0.150, 0.182),
@@ -294,18 +294,12 @@ def fig_tradeoff():
             f'refY="6" orient="auto"><path d="M0,6 L3.5,0 L7,6 z" fill="{GRAY}"/>'
             '</marker></defs>')
     o.insert(0, head)
-    o.append(wrap(84, 330,
-                  "Accuracy is nearly flat until roughly 30% activity and then "
-                  "bends: computation falls thirteenfold on real footage for 13% "
-                  "relative AbsRel, and the default operating point costs 2.8%. "
-                  "The degenerate constant-depth control lies far above both "
-                  "panels and is marked off scale.", 780))
     return svg(W, H, "\n".join(o))
 
 
 def fig_comparison():
     """Accuracy against stability, marker area by parameter count (Table 3)."""
-    W, H = 900, 400
+    W, H = 900, 346
     o = []
     for i, (data, xlim, xticks, ylim, yt, name) in enumerate([
             (CMP_REAL, (0.055, 0.245), [0.08, 0.12, 0.16, 0.20, 0.24],
@@ -329,19 +323,12 @@ def fig_comparison():
             marks.append((ax.X(ar), ax.Y(td), r,
                           f"{lab} ({par:g}M)" if ours else lab, col, ours))
         o.append(place_labels(marks))
-    o.append(wrap(84, 340,
-                  "Marker area scales with parameter count; down and to the "
-                  "left is better on both axes. Our model is the smallest "
-                  "marker in each panel, lowest on stability and rightmost on "
-                  "accuracy. Note the logarithmic stability axis: on synthetic "
-                  "footage the gap to the next best model is a factor of 4.2, "
-                  "and on real footage 1.35.", 780))
     return svg(W, H, "\n".join(o))
 
 
 def fig_drift():
     """The sawtooth, and what the refresh period costs (Tables 7 and 8)."""
-    W, H = 900, 390
+    W, H = 900, 350
     o = []
     ax = Ax(78, 46, 350, 250, (0, 32), (0.10, 0.28))
     o.append(ax.frame([0, 8, 16, 24, 31], [0.12, 0.16, 0.20, 0.24, 0.28],
@@ -381,19 +368,12 @@ def fig_drift():
     o.append(legend(560, 262, [("AbsRel", NAVY, "line"),
                                ("t-delta", TEAL, "dash")], dx=110, dy=0))
 
-    o.append(wrap(78, 348,
-                  "Carried state does not accumulate accuracy: Bonn degrades "
-                  "61% from frame 0 to frame 28 and recovers only when the "
-                  "keyframe fires at frame 30. Panel (b) shows the remedy is "
-                  "already in the architecture and merely applied too rarely, "
-                  "but that a period below 10 forfeits the stability lead the "
-                  "model is built for.", 800))
     return svg(W, H, "\n".join(o))
 
 
 def fig_gating():
     """Pixel against GMC feature gating, as curves (Table 6)."""
-    W, H = 900, 400
+    W, H = 900, 330
     o = []
     for i, (key, ylab, lim, ticks, name) in enumerate([
             (1, "AbsRel", (0.30, 0.34), [0.30, 0.31, 0.32, 0.33, 0.34],
@@ -408,17 +388,12 @@ def fig_gating():
         o.append(ax.line([(p[0], p[key]) for p in GATE_GMC], NAVY))
     o.append(legend(96, 62, [("GMC + feature gating", NAVY, "line"),
                              ("Pixel gating", GRAY, "dash")]))
-    o.append(wrap(84, 348,
-                  "The two strategies score change on different scales, so only "
-                  "the curves are comparable, not points at equal thresholds. At "
-                  "matched activity GMC is better on both axes, and it reaches "
-                  "14% activity while still beating pixel gating at 51%.", 780))
     return svg(W, H, "\n".join(o))
 
 
 def fig_latency():
     """Per-frame latency before and after the fused scan kernel."""
-    W, H = 820, 400
+    W, H = 820, 350
     x0, y0, bw, rowh = 250, 56, 480, 46
     xmax = 12.0
     o = [txt(x0, 26, "Per-frame latency at 22% activity (ms, lower is better)",
@@ -450,12 +425,6 @@ def fig_latency():
     o.append(legend(x0, y0 - 12, [("chunked scan", GRAY, "marker"),
                                   ("fused kernel", NAVY, "marker")],
                     dx=150, dy=0))
-    o.append(wrap(30, ay + 58,
-                  "The kernel made every path faster and, in doing so, made the "
-                  "dense path the fastest at every activity level: what sparsity "
-                  "saved was the scan, and the scan is now nearly free. What "
-                  "remains in the sparse path is bookkeeping that does not scale "
-                  "with activity.", 760))
     return svg(W, H, "\n".join(o))
 
 
@@ -543,7 +512,7 @@ ARROWDEF = ('<defs><marker id="arw" markerWidth="8" markerHeight="8" '
 
 def fig_pipeline():
     """Figure 1: the streaming pipeline."""
-    W, H = 900, 430
+    W, H = 900, 360
     row, bh = 170, 66
     b = {
         "in":   Box(40, row, 104, bh, "Input frames", ["t - 1,  t"], "#f7f7f7"),
@@ -585,22 +554,15 @@ def fig_pipeline():
     for k in b:
         o.append(b[k].draw())
     o.append(txt(262, 336, "activity mask M", 10.5, NAVY, "middle"))
-    o.append(txt(600, 82, "the two caches are where", 10, MUTED))
-    o.append(txt(600, 95, "the MAC reduction comes from", 10, MUTED))
-    o.append(txt(600, 108, "1.644 → 0.608 GMAC", 10, FG))
+    o.append(txt(600, 88, "1.644 → 0.608 GMAC", 10, MUTED))
     o.append(txt(40, 60, "used only for", 10, OCHRE))
     o.append(txt(40, 73, "moving cameras", 10, OCHRE))
-    o.append(wrap(40, 372,
-                  "A change detector produces a patch activity mask, which "
-                  "reaches the backbone as the Δ-gating signal. Static "
-                  "patches keep their hidden state exactly and are skipped; "
-                  "frames above 40% activity take the dense path instead.", 800))
     return svg(W, H, "\n".join(o))
 
 
 def fig_deltagate():
     """Figure 2: what the mask does to the discretization step."""
-    W, H = 900, 400
+    W, H = 900, 290
     o = [ARROWDEF]
     fr1 = Box(40, 60, 96, 68, "Frame t - 1", [], "#fafafa", "#999999",
               title_colour=MUTED)
@@ -647,14 +609,6 @@ def fig_deltagate():
              f'stroke="#8a5a12" stroke-width="1.1"/>')
     o.append(txt(88, 248, "background fixed,", 10, MUTED, "middle"))
     o.append(txt(88, 260, "object moves", 10, MUTED, "middle"))
-    o.append(wrap(40, 300,
-                  "The mask multiplies the discretization step. A static patch "
-                  "therefore takes the identity transition with a vanishing "
-                  "input term, so skipping its computation is not compensated "
-                  "for: it is algebraically the same as preserving the state. "
-                  "Early exit and token dropping instead substitute zero or an "
-                  "approximation, and that error accumulates across frames.",
-                  800))
     return svg(W, H, "\n".join(o))
 
 

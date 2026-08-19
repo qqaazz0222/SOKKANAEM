@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="900" height="400" font-family="Arial, Helvetica, sans-serif">
-<rect width="900" height="400" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 346" width="900" height="346" font-family="Arial, Helvetica, sans-serif">
+<rect width="900" height="346" fill="#ffffff"/>
 <line x1="84" y1="290.0" x2="424" y2="290.0" stroke="#e8e8e8" stroke-width="0.8"/>
 <line x1="84" y1="242.0" x2="424" y2="242.0" stroke="#e8e8e8" stroke-width="0.8"/>
 <line x1="84" y1="194.0" x2="424" y2="194.0" stroke="#e8e8e8" stroke-width="0.8"/>
@@ -91,7 +91,4 @@
 <text x="651.6" y="84.4" font-size="10.5" fill="#8c8c8c" text-anchor="middle" font-weight="normal" font-style="normal">DA V2-S</text>
 <text x="697.9" y="89.6" font-size="10.5" fill="#8c8c8c" text-anchor="middle" font-weight="normal" font-style="normal">DA V1-S</text>
 <text x="844.5" y="52.3" font-size="10.5" fill="#c88a1e" text-anchor="middle" font-weight="normal" font-style="normal">DPT-L</text>
-<text x="84.0" y="340.0" font-size="11" fill="#666666" text-anchor="start" font-weight="normal" font-style="normal">Marker area scales with parameter count; down and to the left is better on both axes. Our model is the smallest marker in each panel,</text>
-<text x="84.0" y="356.0" font-size="11" fill="#666666" text-anchor="start" font-weight="normal" font-style="normal">lowest on stability and rightmost on accuracy. Note the logarithmic stability axis: on synthetic footage the gap to the next best model</text>
-<text x="84.0" y="372.0" font-size="11" fill="#666666" text-anchor="start" font-weight="normal" font-style="normal">is a factor of 4.2, and on real footage 1.35.</text>
 </svg>
