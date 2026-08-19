@@ -1,6 +1,6 @@
 # SOKKANAEM: Exact Change-Gated State-Space Modeling for Efficient and Stable Video Depth
 
-> **Working draft — 27 July 2026.** Author names, affiliations, venue formatting, citations, qualitative figures, and Jetson measurements remain to be added. All numerical claims below are limited to completed experiments in this repository.
+> **Working draft — 19 August 2026.** Author names, affiliations, venue formatting, citations, qualitative figures, and Jetson measurements remain to be added. All numerical claims below are limited to completed experiments in this repository.
 
 ## Abstract
 
@@ -8,7 +8,7 @@ Video depth models repeatedly process large static regions and often exhibit fra
 
 A 4.19M-parameter model reaches 0.1595 AbsRel and 0.8262 \(\delta_1\) on a real indoor holdout at 32.2% activity; cutting computation thirteen-fold to 7.1% activity costs 13% relative AbsRel while raw frame-to-frame variation falls by a factor of 2.8. It runs at 0.378 ms per frame in half precision, 2.2x faster and at 2.4x less memory than a comparable-size baseline. Measured against seven commonly cited depth models under one protocol, it is last on accuracy and first on raw frame-to-frame stability, at 6x to 82x fewer parameters.
 
-Three results delimit the contribution, and each narrows a claim we initially expected to make. A fused scan kernel that removes the dominant cost also removes the sparse path's latency advantage on a desktop GPU, leaving sparsity's benefit established in compute and memory rather than measured time. On unseen real driving footage, accuracy transfers while sparsity does not: activity rises from 26% to 93%, recoverable to 14% only with motion compensation and per-domain threshold calibration. And an iso-mask token-drop control, which collapsed by a factor of four on an earlier checkpoint whose sparse path was never trained, is now a wash on accuracy — preserved-state readout buys temporal stability, not depth accuracy. These results establish exact change-gated state preservation as a useful mechanism while marking precisely where its efficiency claim does and does not hold.
+Four results delimit the contribution, and each narrows a claim we initially expected to make. A fused scan kernel that removes the dominant cost also removes the sparse path's latency advantage on a desktop GPU, leaving sparsity's benefit established in compute and memory rather than measured time. On unseen real driving footage, accuracy transfers while sparsity does not: activity rises from 26% to 93%, recoverable to 14% only with motion compensation and per-domain threshold calibration. An iso-mask token-drop control, which collapsed by a factor of four on an earlier checkpoint whose sparse path was never trained, is now a wash on accuracy — preserved-state readout buys temporal stability, not depth accuracy. And scoring by frame index rather than by clip shows the carried state does not improve accuracy over a stream and degrades it on dynamic scenes by 61% between keyframes, so the eight-frame clip means conventional in this literature are optimistic for the streaming setting they describe. These results establish exact change-gated state preservation as a useful mechanism while marking precisely where its efficiency and stability claims do and do not hold.
 
 ## 1. Introduction
 
@@ -18,12 +18,13 @@ This work asks a narrower question: **can an SSM treat “no visual change” as
 
 We instantiate this idea in SOKKANAEM, a streaming video-depth architecture with alternating temporal and spatial SSM blocks. A lightweight detector produces patch activity masks using hysteresis, dilation, and periodic keyframes. A sensor-free GMC and feature-space detector extend the mechanism to ego-motion. We evaluate not only depth accuracy and raw frame variation, but also optical-flow-warped consistency (OPW), a GT-referenced temporal consistency error (TCE), constant-output controls, analytical MACs, and measured latency.
 
-The completed experiments support four conclusions:
+The completed experiments support five conclusions:
 
 1. **Exact state preservation.** For \(M=0\), \(\Delta\)-gating gives a bit-exact state copy in implementation and an identity transition analytically.
 2. **A favorable sparsity–accuracy trade-off.** On real indoor footage, reducing activity from 96.2% to 32.2% costs 2.8% relative AbsRel, and to 7.1% costs 13%.
 3. **Preserved-state readout buys temporal stability, not accuracy.** At matched masks, replacing \(\Delta\)-gating with token dropping leaves accuracy unchanged but degrades all three temporal metrics. An earlier fourfold accuracy collapse turned out to measure an untrained sparse path (Section 5.4).
 4. **The efficiency claim has a sharp boundary.** After a fused scan kernel, the model is overhead-bound rather than compute-bound on a desktop GPU, and dense execution is faster than the sparse path at every activity level. Sparsity's benefit is established in MACs and per-stream state, and its conversion into time and energy is unmeasured (Section 5.6).
+5. **The cost of gating accumulates over a stream.** Carried state does not improve accuracy frame over frame, and on dynamic scenes it degrades by 61% between keyframes before a refresh resets it. Clip-level means hide this, and the standard eight-frame protocol samples the favourable part of the cycle (Section 5.7).
 
 We claim no accuracy advantage. Against the comparison group in Section 5.3, SOKKANAEM is last on AbsRel and \(\delta_1\) on real footage and leads exactly one measure, raw frame difference. Depth Anything 3 is stronger on motion-compensated and GT-referenced temporal error. The contribution is the mechanism and the efficiency-stability point it reaches, not the depth numbers.
 
@@ -79,7 +80,7 @@ M_{t-1,i},&\text{otherwise}.
 \end{cases}
 \]
 
-We dilate active regions by one patch to protect object boundaries and force a full update every \(K\) frames to limit drift. Evaluation-only ablations found pixel MSE and cosine detection comparable at matched activity, so MSE remains the default. Training with i.i.d. random masks was at least as robust as detector-driven fine-tuning in the completed three-arm study.
+We dilate active regions by one patch to protect object boundaries and force a full update every \(K\) frames to limit drift. \(K\) turns out to be an accuracy control rather than a safety valve, and the drift it bounds is larger than clip-level numbers suggest (Section 5.7). Evaluation-only ablations found pixel MSE and cosine detection comparable at matched activity, so MSE remains the default. Training with i.i.d. random masks was at least as robust as detector-driven fine-tuning in the completed three-arm study.
 
 ### 3.3 Exact \(\Delta\)-gating
 
@@ -123,7 +124,7 @@ An optional spatial output cache gathers active patches, updates them, and scatt
 
 Camera motion makes raw pixel differences dense. We therefore estimate a homography from at most 50 tracked points on a low-resolution frame using Lucas–Kanade tracking and RANSAC. The previous frame is warped to the current view, after which relative \(L_1\) differences between patch embeddings produce the activity mask. Failure falls back to the identity transform, increasing activity rather than silently suppressing changes.
 
-On Virtual KITTI 2, GMC plus feature gating reaches 23.7% activity with only +0.7% relative AbsRel over full computation. At 2.3% activity, AbsRel rises from 0.2054 to 0.2098. These results validate the mechanism on clean synthetic ego-motion; real noisy dashcam footage remains untested.
+On Virtual KITTI 2, GMC plus feature gating reaches 23.7% activity with only +0.7% relative AbsRel over full computation. Section 5.5 tests the same mechanism on real driving footage, where it also holds — but only after per-domain threshold recalibration, because the feature-scale thresholds tuned on rendered video are inoperative on real capture.
 
 ### 3.6 Decoder and objective
 
@@ -143,7 +144,7 @@ The mask is binary and non-differentiable, so gradients pass through a straight-
 
 ### 4.1 Data
 
-The main synthetic training mixture contains Virtual KITTI 2 (Cabon et al., 2020), TartanAir v2 (Wang et al., 2020), and PointOdyssey (Zheng et al., 2023). Dataset-balanced sampling prevents the largest source from dominating. The principal synthetic holdout contains 8,929 clips; all headline comparisons use the same deterministic first 1,000 clips.
+The main synthetic training mixture contains Virtual KITTI 2 (Cabon et al., 2020), TartanAir v2 (Wang et al., 2020), and PointOdyssey (Zheng et al., 2023). Dataset-balanced sampling prevents the largest source from dominating. Every comparison in this paper evaluates 100 deterministic clips per source and reports the dataset-balanced mean, so a large source cannot dominate the headline number the way pixel pooling would.
 
 For the deployment-relevant real domain, we use TUM RGB-D fixed-camera sequences (Sturm et al., 2012) and Bonn RGB-D Dynamic (Palazzolo et al., 2019). RGB and depth are paired by timestamp within 20 ms. The reported checkpoint is trained for 60,000 steps on two real and three synthetic sources on a single GPU, taking 13 hours 11 minutes. Evaluation uses 100 clips per source with held-out sequences, so no evaluated sequence appears in training.
 
@@ -163,7 +164,11 @@ Every full temporal table includes a per-clip optimal constant-depth control. Th
 
 ### 4.3 Baselines and implementation
 
-We compare with Depth Anything V2 Small (24.8M), Depth Anything 3 Base (120M), and Video Depth Anything Small metric (28.4M), using the same 1,000 clips and common metric implementation. The reported SOKKANAEM model has 4.19M parameters and is a single checkpoint used for every table in Section 5. Latency is measured with batch size 1 on an RTX 4090. Analytical multiply–accumulate counts are derived from the configured model. No Jetson result is available yet.
+We compare against six commonly cited depth models — DPT-Large, ZoeDepth N-K, Depth Anything V1 Small, V2 Small, V2 Base, and Depth Anything 3 Base — spanning 24.8M to 345M parameters. Published numbers for these models each come from a different split, resolution and alignment rule, so we re-ran all of them on our own holdout clips at 256 pixels through the same metric implementation rather than quoting papers.
+
+Alignment is the one place where a single rule would be unfair. Relative-depth models are evaluated under the two-degree-of-freedom scale-and-shift fit in disparity space they are designed for; metric models and ours use one-degree-of-freedom per-clip median scaling. Because the extra degree of freedom always flatters the model receiving it, we additionally report our own model under the relative-depth rule so the protocol cannot carry the result.
+
+The reported SOKKANAEM model has 4.19M parameters and is a single checkpoint used for every table in Section 5. Latency is measured with batch size 1 on an RTX 4090. Analytical multiply–accumulate counts are derived from the configured model. No edge-device result is available yet.
 
 ## 5. Results
 
@@ -312,6 +317,39 @@ In fp16 the sparse path reaches 1.69 ms (593 FPS) with 37 MB peak memory and 6.3
 
 We report this plainly because it bounds the contribution. Exact state preservation, the MAC reduction, and the kernel itself all stand. The claim that the sparse path is *faster* does not stand on this GPU. Whether a 63% MAC reduction converts into time and energy depends on the hardware being compute-bound, which a 4090 at this model scale is not; settling that requires the edge measurement listed in Section 7.
 
+### 5.7 Streaming drift: what the clip-level numbers hide
+
+Every number above, and every number we have previously reported, is an eight-frame clip mean. A streaming model is supposed to accumulate evidence across frames, so depth at frame 7 should be better than at frame 0 — that is the reason to carry state at all. We had never measured it.
+
+Scoring by frame index inside a 32-frame clip, with each frame aligned independently so the curve is not an artefact of one clip-level fit:
+
+**Table 7. AbsRel by frame index. Keyframe refresh is every 30 frames.**
+
+| Frame | 0 | 4 | 8 | 12 | 16 | 20 | 24 | 28 | 31 |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
+| TUM | 0.1353 | 0.1206 | 0.1249 | 0.1510 | 0.1521 | 0.1415 | 0.1585 | 0.1697 | **0.1323** |
+| Bonn | 0.1642 | 0.1690 | 0.1795 | 0.1934 | 0.2185 | 0.2312 | 0.2431 | **0.2636** | **0.2011** |
+
+**There is no accumulation benefit, and on dynamic scenes there is an accumulation cost.** TUM improves by about 5% over the first few frames and then degrades; Bonn degrades monotonically from 0.1642 to 0.2636, 61% worse by frame 28. The recovery at frame 31 is the keyframe: a full refresh fires at frame 30 and the error snaps back. The pattern is a sawtooth — gating accumulates error between keyframes and the keyframe erases it.
+
+Two consequences follow. First, the fix already exists in the architecture and is simply applied too rarely. Sweeping the refresh period on 32-frame clips:
+
+**Table 8. Keyframe period against accuracy and cost, real indoor holdout, 32-frame clips.**
+
+| Period | Active (%) | AbsRel | \(\delta_1\) | t-delta | TCE |
+|---:|---:|---:|---:|---:|---:|
+| 5 | 45.0 | **0.1551** | **0.8280** | 0.1084 | 0.0368 |
+| 10 | 35.3 | 0.1601 | 0.8233 | 0.0914 | 0.0355 |
+| 15 | 32.4 | 0.1648 | 0.8142 | 0.0879 | 0.0357 |
+| 30 (default) | 29.2 | 0.1774 | 0.7985 | 0.0813 | 0.0356 |
+| 60 | 26.2 | 0.1807 | 0.7937 | **0.0697** | **0.0330** |
+
+Refreshing every 10 frames instead of 30 recovers 9.8% relative AbsRel and 2.5 points of \(\delta_1\) for 6 points of activity. Going to 5 buys more accuracy but raises t-delta to 0.1084, which would forfeit the one metric we lead in Table 3; at period 10 it stays at 0.0914 and still leads. Accuracy and flicker suppression trade against each other here, because a keyframe is by construction a discontinuity.
+
+Second, and more importantly for how our results should be read: **the same checkpoint scores 0.1595 on eight-frame clips and 0.1774 on 32-frame clips at the default period.** Short clips sample only the favourable part of the sawtooth. Deployment runs hundreds of frames, so the eight-frame convention that we and much of the video-depth literature use is optimistic for the streaming setting it is meant to describe.
+
+The likely cause is a train-deploy mismatch rather than a flaw in \(\Delta\)-gating itself. Training uses four-frame clips, so the model has never had to hold state through more than three consecutive gated frames. Randomised mask ratios make it robust to *how much* is skipped, not to *how long*.
+
 ## 6. Ablations and Diagnostic Findings
 
 ### 6.1 Mask policy
@@ -342,26 +380,52 @@ The gap is concentrated: Bonn sits three times above its ceiling while TUM sits 
 
 This measurement is easy to get wrong. Our first version pooled ground truth without a validity mask, so sensor holes averaged in; in disparity space a single zero becomes 1/eps and dominates its patch, giving 11.4 AbsRel on TUM, and the corresponding depth-space numbers suggested the model had already surpassed the ceiling — the opposite conclusion.
 
+### 6.5 Range compression, and a cheap fix that failed
+
+Section 5.3 reports our model under both alignment rules, and the two-degree-of-freedom fit improves real AbsRel from 0.1595 to 0.1321 — 17%. An extra degree of freedom helping that much means a systematic error the one-parameter fit cannot absorb.
+
+Splitting by clip localises it. The two-degree-of-freedom fit helps 78% of Bonn clips (median improvement 9.6%) but only 31% of TUM clips, where the median clip is actually worse. Measuring the predicted and ground-truth disparity distributions on the same clips explains why:
+
+**Table 9. Predicted dynamic range as a fraction of ground truth.**
+
+| Source | 5–95% width, pred | 5–95% width, GT | Ratio | Std ratio |
+|---|---:|---:|---:|---:|
+| TUM | 0.4068 | 0.4433 | 0.92 | 0.87 |
+| Bonn | 0.4717 | 1.0068 | **0.47** | **0.44** |
+
+**On Bonn the model emits less than half the true dynamic range**, regressing toward the mean on exactly the source whose true range is 2.3x wider. This is one phenomenon behind three symptoms: the low \(\delta_1\) (a ratio metric punishes a flattened field), the Bonn-specific alignment gap, and Bonn sitting three times above its structural ceiling in Section 6.4.
+
+The obvious suspect was the decoder. The binned head predicts depth as a softmax expectation over log-depth bin centres, and an expectation pulls toward the distribution mean whenever the model is uncertain. That hypothesis is testable without retraining, by sharpening the softmax at inference:
+
+| Temperature | Bonn AbsRel | Bonn \(\delta_1\) | Range ratio |
+|---:|---:|---:|---:|
+| 1.00 | 0.2618 | 0.7315 | 0.58 |
+| 0.50 | 0.2642 | 0.7320 | 0.59 |
+| 0.25 | 0.2677 | 0.7278 | 0.58 |
+
+**The range ratio does not move and accuracy gets slightly worse.** The bin distributions are already peaked; the compression is in the predicted centres themselves. The model genuinely predicts a flattened field, which rules out a decoding fix and also rules out longer-clip training as a remedy — drift and range compression are separate defects with separate causes. Nothing in the current objective penalises compression: the scale-invariant log loss does punish the mismatch indirectly, but under uncertainty shrinking the prediction still lowers it, which is the ordinary bias-variance trade.
+
 ## 7. Limitations
 
 The present study has several important limitations.
 
 1. Every table in Section 5 comes from one checkpoint, but two diagnostic results in Section 6 (mask policy, feature distillation) were measured on earlier checkpoints and are reported as such rather than re-run.
-2. Video Depth Anything is absent from the baseline table: the local checkout was lost and re-acquiring its metric weights was out of scope for this round. The comparison therefore covers one comparable-size and one much larger baseline.
+2. Video Depth Anything is absent from the baseline table: the local checkout was lost and re-acquiring its metric weights was out of scope for this round. The comparison therefore covers six models from 24.8M to 345M parameters but no video-specific baseline, which is the most relevant class to compare temporal metrics against.
 3. OPW and TCE do not support a general temporal-consistency lead. Raw t-delta can be gamed by constant predictions and is interpreted only alongside accuracy and the constant control.
 4. A fused scan kernel removed the dominant cost and, in doing so, removed the sparse path's wall-clock advantage on an RTX 4090: compiled full compute is now faster at every activity level. The remaining sparse-path cost is activity-independent bookkeeping. Sparsity's benefit is presently established in MACs and per-stream state, not in measured latency on this device.
 5. Execution on an RTX 4090 is overhead-bound at this model scale, so reduced analytical MACs do not become higher FPS. Jetson Orin latency, energy, and multi-stream measurements have not been performed, and they are the measurement that decides whether the MAC reduction is worth anything in deployment.
 6. GMC is validated on real ego-motion (Section 5.5), but only on five driving sequences from one dataset, and only with per-domain threshold calibration; its default threshold is inoperative on real video. Handheld and aerial motion remain untested.
 7. Cross-domain evaluation covers real driving only. Unseen indoor domains (NYU, ScanNet) were not evaluated: the former's host was unreachable and the latter requires a signed agreement. The claim of generalization is therefore limited to the synthetic-to-real axis of one scene type.
-8. The current experiments cover at most 270-frame long streams for drift analysis. Very long streaming behavior is unknown.
-9. Patch-size, refinement, and fully trained decoder/cache ablations remain incomplete.
-10. Results are single-seed at 60k steps. Seed variance was characterised only at 8k steps (Appendix A), and differences below that noise floor are not claimed.
+8. Accuracy degrades between keyframes and the reported clip-level numbers are measured on eight-frame clips, which sample the favourable part of that cycle (Section 5.7). The same checkpoint scores 0.1774 rather than 0.1595 on 32-frame clips. Behaviour beyond 270 frames is unmeasured, and we expect it to be worse rather than flat.
+9. The predicted depth field has under half the ground truth's dynamic range on the dynamic-object source (Section 6.5). We localised the defect but did not fix it; the objective contains no term that penalises compression.
+10. Patch-size, refinement, and fully trained decoder/cache ablations remain incomplete.
+11. Results are single-seed at 60k steps. Seed variance was characterised only at 8k steps (Appendix A), and differences below that noise floor are not claimed.
 
 ## 8. Conclusion
 
-SOKKANAEM demonstrates that patch-level visual change can control an SSM through its discretization step, turning a static observation into an exact identity transition on temporal state. Across synthetic and real RGB-D evaluations, aggressive patch sparsity causes little loss in depth accuracy, and an iso-mask token-drop control confirms that continued readout of preserved state is critical. The model strongly suppresses raw frame-to-frame flicker while remaining much smaller than evaluated depth baselines.
+SOKKANAEM demonstrates that patch-level visual change can control an SSM through its discretization step, turning a static observation into an exact identity transition on temporal state. Across synthetic and real RGB-D evaluations, aggressive patch sparsity costs little depth accuracy within a clip, and the model suppresses raw frame-to-frame flicker better than any of six larger baselines while remaining 6x to 82x smaller than them.
 
-The experiments also reveal the boundary of the idea. Exact state skipping is not synonymous with end-to-end sparse inference: dense readout, spatial context, and decoding remain. Nor does low raw frame variation guarantee motion-correct temporal accuracy. A fused scan kernel closed the kernel gap and, unexpectedly, made dense streaming the faster configuration on a desktop GPU, which relocates the efficiency argument from latency to compute and memory until an edge device settles it. Real moving-camera evaluation and cross-domain transfer are now measured, and both sharpen rather than confirm the picture: change gating is a property of the content and the capture, not of the method alone. The next decisive step is edge-device measurement, which is what determines whether the compute reduction is worth anything in deployment. Within these boundaries, exact \(\Delta\)-gating provides a principled foundation for change-adaptive streaming vision.
+The experiments also reveal the boundary of the idea. Exact state skipping is not synonymous with end-to-end sparse inference: dense readout, spatial context, and decoding remain. Nor does low raw frame variation guarantee motion-correct temporal accuracy. An iso-mask token-drop control, which we had read as proving that reading preserved state is critical, turns out to prove something narrower once the sparse path is trained: the readout buys stability, and the accuracy it seemed to buy was an artefact of an untrained path. A fused scan kernel closed the kernel gap and, unexpectedly, made dense streaming the faster configuration on a desktop GPU, which relocates the efficiency argument from latency to compute and memory until an edge device settles it. Real moving-camera evaluation and cross-domain transfer are now measured, and both sharpen rather than confirm the picture: change gating is a property of the content and the capture, not of the method alone. Two directions follow from the measurements rather than from intuition. Accuracy is limited by drift between keyframes and by a predicted depth field with under half the true dynamic range on dynamic scenes — not by patch size or output resolution, which sit two to three times above where the model actually operates. And whether the compute reduction is worth anything in deployment is decided by edge-device measurement, which remains the single most informative experiment left. Within these boundaries, exact \(\Delta\)-gating provides a principled foundation for change-adaptive streaming vision.
 
 ## Appendix A. Reproducibility
 
