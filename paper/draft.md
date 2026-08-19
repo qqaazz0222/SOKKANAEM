@@ -1,6 +1,12 @@
 # SOKKANAEM: Exact Change-Gated State-Space Modeling for Efficient and Stable Video Depth
 
-> **Working draft — 19 August 2026.** Author names, affiliations, venue formatting, citations, qualitative figures, and Jetson measurements remain to be added. All numerical claims below are limited to completed experiments in this repository.
+> **Working draft — 19 August 2026.** Author names, affiliations, venue formatting, qualitative figures, and edge-device measurements remain to be added. All numerical claims below are limited to completed experiments in this repository.
+>
+> **Section tags.** Headings carry a status marker so a reader knows which numbers are settled and which are moving:
+>
+> - `[UNDER TEST]` — a running or queued experiment targets this section's conclusion directly, and the conclusion may reverse.
+> - `[CHECKPOINT-DEPENDENT]` — the finding holds for the reported checkpoint. The numbers move if the checkpoint is replaced, though the qualitative claim is not expected to.
+> - Untagged sections are settled: they follow from the architecture, the data, or measurements that a retrain does not affect.
 
 ## Abstract
 
@@ -172,7 +178,9 @@ The reported SOKKANAEM model has 4.19M parameters and is a single checkpoint use
 
 ## 5. Results
 
-### 5.1 Activity–accuracy trade-off
+### 5.1 Activity–accuracy trade-off `[CHECKPOINT-DEPENDENT]`
+
+> The default operating point is under review: Section 5.7 finds a keyframe period of 10 preferable to the 30 used here, and adopting it would shift every activity figure in this section upward by roughly six points.
 
 All tables in this section come from a single checkpoint (4.19M parameters, 60k steps) so that no comparison mixes model versions. Each row sweeps the detector threshold; 100 clips per source, dataset-balanced mean.
 
@@ -194,7 +202,7 @@ The synthetic sweep does not reach low activity because TartanAir stays between 
 
 **Figure 3. Qualitative result on held-out real indoor footage** (RGB, prediction, ground truth; 3.5% of patches active on this frame). The prediction is smoother than the ground truth, which is what Section 6.4 quantifies: the model sits well above its own patch-grid ceiling, so the loss of detail is a capacity and training limitation rather than an output-resolution one.
 
-### 5.2 Real indoor results
+### 5.2 Real indoor results `[CHECKPOINT-DEPENDENT]`
 
 An earlier synthetic-only checkpoint failed to transfer to real indoor Kinect depth and lost to a constant predictor. Mixed-domain fine-tuning reverses this failure, and two auxiliary losses added at the final training stage — a flow-warped log-depth residual term and a depth-boundary-weighted term — improve accuracy and temporal stability together at unchanged compute.
 
@@ -209,7 +217,7 @@ Per source, the confirmed model reaches 0.1321 AbsRel and 0.8426 \(\delta_1\) on
 
 Two cautions apply. The synthetic \(\delta_1\) difference between these checkpoints lies inside a measured seed standard deviation of \(\pm\)0.015 and is not claimed. More importantly, the two rows differ in initialisation lineage and cumulative steps, so Table 2 is a comparison of checkpoints, not a controlled loss ablation; the controlled ablation exists only at 8k steps, where the ranking was in fact reversed. Short-probe rankings of loss terms did not survive to convergence, which we report as a methodological finding: brief probes can settle whether a term helps but not how strongly to weight it.
 
-### 5.3 Comparison with larger depth models
+### 5.3 Comparison with larger depth models `[CHECKPOINT-DEPENDENT]`
 
 Table 3 compares against current baseline checkpoints under one shared protocol on both domains: 100 clips per source, identical holdout sequences, identical metric implementation, per-clip median alignment.
 
@@ -246,7 +254,7 @@ Read honestly, the table says three things. On real footage we are at the bottom
 
 We do not claim a general temporal-consistency lead. Of the three temporal measures, only raw frame difference favours us; Depth Anything 3 is better on both motion-compensated OPW and GT-referenced TCE. The defensible claim is flicker suppression without post-processing, at a fraction of the parameters and latency.
 
-### 5.4 What preserved-state readout actually buys
+### 5.4 What preserved-state readout actually buys `[CHECKPOINT-DEPENDENT]`
 
 \(\Delta\)-gating freezes hidden state at static positions but still reads it through \(C_i h_i\). A token-drop arm freezes the same state under the same masks and additionally bypasses the temporal block's output. Comparing the two isolates the value of the readout itself.
 
@@ -261,7 +269,7 @@ We do not claim a general temporal-consistency lead. Of the three temporal measu
 
 The honest reading is that the earlier experiment measured the fragility of an untrained sparse path, not the value of state readout. What survives is narrower and still meaningful: **reading preserved state buys temporal stability, not depth accuracy.** A model trained to tolerate missing static tokens recovers the accuracy on its own, but only the readout keeps consecutive predictions from moving. Since flicker suppression is the property this architecture is built around, the ablation still supports the design — it simply supports a smaller claim than we first made.
 
-### 5.5 Cross-domain transfer and real moving cameras
+### 5.5 Cross-domain transfer and real moving cameras `[CHECKPOINT-DEPENDENT]`
 
 We evaluate the confirmed checkpoint on five KITTI raw drives (Geiger et al., 2012) (885 frames) that appear in no training split. Only the synthetic clone of this domain was trained on, so the experiment isolates the synthetic-to-real axis rather than an arbitrary domain shift. Ground truth is projected LiDAR: capped near 80 m and 30% valid.
 
@@ -317,7 +325,9 @@ In fp16 the sparse path reaches 1.69 ms (593 FPS) with 37 MB peak memory and 6.3
 
 We report this plainly because it bounds the contribution. Exact state preservation, the MAC reduction, and the kernel itself all stand. The claim that the sparse path is *faster* does not stand on this GPU. Whether a 63% MAC reduction converts into time and energy depends on the hardware being compute-bound, which a 4090 at this model scale is not; settling that requires the edge measurement listed in Section 7.
 
-### 5.7 Streaming drift: what the clip-level numbers hide
+### 5.7 Streaming drift: what the clip-level numbers hide `[UNDER TEST]`
+
+> A fine-tune at clip length 24 is running to test this section's causal claim — that the drift comes from a train-deploy mismatch rather than from \(\Delta\)-gating. If it succeeds, Tables 7 and 8 and the recommended refresh period all change; if it fails, the mismatch explanation is wrong and the drift is intrinsic.
 
 Every number above, and every number we have previously reported, is an eight-frame clip mean. A streaming model is supposed to accumulate evidence across frames, so depth at frame 7 should be better than at frame 0 — that is the reason to carry state at all. We had never measured it.
 
@@ -380,7 +390,9 @@ The gap is concentrated: Bonn sits three times above its ceiling while TUM sits 
 
 This measurement is easy to get wrong. Our first version pooled ground truth without a validity mask, so sensor holes averaged in; in disparity space a single zero becomes 1/eps and dominates its patch, giving 11.4 AbsRel on TUM, and the corresponding depth-space numbers suggested the model had already surpassed the ceiling — the opposite conclusion.
 
-### 6.5 Range compression, and a cheap fix that failed
+### 6.5 Range compression, and a cheap fix that failed `[UNDER TEST]`
+
+> A loss term that matches the predicted log-depth spread to the ground truth's is implemented and queued. The diagnosis below stands either way; what may change is the last sentence, that nothing in the objective penalises compression.
 
 Section 5.3 reports our model under both alignment rules, and the two-degree-of-freedom fit improves real AbsRel from 0.1595 to 0.1321 — 17%. An extra degree of freedom helping that much means a systematic error the one-parameter fit cannot absorb.
 
@@ -427,7 +439,7 @@ SOKKANAEM demonstrates that patch-level visual change can control an SSM through
 
 The experiments also reveal the boundary of the idea. Exact state skipping is not synonymous with end-to-end sparse inference: dense readout, spatial context, and decoding remain. Nor does low raw frame variation guarantee motion-correct temporal accuracy. An iso-mask token-drop control, which we had read as proving that reading preserved state is critical, turns out to prove something narrower once the sparse path is trained: the readout buys stability, and the accuracy it seemed to buy was an artefact of an untrained path. A fused scan kernel closed the kernel gap and, unexpectedly, made dense streaming the faster configuration on a desktop GPU, which relocates the efficiency argument from latency to compute and memory until an edge device settles it. Real moving-camera evaluation and cross-domain transfer are now measured, and both sharpen rather than confirm the picture: change gating is a property of the content and the capture, not of the method alone. Two directions follow from the measurements rather than from intuition. Accuracy is limited by drift between keyframes and by a predicted depth field with under half the true dynamic range on dynamic scenes — not by patch size or output resolution, which sit two to three times above where the model actually operates. And whether the compute reduction is worth anything in deployment is decided by edge-device measurement, which remains the single most informative experiment left. Within these boundaries, exact \(\Delta\)-gating provides a principled foundation for change-adaptive streaming vision.
 
-## Appendix A. Reproducibility
+## Appendix A. Reproducibility `[CHECKPOINT-DEPENDENT]`
 
 **Model.** Dimension 192, four alternating temporal/spatial blocks, state dimension 16, four-direction spatial cross-scan, depthwise local convolution branch, DPT-style decoder with a 64-bin depth head over 0.3-150 m. 4,185,872 parameters; 16.7 MB fp32 weights; 12.75 MB of persistent state per stream in fp32 and 6.38 MB in fp16. Stream state lives entirely in an external dictionary, so one set of weights serves many streams without leakage.
 
