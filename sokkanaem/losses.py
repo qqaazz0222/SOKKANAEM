@@ -180,3 +180,41 @@ def multiscale_grad_loss(pred, gt, valid, scales=4):
             break
         total = total + grad_loss(p, g, v)
     return total / scales
+
+
+def spread_loss(pred, gt, valid, min_px=64, eps=1e-6):
+    """Penalise dynamic-range compression of the predicted depth field.
+
+    REPORT 4.32: on the dynamic-object source the model produces less than
+    half the ground truth's dynamic range (0.47 of it, against 0.92 on the
+    static source), regressing toward the mean on exactly the scenes whose
+    true range is widest. Nothing in the existing objective penalises that.
+    SI-log is scale-invariant and does penalise the mismatch indirectly, but
+    under uncertainty shrinking the prediction still lowers it -- the usual
+    bias-variance trade -- so compression survives training.
+
+    This measures spread the way the diagnostic did: the standard deviation of
+    log depth over valid pixels, per sample rather than per batch, because the
+    compression is a property of a scene and averaging over a batch would let a
+    wide scene cancel a narrow one. The ratio is compared in log space so the
+    term is scale-free and symmetric: over-spreading is penalised as much as
+    under-spreading, which matters because a model can otherwise buy this loss
+    with noise.
+
+    Samples with almost no valid ground truth are dropped rather than clamped;
+    a standard deviation over a handful of pixels is not a range estimate.
+    """
+    lp = torch.log(pred.clamp(min=eps)).flatten(1)
+    lg = torch.log(gt.clamp(min=eps)).flatten(1)
+    v = valid.flatten(1).to(lp.dtype)
+    n = v.sum(1)
+    keep = n >= min_px
+    if not bool(keep.any()):
+        return pred.sum() * 0.0
+    lp, lg, v, n = lp[keep], lg[keep], v[keep], n[keep].unsqueeze(1)
+
+    def std(x):
+        m = (x * v).sum(1, keepdim=True) / n
+        return ((((x - m) ** 2) * v).sum(1, keepdim=True) / n).clamp(min=eps).sqrt()
+
+    return (torch.log(std(lp) / std(lg)) ** 2).mean()

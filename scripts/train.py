@@ -35,7 +35,7 @@ from sokkanaem.distill import (affine_invariant_loss, dinov2_features,
 from sokkanaem.ema import ema_update_
 from sokkanaem.losses import (bin_ce_loss, edge_weighted_loss, grad_loss,
                               multiscale_grad_loss, normal_loss, si_log_loss,
-                              temporal_loss, warp_residual_loss)
+                              spread_loss, temporal_loss, warp_residual_loss)
 from sokkanaem.schedule import lr_at, parse_size_schedule, size_for_step
 
 
@@ -137,6 +137,12 @@ def main():
                     help="flow-warped residual loss, the training-time version "
                          "of the TCE metric (0 = off). Costs one RAFT-small "
                          "forward per clip per step")
+    ap.add_argument("--spread-weight", type=float, default=0.0,
+                    help="penalise dynamic-range compression: match the "
+                         "std of predicted log depth to the GT's, per sample "
+                         "(REPORT 4.32 measured 0.47x range on Bonn). Scale-"
+                         "free and symmetric, so it cannot be bought by "
+                         "inflating the range with noise")
     ap.add_argument("--edge-weight", type=float, default=0.0,
                     help="GT-depth-gradient weighted log L1, aimed at "
                          "foreground objects at depth discontinuities (0 = off)")
@@ -351,6 +357,9 @@ def main():
                     clip, depths, gt, valid)
             if args.edge_weight > 0:
                 loss = loss + args.edge_weight * edge_weighted_loss(
+                    depths, gt, valid)
+            if args.spread_weight > 0:
+                loss = loss + args.spread_weight * spread_loss(
                     depths, gt, valid)
             if args.bin_weight > 0:
                 # hook order is frame-major (t0 batch, t1 batch, ...), so the
