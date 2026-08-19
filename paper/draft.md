@@ -6,7 +6,7 @@
 
 Video depth models repeatedly process large static regions and often exhibit frame-to-frame flicker. We introduce **SOKKANAEM**, a compact recurrent video-depth model that connects patch-level change detection to the discretization step of a selective state-space model (SSM). Given a binary activity mask \(M\), we replace the SSM step size \(\Delta\) with \(\widetilde{\Delta}=M\Delta\). For a static patch, \(\widetilde{\Delta}=0\) yields \(\bar A=I\) and \(\bar B=0\), so the hidden state is copied exactly rather than approximately reconstructed. A temporal SSM preserves per-location memory, while a spatial SSM and a dense decoder recover spatial context and depth. For moving cameras, low-resolution global motion compensation (GMC) precedes feature-space change detection.
 
-A 4.19M-parameter model reaches 0.1595 AbsRel and 0.8262 \(\delta_1\) on a real indoor holdout at 32.2% activity; cutting computation thirteen-fold to 7.1% activity costs 13% relative AbsRel while raw frame-to-frame variation falls by a factor of 2.8. It runs at 0.378 ms per frame in half precision, 2.2x faster and at 2.4x less memory than a comparable-size baseline that it also outperforms on accuracy, while remaining behind a 30x larger generalist on accuracy and on motion-compensated temporal error.
+A 4.19M-parameter model reaches 0.1595 AbsRel and 0.8262 \(\delta_1\) on a real indoor holdout at 32.2% activity; cutting computation thirteen-fold to 7.1% activity costs 13% relative AbsRel while raw frame-to-frame variation falls by a factor of 2.8. It runs at 0.378 ms per frame in half precision, 2.2x faster and at 2.4x less memory than a comparable-size baseline. Measured against seven commonly cited depth models under one protocol, it is last on accuracy and first on raw frame-to-frame stability, at 6x to 82x fewer parameters.
 
 Three results delimit the contribution, and each narrows a claim we initially expected to make. A fused scan kernel that removes the dominant cost also removes the sparse path's latency advantage on a desktop GPU, leaving sparsity's benefit established in compute and memory rather than measured time. On unseen real driving footage, accuracy transfers while sparsity does not: activity rises from 26% to 93%, recoverable to 14% only with motion compensation and per-domain threshold calibration. And an iso-mask token-drop control, which collapsed by a factor of four on an earlier checkpoint whose sparse path was never trained, is now a wash on accuracy — preserved-state readout buys temporal stability, not depth accuracy. These results establish exact change-gated state preservation as a useful mechanism while marking precisely where its efficiency claim does and does not hold.
 
@@ -25,7 +25,7 @@ The completed experiments support four conclusions:
 3. **Preserved-state readout buys temporal stability, not accuracy.** At matched masks, replacing \(\Delta\)-gating with token dropping leaves accuracy unchanged but degrades all three temporal metrics. An earlier fourfold accuracy collapse turned out to measure an untrained sparse path (Section 5.4).
 4. **The efficiency claim has a sharp boundary.** After a fused scan kernel, the model is overhead-bound rather than compute-bound on a desktop GPU, and dense execution is faster than the sparse path at every activity level. Sparsity's benefit is established in MACs and per-stream state, and its conversion into time and energy is unmeasured (Section 5.6).
 
-We deliberately avoid a broader claim of universal temporal-consistency superiority. SOKKANAEM leads raw frame-difference error, a flicker-oriented measure, but Depth Anything 3 is stronger on motion-compensated and GT-referenced measures in the current evaluation.
+We claim no accuracy advantage. Against the comparison group in Section 5.3, SOKKANAEM is last on AbsRel and \(\delta_1\) on real footage and leads exactly one measure, raw frame difference. Depth Anything 3 is stronger on motion-compensated and GT-referenced temporal error. The contribution is the mechanism and the efficiency-stability point it reaches, not the depth numbers.
 
 ## 2. Related Work
 
@@ -208,18 +208,36 @@ Two cautions apply. The synthetic \(\delta_1\) difference between these checkpoi
 
 Table 3 compares against current baseline checkpoints under one shared protocol on both domains: 100 clips per source, identical holdout sequences, identical metric implementation, per-clip median alignment.
 
-**Table 3. Baselines under a single protocol. Dataset-balanced means; lower is better except \(\delta_1\).**
+**Table 3. The commonly cited comparison group, all measured under one protocol: same holdout clips, 256px input, same metric implementation. Relative-depth models receive the 2-DOF disparity-space scale+shift fit they are designed for; metric models and ours receive 1-DOF per-clip median scaling. Our model is reported under both so the alignment rule does not carry the result. "med" is the per-clip median AbsRel, which is robust to the alignment blow-ups discussed below.**
 
-| Model | Params | Domain | AbsRel | \(\delta_1\) | t-delta | TCE |
-|---|---:|---|---:|---:|---:|---:|
-| Depth Anything 3 Base | 120M | real | **0.1244** | **0.8790** | 0.1024 | **0.0252** |
-| Depth Anything V2 Small | 24.8M | real | 0.2256 | 0.9050 | 0.9920 | 0.1015 |
-| **SOKKANAEM (ours)** | **4.19M** | real | 0.1595 | 0.8262 | **0.0751** | 0.0323 |
-| Depth Anything 3 Base | 120M | synthetic | **0.3618** | 0.4409 | 1.0128 | **0.0593** |
-| Depth Anything V2 Small | 24.8M | synthetic | 0.3818 | **0.7301** | 5.0124 | 0.1265 |
-| **SOKKANAEM (ours)** | **4.19M** | synthetic | 0.3791 | 0.4821 | **0.2242** | 0.0622 |
+*Real indoor holdout (TUM, Bonn):*
 
-Three readings. Against a 30x larger generalist we remain behind on accuracy and on GT-referenced temporal error, though raw frame-to-frame variation is 1.36x lower on real footage and 4.5x lower on synthetic. Against a comparable-size model we lead every real-domain metric except \(\delta_1\); Depth Anything V2's high \(\delta_1\) alongside poor AbsRel follows from per-clip scale-and-shift alignment, which ranks most pixels correctly while letting a few far pixels dominate squared error. And on throughput the ordering reverses entirely: at fp16 with compilation we run 0.378 ms per frame against Depth Anything V2 Small's 0.816 ms, at 20.6 MB against 49.6 MB (Section 5.6).
+| Model | Params | Align | AbsRel | med | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---|---:|---:|---:|---:|---:|---:|
+| DA V1 Small | 24.8M | 2-DOF | **0.0736** | **0.0637** | **0.9350** | 0.1074 | 0.0247 | 0.0303 |
+| ZoeDepth N-K | 345M | 1-DOF | 0.0997 | 0.0930 | 0.8910 | 0.1013 | 0.0241 | 0.0291 |
+| DPT-Large | 343M | 2-DOF | 0.1002 | 0.0973 | 0.9112 | 0.1371 | 0.0335 | 0.0389 |
+| DA V2 Base | 97.5M | 2-DOF | 0.1060 | 0.0895 | 0.9182 | 0.4052 | 0.0364 | 0.0425 |
+| DA 3 Base | 120M | 1-DOF | 0.1244 | 0.1154 | 0.8789 | 0.1024 | **0.0185** | **0.0252** |
+| DA V2 Small | 24.8M | 2-DOF | 0.2256 | 0.0967 | 0.9050 | 0.9919 | 0.0958 | 0.1014 |
+| **SOKKANAEM** | **4.19M** | 1-DOF | 0.1595 | 0.1041 | 0.8262 | **0.0751** | 0.0244 | 0.0324 |
+| **SOKKANAEM** | **4.19M** | 2-DOF | 0.1321 | — | 0.8268 | **0.0715** | 0.0229 | 0.0309 |
+
+*Synthetic holdout (Virtual KITTI 2, TartanAir v2, PointOdyssey):*
+
+| Model | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|
+| ZoeDepth N-K | **0.3604** | 0.5021 | 0.9522 | 0.1068 | 0.1298 |
+| DA 3 Base | 0.3618 | 0.4409 | 1.0128 | 0.0482 | **0.0593** |
+| DA V2 Base | 0.3701 | **0.7441** | 5.9644 | 0.1267 | 0.1409 |
+| **SOKKANAEM** | 0.3791 | 0.4821 | **0.2242** | **0.0308** | 0.0622 |
+| DA V2 Small | 0.3818 | 0.7301 | 5.0124 | 0.1104 | 0.1265 |
+| DA V1 Small | 0.4210 | 0.7109 | 4.5525 | 0.1200 | 0.1383 |
+| DPT-Large | 0.5029 | 0.6766 | 8.5888 | 0.1458 | 0.1669 |
+
+**A correction to our own earlier reporting.** We previously claimed to beat a comparable-size model on every real-domain metric except \(\delta_1\). That claim rested on Depth Anything V2 Small's real AbsRel of 0.2256, which is an alignment artifact: its per-clip distribution on TUM is mean 0.3463, median 0.0950, maximum 6.021. In a handful of clips the fitted disparity approaches zero and inverting it sends predicted depth to the clip range, dominating the mean. Its robust median, 0.0967, is in line with every other baseline and better than ours. **We withdraw the claim.**
+
+Read honestly, the table says three things. On real footage we are at the bottom of the accuracy ranking: 0.1321 AbsRel even under the more permissive 2-DOF alignment, 1.8x the best comparable-size baseline, and the lowest \(\delta_1\) in the group. We lead exactly one metric, raw frame-to-frame variation, by 1.35x over the next best. On synthetic footage the picture changes: t-delta is 4.2x better than the runner-up, OPW is best in the group, and AbsRel is within 5% of the leader — at 6x to 82x fewer parameters.
 
 We do not claim a general temporal-consistency lead. Of the three temporal measures, only raw frame difference favours us; Depth Anything 3 is better on both motion-compensated OPW and GT-referenced TCE. The defensible claim is flicker suppression without post-processing, at a fraction of the parameters and latency.
 

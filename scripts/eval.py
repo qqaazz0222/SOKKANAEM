@@ -20,7 +20,7 @@ from sokkanaem.metrics import clip_scores, pooled
 
 
 @torch.no_grad()
-def eval_once(model, loader, dev, max_clips, constant=False):
+def eval_once(model, loader, dev, max_clips, constant=False, align="median"):
     """constant=True replaces the prediction with the clip's best possible
     constant depth — the degenerate control. It scores t-delta 0 and OPW 0
     while being useless, which is exactly why TCE is reported (metrics.py)."""
@@ -36,9 +36,28 @@ def eval_once(model, loader, dev, max_clips, constant=False):
         v = valid.bool()
         if constant:
             depths = torch.full_like(gt, gt[v].median())
-        # median scaling (standard for scale-ambiguous depth)
-        s = gt[v].median() / depths[v].median().clamp(min=1e-6)
-        p = depths * s
+        if align == "scaleshift":
+            # Least-squares scale+shift in disparity space -- the MiDaS
+            # protocol relative-depth baselines are designed for. It has two
+            # degrees of freedom against median scaling's one, so it flatters
+            # any model it is applied to; the only reason to run it here is to
+            # compare against those baselines on THEIR alignment rather than
+            # letting the protocol carry the result.
+            import numpy as np
+            dg = (1.0 / gt.clamp(min=1e-3))[v].double().cpu().numpy()
+            dp = (1.0 / depths.clamp(min=1e-3))[v].double().cpu().numpy()
+            A = np.stack([dp, np.ones_like(dp)], axis=1)
+            (a, b), *_ = np.linalg.lstsq(A, dg, rcond=None)
+            aligned = a * (1.0 / depths.clamp(min=1e-3)) + b
+            p = 1.0 / aligned.clamp(min=1e-3)
+            # the scale-drift diagnostic below is defined for the 1-DOF fit;
+            # under a 2-DOF fit report the median ratio so the column stays
+            # populated and comparable in magnitude, not identical in meaning
+            s = gt[v].median() / depths[v].median().clamp(min=1e-6)
+        else:
+            # median scaling (standard for scale-ambiguous depth)
+            s = gt[v].median() / depths[v].median().clamp(min=1e-6)
+            p = depths * s
         sc = clip_scores(clip[0], p[0], gt[0], valid[0])
         if sc is None:  # clip has no valid GT pixel at all — see clip_scores
             skipped += 1
@@ -102,6 +121,13 @@ def main():
                     help="§4.4 gating-position ablation: Δ-gating vs token drop")
     ap.add_argument("--scores-tag", default=None,
                     help="name for the per-clip JSON dump (default: gate mode)")
+    ap.add_argument("--align", default="median",
+                    choices=["median", "scaleshift"],
+                    help="per-clip alignment. median (default) is 1-DOF and "
+                         "what every SOKKANAEM number uses; scaleshift is the "
+                         "2-DOF disparity-space fit relative-depth baselines "
+                         "are evaluated under, provided so the two can be "
+                         "compared without the protocol carrying the result")
     ap.add_argument("--control", action="store_true",
                     help="add the degenerate constant-depth control row")
     ap.add_argument("--holdout", action="append", default=None,
@@ -184,6 +210,7 @@ def main():
 
     def run(label, **kw):
         ms = []
+        kw.setdefault("align", args.align)
         for src, loader in sources:
             m = eval_once(model, loader, dev, args.max_clips, **kw)
             row(label, src, m)
