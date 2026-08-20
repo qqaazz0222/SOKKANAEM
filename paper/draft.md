@@ -32,9 +32,9 @@ The completed experiments support five conclusions:
 
 1. **Exact state preservation.** For \(M=0\), \(\Delta\)-gating gives a bit-exact state copy in implementation and an identity transition analytically.
 2. **A favorable sparsity–accuracy trade-off.** On real indoor footage, reducing activity from 96.2% to 32.2% costs 2.8% relative AbsRel, and to 7.1% costs 13%.
-3. **Preserved-state readout buys suppression of raw frame-to-frame variation, not accuracy.** At matched masks, replacing \(\Delta\)-gating with token dropping leaves accuracy unchanged but degrades all three temporal metrics. It does not reproduce the stability of preserved-state readout; it is not the case that token dropping fails outright. An earlier fourfold accuracy collapse turned out to measure an untrained sparse path (Section 5.4).
-4. **The efficiency claim has a sharp boundary.** After a fused scan kernel, the model is overhead-bound rather than compute-bound on a desktop GPU, and dense execution is faster than the sparse path at every activity level. Sparsity's benefit is established in MACs and per-stream state, and its conversion into time and energy is unmeasured (Section 5.6).
-5. **Clip length changes the answer, and the eight-frame convention is optimistic for everyone.** Our error grows 87% from eight-frame to 256-frame clips. Stateless per-frame baselines grow more over the same clips (116% and 145%), because per-clip alignment gets harder as the clip lengthens — so carried state is a net advantage over a long stream even though it does not accumulate accuracy within a keyframe cycle. Long-clip fine-tuning removes a fifth of the 256-frame error while leaving the eight-frame number identical to four decimal places, so a short-clip evaluation scores that intervention as doing nothing (Section 5.7).
+3. **Preserved-state readout buys suppression of raw frame-to-frame variation, not accuracy.** At matched masks, replacing \(\Delta\)-gating with token dropping leaves accuracy unchanged but degrades all three temporal metrics. It does not reproduce the stability of preserved-state readout; it is not the case that token dropping fails outright. An earlier fourfold accuracy collapse turned out to measure an untrained sparse path (Section 5.5).
+4. **The efficiency claim has a sharp boundary.** After a fused scan kernel, the model is overhead-bound rather than compute-bound on a desktop GPU, and dense execution is faster than the sparse path at every activity level. Sparsity's benefit is established in MACs and per-stream state, and its conversion into time and energy is unmeasured (Section 5.8).
+5. **Clip length changes the answer, and the eight-frame convention is optimistic for everyone.** Our error grows 87% from eight-frame to 256-frame clips. Stateless per-frame baselines grow more over the same clips (116% and 145%), because per-clip alignment gets harder as the clip lengthens — so carried state is a net advantage over a long stream even though it does not accumulate accuracy within a keyframe cycle. Long-clip fine-tuning removes a fifth of the 256-frame error while leaving the eight-frame number identical to four decimal places, so a short-clip evaluation scores that intervention as doing nothing (Section 5.8).
 
 We claim no accuracy advantage. Against the comparison group in Section 5.3, SOKKANAEM is last on AbsRel and \(\delta_1\) on real footage and leads exactly one measure, raw frame difference. Depth Anything 3 is stronger on motion-compensated and GT-referenced temporal error. The contribution is the mechanism and the efficiency-stability point it reaches, not the depth numbers.
 
@@ -46,7 +46,7 @@ Modern monocular systems built on dense prediction transformers (Ranftl et al., 
 
 ### 2.2 Dynamic token and change-based computation
 
-Token pruning, merging, and early exiting reduce computation within an image (Rao et al., 2021; Kong et al., 2022). DeltaCNN (Parger et al., 2022), skip convolutions (Habibian et al., 2021), and eventful transformers (Liang et al., 2023) exploit change across frames, but must preserve or reconstruct dense outputs using feature caches and cache-consistency rules. SOKKANAEM shares the principle of recomputing changed regions while storing temporal information in the SSM hidden state, so no cache-invalidation rule is needed for the temporal path. Our token-drop ablation directly tests whether merely bypassing static tokens suffices; it does not (Section 5.4).
+Token pruning, merging, and early exiting reduce computation within an image (Rao et al., 2021; Kong et al., 2022). DeltaCNN (Parger et al., 2022), skip convolutions (Habibian et al., 2021), and eventful transformers (Liang et al., 2023) exploit change across frames, but must preserve or reconstruct dense outputs using feature caches and cache-consistency rules. SOKKANAEM shares the principle of recomputing changed regions while storing temporal information in the SSM hidden state, so no cache-invalidation rule is needed for the temporal path. Our token-drop ablation tests what the readout adds over merely bypassing static tokens: temporal stability, not accuracy (Section 5.5).
 
 ### 2.3 Visual state-space models
 
@@ -58,11 +58,11 @@ Making a recurrent state update conditional is not new, and the closest prior wo
 
 Three things separate the mechanism studied here from that group, and only their combination is our claim.
 
-1. **The gate is external and untrained.** The activity signal comes from patch-level pixel or feature change, not from a learned head with a sparsity budget. Nothing in the objective can trade accuracy for a lower skip rate, and the operating point is set at inference by a threshold rather than fixed at training time — which is also why it must be recalibrated per domain (Section 5.5).
+1. **The gate is external and untrained.** The activity signal comes from patch-level pixel or feature change, not from a learned head with a sparsity budget. Nothing in the objective can trade accuracy for a lower skip rate, and the operating point is set at inference by a threshold rather than fixed at training time — which is also why it must be recalibrated per domain (Section 5.6).
 2. **The no-update case is an identity, not a suppression.** A learned gate driven to zero, or a spike that does not fire, leaves an update that is approximately skipped: the transition is still computed and the residual is small. Multiplying the discretization step instead makes \(\bar A = I\) and \(\bar B = 0\), so the state is carried with no residual at all, in implementation as well as in the algebra (Section 3.3).
-3. **The task keeps a dense spatial output.** Skipping a token's temporal update does not excuse producing its depth. The separation between exact temporal state preservation and the approximate spatial caching that supplies the missing context — and the cost floor that separation implies — is specific to dense prediction and is where the efficiency claim runs out (Section 5.6).
+3. **The task keeps a dense spatial output.** Skipping a token's temporal update does not excuse producing its depth. The separation between exact temporal state preservation and the approximate spatial caching that supplies the missing context — and the cost floor that separation implies — is specific to dense prediction and is where the efficiency claim runs out (Section 5.8).
 
-Change-based computation in vision (Section 2.2) shares the first property and none of the second: DeltaCNN and skip convolutions preserve or reconstruct dense activations through caches with invalidation rules, where the temporal path here has no cache to invalidate. Our token-drop ablation tests exactly what the readout adds over bypassing static tokens (Section 5.4).
+Change-based computation in vision (Section 2.2) shares the first property and none of the second: DeltaCNN and skip convolutions preserve or reconstruct dense activations through caches with invalidation rules, where the temporal path here has no cache to invalidate. Our token-drop ablation tests exactly what the readout adds over bypassing static tokens (Section 5.5).
 
 ## 3. Method
 
@@ -102,7 +102,7 @@ M_{t-1,i},&\text{otherwise}.
 \end{cases}
 \]
 
-We dilate active regions by one patch to protect object boundaries and force a full update every \(K\) frames to limit drift. \(K\) turns out to be an accuracy control rather than a safety valve, and the drift it bounds is larger than clip-level numbers suggest (Section 5.7). Evaluation-only ablations found pixel MSE and cosine detection comparable at matched activity, so MSE remains the default. Training with i.i.d. random masks was at least as robust as detector-driven fine-tuning in the completed three-arm study.
+We dilate active regions by one patch to protect object boundaries and force a full update every \(K\) frames to limit drift. \(K\) turns out to be an accuracy control rather than a safety valve, and the drift it bounds is larger than clip-level numbers suggest (Section 5.8). Evaluation-only ablations found pixel MSE and cosine detection comparable at matched activity, so MSE remains the default. Training with i.i.d. random masks was at least as robust as detector-driven fine-tuning in the completed three-arm study.
 
 ### 3.3 Exact \(\Delta\)-gating
 
@@ -146,7 +146,7 @@ An optional spatial output cache gathers active patches, updates them, and scatt
 
 Camera motion makes raw pixel differences dense. We therefore estimate a homography from at most 50 tracked points on a low-resolution frame using Lucas–Kanade tracking and RANSAC. The previous frame is warped to the current view, after which relative \(L_1\) differences between patch embeddings produce the activity mask. Failure falls back to the identity transform, increasing activity rather than silently suppressing changes.
 
-On Virtual KITTI 2, GMC plus feature gating reaches 23.7% activity with only +0.7% relative AbsRel over full computation. Section 5.5 tests the same mechanism on real driving footage, where it also holds — but only after per-domain threshold recalibration, because the feature-scale thresholds tuned on rendered video are inoperative on real capture. That experiment is a feasibility demonstration on one dataset, not a claim of robustness to camera motion in general.
+On Virtual KITTI 2, GMC plus feature gating reaches 23.7% activity with only +0.7% relative AbsRel over full computation. Section 5.6 tests the same mechanism on real driving footage, where it also holds — but only after per-domain threshold recalibration, because the feature-scale thresholds tuned on rendered video are inoperative on real capture. That experiment is a feasibility demonstration on one dataset, not a claim of robustness to camera motion in general.
 
 ### 3.6 Decoder and objective
 
@@ -180,7 +180,7 @@ Three protocol choices decide what the numbers mean, and each has bitten us.
 
 **Clips are disjoint and spread over the whole holdout.** Clips tile each held-out sequence without overlap, and when the clip count is capped the retained clips are spread evenly over the source rather than taken from its front. This is not a refinement: sequences are concatenated in order, so a cap of 100 on Bonn's 399 clips evaluates its first held-out sequence alone, and the same checkpoint then reads 44.7% activity under one cap and 55.8% under another. Every number in this paper is measured under even spacing; earlier versions of our own reports were not, and their Bonn and PointOdyssey columns describe one sequence rather than a holdout.
 
-**Alignment is per clip, not per frame or per dataset.** One scale (and, where stated, shift) is fitted per clip against valid ground-truth pixels and applied to all its frames. The frame-index analysis in Section 5.7 is the one exception, where each frame is aligned independently so that a decaying curve cannot be an artefact of a single clip-level fit dominated by late frames.
+**Alignment is per clip, not per frame or per dataset.** One scale (and, where stated, shift) is fitted per clip against valid ground-truth pixels and applied to all its frames. The frame-index analysis in Section 5.8 is the one exception, where each frame is aligned independently so that a decaying curve cannot be an artefact of a single clip-level fit dominated by late frames.
 
 ### 4.3 Metrics
 
@@ -206,8 +206,6 @@ The reported SOKKANAEM model has 4.19M parameters and is a single checkpoint use
 
 ### 5.1 Activity–accuracy trade-off `[CHECKPOINT-DEPENDENT]`
 
-> The default operating point is under review: Section 5.7 finds a keyframe period of 10 preferable to the 30 used here, and adopting it would shift every activity figure in this section upward by roughly six points.
-
 All tables in this section come from a single checkpoint (4.19M parameters, 60k steps) so that no comparison mixes model versions. Each row sweeps the detector threshold; 100 clips per source, dataset-balanced mean.
 
 **Table 1. Activity sweep on both domains. The constant-depth control is the per-clip optimal constant prediction.**
@@ -222,7 +220,7 @@ All tables in this section come from a single checkpoint (4.19M parameters, 60k 
 
 On real footage, cutting computation by a factor of thirteen — 96.2% to 7.1% activity — costs 13% relative AbsRel, and the default operating point at 32.2% costs 2.8%. At 74.0% activity accuracy is in fact slightly *better* than at full computation (0.1545 against 0.1552), consistent with gating cutting stale context rather than only saving work. The gap to the constant control remains large at every operating point, which the raw t-delta column alone would not establish.
 
-The synthetic sweep does not reach low activity because TartanAir stays between 80% and 100% active regardless of threshold. This is the same phenomenon quantified in Section 5.5: how much a stream can skip is a property of the capture, not only of the method.
+The synthetic sweep does not reach low activity because TartanAir stays between 80% and 100% active regardless of threshold. This is the same phenomenon quantified in Section 5.6: how much a stream can skip is a property of the capture, not only of the method.
 
 ![Activity–accuracy trade-off](figures/tradeoff.svg)
 
@@ -251,7 +249,7 @@ Two cautions apply. The synthetic \(\delta_1\) difference between these checkpoi
 
 Every model in this section is measured on the same holdout clips, at 256 pixels, through the same metric implementation, under the protocol of Section 4.2. We report two clip lengths, because they answer different questions and disagree. Eight frames is the convention in this literature. 256 frames is the streaming setting the architecture is for, and it is the primary table.
 
-**Table 3a. The comparison group at 256 frames — the streaming protocol. Real indoor holdout (TUM, Bonn), disjoint clips, 13 clips per model, dataset-balanced mean. DA3 receives the whole clip at once and is not causal; every other row is causal. Alignment is each model's native rule (Section 4.4), and Section 5.8 reports the whole group under both rules.**
+**Table 3a. The comparison group at 256 frames — the streaming protocol. Real indoor holdout (TUM, Bonn), disjoint clips, 13 clips per model, dataset-balanced mean. DA3 receives the whole clip at once and is not causal; every other row is causal. Alignment is each model's native rule (Section 4.4); Section 5.4 reports the whole group under both rules.**
 
 | Model | Params | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
 |---|---:|---:|---:|---:|---:|---:|
@@ -297,7 +295,27 @@ Four things follow, and only one of them flatters us.
 
 **A correction to our own earlier reporting.** We previously claimed to beat a comparable-size model on every real-domain metric except \(\delta_1\). That claim rested on Depth Anything V2 Small's real AbsRel, which is an alignment artifact: on a handful of clips the fitted disparity approaches zero and inverting it sends predicted depth to the clip range, dominating the mean (its per-clip median is in line with the rest of the group). **We withdraw the claim.**
 
-### 5.4 What preserved-state readout actually buys `[CHECKPOINT-DEPENDENT]`
+### 5.4 Alignment: why one rule for every model would be worse
+
+Scale-ambiguous depth has to be aligned to ground truth before it can be scored, and the choice of rule is not neutral. Relative-depth models are trained to produce disparity up to an affine transform, so they are conventionally fitted with a two-degree-of-freedom scale and shift in disparity space. Metric models, and ours, are fitted with a one-degree-of-freedom per-clip median scale. Reporting each model under its native rule invites the objection that "one protocol" is not one protocol. We therefore ran the whole group under both.
+
+**Table 12. Every model under its native alignment rule and under the other one. Real indoor holdout, eight-frame clips, 189 clips, AbsRel.**
+
+| Model | Native rule | AbsRel, native | AbsRel, other rule |
+|---|---|---:|---:|
+| DA V1 Small | 2-DOF disparity | **0.0650** | 1.0620 |
+| DPT-Large | 2-DOF disparity | 0.0875 | 0.8962 |
+| DA V2 Base | 2-DOF disparity | 0.0877 | 0.8963 |
+| DA V2 Small | 2-DOF disparity | 0.2068 | 0.8722 |
+| ZoeDepth N-K | 1-DOF median | 0.0992 | 0.3782 |
+| DA 3 Base | 2-DOF, depth space | 0.1130 | **0.1023** |
+| **SOKKANAEM** | 1-DOF median | 0.1302 | 0.1155 |
+
+**A single common rule would not be fairer; it would be meaningless for most of the group.** Fitting a relative-depth model with one degree of freedom in depth space raises its error by an order of magnitude, because the quantity being scaled is not the quantity it predicts. Fitting the metric baseline in disparity space costs it a factor of four. Neither number measures depth quality; both measure a protocol mismatch. The native-rule column is the only defensible main comparison, and the paper uses it.
+
+Two things follow for our own claims. The extra degree of freedom is worth 11% to us (0.1302 to 0.1155), which is what Section 6.5 uses as evidence of a systematic error a single scale cannot absorb — and it is worth *less* to us than to any relative-depth model, so it is not the source of our accuracy gap. And DA3 is the one model that prefers the median rule, which is why we report it at 0.1130 in Table 3b rather than at its better 0.1023: quoting a baseline at its worse number would flatter us.
+
+### 5.5 What preserved-state readout actually buys `[CHECKPOINT-DEPENDENT]`
 
 \(\Delta\)-gating freezes hidden state at static positions but still reads it through \(C_i h_i\). A token-drop arm freezes the same state under the same masks and additionally bypasses the temporal block's output. Comparing the two isolates the value of the readout itself.
 
@@ -312,7 +330,7 @@ Four things follow, and only one of them flatters us.
 
 The honest reading is that the earlier experiment measured the fragility of an untrained sparse path, not the value of state readout. What survives is narrower and still meaningful: **reading preserved state buys temporal stability, not depth accuracy.** A model trained to tolerate missing static tokens recovers the accuracy on its own, but only the readout keeps consecutive predictions from moving. Since flicker suppression is the property this architecture is built around, the ablation still supports the design — it simply supports a smaller claim than we first made.
 
-### 5.5 Cross-domain transfer and real moving cameras `[CHECKPOINT-DEPENDENT]`
+### 5.6 Cross-domain transfer and real moving cameras `[CHECKPOINT-DEPENDENT]`
 
 We evaluate the confirmed checkpoint on five KITTI raw drives (Geiger et al., 2012) (885 frames) that appear in no training split. Only the synthetic clone of this domain was trained on, so the experiment isolates the synthetic-to-real axis rather than an arbitrary domain shift. Ground truth is projected LiDAR: capped near 80 m and 30% valid.
 
@@ -350,7 +368,7 @@ The practical caveat is that GMC's default threshold leaves real driving at 100%
 
 Homography estimation itself does not fail on this footage: over 210 frames of KITTI raw at three thresholds, the identity fallback fired **0 times**. The failure mode this branch guards against — no texture, degenerate fit — is not what limits the moving-camera path here; the threshold scale is.
 
-### 5.6 Compute and wall-clock analysis
+### 5.7 Compute and wall-clock analysis
 
 Two results in this section point in opposite directions, and both matter.
 
@@ -392,7 +410,7 @@ We report this plainly because it bounds the contribution. Exact state preservat
 
 The headline latency and memory numbers therefore belong to a small model with a fused kernel, and the sparsity mechanism's established benefit is arithmetic and state, not time. A reader who takes "2.2x faster" as the sparse path beating the dense one has read the opposite of what we measured.
 
-### 5.7 Streaming drift, and how much of it is ours `[CHECKPOINT-DEPENDENT]`
+### 5.8 Streaming drift, and how much of it is ours `[CHECKPOINT-DEPENDENT]`
 
 A streaming model is supposed to accumulate evidence across frames, so depth at frame 7 should be better than at frame 0 — that is the reason to carry state at all. The eight-frame clip mean conventional in this literature cannot see whether that happens, and for a long time we did not measure it either.
 
@@ -506,7 +524,7 @@ This measurement is easy to get wrong. Our first version pooled ground truth wit
 
 ### 6.5 Range compression, a cheap fix that failed, and one that works
 
-Section 5.3 reports our model under both alignment rules, and the two-degree-of-freedom fit improves real AbsRel from 0.1595 to 0.1321 — 17%. An extra degree of freedom helping that much means a systematic error the one-parameter fit cannot absorb.
+Section 5.4 reports our model under both alignment rules, and the two-degree-of-freedom fit improves real AbsRel from 0.1302 to 0.1155 — 11%. An extra degree of freedom helping that much means a systematic error the one-parameter fit cannot absorb.
 
 Splitting by clip localises it. The two-degree-of-freedom fit helps 78% of Bonn clips (median improvement 9.6%) but only 31% of TUM clips, where the median clip is actually worse. Measuring the predicted and ground-truth disparity distributions on the same clips explains why:
 
@@ -554,9 +572,9 @@ The present study has several important limitations.
 3. OPW and TCE do not support a general temporal-consistency lead. Raw t-delta can be gamed by constant predictions and is interpreted only alongside accuracy and the constant control.
 4. A fused scan kernel removed the dominant cost and, in doing so, removed the sparse path's wall-clock advantage on an RTX 4090: compiled full compute is now faster at every activity level. The remaining sparse-path cost is activity-independent bookkeeping. Sparsity's benefit is presently established in MACs and per-stream state, not in measured latency on this device.
 5. Execution on an RTX 4090 is overhead-bound at this model scale, so reduced analytical MACs do not become higher FPS. Jetson Orin latency, energy, and multi-stream measurements have not been performed, and they are the measurement that decides whether the MAC reduction is worth anything in deployment.
-6. GMC is validated on real ego-motion (Section 5.5), but only on five driving sequences from one dataset, and only with per-domain threshold calibration; its default threshold is inoperative on real video. Handheld and aerial motion remain untested.
+6. GMC is validated on real ego-motion (Section 5.6), but only on five driving sequences from one dataset, and only with per-domain threshold calibration; its default threshold is inoperative on real video. Handheld and aerial motion remain untested.
 7. Cross-domain evaluation covers real driving only. Unseen indoor domains (NYU, ScanNet) were not evaluated: the former's host was unreachable and the latter requires a signed agreement. The claim of generalization is therefore limited to the synthetic-to-real axis of one scene type.
-8. Accuracy degrades between keyframes, and clip-length dependence is severe: the reported checkpoint scores 0.1302 AbsRel on eight-frame clips and 0.2434 on 256-frame clips (Section 5.7). Part of that is the per-clip alignment window rather than drift — stateless baselines degrade more over the same clips — but we cannot separate the two exactly, only bound our share by the stateless controls. Behaviour beyond 256 frames is unmeasured; the holdout sequences run to 1,294 frames, so the measurement is available and simply not yet done.
+8. Accuracy degrades between keyframes, and clip-length dependence is severe: the reported checkpoint scores 0.1302 AbsRel on eight-frame clips and 0.2434 on 256-frame clips (Section 5.8). Part of that is the per-clip alignment window rather than drift — stateless baselines degrade more over the same clips — but we cannot separate the two exactly, only bound our share by the stateless controls. Behaviour beyond 256 frames is unmeasured; the holdout sequences run to 1,294 frames, so the measurement is available and simply not yet done.
 
 9. The 256-frame protocol rests on 13 disjoint clips of real footage, because a finite holdout yields few long clips. Overlapping windows would multiply the count at the cost of independence, and one outlier frame then aliases into several frame indices. Differences of a few percent at that clip length are not resolvable, and we do not claim any.
 10. The predicted depth field has under half the ground truth's dynamic range on the dynamic-object source (Section 6.5). A spread term recovers part of it at a stated cost in motion-referenced consistency; the defect is not eliminated.
@@ -591,7 +609,7 @@ The experiments also reveal the boundary of the idea. Exact state skipping is no
 
 Serving \(N\) streams from one set of weights costs \(W + N \times S\): 8.4 MB + 6.38N MB in fp16. State overtakes weights at two streams, which is the regime the external state dictionary exists for.
 
-**Detector defaults.** \(\tau_{\mathrm{on}}=0.05\), \(\tau_{\mathrm{off}}=0.025\), one-patch dilation, keyframe refresh every 30 frames, dense fallback above 40% activity. For GMC these thresholds are on a feature scale and must be recalibrated per domain (Section 5.5).
+**Detector defaults.** \(\tau_{\mathrm{on}}=0.05\), \(\tau_{\mathrm{off}}=0.025\), one-patch dilation, keyframe refresh every 30 frames, dense fallback above 40% activity. For GMC these thresholds are on a feature scale and must be recalibrated per domain (Section 5.6).
 
 **Evaluation.** 100 clips per source, 8 frames per clip, held-out sequences only, per-clip median alignment before every metric. Temporal metrics use RAFT-small flow. Every full temporal table carries the per-clip optimal constant-depth control.
 
