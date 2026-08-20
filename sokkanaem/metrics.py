@@ -25,16 +25,23 @@ import torch.nn.functional as F
 _raft = None
 
 
-def _flow(img1, img2):
+def _flow(img1, img2, chunk=64):
     """RAFT flow img1 -> img2, both (B,3,H,W) in [0,1]. H,W >= 128 and /8
-    (RAFT's correlation pyramid needs a >=16px feature map)."""
+    (RAFT's correlation pyramid needs a >=16px feature map).
+
+    Chunked over the batch: a 512-frame clip is 511 pairs, and RAFT's
+    correlation volume for that many at once does not fit in 24 GB. The result
+    is identical to one call -- pairs are independent."""
     global _raft
     assert min(img1.shape[-2:]) >= 128, f"RAFT needs >=128px, got {img1.shape[-2:]}"
     if _raft is None:
         from torchvision.models.optical_flow import raft_small, Raft_Small_Weights
         _raft = raft_small(weights=Raft_Small_Weights.DEFAULT)
         _raft = _raft.to(img1.device).eval()
-    return _raft(img1 * 2 - 1, img2 * 2 - 1)[-1]  # last refinement iteration
+    if img1.shape[0] <= chunk:
+        return _raft(img1 * 2 - 1, img2 * 2 - 1)[-1]  # last refinement iteration
+    return torch.cat([_raft(img1[i:i + chunk] * 2 - 1, img2[i:i + chunk] * 2 - 1)[-1]
+                      for i in range(0, img1.shape[0], chunk)])
 
 
 @torch.no_grad()
