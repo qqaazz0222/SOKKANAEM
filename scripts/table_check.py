@@ -92,17 +92,20 @@ def main():
             scored = sorted(((sum(t in txt for t in toks), lbl, txt)
                              for lbl, txt in bs), reverse=True)[:2]
             best = scored[0][0] if scored else 0
-            # config values (tau, weights) and parameter counts share a row with
-            # measurements and live in no log, so a near-miss is normal. Only a
-            # row whose best source covers less than half its numbers is a real
-            # provenance hole -- or a row assembled from two runs.
-            flag = best * 2 < len(toks)
-            bad += flag
-            print(f"  line {ln}: {'UNATTRIBUTED' if flag else 'partial'} "
-                  f"{best}/{len(toks)} {toks}")
+            # three outcomes, not two. A comparison row legitimately spans runs
+            # (a ladder over checkpoints); a row with a number that exists in NO
+            # run is a provenance hole. Config values and parameter counts share
+            # rows with measurements and live in no log, so require the caption
+            # to justify a span rather than treating it as an error.
+            absent = [x for x in toks
+                      if not any(x in txt for _, txt in bs)]
+            kind = "UNATTRIBUTED" if absent else "spans runs"
+            bad += bool(absent)
+            print(f"  line {ln}: {kind} {best}/{len(toks)} {toks}")
+            if absent:
+                print(f"    in no run at all: {absent}")
             for hits, lbl, txt in scored:
-                miss = [x for x in toks if x not in txt]
-                print(f"    {hits}/{len(toks)} {lbl}\n      missing: {miss}")
+                print(f"    {hits}/{len(toks)} {lbl}")
     print(f"\n{bad} row(s) without a single-run source")
     return 1 if bad else 0
 

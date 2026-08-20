@@ -26,10 +26,13 @@ SOURCES = [
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--ckpt", required=True)
+    ap.add_argument("--bin-temp", type=float, default=None)
     ap.add_argument("--max-clips", type=int, default=40)
     args = ap.parse_args()
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     m = from_checkpoint(args.ckpt, dev).eval()
+    if args.bin_temp is not None:
+        m.decoder.bin_temp = args.bin_temp
 
     print(f"{'source':>8s} {'range/gt':>9s} {'std/gt':>8s} {'AbsRel':>8s}")
     for name, spec, hold in SOURCES:

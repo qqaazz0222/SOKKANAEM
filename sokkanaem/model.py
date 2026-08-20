@@ -302,6 +302,7 @@ class DPTDecoder(nn.Module):
         )
         if bins:
             self.bin_logits = nn.Parameter(torch.zeros(bins))
+            self.bin_temp = 1.0
             self.register_buffer(
                 "log_range",
                 torch.tensor([math.log(d_min), math.log(d_max)]))
@@ -335,7 +336,11 @@ class DPTDecoder(nn.Module):
             # expectation over bin centres, in log-depth, at 1/2 res; the
             # upsample then interpolates log-depth (geometric, smooth across
             # scale) and exp() keeps the output positive by construction.
-            p = self.head(x).softmax(1)
+            # bin_temp < 1 sharpens the distribution at inference. It exists
+            # because "the expectation over bins pulls toward the mean" is a
+            # testable explanation for range compression (Section 6.5), and the
+            # test needs a knob rather than a patched forward pass.
+            p = (self.head(x) / self.bin_temp).softmax(1)
             logd = (p * self.bin_centres().view(1, -1, 1, 1)).sum(1, keepdim=True)
             return F.interpolate(logd, scale_factor=2, mode="bilinear",
                                  align_corners=False).exp()
