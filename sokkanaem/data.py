@@ -317,6 +317,14 @@ def eval_set_from_env(specs, holdout, tag=""):
             env("EVAL_TAG", tag))
 
 
+def eval_clip_len(default=8):
+    """CLIP_LEN / CLIP_STRIDE overrides, so a baseline script can be measured at
+    the same clip length as scripts/eval.py --clip-len. The streaming protocol
+    is a long-clip protocol; a baseline stuck at 8 frames is not comparable."""
+    n = int(os.environ.get("CLIP_LEN", default))
+    return n, int(os.environ.get("CLIP_STRIDE", n))
+
+
 def build_mixed(specs, holdout=None, val=False, **kw):
     """specs: ["scannet:/path", "folder:/path:2000", ...].
     holdout: list of path substrings (e.g. ["Scene06"]) naming the val

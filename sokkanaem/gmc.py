@@ -18,6 +18,11 @@ class GlobalMotionCompensator:
         self.lowres = lowres
         self.max_corners = max_corners
         self.min_matches = min_matches
+        # how often the estimate degenerates matters: a fallback raises
+        # activity rather than suppressing change, so the skip ratio reported
+        # for a moving camera is only meaningful next to this rate
+        self.calls = 0
+        self.fallbacks = 0
 
     @torch.no_grad()
     def __call__(self, prev, cur):
@@ -33,7 +38,9 @@ class GlobalMotionCompensator:
         out = []
         for b in range(B):
             Hm = self._homography(pg[b], cg[b], cv2)
+            self.calls += 1
             if Hm is None:
+                self.fallbacks += 1
                 out.append(prev[b:b + 1])
                 continue
             # lift low-res homography to full res: S @ H @ S^-1

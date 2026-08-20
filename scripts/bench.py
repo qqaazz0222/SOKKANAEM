@@ -59,17 +59,63 @@ def state_bytes(state):
 
 
 @torch.no_grad()
-def bench(model, size, ratio, streams, dtype, iters, repeat=3, warmup=20):
+class PowerSampler:
+    """Board power over the measured window, via nvidia-smi polling.
+
+    A MAC reduction only matters if it becomes time or energy, and on this GPU
+    it does not become time (Section 5.6), so energy is the remaining question.
+    This is board-level draw on a desktop card, not an edge-device measurement:
+    it includes memory and idle floor, and the floor dominates at this model
+    scale. Treat it as an upper bound on what sparsity can save here.
+
+    ponytail: nvidia-smi subprocess at 20 ms, no pynvml (not installed in this
+    env). Swap in pynvml if sub-10 ms sampling is ever needed.
+    """
+
+    def __init__(self, period=0.02):
+        self.period, self.samples, self._stop = period, [], None
+
+    def __enter__(self):
+        import subprocess, threading
+        self._stop = threading.Event()
+
+        def poll():
+            while not self._stop.is_set():
+                try:
+                    out = subprocess.run(
+                        ["nvidia-smi", "--query-gpu=power.draw",
+                         "--format=csv,noheader,nounits"],
+                        capture_output=True, text=True, timeout=2).stdout
+                    self.samples.append(float(out.strip().splitlines()[0]))
+                except Exception:
+                    pass
+                self._stop.wait(self.period)
+
+        self._thread = threading.Thread(target=poll, daemon=True)
+        self._thread.start()
+        return self
+
+    def __exit__(self, *exc):
+        self._stop.set()
+        self._thread.join(timeout=2)
+
+    @property
+    def watts(self):
+        return sum(self.samples) / len(self.samples) if self.samples else 0.0
+
+
+def bench(model, size, ratio, streams, dtype, iters, repeat=3, warmup=20,
+          power=False):
     """Fastest of `repeat` timings: anything else on the GPU only ever makes
     a run slower, and this box shares its 4090 with other jobs (a contended
     measurement once read 47 ms on a path that costs 19)."""
-    runs = [_timed(model, size, ratio, streams, dtype, iters, warmup)
+    runs = [_timed(model, size, ratio, streams, dtype, iters, warmup, power)
             for _ in range(repeat)]
     return min(runs, key=lambda r: r["ms"])
 
 
 @torch.no_grad()
-def _timed(model, size, ratio, streams, dtype, iters, warmup=20):
+def _timed(model, size, ratio, streams, dtype, iters, warmup=20, power=False):
     dev = next(model.parameters()).device
     model.detector = FixedRatio(ratio, model.p)
     # this benchmark sweeps a FORCED active ratio, so the deployment policy
@@ -79,21 +125,29 @@ def _timed(model, size, ratio, streams, dtype, iters, warmup=20):
     model.dense_above = 0.0
     frame = torch.rand(streams, 3, size, size, device=dev, dtype=dtype)
     state, active, t0 = None, [], 0.0
+    sampler = PowerSampler() if power else None
     for i in range(warmup + iters):
         if i == warmup:
             torch.cuda.synchronize()
             torch.cuda.reset_peak_memory_stats()
+            if sampler is not None:
+                sampler.__enter__()
             t0 = time.perf_counter()
         _, state, info = model.step(frame, state)
         if i >= warmup:
             active.append(info["active_ratio"])
     torch.cuda.synchronize()
     dt = (time.perf_counter() - t0) / iters
+    if sampler is not None:
+        sampler.__exit__()
     got = sum(active) / len(active)
     assert abs(got - ratio) < 0.05, f"forced mask off target: {got} != {ratio}"
+    w = sampler.watts if sampler is not None else 0.0
     return {"ms": dt * 1000, "fps": streams / dt, "active": got,
             "vram": torch.cuda.max_memory_allocated() / 2**20,
-            "state": state_bytes(state) / 2**20 / streams}
+            "state": state_bytes(state) / 2**20 / streams,
+            "watts": w, "mj_frame": w * dt * 1000 / streams,
+            "fps_per_watt": (streams / dt / w) if w else 0.0}
 
 
 def main():
@@ -110,6 +164,10 @@ def main():
     ap.add_argument("--cache", default="both", choices=["both", "on", "off"],
                     help="spatial+temporal output caches (the sparse path)")
     ap.add_argument("--half", action="store_true")
+    ap.add_argument("--power", action="store_true",
+                    help="sample board power over the measured window and "
+                         "report energy per frame -- run it on an idle GPU or "
+                         "the number is another job's")
     ap.add_argument("--bucket", type=int, default=0,
                     help="round the gathered active-token count up to a "
                          "multiple of this (0 = off). Static shapes are what "
@@ -132,6 +190,8 @@ def main():
           f"bucket {args.bucket or 'off'}  "
           f"{torch.cuda.get_device_name(0)}")
     hdr = "cache  active%   ms/frame     FPS   peakVRAM_MB  state_MB/stream"
+    if args.power:
+        hdr += "     watts   mJ/frame   FPS/W"
     print(hdr + "\n" + "-" * len(hdr))
     for cache in configs:
         model = from_checkpoint(args.ckpt, "cuda", spatial_cache=cache,
@@ -142,10 +202,14 @@ def main():
                 model.enable_cuda_graphs()
         for ratio in args.active:
             r = bench(model, args.size, ratio, args.streams, dtype,
-                      args.iters, args.repeat)
-            print(f"{'on ' if cache else 'off'}    {r['active']*100:5.1f}  "
-                  f"{r['ms']:9.3f}  {r['fps']:7.1f}  {r['vram']:11.1f}  "
-                  f"{r['state']:15.2f}")
+                      args.iters, args.repeat, power=args.power)
+            line = (f"{'on ' if cache else 'off'}    {r['active']*100:5.1f}  "
+                    f"{r['ms']:9.3f}  {r['fps']:7.1f}  {r['vram']:11.1f}  "
+                    f"{r['state']:15.2f}")
+            if args.power:
+                line += (f"  {r['watts']:8.1f}  {r['mj_frame']:9.2f}  "
+                         f"{r['fps_per_watt']:8.2f}")
+            print(line)
 
 
 if __name__ == "__main__":

@@ -103,6 +103,11 @@ def main():
                     help="eval resolution; default = the checkpoint's "
                          "training size (128 if unrecorded)")
     ap.add_argument("--clip-len", type=int, default=8)
+    ap.add_argument("--clip-stride", type=int, default=None,
+                    help="clip start spacing; defaults to --clip-len (disjoint "
+                         "clips). A shorter stride buys clips out of a fixed "
+                         "holdout at the cost of their independence, which is "
+                         "the only way a 256-frame protocol gets a sample.")
     ap.add_argument("--max-clips", type=int, default=100,
                     help="clips PER SOURCE. Reading one concatenated stream "
                          "instead made 'synthetic 500' mean 'VKITTI2 500' "
@@ -155,7 +160,7 @@ def main():
     model = from_checkpoint(args.ckpt, dev, **kw).eval()
 
     dataset, _ = build_mixed(args.data, clip_len=args.clip_len,
-                             clip_stride=args.clip_len, size=args.size,
+                             clip_stride=args.clip_stride or args.clip_len, size=args.size,
                              holdout=args.holdout, val=True)
     # one loader per source: build_mixed concatenates in spec order, and a
     # single stream truncated at --max-clips only ever reached the first one
@@ -169,7 +174,7 @@ def main():
     # to its run, and a paper table then gets assembled from two of them
     lines = [f"ckpt={args.ckpt} data={args.data} clips={len(dataset)} "
              f"size={args.size} max={args.max_clips}/source "
-             f"clip_len={args.clip_len} align={args.align} "
+             f"clip_len={args.clip_len} stride={args.clip_stride or args.clip_len} align={args.align} "
              f"gate_mode={args.gate_mode} "
              f"keyframe_every={args.keyframe_every or model.detector.keyframe_every} "
              f"gmc={args.gmc} tag={args.scores_tag or args.gate_mode} "
@@ -247,6 +252,12 @@ def main():
         f.write(report + "\n\n")
     # per-clip values persisted: a different statistic (median, CI, per-dataset
     # split) never needs the model re-run
+    gmc = getattr(model, "gmc", None)
+    if gmc is not None and getattr(gmc, "calls", 0):
+        lines.append(f"gmc: {gmc.fallbacks}/{gmc.calls} frames fell back to "
+                     f"identity ({100 * gmc.fallbacks / gmc.calls:.1f}%)")
+        print(lines[-1])
+
     scores = out.with_name(f"scores_{args.scores_tag or args.gate_mode}.json")
     scores.write_text(json.dumps(per_clip))
     print(f"\nappended -> {out}\nper-clip -> {scores}")

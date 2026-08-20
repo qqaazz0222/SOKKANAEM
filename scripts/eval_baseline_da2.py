@@ -27,7 +27,8 @@ import torch
 from PIL import Image
 from transformers import AutoImageProcessor, AutoModelForDepthEstimation
 
-from sokkanaem.data import build_mixed, eval_set_from_env
+from sokkanaem.data import (build_mixed, eval_clip_len,
+                            eval_set_from_env)
 from sokkanaem.metrics import clip_scores, report
 
 CKPT = "depth-anything/Depth-Anything-V2-Small-hf"
@@ -55,7 +56,8 @@ def main():
          "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey"],
         ["Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"])
     dataset, _ = build_mixed(
-        specs, clip_len=8, clip_stride=8, size=256, holdout=holdout, val=True)
+        specs, clip_len=(_cl := eval_clip_len())[0], clip_stride=_cl[1],
+        size=256, holdout=holdout, val=True)
     loader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
 
     # 100 clips was 1.1% of the holdout and wildly unrepresentative — on the

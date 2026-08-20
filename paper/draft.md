@@ -12,7 +12,7 @@
 
 Video depth models repeatedly process large static regions and often exhibit frame-to-frame flicker. We introduce **SOKKANAEM**, a compact recurrent video-depth model that connects patch-level change detection to the discretization step of a selective state-space model (SSM). Given a binary activity mask \(M\), we replace the SSM step size \(\Delta\) with \(\widetilde{\Delta}=M\Delta\). For a static patch, \(\widetilde{\Delta}=0\) yields \(\bar A=I\) and \(\bar B=0\), so the hidden state is copied exactly rather than approximately reconstructed. A temporal SSM preserves per-location memory, while a spatial SSM and a dense decoder recover spatial context and depth. For moving cameras, low-resolution global motion compensation (GMC) precedes feature-space change detection.
 
-A 4.19M-parameter model reaches 0.1595 AbsRel and 0.8262 \(\delta_1\) on a real indoor holdout at 32.2% activity; cutting computation thirteen-fold to 7.1% activity costs 13% relative AbsRel while raw frame-to-frame variation falls by a factor of 2.8. It runs at 0.378 ms per frame in half precision, 2.2x faster and at 2.4x less memory than a comparable-size baseline. Measured against seven commonly cited depth models under one protocol, it is last on accuracy and first on raw frame-to-frame stability, at 6x to 82x fewer parameters.
+A 4.19M-parameter model reaches 0.1595 AbsRel and 0.8262 \(\delta_1\) on a real indoor holdout at 32.2% activity; cutting computation thirteen-fold to 7.1% activity costs 13% relative AbsRel while raw frame-to-frame variation falls by a factor of 2.8. It runs at 0.378 ms per frame in half precision, 2.2x faster and at 2.4x less memory than a comparable-size baseline. Measured against the commonly cited comparison group under one protocol, it is last on accuracy and first on raw frame-to-frame difference. It is also the smallest model in the group, spanning 6x to 82x fewer parameters, but parameter count, multiply-accumulate count and measured latency move independently here and we report them on separate axes rather than as one efficiency claim.
 
 Four results delimit the contribution, and each narrows a claim we initially expected to make. A fused scan kernel that removes the dominant cost also removes the sparse path's latency advantage on a desktop GPU, leaving sparsity's benefit established in compute and memory rather than measured time. On unseen real driving footage, accuracy transfers while sparsity does not: activity rises from 26% to 93%, recoverable to 14% only with motion compensation and per-domain threshold calibration. An iso-mask token-drop control, which collapsed by a factor of four on an earlier checkpoint whose sparse path was never trained, is now a wash on accuracy — preserved-state readout buys temporal stability, not depth accuracy. And scoring by frame index rather than by clip shows the carried state does not improve accuracy over a stream and degrades it on dynamic scenes by 61% between keyframes, so the eight-frame clip means conventional in this literature are optimistic for the streaming setting they describe. That drift traces to a train-deploy mismatch and is largely removable: fine-tuning on long clips halves the penalty, and pairing it with a longer refresh period improves accuracy, stability and cost together. These results establish exact change-gated state preservation as a useful mechanism while marking precisely where its efficiency and stability claims do and do not hold.
 
@@ -24,11 +24,15 @@ This work asks a narrower question: **can an SSM treat “no visual change” as
 
 We instantiate this idea in SOKKANAEM, a streaming video-depth architecture with alternating temporal and spatial SSM blocks. A lightweight detector produces patch activity masks using hysteresis, dilation, and periodic keyframes. A sensor-free GMC and feature-space detector extend the mechanism to ego-motion. We evaluate not only depth accuracy and raw frame variation, but also optical-flow-warped consistency (OPW), a GT-referenced temporal consistency error (TCE), constant-output controls, analytical MACs, and measured latency.
 
+Conditional recurrent updates have precedent, and one algebraic identity is not by itself a contribution; Section 2.4 places this work against learned skip gates and event-driven state-space models. What we claim is the combination: an external, untrained change signal wired to the discretization parameter so that a static patch's transition is an exact identity rather than a suppressed update; a clean separation between that exact temporal preservation and the approximate spatial caching a dense output still requires; an iso-mask token-drop control that isolates what reading preserved state buys from what merely skipping static tokens buys; and an empirical characterization of where the resulting efficiency and stability claims stop holding — on a desktop GPU after kernel fusion, on real capture where sparsity does not transfer, and over a stream long enough for drift to appear.
+
+One scope note runs through the paper. **Exact** describes the temporal hidden-state transition and nothing else. The spatial output cache is an approximation, the decoder is dense, and the sparse inference path as a whole is not bit-exact against full computation; only the state a static patch carries is.
+
 The completed experiments support five conclusions:
 
 1. **Exact state preservation.** For \(M=0\), \(\Delta\)-gating gives a bit-exact state copy in implementation and an identity transition analytically.
 2. **A favorable sparsity–accuracy trade-off.** On real indoor footage, reducing activity from 96.2% to 32.2% costs 2.8% relative AbsRel, and to 7.1% costs 13%.
-3. **Preserved-state readout buys temporal stability, not accuracy.** At matched masks, replacing \(\Delta\)-gating with token dropping leaves accuracy unchanged but degrades all three temporal metrics. An earlier fourfold accuracy collapse turned out to measure an untrained sparse path (Section 5.4).
+3. **Preserved-state readout buys suppression of raw frame-to-frame variation, not accuracy.** At matched masks, replacing \(\Delta\)-gating with token dropping leaves accuracy unchanged but degrades all three temporal metrics. It does not reproduce the stability of preserved-state readout; it is not the case that token dropping fails outright. An earlier fourfold accuracy collapse turned out to measure an untrained sparse path (Section 5.4).
 4. **The efficiency claim has a sharp boundary.** After a fused scan kernel, the model is overhead-bound rather than compute-bound on a desktop GPU, and dense execution is faster than the sparse path at every activity level. Sparsity's benefit is established in MACs and per-stream state, and its conversion into time and energy is unmeasured (Section 5.6).
 5. **The cost of gating accumulates over a stream, and that cost is a training artefact.** Carried state does not improve accuracy frame over frame, and on dynamic scenes it degrades by 61% between keyframes before a refresh resets it. Clip-level means hide this, and the standard eight-frame protocol samples the favourable part of the cycle. Training on long clips halves the penalty, and the short-clip protocol is blind to that improvement (Section 5.7).
 
@@ -46,7 +50,19 @@ Token pruning, merging, and early exiting reduce computation within an image (Ra
 
 ### 2.3 Visual state-space models
 
-State-space sequence models (Gu et al., 2022) with input-dependent selection (Gu & Dao, 2023) replace quadratic attention with linear scans, and have been extended to images and video (Zhang et al., 2023; Liu et al., 2024). Standard variants still update every token. Our contribution is to connect externally detected visual change to the discretization parameter itself, and to distinguish exact hidden-state preservation from the approximate spatial output caching that sits alongside it.
+State-space sequence models (Gu et al., 2022) with input-dependent selection (Gu & Dao, 2023) replace quadratic attention with linear scans, and have been extended to images and video (Zhang et al., 2023; Liu et al., 2024). Standard variants still update every token.
+
+### 2.4 Conditional and event-driven state updates
+
+Making a recurrent state update conditional is not new, and the closest prior work is worth stating precisely rather than by contrast alone. Skip RNN (Campos et al., 2018) augments a recurrent cell with a learned binary gate that either updates the state or copies it forward, with a budget term encouraging copies. Spiking state-space models reformulate the selective scan so that sparse spike signals drive state transitions, giving event-driven computation on time series (Tang et al., 2026). Concurrently with this work, event-gated video generation predicts token-level activity with a learned head and applies latent updates mainly where an interaction is forming, using hysteresis on the activity signal much as our detector does (Maduabuchi & Wang, 2026).
+
+Three things separate the mechanism studied here from that group, and only their combination is our claim.
+
+1. **The gate is external and untrained.** The activity signal comes from patch-level pixel or feature change, not from a learned head with a sparsity budget. Nothing in the objective can trade accuracy for a lower skip rate, and the operating point is set at inference by a threshold rather than fixed at training time — which is also why it must be recalibrated per domain (Section 5.5).
+2. **The no-update case is an identity, not a suppression.** A learned gate driven to zero, or a spike that does not fire, leaves an update that is approximately skipped: the transition is still computed and the residual is small. Multiplying the discretization step instead makes \(\bar A = I\) and \(\bar B = 0\), so the state is carried with no residual at all, in implementation as well as in the algebra (Section 3.3).
+3. **The task keeps a dense spatial output.** Skipping a token's temporal update does not excuse producing its depth. The separation between exact temporal state preservation and the approximate spatial caching that supplies the missing context — and the cost floor that separation implies — is specific to dense prediction and is where the efficiency claim runs out (Section 5.6).
+
+Change-based computation in vision (Section 2.2) shares the first property and none of the second: DeltaCNN and skip convolutions preserve or reconstruct dense activations through caches with invalidation rules, where the temporal path here has no cache to invalidate. Our token-drop ablation tests exactly what the readout adds over bypassing static tokens (Section 5.4).
 
 ## 3. Method
 
@@ -130,7 +146,7 @@ An optional spatial output cache gathers active patches, updates them, and scatt
 
 Camera motion makes raw pixel differences dense. We therefore estimate a homography from at most 50 tracked points on a low-resolution frame using Lucas–Kanade tracking and RANSAC. The previous frame is warped to the current view, after which relative \(L_1\) differences between patch embeddings produce the activity mask. Failure falls back to the identity transform, increasing activity rather than silently suppressing changes.
 
-On Virtual KITTI 2, GMC plus feature gating reaches 23.7% activity with only +0.7% relative AbsRel over full computation. Section 5.5 tests the same mechanism on real driving footage, where it also holds — but only after per-domain threshold recalibration, because the feature-scale thresholds tuned on rendered video are inoperative on real capture.
+On Virtual KITTI 2, GMC plus feature gating reaches 23.7% activity with only +0.7% relative AbsRel over full computation. Section 5.5 tests the same mechanism on real driving footage, where it also holds — but only after per-domain threshold recalibration, because the feature-scale thresholds tuned on rendered video are inoperative on real capture. That experiment is a feasibility demonstration on one dataset, not a claim of robustness to camera motion in general.
 
 ### 3.6 Decoder and objective
 
@@ -475,7 +491,7 @@ The present study has several important limitations.
 
 ## 8. Conclusion
 
-SOKKANAEM demonstrates that patch-level visual change can control an SSM through its discretization step, turning a static observation into an exact identity transition on temporal state. Across synthetic and real RGB-D evaluations, aggressive patch sparsity costs little depth accuracy within a clip, and the model suppresses raw frame-to-frame flicker better than any of six larger baselines while remaining 6x to 82x smaller than them.
+SOKKANAEM demonstrates that patch-level visual change can control an SSM through its discretization step, turning a static observation into an exact identity transition on temporal state. Across synthetic and real RGB-D evaluations, aggressive patch sparsity costs little depth accuracy within a clip, and the model suppresses raw frame-to-frame variation better than any larger baseline in the comparison group while remaining 6x to 82x smaller. That is a statement about raw prediction variation only: it does not establish an advantage in motion-compensated or ground-truth-referenced temporal consistency, where a 120M baseline is ahead of us.
 
 The experiments also reveal the boundary of the idea. Exact state skipping is not synonymous with end-to-end sparse inference: dense readout, spatial context, and decoding remain. Nor does low raw frame variation guarantee motion-correct temporal accuracy. An iso-mask token-drop control, which we had read as proving that reading preserved state is critical, turns out to prove something narrower once the sparse path is trained: the readout buys stability, and the accuracy it seemed to buy was an artefact of an untrained path. A fused scan kernel closed the kernel gap and, unexpectedly, made dense streaming the faster configuration on a desktop GPU, which relocates the efficiency argument from latency to compute and memory until an edge device settles it. Real moving-camera evaluation and cross-domain transfer are now measured, and both sharpen rather than confirm the picture: change gating is a property of the content and the capture, not of the method alone. Two directions follow from the measurements rather than from intuition, and one of them is already closed. Accuracy is limited by drift between keyframes and by a predicted depth field with under half the true dynamic range on dynamic scenes — not by patch size or output resolution, which sit two to three times above where the model actually operates. The drift turned out to be a training artefact rather than a property of the mechanism: long-clip fine-tuning halves it, and coupling that with a longer refresh period improves accuracy, stability and computation at once. Range compression remains open. And whether the compute reduction is worth anything in deployment is decided by edge-device measurement, which remains the single most informative experiment left. Within these boundaries, exact \(\Delta\)-gating provides a principled foundation for change-adaptive streaming vision.
 
@@ -484,6 +500,22 @@ The experiments also reveal the boundary of the idea. Exact state skipping is no
 **Model.** Dimension 192, four alternating temporal/spatial blocks, state dimension 16, four-direction spatial cross-scan, depthwise local convolution branch, DPT-style decoder with a 64-bin depth head over 0.3-150 m. 4,185,872 parameters; 16.7 MB fp32 weights; 12.75 MB of persistent state per stream in fp32 and 6.38 MB in fp16. Stream state lives entirely in an external dictionary, so one set of weights serves many streams without leakage.
 
 **Training.** 60,000 steps, seed 0, input 256x256, single RTX 4090, 13 h 11 min. Loss is scale-invariant log depth plus 0.5 gradient, 0.1 temporal, 0.05 normal, a 64-bin cross-entropy term at weight 0.2, and two auxiliary terms at weight 2.0 — a flow-warped log-depth residual and a depth-boundary-weighted term. Mask ratios are sampled i.i.d. during training rather than taken from the detector.
+
+**Optimization.** AdamW, learning rate 3e-4, weight decay 0.01 (the PyTorch default), gradient-norm clipping at 1.0, 1,000 linear warm-up steps followed by cosine decay to zero, full fp32 (no mixed precision). Batch is four clips of four frames, so 16 frames per step. Evaluation uses shadow EMA weights with decay 0.999, not the raw parameters.
+
+**Data sampling and augmentation.** The five sources are drawn through a weighted sampler that equalizes per-dataset draw probability, so the largest source does not dominate the gradient any more than it dominates the reported mean. Augmentation is drawn once per clip and applied to every frame in it — random-resized crop (scale 0.55–1.0 of the shorter side, random position), horizontal flip with probability 0.5, and brightness and contrast jitter in 0.75–1.3 on RGB only. Clip-consistent transforms are not a convenience: a per-frame transform would inject apparent motion, which the change detector would register as activity and the temporal loss would penalise. Depth is never photometrically altered. The random mask ratio ramps from 0 to 0.5 over training.
+
+**Temporal metric definitions.** t-delta is the mean absolute difference between consecutive predicted depth maps, in metres, computed *after* per-clip alignment and over every pixel — a prediction is defined everywhere, so t-delta needs no GT-validity mask. Alignment order matters: our own model and every baseline are scored through one implementation, after an earlier version of this pipeline measured t-delta on raw output for our model and on scale-aligned output for the baselines, which is a difference of the scale factor itself. It is not normalised by depth, which is why its magnitude tracks a scene's depth range and why synthetic and real columns are not comparable to each other. OPW and TCE are normalised by ground-truth depth, and both are averaged over pixels that are valid in both frames of a pair and land in-bounds after warping. Flow comes from RAFT-small (torchvision `Raft_Small_Weights.DEFAULT`) applied to the 256-pixel RGB frames the model sees, scaled to [-1, 1], last refinement iteration. Occlusion is handled by the in-bounds test and the warped GT-validity mask only, without a forward-backward consistency check; every model is scored through the identical mask, so the comparison is fair even where absolute values would not match another paper's definition.
+
+**Memory.** Weight and per-stream state memory scale differently, and a streaming deployment cares about the second:
+
+| Component | fp32 | fp16 |
+|---|---:|---:|
+| Weights \(W\), shared across streams | 16.7 MB | 8.4 MB |
+| Persistent state \(S\), per stream | 12.75 MB | 6.38 MB |
+| Peak working set, single sparse stream | — | 37 MB |
+
+Serving \(N\) streams from one set of weights costs \(W + N \times S\): 8.4 MB + 6.38N MB in fp16. State overtakes weights at two streams, which is the regime the external state dictionary exists for.
 
 **Detector defaults.** \(\tau_{\mathrm{on}}=0.05\), \(\tau_{\mathrm{off}}=0.025\), one-patch dilation, keyframe refresh every 30 frames, dense fallback above 40% activity. For GMC these thresholds are on a feature scale and must be recalibrated per domain (Section 5.5).
 
@@ -498,6 +530,8 @@ The experiments also reveal the boundary of the idea. Exact state skipping is no
 Bengio, Y., Léonard, N., & Courville, A. (2013). *Estimating or propagating gradients through stochastic neurons for conditional computation*. arXiv:1308.3432.
 
 Bhat, S. F., Alhashim, I., & Wonka, P. (2021). AdaBins: Depth estimation using adaptive bins. *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition*, 4009–4018.
+
+Campos, V., Jou, B., Giró-i-Nieto, X., Torres, J., & Chang, S.-F. (2018). Skip RNN: Learning to skip state updates in recurrent neural networks. *International Conference on Learning Representations*.
 
 Cabon, Y., Murray, N., & Humenberger, M. (2020). *Virtual KITTI 2*. arXiv:2001.10773.
 
@@ -519,6 +553,9 @@ Kong, L., Wu, B., Chen, Y., Zhang, X., & Sun, J. (2022). *EViT: Expediting visio
 
 Liang, F., et al. (2023). Eventful transformers: Leveraging temporal redundancy in vision transformers. *Proceedings of the IEEE/CVF International Conference on Computer Vision*.
 
+Maduabuchi, C., & Wang, J. (2026). *Event-driven video generation*. arXiv:2603.13402. To appear, *European Conference on Computer Vision*.
+
+
 Liu, Y., Tian, Y., Zhao, Y., Yu, H., Xie, L., Wang, Y., Ye, Q., & Liu, Y. (2024). VMamba: Visual state space model. *Advances in Neural Information Processing Systems*, 37.
 
 Palazzolo, E., Behley, J., Lottes, P., Giguère, P., & Stachniss, C. (2019). ReFusion: 3D reconstruction in dynamic environments for RGB-D cameras exploiting residuals. *IEEE/RSJ International Conference on Intelligent Robots and Systems*.
@@ -530,6 +567,8 @@ Rao, Y., Zhao, W., Liu, B., Lu, J., Zhou, J., & Hsieh, C.-J. (2021). DynamicViT:
 Ranftl, R., Bochkovskiy, A., & Koltun, V. (2021). Vision transformers for dense prediction. *Proceedings of the IEEE/CVF International Conference on Computer Vision*, 12179–12188.
 
 Ranftl, R., Lasinger, K., Hafner, D., Schindler, K., & Koltun, R. (2022). Towards robust monocular depth estimation: Mixing datasets for zero-shot cross-dataset transfer. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 44(3), 1623–1637.
+
+Tang, K., Zheng, J., Jin, Y., Qiu, Y., Sun, G., Yan, Z., & Wong, W.-F. (2026). *SpikySpace: A spiking state space model for energy-efficient time series forecasting*. arXiv:2601.02411.
 
 Sturm, J., Engelhard, N., Endres, F., Burgard, W., & Cremers, D. (2012). A benchmark for the evaluation of RGB-D SLAM systems. *IEEE/RSJ International Conference on Intelligent Robots and Systems*, 573–580.
 

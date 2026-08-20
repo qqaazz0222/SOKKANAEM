@@ -33,7 +33,8 @@ import sys
 import numpy as np
 import torch
 
-from sokkanaem.data import build_mixed, eval_set_from_env
+from sokkanaem.data import (build_mixed, eval_clip_len,
+                            eval_set_from_env)
 from sokkanaem.metrics import clip_scores, report
 
 
@@ -59,7 +60,8 @@ def main():
          "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey"],
         ["Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/"])
     dataset, _ = build_mixed(
-        specs, clip_len=8, clip_stride=8, size=256, holdout=holdout, val=True)
+        specs, clip_len=(_cl := eval_clip_len())[0], clip_stride=_cl[1],
+        size=256, holdout=holdout, val=True)
     loader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
 
     # 1000, not 100: 1.1% of the holdout was not a representative sample
