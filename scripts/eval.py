@@ -126,6 +126,10 @@ def main():
                     help="§4.4 gating-position ablation: Δ-gating vs token drop")
     ap.add_argument("--scores-tag", default=None,
                     help="name for the per-clip JSON dump (default: gate mode)")
+    ap.add_argument("--dense-above", type=float, default=None,
+                    help="route frames above this activity through the dense "
+                         "path (Section 6.3). It is an accuracy/compute knob "
+                         "with a large effect, so it is swept, not assumed.")
     ap.add_argument("--keyframe-every", type=int, default=None,
                     help="override the checkpoint's keyframe refresh period. "
                          "REPORT 4.30 shows accuracy sawtooths between "
@@ -158,6 +162,8 @@ def main():
         kw["keyframe_every"] = args.keyframe_every
     # trained [model] kwargs come from config.toml next to the ckpt
     model = from_checkpoint(args.ckpt, dev, **kw).eval()
+    if args.dense_above is not None:
+        model.dense_above = args.dense_above
 
     dataset, _ = build_mixed(args.data, clip_len=args.clip_len,
                              clip_stride=args.clip_stride or args.clip_len, size=args.size,
@@ -178,7 +184,7 @@ def main():
              f"clip_len={args.clip_len} stride={args.clip_stride or args.clip_len} align={args.align} "
              f"gate_mode={args.gate_mode} "
              f"keyframe_every={args.keyframe_every or model.detector.keyframe_every} "
-             f"gmc={args.gmc} tag={args.scores_tag or args.gate_mode} "
+             f"dense_above={model.dense_above} gmc={args.gmc} tag={args.scores_tag or args.gate_mode} "
              f"spatial_cache={model.spatial_cache} "
              f"temporal_cache={model.temporal_cache}"]
 

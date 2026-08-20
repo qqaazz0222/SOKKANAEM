@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Queued behind scripts/r1_round.sh.
 #
-#  1. re-score the three spread-term arms (Section 6.5, Table 10) under the
+#  1. re-score the three spread-term arms (Section 6.5, Table 11) under the
 #     fixed clip sampling -- all three shared the biased cap, so their ranking
 #     stands, but the absolute numbers move
 #  2. the final configuration by composition: long-clip checkpoint + spread

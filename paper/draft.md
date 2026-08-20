@@ -34,7 +34,7 @@ The completed experiments support five conclusions:
 2. **A favorable sparsity–accuracy trade-off.** On real indoor footage, reducing activity from 96.2% to 32.2% costs 2.8% relative AbsRel, and to 7.1% costs 13%.
 3. **Preserved-state readout buys suppression of raw frame-to-frame variation, not accuracy.** At matched masks, replacing \(\Delta\)-gating with token dropping leaves accuracy unchanged but degrades all three temporal metrics. It does not reproduce the stability of preserved-state readout; it is not the case that token dropping fails outright. An earlier fourfold accuracy collapse turned out to measure an untrained sparse path (Section 5.4).
 4. **The efficiency claim has a sharp boundary.** After a fused scan kernel, the model is overhead-bound rather than compute-bound on a desktop GPU, and dense execution is faster than the sparse path at every activity level. Sparsity's benefit is established in MACs and per-stream state, and its conversion into time and energy is unmeasured (Section 5.6).
-5. **The cost of gating accumulates over a stream, and that cost is a training artefact.** Carried state does not improve accuracy frame over frame, and on dynamic scenes it degrades by 61% between keyframes before a refresh resets it. Clip-level means hide this, and the standard eight-frame protocol samples the favourable part of the cycle. Training on long clips halves the penalty, and the short-clip protocol is blind to that improvement (Section 5.7).
+5. **Clip length changes the answer, and the eight-frame convention is optimistic for everyone.** Our error grows 87% from eight-frame to 256-frame clips. Stateless per-frame baselines grow more over the same clips (116% and 145%), because per-clip alignment gets harder as the clip lengthens — so carried state is a net advantage over a long stream even though it does not accumulate accuracy within a keyframe cycle. Long-clip fine-tuning removes a fifth of the 256-frame error while leaving the eight-frame number identical to four decimal places, so a short-clip evaluation scores that intervention as doing nothing (Section 5.7).
 
 We claim no accuracy advantage. Against the comparison group in Section 5.3, SOKKANAEM is last on AbsRel and \(\delta_1\) on real footage and leads exactly one measure, raw frame difference. Depth Anything 3 is stronger on motion-compensated and GT-referenced temporal error. The contribution is the mechanism and the efficiency-stability point it reaches, not the depth numbers.
 
@@ -348,6 +348,8 @@ At matched activity GMC is clearly better: 43.8% active gives 0.3084 AbsRel and 
 
 The practical caveat is that GMC's default threshold leaves real driving at 100% activity. The correct statement is not that enabling GMC suffices, but that GMC plus per-domain threshold calibration recovers most of the sparsity that pixel gating loses on real video.
 
+Homography estimation itself does not fail on this footage: over 210 frames of KITTI raw at three thresholds, the identity fallback fired **0 times**. The failure mode this branch guards against — no texture, degenerate fit — is not what limits the moving-camera path here; the threshold scale is.
+
 ### 5.6 Compute and wall-clock analysis
 
 Two results in this section point in opposite directions, and both matter.
@@ -476,7 +478,21 @@ Three choices in the final recipe were made from measurements rather than intuit
 
 **Binned depth head.** A 64-bin cross-entropy term alongside the regression loss is worth 8.6% relative AbsRel on real footage (0.1795 against 0.1963), measured across three seeds per arm so the effect is three to six times the seed noise. It is not free: it costs 8% on raw frame difference and 12% on TCE. The reported model keeps it and buys the temporal loss back with the auxiliary terms below.
 
-**Dense fallback.** Routing frames above 40% activity through the dense path improves real accuracy (AbsRel 0.1685 to 0.1633, \(\delta_1\) 0.8083 to 0.8211) at the cost of raising mean activity from 22.2% to 32.2%. The gain is concentrated on the dynamic-object source, so the mechanism is cutting stale spatial context rather than avoiding any instability. All speed claims in this paper are quoted at the resulting 32.2%, not at 22.2%.
+**Dense fallback, and a claim it no longer supports.** A frame whose activity exceeds a threshold is routed through the dense path. We previously reported that this improves real accuracy (AbsRel 0.1685 to 0.1633) at the cost of raising mean activity, and adopted 40% as the default. Sweeping the threshold over the full holdout says otherwise:
+
+**Table 9. Dense-fallback threshold, real indoor holdout, eight-frame clips, reported checkpoint.**
+
+| Threshold | Active (%) | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| off | **16.1** | **0.1293** | 0.8573 | 0.0596 | 0.0178 | 0.0257 |
+| 0.2 | 36.5 | 0.1303 | **0.8665** | **0.0546** | **0.0175** | **0.0252** |
+| 0.3 | 27.4 | 0.1302 | 0.8642 | 0.0569 | 0.0181 | 0.0258 |
+| 0.4 (previous default) | 22.0 | 0.1302 | 0.8613 | 0.0607 | 0.0184 | 0.0262 |
+| 0.6 | 16.9 | **0.1293** | 0.8582 | 0.0604 | 0.0183 | 0.0262 |
+
+**AbsRel is flat across the sweep** — 0.1293 to 0.1303, a spread five times smaller than the seed noise floor — while activity varies by a factor of 2.3. What the fallback actually buys is one point of \(\delta_1\) and a 9% improvement in raw frame difference, for 20 points of activity at threshold 0.2. The earlier accuracy claim was measured on the first-sequence subset, where the crowd scene both dominates and is dense enough that the threshold fires often; on the full holdout it does not survive.
+
+The consequence is an efficiency claim we can now make more cheaply: **disabling the fallback reaches 16.1% mean activity at the same accuracy** as the 22.0% default. We keep the threshold in the architecture because it is the natural place to trade stability for compute, and we report accuracy claims at the threshold each table names.
 
 **Auxiliary losses, and a methodological caution.** A depth-boundary-weighted term and a flow-warped residual term are both enabled at weight 2.0. Screened at 8k steps, they looked like a trade: the boundary term improved accuracy while worsening temporal metrics, and the warp term did the reverse, degrading \(\delta_1\) beyond the noise floor. At 60k steps the trade disappears and both improve together (Table 2). **The ranking of loss terms at 8k did not survive to convergence.** We report this because short screening runs are standard practice for choosing loss weights, and in our case they were reliable for deciding whether a term helps but not for deciding how strongly to weight it.
 
@@ -496,7 +512,7 @@ Section 5.3 reports our model under both alignment rules, and the two-degree-of-
 
 Splitting by clip localises it. The two-degree-of-freedom fit helps 78% of Bonn clips (median improvement 9.6%) but only 31% of TUM clips, where the median clip is actually worse. Measuring the predicted and ground-truth disparity distributions on the same clips explains why:
 
-**Table 9. Predicted dynamic range as a fraction of ground truth.**
+**Table 10. Predicted dynamic range as a fraction of ground truth.**
 
 | Source | 5–95% width, pred | 5–95% width, GT | Ratio | Std ratio |
 |---|---:|---:|---:|---:|
@@ -517,7 +533,7 @@ The obvious suspect was the decoder. The binned head predicts depth as a softmax
 
 What the diagnosis does point at is the objective. Nothing in it penalises compression: the scale-invariant log loss punishes the mismatch indirectly, but under uncertainty shrinking the prediction still lowers it, which is the ordinary bias-variance trade. So we added a term that penalises it directly: the squared log ratio of the standard deviation of predicted log depth to that of ground truth, taken per sample over valid pixels rather than per batch, since compression is a property of a scene and a wide scene would otherwise cancel a narrow one. Comparing in log space makes the term scale-free and symmetric, so over-spreading is penalised as much as under-spreading and the loss cannot be bought with noise. We fine-tuned the reported checkpoint for 8k steps at three weights, with everything else held fixed. All three arms run at the same 32.2% activity, so nothing here is bought with computation.
 
-**Table 10. A spread term against the compression it targets. Same 8k fine-tune from the reported checkpoint, same activity, real indoor holdout.**
+**Table 11. A spread term against the compression it targets. Same 8k fine-tune from the reported checkpoint, same activity, real indoor holdout.**
 
 | Spread weight | AbsRel | \(\delta_1\) | t-delta | OPW | TCE | Bonn range/GT | Bonn AbsRel |
 |---:|---:|---:|---:|---:|---:|---:|---:|
@@ -534,16 +550,18 @@ It is not free, and the two weights trade differently. Weight 0.5 buys the most 
 The present study has several important limitations.
 
 1. Every table in Section 5 comes from one checkpoint, but two diagnostic results in Section 6 (mask policy, feature distillation) were measured on earlier checkpoints and are reported as such rather than re-run.
-2. Video Depth Anything is absent from the baseline table: the local checkout was lost and re-acquiring its metric weights was out of scope for this round. The comparison therefore covers six models from 24.8M to 345M parameters but no video-specific baseline, which is the most relevant class to compare temporal metrics against.
+2. The comparison group now includes Video Depth Anything (metric, Small), the video-specific class that was missing, and Depth Anything 3, which is non-causal and therefore not a streaming competitor at all — we report it because it is strong, not because the comparison is like for like. Neural Video Depth Stabilizer is still absent.
 3. OPW and TCE do not support a general temporal-consistency lead. Raw t-delta can be gamed by constant predictions and is interpreted only alongside accuracy and the constant control.
 4. A fused scan kernel removed the dominant cost and, in doing so, removed the sparse path's wall-clock advantage on an RTX 4090: compiled full compute is now faster at every activity level. The remaining sparse-path cost is activity-independent bookkeeping. Sparsity's benefit is presently established in MACs and per-stream state, not in measured latency on this device.
 5. Execution on an RTX 4090 is overhead-bound at this model scale, so reduced analytical MACs do not become higher FPS. Jetson Orin latency, energy, and multi-stream measurements have not been performed, and they are the measurement that decides whether the MAC reduction is worth anything in deployment.
 6. GMC is validated on real ego-motion (Section 5.5), but only on five driving sequences from one dataset, and only with per-domain threshold calibration; its default threshold is inoperative on real video. Handheld and aerial motion remain untested.
 7. Cross-domain evaluation covers real driving only. Unseen indoor domains (NYU, ScanNet) were not evaluated: the former's host was unreachable and the latter requires a signed agreement. The claim of generalization is therefore limited to the synthetic-to-real axis of one scene type.
-8. Accuracy degrades between keyframes and the reported clip-level numbers are measured on eight-frame clips, which sample the favourable part of that cycle (Section 5.7). The same checkpoint scores 0.1774 rather than 0.1595 on 32-frame clips. A remedy is measured — long-clip fine-tuning with a longer refresh period — but it is not the reported checkpoint, because it has been evaluated at 32 frames only and the baseline comparison is at eight. Behaviour beyond 270 frames is unmeasured, and we expect it to be worse rather than flat.
-9. The predicted depth field has under half the ground truth's dynamic range on the dynamic-object source (Section 6.5). We localised the defect but did not fix it; the objective contains no term that penalises compression.
-10. Patch-size, refinement, and fully trained decoder/cache ablations remain incomplete.
-11. Results are single-seed at 60k steps. Seed variance was characterised only at 8k steps (Appendix A), and differences below that noise floor are not claimed.
+8. Accuracy degrades between keyframes, and clip-length dependence is severe: the reported checkpoint scores 0.1302 AbsRel on eight-frame clips and 0.2434 on 256-frame clips (Section 5.7). Part of that is the per-clip alignment window rather than drift — stateless baselines degrade more over the same clips — but we cannot separate the two exactly, only bound our share by the stateless controls. Behaviour beyond 256 frames is unmeasured; the holdout sequences run to 1,294 frames, so the measurement is available and simply not yet done.
+
+9. The 256-frame protocol rests on 13 disjoint clips of real footage, because a finite holdout yields few long clips. Overlapping windows would multiply the count at the cost of independence, and one outlier frame then aliases into several frame indices. Differences of a few percent at that clip length are not resolvable, and we do not claim any.
+10. The predicted depth field has under half the ground truth's dynamic range on the dynamic-object source (Section 6.5). A spread term recovers part of it at a stated cost in motion-referenced consistency; the defect is not eliminated.
+11. Patch-size, refinement, and fully trained decoder/cache ablations remain incomplete.
+12. Results are single-seed at 60k steps. Seed variance was characterised only at 8k steps (Appendix A), and differences below that noise floor are not claimed.
 
 ## 8. Conclusion
 
