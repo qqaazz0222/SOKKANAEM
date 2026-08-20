@@ -1,0 +1,8 @@
+ckpt=work_dirs/t5-spread0.0/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=488 size=256 max=100/source spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.7  0.1301   0.7919  0.8443  0.1074   0.0218  0.0326  0.1500  1.064  0.0099  0.1275 (0.109)  89
+0.05     bonn            44.7  0.1941   0.4589  0.7990  0.0519   0.0251  0.0304  0.2084  0.982  0.0306  0.1966 (0.154)  100
+0.05     MEAN(src)       32.2  0.1621   0.6254  0.8216  0.0797   0.0234  0.0315  0.1792  1.023  0.0202  0.1620 (0.132)  189
+0.05     POOLED(px)      32.9  0.1681   0.6163  0.8174  0.0780   0.0237  0.0313  0.1809  1.021  0.0208  0.1640 (0.133)  189
+

@@ -1,0 +1,75 @@
+################ A. frame-index probe on the long-clip model ################
+2026-08-20T06:05:04+00:00
+
+tum: AbsRel by frame index (state warm-up)
+  frame  0: 0.1421
+  frame  1: 0.1244
+  frame  2: 0.1177
+  frame  3: 0.1224
+  frame  4: 0.1198
+  frame  5: 0.1207
+  frame  6: 0.1200
+  frame  7: 0.1262
+  frame  8: 0.1277
+  frame  9: 0.1293
+  frame 10: 0.1350
+  frame 11: 0.1408
+  frame 12: 0.1467
+  frame 13: 0.1448
+  frame 14: 0.1350
+  frame 15: 0.1384
+  frame 16: 0.1499
+  frame 17: 0.1479
+  frame 18: 0.1456
+  frame 19: 0.1444
+  frame 20: 0.1370
+  frame 21: 0.1423
+  frame 22: 0.1482
+  frame 23: 0.1505
+  frame 24: 0.1480
+  frame 25: 0.1499
+  frame 26: 0.1521
+  frame 27: 0.1545
+  frame 28: 0.1601
+  frame 29: 0.1599
+  frame 30: 0.1465
+  frame 31: 0.1293
+
+bonn: AbsRel by frame index (state warm-up)
+  frame  0: 0.1604
+  frame  1: 0.1645
+  frame  2: 0.1689
+  frame  3: 0.1654
+  frame  4: 0.1680
+  frame  5: 0.1719
+  frame  6: 0.1690
+  frame  7: 0.1677
+  frame  8: 0.1737
+  frame  9: 0.1702
+  frame 10: 0.1742
+  frame 11: 0.1916
+  frame 12: 0.1864
+  frame 13: 0.1910
+  frame 14: 0.1951
+  frame 15: 0.2030
+  frame 16: 0.2050
+  frame 17: 0.2078
+  frame 18: 0.2053
+  frame 19: 0.2107
+  frame 20: 0.2176
+  frame 21: 0.2216
+  frame 22: 0.2269
+  frame 23: 0.2290
+  frame 24: 0.2268
+  frame 25: 0.2255
+  frame 26: 0.2250
+  frame 27: 0.2372
+  frame 28: 0.2417
+  frame 29: 0.2501
+  frame 30: 0.1564
+  frame 31: 0.1604
+
+################ B. keyframe sweep, long-clip model ################
+2026-08-20T06:05:47+00:00
+
+---- keyframe_every=5 ----
