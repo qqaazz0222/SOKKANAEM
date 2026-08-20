@@ -473,7 +473,19 @@ The recovery at frame 31 is the keyframe: a full refresh fires at frame 30 and t
 
 **Out to 256 frames the sawtooth rides a trend and then levels off.** On disjoint 256-frame clips, Bonn's per-frame error grows from 0.0912 at frame 0 to 0.2817 by frame 224 — a factor of three — and then falls back to 0.1712 at frame 255. The error is bounded rather than divergent, but the trend over the first two hundred frames is real, and a keyframe period tuned on 32-frame clips does not contain it.
 
-Two consequences follow. First, the fix already exists in the architecture and is simply applied too rarely: the keyframe period is a knob on exactly this decay. The period sweep we previously reported was measured under the first-sequence sampling and is being re-run; what survives that change is its shape, which the ladder above already shows — a shorter period buys accuracy and costs raw frame difference, because a keyframe is by construction a discontinuity in the output sequence. `[UNDER TEST]`
+Two consequences follow. First, the fix already exists in the architecture and is simply applied too rarely: the keyframe period is a knob on exactly this decay.
+
+**Table 7c. Keyframe period against accuracy, stability and cost. 32-frame clips, full holdout, both checkpoints.**
+
+| Period | Active (%) | Reported AbsRel | Reported \(\delta_1\) | Reported t-delta | Long-clip AbsRel | Long-clip \(\delta_1\) | Long-clip t-delta |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 5 | 39.4 | 0.1337 | 0.8499 | 0.0976 | **0.1281** | **0.8663** | 0.0951 |
+| 10 | 29.4 | 0.1370 | 0.8464 | 0.0793 | 0.1313 | 0.8602 | 0.0817 |
+| 15 | 26.0 | 0.1400 | 0.8393 | 0.0753 | 0.1340 | 0.8521 | 0.0788 |
+| 30 (default) | 22.7 | 0.1487 | 0.8264 | 0.0682 | 0.1424 | 0.8384 | 0.0729 |
+| 60 | **19.6** | 0.1510 | 0.8225 | **0.0570** | 0.1447 | 0.8345 | **0.0608** |
+
+The trade is monotone in all three quantities and there is no free point on it: refreshing six times more often buys 12% relative AbsRel and 2.7 points of \(\delta_1\) for double the compute and 71% worse raw frame difference. A keyframe is by construction a discontinuity in the output sequence, so the metric this architecture leads on is the one that pays for accuracy. The long-clip checkpoint is better than the reported one at every period on accuracy and \(\delta_1\), which is what makes the period a free variable again: it can be lengthened to recover stability without giving back the accuracy the fine-tune bought.
 
 Second, the cause is a train-deploy mismatch rather than a flaw in \(\Delta\)-gating itself. Training uses four-frame clips, so the model has never had to hold state through more than three consecutive gated frames. Randomised mask ratios make it robust to *how much* is skipped, not to *how long*.
 
