@@ -198,7 +198,7 @@ Every full temporal table includes a per-clip optimal constant-depth control. Th
 
 ### 4.4 Baselines and implementation
 
-We compare against six commonly cited depth models — DPT-Large, ZoeDepth N-K, Depth Anything V1 Small, V2 Small, V2 Base, and Depth Anything 3 Base — spanning 24.8M to 345M parameters. Published numbers for these models each come from a different split, resolution and alignment rule, so we re-ran all of them on our own holdout clips at 256 pixels through the same metric implementation rather than quoting papers.
+We compare against seven commonly cited depth models — DPT-Large, ZoeDepth N-K, Depth Anything V1 Small, V2 Small, V2 Base, Depth Anything 3 Base, and Video Depth Anything Small (metric) — spanning 24.8M to 345M parameters. Video Depth Anything is the one baseline with an explicit temporal module and is run causally over each clip; Depth Anything 3 receives the whole clip jointly and is therefore not a streaming competitor, and we label it as such wherever it appears. Published numbers for these models each come from a different split, resolution and alignment rule, so we re-ran all of them on our own holdout clips at 256 pixels through the same metric implementation rather than quoting papers.
 
 Alignment is the one place where a single rule would be unfair. Relative-depth models are evaluated under the two-degree-of-freedom scale-and-shift fit in disparity space they are designed for; metric models and ours use one-degree-of-freedom per-clip median scaling. Because the extra degree of freedom always flatters the model receiving it, we additionally report our own model under the relative-depth rule so the protocol cannot carry the result.
 

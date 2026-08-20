@@ -325,9 +325,21 @@ AbsRel, RMSE, \(\delta_1\)은 평가 프로토콜의 클립별 배율 정합 후
 
 ### 4.4 Baseline과 구현
 
-Depth Anything V2 Small(24.8M), Depth Anything 3 Base(120M), Video Depth Anything Small metric
-(28.4M)과 동일한 클립·동일한 지표 구현으로 비교한다. 지연 시간은 RTX 4090에서 배치 1로 측정한다.
-해석적 곱셈-누산 수는 설정된 모델에서 유도한다. 에지 기기 결과는 아직 없다.
+상용 깊이 모델 7종과 비교한다 — DPT-Large, ZoeDepth N-K, Depth Anything V1 Small, V2 Small,
+V2 Base, Depth Anything 3 Base, Video Depth Anything Small(metric) — 파라미터 24.8M~345M 범위다.
+이들의 공개 수치는 각기 다른 분할·해상도·정합 규칙에서 나왔으므로, 논문 수치를 인용하지 않고
+우리 holdout 클립에서 256픽셀로 동일한 지표 구현을 거쳐 전부 재실행했다. Video Depth Anything은
+명시적 시간 모듈을 가진 유일한 baseline이며 클립을 인과적으로 처리한다. Depth Anything 3은 클립
+전체를 한 번에 받으므로 스트리밍 경쟁자가 아니고, 등장하는 모든 곳에 그렇게 표기한다.
+
+정합은 단일 규칙이 공정하지 않은 유일한 지점이다. 상대 깊이 모델은 설계된 대로 시차 공간에서 자유도
+2의 배율+이동 적합을, metric 모델과 우리 모델은 자유도 1의 클립별 중앙값 배율을 받는다. 추가 자유도는
+그것을 받는 모델에 항상 유리하므로, 프로토콜이 결과를 좌우하지 않도록 §5.4에서 전 모델을 양쪽 규칙으로
+보고한다.
+
+보고하는 SOKKANAEM 모델은 4.19M 파라미터이며 §5의 모든 표에 같은 체크포인트를 쓴다. 지연 시간은
+RTX 4090에서 배치 1로 측정한다. 해석적 곱셈-누산 수는 설정된 모델에서 유도한다. 에지 기기 결과는
+아직 없다.
 
 ## 5. 결과
 
