@@ -162,3 +162,18 @@
 2026-08-19 23:33:34,341 step 7900  loss 2.0545  skip 0.50  lr 1.51e-07  depth_std 34.2575
 2026-08-19 23:34:09,166 step 7950  loss 0.9651  skip 0.50  lr 3.78e-08  depth_std 16.7690
 2026-08-19 23:34:43,513 saved -> work_dirs/t5-spread0.0/latest.pt
+2026-08-20 06:07:37,962 work dir: work_dirs/t5-spread0.0  seed 0  commit 2d9d46af
+2026-08-20 06:07:38,377 partial init from work_dirs/v9-60k/latest.pt: 1 new tensors kept at init, 0 checkpoint tensors unused
+2026-08-20 06:07:40,088 mixed dataset: 208720 clips from 5 sources (size 256)
+2026-08-20 06:07:42,223 step    0  loss 2.6343  skip 0.00  lr 3.00e-07  depth_std 31.5511
+2026-08-20 06:08:30,295 step   50  loss 1.7102  skip 0.01  lr 1.53e-05  depth_std 8.0730
+2026-08-20 06:09:22,712 step  100  loss 2.3177  skip 0.01  lr 3.03e-05  depth_std 13.3672
+2026-08-20 06:10:15,378 step  150  loss 1.5782  skip 0.02  lr 4.53e-05  depth_std 25.1311
+2026-08-20 06:11:08,011 step  200  loss 1.2153  skip 0.03  lr 6.03e-05  depth_std 22.1721
+2026-08-20 06:12:00,677 step  250  loss 2.1427  skip 0.03  lr 7.53e-05  depth_std 30.4006
+2026-08-20 06:12:53,288 step  300  loss 2.7921  skip 0.04  lr 9.03e-05  depth_std 34.0987
+2026-08-20 06:13:45,863 step  350  loss 0.6092  skip 0.04  lr 1.05e-04  depth_std 1.8997
+2026-08-20 06:14:38,221 step  400  loss 2.7573  skip 0.05  lr 1.20e-04  depth_std 41.6552
+2026-08-20 06:15:30,306 step  450  loss 0.7713  skip 0.06  lr 1.35e-04  depth_std 0.5737
+2026-08-20 06:16:21,840 step  500  loss 1.9884  skip 0.06  lr 1.50e-04  depth_std 22.6612
+2026-08-20 06:17:13,645 step  550  loss 3.3197  skip 0.07  lr 1.65e-04  depth_std 9.5257
