@@ -43,33 +43,29 @@ def blocks():
 
 
 def baseline_means():
-    """Table 3 rows are the mean over per-source pooled numbers in
-    baseline-suite.log, so no substring search can find them. Recompute the
-    aggregation here and hand it back as one synthetic block per model."""
-    REAL, SYNTH = {"tum", "bonn"}, {"vkitti2", "tartanair2", "pointodyssey"}
-    runs = {}
-    for log in sorted(ROOT.glob("work_dirs/*.log")):
-        model = src = None
-        for line in log.read_text(errors="replace").splitlines():
-            # two header forms are in use across the baseline scripts
-            m = (re.match(r"---- (.+?) / (\w+) ----", line.strip())
-                 or re.match(r"(.+?) \(\S+?\) \[?(\w+)\]? on \d+ holdout", line.strip()))
-            if m:
-                model, src = m.group(1), m.group(2)
-            elif line.strip().startswith("pooled") and model:
-                vals = dict(re.findall(r"(\w[\w-]*)=([\d.]+)", line))
-                runs.setdefault(f"{model} [{log.name}]", {})[src] = vals
+    """Table 3's rows are means over the per-source pooled numbers in the
+    baseline logs, so no substring search can find them. Recompute the
+    aggregation with the same parser scripts/make_tables.py uses, one synthetic
+    block per (model, tag, domain)."""
+    import sys
+    sys.path.insert(0, str(ROOT / "scripts"))
+    from make_tables import REAL, SYNTH, baseline_rows, mean_over
+
     out = []
-    for model, per_src in runs.items():
-        for dom, keep in (("real", REAL), ("synth", SYNTH)):
-            got = [v for s, v in per_src.items() if s in keep]
-            if not got:
-                continue
-            keys = got[0].keys()
-            text = " ".join(f"{k}={sum(float(g[k]) for g in got)/len(got):.4f}"
-                            for k in keys)
-            out.append((f"baseline-suite.log[derived] {model} {dom} "
-                        f"mean of {len(got)} sources", text))
+    for log in sorted(ROOT.glob("work_dirs/*.log")):
+        try:
+            runs = baseline_rows(log)
+        except Exception:
+            continue
+        for (model, tag), per_src in runs.items():
+            for dom, sources in (("real", REAL), ("synth", SYNTH)):
+                m = mean_over(per_src, sources)
+                if m is None:
+                    continue
+                text = " ".join(f"{k}={v:.4f}" for k, v in m.items()
+                                if isinstance(v, float))
+                out.append((f"{log.name}[derived] {model} {tag} {dom} "
+                            f"mean of {m['sources']} sources", text))
     return out
 
 

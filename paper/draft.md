@@ -232,57 +232,70 @@ The synthetic sweep does not reach low activity because TartanAir stays between 
 
 An earlier synthetic-only checkpoint failed to transfer to real indoor Kinect depth and lost to a constant predictor. Mixed-domain fine-tuning reverses this failure, and two auxiliary losses added at the final training stage — a flow-warped log-depth residual term and a depth-boundary-weighted term — improve accuracy and temporal stability together at unchanged compute.
 
-**Table 2. Held-out real indoor RGB-D (TUM and Bonn), 100 clips per source, dataset-balanced mean. The two rows share an activity ratio of 32.2%, so the improvement is not bought with computation.**
+**Table 2. Held-out real indoor RGB-D (TUM and Bonn), eight-frame clips, 100 clips per source spread evenly over the holdout, dataset-balanced mean. The two rows share an activity ratio, so the improvement is not bought with computation.**
 
-| Model | AbsRel | RMSE (m) | \(\delta_1\) | t-delta | OPW | TCE |
+| Model | AbsRel | \(\delta_1\) | t-delta | OPW | TCE | Active (%) |
 |---|---:|---:|---:|---:|---:|---:|
-| Previous checkpoint | 0.1633 | 0.6279 | 0.8211 | 0.0915 | 0.0271 | 0.0351 |
-| **Confirmed checkpoint (4.19M)** | **0.1595** | **0.6063** | **0.8262** | **0.0751** | **0.0243** | **0.0323** |
+| Previous checkpoint (first-sequence sampling) | 0.1633 | 0.8211 | 0.0915 | 0.0271 | 0.0351 | 32.2 |
+| Reported checkpoint (first-sequence sampling) | 0.1595 | 0.8262 | 0.0751 | 0.0243 | 0.0323 | 32.2 |
+| **Reported checkpoint (4.19M), full holdout** | **0.1302** | **0.8613** | **0.0607** | **0.0184** | **0.0262** | **22.0** |
+| **Long-clip checkpoint, full holdout** | **0.1302** | **0.8684** | 0.0702 | 0.0196 | 0.0273 | **22.0** |
 
-Per source, the confirmed model reaches 0.1321 AbsRel and 0.8426 \(\delta_1\) on TUM at 19.7% activity, and 0.1869 and 0.8098 on Bonn at 44.7%. On the synthetic holdout it reaches 0.3791 AbsRel and 14.22 RMSE.
+The first two rows are the comparison of training recipes we previously reported, and they are kept because the auxiliary-loss conclusion rests on them; both were measured before the sampling fix of Section 4.2 and therefore describe Bonn's first held-out sequence. Rows three and four are the same checkpoints on the full holdout, and they are the numbers used everywhere else in this paper. The sampling change moves the reported checkpoint from 0.1595 to 0.1302 AbsRel and its activity from 32.2% to 22.0% — the first-sequence subset is the crowd scene, which is both harder and more active than the holdout it stood for.
+
+Per source under the fixed sampling, the reported model reaches 0.1321 AbsRel and 0.8426 \(\delta_1\) on TUM at 19.7% activity, and 0.1283 and 0.8801 on Bonn at 24.4%. The Bonn column previously read 0.1869 at 44.7% activity, which was the crowd sequence alone.
 
 Two cautions apply. The synthetic \(\delta_1\) difference between these checkpoints lies inside a measured seed standard deviation of \(\pm\)0.015 and is not claimed. More importantly, the two rows differ in initialisation lineage and cumulative steps, so Table 2 is a comparison of checkpoints, not a controlled loss ablation; the controlled ablation exists only at 8k steps, where the ranking was in fact reversed. Short-probe rankings of loss terms did not survive to convergence, which we report as a methodological finding: brief probes can settle whether a term helps but not how strongly to weight it.
 
 ### 5.3 Comparison with larger depth models `[CHECKPOINT-DEPENDENT]`
 
-Table 3 compares against current baseline checkpoints under one shared protocol on both domains: 100 clips per source, identical holdout sequences, identical metric implementation, per-clip median alignment.
+Every model in this section is measured on the same holdout clips, at 256 pixels, through the same metric implementation, under the protocol of Section 4.2. We report two clip lengths, because they answer different questions and disagree. Eight frames is the convention in this literature. 256 frames is the streaming setting the architecture is for, and it is the primary table.
 
-**Table 3. The commonly cited comparison group, all measured under one protocol: same holdout clips, 256px input, same metric implementation. Relative-depth models receive the 2-DOF disparity-space scale+shift fit they are designed for; metric models and ours receive 1-DOF per-clip median scaling. Our model is reported under both so the alignment rule does not carry the result. "med" is the per-clip median AbsRel, which is robust to the alignment blow-ups discussed below.**
+**Table 3a. The comparison group at 256 frames — the streaming protocol. Real indoor holdout (TUM, Bonn), disjoint clips, 13 clips per model, dataset-balanced mean. DA3 receives the whole clip at once and is not causal; every other row is causal. Alignment is each model's native rule (Section 4.4), and Section 5.8 reports the whole group under both rules.**
+
+| Model | Params | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| DA 3 Base (non-causal) | 120M | **0.1163** | **0.8871** | 0.0857 | **0.0181** | **0.0241** |
+| Video Depth Anything S (metric) | 28.4M | 0.1276 | 0.8808 | 0.0854 | 0.0217 | 0.0274 |
+| ZoeDepth N-K | 345M | 0.1285 | 0.8677 | 0.0871 | 0.0227 | 0.0278 |
+| DA V1 Small | 24.8M | 0.1404 | 0.8339 | 0.1222 | 0.0271 | 0.0324 |
+| DPT-Large | 343M | 0.1891 | 0.7461 | 0.1631 | 0.0352 | 0.0404 |
+| **SOKKANAEM (long-clip)** | **4.19M** | 0.1990 | 0.7864 | **0.0674** | 0.0258 | 0.0335 |
+| DA V2 Base | 97.5M | 0.2151 | 0.7387 | 0.3194 | 0.0483 | 0.0541 |
+| SOKKANAEM (reported) | 4.19M | 0.2434 | 0.7134 | 0.0719 | 0.0291 | 0.0366 |
+| DA V2 Small | 24.8M | 0.5491 | 0.7305 | 3.5881 | 0.2228 | 0.2283 |
+
+**Table 3b. The same group at eight frames, the conventional protocol. 189 clips per model.**
+
+| Model | Params | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| DA V1 Small | 24.8M | **0.0650** | 0.9439 | 0.0892 | 0.0202 | 0.0261 |
+| DPT-Large | 343M | 0.0875 | 0.9276 | 0.1162 | 0.0270 | 0.0326 |
+| DA V2 Base | 97.5M | 0.0877 | **0.9420** | 0.3814 | 0.0306 | 0.0367 |
+| ZoeDepth N-K | 345M | 0.0992 | 0.8900 | 0.0866 | 0.0211 | 0.0264 |
+| Video Depth Anything S (metric) | 28.4M | 0.1000 | 0.9139 | 0.0829 | 0.0200 | 0.0258 |
+| DA 3 Base (non-causal) | 120M | 0.1130 | 0.8924 | 0.0825 | **0.0140** | **0.0200** |
+| **SOKKANAEM (reported)** | **4.19M** | 0.1302 | 0.8613 | **0.0607** | 0.0184 | 0.0262 |
+| **SOKKANAEM (long-clip)** | **4.19M** | 0.1302 | 0.8684 | 0.0702 | 0.0196 | 0.0273 |
+| DA V2 Small | 24.8M | 0.2068 | 0.9292 | 1.0015 | 0.0895 | 0.0953 |
 
 ![Comparison group](figures/comparison.svg)
 
-**Figure 4. Accuracy against temporal stability across the comparison group**, with marker area scaling as the logarithm of parameter count. Down and to the left is better on both axes. Our model is the smallest marker in each panel, lowest on the stability axis and rightmost on accuracy. The stability axis is logarithmic because t-delta spans two orders of magnitude across the group: the gap to the next best model is a factor of 1.35 on real footage and 4.2 on synthetic.
+**Figure 4. Accuracy against temporal stability across the comparison group.** Marker area scales as the logarithm of parameter count; down and to the left is better on both axes. Our model is the smallest marker and the lowest on the stability axis in both panels. The stability axis is logarithmic because t-delta spans two orders of magnitude across the group.
 
-*Real indoor holdout (TUM, Bonn):*
+Four things follow, and only one of them flatters us.
 
-| Model | Params | Align | AbsRel | med | \(\delta_1\) | t-delta | OPW | TCE |
-|---|---:|---|---:|---:|---:|---:|---:|---:|
-| DA V1 Small | 24.8M | 2-DOF | **0.0736** | **0.0637** | **0.9350** | 0.1074 | 0.0247 | 0.0303 |
-| ZoeDepth N-K | 345M | 1-DOF | 0.0997 | 0.0930 | 0.8910 | 0.1013 | 0.0241 | 0.0291 |
-| DPT-Large | 343M | 2-DOF | 0.1002 | 0.0973 | 0.9112 | 0.1371 | 0.0335 | 0.0389 |
-| DA V2 Base | 97.5M | 2-DOF | 0.1060 | 0.0895 | 0.9182 | 0.4052 | 0.0364 | 0.0425 |
-| DA 3 Base | 120M | 1-DOF | 0.1244 | 0.1154 | 0.8789 | 0.1024 | **0.0185** | **0.0252** |
-| DA V2 Small | 24.8M | 2-DOF | 0.2256 | 0.0967 | 0.9050 | 0.9919 | 0.0958 | 0.1014 |
-| **SOKKANAEM** | **4.19M** | 1-DOF | 0.1595 | 0.1041 | 0.8262 | **0.0751** | 0.0244 | 0.0324 |
-| **SOKKANAEM** | **4.19M** | 2-DOF | 0.1321 | — | 0.8268 | **0.0715** | 0.0229 | 0.0309 |
+**We lead raw frame-to-frame difference under both protocols, and the video-specific baseline does not take it.** At 256 frames, 0.0674 against 0.0854 for Video Depth Anything, the one baseline with an explicit temporal module, and 0.0857 for the non-causal DA3 — a factor of 1.27 over the best of them. At eight frames the margin is 1.36. This is the claim the architecture was built to make, and adding the class of baseline that was missing from our earlier tables did not overturn it.
 
-*Synthetic holdout (Virtual KITTI 2, TartanAir v2, PointOdyssey):*
+**We are last or nearly last on accuracy, under both protocols.** At eight frames, 0.1302 AbsRel against 0.0650 for a 24.8M-parameter baseline: a factor of two, at six times fewer parameters. At 256 frames we are sixth of nine on AbsRel. The gap narrows with clip length but does not close, and nothing in this paper claims otherwise.
 
-| Model | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
-|---|---:|---:|---:|---:|---:|
-| ZoeDepth N-K | **0.3604** | 0.5021 | 0.9522 | 0.1068 | 0.1298 |
-| DA 3 Base | 0.3618 | 0.4409 | 1.0128 | 0.0482 | **0.0593** |
-| DA V2 Base | 0.3701 | **0.7441** | 5.9644 | 0.1267 | 0.1409 |
-| **SOKKANAEM** | 0.3791 | 0.4821 | **0.2242** | **0.0308** | 0.0622 |
-| DA V2 Small | 0.3818 | 0.7301 | 5.0124 | 0.1104 | 0.1265 |
-| DA V1 Small | 0.4210 | 0.7109 | 4.5525 | 0.1200 | 0.1383 |
-| DPT-Large | 0.5029 | 0.6766 | 8.5888 | 0.1458 | 0.1669 |
+**Motion-referenced consistency is not ours.** DA3 is better on OPW and TCE under both protocols, and at 256 frames Video Depth Anything and ZoeDepth are too. Raw frame difference and motion-compensated consistency come apart here, and only the first favours us.
 
-**A correction to our own earlier reporting.** We previously claimed to beat a comparable-size model on every real-domain metric except \(\delta_1\). That claim rested on Depth Anything V2 Small's real AbsRel of 0.2256, which is an alignment artifact: its per-clip distribution on TUM is mean 0.3463, median 0.0950, maximum 6.021. In a handful of clips the fitted disparity approaches zero and inverting it sends predicted depth to the clip range, dominating the mean. Its robust median, 0.0967, is in line with every other baseline and better than ours. **We withdraw the claim.**
+**The two protocols rank the group differently, which is the point of reporting both.** Every model degrades from eight frames to 256 — the per-clip alignment window grows with the clip, so a single scale (or scale and shift) must serve a longer span — but they degrade by very different factors: DPT-Large by 116% and DA V2 Base by 145%, our reported checkpoint by 87%, our long-clip checkpoint by 53%, DA3 by only 3%. A model that carries state and one that processes the whole clip jointly both hold up better than per-frame models over a long stream, for opposite reasons: ours accumulates evidence causally and DA3 is allowed to see the future. Read only the eight-frame table and none of that is visible.
 
-Read honestly, the table says three things. On real footage we are at the bottom of the accuracy ranking: 0.1321 AbsRel even under the more permissive 2-DOF alignment, 1.8x the best comparable-size baseline, and the lowest \(\delta_1\) in the group. We lead exactly one metric, raw frame-to-frame variation, by 1.35x over the next best. On synthetic footage the picture changes: t-delta is 4.2x better than the runner-up, OPW is best in the group, and AbsRel is within 5% of the leader — at 6x to 82x fewer parameters.
+**The synthetic comparison is being re-measured** under the fixed clip sampling and is not reported here; PointOdyssey offers 1,984 clips at eight frames and the earlier cap of 100 took its first held-out sequence, so the synthetic columns of our previous tables describe one sequence per source rather than a holdout. `[UNDER TEST]`
 
-We do not claim a general temporal-consistency lead. Of the three temporal measures, only raw frame difference favours us; Depth Anything 3 is better on both motion-compensated OPW and GT-referenced TCE. The defensible claim is flicker suppression without post-processing, at a fraction of the parameters and latency.
+**A correction to our own earlier reporting.** We previously claimed to beat a comparable-size model on every real-domain metric except \(\delta_1\). That claim rested on Depth Anything V2 Small's real AbsRel, which is an alignment artifact: on a handful of clips the fitted disparity approaches zero and inverting it sends predicted depth to the clip range, dominating the mean (its per-clip median is in line with the rest of the group). **We withdraw the claim.**
 
 ### 5.4 What preserved-state readout actually buys `[CHECKPOINT-DEPENDENT]`
 
@@ -377,19 +390,36 @@ We report this plainly because it bounds the contribution. Exact state preservat
 
 The headline latency and memory numbers therefore belong to a small model with a fused kernel, and the sparsity mechanism's established benefit is arithmetic and state, not time. A reader who takes "2.2x faster" as the sparse path beating the dense one has read the opposite of what we measured.
 
-### 5.7 Streaming drift: what the clip-level numbers hide `[CHECKPOINT-DEPENDENT]`
+### 5.7 Streaming drift, and how much of it is ours `[CHECKPOINT-DEPENDENT]`
 
-> The causal claim in this section has been tested and holds (Tables 10 and 11). What remains open is adoption: the fine-tuned checkpoint is measured at 32 frames only, so it is not yet the reported one.
+A streaming model is supposed to accumulate evidence across frames, so depth at frame 7 should be better than at frame 0 — that is the reason to carry state at all. The eight-frame clip mean conventional in this literature cannot see whether that happens, and for a long time we did not measure it either.
 
-Every number above, and every number we have previously reported, is an eight-frame clip mean. A streaming model is supposed to accumulate evidence across frames, so depth at frame 7 should be better than at frame 0 — that is the reason to carry state at all. We had never measured it.
+**The clip-length ladder.** The same two checkpoints, evaluated on disjoint clips of increasing length, with the keyframe period fixed at 30:
+
+**Table 7a. Accuracy against clip length, real indoor holdout, dataset-balanced mean. Clip counts fall with length because the holdout is finite: 189 clips at eight frames, 13 at 256.**
+
+| Clip length | Clips | Reported ckpt AbsRel | Penalty | Long-clip ckpt AbsRel | Penalty |
+|---:|---:|---:|---:|---:|---:|
+| 8 | 189 | 0.1302 | — | 0.1302 | — |
+| 32 | 120 | 0.1487 | +14.2% | 0.1424 | +9.4% |
+| 128 | 28 | 0.1961 | +50.6% | 0.1719 | +32.0% |
+| 256 | 13 | 0.2434 | +86.9% | 0.1990 | +52.8% |
+
+**The short-clip convention is optimistic by a factor we had badly underestimated.** We previously reported an eight-to-32-frame penalty of 11.2% and treated it as the size of the effect. Measured out to 256 frames it is 87% for the reported checkpoint. Deployment runs hundreds of frames, so this is the number that describes the setting the architecture is for.
+
+**But not all of that penalty is drift, and the honest accounting needs a control.** Per-clip alignment fits one scale for the whole clip, so a longer clip gives the fit a harder job irrespective of any state. Stateless per-frame baselines measure that effect directly, since they have no state to drift: over the same clips, DPT-Large degrades by 116% and Depth Anything V2 Base by 145% from eight frames to 256 — *more* than our 87%. Depth Anything 3, which is handed the whole clip at once and is not causal, degrades by 3%.
+
+So there are two effects and they point in opposite directions. The protocol penalises every causal model as the clip grows, and it penalises per-frame models hardest; carried state, drift and all, is a net advantage over a long stream rather than a liability. What remains true, and is the reason this section exists, is that **the carried state does not accumulate accuracy within a keyframe cycle** — the frame-index curve below shows error growing between refreshes — and that **an eight-frame protocol cannot see either effect**.
 
 Scoring by frame index inside a 32-frame clip, with each frame aligned independently so the curve is not an artefact of one clip-level fit:
+
+> The frame-index table below was measured before the sampling fix of Section 4.2, on the first 30 clips of each source. Its Bonn column is the crowd sequence; the qualitative shape is what the section relies on and the re-measurement over the full holdout is in progress. `[UNDER TEST]`
 
 ![Streaming drift](figures/drift.svg)
 
 **Figure 7. Accuracy decays between keyframes.** Panel (a) scores by frame index within a 32-frame clip, with each frame aligned independently. Carried state does not accumulate accuracy: the dynamic-object source degrades 61% from frame 0 to frame 28, and the recovery at frame 31 is the keyframe firing at frame 30. Panel (b) sweeps the refresh period, showing that the remedy is already in the architecture and merely applied too rarely, and that a period below 10 forfeits the stability lead the model is built for.
 
-**Table 7. Accuracy and consistency by frame index, 32-frame clips, keyframe refresh every 30 frames. Every metric is scored per frame index, with each frame aligned independently; OPW and TCE are scored on the pair (t-1, t).**
+**Table 7b. Accuracy and consistency by frame index, 32-frame clips, keyframe refresh every 30 frames. Every metric is scored per frame index, with each frame aligned independently; OPW and TCE are scored on the pair (t-1, t).**
 
 | Frame | TUM AbsRel | TUM \(\delta_1\) | Bonn AbsRel | Bonn \(\delta_1\) | Bonn OPW | Bonn TCE |
 |---|---:|---:|---:|---:|---:|---:|
@@ -407,47 +437,28 @@ Scoring by frame index inside a 32-frame clip, with each frame aligned independe
 
 The recovery at frame 31 is the keyframe: a full refresh fires at frame 30 and the error snaps back, on Bonn recovering 10 points of \(\delta_1\) at once. The pattern is a sawtooth — gating accumulates error between keyframes and the keyframe erases it. The refresh is not free in the other direction: raw frame difference *spikes* at the keyframe (TUM 0.0824 at frame 28 against 0.1751 at frame 31), because a full recomputation is a discontinuity in the output sequence. Accuracy sawtooths down and flicker sawtooths up, out of phase.
 
-Two consequences follow. First, the fix already exists in the architecture and is simply applied too rarely. Sweeping the refresh period on 32-frame clips:
+Two consequences follow. First, the fix already exists in the architecture and is simply applied too rarely: the keyframe period is a knob on exactly this decay. The period sweep we previously reported was measured under the first-sequence sampling and is being re-run; what survives that change is its shape, which the ladder above already shows — a shorter period buys accuracy and costs raw frame difference, because a keyframe is by construction a discontinuity in the output sequence. `[UNDER TEST]`
 
-**Table 8. Keyframe period against accuracy and cost, real indoor holdout, 32-frame clips.**
+Second, the cause is a train-deploy mismatch rather than a flaw in \(\Delta\)-gating itself. Training uses four-frame clips, so the model has never had to hold state through more than three consecutive gated frames. Randomised mask ratios make it robust to *how much* is skipped, not to *how long*.
 
-| Period | Active (%) | AbsRel | \(\delta_1\) | t-delta | TCE |
-|---:|---:|---:|---:|---:|---:|
-| 5 | 45.0 | **0.1551** | **0.8280** | 0.1084 | 0.0368 |
-| 10 | 35.3 | 0.1601 | 0.8233 | 0.0914 | 0.0355 |
-| 15 | 32.4 | 0.1648 | 0.8142 | 0.0879 | 0.0357 |
-| 30 (default) | 29.2 | 0.1774 | 0.7985 | 0.0813 | 0.0356 |
-| 60 | 26.2 | 0.1807 | 0.7937 | **0.0697** | **0.0330** |
+**Testing that explanation.** We fine-tuned the reported checkpoint for 25k steps at clip length 24 — long enough that no mid-clip keyframe fires, so the model must hold state through 23 consecutive gated frames. The diagnostic quantity is not the absolute error but the gap between protocols, which is the Penalty column of Table 7a: the eight-to-32-frame penalty falls from 14.2% to 9.4%, the eight-to-128 from 50.6% to 32.0%, and the eight-to-256 from 86.9% to 52.8%. **The mismatch is a real contributor at every horizon, and its removal is worth 18% of absolute error at 256 frames** (0.2434 to 0.1990).
 
-Refreshing every 10 frames instead of 30 recovers 9.8% relative AbsRel and 2.5 points of \(\delta_1\) for 6 points of activity. Going to 5 buys more accuracy but raises t-delta to 0.1084, which would forfeit the one metric we lead in Table 3; at period 10 it stays at 0.0914 and still leads. Accuracy and flicker suppression trade against each other here, because a keyframe is by construction a discontinuity.
+One observation comes with it, and it is about evaluation rather than about the model. The two checkpoints score **identically to four decimal places on eight-frame clips** — 0.1302 both. An evaluation restricted to short clips would have scored a 25k-step intervention that removes a fifth of the long-horizon error as having no effect whatsoever. The short-clip convention is not only optimistic about streaming, it is blind to improvements aimed at it.
 
-Second, and more importantly for how our results should be read: **the same checkpoint scores 0.1595 on eight-frame clips and 0.1774 on 32-frame clips at the default period.** Short clips sample only the favourable part of the sawtooth. Deployment runs hundreds of frames, so the eight-frame convention that we and much of the video-depth literature use is optimistic for the streaming setting it is meant to describe.
+**The refresh period moves with the checkpoint.** A model taught to tolerate sustained gating needs refreshing less often, and the saved refreshes buy back the stability that a longer period would otherwise cost:
 
-The likely cause is a train-deploy mismatch rather than a flaw in \(\Delta\)-gating itself. Training uses four-frame clips, so the model has never had to hold state through more than three consecutive gated frames. Randomised mask ratios make it robust to *how much* is skipped, not to *how long*.
+**Table 8. The reported configuration against the long-clip checkpoint at a longer refresh period, under both clip lengths that matter.**
 
-**Testing that explanation.** We fine-tuned the reported checkpoint for 25k steps at clip length 24 — long enough that no mid-clip keyframe fires, so the model must hold state through 23 consecutive gated frames. The diagnostic quantity is not the absolute error but the gap between the two protocols:
+| Configuration | Clip | Active (%) | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Reported ckpt, period 30 | 32 | 22.7 | 0.1487 | 0.8264 | 0.0682 | 0.0219 | 0.0298 |
+| **Long-clip ckpt, period 60** | 32 | **19.6** | **0.1447** | **0.8345** | **0.0608** | **0.0195** | **0.0274** |
+| Reported ckpt, period 30 | 256 | 23.9 | 0.2434 | 0.7134 | 0.0719 | 0.0291 | 0.0366 |
+| **Long-clip ckpt, period 60** | 256 | **22.1** | **0.2087** | **0.7716** | **0.0665** | **0.0252** | **0.0329** |
 
-**Table 10. The eight- to 32-frame penalty, before and after long-clip fine-tuning.**
+The second configuration is better on every measure and cheaper, at both clip lengths: at 256 frames, 14% relative AbsRel, 5.8 points of \(\delta_1\), 8% on raw frame difference, 10% on TCE, and 1.8 points less activity. The two changes are coupled — swapping the checkpoint while leaving the period at 30 keeps the accuracy gain but gives back the stability (t-delta 0.0674 against 0.0665), and it is the saved refreshes that buy it back.
 
-| Checkpoint | 8-frame AbsRel | 32-frame AbsRel | Penalty |
-|---|---:|---:|---:|
-| Reported (clip length 4) | 0.1595 | 0.1774 | +11.2% |
-| Long-clip fine-tune (clip length 24) | 0.1600 | **0.1677** | **+4.8%** |
-
-The penalty more than halves, which confirms the mismatch as a real contributor rather than a conjecture. Two observations come with it. The eight-frame numbers barely move — 0.1595 to 0.1600, inside the seed noise of \(\pm\)0.005 — so **an evaluation restricted to short clips would have scored this intervention as having no effect**. The short-clip convention is not only optimistic about streaming, it is blind to improvements aimed at it. And raw frame difference degrades by 13%, which is the one metric we lead in Table 3.
-
-**The trade dissolves once the refresh period moves with the checkpoint.** A model taught to tolerate sustained gating should need refreshing less often, and it does. Re-sweeping the period on the fine-tuned checkpoint and comparing against the current default configuration:
-
-**Table 11. Current configuration against the fine-tuned checkpoint at a longer refresh period, 32-frame clips.**
-
-| Configuration | Active (%) | AbsRel | \(\delta_1\) | t-delta | TCE |
-|---|---:|---:|---:|---:|---:|
-| Reported checkpoint, period 30 | 29.2 | 0.1774 | 0.7985 | 0.0813 | 0.0356 |
-| **Fine-tuned checkpoint, period 60** | **26.2** | **0.1710** | **0.8067** | **0.0731** | **0.0323** |
-
-The second row is better on every measure and cheaper: 3.6% relative AbsRel, 0.8 points of \(\delta_1\) — twice the \(\pm\)0.004 seed noise — 10% on raw frame difference, 9% on TCE, and three points less activity. The two changes are coupled: swapping the checkpoint while leaving the period at 30 keeps the accuracy gain but forfeits the stability, and it is the saved refreshes that buy the stability back.
-
-We do not promote this configuration to the reported checkpoint here. Tables 10 and 11 are 32-frame measurements while the comparison group in Table 3 was measured at eight frames, and the temporal lead claimed there cannot be transferred across protocols without re-measuring it.
+**We therefore treat the long-clip checkpoint as the model of record for the streaming protocol**, and report both in Table 3 so that the eight-frame comparison against the literature stays on the checkpoint it was measured with. Section 6.5 adds a further stage to this checkpoint, and the final configuration is stated there.
 
 ## 6. Ablations and Diagnostic Findings
 
@@ -506,7 +517,7 @@ The obvious suspect was the decoder. The binned head predicts depth as a softmax
 
 What the diagnosis does point at is the objective. Nothing in it penalises compression: the scale-invariant log loss punishes the mismatch indirectly, but under uncertainty shrinking the prediction still lowers it, which is the ordinary bias-variance trade. So we added a term that penalises it directly: the squared log ratio of the standard deviation of predicted log depth to that of ground truth, taken per sample over valid pixels rather than per batch, since compression is a property of a scene and a wide scene would otherwise cancel a narrow one. Comparing in log space makes the term scale-free and symmetric, so over-spreading is penalised as much as under-spreading and the loss cannot be bought with noise. We fine-tuned the reported checkpoint for 8k steps at three weights, with everything else held fixed. All three arms run at the same 32.2% activity, so nothing here is bought with computation.
 
-**Table 12. A spread term against the compression it targets. Same 8k fine-tune from the reported checkpoint, same activity, real indoor holdout.**
+**Table 10. A spread term against the compression it targets. Same 8k fine-tune from the reported checkpoint, same activity, real indoor holdout.**
 
 | Spread weight | AbsRel | \(\delta_1\) | t-delta | OPW | TCE | Bonn range/GT | Bonn AbsRel |
 |---:|---:|---:|---:|---:|---:|---:|---:|
