@@ -413,31 +413,29 @@ A streaming model is supposed to accumulate evidence across frames, so depth at 
 
 So there are two effects and they point in opposite directions. The protocol penalises every causal model as the clip grows, and it penalises per-frame models hardest; carried state, drift and all, is a net advantage over a long stream rather than a liability. What remains true, and is the reason this section exists, is that **the carried state does not accumulate accuracy within a keyframe cycle** — the frame-index curve below shows error growing between refreshes — and that **an eight-frame protocol cannot see either effect**.
 
-Scoring by frame index inside a 32-frame clip, with each frame aligned independently so the curve is not an artefact of one clip-level fit:
+**Where inside a clip the error lives.** Scoring by frame index, with each frame aligned independently so the curve cannot be an artefact of one clip-level fit:
 
-> The frame-index table below was measured before the sampling fix of Section 4.2, on the first 30 clips of each source. Its Bonn column is the crowd sequence; the qualitative shape is what the section relies on and the re-measurement over the full holdout is in progress. `[UNDER TEST]`
-
-![Streaming drift](figures/drift.svg)
-
-**Figure 7. Accuracy decays between keyframes.** Panel (a) scores by frame index within a 32-frame clip, with each frame aligned independently. Carried state does not accumulate accuracy: the dynamic-object source degrades 61% from frame 0 to frame 28, and the recovery at frame 31 is the keyframe firing at frame 30. Panel (b) sweeps the refresh period, showing that the remedy is already in the architecture and merely applied too rarely, and that a period below 10 forfeits the stability lead the model is built for.
-
-**Table 7b. Accuracy and consistency by frame index, 32-frame clips, keyframe refresh every 30 frames. Every metric is scored per frame index, with each frame aligned independently; OPW and TCE are scored on the pair (t-1, t).**
+**Table 7b. Accuracy and consistency by frame index, 32-frame clips, full holdout (22 TUM and 98 Bonn clips), keyframe refresh every 30 frames. OPW and TCE are scored on the pair (t-1, t).**
 
 | Frame | TUM AbsRel | TUM \(\delta_1\) | Bonn AbsRel | Bonn \(\delta_1\) | Bonn OPW | Bonn TCE |
 |---|---:|---:|---:|---:|---:|---:|
-| 0 | 0.1353 | **0.8616** | 0.1642 | **0.8611** | — | — |
-| 4 | 0.1206 | 0.8559 | 0.1690 | 0.8485 | 0.0288 | 0.0332 |
-| 8 | 0.1249 | 0.8431 | 0.1795 | 0.8093 | 0.0279 | 0.0333 |
-| 12 | 0.1510 | 0.8327 | 0.1934 | 0.7667 | 0.0423 | 0.0465 |
-| 16 | 0.1521 | 0.8068 | 0.2185 | 0.7152 | 0.0367 | 0.0413 |
-| 20 | 0.1415 | 0.8041 | 0.2312 | 0.7400 | 0.0324 | 0.0375 |
-| 24 | 0.1585 | 0.7983 | 0.2431 | 0.7212 | 0.0376 | 0.0420 |
-| 28 | 0.1697 | 0.7935 | **0.2636** | 0.7165 | **0.0418** | **0.0459** |
-| 31 | **0.1323** | 0.8413 | **0.2011** | 0.8161 | 0.0424 | 0.0457 |
+| 0 | 0.1353 | **0.8616** | **0.1167** | **0.8994** | — | — |
+| 4 | 0.1206 | 0.8559 | 0.1239 | 0.8858 | 0.0229 | 0.0255 |
+| 8 | 0.1249 | 0.8431 | 0.1316 | 0.8630 | 0.0194 | 0.0216 |
+| 12 | 0.1510 | 0.8327 | 0.1383 | 0.8405 | 0.0228 | 0.0250 |
+| 16 | 0.1521 | 0.8068 | 0.1485 | 0.8197 | 0.0213 | 0.0236 |
+| 20 | 0.1415 | 0.8041 | 0.1538 | 0.8246 | 0.0198 | 0.0226 |
+| 24 | 0.1585 | 0.7983 | 0.1582 | 0.8162 | 0.0204 | 0.0227 |
+| 28 | 0.1697 | 0.7935 | **0.1668** | 0.8095 | 0.0228 | 0.0250 |
+| 31 | **0.1323** | 0.8413 | 0.1340 | 0.8695 | 0.0260 | 0.0283 |
 
-**There is no accumulation benefit, and on dynamic scenes there is an accumulation cost — on every measure, not only accuracy.** TUM improves by about 5% over the first few frames and then degrades; Bonn degrades monotonically from 0.1642 to 0.2636, 61% worse by frame 28. \(\delta_1\) falls 14.5 points on Bonn over the same span, and the two motion-referenced measures degrade with it: OPW rises 45% and TCE 38% from frame 4 to frame 28. This matters for how the temporal claim in Table 3 should be read — the stability we lead on is measured at the start of a clip, and it decays over a stream just as accuracy does.
+**There is no accumulation benefit, and on dynamic scenes there is an accumulation cost.** Bonn degrades monotonically from 0.1167 at frame 0 to 0.1668 at frame 28 — 43% worse — and loses 9.0 points of \(\delta_1\) over the same span. TUM improves for the first few frames and then degrades. We previously put the Bonn figure at 61%, measured on the crowd sequence alone; on the full holdout it is 43%, and the shape is unchanged.
 
-The recovery at frame 31 is the keyframe: a full refresh fires at frame 30 and the error snaps back, on Bonn recovering 10 points of \(\delta_1\) at once. The pattern is a sawtooth — gating accumulates error between keyframes and the keyframe erases it. The refresh is not free in the other direction: raw frame difference *spikes* at the keyframe (TUM 0.0824 at frame 28 against 0.1751 at frame 31), because a full recomputation is a discontinuity in the output sequence. Accuracy sawtooths down and flicker sawtooths up, out of phase.
+**The decay is in accuracy, not in motion-referenced consistency.** Bonn's OPW and TCE are flat across the cycle — 0.0229 at frame 4 against 0.0228 at frame 28 — while AbsRel and \(\delta_1\) move steadily. What drifts is where the surface is placed, not how consistently it moves, which is exactly the distinction the two metric families exist to draw and the reason a single "temporal consistency" claim would be wrong in both directions.
+
+The recovery at frame 31 is the keyframe: a full refresh fires at frame 30 and the error snaps back, on Bonn recovering 6 points of \(\delta_1\) at once. The refresh is not free in the other direction: raw frame difference *spikes* at the keyframe (TUM 0.0824 at frame 28 against 0.1751 at frame 31), because a full recomputation is a discontinuity in the output sequence. Accuracy sawtooths down and flicker sawtooths up, out of phase. Long-clip fine-tuning flattens both: on the same clips its Bonn curve runs 0.1139 to 0.1548, a 36% rise rather than 43%, and it holds 0.8380 \(\delta_1\) at frame 28 against 0.8095.
+
+**Out to 256 frames the sawtooth rides a trend and then levels off.** On disjoint 256-frame clips, Bonn's per-frame error grows from 0.0912 at frame 0 to 0.2817 by frame 224 — a factor of three — and then falls back to 0.1712 at frame 255. The error is bounded rather than divergent, but the trend over the first two hundred frames is real, and a keyframe period tuned on 32-frame clips does not contain it.
 
 Two consequences follow. First, the fix already exists in the architecture and is simply applied too rarely: the keyframe period is a knob on exactly this decay. The period sweep we previously reported was measured under the first-sequence sampling and is being re-run; what survives that change is its shape, which the ladder above already shows — a shorter period buys accuracy and costs raw frame difference, because a keyframe is by construction a discontinuity in the output sequence. `[UNDER TEST]`
 
