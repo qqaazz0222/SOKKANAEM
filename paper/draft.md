@@ -16,7 +16,7 @@ Video depth models reprocess large static regions every frame and often flicker.
 
 A 4.19M-parameter model reaches 0.1302 AbsRel on a real indoor holdout while updating 22.0% of patches per frame, and cutting the update rate to 4.6% costs 6.4% relative error. Against seven commonly cited depth models under one protocol it is last or nearly last on accuracy and first on raw frame-to-frame difference, by 1.27x to 1.36x, including against a video-specific baseline with an explicit temporal module. It does not lead motion-compensated or ground-truth-referenced consistency, and we claim no general temporal-consistency advantage.
 
-**The sharpest result is a negative one about protocol.** Clip length changes the answer: our error grows 128% from eight-frame to 512-frame clips, and long-clip fine-tuning removes a fifth of that while leaving the eight-frame number unchanged to four decimal places — so the eight-frame convention this literature uses is blind to the intervention that most improves streaming behaviour. Sparsity's other claims are similarly bounded: after a fused scan kernel, dense execution is faster than the sparse path at every activity level on a desktop GPU, so sparsity's benefit is established in arithmetic and per-stream state rather than in measured time.
+**The sharpest result is a negative one about protocol.** Clip length changes the answer: our clip-level error grows 128% from eight-frame to 512-frame clips, and long-clip fine-tuning removes a fifth of that while leaving the eight-frame number unchanged to four decimal places — so the eight-frame convention this literature uses is blind to the intervention that most improves streaming behaviour. Scoring 1,024-frame streams frame by frame separates the causes: the fine-tuned model's per-frame error rises 1.1% from the first frame to the thousandth while its clip-level score falls 36%, so most of what looks like drift is the per-clip alignment window, and stateless baselines suffer it worse than we do. Sparsity's other claims are similarly bounded: after a fused scan kernel, dense execution is faster than the sparse path at every activity level on a desktop GPU, so sparsity's benefit is established in arithmetic and per-stream state rather than in measured time.
 
 ## 1. Introduction
 
@@ -501,6 +501,21 @@ The recovery at frame 31 is the keyframe: a full refresh fires at frame 30 and t
 
 **Out to 256 frames the sawtooth rides a trend and then levels off.** On disjoint 256-frame clips, Bonn's per-frame error grows from 0.0912 at frame 0 to 0.2817 by frame 224 — a factor of three — and then falls back to 0.1712 at frame 255. The error is bounded rather than divergent, but the trend over the first two hundred frames is real, and a keyframe period tuned on 32-frame clips does not contain it.
 
+**At 1,024 frames the two effects separate cleanly, and this is the section's central measurement.** PointOdyssey's held-out sequences are long enough for 20 disjoint 1,024-frame streams, which is the only place we can measure a stream of that length with a usable sample.
+
+**Table 7d. 1,024-frame streams. Clip-level scores use one scale per clip; the per-frame column aligns every frame independently, so it sees drift without the alignment window.**
+
+| Source | Clips | Checkpoint | Clip AbsRel | vs 8 frames | Per-frame AbsRel, frame 0 → 1023 | Drift |
+|---|---:|---|---:|---:|---|---:|
+| PointOdyssey | 20 | Reported | 0.5344 | +58% | 0.2842 → 0.3227 | +13.5% |
+| PointOdyssey | 20 | Long-clip | **0.4638** | **+36%** | 0.2700 → **0.2730** | **+1.1%** |
+| Bonn (static\_close\_far) | 1 | Reported | 0.4820 | — | — | — |
+| Bonn (static\_close\_far) | 1 | Long-clip | **0.4170** | — | — | — |
+
+**Almost all of the clip-level penalty is the protocol, and almost none of the remainder survives long-clip training.** On the long-clip checkpoint, the clip-level score at 1,024 frames is 36% worse than at eight, while the same model's independently aligned per-frame error rises by 1.1% from the first frame to the thousandth and its \(\delta_1\) falls by 1.4 points. A model that had genuinely drifted over a thousand gated frames could not produce a flat per-frame curve. The reported checkpoint does drift — 13.5% and 8.5 points of \(\delta_1\) over the same span — so drift is real and long-clip training removes most of it.
+
+This is the answer to the question the eight-frame convention cannot ask. **State preservation over a thousand frames is stable; per-clip alignment over a thousand frames is not.** A deployment that aligns per frame, or that has metric scale, keeps the accuracy the short-clip tables advertise. A benchmark that fits one scale to a long clip will report a degradation that says more about its own protocol than about any model in it — including the stateless baselines, which degrade hardest of all (Table 3a).
+
 Two consequences follow. First, the fix already exists in the architecture and is simply applied too rarely: the keyframe period is a knob on exactly this decay.
 
 **Table 7c. Keyframe period against accuracy, stability and cost. 32-frame clips, full holdout, both checkpoints.**
@@ -644,7 +659,7 @@ The present study has several important limitations.
 5. Execution on an RTX 4090 is overhead-bound at this model scale, so reduced analytical MACs do not become higher FPS. Jetson Orin latency, energy, and multi-stream measurements have not been performed, and they are the measurement that decides whether the MAC reduction is worth anything in deployment.
 6. GMC is validated on real ego-motion (Section 5.6), but only on five driving sequences from one dataset, and only with per-domain threshold calibration; its default threshold is inoperative on real video. Handheld and aerial motion remain untested.
 7. Cross-domain evaluation covers real driving only. Unseen indoor domains (NYU, ScanNet) were not evaluated: the former's host was unreachable and the latter requires a signed agreement. The claim of generalization is therefore limited to the synthetic-to-real axis of one scene type.
-8. Accuracy degrades between keyframes, and clip-length dependence is severe: the reported checkpoint scores 0.1302 AbsRel on eight-frame clips and 0.2434 on 256-frame clips (Section 5.8). Part of that is the per-clip alignment window rather than drift — stateless baselines degrade more over the same clips — but we cannot separate the two exactly, only bound our share by the stateless controls. Behaviour beyond 256 frames is unmeasured; the holdout sequences run to 1,294 frames, so the measurement is available and simply not yet done.
+8. Clip-length dependence is severe under per-clip alignment: the reported checkpoint scores 0.1302 AbsRel on eight-frame clips and 0.2972 on 512-frame clips of real footage (Section 5.8). The 1,024-frame measurement separates the causes — per-frame drift is 13.5% for the reported checkpoint and 1.1% for the long-clip one, against clip-level penalties of 58% and 36% — so most of the effect is the alignment window. What we cannot do is remove the alignment window from the comparison tables, because scale-ambiguous depth has to be aligned somehow; the decomposition is reported instead. The 1,024-frame streams come from one synthetic source (20 clips) and one real sequence (1 clip); the real holdout does not contain more.
 
 9. The 256-frame protocol rests on 13 disjoint clips of real footage, because a finite holdout yields few long clips. Overlapping windows would multiply the count at the cost of independence, and one outlier frame then aliases into several frame indices. Differences of a few percent at that clip length are not resolvable, and we do not claim any.
 10. The predicted depth field has under half the ground truth's dynamic range on the dynamic-object source (Section 6.5). A spread term recovers part of it at a stated cost in motion-referenced consistency; the defect is not eliminated.
