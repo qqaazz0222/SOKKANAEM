@@ -22,7 +22,7 @@ import argparse
 import torch
 import torch.nn.functional as F
 
-from sokkanaem.data import build_mixed
+from sokkanaem.data import build_mixed, even_subset
 from sokkanaem.metrics import clip_scores, pooled
 
 
@@ -61,7 +61,9 @@ def main():
                              clip_stride=args.clip_len, size=args.size,
                              holdout=args.holdout, val=True)
     sources = [(spec.split(":")[0],
-                torch.utils.data.DataLoader(ds, batch_size=1, shuffle=False))
+                torch.utils.data.DataLoader(
+                    even_subset(ds, args.max_clips), batch_size=1,
+                    shuffle=False))
                for spec, ds in zip(args.data, dataset.datasets)]
 
     arms = [(p, d) for p in args.patch for d in (False, True)]

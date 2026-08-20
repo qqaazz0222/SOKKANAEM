@@ -11,7 +11,7 @@ import argparse
 import torch
 
 from sokkanaem import from_checkpoint
-from sokkanaem.data import build_mixed
+from sokkanaem.data import build_mixed, even_subset
 
 D = "/home/hyunsu/dataset_ssd"
 SOURCES = [
@@ -35,7 +35,8 @@ def main():
     for name, spec, hold in SOURCES:
         ds, _ = build_mixed([spec], clip_len=8, clip_stride=8, size=256,
                             holdout=hold, val=True)
-        ld = torch.utils.data.DataLoader(ds, batch_size=1, shuffle=False)
+        ld = torch.utils.data.DataLoader(even_subset(ds, args.max_clips),
+                                         batch_size=1, shuffle=False)
         rr, ss, ar = [], [], []
         for ci, (clip, gt, valid) in enumerate(ld):
             if ci >= args.max_clips:
