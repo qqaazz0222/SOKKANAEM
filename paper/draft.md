@@ -455,7 +455,7 @@ A streaming model is supposed to accumulate evidence across frames, so depth at 
 
 **The clip-length ladder.** The same two checkpoints, evaluated on disjoint clips of increasing length, with the keyframe period fixed at 30:
 
-**Table 7a. Accuracy against clip length, real indoor holdout, dataset-balanced mean. Clip counts fall with length because the holdout is finite: 189 clips at eight frames, 13 at 256.**
+**Table 7a. Accuracy against clip length, real indoor holdout, dataset-balanced mean, keyframe period 30. Clip counts fall with length because the holdout is finite: 189 clips at eight frames, 6 at 512. The 512-frame row rests on one TUM clip and five Bonn clips and is reported for the trend, not for its third decimal.**
 
 | Clip length | Clips | Reported ckpt AbsRel | Penalty | Long-clip ckpt AbsRel | Penalty |
 |---:|---:|---:|---:|---:|---:|
@@ -463,8 +463,11 @@ A streaming model is supposed to accumulate evidence across frames, so depth at 
 | 32 | 120 | 0.1487 | +14.2% | 0.1424 | +9.4% |
 | 128 | 28 | 0.1961 | +50.6% | 0.1719 | +32.0% |
 | 256 | 13 | 0.2434 | +86.9% | 0.1990 | +52.8% |
+| 512 | 6 | 0.2972 | +128% | 0.2318 | +78% |
 
-**The short-clip convention is optimistic by a factor we had badly underestimated.** We previously reported an eight-to-32-frame penalty of 11.2% and treated it as the size of the effect. Measured out to 256 frames it is 87% for the reported checkpoint. Deployment runs hundreds of frames, so this is the number that describes the setting the architecture is for.
+**The short-clip convention is optimistic by a factor we had badly underestimated.** We previously reported an eight-to-32-frame penalty of 11.2% and treated it as the size of the effect. Measured out to 512 frames — the longest stream the real holdout supports, since its sequences run 567 to 1,752 frames — it is 128% for the reported checkpoint. Deployment runs hundreds of frames, so this is the number that describes the setting the architecture is for.
+
+**The long-clip checkpoint's advantage grows with the stream.** At eight frames the two checkpoints are indistinguishable; at 256 frames the fine-tuned one is 18% better; at 512 frames it is 22% better and holds 9.7 more points of \(\delta_1\) (0.7389 against 0.6417). Whatever the fine-tune taught is specifically about holding state, and it pays more the longer it has to hold.
 
 **But not all of that penalty is drift, and the honest accounting needs a control.** Per-clip alignment fits one scale for the whole clip, so a longer clip gives the fit a harder job irrespective of any state. Stateless per-frame baselines measure that effect directly, since they have no state to drift: over the same clips, DPT-Large degrades by 116% and Depth Anything V2 Base by 145% from eight frames to 256 — *more* than our 87%. Depth Anything 3, which is handed the whole clip at once and is not causal, degrades by 3%.
 
