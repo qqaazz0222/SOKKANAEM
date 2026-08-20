@@ -172,7 +172,17 @@ For the deployment-relevant real domain, we use TUM RGB-D fixed-camera sequences
 
 The early proof of concept uses the full Virtual KITTI 2 corpus (42,520 frames; 21,120 training clips) at 128 pixels and 30k optimization steps.
 
-### 4.2 Metrics
+### 4.2 Evaluation protocol
+
+Three protocol choices decide what the numbers mean, and each has bitten us.
+
+**State is reset at every clip boundary and nowhere else.** Within a clip the model runs as it would in deployment: detector state, per-patch SSM state, and both caches carry from frame to frame, and the keyframe counter runs from the clip's first frame. Between clips everything is discarded. A clip is therefore a stream of its own length, which is why clip length is a protocol parameter rather than a batching detail — an eight-frame clip never reaches a keyframe at period 30, and a 256-frame clip crosses eight of them.
+
+**Clips are disjoint and spread over the whole holdout.** Clips tile each held-out sequence without overlap, and when the clip count is capped the retained clips are spread evenly over the source rather than taken from its front. This is not a refinement: sequences are concatenated in order, so a cap of 100 on Bonn's 399 clips evaluates its first held-out sequence alone, and the same checkpoint then reads 44.7% activity under one cap and 55.8% under another. Every number in this paper is measured under even spacing; earlier versions of our own reports were not, and their Bonn and PointOdyssey columns describe one sequence rather than a holdout.
+
+**Alignment is per clip, not per frame or per dataset.** One scale (and, where stated, shift) is fitted per clip against valid ground-truth pixels and applied to all its frames. The frame-index analysis in Section 5.7 is the one exception, where each frame is aligned independently so that a decaying curve cannot be an artefact of a single clip-level fit dominated by late frames.
+
+### 4.3 Metrics
 
 We report AbsRel, RMSE, and \(\delta_1\) (Eigen et al., 2014) after the evaluation protocol's per-clip scale alignment. Activity is the fraction of patch updates enabled by the detector.
 
@@ -184,7 +194,7 @@ Temporal metrics are:
 
 Every full temporal table includes a per-clip optimal constant-depth control. This control exposes the degeneracy of t-delta and OPW and supplies the dataset-specific residual floor for TCE.
 
-### 4.3 Baselines and implementation
+### 4.4 Baselines and implementation
 
 We compare against six commonly cited depth models — DPT-Large, ZoeDepth N-K, Depth Anything V1 Small, V2 Small, V2 Base, and Depth Anything 3 Base — spanning 24.8M to 345M parameters. Published numbers for these models each come from a different split, resolution and alignment rule, so we re-ran all of them on our own holdout clips at 256 pixels through the same metric implementation rather than quoting papers.
 
