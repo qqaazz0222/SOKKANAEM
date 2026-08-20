@@ -83,13 +83,47 @@ def mean_over(per_src, sources):
                                             "sources": len(got)}
 
 
+def seed_table(paths, cols=COLS):
+    """mean +- std over seeds, per (tag, clip_len, keyframe).
+
+    Seed variance was only ever characterised at 8k steps on a different
+    recipe, so the final configuration carries its own spread: same tags, one
+    eval.txt per seed, aggregated here rather than by hand.
+    """
+    import statistics as st
+    rows = {}
+    for path in paths:
+        for (ck, tag), m in ours_rows([path]).items():
+            key = (tag, m["clip_len"], m["keyframe"])
+            rows.setdefault(key, []).append(m)
+    print("\n*final configuration, mean +- std over seeds*\n")
+    print("| tag | clip | K | active% | " + " | ".join(cols) + " | seeds |")
+    print("|---|---:|---:|---:|" + "---:|" * (len(cols) + 1))
+    for (tag, cl, kf), ms in sorted(rows.items()):
+        cells = []
+        for c in cols:
+            vals = [m[c] for m in ms]
+            sd = st.stdev(vals) if len(vals) > 1 else 0.0
+            cells.append(f"{st.fmean(vals):.4f} ± {sd:.4f}")
+        act = st.fmean([m["active"] for m in ms])
+        print(f"| {tag} | {cl} | {kf} | {act:.1f} | " + " | ".join(cells)
+              + f" | {len(ms)} |")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("logs", nargs="+")
+    ap.add_argument("logs", nargs="*", default=[])
     ap.add_argument("--tag", default=None, help="only rows with this tag")
+    ap.add_argument("--seeds", nargs="*", default=None,
+                    help="eval.txt paths of seed replicates: prints mean +- std "
+                         "per tag instead of one row per checkpoint")
     ap.add_argument("--ours", nargs="*", default=None,
                     help="eval.txt paths (default: every work_dirs/*/eval.txt)")
     args = ap.parse_args()
+
+    if args.seeds:
+        seed_table(args.seeds)
+        return
 
     runs = {}
     for log in args.logs:
