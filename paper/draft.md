@@ -16,7 +16,7 @@ Video depth models repeatedly process large static regions and often exhibit fra
 
 A 4.19M-parameter model reaches 0.1302 AbsRel and 0.8613 \(\delta_1\) on a real indoor holdout while updating 22.0% of patches per frame; cutting the update rate to 4.6% costs 6.4% relative error, and full computation buys only 0.9% over the default. Against seven commonly cited depth models measured under one protocol, it is last or nearly last on accuracy and first on raw frame-to-frame difference — by 1.36x at eight-frame clips and 1.27x at 256-frame clips, including against a video-specific baseline with an explicit temporal module. It does not lead motion-compensated or ground-truth-referenced consistency, and we do not claim general temporal consistency.
 
-Four measurements delimit the contribution, and each narrows a claim we expected to make. **Efficiency:** a fused scan kernel removes the dominant cost and with it the sparse path's latency advantage, so on a desktop GPU compiled dense execution is faster at every activity level; sparsity's benefit is established in multiply-accumulates and per-stream state, not in measured time, and the edge measurement that would settle it is absent. **Transfer:** on unseen real driving, accuracy transfers while sparsity does not — activity rises from 26% to 93%, recoverable to 14% only with motion compensation and per-domain threshold recalibration. **Readout:** an iso-mask token-drop control is a wash on accuracy, so preserved-state readout buys stability rather than depth quality. **Protocol:** error grows 87% from eight-frame to 256-frame clips, but stateless per-frame baselines grow more over the same clips (116% and 145%), so part of that penalty is the alignment window rather than drift; long-clip fine-tuning removes a fifth of the 256-frame error while leaving the eight-frame number unchanged to four decimal places, which is what a short-clip protocol is blind to. A predicted dynamic range under half the ground truth's on dynamic scenes is the remaining accuracy defect, and a spread term in the objective recovers part of it at a stated cost in motion-referenced consistency.
+Four measurements delimit the contribution, and each narrows a claim we expected to make. **Efficiency:** a fused scan kernel removes the dominant cost and with it the sparse path's latency advantage, so on a desktop GPU compiled dense execution is faster at every activity level; sparsity's benefit is established in multiply-accumulates and per-stream state, not in measured time, and the edge measurement that would settle it is absent. **Transfer:** on unseen real driving, accuracy transfers while sparsity does not — activity rises from 26% to 93%, recoverable to 14% only with motion compensation and per-domain threshold recalibration. **Readout:** an iso-mask token-drop control is a wash on accuracy, so preserved-state readout buys stability rather than depth quality. **Protocol:** error grows 87% from eight-frame to 256-frame clips, but stateless per-frame baselines grow more over the same clips (116% and 145%), so part of that penalty is the alignment window rather than drift; long-clip fine-tuning removes a fifth of the 256-frame error while leaving the eight-frame number unchanged to four decimal places, which is what a short-clip protocol is blind to. A predicted dynamic range at three quarters of the ground truth's on dynamic scenes is the remaining accuracy defect, and a spread term in the objective recovers most of it at a stated cost in motion-referenced consistency.
 
 ## 1. Introduction
 
@@ -386,7 +386,26 @@ At matched activity GMC is clearly better: 43.8% active gives 0.3084 AbsRel and 
 
 The practical caveat is that GMC's default threshold leaves real driving at 100% activity. The correct statement is not that enabling GMC suffices, but that GMC plus per-domain threshold calibration recovers most of the sparsity that pixel gating loses on real video.
 
-Homography estimation itself does not fail on this footage: over 210 frames of KITTI raw at three thresholds, the identity fallback fired **0 times**. The failure mode this branch guards against — no texture, degenerate fit — is not what limits the moving-camera path here; the threshold scale is.
+Homography estimation itself does not fail on this footage: over 210 frames of KITTI raw at three thresholds, the identity fallback fired **0 times**, and over 1,260 frames in the split experiment below it fired 0 times again. The failure mode this branch guards against — no texture, degenerate fit — is not what limits the moving-camera path here; the threshold scale is.
+
+**What "per-domain calibration" actually requires.** The sweep above chooses a threshold on the same clips it reports, which is an oracle. To measure the honest version we split the five drives: the threshold is chosen on one drive (2011_09_26_drive_0002, 8 clips) and every reported number comes from the other four (30 clips), which the threshold never saw.
+
+**Table 6b. Calibrating the GMC threshold on one drive and reporting on four unseen drives.**
+
+| Threshold | Calibration drive: active (%) | Held-out drives: active (%) | Held-out AbsRel | Held-out \(\delta_1\) | Held-out t-delta |
+|---|---:|---:|---:|---:|---:|
+| 0.05 (full compute) | 100.0 | 100.0 | **0.2821** | 0.4725 | 1.9405 |
+| 0.2 | 97.7 | 87.9 | 0.2829 | 0.4707 | 1.9024 |
+| 0.4 | 31.4 | 46.0 | 0.2910 | 0.4701 | 1.4532 |
+| 0.8 | **5.3** | **11.5** | 0.2969 | **0.4702** | **0.7625** |
+| Pixel gating, best available | — | 77.3 | 0.2793 | **0.4768** | 1.7939 |
+
+Four answers follow, and they are what the protocol question was really about.
+
+1. **Calibration needs no ground truth.** The target is an activity ratio, which the detector computes from the video alone. Nothing in the procedure inspects depth labels, so it can be run on deployment footage.
+2. **The trade-off transfers; the operating point does not.** A threshold that gives 5.3% activity on the calibration drive gives 11.5% on the unseen drives — a factor of two in cost, from one drive to four of the same scene type. What does transfer is the shape: on the held-out drives, going from full computation to 11.5% activity costs 5.2% relative AbsRel and improves raw frame difference by 2.5x, which is the same pattern the in-domain sweep shows.
+3. **One drive is enough to calibrate, and not enough to predict cost.** Eight clips sufficed to place the threshold in the right range; they did not predict the resulting activity within a factor of two. A deployment that needs a compute budget must measure activity on its own footage, which is cheap, rather than inherit a number from a paper.
+4. **The comparison against pixel gating survives the split.** At its most aggressive setting the pixel detector still leaves 77.3% of patches active on real driving, where the compensated detector reaches 11.5% at 5% relative accuracy cost. This is the claim the section exists to make, and it is now measured on drives that played no part in choosing the threshold.
 
 ### 5.7 Compute and wall-clock analysis
 

@@ -36,6 +36,13 @@ def main():
     ap.add_argument("--clip-stride", type=int, default=None)
     ap.add_argument("--max-clips", type=int, default=30)
     ap.add_argument("--keyframe-every", type=int, default=None)
+    ap.add_argument("--spec", action="append", default=None,
+                    help="source spec 'name:path' (repeatable). Defaults to the "
+                         "real indoor holdout. Long streams need a source whose "
+                         "sequences are long enough: TUM's holdout sequence is "
+                         "743 frames, so a 1024-frame clip does not exist there.")
+    ap.add_argument("--holdout", action="append", default=None,
+                    help="holdout patterns for --spec sources")
     ap.add_argument("--every", type=int, default=1,
                     help="print every Nth frame index (a 256-frame curve does "
                          "not need 256 rows)")
@@ -48,7 +55,10 @@ def main():
           f"stride={args.clip_stride or args.clip_len} max={args.max_clips} "
           f"keyframe_every={m.detector.keyframe_every}")
 
-    for name, spec, hold in SOURCES:
+    sources = SOURCES
+    if args.spec:
+        sources = [(s.split(":")[0], s, args.holdout or []) for s in args.spec]
+    for name, spec, hold in sources:
         ds, _ = build_mixed([spec], clip_len=args.clip_len,
                             clip_stride=args.clip_stride or args.clip_len,
                             size=256, holdout=hold, val=True)
