@@ -353,6 +353,20 @@ In fp16 the sparse path reaches 1.69 ms (593 FPS) with 37 MB peak memory and 6.3
 
 We report this plainly because it bounds the contribution. Exact state preservation, the MAC reduction, and the kernel itself all stand. The claim that the sparse path is *faster* does not stand on this GPU. Whether a 63% MAC reduction converts into time and energy depends on the hardware being compute-bound, which a 4090 at this model scale is not; settling that requires the edge measurement listed in Section 7.
 
+**Four efficiency claims, separately scored.** The word "efficient" covers four different assertions in this literature, and they have different evidence here. It is worth stating which is which, because the model *is* fast and that speed is not the mechanism's doing:
+
+| Claim | Status | Where it comes from |
+|---|---|---|
+| Fewer parameters and MACs than the comparison group | demonstrated | 4.19M parameters, 1.644 GMAC dense; model scale, not sparsity |
+| Lower per-frame latency than a comparable-size baseline | demonstrated | 1.29 ms compiled dense; model scale and the fused kernel, **not** the sparse path |
+| MAC reduction from sparsity | demonstrated | 1.644 to 0.608 GMAC at 15.4% activity |
+| Reduced per-stream state, so one weight set serves many streams | demonstrated | 6.38 MB fp16 state against 8.4 MB of weights |
+| Wall-clock speedup *from sparsity* | **not demonstrated** | compiled dense is faster at every activity level on a 4090 |
+| Energy or power reduction from sparsity | **not measured** | board-power sampling is implemented; the desktop card's idle floor dominates at this model scale, so the informative measurement is the edge one |
+| Advantage on an edge accelerator | **not measured** | no Jetson-class device was available (Section 7) |
+
+The headline latency and memory numbers therefore belong to a small model with a fused kernel, and the sparsity mechanism's established benefit is arithmetic and state, not time. A reader who takes "2.2x faster" as the sparse path beating the dense one has read the opposite of what we measured.
+
 ### 5.7 Streaming drift: what the clip-level numbers hide `[CHECKPOINT-DEPENDENT]`
 
 > The causal claim in this section has been tested and holds (Tables 10 and 11). What remains open is adoption: the fine-tuned checkpoint is measured at 32 frames only, so it is not yet the reported one.
@@ -365,14 +379,23 @@ Scoring by frame index inside a 32-frame clip, with each frame aligned independe
 
 **Figure 7. Accuracy decays between keyframes.** Panel (a) scores by frame index within a 32-frame clip, with each frame aligned independently. Carried state does not accumulate accuracy: the dynamic-object source degrades 61% from frame 0 to frame 28, and the recovery at frame 31 is the keyframe firing at frame 30. Panel (b) sweeps the refresh period, showing that the remedy is already in the architecture and merely applied too rarely, and that a period below 10 forfeits the stability lead the model is built for.
 
-**Table 7. AbsRel by frame index. Keyframe refresh is every 30 frames.**
+**Table 7. Accuracy and consistency by frame index, 32-frame clips, keyframe refresh every 30 frames. Every metric is scored per frame index, with each frame aligned independently; OPW and TCE are scored on the pair (t-1, t).**
 
-| Frame | 0 | 4 | 8 | 12 | 16 | 20 | 24 | 28 | 31 |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| TUM | 0.1353 | 0.1206 | 0.1249 | 0.1510 | 0.1521 | 0.1415 | 0.1585 | 0.1697 | **0.1323** |
-| Bonn | 0.1642 | 0.1690 | 0.1795 | 0.1934 | 0.2185 | 0.2312 | 0.2431 | **0.2636** | **0.2011** |
+| Frame | TUM AbsRel | TUM \(\delta_1\) | Bonn AbsRel | Bonn \(\delta_1\) | Bonn OPW | Bonn TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| 0 | 0.1353 | **0.8616** | 0.1642 | **0.8611** | — | — |
+| 4 | 0.1206 | 0.8559 | 0.1690 | 0.8485 | 0.0288 | 0.0332 |
+| 8 | 0.1249 | 0.8431 | 0.1795 | 0.8093 | 0.0279 | 0.0333 |
+| 12 | 0.1510 | 0.8327 | 0.1934 | 0.7667 | 0.0423 | 0.0465 |
+| 16 | 0.1521 | 0.8068 | 0.2185 | 0.7152 | 0.0367 | 0.0413 |
+| 20 | 0.1415 | 0.8041 | 0.2312 | 0.7400 | 0.0324 | 0.0375 |
+| 24 | 0.1585 | 0.7983 | 0.2431 | 0.7212 | 0.0376 | 0.0420 |
+| 28 | 0.1697 | 0.7935 | **0.2636** | 0.7165 | **0.0418** | **0.0459** |
+| 31 | **0.1323** | 0.8413 | **0.2011** | 0.8161 | 0.0424 | 0.0457 |
 
-**There is no accumulation benefit, and on dynamic scenes there is an accumulation cost.** TUM improves by about 5% over the first few frames and then degrades; Bonn degrades monotonically from 0.1642 to 0.2636, 61% worse by frame 28. The recovery at frame 31 is the keyframe: a full refresh fires at frame 30 and the error snaps back. The pattern is a sawtooth — gating accumulates error between keyframes and the keyframe erases it.
+**There is no accumulation benefit, and on dynamic scenes there is an accumulation cost — on every measure, not only accuracy.** TUM improves by about 5% over the first few frames and then degrades; Bonn degrades monotonically from 0.1642 to 0.2636, 61% worse by frame 28. \(\delta_1\) falls 14.5 points on Bonn over the same span, and the two motion-referenced measures degrade with it: OPW rises 45% and TCE 38% from frame 4 to frame 28. This matters for how the temporal claim in Table 3 should be read — the stability we lead on is measured at the start of a clip, and it decays over a stream just as accuracy does.
+
+The recovery at frame 31 is the keyframe: a full refresh fires at frame 30 and the error snaps back, on Bonn recovering 10 points of \(\delta_1\) at once. The pattern is a sawtooth — gating accumulates error between keyframes and the keyframe erases it. The refresh is not free in the other direction: raw frame difference *spikes* at the keyframe (TUM 0.0824 at frame 28 against 0.1751 at frame 31), because a full recomputation is a discontinuity in the output sequence. Accuracy sawtooths down and flicker sawtooths up, out of phase.
 
 Two consequences follow. First, the fix already exists in the architecture and is simply applied too rarely. Sweeping the refresh period on 32-frame clips:
 
@@ -446,9 +469,7 @@ The gap is concentrated: Bonn sits three times above its ceiling while TUM sits 
 
 This measurement is easy to get wrong. Our first version pooled ground truth without a validity mask, so sensor holes averaged in; in disparity space a single zero becomes 1/eps and dominates its patch, giving 11.4 AbsRel on TUM, and the corresponding depth-space numbers suggested the model had already surpassed the ceiling — the opposite conclusion.
 
-### 6.5 Range compression, and a cheap fix that failed `[UNDER TEST]`
-
-> A loss term that matches the predicted log-depth spread to the ground truth's is implemented and queued. The diagnosis below stands either way; what may change is the last sentence, that nothing in the objective penalises compression.
+### 6.5 Range compression, a cheap fix that failed, and one that works
 
 Section 5.3 reports our model under both alignment rules, and the two-degree-of-freedom fit improves real AbsRel from 0.1595 to 0.1321 — 17%. An extra degree of freedom helping that much means a systematic error the one-parameter fit cannot absorb.
 
@@ -471,7 +492,21 @@ The obvious suspect was the decoder. The binned head predicts depth as a softmax
 | 0.50 | 0.2642 | 0.7320 | 0.59 |
 | 0.25 | 0.2677 | 0.7278 | 0.58 |
 
-**The range ratio does not move and accuracy gets slightly worse.** The bin distributions are already peaked; the compression is in the predicted centres themselves. The model genuinely predicts a flattened field, which rules out a decoding fix and also rules out longer-clip training as a remedy — drift and range compression are separate defects with separate causes. Nothing in the current objective penalises compression: the scale-invariant log loss does punish the mismatch indirectly, but under uncertainty shrinking the prediction still lowers it, which is the ordinary bias-variance trade.
+**The range ratio does not move and accuracy gets slightly worse.** The bin distributions are already peaked; the compression is in the predicted centres themselves. The model genuinely predicts a flattened field, which rules out a decoding fix and also rules out longer-clip training as a remedy — drift and range compression are separate defects with separate causes.
+
+What the diagnosis does point at is the objective. Nothing in it penalises compression: the scale-invariant log loss punishes the mismatch indirectly, but under uncertainty shrinking the prediction still lowers it, which is the ordinary bias-variance trade. So we added a term that penalises it directly: the squared log ratio of the standard deviation of predicted log depth to that of ground truth, taken per sample over valid pixels rather than per batch, since compression is a property of a scene and a wide scene would otherwise cancel a narrow one. Comparing in log space makes the term scale-free and symmetric, so over-spreading is penalised as much as under-spreading and the loss cannot be bought with noise. We fine-tuned the reported checkpoint for 8k steps at three weights, with everything else held fixed. All three arms run at the same 32.2% activity, so nothing here is bought with computation.
+
+**Table 12. A spread term against the compression it targets. Same 8k fine-tune from the reported checkpoint, same activity, real indoor holdout.**
+
+| Spread weight | AbsRel | \(\delta_1\) | t-delta | OPW | TCE | Bonn range/GT | Bonn AbsRel |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0.0 (control) | 0.1596 | 0.8225 | 0.0789 | **0.0235** | **0.0315** | 0.55 | 0.2738 |
+| 0.5 | **0.1509** | 0.8304 | 0.0865 | 0.0242 | 0.0321 | 0.62 | **0.2529** |
+| 2.0 | 0.1548 | **0.8312** | **0.0783** | 0.0252 | 0.0332 | **0.65** | 0.2547 |
+
+**The term does what it was derived to do.** Bonn's dynamic range recovers monotonically with the weight, from 0.55 of ground truth to 0.65, and the source-specific error follows it down: Bonn AbsRel improves 7.6% at weight 0.5. The dataset-balanced AbsRel improves 5.5% and \(\delta_1\) by 0.8 points, both several times the seed noise floor, at unchanged compute. TUM, whose range ratio was already 0.95, barely moves — the intervention lands where the diagnosis said the defect was, which is the strongest evidence that the diagnosis was right.
+
+It is not free, and the two weights trade differently. Weight 0.5 buys the most accuracy and costs 10% on raw frame difference; weight 2.0 recovers the most range and holds raw frame difference at the control's level, but gives back a little accuracy. Both cost 3-5% on OPW and TCE. Widening a predicted field necessarily lets it move more, so a term that fights compression works against the flicker suppression this architecture is built for; the useful statement is that range compression is a defect of the objective rather than of the decoder or the gating, and that it is correctable at a stated price.
 
 ## 7. Limitations
 

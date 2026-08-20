@@ -52,6 +52,8 @@ def main():
     # 0.397 -> 0.544 between 100 and 1000 clips (1.1% of the holdout was not
     # a representative sample). Deterministic first-N, same set per model.
     max_clips = int(os.environ.get("MAX_CLIPS", 1000))
+    align = os.environ.get("ALIGN", "scaleshift")
+    assert align in ("scaleshift", "median"), align
     acc = {}
     for ci, (clip, gt, valid) in enumerate(loader):
         if ci >= max_clips:
@@ -65,11 +67,20 @@ def main():
 
         v = valid[0, :, 0].bool()
         gtd = gt[0, :, 0]
-        x = d[v].numpy().astype(np.float64)
-        y = gtd[v].numpy().astype(np.float64)
-        A = np.stack([x, np.ones_like(x)], axis=1)
-        (s, b), *_ = np.linalg.lstsq(A, y, rcond=None)
-        depth_pred = torch.from_numpy(s * d.numpy() + b).float().clamp(min=1e-3)
+        if align == "scaleshift":
+            # least squares scale+shift in DEPTH space: DA3's output is
+            # depth-like, so the fit is direct. Two degrees of freedom, which
+            # flatters whichever model receives them -- hence the median option
+            x = d[v].numpy().astype(np.float64)
+            y = gtd[v].numpy().astype(np.float64)
+            A = np.stack([x, np.ones_like(x)], axis=1)
+            (s, b), *_ = np.linalg.lstsq(A, y, rcond=None)
+            depth_pred = torch.from_numpy(s * d.numpy() + b).float().clamp(min=1e-3)
+        else:
+            # per-clip median scaling, one degree of freedom -- exactly the
+            # rule scripts/eval.py applies to our own model
+            s = gtd[v].median() / d[v].median().clamp(min=1e-6)
+            depth_pred = (d * s).clamp(min=1e-3)
 
         # shared scorer (sokkanaem/metrics.py) — identical protocol for every
         # model, including the OPW/TCE temporal metrics
@@ -82,7 +93,7 @@ def main():
         if (ci + 1) % 100 == 0:
             print(f"  {ci+1}/{max_clips} clips...", file=sys.stderr)
 
-    report(f"DA3-BASE (0.12B){tag}", acc)
+    report(f"DA3-BASE (0.12B) [{align}]{tag}", acc)
 
 
 if __name__ == "__main__":

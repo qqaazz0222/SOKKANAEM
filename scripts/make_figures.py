@@ -429,11 +429,11 @@ def fig_latency():
 
 
 FIGURES = {
-    "fig3-tradeoff.svg": fig_tradeoff,
-    "fig4-comparison.svg": fig_comparison,
-    "fig7-drift.svg": fig_drift,
-    "fig5-gating.svg": fig_gating,
-    "fig6-latency.svg": fig_latency,
+    "tradeoff.svg": fig_tradeoff,
+    "comparison.svg": fig_comparison,
+    "drift.svg": fig_drift,
+    "gating.svg": fig_gating,
+    "latency.svg": fig_latency,
 }
 
 
@@ -555,6 +555,7 @@ def fig_pipeline():
         o.append(b[k].draw())
     o.append(txt(262, 336, "activity mask M", 10.5, NAVY, "middle"))
     o.append(txt(600, 88, "1.644 → 0.608 GMAC", 10, MUTED))
+    o.append(txt(600, 100, "at 15.4% activity", 10, MUTED))
     o.append(txt(40, 60, "used only for", 10, OCHRE))
     o.append(txt(40, 73, "moving cameras", 10, OCHRE))
     return svg(W, H, "\n".join(o))
@@ -612,8 +613,8 @@ def fig_deltagate():
     return svg(W, H, "\n".join(o))
 
 
-FIGURES["fig1-pipeline.svg"] = fig_pipeline
-FIGURES["fig2-delta-gating.svg"] = fig_deltagate
+FIGURES["pipeline.svg"] = fig_pipeline
+FIGURES["delta-gating.svg"] = fig_deltagate
 
 
 if __name__ == "__main__":

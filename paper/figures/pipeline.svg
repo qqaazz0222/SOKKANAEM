@@ -43,6 +43,7 @@
 <text x="540.0" y="76.0" font-size="10" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">hidden state</text>
 <text x="262.0" y="336.0" font-size="10.5" fill="#1f4e79" text-anchor="middle" font-weight="normal" font-style="normal">activity mask M</text>
 <text x="600.0" y="88.0" font-size="10" fill="#666666" text-anchor="start" font-weight="normal" font-style="normal">1.644 → 0.608 GMAC</text>
+<text x="600.0" y="100.0" font-size="10" fill="#666666" text-anchor="start" font-weight="normal" font-style="normal">at 15.4% activity</text>
 <text x="40.0" y="60.0" font-size="10" fill="#c88a1e" text-anchor="start" font-weight="normal" font-style="normal">used only for</text>
 <text x="40.0" y="73.0" font-size="10" fill="#c88a1e" text-anchor="start" font-weight="normal" font-style="normal">moving cameras</text>
 </svg>
