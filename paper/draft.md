@@ -536,6 +536,16 @@ The second configuration is better on every measure and cheaper, at both clip le
 
 **We therefore treat the long-clip checkpoint as the model of record for the streaming protocol**, and report both in Table 3 so that the eight-frame comparison against the literature stays on the checkpoint it was measured with. Section 6.5 adds a further stage to this checkpoint, and the final configuration is stated there.
 
+### 5.9 Where the remaining accuracy error is
+
+Two measurements localise the accuracy gap of Section 5.3, and both say the same thing about where work should go next. We state them here rather than only among the diagnostics, because they are the paper's main negative result about the model itself.
+
+**The output structure is not the limit.** Pushing ground truth through the model's own patch-token bottleneck gives the best score this output could reach: 0.0858 AbsRel on TUM and 0.0367 on Bonn, against our 0.1321 and 0.1283. The balanced ceiling, 0.0613, is better than every model in the comparison group, so neither patch size nor input resolution is what stands between this architecture and the leaders (Section 6.4). The gap is concentrated on the dynamic-object source, where we sit 3.5 times above the ceiling against 1.5 on the static one.
+
+**The predicted depth field is compressed on exactly that source.** Its dynamic range is 0.75 of ground truth on Bonn against 0.93 on TUM, so a ratio metric like \(\delta_1\) is punished for a flattened field rather than a misplaced one. This is not a decoder artefact — sharpening the binned head's softmax at inference moves the ratio not at all — but a property of the objective, which contains no term penalising compression. Adding one recovers the range monotonically, to 0.90 at the strongest weight tested, at a small cost in raw frame difference and no cost in compute (Section 6.5).
+
+Together they say the next accuracy improvement is neither a bigger output nor a finer patch: it is dynamic-scene handling and an objective that does not reward shrinking the prediction.
+
 ## 6. Ablations and Diagnostic Findings
 
 ### 6.1 Mask policy
