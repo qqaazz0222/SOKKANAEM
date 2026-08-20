@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" width="900" height="340" font-family="Arial, Helvetica, sans-serif">
 <rect width="900" height="340" fill="#ffffff"/>
 <defs><marker id="up" markerWidth="7" markerHeight="7" refX="3.5" refY="6" orient="auto"><path d="M0,6 L3.5,0 L7,6 z" fill="#8c8c8c"/></marker></defs>
-<line x1="84" y1="246.1" x2="424" y2="246.1" stroke="#e8e8e8" stroke-width="0.8"/>
-<line x1="84" y1="188.6" x2="424" y2="188.6" stroke="#e8e8e8" stroke-width="0.8"/>
-<line x1="84" y1="131.1" x2="424" y2="131.1" stroke="#e8e8e8" stroke-width="0.8"/>
-<line x1="84" y1="73.6" x2="424" y2="73.6" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="84" y1="249.1" x2="424" y2="249.1" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="84" y1="183.4" x2="424" y2="183.4" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="84" y1="117.7" x2="424" y2="117.7" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="84" y1="52.0" x2="424" y2="52.0" stroke="#e8e8e8" stroke-width="0.8"/>
 <line x1="84" y1="282" x2="424" y2="282" stroke="#333333" stroke-width="1"/>
 <line x1="84" y1="52" x2="84" y2="282" stroke="#333333" stroke-width="1"/>
 <line x1="84.0" y1="282" x2="84.0" y2="286" stroke="#333333" stroke-width="1"/>
@@ -17,30 +17,32 @@
 <text x="339.0" y="299.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">75</text>
 <line x1="424.0" y1="282" x2="424.0" y2="286" stroke="#333333" stroke-width="1"/>
 <text x="424.0" y="299.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">100</text>
-<line x1="80" y1="246.1" x2="84" y2="246.1" stroke="#333333" stroke-width="1"/>
-<text x="76.0" y="250.1" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.155</text>
-<line x1="80" y1="188.6" x2="84" y2="188.6" stroke="#333333" stroke-width="1"/>
-<text x="76.0" y="192.6" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.163</text>
-<line x1="80" y1="131.1" x2="84" y2="131.1" stroke="#333333" stroke-width="1"/>
-<text x="76.0" y="135.1" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.171</text>
-<line x1="80" y1="73.6" x2="84" y2="73.6" stroke="#333333" stroke-width="1"/>
-<text x="76.0" y="77.6" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.179</text>
+<line x1="80" y1="249.1" x2="84" y2="249.1" stroke="#333333" stroke-width="1"/>
+<text x="76.0" y="253.1" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.128</text>
+<line x1="80" y1="183.4" x2="84" y2="183.4" stroke="#333333" stroke-width="1"/>
+<text x="76.0" y="187.4" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.132</text>
+<line x1="80" y1="117.7" x2="84" y2="117.7" stroke="#333333" stroke-width="1"/>
+<text x="76.0" y="121.7" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.136</text>
+<line x1="80" y1="52.0" x2="84" y2="52.0" stroke="#333333" stroke-width="1"/>
+<text x="76.0" y="56.0" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.140</text>
 <text x="254.0" y="318.0" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="normal" font-style="normal">Active patches (%)</text>
 <text x="38.0" y="167.0" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="normal" font-style="normal" transform="rotate(-90 38 167.0)">AbsRel</text>
 <text x="84.0" y="40.0" font-size="12.5" fill="#1a1a1a" text-anchor="start" font-weight="bold" font-style="normal">(a) Real indoor holdout</text>
-<polyline points="108.1,100.2 193.5,213.7 335.6,249.7 411.1,244.6" fill="none" stroke="#1f4e79" stroke-width="1.8"/>
-<circle cx="108.1" cy="100.2" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
-<circle cx="193.5" cy="213.7" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
-<circle cx="335.6" cy="249.7" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
-<circle cx="411.1" cy="244.6" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
-<circle cx="193.5" cy="213.7" r="7.5" fill="none" stroke="#b8442c" stroke-width="1.8"/>
-<text x="182.5" y="235.7" font-size="10.5" fill="#b8442c" text-anchor="end" font-weight="normal" font-style="normal">default</text>
+<polyline points="99.6,96.4 158.8,213.0 300.2,245.9 373.0,237.6 406.7,236.0 424.0,232.7" fill="none" stroke="#1f4e79" stroke-width="1.8"/>
+<circle cx="99.6" cy="96.4" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="158.8" cy="213.0" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="300.2" cy="245.9" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="373.0" cy="237.6" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="406.7" cy="236.0" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="424.0" cy="232.7" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="158.8" cy="213.0" r="7.5" fill="none" stroke="#b8442c" stroke-width="1.8"/>
+<text x="147.8" y="235.0" font-size="10.5" fill="#b8442c" text-anchor="end" font-weight="normal" font-style="normal">default</text>
 <line x1="354" y1="58" x2="354" y2="44" stroke="#8c8c8c" stroke-width="1.2" marker-end="url(#up)"/>
-<text x="362.0" y="50.0" font-size="10.5" fill="#8c8c8c" text-anchor="start" font-weight="normal" font-style="normal">control 0.358</text>
-<line x1="544" y1="251.3" x2="884" y2="251.3" stroke="#e8e8e8" stroke-width="0.8"/>
-<line x1="544" y1="190.0" x2="884" y2="190.0" stroke="#e8e8e8" stroke-width="0.8"/>
-<line x1="544" y1="128.7" x2="884" y2="128.7" stroke="#e8e8e8" stroke-width="0.8"/>
-<line x1="544" y1="67.3" x2="884" y2="67.3" stroke="#e8e8e8" stroke-width="0.8"/>
+<text x="362.0" y="50.0" font-size="10.5" fill="#8c8c8c" text-anchor="start" font-weight="normal" font-style="normal">control 0.276</text>
+<line x1="544" y1="253.2" x2="884" y2="253.2" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="544" y1="195.8" x2="884" y2="195.8" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="544" y1="138.2" x2="884" y2="138.2" stroke="#e8e8e8" stroke-width="0.8"/>
+<line x1="544" y1="80.8" x2="884" y2="80.8" stroke="#e8e8e8" stroke-width="0.8"/>
 <line x1="544" y1="282" x2="884" y2="282" stroke="#333333" stroke-width="1"/>
 <line x1="544" y1="52" x2="544" y2="282" stroke="#333333" stroke-width="1"/>
 <line x1="544.0" y1="282" x2="544.0" y2="286" stroke="#333333" stroke-width="1"/>
@@ -53,24 +55,26 @@
 <text x="799.0" y="299.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">75</text>
 <line x1="884.0" y1="282" x2="884.0" y2="286" stroke="#333333" stroke-width="1"/>
 <text x="884.0" y="299.0" font-size="11" fill="#666666" text-anchor="middle" font-weight="normal" font-style="normal">100</text>
-<line x1="540" y1="251.3" x2="544" y2="251.3" stroke="#333333" stroke-width="1"/>
-<text x="536.0" y="255.3" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.372</text>
-<line x1="540" y1="190.0" x2="544" y2="190.0" stroke="#333333" stroke-width="1"/>
-<text x="536.0" y="194.0" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.376</text>
-<line x1="540" y1="128.7" x2="544" y2="128.7" stroke="#333333" stroke-width="1"/>
-<text x="536.0" y="132.7" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.380</text>
-<line x1="540" y1="67.3" x2="544" y2="67.3" stroke="#333333" stroke-width="1"/>
-<text x="536.0" y="71.3" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.384</text>
+<line x1="540" y1="253.2" x2="544" y2="253.2" stroke="#333333" stroke-width="1"/>
+<text x="536.0" y="257.2" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.429</text>
+<line x1="540" y1="195.8" x2="544" y2="195.8" stroke="#333333" stroke-width="1"/>
+<text x="536.0" y="199.8" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.431</text>
+<line x1="540" y1="138.2" x2="544" y2="138.2" stroke="#333333" stroke-width="1"/>
+<text x="536.0" y="142.2" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.433</text>
+<line x1="540" y1="80.8" x2="544" y2="80.8" stroke="#333333" stroke-width="1"/>
+<text x="536.0" y="84.8" font-size="11" fill="#666666" text-anchor="end" font-weight="normal" font-style="normal">0.435</text>
 <text x="714.0" y="318.0" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="normal" font-style="normal">Active patches (%)</text>
 <text x="498.0" y="167.0" font-size="12" fill="#1a1a1a" text-anchor="middle" font-weight="normal" font-style="normal" transform="rotate(-90 498 167.0)">AbsRel</text>
 <text x="544.0" y="40.0" font-size="12.5" fill="#1a1a1a" text-anchor="start" font-weight="bold" font-style="normal">(b) Synthetic holdout</text>
-<polyline points="677.3,107.2 712.6,142.5 748.7,177.7 782.3,229.9" fill="none" stroke="#1f4e79" stroke-width="1.8"/>
-<circle cx="677.3" cy="107.2" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
-<circle cx="712.6" cy="142.5" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
-<circle cx="748.7" cy="177.7" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
-<circle cx="782.3" cy="229.9" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
-<circle cx="712.6" cy="142.5" r="7.5" fill="none" stroke="#b8442c" stroke-width="1.8"/>
-<text x="701.6" y="164.5" font-size="10.5" fill="#b8442c" text-anchor="end" font-weight="normal" font-style="normal">default</text>
+<polyline points="653.1,132.5 683.1,175.6 718.1,187.1 741.5,181.4 757.5,210.1 884.0,227.4" fill="none" stroke="#1f4e79" stroke-width="1.8"/>
+<circle cx="653.1" cy="132.5" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="683.1" cy="175.6" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="718.1" cy="187.1" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="741.5" cy="181.4" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="757.5" cy="210.1" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="884.0" cy="227.4" r="3.2" fill="#1f4e79" stroke="#1f4e79" stroke-width="1.4"/>
+<circle cx="683.1" cy="175.6" r="7.5" fill="none" stroke="#b8442c" stroke-width="1.8"/>
+<text x="672.1" y="197.6" font-size="10.5" fill="#b8442c" text-anchor="end" font-weight="normal" font-style="normal">default</text>
 <line x1="814" y1="58" x2="814" y2="44" stroke="#8c8c8c" stroke-width="1.2" marker-end="url(#up)"/>
-<text x="822.0" y="50.0" font-size="10.5" fill="#8c8c8c" text-anchor="start" font-weight="normal" font-style="normal">control 0.550</text>
+<text x="822.0" y="50.0" font-size="10.5" fill="#8c8c8c" text-anchor="start" font-weight="normal" font-style="normal">control 0.630</text>
 </svg>

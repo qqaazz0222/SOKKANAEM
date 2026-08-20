@@ -211,19 +211,24 @@ def legend(x, y, items, size=11, dx=0, dy=16):
 
 # ------------------------------------------------------------ measured -----
 # Table 1 (Section 5.1): activity sweep, dataset-balanced mean, 100 clips/source
-SWEEP_REAL = [(96.2, 0.1552), (74.0, 0.1545), (32.2, 0.1595), (7.1, 0.1753)]
-SWEEP_SYN = [(70.1, 0.3734), (60.2, 0.3768), (49.6, 0.3791), (39.2, 0.3814)]
-CONST_REAL, CONST_SYN = 0.3581, 0.5504
+SWEEP_REAL = [(100.0, 0.1290), (94.9, 0.1288), (85.0, 0.1287), (63.6, 0.1282),
+               (22.0, 0.1302), (4.6, 0.1373)]
+SWEEP_SYN = [(100.0, 0.4299), (62.8, 0.4305), (58.1, 0.4315), (51.2, 0.4313),
+              (40.9, 0.4317), (32.1, 0.4332)]
+CONST_REAL, CONST_SYN = 0.2761, 0.6303
+# index of the default operating point within each sweep (tau_on = 0.05)
+DEFAULT_I = 4
 
 # Table 3 (Section 5.3): params (M), AbsRel, t-delta
 CMP_REAL = [
-    ("DA V1-S", 24.8, 0.0736, 0.1074, GRAY),
-    ("ZoeDepth", 345.0, 0.0997, 0.1013, PURPLE),
-    ("DPT-L", 343.0, 0.1002, 0.1371, OCHRE),
-    ("DA V2-B", 97.5, 0.1060, 0.4052, TEAL),
-    ("DA3-B", 120.0, 0.1244, 0.1024, VERM),
-    ("DA V2-S", 24.8, 0.2256, 0.9919, GRAY),
-    ("Ours", 4.19, 0.1595, 0.0751, NAVY),
+    ("DA V1-S", 24.8, 0.0650, 0.0892, GRAY),
+    ("DPT-L", 343.0, 0.0875, 0.1162, OCHRE),
+    ("DA V2-B", 97.5, 0.0877, 0.3814, TEAL),
+    ("ZoeDepth", 345.0, 0.0992, 0.0866, PURPLE),
+    ("VDA-S", 28.4, 0.1000, 0.0829, TEAL),
+    ("DA3-B", 120.0, 0.1130, 0.0825, VERM),
+    ("Ours", 4.19, 0.1302, 0.0607, NAVY),
+    ("DA V2-S", 24.8, 0.2068, 1.0015, GRAY),
 ]
 CMP_SYN = [
     ("ZoeDepth", 345.0, 0.3604, 0.9522, PURPLE),
@@ -237,7 +242,7 @@ CMP_SYN = [
 # label offsets, chosen once so no annotation sits on a marker or another label
 CMP_OFF = {"DA V1-S": (0, -14), "ZoeDepth": (0, -14), "DPT-L": (0, 18),
            "DA V2-B": (0, -14), "DA3-B": (0, 18), "DA V2-S": (0, -14),
-           "Ours": (0, -16)}
+           "VDA-S": (0, 18), "Ours": (0, -16)}
 
 # Table 7 (Section 5.7): AbsRel by frame index, 32-frame clips
 DRIFT_TUM = [(0, 0.1353), (4, 0.1206), (8, 0.1249), (12, 0.1510), (16, 0.1521),
@@ -271,15 +276,15 @@ def fig_tradeoff():
     W, H = 900, 340
     o = []
     for i, (data, const, lim, ticks, name) in enumerate([
-            (SWEEP_REAL, CONST_REAL, (0.150, 0.182),
-             [0.155, 0.163, 0.171, 0.179], "(a) Real indoor holdout"),
-            (SWEEP_SYN, CONST_SYN, (0.3700, 0.3850),
-             [0.372, 0.376, 0.380, 0.384], "(b) Synthetic holdout")]):
+            (SWEEP_REAL, CONST_REAL, (0.126, 0.140),
+             [0.128, 0.132, 0.136, 0.140], "(a) Real indoor holdout"),
+            (SWEEP_SYN, CONST_SYN, (0.4280, 0.4360),
+             [0.429, 0.431, 0.433, 0.435], "(b) Synthetic holdout")]):
         ax = Ax(84 + i * 460, 52, 340, 230, (0, 100), lim)
         o.append(ax.frame([0, 25, 50, 75, 100], ticks, "Active patches (%)",
                           "AbsRel", "{:g}", "{:.3f}", name))
         o.append(ax.line(sorted(data), NAVY))
-        dx, dy = data[2]                      # default operating point
+        dx, dy = data[DEFAULT_I]              # default operating point
         o.append(f'<circle cx="{ax.X(dx):.1f}" cy="{ax.Y(dy):.1f}" r="7.5" '
                  f'fill="none" stroke="{VERM}" stroke-width="1.8"/>')
         o.append(txt(ax.X(dx) - 11, ax.Y(dy) + 22, "default", 10.5, VERM,

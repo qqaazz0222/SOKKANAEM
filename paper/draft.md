@@ -12,7 +12,7 @@
 
 Video depth models repeatedly process large static regions and often exhibit frame-to-frame flicker. We introduce **SOKKANAEM**, a compact recurrent video-depth model that connects patch-level change detection to the discretization step of a selective state-space model (SSM). Given a binary activity mask \(M\), we replace the SSM step size \(\Delta\) with \(\widetilde{\Delta}=M\Delta\). For a static patch, \(\widetilde{\Delta}=0\) yields \(\bar A=I\) and \(\bar B=0\), so the hidden state is carried exactly rather than approximately reconstructed — an identity transition, not a suppressed update. A temporal SSM preserves per-location memory, while a spatial SSM and a dense decoder recover spatial context and depth. For moving cameras, low-resolution global motion compensation precedes feature-space change detection. Conditional recurrent updates have precedent; what is new here is the combination of an external untrained change signal, an exact rather than approximate no-op, and a dense streaming output — together with a measurement of where the resulting claims stop holding.
 
-A 4.19M-parameter model reaches 0.1302 AbsRel and 0.8613 \(\delta_1\) on a real indoor holdout while updating 22.0% of patches per frame, and 16.1% at the same accuracy once a dense-fallback heuristic is switched off. Against seven commonly cited depth models measured under one protocol, it is last or nearly last on accuracy and first on raw frame-to-frame difference — by 1.36x at eight-frame clips and 1.27x at 256-frame clips, including against a video-specific baseline with an explicit temporal module. It does not lead motion-compensated or ground-truth-referenced consistency, and we do not claim general temporal consistency.
+A 4.19M-parameter model reaches 0.1302 AbsRel and 0.8613 \(\delta_1\) on a real indoor holdout while updating 22.0% of patches per frame; cutting the update rate to 4.6% costs 6.4% relative error, and full computation buys only 0.9% over the default. Against seven commonly cited depth models measured under one protocol, it is last or nearly last on accuracy and first on raw frame-to-frame difference — by 1.36x at eight-frame clips and 1.27x at 256-frame clips, including against a video-specific baseline with an explicit temporal module. It does not lead motion-compensated or ground-truth-referenced consistency, and we do not claim general temporal consistency.
 
 Four measurements delimit the contribution, and each narrows a claim we expected to make. **Efficiency:** a fused scan kernel removes the dominant cost and with it the sparse path's latency advantage, so on a desktop GPU compiled dense execution is faster at every activity level; sparsity's benefit is established in multiply-accumulates and per-stream state, not in measured time, and the edge measurement that would settle it is absent. **Transfer:** on unseen real driving, accuracy transfers while sparsity does not — activity rises from 26% to 93%, recoverable to 14% only with motion compensation and per-domain threshold recalibration. **Readout:** an iso-mask token-drop control is a wash on accuracy, so preserved-state readout buys stability rather than depth quality. **Protocol:** error grows 87% from eight-frame to 256-frame clips, but stateless per-frame baselines grow more over the same clips (116% and 145%), so part of that penalty is the alignment window rather than drift; long-clip fine-tuning removes a fifth of the 256-frame error while leaving the eight-frame number unchanged to four decimal places, which is what a short-clip protocol is blind to. A predicted dynamic range under half the ground truth's on dynamic scenes is the remaining accuracy defect, and a spread term in the objective recovers part of it at a stated cost in motion-referenced consistency.
 
@@ -31,7 +31,7 @@ One scope note runs through the paper. **Exact** describes the temporal hidden-s
 The completed experiments support five conclusions:
 
 1. **Exact state preservation.** For \(M=0\), \(\Delta\)-gating gives a bit-exact state copy in implementation and an identity transition analytically.
-2. **A favorable sparsity–accuracy trade-off.** On real indoor footage, reducing activity from 96.2% to 32.2% costs 2.8% relative AbsRel, and to 7.1% costs 13%.
+2. **A favorable sparsity–accuracy trade-off.** On real indoor footage, cutting the patch update rate by 22x — 100% to 4.6% activity — costs 6.4% relative AbsRel, and the default 22.0% operating point costs 0.9%. Raw frame difference improves threefold over the same range.
 3. **Preserved-state readout buys suppression of raw frame-to-frame variation, not accuracy.** At matched masks, replacing \(\Delta\)-gating with token dropping leaves accuracy unchanged but degrades all three temporal metrics. It does not reproduce the stability of preserved-state readout; it is not the case that token dropping fails outright. An earlier fourfold accuracy collapse turned out to measure an untrained sparse path (Section 5.5).
 4. **The efficiency claim has a sharp boundary.** After a fused scan kernel, the model is overhead-bound rather than compute-bound on a desktop GPU, and dense execution is faster than the sparse path at every activity level. Sparsity's benefit is established in MACs and per-stream state, and its conversion into time and energy is unmeasured (Section 5.8).
 5. **Clip length changes the answer, and the eight-frame convention is optimistic for everyone.** Our error grows 87% from eight-frame to 256-frame clips. Stateless per-frame baselines grow more over the same clips (116% and 145%), because per-clip alignment gets harder as the clip lengthens — so carried state is a net advantage over a long stream even though it does not accumulate accuracy within a keyframe cycle. Long-clip fine-tuning removes a fifth of the 256-frame error while leaving the eight-frame number identical to four decimal places, so a short-clip evaluation scores that intervention as doing nothing (Section 5.8).
@@ -206,25 +206,31 @@ The reported SOKKANAEM model has 4.19M parameters and is a single checkpoint use
 
 ### 5.1 Activity–accuracy trade-off `[CHECKPOINT-DEPENDENT]`
 
-All tables in this section come from a single checkpoint (4.19M parameters, 60k steps) so that no comparison mixes model versions. Each row sweeps the detector threshold; 100 clips per source, dataset-balanced mean.
+All tables in this section come from a single checkpoint (4.19M parameters, 60k steps) so that no comparison mixes model versions. Each row sweeps the detector threshold; 100 clips per source spread over the whole holdout, dataset-balanced mean, eight-frame clips.
 
 **Table 1. Activity sweep on both domains. The constant-depth control is the per-clip optimal constant prediction.**
 
-| \(\tau_{\mathrm{on}}\) | Synth. active (%) | Synth. AbsRel | Synth. \(\delta_1\) | Real active (%) | Real AbsRel | Real \(\delta_1\) | Real t-delta |
+| \(\tau_{\mathrm{on}}\) | Real active (%) | Real AbsRel | Real \(\delta_1\) | Real t-delta | Synth. active (%) | Synth. AbsRel | Synth. \(\delta_1\) |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| 0.005 | 70.1 | 0.3734 | 0.4941 | 96.2 | 0.1552 | 0.8373 | 0.0836 |
-| 0.02 | 60.2 | 0.3768 | 0.4880 | 74.0 | **0.1545** | 0.8365 | 0.0994 |
-| 0.05 (default) | 49.6 | 0.3791 | 0.4821 | 32.2 | 0.1595 | 0.8262 | 0.0751 |
-| 0.1 | 39.2 | 0.3814 | 0.4807 | **7.1** | 0.1753 | 0.8106 | **0.0299** |
-| Constant control | — | 0.5504 | 0.3574 | — | 0.3581 | 0.5957 | 0.0000 |
+| 0 (full compute) | 100.0 | 0.1290 | **0.8705** | 0.0679 | 100.0 | **0.4299** | **0.5939** |
+| 0.005 | 94.9 | 0.1288 | 0.8703 | 0.0751 | 62.8 | 0.4305 | 0.5906 |
+| 0.01 | 85.0 | 0.1287 | 0.8701 | 0.0846 | 58.1 | 0.4315 | 0.5903 |
+| 0.02 | 63.6 | **0.1282** | 0.8694 | 0.0904 | 51.2 | 0.4313 | 0.5897 |
+| 0.05 (default) | 22.0 | 0.1302 | 0.8613 | 0.0607 | 40.9 | 0.4317 | 0.5918 |
+| 0.1 | **4.6** | 0.1373 | 0.8576 | **0.0224** | 32.1 | 0.4332 | 0.5927 |
+| Constant control | — | 0.2761 | 0.5831 | 0.0000 | — | 0.6303 | 0.4152 |
 
-On real footage, cutting computation by a factor of thirteen — 96.2% to 7.1% activity — costs 13% relative AbsRel, and the default operating point at 32.2% costs 2.8%. At 74.0% activity accuracy is in fact slightly *better* than at full computation (0.1545 against 0.1552), consistent with gating cutting stale context rather than only saving work. The gap to the constant control remains large at every operating point, which the raw t-delta column alone would not establish.
+**The trade-off is better than we previously reported, and in the same direction.** On real footage, cutting the update rate by a factor of 22 — 100% to 4.6% activity — costs 6.4% relative AbsRel and 1.3 points of \(\delta_1\), while raw frame difference improves by a factor of three and both motion-referenced measures improve as well. At the default operating point, 22.0% activity, accuracy is within 0.9% of full computation. On synthetic footage a threefold cut costs 0.8%.
 
-The synthetic sweep does not reach low activity because TartanAir stays between 80% and 100% active regardless of threshold. This is the same phenomenon quantified in Section 5.6: how much a stream can skip is a property of the capture, not only of the method.
+Two features of the curve are worth naming. Accuracy is *non-monotonic*: at 63.6% activity on real footage it is better than at full computation (0.1282 against 0.1290), consistent with gating removing stale context rather than only saving work. And the temporal metrics are non-monotonic in the other direction — t-delta rises from 0.0679 at full compute to 0.0904 at 63.6% before falling to 0.0224 at 4.6%. Partial gating updates some patches and not others, which is itself a source of frame-to-frame difference; heavy gating freezes most of the field and removes it. The stability our architecture is built for arrives at low activity, not at every activity.
+
+The gap to the constant control remains large at every operating point — a factor of 2.1 on real AbsRel even at 4.6% activity — which the t-delta column alone would not establish, since a constant prediction scores zero there by construction.
 
 ![Activity–accuracy trade-off](figures/tradeoff.svg)
 
-**Figure 3. Activity against accuracy** on the real indoor and synthetic holdouts, sweeping the detector threshold. Accuracy is nearly flat until roughly 30% activity and then bends. On real footage, cutting computation thirteenfold costs 13% relative AbsRel, and the default operating point (circled) costs 2.8%. The per-clip optimal constant-depth control lies far above both panels and is marked off scale, so the vertical axis can resolve the curve the panel exists to show.
+**Figure 3. Activity against accuracy** on the real indoor and synthetic holdouts, sweeping the detector threshold. Accuracy is flat to within 1% down to roughly 20% activity and then bends. On real footage a 22-fold cut in the update rate costs 6.4% relative AbsRel, and the default operating point (circled) costs 0.9%. The per-clip optimal constant-depth control lies far above both panels and is marked off scale, so the vertical axis can resolve the curve the panel exists to show.
+
+The synthetic sweep does not reach low activity because TartanAir stays between 80% and 100% active regardless of threshold. This is the same phenomenon quantified in Section 5.6: how much a stream can skip is a property of the capture, not only of the method.
 
 ### 5.2 Real indoor results `[CHECKPOINT-DEPENDENT]`
 
