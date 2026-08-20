@@ -63,3 +63,11 @@ tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE  
 0.05     MEAN(src)       26.2  0.1710   0.6858  0.8067  0.0731   0.0244  0.0323  0.1803  1.032  0.0386  0.1707 (0.121)  52
 0.05     POOLED(px)      27.7  0.1782   0.6586  0.8010  0.0704   0.0246  0.0318  0.1827  1.028  0.0408  0.1750 (0.122)  52
 
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=488 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 gmc=False tag=v10-8f-kf30 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.7  0.1344   0.8003  0.8469  0.1110   0.0242  0.0349  0.1562  1.059  0.0103  0.1312 (0.116)  89
+0.05     bonn            44.7  0.1857   0.4387  0.8145  0.0593   0.0266  0.0316  0.1968  0.996  0.0297  0.1881 (0.151)  100
+0.05     MEAN(src)       32.2  0.1600   0.6195  0.8307  0.0851   0.0254  0.0333  0.1765  1.027  0.0200  0.1596 (0.134)  189
+0.05     POOLED(px)      32.9  0.1649   0.6119  0.8277  0.0836   0.0256  0.0330  0.1777  1.025  0.0206  0.1613 (0.135)  189
+

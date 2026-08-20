@@ -25,13 +25,13 @@ wording and the inline captions in `../draft.md` mirror it.
 
 | # | File | Section | Shows |
 |---|---|---|---|
-| 1 | `fig1-pipeline.svg` | 3.1 | Streaming pipeline. |
-| 2 | `fig2-delta-gating.svg` | 3.3 | What the mask does to the discretization step. |
-| 3 | `fig3-tradeoff.svg` | 5.1 | Activity against accuracy, both domains. |
-| 4 | `fig4-comparison.svg` | 5.3 | Accuracy against stability, marker area by parameters. |
-| 5 | `fig5-gating.svg` | 5.5 | Pixel against GMC gating, as curves. |
-| 6 | `fig6-latency.svg` | 5.6 | Latency before and after the fused kernel. |
-| 7 | `fig7-drift.svg` | 5.7 | The sawtooth, and the refresh-period trade. |
+| 1 | `pipeline.svg` | 3.1 | Streaming pipeline. |
+| 2 | `delta-gating.svg` | 3.3 | What the mask does to the discretization step. |
+| 3 | `tradeoff.svg` | 5.1 | Activity against accuracy, both domains. |
+| 4 | `comparison.svg` | 5.3 | Accuracy against stability, marker area by parameters. |
+| 5 | `gating.svg` | 5.5 | Pixel against GMC gating, as curves. |
+| 6 | `latency.svg` | 5.6 | Latency before and after the fused kernel. |
+| 7 | `drift.svg` | 5.7 | The sawtooth, and the refresh-period trade. |
 
 Figures 3 and 7 are `[UNDER TEST]`: redraw after the long-clip run lands.
 

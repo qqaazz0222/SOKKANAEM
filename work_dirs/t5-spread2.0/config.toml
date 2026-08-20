@@ -44,7 +44,7 @@ temporal_cache = true
 
 [meta]
 command = "scripts/train.py --config configs/main_v8.toml --resume work_dirs/v9-60k/latest.pt --resume-partial --steps 8000 --seed 0 --warp-weight 2.0 --edge-weight 2.0 --spread-weight 2.0 --work-dir work_dirs/t5-spread2.0"
-git_commit = "9dfcff6fe8d01445a5e6a7f8d36c94fd98d966f1"
+git_commit = "67213a5130c7cb12aa94346e7ae9be0170e1e790"
 torch = "2.8.0+cu128"
 cuda = "12.8"
 gpu = "NVIDIA GeForce RTX 4090"
