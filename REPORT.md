@@ -3,6 +3,14 @@
 실험 결과 기술 보고서. 설계 배경·수식 유도는 [IDEA.md](IDEA.md), 차별점 요약은 [NOVELTY.md](NOVELTY.md),
 현재 작업 상태는 [PROGRESS.md](PROGRESS.md) 참조. 원본 로그: `work_dirs/*/eval.txt`, `work_dirs/*/train.log`.
 
+> **2026-08-20 샘플링 정정.** 이 날짜 이전의 모든 수치는 `--max-clips` 상한을 concat 순서 앞에서 잘라
+> 얻은 것이다. 클립은 시퀀스 순서로 이어붙으므로, Bonn 399클립에 상한 100은 `rgbd_bonn_crowd2` 한
+> 시퀀스만, PointOdyssey 1984클립에 상한 100은 첫 holdout 시퀀스만 평가한 셈이다. 같은 체크포인트·같은
+> 8프레임에서 상한 60은 활성률 55.8%·AbsRel 0.2239, 상한 100은 44.7%·0.1914로 읽혔다 — 모델보다 상한이
+> 수치를 더 움직였다. `sokkanaem.data.even_subset`으로 균등 추출하도록 `scripts/eval.py`·baseline 3종·
+> frame-index probe를 수정했다(commit 5b3bd37). **아래 절들의 Bonn·합성 수치는 재측정 전까지 "첫 holdout
+> 시퀀스"로 읽어야 한다.** 모델 간 비교는 전부 동일한 편향을 공유하므로 순위는 유지된다.
+
 ## 1. 방법 요약
 
 프레임을 16×16 패치로 분할 → 변화 감지(MSE, hysteresis+dilation+keyframe) → 마스크 $M_t$를 Mamba
