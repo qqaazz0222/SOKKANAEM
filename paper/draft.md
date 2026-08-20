@@ -297,7 +297,19 @@ Four things follow, and only one of them flatters us.
 
 **The two protocols rank the group differently, which is the point of reporting both.** Every model degrades from eight frames to 256 — the per-clip alignment window grows with the clip, so a single scale (or scale and shift) must serve a longer span — but they degrade by very different factors: DPT-Large by 116% and DA V2 Base by 145%, our reported checkpoint by 87%, our long-clip checkpoint by 53%, DA3 by only 3%. A model that carries state and one that processes the whole clip jointly both hold up better than per-frame models over a long stream, for opposite reasons: ours accumulates evidence causally and DA3 is allowed to see the future. Read only the eight-frame table and none of that is visible.
 
-**The synthetic comparison is being re-measured** under the fixed clip sampling and is not reported here; PointOdyssey offers 1,984 clips at eight frames and the earlier cap of 100 took its first held-out sequence, so the synthetic columns of our previous tables describe one sequence per source rather than a holdout. `[UNDER TEST]`
+**Table 3c. Synthetic holdout (Virtual KITTI 2, TartanAir v2, PointOdyssey), eight-frame clips, 300 clips per model, dataset-balanced mean. Our row is full computation; the sweep is in Table 1.**
+
+| Model | Params | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| DA 3 Base (non-causal) | 120M | **0.3003** | 0.5699 | 0.8901 | 0.0452 | 0.0623 |
+| ZoeDepth N-K | 345M | 0.3973 | 0.5459 | 0.7789 | 0.1080 | 0.1388 |
+| **SOKKANAEM** | **4.19M** | 0.4299 | 0.5939 | **0.3761** | **0.0398** | **0.0812** |
+| DA V2 Small | 24.8M | 1.0121 | 0.7343 | 8.4370 | 0.5096 | 0.5278 |
+| DA V2 Base | 97.5M | 1.0228 | **0.7398** | 9.5212 | 0.9094 | 0.9244 |
+| DA V1 Small | 24.8M | 1.2032 | 0.7175 | 7.7437 | 0.5908 | 0.6103 |
+| DPT-Large | 343M | 1.2035 | 0.6793 | 10.3811 | 0.7401 | 0.7629 |
+
+Synthetic footage inverts the accuracy ranking. The relative-depth models, which lead on real indoor footage, produce AbsRel above 1.0 here: their disparity-space affine fit cannot span scenes with structure at hundreds of metres, and their \(\delta_1\) stays high while AbsRel explodes, which is the signature of a few catastrophically scaled clips rather than uniformly poor depth. We are third of seven on AbsRel behind two metric-capable models, and 2.1x better than the best relative model. Raw frame difference is 2.1x better than the runner-up and OPW is best in the group. TCE is not: DA3's 0.0623 beats our 0.0812.
 
 **A correction to our own earlier reporting.** We previously claimed to beat a comparable-size model on every real-domain metric except \(\delta_1\). That claim rested on Depth Anything V2 Small's real AbsRel, which is an alignment artifact: on a handful of clips the fitted disparity approaches zero and inverting it sends predicted depth to the clip range, dominating the mean (its per-clip median is in line with the rest of the group). **We withdraw the claim.**
 
@@ -325,14 +337,14 @@ Two things follow for our own claims. The extra degree of freedom is worth 11% t
 
 \(\Delta\)-gating freezes hidden state at static positions but still reads it through \(C_i h_i\). A token-drop arm freezes the same state under the same masks and additionally bypasses the temporal block's output. Comparing the two isolates the value of the readout itself.
 
-**Table 4. Gating-location ablation at matched masks (49.6% activity), confirmed checkpoint, synthetic holdout. Both arms run with the temporal cache disabled so that the \(\Delta\)-gating arm actually performs the dense readout under test.**
+**Table 4. Gating-location ablation at matched masks (40.9% activity), reported checkpoint, synthetic holdout, 300 clips. Both arms run with the temporal cache disabled so that the \(\Delta\)-gating arm actually performs the dense readout under test.**
 
-| Method | AbsRel | RMSE | \(\delta_1\) | t-delta | OPW | TCE |
-|---|---:|---:|---:|---:|---:|---:|
-| \(\Delta\)-gating | 0.3791 | 14.22 | 0.4821 | **0.2251** | **0.0309** | **0.0622** |
-| Token drop | **0.3771** | **13.98** | **0.4866** | 0.2684 | 0.0337 | 0.0649 |
+| Method | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|
+| \(\Delta\)-gating | **0.4317** | 0.5918 | **0.1923** | **0.0310** | **0.0725** |
+| Token drop | 0.4329 | **0.5935** | 0.2508 | 0.0357 | 0.0772 |
 
-**This result reverses an earlier finding of ours and we report the reversal rather than the earlier number.** On an earlier checkpoint whose sparse path was an inference-time approximation never seen during training, token dropping collapsed: 1.7178 AbsRel against 0.4292 at 31.6% activity, a factor of four. On the confirmed checkpoint, trained with the sparse path in the loop and with randomised mask ratios, accuracy is a wash — token dropping is in fact marginally ahead — and the entire difference has moved into the temporal metrics: 19% worse raw frame difference, 9% worse OPW, 4% worse TCE.
+**This result reverses an earlier finding of ours and we report the reversal rather than the earlier number.** On an earlier checkpoint whose sparse path was an inference-time approximation never seen during training, token dropping collapsed: 1.7178 AbsRel against 0.4292 at 31.6% activity, a factor of four. On the confirmed checkpoint, trained with the sparse path in the loop and with randomised mask ratios, accuracy is a wash — 0.4317 against 0.4329 AbsRel, and \(\delta_1\) marginally favours token dropping — while the entire difference has moved into the temporal metrics: 30% worse raw frame difference, 15% worse OPW, 6% worse TCE. The long-clip checkpoint reproduces the same pattern (0.4347 against 0.4361, t-delta 0.2112 against 0.2601).
 
 The honest reading is that the earlier experiment measured the fragility of an untrained sparse path, not the value of state readout. What survives is narrower and still meaningful: **reading preserved state buys temporal stability, not depth accuracy.** A model trained to tolerate missing static tokens recovers the accuracy on its own, but only the readout keeps consecutive predictions from moving. Since flicker suppression is the property this architecture is built around, the ablation still supports the design — it simply supports a smaller claim than we first made.
 
@@ -555,19 +567,21 @@ The obvious suspect was the decoder. The binned head predicts depth as a softmax
 
 **The range ratio does not move and accuracy gets slightly worse.** The bin distributions are already peaked; the compression is in the predicted centres themselves. The model genuinely predicts a flattened field, which rules out a decoding fix and also rules out longer-clip training as a remedy — drift and range compression are separate defects with separate causes.
 
-What the diagnosis does point at is the objective. Nothing in it penalises compression: the scale-invariant log loss punishes the mismatch indirectly, but under uncertainty shrinking the prediction still lowers it, which is the ordinary bias-variance trade. So we added a term that penalises it directly: the squared log ratio of the standard deviation of predicted log depth to that of ground truth, taken per sample over valid pixels rather than per batch, since compression is a property of a scene and a wide scene would otherwise cancel a narrow one. Comparing in log space makes the term scale-free and symmetric, so over-spreading is penalised as much as under-spreading and the loss cannot be bought with noise. We fine-tuned the reported checkpoint for 8k steps at three weights, with everything else held fixed. All three arms run at the same activity, so nothing here is bought with computation. The arms below were scored before the sampling fix and are being re-scored; their ranking is unaffected because all three share the same clips. `[UNDER TEST]`
+What the diagnosis does point at is the objective. Nothing in it penalises compression: the scale-invariant log loss punishes the mismatch indirectly, but under uncertainty shrinking the prediction still lowers it, which is the ordinary bias-variance trade. So we added a term that penalises it directly: the squared log ratio of the standard deviation of predicted log depth to that of ground truth, taken per sample over valid pixels rather than per batch, since compression is a property of a scene and a wide scene would otherwise cancel a narrow one. Comparing in log space makes the term scale-free and symmetric, so over-spreading is penalised as much as under-spreading and the loss cannot be bought with noise. We fine-tuned the reported checkpoint for 8k steps at three weights, with everything else held fixed. All three arms run at the same 22.0% activity, so nothing here is bought with computation.
 
 **Table 11. A spread term against the compression it targets. Same 8k fine-tune from the reported checkpoint, same activity, real indoor holdout.**
 
-| Spread weight | AbsRel | \(\delta_1\) | t-delta | OPW | TCE | Bonn range/GT | Bonn AbsRel |
+| Spread weight | AbsRel | \(\delta_1\) | t-delta | OPW | TCE | TUM range/GT | Bonn range/GT |
 |---:|---:|---:|---:|---:|---:|---:|---:|
-| 0.0 (control) | 0.1596 | 0.8225 | 0.0789 | **0.0235** | **0.0315** | 0.55 | 0.2738 |
-| 0.5 | **0.1509** | 0.8304 | 0.0865 | 0.0242 | 0.0321 | 0.62 | **0.2529** |
-| 2.0 | 0.1548 | **0.8312** | **0.0783** | 0.0252 | 0.0332 | **0.65** | 0.2547 |
+| 0.0 (control) | 0.1286 | 0.8633 | 0.0656 | 0.0179 | **0.0257** | 0.93 | 0.77 |
+| 0.5 | **0.1254** | **0.8638** | 0.0720 | **0.0178** | **0.0256** | 0.94 | 0.85 |
+| 2.0 | 0.1293 | 0.8634 | **0.0637** | 0.0188 | 0.0266 | 0.94 | **0.90** |
 
-**The term does what it was derived to do.** Bonn's dynamic range recovers monotonically with the weight, from 0.55 of ground truth to 0.65, and the source-specific error follows it down: Bonn AbsRel improves 7.6% at weight 0.5. The dataset-balanced AbsRel improves 5.5% and \(\delta_1\) by 0.8 points, both several times the seed noise floor, at unchanged compute. TUM, whose range ratio was already 0.95, barely moves — the intervention lands where the diagnosis said the defect was, which is the strongest evidence that the diagnosis was right.
+**The term moves the quantity it targets, and only that quantity clearly.** Bonn's range ratio recovers monotonically with the weight, 0.77 to 0.90, while TUM — already at 0.93 — does not move. The intervention lands exactly where the diagnosis said the defect was, which is the strongest evidence that the diagnosis is right.
 
-It is not free, and the two weights trade differently. Weight 0.5 buys the most accuracy and costs 10% on raw frame difference; weight 2.0 recovers the most range and holds raw frame difference at the control's level, but gives back a little accuracy. Both cost 3-5% on OPW and TCE. Widening a predicted field necessarily lets it move more, so a term that fights compression works against the flicker suppression this architecture is built for; the useful statement is that range compression is a defect of the objective rather than of the decoder or the gating, and that it is correctable at a stated price.
+**The accuracy gain is not claimable.** Dataset-balanced AbsRel improves from 0.1286 to 0.1254 at weight 0.5, which is 0.0032 — inside the \(\pm\)0.005 seed-noise floor — and \(\delta_1\) moves by half a point of noise. Weight 2.0 is no better than the control. Measured on the first-sequence subset the same arms read as a 5.5% AbsRel improvement, and that figure does not survive the full holdout. What survives is a mechanism that corrects a specific, separately measured defect at no cost in compute and a small cost in raw frame difference (10% at weight 0.5), which is worth having for the range itself rather than for the error metric.
+
+Widening a predicted field necessarily lets it move more, so a term that fights compression works against the flicker suppression this architecture is built for. The useful statement is that range compression is a defect of the objective rather than of the decoder or the gating, and that it is correctable at a stated price.
 
 ## 7. Limitations
 
