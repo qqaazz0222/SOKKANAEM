@@ -19,7 +19,7 @@ import torch
 
 sys.path.insert(0, "/workspace/SOKKANAEM")
 from sokkanaem import from_checkpoint
-from sokkanaem.data import build_mixed
+from sokkanaem.data import build_mixed, even_subset
 from sokkanaem.metrics import temporal_metrics
 
 D = "/home/hyunsu/dataset_ssd"
@@ -52,7 +52,8 @@ def main():
         ds, _ = build_mixed([spec], clip_len=args.clip_len,
                             clip_stride=args.clip_stride or args.clip_len,
                             size=256, holdout=hold, val=True)
-        ld = torch.utils.data.DataLoader(ds, batch_size=1, shuffle=False)
+        ld = torch.utils.data.DataLoader(even_subset(ds, args.max_clips),
+                                         batch_size=1, shuffle=False)
         keys = ("absrel", "delta1", "tdelta", "opw", "tce")
         per_t = {k: [[] for _ in range(args.clip_len)] for k in keys}
         with torch.no_grad():

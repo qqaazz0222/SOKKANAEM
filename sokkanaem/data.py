@@ -317,6 +317,24 @@ def eval_set_from_env(specs, holdout, tag=""):
             env("EVAL_TAG", tag))
 
 
+def even_subset(ds, max_clips):
+    """`max_clips` clips spread evenly over ds, not its first `max_clips`.
+
+    Clips are concatenated sequence by sequence, so first-N truncation is not a
+    sample of the holdout: capping Bonn at 60 of its 399 clips evaluates only
+    rgbd_bonn_crowd2, and the cap then changes the reported activity ratio by
+    16 points. Even spacing keeps every held-out sequence represented at any
+    cap, and stays deterministic so two models see identical clips.
+    """
+    import torch.utils.data as tud
+    n = len(ds)
+    if max_clips is None or max_clips >= n:
+        return ds
+    step = n / max_clips
+    idx = sorted({int(i * step) for i in range(max_clips)})
+    return tud.Subset(ds, idx)
+
+
 def eval_clip_len(default=8):
     """CLIP_LEN / CLIP_STRIDE overrides, so a baseline script can be measured at
     the same clip length as scripts/eval.py --clip-len. The streaming protocol

@@ -28,7 +28,7 @@ from PIL import Image
 from transformers import AutoImageProcessor, AutoModelForDepthEstimation
 
 from sokkanaem.data import (build_mixed, eval_clip_len,
-                            eval_set_from_env)
+                            eval_set_from_env, even_subset)
 from sokkanaem.metrics import clip_scores, report
 
 CKPT = "depth-anything/Depth-Anything-V2-Small-hf"
@@ -58,12 +58,13 @@ def main():
     dataset, _ = build_mixed(
         specs, clip_len=(_cl := eval_clip_len())[0], clip_stride=_cl[1],
         size=256, holdout=holdout, val=True)
-    loader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
 
     # 100 clips was 1.1% of the holdout and wildly unrepresentative — on the
     # identical protocol SOKKANAEM's own delta1 moved 0.397 -> 0.544 going
     # from 100 to 1000 clips. Deterministic first-N, same set for every model.
     max_clips = int(os.environ.get("MAX_CLIPS", 1000))
+    loader = torch.utils.data.DataLoader(
+        even_subset(dataset, max_clips), batch_size=1, shuffle=False)
     acc = {}
     with torch.no_grad():
         for ci, (clip, gt, valid) in enumerate(loader):

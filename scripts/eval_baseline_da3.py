@@ -28,7 +28,7 @@ import torch.nn.functional as F
 from depth_anything_3.api import DepthAnything3
 
 from sokkanaem.data import (build_mixed, eval_clip_len,
-                            eval_set_from_env)
+                            eval_set_from_env, even_subset)
 from sokkanaem.metrics import clip_scores, report
 
 CKPT = "depth-anything/DA3-BASE"
@@ -46,12 +46,13 @@ def main():
     dataset, _ = build_mixed(
         specs, clip_len=(_cl := eval_clip_len())[0], clip_stride=_cl[1],
         size=256, holdout=holdout, val=True)
-    loader = torch.utils.data.DataLoader(dataset, batch_size=1, shuffle=False)
 
     # 1000, not 100: on the identical protocol SOKKANAEM's own delta1 moved
     # 0.397 -> 0.544 between 100 and 1000 clips (1.1% of the holdout was not
     # a representative sample). Deterministic first-N, same set per model.
     max_clips = int(os.environ.get("MAX_CLIPS", 1000))
+    loader = torch.utils.data.DataLoader(
+        even_subset(dataset, max_clips), batch_size=1, shuffle=False)
     align = os.environ.get("ALIGN", "scaleshift")
     assert align in ("scaleshift", "median"), align
     acc = {}
