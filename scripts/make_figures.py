@@ -247,12 +247,12 @@ CMP_OFF = {"DA V1-S": (0, -14), "ZoeDepth": (0, -14), "DPT-L": (0, 18),
 # Table 7 (Section 5.7): AbsRel by frame index, 32-frame clips
 DRIFT_TUM = [(0, 0.1353), (4, 0.1206), (8, 0.1249), (12, 0.1510), (16, 0.1521),
              (20, 0.1415), (24, 0.1585), (28, 0.1697), (31, 0.1323)]
-DRIFT_BONN = [(0, 0.1642), (4, 0.1690), (8, 0.1795), (12, 0.1934), (16, 0.2185),
-              (20, 0.2312), (24, 0.2431), (28, 0.2636), (31, 0.2011)]
+DRIFT_BONN = [(0, 0.1167), (4, 0.1239), (8, 0.1316), (12, 0.1383), (16, 0.1485),
+              (20, 0.1538), (24, 0.1582), (28, 0.1668), (31, 0.1340)]
 # Table 8: keyframe period -> (activity, AbsRel, t-delta)
-KEYFRAME = [(5, 45.0, 0.1551, 0.1084), (10, 35.3, 0.1601, 0.0914),
-            (15, 32.4, 0.1648, 0.0879), (30, 29.2, 0.1774, 0.0813),
-            (60, 26.2, 0.1807, 0.0697)]
+KEYFRAME = [(5, 39.4, 0.1337, 0.0976), (10, 29.4, 0.1370, 0.0793),
+            (15, 26.0, 0.1400, 0.0753), (30, 22.7, 0.1487, 0.0682),
+            (60, 19.6, 0.1510, 0.0570)]
 
 # Table 6 (Section 5.5): gating strategy -> (activity, AbsRel, delta1)
 GATE_PIX = [(100.0, 0.3083, 0.5142), (92.7, 0.3093, 0.5089),
@@ -335,8 +335,8 @@ def fig_drift():
     """The sawtooth, and what the refresh period costs (Tables 7 and 8)."""
     W, H = 900, 350
     o = []
-    ax = Ax(78, 46, 350, 250, (0, 32), (0.10, 0.28))
-    o.append(ax.frame([0, 8, 16, 24, 31], [0.12, 0.16, 0.20, 0.24, 0.28],
+    ax = Ax(78, 46, 350, 250, (0, 32), (0.110, 0.180))
+    o.append(ax.frame([0, 8, 16, 24, 31], [0.12, 0.14, 0.16, 0.18],
                       "Frame index within clip", "AbsRel", "{:g}", "{:.2f}",
                       "(a) Accuracy decays between keyframes"))
     o.append(ax.vline(30, VERM, "keyframe"))
@@ -345,19 +345,19 @@ def fig_drift():
     o.append(legend(96, 66, [("Bonn (dynamic objects)", VERM, "line"),
                              ("TUM (static camera)", NAVY, "line")]))
 
-    ax2 = Ax(538, 46, 300, 250, (0, 65), (0.15, 0.19))
-    o.append(ax2.frame([5, 15, 30, 45, 60], [0.15, 0.16, 0.17, 0.18],
+    ax2 = Ax(538, 46, 300, 250, (0, 65), (0.130, 0.155))
+    o.append(ax2.frame([5, 15, 30, 45, 60], [0.13, 0.14, 0.15],
                        "Keyframe refresh period (frames)", "AbsRel",
                        "{:g}", "{:.2f}",
                        "(b) Refreshing more often trades against stability"))
     o.append(ax2.line([(k, a) for k, _, a, _ in KEYFRAME], NAVY))
     # second axis for t-delta, drawn on the right so the two never cross labels
-    tlim = (0.06, 0.12)
+    tlim = (0.05, 0.10)
     ty = lambda v: ax2.y0 + ax2.h - (v - tlim[0]) / (tlim[1] - tlim[0]) * ax2.h
     o.append(f'<line x1="{ax2.x0+ax2.w}" y1="{ax2.y0}" '
              f'x2="{ax2.x0+ax2.w}" y2="{ax2.y0+ax2.h}" stroke="{TEAL}" '
              f'stroke-width="1"/>')
-    for t in (0.07, 0.08, 0.09, 0.10, 0.11):
+    for t in (0.06, 0.07, 0.08, 0.09, 0.10):
         o.append(f'<line x1="{ax2.x0+ax2.w}" y1="{ty(t):.1f}" '
                  f'x2="{ax2.x0+ax2.w+4}" y2="{ty(t):.1f}" stroke="{TEAL}" '
                  f'stroke-width="1"/>')
@@ -370,7 +370,8 @@ def fig_drift():
     for k, _, _, t in KEYFRAME:
         o.append(f'<circle cx="{ax2.X(k):.1f}" cy="{ty(t):.1f}" r="3.2" '
                  f'fill="#ffffff" stroke="{TEAL}" stroke-width="1.4"/>')
-    o.append(legend(560, 262, [("AbsRel", NAVY, "line"),
+    # legend low and left: the AbsRel curve runs through the old position
+    o.append(legend(560, 286, [("AbsRel", NAVY, "line"),
                                ("t-delta", TEAL, "dash")], dx=110, dy=0))
 
     return svg(W, H, "\n".join(o))
