@@ -227,7 +227,7 @@ CMP_REAL = [
     ("ZoeDepth", 345.0, 0.0992, 0.0866, PURPLE),
     ("VDA-S", 28.4, 0.1000, 0.0829, TEAL),
     ("DA3-B", 120.0, 0.1130, 0.0825, VERM),
-    ("Ours", 4.19, 0.1302, 0.0607, NAVY),
+    ("Ours", 4.19, 0.1263, 0.0750, NAVY),   # final checkpoint (Table 3b)
     ("DA V2-S", 24.8, 0.2068, 1.0015, GRAY),
 ]
 CMP_SYN = [
