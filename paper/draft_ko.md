@@ -109,7 +109,7 @@ state에 저장한다. 본 연구의 토큰 제거 ablation은 정적 토큰을 
 
 ### 3.1 개요
 
-![Streaming pipeline](figures/fig1-pipeline.svg)
+![Streaming pipeline](figures/pipeline.svg)
 
 **그림 1. 스트리밍 파이프라인.** 변화 검출기가 연속 프레임을 패치 단위로 비교해 이진 활성 마스크를
 내고, 그 마스크가 백본에 \(\Delta\)-게이팅 신호로 전달된다. 정적 패치는 hidden state를 정확히
@@ -154,7 +154,7 @@ MSE를 기본으로 둔다. 완료된 3-arm 연구에서 i.i.d. 무작위 마스
 
 ### 3.3 정확한 \(\Delta\)-게이팅
 
-![Delta-gating](figures/fig2-delta-gating.svg)
+![Delta-gating](figures/delta-gating.svg)
 
 **그림 2. 정확한 \(\Delta\)-게이팅.** 활성 마스크가 이산화 스텝에 곱해진다
 (\(\widetilde{\Delta} = M\Delta\)). 변화한 패치는 표준 selective-SSM 갱신을 받는다. 정적 패치는
@@ -296,7 +296,7 @@ Depth Anything V2 Small(24.8M), Depth Anything 3 Base(120M), Video Depth Anythin
 남기 때문이다. §5.5에서 정량화하는 것과 같은 현상으로, 스트림이 얼마나 건너뛸 수 있는지는 방법만이
 아니라 촬영 조건의 성질이다.
 
-![Activity-accuracy trade-off](figures/fig3-tradeoff.svg)
+![Activity-accuracy trade-off](figures/tradeoff.svg)
 
 **그림 3. 활성 비율 대 정확도** — 실촬 실내와 합성 holdout에서 검출기 임계를 쓸어본 결과. 정확도는
 활성 약 30%까지 거의 평평하다가 꺾인다. 실촬에서 연산을 13분의 1로 줄이는 대가는 상대 AbsRel 13%
@@ -332,7 +332,7 @@ log-depth 잔차 항과 깊이 경계 가중 항 — 가 연산을 늘리지 않
 표 3은 두 도메인 모두에서 단일 공통 프로토콜로 현행 baseline 체크포인트와 비교한다 — 소스당
 100클립, 동일 holdout 시퀀스, 동일 지표 구현, 클립별 중앙값 정합.
 
-![Comparison group](figures/fig4-comparison.svg)
+![Comparison group](figures/comparison.svg)
 
 **그림 4. 비교군의 정확도 대 시간 안정성.** 마커 면적은 파라미터 수의 로그에 비례한다. 두 축 모두
 왼쪽 아래가 좋다. 본 모델은 각 패널에서 가장 작은 마커이며 안정성 축에서 가장 낮고 정확도 축에서
@@ -415,7 +415,7 @@ temporal cache를 끈다 — \(\Delta\)-게이팅 arm이 검증 대상인 dense 
 것은 무의미하다 — 기본 임계에서 둘은 정확도상 구별되지 않으면서 GMC가 연산을 더 쓴다. 공정한 비교는
 활성–정확도 곡선이다.
 
-![Gating strategies](figures/fig5-gating.svg)
+![Gating strategies](figures/gating.svg)
 
 **그림 5. 픽셀 게이팅 대 전역 모션 보정 피처 게이팅** — 실촬 주행 영상에서 곡선으로 비교. 두 전략은
 변화를 서로 다른 척도로 채점하므로 곡선만 비교 가능하고 같은 임계의 점끼리는 비교되지 않는다. 같은
@@ -458,7 +458,7 @@ temporal cache를 끈다 — \(\Delta\)-게이팅 arm이 검증 대상인 dense 
 정확하고(\(\widetilde{\Delta}=0\)이면 \(\exp(0)=1\)이고 입력 항이 0), 모든 평가 지표가 소수점 넷째
 자리까지 불변이다.
 
-![Latency before and after the fused kernel](figures/fig6-latency.svg)
+![Latency before and after the fused kernel](figures/latency.svg)
 
 **그림 6. 융합 스캔 커널 전후의 프레임당 지연 시간** — RTX 4090 1장, 256픽셀, 배치 1, fp32, 활성
 22%에서 측정. 모든 경로가 빨라졌고 순서가 뒤집혔다. 희소성이 아끼던 것이 스캔이었는데 그 스캔이
@@ -503,7 +503,7 @@ fp16에서 희소 경로는 1.69 ms(593 FPS), 최대 메모리 37 MB, 스트림�
 32프레임 클립 안에서 프레임 인덱스별로 채점하되, 클립 단위 정합의 아티팩트를 배제하려고 프레임
 마다 독립적으로 정합했다:
 
-![Streaming drift](figures/fig7-drift.svg)
+![Streaming drift](figures/drift.svg)
 
 **그림 7. 키프레임 사이에서 정확도가 악화한다.** 패널 (a)는 32프레임 클립 안에서 프레임 인덱스별로
 채점하되 각 프레임을 독립적으로 정합했다. 유지된 상태는 정확도를 누적하지 않는다 — 동적 객체 소스가
@@ -575,11 +575,11 @@ fp16에서 희소 경로는 1.69 ms(593 FPS), 최대 메모리 37 MB, 스트림�
 
 | 설정 | 활성 (%) | AbsRel | \(\delta_1\) | t-delta | TCE |
 |---|---:|---:|---:|---:|---:|
-| 보고 체크포인트, 주기 30 | 29.2 | 0.1774 | **0.8108** | 0.0813 | 0.0349 |
-| **fine-tune 체크포인트, 주기 60** | **26.2** | **0.1710** | 0.8067 | **0.0731** | **0.0323** |
+| 보고 체크포인트, 주기 30 | 29.2 | 0.1774 | 0.7985 | 0.0813 | 0.0356 |
+| **fine-tune 체크포인트, 주기 60** | **26.2** | **0.1710** | **0.8067** | **0.0731** | **0.0323** |
 
-두 번째 행이 정확도, 시간 지표 둘 다, 그리고 비용까지 우위다. \(\delta_1\)만 0.4포인트 낮은데
-seed 노이즈 ±0.004 경계다. **두 변경은 묶여 있다** — 주기를 30에 둔 채 체크포인트만 바꾸면 정확도
+두 번째 행이 모든 지표에서 우위이고 더 싸다 — AbsRel 상대 3.6%, \(\delta_1\) 0.8포인트(seed
+노이즈 ±0.004의 두 배), raw 프레임 차 10%, TCE 9%, 활성률 3포인트 감소. **두 변경은 묶여 있다** — 주기를 30에 둔 채 체크포인트만 바꾸면 정확도
 이득은 남지만 안정성을 잃는다. 안정성을 되사는 것은 아낀 갱신이다.
 
 여기서 이 설정을 보고 체크포인트로 승격하지는 않는다. 표 10·11은 32프레임 측정인데 표 3의 비교군은

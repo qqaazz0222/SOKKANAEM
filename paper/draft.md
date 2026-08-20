@@ -52,7 +52,7 @@ State-space sequence models (Gu et al., 2022) with input-dependent selection (Gu
 
 ### 3.1 Overview
 
-![Streaming pipeline](figures/fig1-pipeline.svg)
+![Streaming pipeline](figures/pipeline.svg)
 
 **Figure 1. Streaming pipeline.** A change detector compares consecutive frames patch-wise and emits a binary activity mask, which reaches the backbone as the \(\Delta\)-gating signal. Static patches retain their hidden state exactly and their computation is skipped. Two caches — spatial outputs and temporal hidden state — are where the reduction in multiply–accumulate operations comes from, taking a frame from 1.644 to 0.608 GMAC at 15.4% activity. The global motion compensation branch is used only for moving cameras. Frames above 40% activity are routed through the dense path instead.
 
@@ -90,7 +90,7 @@ We dilate active regions by one patch to protect object boundaries and force a f
 
 ### 3.3 Exact \(\Delta\)-gating
 
-![Delta-gating](figures/fig2-delta-gating.svg)
+![Delta-gating](figures/delta-gating.svg)
 
 **Figure 2. Exact \(\Delta\)-gating.** The activity mask multiplies the discretization step, \(\widetilde{\Delta} = M\Delta\). A changed patch takes the standard selective-SSM update. A static patch takes \(\bar A = I\) and \(\bar B = 0\), so its hidden state is copied rather than reconstructed: skipping the computation is not compensated for, it is algebraically identical to preserving the state. Early exit and token dropping instead substitute zero or an approximation, and that error accumulates across frames.
 
@@ -198,7 +198,7 @@ On real footage, cutting computation by a factor of thirteen — 96.2% to 7.1% a
 
 The synthetic sweep does not reach low activity because TartanAir stays between 80% and 100% active regardless of threshold. This is the same phenomenon quantified in Section 5.5: how much a stream can skip is a property of the capture, not only of the method.
 
-![Activity–accuracy trade-off](figures/fig3-tradeoff.svg)
+![Activity–accuracy trade-off](figures/tradeoff.svg)
 
 **Figure 3. Activity against accuracy** on the real indoor and synthetic holdouts, sweeping the detector threshold. Accuracy is nearly flat until roughly 30% activity and then bends. On real footage, cutting computation thirteenfold costs 13% relative AbsRel, and the default operating point (circled) costs 2.8%. The per-clip optimal constant-depth control lies far above both panels and is marked off scale, so the vertical axis can resolve the curve the panel exists to show.
 
@@ -223,7 +223,7 @@ Table 3 compares against current baseline checkpoints under one shared protocol 
 
 **Table 3. The commonly cited comparison group, all measured under one protocol: same holdout clips, 256px input, same metric implementation. Relative-depth models receive the 2-DOF disparity-space scale+shift fit they are designed for; metric models and ours receive 1-DOF per-clip median scaling. Our model is reported under both so the alignment rule does not carry the result. "med" is the per-clip median AbsRel, which is robust to the alignment blow-ups discussed below.**
 
-![Comparison group](figures/fig4-comparison.svg)
+![Comparison group](figures/comparison.svg)
 
 **Figure 4. Accuracy against temporal stability across the comparison group**, with marker area scaling as the logarithm of parameter count. Down and to the left is better on both axes. Our model is the smallest marker in each panel, lowest on the stability axis and rightmost on accuracy. The stability axis is logarithmic because t-delta spans two orders of magnitude across the group: the gap to the next best model is a factor of 1.35 on real footage and 4.2 on synthetic.
 
@@ -290,7 +290,7 @@ Accuracy does not collapse; it is nominally better on real footage. That orderin
 
 **Moving-camera gating.** Pixel gating and GMC feature gating operate on different score scales, so comparing them at equal thresholds is meaningless — at their default thresholds the two are indistinguishable in accuracy while GMC uses more computation. The fair comparison is the activity-accuracy curve.
 
-![Gating strategies](figures/fig5-gating.svg)
+![Gating strategies](figures/gating.svg)
 
 **Figure 5. Pixel gating against global-motion-compensated feature gating** on real driving footage, swept as curves. The two strategies score change on different scales, so only the curves are comparable and points at equal thresholds are not. At matched activity the compensated variant is better on both axes, and it reaches 14% activity while still beating pixel gating at 51%.
 
@@ -317,7 +317,7 @@ Two results in this section point in opposite directions, and both matter.
 
 **Measured latency.** The scan implementation, not the gather, dominated wall-clock. Profiling a sparse frame at 22% activity attributes 71% of it to the spatial scan and only 6% to gathering and scattering active tokens. The reference scan is chunked and materialises a \((B, C, C, P, S)\) pairwise-decay tensor per chunk: at \(L=64\), \(P=384\), \(S=16\) it moves roughly 25 MB to perform 0.4 MMAC. We therefore replaced it with a fused Triton (Tillet et al., 2019) kernel that keeps the recurrence in registers, used at inference while training retains the differentiable chunked path. \(\Delta\)-gating remains bit-exact through the kernel — \(\widetilde{\Delta}=0\) gives \(\exp(0)=1\) and a zero input term — and every evaluation metric is unchanged to four decimal places.
 
-![Latency before and after the fused kernel](figures/fig6-latency.svg)
+![Latency before and after the fused kernel](figures/latency.svg)
 
 **Figure 6. Per-frame latency before and after the fused scan kernel**, measured at 22% activity on one RTX 4090 at 256 pixels, batch size one, fp32. Every path became faster and the ordering inverted: what sparsity was saving was the scan, and the scan is now nearly free, leaving the sparse path with bookkeeping that does not scale with activity.
 
@@ -345,7 +345,7 @@ Every number above, and every number we have previously reported, is an eight-fr
 
 Scoring by frame index inside a 32-frame clip, with each frame aligned independently so the curve is not an artefact of one clip-level fit:
 
-![Streaming drift](figures/fig7-drift.svg)
+![Streaming drift](figures/drift.svg)
 
 **Figure 7. Accuracy decays between keyframes.** Panel (a) scores by frame index within a 32-frame clip, with each frame aligned independently. Carried state does not accumulate accuracy: the dynamic-object source degrades 61% from frame 0 to frame 28, and the recovery at frame 31 is the keyframe firing at frame 30. Panel (b) sweeps the refresh period, showing that the remedy is already in the architecture and merely applied too rarely, and that a period below 10 forfeits the stability lead the model is built for.
 
@@ -393,10 +393,10 @@ The penalty more than halves, which confirms the mismatch as a real contributor 
 
 | Configuration | Active (%) | AbsRel | \(\delta_1\) | t-delta | TCE |
 |---|---:|---:|---:|---:|---:|
-| Reported checkpoint, period 30 | 29.2 | 0.1774 | **0.8108** | 0.0813 | 0.0349 |
-| **Fine-tuned checkpoint, period 60** | **26.2** | **0.1710** | 0.8067 | **0.0731** | **0.0323** |
+| Reported checkpoint, period 30 | 29.2 | 0.1774 | 0.7985 | 0.0813 | 0.0356 |
+| **Fine-tuned checkpoint, period 60** | **26.2** | **0.1710** | **0.8067** | **0.0731** | **0.0323** |
 
-The second row is better on accuracy, better on both temporal measures, and cheaper, with \(\delta_1\) lower by 0.4 points — at the edge of the \(\pm\)0.004 seed noise. The two changes are coupled: swapping the checkpoint while leaving the period at 30 keeps the accuracy gain but forfeits the stability, and it is the saved refreshes that buy the stability back.
+The second row is better on every measure and cheaper: 3.6% relative AbsRel, 0.8 points of \(\delta_1\) — twice the \(\pm\)0.004 seed noise — 10% on raw frame difference, 9% on TCE, and three points less activity. The two changes are coupled: swapping the checkpoint while leaving the period at 30 keeps the accuracy gain but forfeits the stability, and it is the saved refreshes that buy the stability back.
 
 We do not promote this configuration to the reported checkpoint here. Tables 10 and 11 are 32-frame measurements while the comparison group in Table 3 was measured at eight frames, and the temporal lead claimed there cannot be transferred across protocols without re-measuring it.
 

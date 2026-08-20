@@ -164,8 +164,15 @@ def main():
                for spec, ds in zip(args.data, dataset.datasets)]
 
     out = Path(args.ckpt).parent / "eval.txt"
+    # every knob that changes the numbers belongs in the header: a row whose
+    # keyframe period / clip length / tag is unrecorded cannot be traced back
+    # to its run, and a paper table then gets assembled from two of them
     lines = [f"ckpt={args.ckpt} data={args.data} clips={len(dataset)} "
              f"size={args.size} max={args.max_clips}/source "
+             f"clip_len={args.clip_len} align={args.align} "
+             f"gate_mode={args.gate_mode} "
+             f"keyframe_every={args.keyframe_every or model.detector.keyframe_every} "
+             f"gmc={args.gmc} tag={args.scores_tag or args.gate_mode} "
              f"spatial_cache={model.spatial_cache} "
              f"temporal_cache={model.temporal_cache}"]
 
