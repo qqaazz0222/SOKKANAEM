@@ -1,6 +1,8 @@
 # SOKKANAEM: Exact Change-Gated State-Space Modeling for Efficient and Stable Video Depth
 
-> **Working draft — 19 August 2026.** Author names, affiliations, venue formatting, qualitative figures, and edge-device measurements remain to be added. All numerical claims below are limited to completed experiments in this repository.
+> **Working draft — 20 August 2026.** Author names, affiliations, venue formatting, and edge-device measurements remain to be added. All numerical claims below are limited to completed experiments in this repository, and every table row is checked against a single measurement run (`scripts/table_check.py`).
+>
+> **Protocol note.** Numbers in this draft supersede every figure we reported before 20 August 2026. A clip cap was sampling the first held-out sequence of each source rather than the holdout (Section 4.2); the correction moves the real-domain operating point from 0.1595 AbsRel at 32.2% activity to 0.1302 at 22.0%, and it withdraws or reduces three diagnostic findings.
 >
 > **Section tags.** Headings carry a status marker so a reader knows which numbers are settled and which are moving:
 >
@@ -470,6 +472,10 @@ So there are two effects and they point in opposite directions. The protocol pen
 **The decay is in accuracy, not in motion-referenced consistency.** Bonn's OPW and TCE are flat across the cycle — 0.0229 at frame 4 against 0.0228 at frame 28 — while AbsRel and \(\delta_1\) move steadily. What drifts is where the surface is placed, not how consistently it moves, which is exactly the distinction the two metric families exist to draw and the reason a single "temporal consistency" claim would be wrong in both directions.
 
 The recovery at frame 31 is the keyframe: a full refresh fires at frame 30 and the error snaps back, on Bonn recovering 6 points of \(\delta_1\) at once. The refresh is not free in the other direction: raw frame difference *spikes* at the keyframe (TUM 0.0824 at frame 28 against 0.1751 at frame 31), because a full recomputation is a discontinuity in the output sequence. Accuracy sawtooths down and flicker sawtooths up, out of phase. Long-clip fine-tuning flattens both: on the same clips its Bonn curve runs 0.1139 to 0.1548, a 36% rise rather than 43%, and it holds 0.8380 \(\delta_1\) at frame 28 against 0.8095.
+
+![Depth and error either side of a keyframe](figures/sawtooth.png)
+
+**Figure 8. The sawtooth, as pictures.** One 32-frame clip of the dynamic-object holdout; rows are frames 24, 28, 29, 30 and 31; columns are RGB, prediction, ground truth and relative error (black is invalid ground truth). Frame 30 is the keyframe: activity goes to 100% and clip AbsRel falls from 0.3740 to 0.2030 in one frame, visible as the error column darkening over the moving person. The prediction column is also where range compression (Section 6.5) shows without a histogram — it is uniformly flatter than the ground-truth column that shares its colour scale.
 
 **Out to 256 frames the sawtooth rides a trend and then levels off.** On disjoint 256-frame clips, Bonn's per-frame error grows from 0.0912 at frame 0 to 0.2817 by frame 224 — a factor of three — and then falls back to 0.1712 at frame 255. The error is bounded rather than divergent, but the trend over the first two hundred frames is real, and a keyframe period tuned on 32-frame clips does not contain it.
 
