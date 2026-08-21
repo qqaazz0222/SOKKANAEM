@@ -454,11 +454,34 @@ We report this plainly because it bounds the contribution. Exact state preservat
 | Lower per-frame latency than a comparable-size baseline | demonstrated | 1.29 ms compiled dense; model scale and the fused kernel, **not** the sparse path |
 | MAC reduction from sparsity | demonstrated | 1.644 to 0.608 GMAC at 15.4% activity |
 | Reduced per-stream state, so one weight set serves many streams | demonstrated | 6.38 MB fp16 state against 8.4 MB of weights |
-| Wall-clock speedup *from sparsity* | **not demonstrated** | compiled dense is faster at every activity level on a 4090 |
-| Energy or power reduction from sparsity | **not measured** | board-power sampling is implemented; the desktop card's idle floor dominates at this model scale, so the informative measurement is the edge one |
-| Advantage on an edge accelerator | **not measured** | no Jetson-class device was available (Section 7) |
+| Wall-clock speedup *from sparsity* | **demonstrated where arithmetic is the constraint, not on a desktop GPU** | 11.5x at 5% activity on a Jetson Nano; compiled dense is faster at every activity level on a 4090 |
+| Energy or power reduction from sparsity | **not measured** | the rail parser missed this device's `tegrastats` format; the fix is in and the measurement is one re-run away |
+| Advantage on an edge accelerator running the *reported* implementation | **not measured** | Triton does not target the pre-Volta SMs of the devices available, so the edge numbers are the reference scan |
 
-The headline latency and memory numbers therefore belong to a small model with a fused kernel, and the sparsity mechanism's established benefit is arithmetic and state, not time. A reader who takes "2.2x faster" as the sparse path beating the dense one has read the opposite of what we measured.
+The headline latency and memory numbers therefore belong to a small model with a fused kernel, and on this GPU the sparsity mechanism's benefit is arithmetic and state, not time. A reader who takes "2.2x faster" as the sparse path beating the dense one has read the opposite of what we measured *there*. Whether that ordering is a property of the mechanism or of the device is the next measurement.
+
+**Where arithmetic is the constraint, the ordering inverts.** We ran the same model on a Jetson Nano Developer Kit B01 (Maxwell, 128 CUDA cores, 25.6 GB/s), which is compute-bound at this scale where the 4090 is overhead-bound. Triton does not target `sm_53`, so this is the reference chunked scan rather than the fused kernel; the log records that fact.
+
+**Table 13. Per-frame latency against forced activity on a Jetson Nano B01, 256 pixels, fp32, reference scan. Dense is the same model with both caches disabled.**
+
+| Activity (%) | Sparse (ms) | Dense (ms) | Speedup | Sparse at 5W (ms) |
+|---:|---:|---:|---:|---:|
+| 5.1 | **139.14** | 1592.49 | **11.5x** | 199.64 |
+| 14.8 | 279.41 | 1590.07 | 5.7x | 396.61 |
+| 30.1 | 539.74 | 1590.80 | 3.0x | 728.79 |
+| 50.0 | 842.16 | 1588.39 | 1.9x | 1134.05 |
+| 69.9 | 1161.73 | 1586.96 | 1.4x | 1569.75 |
+| 100.0 | 1663.05 | 1586.92 | 0.95x | 2189.90 |
+
+Three things follow, and together they turn Section 5.7's conjecture into a measurement.
+
+**Sparsity converts to time when the device is compute-bound.** Dense latency is flat in activity here exactly as on the 4090 — 1587 to 1592 ms across the sweep — but the sparse path scales with activity, from 1663.05 ms at full update down to 139.14 ms at 5%. A least-squares fit gives `sparse ≈ 49 ms + 1605 ms x activity`: an activity-proportional term that is the compute, and a 49 ms intercept that is the bookkeeping. On the 4090 the same intercept was the whole story.
+
+**The crossover is quantified rather than asserted.** Sparse loses to dense only above 96% activity on this device, where the bookkeeping is no longer amortised. Reading the two devices together: the mechanism pays whenever the arithmetic it removes exceeds the fixed cost of deciding what to remove, and that condition holds by a factor of 11 on a 10W SoC and fails outright on a desktop card with a fused kernel.
+
+**The low-power mode changes the scale, not the shape.** At 5W (two CPU cores instead of four, lower clocks) every number grows by about 1.3x and the speedups are unchanged to two significant figures — 10.9x at 5% activity, break-even at 99%. The trade-off curve is a property of the model and the mask, not of the power budget.
+
+What this does not establish: the device is far from real time (7.2 FPS at 5% activity, 0.6 FPS dense), so this is a statement about arithmetic converting to time, not about deployable throughput. And because `sm_53` cannot run the fused kernel, the configuration measured here is not the one we ship. An Orin-class device would close both gaps.
 
 ### 5.8 Streaming drift, and how much of it is ours `[CHECKPOINT-DEPENDENT]`
 
@@ -673,7 +696,7 @@ The present study has several important limitations.
 2. The comparison group now includes Video Depth Anything (metric, Small), the video-specific class that was missing, and Depth Anything 3, which is non-causal and therefore not a streaming competitor at all — we report it because it is strong, not because the comparison is like for like. Neural Video Depth Stabilizer is still absent.
 3. OPW and TCE do not support a general temporal-consistency lead. Raw t-delta can be gamed by constant predictions and is interpreted only alongside accuracy and the constant control.
 4. A fused scan kernel removed the dominant cost and, in doing so, removed the sparse path's wall-clock advantage on an RTX 4090: compiled full compute is now faster at every activity level. The remaining sparse-path cost is activity-independent bookkeeping. Sparsity's benefit is presently established in MACs and per-stream state, not in measured latency on this device.
-5. Execution on an RTX 4090 is overhead-bound at this model scale, so reduced analytical MACs do not become higher FPS. Jetson Orin latency, energy, and multi-stream measurements have not been performed, and they are the measurement that decides whether the MAC reduction is worth anything in deployment.
+5. Execution on an RTX 4090 is overhead-bound at this model scale, so reduced analytical MACs do not become higher FPS *there*; on a compute-bound Jetson Nano they do, by 11.5x at 5% activity (Section 5.7). Two gaps remain. The edge device cannot run the fused kernel we ship (Triton does not target `sm_53`), so the inverted ordering is measured on the reference scan; and energy per frame is still unmeasured, because the rail parser did not match this device's `tegrastats` output. An Orin-class device would close both.
 6. GMC is validated on real ego-motion (Section 5.6), but only on five driving sequences from one dataset, and only with per-domain threshold calibration; its default threshold is inoperative on real video. Handheld and aerial motion remain untested.
 7. Cross-domain evaluation covers real driving only. Unseen indoor domains (NYU, ScanNet) were not evaluated: the former's host was unreachable and the latter requires a signed agreement. The claim of generalization is therefore limited to the synthetic-to-real axis of one scene type.
 8. Clip-length dependence is severe under per-clip alignment: the base checkpoint scores 0.1302 AbsRel on eight-frame clips and 0.2972 on 512-frame clips of real footage, and the reported one 0.1263 and 0.1907 at 256 frames (Section 5.8). The 1,024-frame measurement separates the causes — per-frame drift is 13.5% for the base checkpoint and 1.1% for the long-clip one, against clip-level penalties of 58% and 36% — so most of the effect is the alignment window. What we cannot do is remove the alignment window from the comparison tables, because scale-ambiguous depth has to be aligned somehow; the decomposition is reported instead. The 1,024-frame streams come from one synthetic source (20 clips) and one real sequence (1 clip); the real holdout does not contain more.

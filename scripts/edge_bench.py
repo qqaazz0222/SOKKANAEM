@@ -42,7 +42,13 @@ import torch
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from sokkanaem import from_checkpoint            # noqa: E402
 
-TEGRA_W = re.compile(r"(?:VDD_IN|POM_5V_IN)\s+(\d+)\s*mW")
+# tegrastats prints rails in two shapes across generations:
+#   Nano/TX2:  "POM_5V_IN 4104/4104"      (mW, no unit)
+#   Xavier/Orin: "VDD_IN 4000mW/4000mW"
+# board-in rail first, GPU rail only as a fallback: searching one alternation
+# would pick whichever appears earliest in the line, which differs by generation
+TEGRA_W = [re.compile(r"(?:VDD_IN|POM_5V_IN)\s+(\d+)(?:mW)?/"),
+           re.compile(r"(?:VDD_SYS_GPU|POM_5V_GPU)\s+(\d+)(?:mW)?/")]
 
 
 class FixedRatio(object):
@@ -87,7 +93,8 @@ class Power(object):
                     out = subprocess.check_output(self.cmd, shell=True,
                                                   stderr=subprocess.STDOUT)
                     out = out.decode("utf-8", "replace")
-                    m = TEGRA_W.search(out)
+                    m = next((r.search(out) for r in TEGRA_W
+                              if r.search(out)), None)
                     self.samples.append(float(m.group(1)) / 1000.0 if m
                                         else float(out.strip().splitlines()[0]))
                 except Exception:

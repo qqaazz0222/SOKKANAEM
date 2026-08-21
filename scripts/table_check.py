@@ -22,14 +22,17 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-NUM = re.compile(r"\d+\.\d{2,}")  # 0.1774, 29.2 is too weak to attribute
+NUM = re.compile(r"\d+\.\d{2,}")  # two decimals or more. One-decimal
+                                   # cells are derived (penalty %, speedup
+                                   # x) and belong to no single run
 
 
 def blocks():
     """(label, text) per measurement run: log files split at each ckpt= header."""
     out = []
     for f in sorted(ROOT.glob("work_dirs/**/eval.txt")) + sorted(ROOT.glob("work_dirs/*.log")) \
-            + sorted(ROOT.glob("reports/**/*.log")) + sorted(ROOT.glob("reports/**/*.txt")):
+            + sorted(ROOT.glob("reports/**/*.log")) + sorted(ROOT.glob("reports/**/*.txt")) \
+            + sorted(ROOT.glob("measures/**/*.log")) + sorted(ROOT.glob("measures/**/*.txt")):
         try:
             text = f.read_text(errors="replace")
         except OSError:
