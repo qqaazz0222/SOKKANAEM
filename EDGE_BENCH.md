@@ -80,15 +80,40 @@ scp $CK/config.toml    <user>@<device>:~/SOKKANAEM/work_dirs/edge/config.toml
 바로 실행되며 `pip install -e .`는 하지 말 것 — `pyproject.toml`이 torch 2.x를 요구해 기기의 torch를
 덮어쓰려 한다. 필요하면 `pip install -e . --no-deps`.
 
-## 3. Raspberry Pi 4
+## 3. Raspberry Pi 4B
 
-64-bit Raspberry Pi OS 기준. 32-bit OS면 aarch64 휠이 없어 설치가 막히므로 `uname -m`이
-`aarch64`인지 먼저 확인한다.
+**OS 선택: Raspberry Pi OS Lite (64-bit, Bookworm).**
+
+- **64bit는 필수다.** PyTorch는 32bit ARM(armv7l) 휠을 배포하지 않으므로 32bit 이미지는 그 자리에서
+  막힌다. `uname -m`이 `aarch64`여야 한다.
+- **Lite(데스크톱 없음)** 를 쓰는 이유는 측정 안정성이다. GUI가 RAM과 코어를 잡으면 회차별 편차가
+  커진다. dense 경로가 프레임당 1초 이상 걸리는 동안 4코어를 온전히 써야 한다.
+- Bookworm의 Python 3.11은 PyPI aarch64 휠(cp39~cp313)의 중앙에 있다. Bullseye 64bit(3.9)도 되지만
+  굳이 옛 버전을 쓸 이유가 없다.
+- **대안**: Ubuntu Server 24.04 LTS arm64도 무관하게 잘 돈다. 이 워크로드에서 배포판 차이는 무의미
+  하므로 익숙한 쪽을 쓰면 된다.
+
+Bookworm은 PEP 668로 시스템 pip 설치를 막으므로 venv를 쓴다.
 
 ```bash
 uname -m                      # aarch64 여야 한다
-python3 -V                    # 3.9 이상 권장
+sudo apt update && sudo apt install -y python3-venv python3-pip libopenblas0
+python3 -m venv ~/venv && source ~/venv/bin/activate
 pip install torch --index-url https://download.pytorch.org/whl/cpu
+python -c "import torch; print(torch.__version__, torch.get_num_threads())"
+```
+
+측정 조건을 고정한다. Pi는 온도·전압에 따라 클럭이 흔들려서 이것 없이는 재현되지 않는다.
+
+```bash
+echo performance | sudo tee /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+
+# 2GB 모델이면 스왑 확보
+sudo dphys-swapfile swapoff
+sudo sed -i 's/^CONF_SWAPSIZE=.*/CONF_SWAPSIZE=2048/' /etc/dphys-swapfile
+sudo dphys-swapfile setup && sudo dphys-swapfile swapon
+
+vcgencmd measure_temp && vcgencmd get_throttled    # 측정 전후 둘 다
 ```
 
 측정:
