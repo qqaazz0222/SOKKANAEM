@@ -57,25 +57,28 @@ dense(캐시 off)는 활성률과 무관하게 평평하고, 희소는 거의 �
 
 ## 2. 공통 준비
 
-체크포인트와 코드를 기기로 옮긴다. 체크포인트는 16.7 MB, `config.toml`이 **같은 디렉터리에
-있어야** 모델 설정이 복원된다.
+코드는 저장소를 clone하면 되지만 **체크포인트는 git에 없다**(`.gitignore`의 `*.pt`). 학습 체크포인트는
+optimizer 상태까지 담아 64 MB이므로, 추론용으로 줄여서 옮긴다.
 
 ```bash
-# 개발 PC에서
+# 개발 PC에서: 추론에 필요한 가중치만 남긴다 (64 MB -> 16 MB)
 CK=work_dirs/v11-longclip-spread-s0
-tar czf edge-bundle.tar.gz sokkanaem scripts/edge_bench.py pyproject.toml \
-    "$CK/latest.pt" "$CK/config.toml"
-scp edge-bundle.tar.gz <user>@<device>:~/
+python - <<'EOF'
+import torch
+st = torch.load("work_dirs/v11-longclip-spread-s0/latest.pt", map_location="cpu")
+torch.save({"ema": st.get("ema") or st["model"]}, "/tmp/edge-latest.pt")
+EOF
+
+scp /tmp/edge-latest.pt <user>@<device>:~/SOKKANAEM/work_dirs/edge/latest.pt
+scp $CK/config.toml    <user>@<device>:~/SOKKANAEM/work_dirs/edge/config.toml
 ```
 
-기기에서:
+`config.toml`이 체크포인트와 **같은 디렉터리에 있어야** 모델 설정(특히 `size = 256`)이 복원된다.
+없으면 128px 기본값으로 조용히 돌아가 수치가 무의미해진다.
 
-```bash
-tar xzf edge-bundle.tar.gz && cd ~
-```
-
-`edge_bench.py`는 torch만 요구하고 Python 3.6 문법으로 작성돼 있다(JetPack 4.6 대응). 패키지
-설치 없이 저장소 루트에서 바로 실행된다.
+`edge_bench.py`는 torch만 요구하고 Python 3.6 문법으로 작성돼 있다(JetPack 4.6 대응). 저장소 루트에서
+바로 실행되며 `pip install -e .`는 하지 말 것 — `pyproject.toml`이 torch 2.x를 요구해 기기의 torch를
+덮어쓰려 한다. 필요하면 `pip install -e . --no-deps`.
 
 ## 3. Raspberry Pi 4
 
@@ -117,19 +120,107 @@ Maxwell sm_53 / JetPack 4.6.x(CUDA 10.2, Python 3.6). **Triton이 sm_53을 지�
 스캔 커널은 동작하지 않는다.** 스크립트가 `fused scan available: False`를 출력하며, 그 로그가
 "참조 chunked 스캔으로 측정했다"는 기록이 된다.
 
-```bash
-cat /etc/nv_tegra_release      # JetPack 버전 확인
-python3 -V                     # 3.6.x
-```
+갓 셋업한 기기에 저장소만 clone된 상태를 가정한 순서다.
 
-torch는 NVIDIA가 배포하는 JetPack 4.6용 휠을 쓴다(PyPI 휠은 CUDA를 못 잡는다).
+**(1) 환경 확인**
 
 ```bash
-sudo apt-get install -y libopenblas-base libopenmpi-dev
-# JetPack 4.6 / Python 3.6 대상 torch 1.10 휠 (NVIDIA 포럼 배포 링크)
-pip3 install --user <torch-1.10.0-cp36-cp36m-linux_aarch64.whl>
-python3 -c "import torch; print(torch.__version__, torch.cuda.is_available())"
+cat /etc/nv_tegra_release          # R32.7.x 이면 JetPack 4.6 계열
+python3 -V                         # 3.6.9 예상
+free -h                            # 4GB 공유. swap 없으면 (2) 에서 만든다
+nvcc --version || ls /usr/local/cuda/bin/nvcc
 ```
+
+**(2) 시스템 패키지와 스왑**
+
+torch 1.10 임포트에 OpenBLAS가 필요하고, 4GB 기기에서 pip 빌드/로드가 OOM으로 죽는 것을 막으려면
+스왑이 있어야 한다.
+
+```bash
+sudo apt-get update
+sudo apt-get install -y python3-pip libopenblas-base libopenmpi-dev libomp-dev
+sudo systemctl disable --now nvzramconfig 2>/dev/null || true
+sudo fallocate -l 4G /swapfile && sudo chmod 600 /swapfile
+sudo mkswap /swapfile && sudo swapon /swapfile
+free -h                            # Swap 4G 확인
+```
+
+**(3) torch 1.10 (JetPack 4.6 / cp36)**
+
+PyPI 휠은 CUDA를 못 잡으므로 NVIDIA 배포 휠을 쓴다.
+
+```bash
+python3 -m pip install --upgrade "pip<21.4" "setuptools<60" wheel
+python3 -m pip install --user "numpy<1.20" "toml"     # py3.6 상한, tomllib 대체
+wget -O torch-1.10.0-cp36-cp36m-linux_aarch64.whl \
+    https://nvidia.box.com/shared/static/fjtbno0vpo676a25cgvuqc1wty0fkkg6.whl
+python3 -m pip install --user torch-1.10.0-cp36-cp36m-linux_aarch64.whl
+```
+
+확인:
+
+```bash
+python3 -c "import torch; print(torch.__version__, torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+# 1.10.0  True  NVIDIA Tegra X1
+```
+
+torchvision은 **필요 없다**. `edge_bench.py`는 광학 흐름을 쓰지 않는다.
+
+**(4) 체크포인트 배치**
+
+개발 PC에서 §2의 slim 체크포인트를 만들어 옮긴다.
+
+```bash
+# Nano에서
+mkdir -p ~/SOKKANAEM/work_dirs/edge
+# PC에서
+scp /tmp/edge-latest.pt <user>@<nano>:~/SOKKANAEM/work_dirs/edge/latest.pt
+scp work_dirs/v11-longclip-spread-s0/config.toml <user>@<nano>:~/SOKKANAEM/work_dirs/edge/
+```
+
+**(5) 임포트 스모크 테스트** — 여기서 실패하면 측정 전에 잡는다.
+
+```bash
+cd ~/SOKKANAEM
+python3 -c "
+from sokkanaem import from_checkpoint, checkpoint_config
+print('size =', checkpoint_config('work_dirs/edge/latest.pt').get('size'))
+m = from_checkpoint('work_dirs/edge/latest.pt', 'cuda').eval()
+print('params =', sum(p.numel() for p in m.parameters()))
+"
+# size = 256 / params = 4185872
+```
+
+**(6) 측정 조건 고정**
+
+```bash
+sudo systemctl isolate multi-user.target     # GUI 종료 (메모리·클럭 안정)
+sudo nvpmodel -m 0                           # 0 = 10W MAXN, 1 = 5W
+sudo jetson_clocks
+sudo nvpmodel -q                             # 기록용
+```
+
+**(7) 짧게 한 점만 확인한 뒤 전체 스윕**
+
+```bash
+# 동작 확인 (2~3분)
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt \
+    --device cuda --iters 5 --warmup 2 --active 0.05 1.0 --power tegra
+
+# 본 측정 (활성률 6점 × 캐시 on/off)
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt \
+    --device cuda --iters 20 --warmup 5 --power tegra \
+    2>&1 | tee ~/nano-b01-10w.log
+
+# 5W 끝점
+sudo nvpmodel -m 1 && sudo jetson_clocks
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt \
+    --device cuda --iters 20 --warmup 5 --power tegra \
+    2>&1 | tee ~/nano-b01-5w.log
+```
+
+`fused scan available: False`가 헤더에 찍히는 것이 정상이며, 그것이 참조 경로 측정임을 증명하는
+기록이다.
 
 측정 전 전력 모드와 클럭을 고정한다. 고정하지 않으면 DVFS 때문에 지연·전력 둘 다 재현되지 않는다.
 

@@ -626,14 +626,26 @@ def checkpoint_config(ckpt):
     Callers need the top-level training args, not only [model]: `size`
     especially — inference at a resolution the model was never trained at is
     silent, and the 128 default used to override a 256px run."""
-    import tomllib
     from pathlib import Path
+
+    # tomllib is 3.11+; a JetPack 4.6 image is Python 3.6, so fall back to the
+    # backports rather than making the edge benchmark unrunnable
+    try:
+        import tomllib as _toml
+        _binary = True
+    except ImportError:
+        try:
+            import tomli as _toml
+            _binary = True
+        except ImportError:
+            import toml as _toml          # pure-python, works on 3.6
+            _binary = False
 
     cfg = Path(ckpt).parent / "config.toml"
     if not cfg.exists():
         return {}
-    with open(cfg, "rb") as f:
-        return tomllib.load(f)
+    with open(cfg, "rb" if _binary else "r") as f:
+        return _toml.load(f)
 
 
 def from_checkpoint(ckpt, device="cpu", **overrides):
