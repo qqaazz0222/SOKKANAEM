@@ -195,7 +195,8 @@ softmax 온도 실험은 재현 경로가 없었다. `decoder.bin_temp` + `eval.
 |---|---|
 | 3 seed CI 부착, 한계 12번 교체 | seed 1·2 학습 중(2026-08-21 오전 완료 예상) |
 | 데스크톱 GPU 에너지/프레임 측정 | GPU가 학습에 점유됨. `bench.py --power` 준비됨 |
-| Jetson급 엣지 측정 | 하드웨어 없음 |
+| Raspberry Pi 4 · Jetson Nano B01 측정 | 실행 문서 [EDGE_BENCH.md](../../EDGE_BENCH.md), 스크립트 `scripts/edge_bench.py` 준비됨. 데스크톱 CPU 4스레드 기준 수치 확보(활성 5%에서 15.1배, 30%에서 2.9배, dense는 활성률에 평평) |
+| Orin급 엣지 측정 | 하드웨어 없음. Nano B01은 sm_53이라 융합 커널 측정 불가 |
 | Data Availability·Funding·Acknowledgments, 저자·소속, 학회 양식 | 사용자 정보 필요 |
 | NVDS baseline | 범위 판단 필요 |
 | `[CHECKPOINT-DEPENDENT]` 태그 제거 | 제출본 분기에서 일괄 |
