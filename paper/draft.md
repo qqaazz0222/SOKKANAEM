@@ -216,9 +216,9 @@ Latency is measured with batch size 1 on an RTX 4090. Analytical multiply–accu
 
 ### 5.1 Activity–accuracy trade-off `[CHECKPOINT-DEPENDENT]`
 
-All tables in this section come from a single checkpoint (4.19M parameters, 60k steps) so that no comparison mixes model versions. Each row sweeps the detector threshold; 100 clips per source spread over the whole holdout, dataset-balanced mean, eight-frame clips.
+The sweep below comes from the base checkpoint (4.19M parameters, 60k steps) so that no row mixes model versions; the reported checkpoint's sweep follows it. Each row sweeps the detector threshold; 100 clips per source spread over the whole holdout, dataset-balanced mean, eight-frame clips.
 
-**Table 1. Activity sweep on both domains. The constant-depth control is the per-clip optimal constant prediction.**
+**Table 1. Activity sweep on both domains, base checkpoint. The constant-depth control is the per-clip optimal constant prediction. Section 5.1 re-measures the real-domain sweep on the reported checkpoint; the trade-off shape is unchanged.**
 
 | \(\tau_{\mathrm{on}}\) | Real active (%) | Real AbsRel | Real \(\delta_1\) | Real t-delta | Synth. active (%) | Synth. AbsRel | Synth. \(\delta_1\) |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -350,7 +350,7 @@ Two things follow for our own claims. The extra degree of freedom is worth 11% t
 
 \(\Delta\)-gating freezes hidden state at static positions but still reads it through \(C_i h_i\). A token-drop arm freezes the same state under the same masks and additionally bypasses the temporal block's output. Comparing the two isolates the value of the readout itself.
 
-**Table 4. Gating-location ablation at matched masks (40.9% activity), reported checkpoint, synthetic holdout, 300 clips. Both arms run with the temporal cache disabled so that the \(\Delta\)-gating arm actually performs the dense readout under test.**
+**Table 4. Gating-location ablation at matched masks (40.9% activity), base checkpoint, synthetic holdout, 300 clips. The long-clip checkpoint reproduces the pattern and is quoted in the text. Both arms run with the temporal cache disabled so that the \(\Delta\)-gating arm actually performs the dense readout under test.**
 
 | Method | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
 |---|---:|---:|---:|---:|---:|
@@ -365,7 +365,7 @@ The honest reading is that the earlier experiment measured the fragility of an u
 
 We evaluate the confirmed checkpoint on five KITTI raw drives (Geiger et al., 2012) (885 frames) that appear in no training split. Only the synthetic clone of this domain was trained on, so the experiment isolates the synthetic-to-real axis rather than an arbitrary domain shift. Ground truth is projected LiDAR: capped near 80 m and 30% valid.
 
-**Table 5. Zero-shot real driving against the in-domain synthetic holdout.**
+**Table 5. Zero-shot real driving against the in-domain synthetic holdout, base checkpoint.**
 
 | Setting | Active (%) | AbsRel | RMSE (m) | \(\delta_1\) | t-delta | TCE | Median scale |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -382,7 +382,7 @@ Accuracy does not collapse; it is nominally better on real footage. That orderin
 
 **Figure 5. Pixel gating against global-motion-compensated feature gating** on real driving footage, swept as curves. The two strategies score change on different scales, so only the curves are comparable and points at equal thresholds are not. At matched activity the compensated variant is better on both axes, and it reaches 14% activity while still beating pixel gating at 51%.
 
-**Table 6. Same 30 clips, both gating strategies swept.**
+**Table 6. Same 30 clips, both gating strategies swept, base checkpoint.**
 
 | Gating | Active (%) | AbsRel | \(\delta_1\) | t-delta | TCE |
 |---|---:|---:|---:|---:|---:|
@@ -568,7 +568,7 @@ Two things follow. **On the long-clip checkpoint, lengthening the period is free
 
 Two measurements localise the accuracy gap of Section 5.3, and both say the same thing about where work should go next. We state them here rather than only among the diagnostics, because they are the paper's main negative result about the model itself.
 
-**The output structure is not the limit.** Pushing ground truth through the model's own patch-token bottleneck gives the best score this output could reach: 0.0858 AbsRel on TUM and 0.0367 on Bonn, against our 0.1321 and 0.1283. The balanced ceiling, 0.0613, is better than every model in the comparison group, so neither patch size nor input resolution is what stands between this architecture and the leaders (Section 6.4). The gap is concentrated on the dynamic-object source, where we sit 3.5 times above the ceiling against 1.5 on the static one.
+**The output structure is not the limit.** Pushing ground truth through the model's own patch-token bottleneck gives the best score this output could reach: 0.0858 AbsRel on TUM and 0.0367 on Bonn, against the reported model's 0.1285 and 0.1241. The balanced ceiling, 0.0613, is better than every model in the comparison group, so neither patch size nor input resolution is what stands between this architecture and the leaders (Section 6.4). The gap is concentrated on the dynamic-object source, where we sit 3.5 times above the ceiling against 1.5 on the static one.
 
 **The predicted depth field is compressed on exactly that source.** Its dynamic range is 0.75 of ground truth on Bonn against 0.93 on TUM, so a ratio metric like \(\delta_1\) is punished for a flattened field rather than a misplaced one. This is not a decoder artefact — sharpening the binned head's softmax at inference moves the ratio not at all — but a property of the objective, which contains no term penalising compression. Adding one recovers the range monotonically, to 0.90 at the strongest weight tested, at a small cost in raw frame difference and no cost in compute (Section 6.5).
 
@@ -592,7 +592,7 @@ Three choices in the final recipe were made from measurements rather than intuit
 
 **Dense fallback, and a claim it no longer supports.** A frame whose activity exceeds a threshold is routed through the dense path. We previously reported that this improves real accuracy (AbsRel 0.1685 to 0.1633) at the cost of raising mean activity, and adopted 40% as the default. Sweeping the threshold over the full holdout says otherwise:
 
-**Table 9. Dense-fallback threshold, real indoor holdout, eight-frame clips, reported checkpoint.**
+**Table 9. Dense-fallback threshold, real indoor holdout, eight-frame clips, base checkpoint.**
 
 | Threshold | Active (%) | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
 |---|---:|---:|---:|---:|---:|---:|
@@ -610,7 +610,7 @@ The consequence is an efficiency claim we can now make more cheaply: **disabling
 
 ### 6.4 Where the remaining accuracy error lives
 
-Pushing ground truth through the model's own output bottleneck — average-pool to the token grid over valid pixels, bilinear back up, median-align — measures what a perfect patch-token head could score. On the real indoor holdout at the current patch size of 16, that ceiling is 0.0858 AbsRel and 0.9150 \(\delta_1\) on TUM and 0.0367 and 0.9786 on Bonn, against our 0.1321 and 0.1283. The dataset-balanced ceiling, 0.0613, is better than every model in the comparison group.
+Pushing ground truth through the model's own output bottleneck — average-pool to the token grid over valid pixels, bilinear back up, median-align — measures what a perfect patch-token head could score. On the real indoor holdout at the current patch size of 16, that ceiling is 0.0858 AbsRel and 0.9150 \(\delta_1\) on TUM and 0.0367 and 0.9786 on Bonn, against the reported model's 0.1285 and 0.1241. The dataset-balanced ceiling, 0.0613, is better than every model in the comparison group.
 
 **Patch size and input resolution are therefore not the bottleneck.** Halving the patch to 8 lifts the ceiling to 0.0474 and 0.0204, but there is no reason to buy headroom that the model is not using. Capacity, optimisation, and dynamic-scene handling are what stand between the model and its current ceiling.
 
@@ -649,7 +649,7 @@ The obvious suspect was the decoder. The binned head predicts depth as a softmax
 
 What the diagnosis does point at is the objective. Nothing in it penalises compression: the scale-invariant log loss punishes the mismatch indirectly, but under uncertainty shrinking the prediction still lowers it, which is the ordinary bias-variance trade. So we added a term that penalises it directly: the squared log ratio of the standard deviation of predicted log depth to that of ground truth, taken per sample over valid pixels rather than per batch, since compression is a property of a scene and a wide scene would otherwise cancel a narrow one. Comparing in log space makes the term scale-free and symmetric, so over-spreading is penalised as much as under-spreading and the loss cannot be bought with noise. We fine-tuned the reported checkpoint for 8k steps at three weights, with everything else held fixed. All three arms run at the same 22.0% activity, so nothing here is bought with computation.
 
-**Table 11. A spread term against the compression it targets. Same 8k fine-tune from the reported checkpoint, same activity, real indoor holdout.**
+**Table 11. A spread term against the compression it targets. Same 8k fine-tune from the base checkpoint, same activity, real indoor holdout. Stacking the same stage on the long-clip checkpoint is what produces the reported model.**
 
 | Spread weight | AbsRel | \(\delta_1\) | t-delta | OPW | TCE | TUM range/GT | Bonn range/GT |
 |---:|---:|---:|---:|---:|---:|---:|---:|
