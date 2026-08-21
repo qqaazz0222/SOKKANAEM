@@ -11,12 +11,30 @@
 
 기기별로 닫히는 주장이 다르다.
 
-| 주장 | Pi 4 (CPU) | Nano B01 (Maxwell) | Orin 이상 |
-|---|---|---|---|
-| 연산 제약 환경에서 게이팅이 지배 연산을 제거한다 | **닫힘** (런치 오버헤드 교란 없음) | 닫힘 (참조 경로) | 닫힘 |
-| 논문이 보고하는 융합 커널 구현에서도 그렇다 | 해당 없음 | **불가** (Triton은 sm_53 미지원) | 닫힘 |
-| 엣지 배치에서 실시간 | 안 닫힘 | 안 닫힘 | 닫힘 가능 |
-| 에너지/프레임 감소 | 외부 전력계 필요 | 온보드 INA3221 | 온보드 |
+| 주장 | Pi 4 (CPU) | Nano B01 (Maxwell sm_53) | TX2 (Pascal sm_62) | Orin 이상 |
+|---|---|---|---|---|
+| 연산 제약 환경에서 게이팅이 지배 연산을 제거한다 | **닫힘** (런치 오버헤드 교란 없음) | 닫힘 (참조 경로) | 닫힘 (참조 경로) | 닫힘 |
+| 논문이 보고하는 융합 커널 구현에서도 그렇다 | 해당 없음 | **불가** (Triton sm_70+) | **불가** (Triton sm_70+) | 닫힘 |
+| 엣지 배치에서 실시간 | 안 닫힘 | 안 닫힘 | 측정값에 따라 | 닫힘 가능 |
+| 에너지/프레임 감소 | 외부 전력계 필요 | 온보드 INA3221 (보드 전체) | 온보드 INA3221 (**GPU 레일 분리**) | 온보드 |
+| fp16 측정 의미 | 해당 없음 | 없음 (Maxwell은 FP32와 동률) | **있음** (Pascal 2:1) | 있음 |
+
+### 4점 교차점 특성화
+
+기기를 연산 풍부도 순으로 늘어놓는 것이 이 라운드의 목표다. 현재 논문은 4090 한 점만 있어
+"이 GPU에서는 환산되지 않는다"까지만 말한다.
+
+| 기기 | 성격 | 예상 |
+|---|---|---|
+| Pi 4 (CPU 4스레드) | 극단적 연산 제약 | 희소 압승 (데스크톱 CPU에서 이미 활성 5%에서 15.1배) |
+| Jetson Nano B01 | 연산 + 대역 제약 (25.6 GB/s) | 희소 우세 |
+| Jetson TX2 | 연산 제약, 대역 여유 (59.7 GB/s) | 희소 우세, 배수 감소 예상 |
+| RTX 4090 (융합 커널) | 오버헤드 제약 | **dense 압승** (측정 완료) |
+
+네 점이 있으면 "희소성의 시간 이득이 어느 등급에서 뒤집히는가"를 곡선으로 제시할 수 있다.
+
+**요점은 기기 연식이 아니라 영역이다.** 세 기기 모두 2019~2020년대 초 하드웨어이므로, 본문에서
+"구형 기기 측정"으로 읽히지 않게 연산 제약 영역을 측정한다는 의도를 먼저 밝힌다.
 
 ## 1. 기준 수치 (데스크톱 CPU, 4스레드)
 
@@ -143,15 +161,48 @@ GPU 레일만 분리하려면 `--power cmd`로 원하는 sysfs 경로를 읽는 
 - fp16(`--half`)은 Maxwell에 텐서코어가 없어 FP32와 처리량이 같다. 의미 없으므로 기본 fp32로 둔다.
 - 5W 모드(`nvpmodel -m 1`)에서도 한 번 재두면 전력-지연 곡선의 양 끝이 생긴다.
 
+## 4b. Jetson TX2
+
+Pascal sm_62 / JetPack 4.6.x. Nano B01과 소프트웨어 제약은 같다(Python 3.6, torch 1.10 휠,
+**Triton 불가 → 참조 chunked 스캔**). 달라지는 것은 측정 품질이다 — 대역폭 59.7 GB/s로 Nano의
+2.3배라 참조 스캔의 메모리 병목 왜곡이 작고, Pascal은 FP16을 2:1로 처리하므로 `--half`가 의미를
+가진다.
+
+```bash
+sudo nvpmodel -m 0 && sudo jetson_clocks     # MAXN, 클럭 락
+python3 scripts/edge_bench.py --ckpt v11-longclip-spread-s0/latest.pt \
+    --device cuda --iters 20 --warmup 5 --power tegra
+
+# fp16 (Nano B01과 달리 여기서는 유의미하다)
+python3 scripts/edge_bench.py --ckpt v11-longclip-spread-s0/latest.pt \
+    --device cuda --half --iters 20 --warmup 5 --power tegra
+
+# 저전력 끝점
+sudo nvpmodel -m 1 && sudo jetson_clocks     # 7.5W Max-Q
+python3 scripts/edge_bench.py --ckpt v11-longclip-spread-s0/latest.pt \
+    --device cuda --iters 20 --warmup 5 --power tegra
+```
+
+GPU 레일만 분리해 재려면 보드 전체(`VDD_IN`) 대신 `VDD_SYS_GPU` 채널을 읽는다. 경로는 커널 버전에
+따라 다르므로 먼저 `ls /sys/bus/i2c/drivers/ina3221x/*/iio:device0/`로 채널 이름을 확인한다.
+
+```bash
+--power cmd --power-cmd "cat /sys/bus/i2c/drivers/ina3221x/0-0040/iio:device0/in_power1_input"
+```
+
+Denver2 코어는 기본 비활성인 경우가 있다. `sudo nvpmodel -q`로 활성 코어 구성을 기록해 둔다 —
+CPU 측 런치 오버헤드가 결과에 들어가므로 어떤 코어 구성이었는지가 재현에 필요하다.
+
 ## 5. 기록할 것
 
 두 기기 모두 다음을 그대로 남긴다. `paper/draft.md` §5.7의 표에 행으로 들어간다.
 
 1. 스크립트 헤더 전체 (device, dtype, threads/gpu, torch 버전, `fused scan available`)
 2. 표 전체 (cache on/off × 활성률 6점)
-3. Jetson은 `nvpmodel -q` 출력과 모드
-4. Pi는 측정 종료 후 `vcgencmd get_throttled`
-5. 전력계 종류와 어느 레일을 읽었는지
+3. Jetson은 `nvpmodel -q` 출력과 모드, TX2는 활성 코어 구성까지
+4. Pi는 측정 종료 후 `vcgencmd get_throttled` (0x0이 아니면 그 회차 폐기)
+5. 전력계 종류와 어느 레일을 읽었는지 (보드 전체 / GPU 레일)
+6. TX2는 fp32와 fp16 두 벌
 
 판정 기준은 **dense와 sparse의 순서가 역전되는지**, 그리고 활성률에 대한 희소 경로의 기울기다.
 4090에서는 dense가 평평하게 이겼다. 연산 제약 기기에서 희소가 활성률에 비례해 내려가면 §5.7의
