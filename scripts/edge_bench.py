@@ -50,6 +50,31 @@ from sokkanaem import from_checkpoint            # noqa: E402
 TEGRA_W = [re.compile(r"(?:VDD_IN|POM_5V_IN)\s+(\d+)(?:mW)?/"),
            re.compile(r"(?:VDD_SYS_GPU|POM_5V_GPU)\s+(\d+)(?:mW)?/")]
 
+# Reading the INA3221 sysfs node directly beats parsing tegrastats: no
+# subprocess, no sudo, and no hang. `tegrastats --interval 100 | head -1`
+# deadlocks -- head exits after one line and tegrastats does not die on
+# SIGPIPE, so the parent waits forever and every sample is silently lost.
+# Channel 0 is the board input rail (POM_5V_IN / VDD_IN) on every generation
+# that exposes it; JetPack 4.x reports mW under ina3221x, newer L4T reports
+# uW under hwmon.
+RAILS = [("/sys/bus/i2c/drivers/ina3221x/*/iio:device0/in_power0_input", 1e-3),
+         ("/sys/bus/i2c/drivers/ina3221/*/hwmon/hwmon*/power1_input", 1e-6),
+         ("/sys/class/hwmon/hwmon*/power1_input", 1e-6)]
+
+
+def find_rail():
+    """(path, scale-to-watts) of the first readable power rail, or (None, 0)."""
+    import glob
+    for pattern, scale in RAILS:
+        for path in sorted(glob.glob(pattern)):
+            try:
+                with open(path) as f:
+                    float(f.read().strip())
+                return path, scale
+            except Exception:
+                continue
+    return None, 0.0
+
 
 class FixedRatio(object):
     """Force a known active fraction, so the x axis is identical everywhere.
@@ -76,29 +101,42 @@ class FixedRatio(object):
 
 
 class Power(object):
-    """Mean watts over the measured window, from a command printing watts."""
+    """Mean watts over the measured window, from a sysfs rail or a command.
 
-    def __init__(self, cmd, period=0.05):
-        self.cmd, self.period, self.samples = cmd, period, []
+    source is either ("rail", path, scale) or ("cmd", shell_command, None).
+    Failures are counted, not swallowed: a silent zero once cost a whole
+    measurement round.
+    """
+
+    def __init__(self, source, period=0.05):
+        self.source, self.period = source, period
+        self.samples, self.errors = [], 0
         self._stop = None
 
+    def _read(self):
+        kind, spec, scale = self.source
+        if kind == "rail":
+            with open(spec) as f:
+                return float(f.read().strip()) * scale
+        out = subprocess.check_output(spec, shell=True,
+                                      stderr=subprocess.STDOUT)
+        out = out.decode("utf-8", "replace")
+        m = next((r.search(out) for r in TEGRA_W if r.search(out)), None)
+        if m:
+            return float(m.group(1)) / 1000.0
+        return float(out.strip().splitlines()[0])
+
     def start(self):
-        if not self.cmd:
+        if self.source is None:
             return self
         self._stop = threading.Event()
 
         def poll():
             while not self._stop.is_set():
                 try:
-                    out = subprocess.check_output(self.cmd, shell=True,
-                                                  stderr=subprocess.STDOUT)
-                    out = out.decode("utf-8", "replace")
-                    m = next((r.search(out) for r in TEGRA_W
-                              if r.search(out)), None)
-                    self.samples.append(float(m.group(1)) / 1000.0 if m
-                                        else float(out.strip().splitlines()[0]))
+                    self.samples.append(self._read())
                 except Exception:
-                    pass
+                    self.errors += 1
                 self._stop.wait(self.period)
 
         self._t = threading.Thread(target=poll)
@@ -113,7 +151,7 @@ class Power(object):
         return sum(self.samples) / len(self.samples) if self.samples else 0.0
 
 
-def timed(model, size, ratio, dtype, device, iters, warmup, power_cmd):
+def timed(model, size, ratio, dtype, device, iters, warmup, power_src):
     model.detector = FixedRatio(ratio, model.p)
     model.dense_above = 0.0            # the sweep forces the ratio, so the
     frame = torch.rand(1, 3, size, size, device=device, dtype=dtype)
@@ -123,7 +161,7 @@ def timed(model, size, ratio, dtype, device, iters, warmup, power_cmd):
             if i == warmup:
                 if device == "cuda":
                     torch.cuda.synchronize()
-                pw = Power(power_cmd).start()
+                pw = Power(power_src).start()
                 t0 = time.time()
             _, state, info = model.step(frame, state)
             if i >= warmup:
@@ -134,7 +172,8 @@ def timed(model, size, ratio, dtype, device, iters, warmup, power_cmd):
     watts = pw.stop() if pw is not None else 0.0
     got = sum(active) / len(active)
     return {"ms": dt * 1000, "fps": 1.0 / dt, "active": got, "watts": watts,
-            "mj": watts * dt * 1000}
+            "mj": watts * dt * 1000,
+            "power_errors": pw.errors if pw is not None else 0}
 
 
 def main():
@@ -151,18 +190,43 @@ def main():
     ap.add_argument("--active", type=float, nargs="+",
                     default=[0.05, 0.15, 0.3, 0.5, 0.7, 1.0])
     ap.add_argument("--power", default="none",
-                    choices=["none", "tegra", "nvidia-smi", "cmd"])
+                    choices=["none", "tegra", "nvidia-smi", "cmd", "probe"],
+                    help="tegra reads the INA3221 sysfs rail directly; probe "
+                         "only lists what rails exist and exits")
     ap.add_argument("--power-cmd", default=None,
                     help="shell command printing watts (or tegrastats output)")
     args = ap.parse_args()
 
-    cmd = {"none": None,
-           "tegra": "tegrastats --interval 100 | head -1",
-           "nvidia-smi": "nvidia-smi --query-gpu=power.draw "
-                         "--format=csv,noheader,nounits",
-           "cmd": args.power_cmd}[args.power]
-    if args.power == "cmd" and not cmd:
-        ap.error("--power cmd needs --power-cmd")
+    if args.power == "none":
+        power_src = None
+    elif args.power == "tegra":
+        path, scale = find_rail()
+        if path is None:
+            ap.error("no readable INA3221 rail found under /sys. Run with "
+                     "--power probe to see what exists, or use --power cmd "
+                     "with an external meter.")
+        power_src = ("rail", path, scale)
+    elif args.power == "nvidia-smi":
+        power_src = ("cmd", "nvidia-smi --query-gpu=power.draw "
+                            "--format=csv,noheader,nounits", None)
+    elif args.power == "probe":
+        import glob
+        print("rail candidates:")
+        for pattern, scale in RAILS:
+            for hit in sorted(glob.glob(pattern)):
+                try:
+                    with open(hit) as f:
+                        raw = f.read().strip()
+                    print("  %s = %s (x%g -> %.3f W)"
+                          % (hit, raw, scale, float(raw) * scale))
+                except Exception as e:
+                    print("  %s unreadable: %s" % (hit, e))
+        print("(nothing listed means this board exposes no power rail)")
+        return
+    else:
+        if not args.power_cmd:
+            ap.error("--power cmd needs --power-cmd")
+        power_src = ("cmd", args.power_cmd, None)
     if args.threads:
         torch.set_num_threads(args.threads)
 
@@ -178,6 +242,8 @@ def main():
     except Exception as e:
         print("fused scan unavailable: %s" % e)
 
+    if power_src is not None:
+        print("power source: %s" % (power_src[1],))
     print("\ncache  active%   ms/frame      FPS    watts   mJ/frame")
     print("-" * 56)
     for cache in (True, False):
@@ -185,10 +251,13 @@ def main():
                                 temporal_cache=cache).eval().to(dtype)
         for ratio in args.active:
             r = timed(model, args.size, ratio, dtype, args.device,
-                      args.iters, args.warmup, cmd)
-            print("%-5s  %6.1f  %9.2f  %7.1f  %7.2f  %9.2f"
+                      args.iters, args.warmup, power_src)
+            note = ""
+            if power_src is not None and not r["watts"]:
+                note = "   <- power read failed %dx" % r["power_errors"]
+            print("%-5s  %6.1f  %9.2f  %7.1f  %7.2f  %9.2f%s"
                   % ("on" if cache else "off", r["active"] * 100, r["ms"],
-                     r["fps"], r["watts"], r["mj"]))
+                     r["fps"], r["watts"], r["mj"], note))
 
 
 if __name__ == "__main__":
