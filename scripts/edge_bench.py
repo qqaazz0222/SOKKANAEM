@@ -211,17 +211,33 @@ def main():
                             "--format=csv,noheader,nounits", None)
     elif args.power == "probe":
         import glob
+        found, readable = [], []
         print("rail candidates:")
         for pattern, scale in RAILS:
             for hit in sorted(glob.glob(pattern)):
+                found.append(hit)
                 try:
                     with open(hit) as f:
                         raw = f.read().strip()
+                    readable.append(hit)
                     print("  %s = %s (x%g -> %.3f W)"
                           % (hit, raw, scale, float(raw) * scale))
                 except Exception as e:
-                    print("  %s unreadable: %s" % (hit, e))
-        print("(nothing listed means this board exposes no power rail)")
+                    print("  %s NOT readable: %s" % (hit, e))
+        if readable:
+            print("\nusable. run with --power tegra")
+        elif found:
+            # the rail exists and the process cannot read it: a permission
+            # problem, not a hardware one. sysfs modes reset at boot, so
+            # opening the node beats running the whole benchmark as root --
+            # a --user torch install is invisible to root's interpreter.
+            print("\nrails exist but are not readable by this user. Open them:")
+            for hit in found:
+                print("  sudo chmod a+r %s" % hit)
+            print("  (resets on reboot; add a udev rule to persist)")
+        else:
+            print("\nno power rail on this board -- use --power cmd with an "
+                  "external meter")
         return
     else:
         if not args.power_cmd:

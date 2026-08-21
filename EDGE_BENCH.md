@@ -252,9 +252,22 @@ python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt --power probe
 #   /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power0_input = 2104 (x0.001 -> 2.104 W)
 ```
 
-아무것도 안 나오면 그 보드가 레일을 노출하지 않는 것이므로 외부 전력계(`--power cmd`)를 쓴다.
-`unreadable`이 뜨면 권한 문제이므로 `sudo`로 확인한다. 읽기 실패는 표의 해당 행에
-`<- power read failed Nx`로 표시되며, 더 이상 조용히 0으로 넘어가지 않는다.
+probe는 세 가지를 구분해서 알려준다.
+
+- **usable** — `--power tegra`로 그대로 측정
+- **rails exist but are not readable** — 권한 문제다. Nano B01의 기본 상태가 이렇다. 노드를 열어준다:
+
+  ```bash
+  sudo chmod a+r /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power*_input
+  ```
+
+  벤치 전체를 `sudo`로 돌리는 것보다 이게 낫다 — torch를 `pip install --user`로 깔면 root
+  인터프리터가 그것을 못 본다. 굳이 sudo로 가려면
+  `sudo -E env PYTHONPATH=$HOME/.local/lib/python3.6/site-packages python3 ...`가 필요하다.
+  sysfs 권한은 재부팅 시 초기화되므로 유지하려면 udev 규칙을 쓴다.
+- **no power rail** — 보드가 레일을 안 내주는 경우다. 외부 전력계를 `--power cmd`로 붙인다.
+
+읽기 실패는 표의 해당 행에 `<- power read failed Nx`로 표시되며, 더 이상 조용히 0으로 넘어가지 않는다.
 
 주의:
 
