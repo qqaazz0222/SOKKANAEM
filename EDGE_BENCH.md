@@ -238,13 +238,23 @@ python3 scripts/edge_bench.py \
     --device cuda --iters 20 --warmup 5 --power tegra
 ```
 
-`--power tegra`는 `tegrastats` 출력의 `VDD_IN` 또는 `POM_5V_IN` mW를 파싱한다. 보드 전체 전력이라
-GPU 레일만 분리하려면 `--power cmd`로 원하는 sysfs 경로를 읽는 명령을 넘긴다.
+`--power tegra`는 INA3221 sysfs 노드를 **직접** 읽는다
+(`/sys/bus/i2c/drivers/ina3221x/*/iio:device0/in_power0_input`, 채널 0 = 보드 입력 레일).
+`tegrastats`를 파싱하지 않는 이유는 파이프라인이 걸리기 때문이다 — `tegrastats --interval 100 | head -1`은
+`head`가 한 줄 받고 종료해도 tegrastats가 SIGPIPE로 죽지 않아 부모가 영원히 기다리고, 표본이 조용히
+0이 된다. 실제로 첫 라운드에서 전력이 전부 0.00 W로 나온 원인이 이것이었다.
+
+측정 전에 어떤 레일이 보이는지 먼저 확인한다.
 
 ```bash
-# 예: INA3221 채널을 직접 읽기 (경로는 커널 버전에 따라 다르다)
---power cmd --power-cmd "cat /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power0_input"
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt --power probe
+# rail candidates:
+#   /sys/bus/i2c/drivers/ina3221x/6-0040/iio:device0/in_power0_input = 2104 (x0.001 -> 2.104 W)
 ```
+
+아무것도 안 나오면 그 보드가 레일을 노출하지 않는 것이므로 외부 전력계(`--power cmd`)를 쓴다.
+`unreadable`이 뜨면 권한 문제이므로 `sudo`로 확인한다. 읽기 실패는 표의 해당 행에
+`<- power read failed Nx`로 표시되며, 더 이상 조용히 0으로 넘어가지 않는다.
 
 주의:
 
