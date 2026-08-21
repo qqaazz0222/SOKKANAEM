@@ -77,6 +77,11 @@ def rows(doc):
         s = line.strip()
         if not (s.startswith("|") and s.count("|") >= 3):
             continue
+        if "±" in s:
+            # a mean +- std row is an aggregate over seeds by construction, so
+            # "which single run does this come from" has no answer. Generate
+            # those with make_tables.py --seeds rather than checking them here.
+            continue
         toks = NUM.findall(s.replace("**", ""))
         if len(toks) >= 3:
             yield ln, s, toks
