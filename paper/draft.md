@@ -577,6 +577,21 @@ Two consequences follow. First, the fix already exists in the architecture and i
 
 The trade is monotone in all three quantities and there is no free point on it: refreshing six times more often buys 12% relative AbsRel and 2.7 points of \(\delta_1\) for double the compute and 71% worse raw frame difference. A keyframe is by construction a discontinuity in the output sequence, so the metric this architecture leads on is the one that pays for accuracy. The long-clip checkpoint is better than the reported one at every period on accuracy and \(\delta_1\), which is what makes the period a free variable again: it can be lengthened to recover stability without giving back the accuracy the fine-tune bought.
 
+**Spreading the refresh over time instead of concentrating it makes everything worse.** The keyframe is a discontinuity in the output sequence, so the obvious fix is to refresh a fraction of the patches on every frame instead of all of them every \(K\) frames — the same amortised compute, no spike. We implemented it as a fixed rotation over patch indices and measured it on the reported checkpoint:
+
+**Table 7e. Rolling refresh against keyframe refresh, relative change. Positive is worse for every column except \(\delta_1\), where the sign is flipped so that positive is also worse.**
+
+| Clip | Period | Activity | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 32 | 30 | +7.9% | +7.8% | +3.1 pt | +22.4% | +12.6% | +8.4% |
+| 32 | 60 | +13.3% | −0.1% | +0.1 pt | +26.6% | +12.2% | +7.6% |
+| 256 | 30 | +5.9% | +17.4% | +9.9 pt | +41.0% | +23.9% | +16.5% |
+| 256 | 60 | +3.2% | +14.9% | +7.9 pt | +30.0% | +21.5% | +15.2% |
+
+**Every column is worse, and the long-clip protocol is where it is worst.** The interpretation we came in with — that the refresh discontinuity is what costs us on the motion-referenced metrics — is wrong, or at least secondary. What the comparison actually says is that **spatial coherence of the refresh matters more than its temporal concentration**: an index rotation leaves fresh and stale patches interleaved in a lattice across the frame, the spatial SSM and the output cache lose local context, and that costs more than the spike it removes. Mean activity also rises by 3 to 13 points, because the rotation's stripe does not coincide with what the detector was already going to update.
+
+We report this because the idea is cheap enough that a reader would otherwise try it, and because it constrains how the mechanism should be thought about: the periodic full refresh is not merely a safety valve against drift, it is the operation that restores a globally consistent spatial context.
+
 Second, the cause is a train-deploy mismatch rather than a flaw in \(\Delta\)-gating itself. Training uses four-frame clips, so the model has never had to hold state through more than three consecutive gated frames. Randomised mask ratios make it robust to *how much* is skipped, not to *how long*.
 
 **Testing that explanation.** We fine-tuned the reported checkpoint for 25k steps at clip length 24 — long enough that no mid-clip keyframe fires, so the model must hold state through 23 consecutive gated frames. The diagnostic quantity is not the absolute error but the gap between protocols, which is the Penalty column of Table 7a: the eight-to-32-frame penalty falls from 14.2% to 9.4%, the eight-to-128 from 50.6% to 32.0%, and the eight-to-256 from 86.9% to 52.8%. **The mismatch is a real contributor at every horizon, and its removal is worth 18% of absolute error at 256 frames** (0.2434 to 0.1990).

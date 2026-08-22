@@ -357,6 +357,7 @@ class DPTDecoder(nn.Module):
 class SOKKANAEM(nn.Module):
     def __init__(self, dim=192, depth=4, d_state=16, patch_size=16,
                  tau_on=0.02, tau_off=0.01, keyframe_every=30,
+                 refresh="keyframe",
                  gmc=False, gmc_lowres=128, gmc_corners=50,
                  spatial_cache=False, gate_mode="delta", decoder="conv",
                  scan_directions=2, local_conv=False, bins=0,
@@ -420,7 +421,8 @@ class SOKKANAEM(nn.Module):
             self.decoder = (ShuffleDecoder if decoder == "shuffle" else Decoder)(
                 dim, patch_size)
         self.detector = ChangeDetector(patch_size, tau_on, tau_off,
-                                       keyframe_every=keyframe_every)
+                                       keyframe_every=keyframe_every,
+                                       refresh=refresh)
         self._n_spatial = sum(isinstance(b, SpatialBlock) for b in self.blocks)
         self._n_temporal = sum(isinstance(b, TemporalBlock) for b in self.blocks)
 

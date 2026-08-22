@@ -133,6 +133,11 @@ def main():
                     help="route frames above this activity through the dense "
                          "path (Section 6.3). It is an accuracy/compute knob "
                          "with a large effect, so it is swept, not assumed.")
+    ap.add_argument("--refresh", default=None,
+                    choices=["keyframe", "rolling"],
+                    help="rolling refreshes 1/K of the patches every frame "
+                         "instead of all of them every K frames: same "
+                         "amortised cost, no refresh discontinuity")
     ap.add_argument("--keyframe-every", type=int, default=None,
                     help="override the checkpoint's keyframe refresh period. "
                          "REPORT 4.30 shows accuracy sawtooths between "
@@ -163,6 +168,8 @@ def main():
     kw["gate_mode"] = args.gate_mode
     if args.keyframe_every is not None:
         kw["keyframe_every"] = args.keyframe_every
+    if args.refresh is not None:
+        kw["refresh"] = args.refresh
     # trained [model] kwargs come from config.toml next to the ckpt
     model = from_checkpoint(args.ckpt, dev, **kw).eval()
     if args.dense_above is not None:
@@ -189,6 +196,7 @@ def main():
              f"clip_len={args.clip_len} stride={args.clip_stride or args.clip_len} align={args.align} "
              f"gate_mode={args.gate_mode} "
              f"keyframe_every={args.keyframe_every or model.detector.keyframe_every} "
+             f"refresh={model.detector.refresh} "
              f"dense_above={model.dense_above} bin_temp={getattr(model.decoder, 'bin_temp', 1.0)} gmc={args.gmc} tag={args.scores_tag or args.gate_mode} "
              f"spatial_cache={model.spatial_cache} "
              f"temporal_cache={model.temporal_cache}"]
