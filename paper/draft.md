@@ -306,7 +306,18 @@ Four things follow, and only one of them flatters us.
 
 **We are last or nearly last on accuracy, under both protocols.** At eight frames, 0.1263 AbsRel against 0.0650 for a 24.8M-parameter baseline: a factor of 1.9, at six times fewer parameters. At 256 frames we are fifth of nine on AbsRel, ahead of DPT-Large and DA V2 Base. The gap narrows with clip length but does not close, and nothing in this paper claims otherwise.
 
-**Motion-referenced consistency is not ours.** DA3 is better on OPW and TCE under both protocols, and at 256 frames Video Depth Anything and ZoeDepth are too. Raw frame difference and motion-compensated consistency come apart here, and only the first favours us.
+**Motion-referenced consistency is not ours in absolute terms — but it is better than our accuracy predicts.** DA3 is better on OPW and TCE under both protocols, and at 256 frames Video Depth Anything and ZoeDepth are too. Every model that beats us on those two is more accurate than we are, which is not a coincidence: TCE compares the prediction's warped residual against the ground truth's, so it is bounded below by depth error, and a model cannot score well on it while placing the surface wrongly. Regressing the group's OPW and TCE on AbsRel and reading off our operating point makes the size of that confound explicit:
+
+| Protocol | Metric | Group trend at our AbsRel | Ours | Difference |
+|---|---|---:|---:|---:|
+| 8 frames | OPW | 0.0409 | **0.0193** | **-53%** |
+| 8 frames | TCE | 0.0466 | **0.0270** | **-42%** |
+| 256 frames | OPW | 0.0393 | **0.0264** | **-33%** |
+| 256 frames | TCE | 0.0448 | **0.0338** | **-25%** |
+
+**At matched accuracy we are 25% to 53% better on the motion-referenced measures, and one pair in the table makes the point without any regression.** At 256 frames DPT-Large scores 0.1891 AbsRel against our 0.1907 — a 0.8% difference, inside neither model's favour — and on the same clips we are 2.4x better on raw frame difference, 1.33x on OPW and 1.20x on TCE, at 82x fewer parameters. Where a model of our accuracy sits, this mechanism gives better temporal behaviour on every measure; what it does not do is buy the accuracy that would make those numbers competitive outright.
+
+This also explains why leading all three at once is not a coherent target for this contribution. t-delta rewards a prediction that does not move, TCE penalises one that moves differently from the scene, and a prediction that moves *exactly* as the true geometry does is an accurate prediction, not a stable one. The mechanism studied here buys stability; the remaining error is accuracy, and Section 5.9 localises it.
 
 **The two protocols rank the group differently, which is the point of reporting both.** Every model degrades from eight frames to 256 — the per-clip alignment window grows with the clip, so a single scale (or scale and shift) must serve a longer span — but they degrade by very different factors: DPT-Large by 116% and DA V2 Base by 145%, our reported checkpoint by 87%, our long-clip checkpoint by 53%, DA3 by only 3%. A model that carries state and one that processes the whole clip jointly both hold up better than per-frame models over a long stream, for opposite reasons: ours accumulates evidence causally and DA3 is allowed to see the future. Read only the eight-frame table and none of that is visible.
 
