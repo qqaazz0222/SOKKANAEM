@@ -522,6 +522,10 @@ So there are two effects and they point in opposite directions. The protocol pen
 
 **Where inside a clip the error lives.** Scoring by frame index, with each frame aligned independently so the curve cannot be an artefact of one clip-level fit:
 
+![Streaming drift](figures/drift.svg)
+
+**Figure 7. Accuracy decays between keyframes.** Panel (a) scores by frame index, each frame aligned independently; panel (b) sweeps the refresh period. Preserved state does not accumulate accuracy, and the recovery at frame 31 is the keyframe firing at frame 30.
+
 **Table 7b. Accuracy and consistency by frame index, 32-frame clips, full holdout (22 TUM and 98 Bonn clips), keyframe refresh every 30 frames. OPW and TCE are scored on the pair (t-1, t).**
 
 | Frame | TUM AbsRel | TUM \(\delta_1\) | Bonn AbsRel | Bonn \(\delta_1\) | Bonn OPW | Bonn TCE |
@@ -569,13 +573,13 @@ Two consequences follow. First, the fix already exists in the architecture and i
 
 | Period | Active (%) | Reported AbsRel | Reported \(\delta_1\) | Reported t-delta | Long-clip AbsRel | Long-clip \(\delta_1\) | Long-clip t-delta |
 |---:|---:|---:|---:|---:|---:|---:|---:|
-| 5 | 39.4 | 0.1337 | 0.8499 | 0.0976 | **0.1281** | **0.8663** | 0.0951 |
-| 10 | 29.4 | 0.1370 | 0.8464 | 0.0793 | 0.1313 | 0.8602 | 0.0817 |
-| 15 | 26.0 | 0.1400 | 0.8393 | 0.0753 | 0.1340 | 0.8521 | 0.0788 |
-| 30 (default) | 22.7 | 0.1487 | 0.8264 | 0.0682 | 0.1424 | 0.8384 | 0.0729 |
-| 60 | **19.6** | 0.1510 | 0.8225 | **0.0570** | 0.1447 | 0.8345 | **0.0608** |
+| 5 | 39.4 | **0.1239** | **0.8695** | 0.1035 | 0.1281 | 0.8663 | 0.0951 |
+| 10 | 29.4 | 0.1274 | 0.8635 | 0.0868 | 0.1313 | 0.8602 | 0.0817 |
+| 15 | 26.0 | 0.1304 | 0.8559 | 0.0831 | 0.1340 | 0.8521 | 0.0788 |
+| 30 (default) | 22.7 | 0.1388 | 0.8426 | 0.0751 | 0.1424 | 0.8384 | 0.0729 |
+| 60 | **19.6** | 0.1412 | 0.8391 | 0.0617 | 0.1447 | 0.8345 | **0.0608** |
 
-The trade is monotone in all three quantities and there is no free point on it: refreshing six times more often buys 12% relative AbsRel and 2.7 points of \(\delta_1\) for double the compute and 71% worse raw frame difference. A keyframe is by construction a discontinuity in the output sequence, so the metric this architecture leads on is the one that pays for accuracy. The long-clip checkpoint is better than the reported one at every period on accuracy and \(\delta_1\), which is what makes the period a free variable again: it can be lengthened to recover stability without giving back the accuracy the fine-tune bought.
+The trade is monotone in all three quantities and there is no free point on it: refreshing six times more often buys 12% relative AbsRel and 3.0 points of \(\delta_1\) for double the compute and 68% worse raw frame difference. A keyframe is by construction a discontinuity in the output sequence, so the metric this architecture leads on is the one that pays for accuracy. The reported checkpoint is better than the long-clip one at every period on accuracy and \(\delta_1\) and worse on raw frame difference at every period, which is the spread term's price paid again in a second place: the fine-tune widens the predicted field, and a wider field moves more between frames.
 
 **Spreading the refresh over time instead of concentrating it makes everything worse.** The keyframe is a discontinuity in the output sequence, so the obvious fix is to refresh a fraction of the patches on every frame instead of all of them every \(K\) frames — the same amortised compute, no spike. We implemented it as a fixed rotation over patch indices and measured it on the reported checkpoint:
 
@@ -624,6 +628,11 @@ Two measurements localise the accuracy gap of Section 5.3, and both say the same
 **The predicted depth field is compressed on exactly that source.** Its dynamic range is 0.75 of ground truth on Bonn against 0.93 on TUM, so a ratio metric like \(\delta_1\) is punished for a flattened field rather than a misplaced one. This is not a decoder artefact — sharpening the binned head's softmax at inference moves the ratio not at all — but a property of the objective, which contains no term penalising compression. Adding one recovers the range monotonically, to 0.90 at the strongest weight tested, at a small cost in raw frame difference and no cost in compute (Section 6.5).
 
 Together they say the next accuracy improvement is neither a bigger output nor a finer patch: it is dynamic-scene handling and an objective that does not reward shrinking the prediction.
+
+![Qualitative comparison](figures/qualitative.png)
+
+**Figure 9. Qualitative comparison on three held-out scene types**, last frame of an eight-frame clip. Columns: RGB, the detector's activity mask (selected patches keep their brightness, skipped ones are dimmed, the boundary outlined), our prediction, Depth Anything V2 Small, DPT-Large, and ground truth. Each model is aligned by its own native rule and every depth tile in a row shares one colour range taken from that row's ground truth. The detector fires on the walking person and almost nowhere else while the static scene lights almost nothing; the driving row lights 80% of the field, which is the transfer failure of Section 5.6. Our prediction is visibly smoother than the ground truth has structure — the visual signature of the two defects named just above, the ceiling gap and the range compression. The percentage beside each row is the detector's own selection; above the 40% fallback threshold the shipped model overrules it and computes densely, so the compute paid is 17.9%, 49.9% and 100% against the detector's 9.8%, 34.4% and 79.6%. KITTI's ground truth is projected LiDAR, valid on 18.1% of pixels, which is why that tile is mostly black.
+
 
 ## 6. Ablations and Diagnostic Findings
 

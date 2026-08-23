@@ -210,16 +210,17 @@ def legend(x, y, items, size=11, dx=0, dy=16):
 
 
 # ------------------------------------------------------------ measured -----
-# Table 1 (Section 5.1): activity sweep, dataset-balanced mean, 100 clips/source
-SWEEP_REAL = [(100.0, 0.1290), (94.9, 0.1288), (85.0, 0.1287), (63.6, 0.1282),
-               (22.0, 0.1302), (4.6, 0.1373)]
-SWEEP_SYN = [(100.0, 0.4299), (62.8, 0.4305), (58.1, 0.4315), (51.2, 0.4313),
-              (40.9, 0.4317), (32.1, 0.4332)]
+# Table 1 (Section 5.1): activity sweep on the reported checkpoint,
+# dataset-balanced mean, 100 clips/source
+SWEEP_REAL = [(100.0, 0.1242), (94.9, 0.1243), (85.0, 0.1243), (63.6, 0.1240),
+               (22.0, 0.1263), (4.6, 0.1325)]
+SWEEP_SYN = [(100.0, 0.4304), (62.8, 0.4354), (58.1, 0.4352), (51.2, 0.4354),
+              (40.9, 0.4355), (32.1, 0.4368)]
 CONST_REAL, CONST_SYN = 0.2761, 0.6303
 # index of the default operating point within each sweep (tau_on = 0.05)
 DEFAULT_I = 4
 
-# Table 3 (Section 5.3): params (M), AbsRel, t-delta
+# Table 3b/3c (Section 5.3): params (M), AbsRel, t-delta
 CMP_REAL = [
     ("DA V1-S", 24.8, 0.0650, 0.0892, GRAY),
     ("DPT-L", 343.0, 0.0875, 0.1162, OCHRE),
@@ -231,13 +232,13 @@ CMP_REAL = [
     ("DA V2-S", 24.8, 0.2068, 1.0015, GRAY),
 ]
 CMP_SYN = [
-    ("ZoeDepth", 345.0, 0.3604, 0.9522, PURPLE),
-    ("DA3-B", 120.0, 0.3618, 1.0128, VERM),
-    ("DA V2-B", 97.5, 0.3701, 5.9644, TEAL),
-    ("Ours", 4.19, 0.3791, 0.2242, NAVY),
-    ("DA V2-S", 24.8, 0.3818, 5.0124, GRAY),
-    ("DA V1-S", 24.8, 0.4210, 4.5525, GRAY),
-    ("DPT-L", 343.0, 0.5029, 8.5888, OCHRE),
+    ("DA3-B", 120.0, 0.3003, 0.8901, VERM),
+    ("ZoeDepth", 345.0, 0.3973, 0.7789, PURPLE),
+    ("Ours", 4.19, 0.4299, 0.3761, NAVY),
+    ("DA V2-S", 24.8, 1.0121, 8.4370, GRAY),
+    ("DA V2-B", 97.5, 1.0228, 9.5212, TEAL),
+    ("DA V1-S", 24.8, 1.2032, 7.7437, GRAY),
+    ("DPT-L", 343.0, 1.2035, 10.3811, OCHRE),
 ]
 # label offsets, chosen once so no annotation sits on a marker or another label
 CMP_OFF = {"DA V1-S": (0, -14), "ZoeDepth": (0, -14), "DPT-L": (0, 18),
@@ -249,10 +250,12 @@ DRIFT_TUM = [(0, 0.1353), (4, 0.1206), (8, 0.1249), (12, 0.1510), (16, 0.1521),
              (20, 0.1415), (24, 0.1585), (28, 0.1697), (31, 0.1323)]
 DRIFT_BONN = [(0, 0.1167), (4, 0.1239), (8, 0.1316), (12, 0.1383), (16, 0.1485),
               (20, 0.1538), (24, 0.1582), (28, 0.1668), (31, 0.1340)]
-# Table 8: keyframe period -> (activity, AbsRel, t-delta)
-KEYFRAME = [(5, 39.4, 0.1337, 0.0976), (10, 29.4, 0.1370, 0.0793),
-            (15, 26.0, 0.1400, 0.0753), (30, 22.7, 0.1487, 0.0682),
-            (60, 19.6, 0.1510, 0.0570)]
+# Table 7c: keyframe period -> (activity, AbsRel, t-delta), reported checkpoint.
+# These were the base checkpoint's numbers until the header was checked against
+# the eval logs; the table said "Reported" and held v9-60k.
+KEYFRAME = [(5, 39.4, 0.1239, 0.1035), (10, 29.4, 0.1274, 0.0868),
+            (15, 26.0, 0.1304, 0.0831), (30, 22.7, 0.1388, 0.0751),
+            (60, 19.6, 0.1412, 0.0617)]
 
 # Table 6 (Section 5.5): gating strategy -> (activity, AbsRel, delta1)
 GATE_PIX = [(100.0, 0.3083, 0.5142), (92.7, 0.3093, 0.5089),
@@ -276,10 +279,10 @@ def fig_tradeoff():
     W, H = 900, 340
     o = []
     for i, (data, const, lim, ticks, name) in enumerate([
-            (SWEEP_REAL, CONST_REAL, (0.126, 0.140),
-             [0.128, 0.132, 0.136, 0.140], "(a) Real indoor holdout"),
-            (SWEEP_SYN, CONST_SYN, (0.4280, 0.4360),
-             [0.429, 0.431, 0.433, 0.435], "(b) Synthetic holdout")]):
+            (SWEEP_REAL, CONST_REAL, (0.1225, 0.1345),
+             [0.124, 0.127, 0.130, 0.133], "(a) Real indoor holdout"),
+            (SWEEP_SYN, CONST_SYN, (0.4295, 0.4375),
+             [0.430, 0.432, 0.434, 0.436], "(b) Synthetic holdout")]):
         ax = Ax(84 + i * 460, 52, 340, 230, (0, 100), lim)
         o.append(ax.frame([0, 25, 50, 75, 100], ticks, "Active patches (%)",
                           "AbsRel", "{:g}", "{:.3f}", name))
@@ -310,8 +313,8 @@ def fig_comparison():
             (CMP_REAL, (0.055, 0.245), [0.08, 0.12, 0.16, 0.20, 0.24],
              (0.05, 1.6), [0.05, 0.1, 0.2, 0.5, 1.0],
              "(a) Real indoor holdout"),
-            (CMP_SYN, (0.335, 0.525), [0.36, 0.40, 0.44, 0.48, 0.52],
-             (0.15, 13.0), [0.2, 0.5, 1.0, 2.0, 5.0, 10.0],
+            (CMP_SYN, (0.26, 1.29), [0.4, 0.6, 0.8, 1.0, 1.2],
+             (0.3, 13.0), [0.5, 1.0, 2.0, 5.0, 10.0],
              "(b) Synthetic holdout")]):
         ax = Ax(84 + i * 460, 50, 340, 240, xlim, ylim, ylog=True)
         o.append(ax.frame(xticks, yt, "AbsRel  (lower is better)",
@@ -345,19 +348,19 @@ def fig_drift():
     o.append(legend(96, 66, [("Bonn (dynamic objects)", VERM, "line"),
                              ("TUM (static camera)", NAVY, "line")]))
 
-    ax2 = Ax(538, 46, 300, 250, (0, 65), (0.130, 0.155))
-    o.append(ax2.frame([5, 15, 30, 45, 60], [0.13, 0.14, 0.15],
+    ax2 = Ax(538, 46, 300, 250, (0, 65), (0.120, 0.146))
+    o.append(ax2.frame([5, 15, 30, 45, 60], [0.12, 0.13, 0.14],
                        "Keyframe refresh period (frames)", "AbsRel",
                        "{:g}", "{:.2f}",
                        "(b) Refreshing more often trades against stability"))
     o.append(ax2.line([(k, a) for k, _, a, _ in KEYFRAME], NAVY))
     # second axis for t-delta, drawn on the right so the two never cross labels
-    tlim = (0.05, 0.10)
+    tlim = (0.055, 0.110)
     ty = lambda v: ax2.y0 + ax2.h - (v - tlim[0]) / (tlim[1] - tlim[0]) * ax2.h
     o.append(f'<line x1="{ax2.x0+ax2.w}" y1="{ax2.y0}" '
              f'x2="{ax2.x0+ax2.w}" y2="{ax2.y0+ax2.h}" stroke="{TEAL}" '
              f'stroke-width="1"/>')
-    for t in (0.06, 0.07, 0.08, 0.09, 0.10):
+    for t in (0.06, 0.07, 0.08, 0.09, 0.10, 0.11):
         o.append(f'<line x1="{ax2.x0+ax2.w}" y1="{ty(t):.1f}" '
                  f'x2="{ax2.x0+ax2.w+4}" y2="{ty(t):.1f}" stroke="{TEAL}" '
                  f'stroke-width="1"/>')

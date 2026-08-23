@@ -1,0 +1,31 @@
+ckpt=work_dirs/v11-longclip-spread-s0/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=120 size=256 max=100/source clip_len=32 stride=32 align=median gate_mode=delta keyframe_every=5 refresh=keyframe dense_above=0.4 bin_temp=1.0 gmc=False tag=evenkf5 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             36.1  0.1296   0.7809  0.8548  0.1600   0.0295  0.0399  0.1488  1.060  0.0213  0.1271 (0.108)  22
+0.05     bonn            42.6  0.1182   0.3925  0.8843  0.0469   0.0204  0.0247  0.2764  1.118  0.0523  0.1230 (0.073)  98
+0.05     MEAN(src)       39.4  0.1239   0.5867  0.8695  0.1035   0.0250  0.0323  0.2126  1.089  0.0368  0.1250 (0.091)  120
+0.05     POOLED(px)      41.4  0.1200   0.4738  0.8797  0.0676   0.0219  0.0271  0.2530  1.107  0.0466  0.1238 (0.079)  120
+
+appended -> work_dirs/v11-longclip-spread-s0/eval.txt
+per-clip -> work_dirs/v11-longclip-spread-s0/scores_evenkf5.json
+ckpt=work_dirs/v11-longclip-spread-s0/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=120 size=256 max=100/source clip_len=32 stride=32 align=median gate_mode=delta keyframe_every=10 refresh=keyframe dense_above=0.4 bin_temp=1.0 gmc=False tag=evenkf10 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             25.8  0.1318   0.8039  0.8507  0.1311   0.0268  0.0373  0.1502  1.062  0.0220  0.1295 (0.105)  22
+0.05     bonn            33.0  0.1229   0.4096  0.8762  0.0425   0.0195  0.0241  0.2786  1.117  0.0552  0.1274 (0.073)  98
+0.05     MEAN(src)       29.4  0.1274   0.6067  0.8635  0.0868   0.0231  0.0307  0.2144  1.090  0.0386  0.1284 (0.089)  120
+0.05     POOLED(px)      31.7  0.1243   0.4916  0.8723  0.0588   0.0207  0.0261  0.2551  1.107  0.0491  0.1278 (0.079)  120
+
+appended -> work_dirs/v11-longclip-spread-s0/eval.txt
+per-clip -> work_dirs/v11-longclip-spread-s0/scores_evenkf10.json
+ckpt=work_dirs/v11-longclip-spread-s0/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=120 size=256 max=100/source clip_len=32 stride=32 align=median gate_mode=delta keyframe_every=15 refresh=keyframe dense_above=0.4 bin_temp=1.0 gmc=False tag=evenkf15 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             22.7  0.1336   0.8083  0.8440  0.1258   0.0270  0.0376  0.1512  1.062  0.0220  0.1313 (0.104)  22
+0.05     bonn            29.2  0.1272   0.4216  0.8677  0.0404   0.0190  0.0237  0.2806  1.119  0.0552  0.1318 (0.074)  98
+0.05     MEAN(src)       26.0  0.1304   0.6149  0.8559  0.0831   0.0230  0.0306  0.2159  1.091  0.0386  0.1315 (0.089)  120
+0.05     POOLED(px)      28.0  0.1281   0.5012  0.8641  0.0561   0.0202  0.0258  0.2569  1.109  0.0491  0.1317 (0.080)  120
+
+appended -> work_dirs/v11-longclip-spread-s0/eval.txt
+per-clip -> work_dirs/v11-longclip-spread-s0/scores_evenkf15.json
+KFSWEEP DONE
