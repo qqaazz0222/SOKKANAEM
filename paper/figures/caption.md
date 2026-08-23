@@ -4,8 +4,11 @@ Captions are kept out of the SVGs so the artwork can be submitted as-is and the
 journal typesets the caption. The text below is the authoritative wording; the
 inline captions in `../draft.md` mirror it.
 
-Two of these serve sections tagged `[UNDER TEST]` in the draft — Figures 3 and
-7 — so their numbers, and therefore their captions, are expected to change.
+No section of the draft carries `[UNDER TEST]` any more, so these numbers are
+the reported ones. They are still copies: `make_figures.py` holds its own copy
+of each table, and a table re-measured without updating that copy leaves the
+figure quietly stale — which has happened, and is why the figures are checked
+against the draft whenever a table moves.
 
 ---
 
@@ -64,11 +67,50 @@ the stability lead the model is built for.
 
 ---
 
+**Figure 8.** The sawtooth, as pictures. One 32-frame clip of the dynamic-object
+holdout; rows are frames 24, 28, 29, 30 and 31; columns are RGB, prediction,
+ground truth and relative error, where black is invalid ground truth. Frame 30
+is the keyframe: activity goes to 100% and clip AbsRel falls from 0.3740 to
+0.2030 in one frame, visible as the error column darkening over the moving
+person. The prediction column is also where range compression (Section 6.5)
+shows without a histogram — it is uniformly flatter than the ground-truth
+column that shares its colour scale.
+
+---
+
+**Figure 9.** Qualitative comparison on three held-out scene types, last frame
+of an eight-frame clip. Columns: RGB, the detector's activity mask, our
+prediction, Depth Anything V2 Small (24.8M), DPT-Large (343M), and ground
+truth. In the mask column, patches the detector selected keep their brightness
+and skipped patches are dimmed, with the boundary outlined; the percentage
+beside each row label is the detector's mean selection over the clip. Every
+model is aligned by its own native rule — per-clip median scaling for ours,
+least-squares scale and shift in disparity space for the two relative
+baselines (Section 5.4) — and all depth tiles in a row share one colour range
+taken from that row's ground truth, so a wrong prediction cannot be rescued by
+its own scaling.
+
+Three things are visible here that no table in this paper shows. The detector
+fires on the walking person and the trolley and almost nowhere else in the
+indoor dynamic scene, while the static scene lights almost nothing: this is the
+mechanism working as designed. Our prediction is markedly smoother than the
+ground truth has structure, which is the visual signature of the range
+compression of Section 6.5 and the ceiling gap of Section 6.4, and it is the
+honest counterpart to our position in Table 3 — we are not competitive on
+detail with either baseline shown. And the driving row lights 80% of the field,
+the transfer failure quantified in Section 5.6: on real ego-motion the pixel
+threshold selects nearly everything.
+
+Two caveats on reading the figure. The activity mask is the detector's own
+selection; above the 40% dense-fallback threshold the shipped model overrules
+it and computes the frame densely, so the compute actually paid is higher than
+the number shown (17.9%, 49.9% and 100% for the three rows against the
+detector's 9.8%, 34.4% and 79.6%). And KITTI's ground truth is projected LiDAR,
+valid on 18.1% of the pixels in that row, which is why the bottom-right tile is
+mostly black.
+
+---
+
 ## Pending
 
-**Figure 8 (qualitative).** Not yet generated: the panels must come from the
-final checkpoint. Planned as rows of held-out scenes — static indoor, indoor
-with a moving person, driving — against columns of RGB, activity mask overlay,
-our prediction, a comparable-size baseline, a large baseline, and ground truth.
-The mask column does work no other figure does: it shows the detector firing on
-the moving object and nowhere else.
+None. Figure 8 was the last one outstanding.
