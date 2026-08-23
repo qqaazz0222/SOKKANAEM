@@ -1,0 +1,3 @@
+  source  range/gt   std/gt   AbsRel
+     tum      0.94     0.91   0.1266
+    bonn      0.80     0.80   0.1257

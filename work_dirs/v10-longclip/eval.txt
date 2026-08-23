@@ -71,3 +71,271 @@ tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE  
 0.05     MEAN(src)       32.2  0.1600   0.6195  0.8307  0.0851   0.0254  0.0333  0.1765  1.027  0.0200  0.1596 (0.134)  189
 0.05     POOLED(px)      32.9  0.1649   0.6119  0.8277  0.0836   0.0256  0.0330  0.1777  1.025  0.0206  0.1613 (0.135)  189
 
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=488 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=60 gmc=False tag=v10-8f-kf60 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.7  0.1344   0.8003  0.8469  0.1110   0.0242  0.0349  0.1562  1.059  0.0103  0.1312 (0.116)  89
+0.05     bonn            44.7  0.1857   0.4387  0.8145  0.0593   0.0266  0.0316  0.1968  0.996  0.0297  0.1881 (0.151)  100
+0.05     MEAN(src)       32.2  0.1600   0.6195  0.8307  0.0851   0.0254  0.0333  0.1765  1.027  0.0200  0.1596 (0.134)  189
+0.05     POOLED(px)      32.9  0.1649   0.6119  0.8277  0.0836   0.0256  0.0330  0.1777  1.025  0.0206  0.1613 (0.135)  189
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['vkitti2:/home/hyunsu/dataset_ssd/vkitti2', 'tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2', 'pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey'] clips=8929 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=60 gmc=False tag=v10-8f-synth spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     vkitti2         25.8  0.3632  32.5797  0.3917  0.4287   0.0165  0.0245  0.3374  0.785  0.0327  0.3615 (0.201)  100
+0.05     tartanair2      92.1  0.5202   4.2583  0.4875  0.1591   0.0417  0.1069  0.5265  1.578  0.1570  0.5262 (0.348)  100
+0.05     pointodyssey    30.8  0.2519   4.4191  0.5934  0.1863   0.0267  0.0478  0.3436  1.338  0.0364  0.2471 (0.067)  100
+0.05     MEAN(src)       49.6  0.3784  13.7524  0.4909  0.2580   0.0283  0.0597  0.4025  1.234  0.0754  0.3783 (0.205)  300
+0.05     POOLED(px)      49.6  0.3868  18.7074  0.4901  0.2580   0.0288  0.0613  0.4025  1.234  0.0754  0.3783 (0.205)  300
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=488 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 gmc=False tag=L8K30 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.7  0.1344   0.8003  0.8469  0.1110   0.0242  0.0349  0.1562  1.059  0.0103  0.1312 (0.116)  89
+0.05     bonn            24.4  0.1260   0.4017  0.8898  0.0294   0.0149  0.0197  0.2801  1.125  0.0219  0.1264 (0.112)  100
+0.05     MEAN(src)       22.0  0.1302   0.6010  0.8684  0.0702   0.0196  0.0273  0.2182  1.092  0.0161  0.1288 (0.114)  189
+0.05     POOLED(px)      22.2  0.1295   0.6020  0.8718  0.0678   0.0188  0.0261  0.2218  1.094  0.0164  0.1286 (0.114)  189
+const    tum             19.7  0.2543   1.6094  0.6209  0.0000   0.0000  0.0147  0.2530  1.000  0.0091  0.2530 (0.081)  89
+const    bonn            24.4  0.2979   0.9033  0.5453  0.0000   0.0000  0.0091  0.2911  1.000  0.0233  0.2911 (0.203)  100
+const    MEAN(src)       22.0  0.2761   1.2563  0.5831  0.0000   0.0000  0.0119  0.2720  1.000  0.0162  0.2720 (0.142)  189
+const    POOLED(px)      22.2  0.2796   1.2491  0.5770  0.0000   0.0000  0.0115  0.2732  1.000  0.0166  0.2732 (0.146)  189
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=488 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=60 gmc=False tag=L8K60 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.7  0.1344   0.8003  0.8469  0.1110   0.0242  0.0349  0.1562  1.059  0.0103  0.1312 (0.116)  89
+0.05     bonn            24.4  0.1260   0.4017  0.8898  0.0294   0.0149  0.0197  0.2801  1.125  0.0219  0.1264 (0.112)  100
+0.05     MEAN(src)       22.0  0.1302   0.6010  0.8684  0.0702   0.0196  0.0273  0.2182  1.092  0.0161  0.1288 (0.114)  189
+0.05     POOLED(px)      22.2  0.1295   0.6020  0.8718  0.0678   0.0188  0.0261  0.2218  1.094  0.0164  0.1286 (0.114)  189
+const    tum             19.7  0.2543   1.6094  0.6209  0.0000   0.0000  0.0147  0.2530  1.000  0.0091  0.2530 (0.081)  89
+const    bonn            24.4  0.2979   0.9033  0.5453  0.0000   0.0000  0.0091  0.2911  1.000  0.0233  0.2911 (0.203)  100
+const    MEAN(src)       22.0  0.2761   1.2563  0.5831  0.0000   0.0000  0.0119  0.2720  1.000  0.0162  0.2720 (0.142)  189
+const    POOLED(px)      22.2  0.2796   1.2491  0.5770  0.0000   0.0000  0.0115  0.2732  1.000  0.0166  0.2732 (0.146)  189
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=120 size=256 max=100/source clip_len=32 stride=32 align=median gate_mode=delta keyframe_every=30 gmc=False tag=L32K30 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.6  0.1437   0.8536  0.8302  0.1094   0.0262  0.0369  0.1630  1.058  0.0238  0.1412 (0.112)  22
+0.05     bonn            25.8  0.1412   0.4550  0.8465  0.0364   0.0176  0.0225  0.3042  1.127  0.0584  0.1450 (0.089)  98
+0.05     MEAN(src)       22.7  0.1424   0.6543  0.8384  0.0729   0.0219  0.0297  0.2336  1.092  0.0411  0.1431 (0.101)  120
+0.05     POOLED(px)      24.7  0.1416   0.5363  0.8440  0.0498   0.0190  0.0248  0.2783  1.115  0.0521  0.1443 (0.094)  120
+const    tum             19.6  0.2595   1.6134  0.6109  0.0000   0.0000  0.0147  0.2580  1.000  0.0333  0.2580 (0.091)  22
+const    bonn            25.8  0.3091   0.9195  0.5367  0.0000   0.0000  0.0094  0.3048  1.000  0.0749  0.3048 (0.182)  98
+const    MEAN(src)       22.7  0.2843   1.2665  0.5738  0.0000   0.0000  0.0120  0.2814  1.000  0.0541  0.2814 (0.137)  120
+const    POOLED(px)      24.7  0.3014   1.0569  0.5481  0.0000   0.0000  0.0102  0.2962  1.000  0.0673  0.2962 (0.165)  120
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=120 size=256 max=100/source clip_len=32 stride=32 align=median gate_mode=delta keyframe_every=60 gmc=False tag=L32K60 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             16.5  0.1452   0.8637  0.8270  0.0910   0.0236  0.0344  0.1641  1.058  0.0244  0.1428 (0.111)  22
+0.05     bonn            22.8  0.1442   0.4632  0.8420  0.0306   0.0154  0.0204  0.3069  1.128  0.0586  0.1479 (0.091)  98
+0.05     MEAN(src)       19.6  0.1447   0.6635  0.8345  0.0608   0.0195  0.0274  0.2355  1.093  0.0415  0.1453 (0.101)  120
+0.05     POOLED(px)      21.6  0.1444   0.5447  0.8397  0.0416   0.0167  0.0226  0.2807  1.115  0.0524  0.1469 (0.095)  120
+const    tum             16.5  0.2595   1.6134  0.6109  0.0000   0.0000  0.0147  0.2580  1.000  0.0333  0.2580 (0.091)  22
+const    bonn            22.8  0.3091   0.9195  0.5367  0.0000   0.0000  0.0094  0.3048  1.000  0.0749  0.3048 (0.182)  98
+const    MEAN(src)       19.6  0.2843   1.2665  0.5738  0.0000   0.0000  0.0120  0.2814  1.000  0.0541  0.2814 (0.137)  120
+const    POOLED(px)      21.6  0.3014   1.0569  0.5481  0.0000   0.0000  0.0102  0.2962  1.000  0.0673  0.2962 (0.165)  120
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=28 size=256 max=100/source clip_len=128 stride=128 align=median gate_mode=delta keyframe_every=30 gmc=False tag=L128K30 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.9  0.1636   0.9130  0.8301  0.1060   0.0291  0.0397  0.1738  1.075  0.0442  0.1642 (0.110)  5
+0.05     bonn            26.3  0.1802   0.5013  0.7956  0.0377   0.0186  0.0234  0.2882  1.179  0.1245  0.1910 (0.113)  23
+0.05     MEAN(src)       23.1  0.1719   0.7071  0.8129  0.0718   0.0239  0.0316  0.2310  1.127  0.0844  0.1776 (0.111)  28
+0.05     POOLED(px)      25.1  0.1777   0.5830  0.8009  0.0499   0.0202  0.0259  0.2678  1.161  0.1102  0.1862 (0.112)  28
+const    tum             19.9  0.2867   1.6165  0.6361  0.0000   0.0000  0.0147  0.2873  1.000  0.0713  0.2873 (0.114)  5
+const    bonn            26.3  0.3722   0.9798  0.4941  0.0000   0.0000  0.0095  0.3800  1.000  0.1568  0.3800 (0.188)  23
+const    MEAN(src)       23.1  0.3294   1.2982  0.5651  0.0000   0.0000  0.0121  0.3336  1.000  0.1140  0.3336 (0.151)  28
+const    POOLED(px)      25.1  0.3592   1.1008  0.5158  0.0000   0.0000  0.0103  0.3634  1.000  0.1415  0.3634 (0.175)  28
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=28 size=256 max=100/source clip_len=128 stride=128 align=median gate_mode=delta keyframe_every=60 gmc=False tag=L128K60 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             18.2  0.1718   0.9598  0.8188  0.1021   0.0284  0.0391  0.1799  1.080  0.0471  0.1726 (0.117)  5
+0.05     bonn            24.5  0.1945   0.5423  0.7737  0.0364   0.0185  0.0233  0.2992  1.180  0.1297  0.2050 (0.118)  23
+0.05     MEAN(src)       21.4  0.1832   0.7511  0.7962  0.0692   0.0235  0.0312  0.2396  1.130  0.0884  0.1888 (0.118)  28
+0.05     POOLED(px)      23.4  0.1910   0.6242  0.7805  0.0482   0.0200  0.0257  0.2779  1.163  0.1150  0.1992 (0.118)  28
+const    tum             18.2  0.2867   1.6165  0.6361  0.0000   0.0000  0.0147  0.2873  1.000  0.0713  0.2873 (0.114)  5
+const    bonn            24.5  0.3722   0.9798  0.4941  0.0000   0.0000  0.0095  0.3800  1.000  0.1568  0.3800 (0.188)  23
+const    MEAN(src)       21.4  0.3294   1.2982  0.5651  0.0000   0.0000  0.0121  0.3336  1.000  0.1140  0.3336 (0.151)  28
+const    POOLED(px)      23.4  0.3592   1.1008  0.5158  0.0000   0.0000  0.0103  0.3634  1.000  0.1415  0.3634 (0.175)  28
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=13 size=256 max=100/source clip_len=256 stride=256 align=median gate_mode=delta keyframe_every=30 gmc=False tag=L256K30 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             21.1  0.1883   0.9709  0.8076  0.0955   0.0321  0.0427  0.1930  1.083  0.0725  0.1904 (0.053)  2
+0.05     bonn            26.7  0.2098   0.5394  0.7652  0.0393   0.0196  0.0242  0.2811  1.200  0.1645  0.2193 (0.111)  11
+0.05     MEAN(src)       23.9  0.1990   0.7552  0.7864  0.0674   0.0258  0.0335  0.2371  1.141  0.1185  0.2049 (0.082)  13
+0.05     POOLED(px)      25.8  0.2069   0.6147  0.7708  0.0480   0.0212  0.0267  0.2675  1.182  0.1504  0.2149 (0.102)  13
+const    tum             21.1  0.3114   1.6174  0.6373  0.0000   0.0000  0.0148  0.3138  1.000  0.1223  0.3138 (0.058)  2
+const    bonn            26.7  0.4241   1.0330  0.5081  0.0000   0.0000  0.0095  0.4359  1.000  0.2203  0.4359 (0.193)  11
+const    MEAN(src)       23.9  0.3678   1.3252  0.5727  0.0000   0.0000  0.0121  0.3748  1.000  0.1713  0.3748 (0.125)  13
+const    POOLED(px)      25.8  0.4091   1.1285  0.5253  0.0000   0.0000  0.0102  0.4171  1.000  0.2052  0.4171 (0.172)  13
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=13 size=256 max=100/source clip_len=256 stride=256 align=median gate_mode=delta keyframe_every=60 gmc=False tag=L256K60 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.3  0.1915   0.9657  0.8006  0.0952   0.0312  0.0418  0.1913  1.094  0.0740  0.1936 (0.052)  2
+0.05     bonn            24.9  0.2258   0.5812  0.7425  0.0377   0.0192  0.0240  0.2964  1.206  0.1744  0.2360 (0.115)  11
+0.05     MEAN(src)       22.1  0.2087   0.7734  0.7716  0.0665   0.0252  0.0329  0.2438  1.150  0.1242  0.2148 (0.083)  13
+0.05     POOLED(px)      24.1  0.2212   0.6459  0.7503  0.0466   0.0209  0.0264  0.2802  1.189  0.1590  0.2294 (0.105)  13
+const    tum             19.3  0.3114   1.6174  0.6373  0.0000   0.0000  0.0148  0.3138  1.000  0.1223  0.3138 (0.058)  2
+const    bonn            24.9  0.4241   1.0330  0.5081  0.0000   0.0000  0.0095  0.4359  1.000  0.2203  0.4359 (0.193)  11
+const    MEAN(src)       22.1  0.3678   1.3252  0.5727  0.0000   0.0000  0.0121  0.3748  1.000  0.1713  0.3748 (0.125)  13
+const    POOLED(px)      24.1  0.4091   1.1285  0.5253  0.0000   0.0000  0.0102  0.4171  1.000  0.2052  0.4171 (0.172)  13
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['vkitti2:/home/hyunsu/dataset_ssd/vkitti2', 'tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2', 'pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey'] clips=8929 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 gmc=False tag=even-synth spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0        vkitti2        100.0  0.2306  36.1443  0.6752  0.6240   0.0195  0.0214  0.2488  0.838  0.0305  0.2267 (0.147)  100
+0        tartanair2     100.0  0.7226   4.8801  0.5087  0.2330   0.0487  0.1573  0.5547  1.984  0.1315  0.7594 (0.535)  100
+0        pointodyssey   100.0  0.3425   2.5854  0.6137  0.1938   0.0475  0.0589  0.4620  1.395  0.0584  0.3406 (0.542)  100
+0        MEAN(src)      100.0  0.4319  14.5366  0.5992  0.3502   0.0386  0.0792  0.4218  1.406  0.0735  0.4422 (0.408)  300
+0        POOLED(px)     100.0  0.4435  19.9376  0.5949  0.3502   0.0393  0.0812  0.4218  1.406  0.0735  0.4422 (0.408)  300
+0.005    vkitti2         30.7  0.2394  35.9450  0.6714  0.4116   0.0154  0.0181  0.2567  0.868  0.0364  0.2354 (0.141)  100
+0.005    tartanair2      98.2  0.7230   4.8865  0.5100  0.2317   0.0476  0.1562  0.5529  1.993  0.1288  0.7598 (0.537)  100
+0.005    pointodyssey    59.5  0.3456   2.5650  0.6055  0.1534   0.0431  0.0548  0.4727  1.451  0.0467  0.3451 (0.540)  100
+0.005    MEAN(src)       62.8  0.4360  14.4655  0.5956  0.2656   0.0354  0.0764  0.4274  1.437  0.0706  0.4468 (0.406)  300
+0.005    POOLED(px)      62.8  0.4474  19.8303  0.5913  0.2656   0.0361  0.0784  0.4274  1.437  0.0706  0.4468 (0.406)  300
+0.01     vkitti2         27.3  0.2389  35.9386  0.6720  0.3841   0.0150  0.0177  0.2565  0.870  0.0360  0.2351 (0.141)  100
+0.01     tartanair2      97.7  0.7227   4.8883  0.5102  0.2315   0.0473  0.1559  0.5525  1.994  0.1283  0.7595 (0.536)  100
+0.01     pointodyssey    49.4  0.3445   2.5517  0.6005  0.1439   0.0420  0.0538  0.4733  1.445  0.0463  0.3440 (0.538)  100
+0.01     MEAN(src)       58.1  0.4354  14.4595  0.5942  0.2532   0.0348  0.0758  0.4275  1.436  0.0702  0.4462 (0.405)  300
+0.01     POOLED(px)      58.1  0.4467  19.8264  0.5898  0.2532   0.0355  0.0779  0.4275  1.436  0.0702  0.4462 (0.405)  300
+0.02     vkitti2         21.2  0.2390  35.8604  0.6731  0.3839   0.0153  0.0182  0.2563  0.872  0.0354  0.2352 (0.141)  100
+0.02     tartanair2      96.0  0.7226   4.8943  0.5104  0.2322   0.0473  0.1559  0.5525  1.995  0.1279  0.7594 (0.537)  100
+0.02     pointodyssey    36.4  0.3426   2.5420  0.5999  0.1166   0.0372  0.0492  0.4683  1.449  0.0423  0.3425 (0.535)  100
+0.02     MEAN(src)       51.2  0.4347  14.4322  0.5945  0.2442   0.0333  0.0744  0.4257  1.439  0.0685  0.4457 (0.404)  300
+0.02     POOLED(px)      51.2  0.4460  19.7846  0.5900  0.2442   0.0339  0.0764  0.4257  1.439  0.0685  0.4457 (0.404)  300
+0.05     vkitti2         10.5  0.2394  35.9323  0.6731  0.3189   0.0146  0.0178  0.2607  0.874  0.0345  0.2356 (0.140)  100
+0.05     tartanair2      91.0  0.7228   4.9012  0.5126  0.2271   0.0466  0.1552  0.5521  2.001  0.1259  0.7595 (0.536)  100
+0.05     pointodyssey    21.2  0.3422   2.5498  0.6119  0.0855   0.0312  0.0433  0.4663  1.457  0.0341  0.3421 (0.539)  100
+0.05     MEAN(src)       40.9  0.4348  14.4611  0.5992  0.2105   0.0308  0.0721  0.4264  1.444  0.0648  0.4457 (0.405)  300
+0.05     POOLED(px)      40.9  0.4461  19.8241  0.5950  0.2105   0.0314  0.0740  0.4264  1.444  0.0648  0.4457 (0.405)  300
+0.1      vkitti2          4.4  0.2439  35.9665  0.6717  0.1840   0.0131  0.0161  0.2640  0.877  0.0356  0.2397 (0.138)  100
+0.1      tartanair2      81.9  0.7213   4.9039  0.5140  0.2195   0.0458  0.1545  0.5486  2.003  0.1259  0.7577 (0.532)  100
+0.1      pointodyssey    10.1  0.3417   2.5302  0.6167  0.0566   0.0259  0.0382  0.4683  1.448  0.0293  0.3417 (0.549)  100
+0.1      MEAN(src)       32.1  0.4356  14.4668  0.6008  0.1534   0.0283  0.0696  0.4270  1.443  0.0636  0.4464 (0.406)  300
+0.1      POOLED(px)      32.1  0.4467  19.8418  0.5967  0.1534   0.0288  0.0714  0.4270  1.443  0.0636  0.4464 (0.406)  300
+const    vkitti2          4.4  0.7912  59.4201  0.1273  0.0000   0.0000  0.0162  0.7739  1.000  0.0330  0.7739 (0.192)  100
+const    tartanair2      81.9  0.6744   4.9387  0.6106  0.0000   0.0000  0.1139  0.7094  1.000  0.0996  0.7094 (0.548)  100
+const    pointodyssey    10.1  0.4252   3.4910  0.5077  0.0000   0.0000  0.0164  0.4294  1.000  0.0232  0.4294 (0.558)  100
+const    MEAN(src)       32.1  0.6303  22.6166  0.4152  0.0000   0.0000  0.0488  0.6375  1.000  0.0519  0.6375 (0.433)  300
+const    POOLED(px)      32.1  0.6215  32.5292  0.4314  0.0000   0.0000  0.0499  0.6375  1.000  0.0519  0.6375 (0.433)  300
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['vkitti2:/home/hyunsu/dataset_ssd/vkitti2', 'tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2', 'pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey'] clips=8929 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=drop keyframe_every=30 dense_above=0.4 gmc=False tag=even-synth-drop spatial_cache=True temporal_cache=False
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     vkitti2         10.5  0.2450  35.1531  0.6745  0.4336   0.0191  0.0222  0.2468  0.909  0.0459  0.2414 (0.138)  100
+0.05     tartanair2      91.0  0.7218   4.9073  0.5135  0.2304   0.0483  0.1569  0.5511  1.988  0.1274  0.7587 (0.537)  100
+0.05     pointodyssey    21.2  0.3415   2.5901  0.6143  0.1165   0.0365  0.0485  0.4641  1.413  0.0404  0.3413 (0.539)  100
+0.05     MEAN(src)       40.9  0.4361  14.2169  0.6008  0.2601   0.0347  0.0759  0.4207  1.437  0.0712  0.4471 (0.404)  300
+0.05     POOLED(px)      40.9  0.4472  19.4086  0.5965  0.2601   0.0352  0.0777  0.4207  1.437  0.0712  0.4471 (0.404)  300
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['vkitti2:/home/hyunsu/dataset_ssd/vkitti2', 'tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2', 'pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey'] clips=8929 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 gmc=False tag=even-synth-delta spatial_cache=True temporal_cache=False
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     vkitti2         10.5  0.2394  35.9308  0.6733  0.3201   0.0147  0.0178  0.2606  0.874  0.0345  0.2356 (0.140)  100
+0.05     tartanair2      91.0  0.7226   4.9012  0.5124  0.2275   0.0466  0.1553  0.5520  2.001  0.1259  0.7594 (0.536)  100
+0.05     pointodyssey    21.2  0.3422   2.5501  0.6119  0.0859   0.0312  0.0433  0.4663  1.458  0.0342  0.3421 (0.539)  100
+0.05     MEAN(src)       40.9  0.4347  14.4607  0.5992  0.2112   0.0308  0.0721  0.4263  1.444  0.0649  0.4457 (0.405)  300
+0.05     POOLED(px)      40.9  0.4460  19.8233  0.5950  0.2112   0.0314  0.0740  0.4263  1.444  0.0649  0.4457 (0.405)  300
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=488 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 gmc=False tag=even-real-sweep spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0        tum            100.0  0.1445   0.8555  0.8534  0.0648   0.0220  0.0327  0.1667  1.055  0.0092  0.1406 (0.135)  89
+0        bonn           100.0  0.1140   0.3667  0.9047  0.0430   0.0160  0.0198  0.2742  1.122  0.0206  0.1151 (0.097)  100
+0        MEAN(src)      100.0  0.1292   0.6111  0.8790  0.0539   0.0190  0.0263  0.2205  1.088  0.0149  0.1279 (0.116)  189
+0        POOLED(px)     100.0  0.1268   0.6206  0.8832  0.0533   0.0185  0.0253  0.2236  1.090  0.0152  0.1271 (0.115)  189
+0.005    tum             94.9  0.1443   0.8545  0.8533  0.0806   0.0229  0.0336  0.1666  1.055  0.0093  0.1404 (0.135)  89
+0.005    bonn            95.0  0.1141   0.3679  0.9040  0.0459   0.0170  0.0208  0.2742  1.120  0.0211  0.1152 (0.096)  100
+0.005    MEAN(src)       94.9  0.1292   0.6112  0.8787  0.0632   0.0200  0.0272  0.2204  1.087  0.0152  0.1278 (0.116)  189
+0.005    POOLED(px)      94.9  0.1268   0.6204  0.8827  0.0622   0.0195  0.0262  0.2235  1.089  0.0155  0.1271 (0.115)  189
+0.01     tum             82.8  0.1435   0.8511  0.8531  0.1029   0.0242  0.0348  0.1659  1.055  0.0094  0.1396 (0.135)  89
+0.01     bonn            87.2  0.1145   0.3703  0.9031  0.0484   0.0179  0.0217  0.2742  1.122  0.0213  0.1157 (0.096)  100
+0.01     MEAN(src)       85.0  0.1290   0.6107  0.8781  0.0756   0.0210  0.0283  0.2200  1.088  0.0153  0.1276 (0.116)  189
+0.01     POOLED(px)      85.1  0.1267   0.6193  0.8822  0.0740   0.0205  0.0273  0.2232  1.090  0.0157  0.1270 (0.114)  189
+0.02     tum             56.9  0.1397   0.8292  0.8520  0.1395   0.0282  0.0388  0.1623  1.056  0.0098  0.1361 (0.132)  89
+0.02     bonn            70.4  0.1165   0.3751  0.9001  0.0480   0.0186  0.0226  0.2763  1.123  0.0223  0.1176 (0.097)  100
+0.02     MEAN(src)       63.6  0.1281   0.6022  0.8760  0.0937   0.0234  0.0307  0.2193  1.090  0.0161  0.1268 (0.114)  189
+0.02     POOLED(px)      64.0  0.1262   0.6084  0.8799  0.0911   0.0226  0.0294  0.2226  1.091  0.0164  0.1263 (0.113)  189
+0.05     tum             19.7  0.1344   0.8003  0.8469  0.1110   0.0242  0.0349  0.1562  1.059  0.0103  0.1312 (0.116)  89
+0.05     bonn            24.4  0.1260   0.4017  0.8898  0.0294   0.0149  0.0197  0.2801  1.125  0.0219  0.1264 (0.112)  100
+0.05     MEAN(src)       22.0  0.1302   0.6010  0.8684  0.0702   0.0196  0.0273  0.2182  1.092  0.0161  0.1288 (0.114)  189
+0.05     POOLED(px)      22.2  0.1295   0.6020  0.8718  0.0678   0.0188  0.0261  0.2218  1.094  0.0164  0.1286 (0.114)  189
+0.1      tum              3.5  0.1462   0.8554  0.8445  0.0362   0.0180  0.0290  0.1660  1.058  0.0103  0.1423 (0.128)  89
+0.1      bonn             5.6  0.1299   0.4147  0.8839  0.0150   0.0126  0.0179  0.2838  1.125  0.0222  0.1301 (0.117)  100
+0.1      MEAN(src)        4.6  0.1381   0.6350  0.8642  0.0256   0.0153  0.0235  0.2249  1.091  0.0162  0.1362 (0.122)  189
+0.1      POOLED(px)       4.6  0.1367   0.6378  0.8674  0.0250   0.0149  0.0226  0.2283  1.093  0.0166  0.1359 (0.122)  189
+const    tum              3.5  0.2543   1.6094  0.6209  0.0000   0.0000  0.0147  0.2530  1.000  0.0091  0.2530 (0.081)  89
+const    bonn             5.6  0.2979   0.9033  0.5453  0.0000   0.0000  0.0091  0.2911  1.000  0.0233  0.2911 (0.203)  100
+const    MEAN(src)        4.6  0.2761   1.2563  0.5831  0.0000   0.0000  0.0119  0.2720  1.000  0.0162  0.2720 (0.142)  189
+const    POOLED(px)       4.6  0.2796   1.2491  0.5770  0.0000   0.0000  0.0115  0.2732  1.000  0.0166  0.2732 (0.146)  189
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=120 size=256 max=100/source clip_len=32 stride=32 align=median gate_mode=delta keyframe_every=5 dense_above=0.4 gmc=False tag=evenkf5 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             36.1  0.1352   0.7989  0.8514  0.1441   0.0305  0.0409  0.1566  1.057  0.0220  0.1324 (0.120)  22
+0.05     bonn            42.6  0.1209   0.3930  0.8812  0.0460   0.0199  0.0242  0.2863  1.129  0.0527  0.1248 (0.079)  98
+0.05     MEAN(src)       39.4  0.1281   0.5960  0.8663  0.0951   0.0252  0.0326  0.2214  1.093  0.0373  0.1286 (0.099)  120
+0.05     POOLED(px)      41.4  0.1231   0.4788  0.8766  0.0640   0.0215  0.0268  0.2625  1.116  0.0470  0.1262 (0.086)  120
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=120 size=256 max=100/source clip_len=32 stride=32 align=median gate_mode=delta keyframe_every=10 dense_above=0.4 gmc=False tag=evenkf10 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             25.8  0.1368   0.8137  0.8476  0.1221   0.0275  0.0380  0.1576  1.059  0.0230  0.1342 (0.116)  22
+0.05     bonn            33.0  0.1258   0.4105  0.8727  0.0412   0.0188  0.0234  0.2896  1.128  0.0553  0.1294 (0.079)  98
+0.05     MEAN(src)       29.4  0.1313   0.6121  0.8602  0.0817   0.0231  0.0307  0.2236  1.094  0.0391  0.1318 (0.098)  120
+0.05     POOLED(px)      31.7  0.1275   0.4948  0.8688  0.0561   0.0201  0.0256  0.2654  1.115  0.0494  0.1303 (0.086)  120
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=120 size=256 max=100/source clip_len=32 stride=32 align=median gate_mode=delta keyframe_every=15 dense_above=0.4 gmc=False tag=evenkf15 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             22.7  0.1378   0.8124  0.8398  0.1187   0.0274  0.0380  0.1582  1.059  0.0229  0.1353 (0.115)  22
+0.05     bonn            29.2  0.1302   0.4229  0.8645  0.0389   0.0183  0.0230  0.2923  1.130  0.0548  0.1334 (0.081)  98
+0.05     MEAN(src)       26.0  0.1340   0.6177  0.8521  0.0788   0.0228  0.0305  0.2253  1.094  0.0388  0.1344 (0.098)  120
+0.05     POOLED(px)      28.0  0.1314   0.5032  0.8607  0.0535   0.0197  0.0253  0.2678  1.117  0.0489  0.1338 (0.087)  120
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=120 size=256 max=100/source clip_len=32 stride=32 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 gmc=False tag=evenkf30 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.6  0.1437   0.8536  0.8302  0.1094   0.0262  0.0369  0.1630  1.058  0.0238  0.1412 (0.112)  22
+0.05     bonn            25.8  0.1412   0.4550  0.8465  0.0364   0.0176  0.0225  0.3042  1.127  0.0584  0.1450 (0.089)  98
+0.05     MEAN(src)       22.7  0.1424   0.6543  0.8384  0.0729   0.0219  0.0297  0.2336  1.092  0.0411  0.1431 (0.101)  120
+0.05     POOLED(px)      24.7  0.1416   0.5363  0.8440  0.0498   0.0190  0.0248  0.2783  1.115  0.0521  0.1443 (0.094)  120
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=120 size=256 max=100/source clip_len=32 stride=32 align=median gate_mode=delta keyframe_every=60 dense_above=0.4 gmc=False tag=evenkf60 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             16.5  0.1452   0.8637  0.8270  0.0910   0.0236  0.0344  0.1641  1.058  0.0244  0.1428 (0.111)  22
+0.05     bonn            22.8  0.1442   0.4632  0.8420  0.0306   0.0154  0.0204  0.3069  1.128  0.0586  0.1479 (0.091)  98
+0.05     MEAN(src)       19.6  0.1447   0.6635  0.8345  0.0608   0.0195  0.0274  0.2355  1.093  0.0415  0.1453 (0.101)  120
+0.05     POOLED(px)      21.6  0.1444   0.5447  0.8397  0.0416   0.0167  0.0226  0.2807  1.115  0.0524  0.1469 (0.095)  120
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=6 size=256 max=10/source clip_len=512 stride=512 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 gmc=False tag=L512K30 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             21.3  0.1861   0.9804  0.8057  0.0992   0.0318  0.0422  0.1894  1.085  0.0808  0.1861 (0.000)  1
+0.05     bonn            26.5  0.2776   0.7007  0.6721  0.0388   0.0192  0.0238  0.2912  1.252  0.2469  0.2838 (0.102)  5
+0.05     MEAN(src)       23.9  0.2318   0.8406  0.7389  0.0690   0.0255  0.0330  0.2403  1.168  0.1638  0.2350 (0.051)  6
+0.05     POOLED(px)      25.7  0.2642   0.7480  0.6916  0.0489   0.0210  0.0265  0.2742  1.224  0.2192  0.2676 (0.085)  6
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=6 size=256 max=10/source clip_len=512 stride=512 align=median gate_mode=delta keyframe_every=60 dense_above=0.4 gmc=False tag=L512K60 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.2  0.1919   0.9997  0.7953  0.0952   0.0303  0.0409  0.1916  1.091  0.0829  0.1919 (0.000)  1
+0.05     bonn            24.6  0.2903   0.7369  0.6586  0.0371   0.0189  0.0236  0.3038  1.259  0.2510  0.2976 (0.112)  5
+0.05     MEAN(src)       21.9  0.2411   0.8683  0.7270  0.0662   0.0246  0.0322  0.2477  1.175  0.1669  0.2448 (0.056)  6
+0.05     POOLED(px)      23.7  0.2759   0.7807  0.6785  0.0468   0.0206  0.0261  0.2851  1.231  0.2230  0.2800 (0.093)  6
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=1 size=256 max=2/source clip_len=1024 stride=1024 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 gmc=False tag=L1024 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     bonn            11.2  0.4170   0.9316  0.4566  0.0209   0.0131  0.0182  0.3743  1.370  0.4163  0.4170 (0.000)  1
+
+ckpt=work_dirs/v10-longclip/latest.pt data=['pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey'] clips=50 size=256 max=20/source clip_len=1024 stride=1024 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 gmc=False tag=L1024-po spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     pointodyssey    22.7  0.4638   2.8200  0.4909  0.1198   0.0491  0.0647  0.4609  1.503  0.2094  0.4538 (0.256)  20
+
