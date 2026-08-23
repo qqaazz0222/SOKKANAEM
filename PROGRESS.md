@@ -329,7 +329,41 @@ temporal cache가 hidden state를 bit-identical로 유지, bin 중심 단조·�
   방향 2(T4-18~20, 픽셀 임계를 **상태 오차 예산**으로 대체 + 다중 스킵 드리프트 상계로
   keyframe 주기 유도), 방향 3(T4-21~23, 목표 달성 확인 + 희소 경로 존치 판정).
 
+## 2026-08-20~23 — r1 대응, 엣지 실측, 그리고 문서 감사
+
+세부는 REPORT §4.36~4.40과 `paper/self-revision/r1-revision-status.md`에 있다. 요약:
+
+- **평가 표본 버그**로 2026-08-20 이전 수치가 전부 바뀌었다. `--max-clips`가 concat 순서
+  앞에서 잘라 Bonn은 `crowd2` 하나만 평가하고 있었다. `even_subset`으로 수정(`5b3bd37`).
+  base 체크포인트 실촬 AbsRel 0.1595 → **0.1302**, active 32.2% → **22.0%**.
+- **확정 체크포인트 승격**: `v11-longclip-spread-s0`(base 60k → 장클립 25k → spread 8k,
+  키프레임 주기 30). 8프레임 **0.1263 / active 22.0%**, 256프레임 0.1907.
+- **256프레임 스트리밍을 주 프로토콜로 승격.** 클립 단위 벌점의 대부분이 드리프트가 아니라
+  클립당 정합 창이었고, 상태 없는 baseline이 같은 클립에서 훨씬 크게 악화한다.
+- **엣지 실측 성사**(Jetson Nano B01): 4090의 서열이 뒤집힌다. 5% active에서 시간 13.7배·
+  에너지 15.3배. **TX2·Raspberry Pi 4B는 여전히 미측정.**
+- **rolling refresh 기각**, **dense 폴백은 운용점 2개로 정리**, **warp 가중치는 다이얼**로 확정.
+- **문서·그림 감사(08-23)**: Table 7c의 "Reported" 열이 실제로는 base 체크포인트였다.
+  보고 체크포인트에서 주기 5·10·15를 새로 재고 표와 그 표를 읽던 문단을 고쳤다. 같은 감사에서
+  Figure 3·4·7의 데이터가 낡아 있었고(`make_figures.py`가 표의 사본을 들고 있다), 영문 draft에
+  Figure 7이 아예 빠져 있었으며, `caption.md`에 Figure 8 캡션이 없었다. 전부 수정.
+- **Figure 9(정성 비교) 생성** — r1 minor 12 해소. `scripts/viz_qualitative.py`.
+
 ## 다음 액션
+
+1. **논문 제출본 정리** — r1 minor 1(`[CHECKPOINT-DEPENDENT]` 태그 8개 제거)과
+   minor 15(저자·소속·Data Availability·Funding·Acknowledgments)는 **최종 교정본에서 처리**.
+   minor 15는 사용자 정보 필요.
+2. **TX2·Raspberry Pi 4B 실측** — 절차는 `docs/EDGE_BENCH.md`에 있다. Nano B01 결과가
+   기기 종속성을 보였으므로 두 번째·세 번째 점이 곡선을 확정한다.
+3. **Orin급 실측** — `sm_53`이 융합 커널을 못 돌려 Nano 수치는 배포 구성이 아니다.
+   Orin이 그 공백과 실시간 처리량 공백을 동시에 닫는다.
+4. **참고문헌 검증** — 미확인 6건, 특히 Depth Anything 3(0.12B baseline으로 전편에 쓰이는데
+   저자·발표처·연도 미확인).
+5. 실내 미지 도메인(NYU·ScanNet) zero-shot — 호스트 복구 또는 서명 절차 필요.
+6. `tartanair_v2/Hospital` 간헐적 read 실패 — 재발하면 `num_workers` 조정.
+
+## 이전 다음 액션 (2026-08-18 시점, 보관)
 
 1. **T4-15 Bonn 실패 해부** (반나절, 선행 없음) — T4-16·T4-17의 방향을 정하는 선행 작업.
    `work_dirs/v9-60k/scores_real.json`의 클립별 오차 분포에서 최악 10%가 무엇인지 확인

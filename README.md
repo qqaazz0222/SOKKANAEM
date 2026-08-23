@@ -105,17 +105,38 @@ python scripts/eval.py --ckpt work_dirs/kitti/latest.pt --data kitti:/data/kitti
 | `main_v8.toml` | **본 학습**: 실촬(TUM/Bonn) + 합성 3종 | 0.5 | 0.05 | 4방향 scan, local conv, DPT, 64 bin + bin CE |
 | `t1_binrange.toml` / `t1_bin128.toml` | T1-5 원거리 ablation | | | `d_max` 150→600 (+ bins 128) — PLAN.md T1-5 |
 
-기본 꺼져 있는 손실 두 개(`--warp-weight` / `--edge-weight`): 전자는 RAFT flow로 워프한
-log-depth 잔차를 GT 잔차에 맞추는 TCE의 학습판, 후자는 GT depth gradient 밴드에 가중한
-log L1(전경 물체용). **확정 체크포인트 `work_dirs/v9-60k`는 둘 다 2.0으로 켜고 학습**했다
-(REPORT §4.23):
+기본 꺼져 있는 손실 세 개(`--warp-weight` / `--edge-weight` / `--spread-weight`): 첫째는
+RAFT flow로 워프한 log-depth 잔차를 GT 잔차에 맞추는 TCE의 학습판, 둘째는 GT depth gradient
+밴드에 가중한 log L1(전경 물체용), 셋째는 예측 log-depth의 표본별 표준편차를 GT에 맞춰
+동적 범위 압축을 직접 벌한다(REPORT §4.35).
+
+**확정 체크포인트 `work_dirs/v11-longclip-spread-s0`는 3단계로 만들어진다** — base 60k →
+장클립 25k → spread 8k, 키프레임 주기 30. 8프레임 실촬 AbsRel **0.1263 / active 22.0%**,
+256프레임 0.1907 (REPORT §4.36):
 
 ```bash
+# 1단계 base: warp·edge 각 2.0, clip 4
 python scripts/train.py --config configs/main_v8.toml \
     --resume work_dirs/main_v8/latest.pt --resume-partial \
     --steps 60000 --seed 0 --warp-weight 2.0 --edge-weight 2.0 \
     --work-dir work_dirs/v9-60k
+
+# 2단계 장클립: 드리프트는 학습-배포 클립 길이 불일치였다 (REPORT §4.33)
+python scripts/train.py --config configs/main_v8.toml \
+    --resume work_dirs/v9-60k/latest.pt --resume-partial \
+    --clip-len 24 --batch 2 --steps 25000 --seed 0 \
+    --warp-weight 2.0 --edge-weight 2.0 --work-dir work_dirs/v10-longclip
+
+# 3단계 spread: 범위 압축 교정 (REPORT §4.35)
+python scripts/train.py --config configs/main_v8.toml \
+    --resume work_dirs/v10-longclip/latest.pt --resume-partial \
+    --clip-len 24 --batch 2 --steps 8000 --seed 0 \
+    --warp-weight 2.0 --edge-weight 2.0 --spread-weight 0.5 \
+    --work-dir work_dirs/v11-longclip-spread-s0
 ```
+
+warp 가중치는 2.0이 보고값이다. 4.0·8.0으로 올리면 시간 지표가 전 프로토콜에서 좋아지고
+긴 스트림 정확도가 나빠진다 — 단조 교환이므로 최적점이 아니라 선택이다(REPORT §4.40).
 
 ## 산출물 (`work_dirs/<이름>/`)
 
