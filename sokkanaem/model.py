@@ -254,7 +254,9 @@ class DPTDecoder(nn.Module):
         features + shallow ones, the "reassemble" idea without extra scales
         inside the SSM, which runs at one resolution by construction);
       * a 3-layer stride-2 conv stem on the RGB frame supplies 1/8, 1/4 and
-        1/2 detail features as skips;
+        1/2 detail features as skips -- but only if `fuse_norm=True`; without
+        it the backbone branch outweighs the skip 5-10x and the stem is dead
+        weight (see the note on self.norm_x);
       * fusion goes 1/16 -> 1/8 -> 1/4 -> 1/2 -> 1/1, one 3x3 conv per level.
 
     Output is inverse depth (disparity) when disparity=True: 0.5-129 m ranges
@@ -276,7 +278,7 @@ class DPTDecoder(nn.Module):
     """
 
     def __init__(self, dim, patch_size=16, width=64, disparity=True,
-                 bins=0, d_min=0.3, d_max=150.0):
+                 bins=0, d_min=0.3, d_max=150.0, fuse_norm=False):
         super().__init__()
         assert patch_size == 16
         self.disparity = disparity
@@ -296,6 +298,19 @@ class DPTDecoder(nn.Module):
         self.mix = nn.ModuleList(
             nn.Sequential(nn.Conv2d(c, c, 3, padding=1), nn.GELU())
             for c in widths)
+        # Without a normalization the fusion add is not a fusion. Measured on
+        # the reported checkpoint, |red(x)| / |skip| is 4.9, 6.8 and 9.8 at
+        # 1/8, 1/4 and 1/2 -- the backbone arm drowns the RGB arm, and it
+        # drowns it worst at the finest resolution, which is the only place
+        # sub-patch detail can enter. Zeroing the stem entirely then moves real
+        # AbsRel by 1.6% and *improves* the driving scene: the skips were dead.
+        # One GroupNorm per branch puts both on the same scale and lets the
+        # fusion weights decide the mixture, which is what DPT's own residual
+        # conv units do with their batch norms.
+        self.norm_x = nn.ModuleList(nn.GroupNorm(8, c) for c in widths) \
+            if fuse_norm else None
+        self.norm_s = nn.ModuleList(nn.GroupNorm(8, c) for c in widths) \
+            if fuse_norm else None
         self.head = nn.Sequential(
             nn.Conv2d(widths[-1], widths[-1], 3, padding=1), nn.GELU(),
             nn.Conv2d(widths[-1], max(bins, 1), 3, padding=1),
@@ -328,10 +343,14 @@ class DPTDecoder(nn.Module):
         for blk in self.stem:
             h = blk(h)
             skips.append(h)                                  # 1/2, 1/4, 1/8
-        for skip, red, mix in zip(reversed(skips), self.reduce, self.mix):
+        for i, (skip, red, mix) in enumerate(
+                zip(reversed(skips), self.reduce, self.mix)):
             x = F.interpolate(x, scale_factor=2, mode="bilinear",
                               align_corners=False)
-            x = mix(red(x) + skip)
+            a, b = red(x), skip
+            if self.norm_x is not None:
+                a, b = self.norm_x[i](a), self.norm_s[i](b)
+            x = mix(a + b)
         if self.bins:
             # expectation over bin centres, in log-depth, at 1/2 res; the
             # upsample then interpolates log-depth (geometric, smooth across
@@ -362,7 +381,7 @@ class SOKKANAEM(nn.Module):
                  spatial_cache=False, gate_mode="delta", decoder="conv",
                  scan_directions=2, local_conv=False, bins=0,
                  temporal_cache=False, dense_above=0.4,
-                 d_min=0.3, d_max=150.0, bucket=0):
+                 d_min=0.3, d_max=150.0, bucket=0, fuse_norm=False):
         """gmc=True enables the ego-motion path (IDEA.md §3.5): Low-Res GMC
         warps frame t-1 onto t, then the change score is the relative L1
         between the *embed features* of both — not pixel MSE — so tau_on/
@@ -414,7 +433,8 @@ class SOKKANAEM(nn.Module):
             # bin centre sits at 115 m, and on vkitti2 the 0.8% of pixels past
             # that carry 54% of the squared error (scripts/bin_probe.py)
             self.decoder = DPTDecoder(dim, patch_size, bins=bins,
-                                      d_min=d_min, d_max=d_max)
+                                      d_min=d_min, d_max=d_max,
+                                      fuse_norm=fuse_norm)
             self.decoder.set_n_blocks(depth)
         else:
             assert not bins, "bins head lives in the dpt decoder"

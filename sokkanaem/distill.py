@@ -89,6 +89,36 @@ def affine_invariant_loss(pred_depth, teacher_disp, valid=None):
     return ((p - t).abs() * valid).sum() / valid.sum().clamp(min=1)
 
 
+def teacher_grad_loss(pred_depth, teacher_disp, scales=4):
+    """Match the teacher's *shape* -- its disparity gradients -- and nothing else.
+
+    `affine_invariant_loss` above matches the teacher's values, and a 3-arm
+    probe measured that it HURTS: real delta1 0.8156 against 0.8405 with it off,
+    synthetic 0.4155 against 0.5629. The diagnosis was that pinning our
+    disparity field to a relative teacher's drags the far-range structure that
+    TartanAir's 0.5-129 m scenes need, and the far range is where an affine fit
+    in disparity space has the least to say.
+
+    Gradients do not have that failure mode. Two fields with the same gradients
+    can sit anywhere and be stretched by any scale, so this term constrains
+    boundaries and surface shape while leaving the depth range entirely to the
+    ground-truth supervision. It exists because sharpness is the one thing the
+    teacher demonstrably has and we do not: on the real indoor holdout DA v2
+    Small scores a boundary gradient ratio of 0.76 against our 0.43
+    (scripts/sharp_metric.py).
+
+    Both sides are normalized per frame and no validity mask is applied -- the
+    teacher supplies a target on every pixel, including where the Kinect ground
+    truth has holes, which is half the reason to have a teacher at all.
+    """
+    from .losses import _norm_field, _pyramid_grad
+
+    ones = torch.ones_like(pred_depth)
+    p = _norm_field(1.0 / pred_depth.clamp(min=1e-3), ones, per_sample=True)
+    t = _norm_field(teacher_disp, torch.ones_like(teacher_disp), per_sample=True)
+    return _pyramid_grad(p, t, ones, scales)
+
+
 def distill_loss(tokens, proj, target_feat):
     """tokens: (B, N, dim) our encoder tokens (any block, pre-decoder).
     proj: Linear(dim -> D), trainable. target_feat: (B, gh, gw, D) frozen,

@@ -31,12 +31,19 @@ from sokkanaem.data import SynthClips, build_mixed
 from sokkanaem.collapse import update_streak
 from sokkanaem.distill import (affine_invariant_loss, dinov2_features,
                                distill_loss, load_frozen_dinov2,
-                               load_frozen_teacher, teacher_disparity)
+                               load_frozen_teacher, teacher_disparity,
+                               teacher_grad_loss)
 from sokkanaem.ema import ema_update_
 from sokkanaem.losses import (bin_ce_loss, edge_weighted_loss, grad_loss,
                               multiscale_grad_loss, normal_loss, si_log_loss,
                               spread_loss, temporal_loss, warp_residual_loss)
 from sokkanaem.schedule import lr_at, parse_size_schedule, size_for_step
+
+
+# Measured with scripts/train.py's own terms on the reported checkpoint over
+# 8 mixed batches: grad_loss 1.391 -> 0.044 and normal_loss 0.0482 -> 0.0067
+# when moved from metres to log depth. See --loss-space.
+GRAD_LOG_GAIN, NORMAL_LOG_GAIN = 31.4, 7.2
 
 
 def write_config(path, args, model_kw):
@@ -143,6 +150,17 @@ def main():
                          "(REPORT 4.32 measured 0.47x range on Bonn). Scale-"
                          "free and symmetric, so it cannot be bought by "
                          "inflating the range with noise")
+    ap.add_argument("--loss-space", choices=("metric", "log"), default="metric",
+                    help="space the gradient and normal terms are computed in. "
+                         "'metric' is what the reported checkpoint used: both "
+                         "take raw metres, so on 1.5-4 m indoor footage "
+                         "dz/dx ~ 0.01 and the pseudo-normal is (0,0,1) "
+                         "everywhere -- the term that exists for boundaries "
+                         "contributes almost nothing, and the far-range "
+                         "synthetic sources own the gradient term as well. "
+                         "'log' puts both in log depth, which is scale-free, "
+                         "and also normalizes the multiscale term per frame "
+                         "rather than per batch (MiDaS's own rule).")
     ap.add_argument("--edge-weight", type=float, default=0.0,
                     help="GT-depth-gradient weighted log L1, aimed at "
                          "foreground objects at depth discontinuities (0 = off)")
@@ -172,6 +190,13 @@ def main():
                          "depth teacher (0 = off). Zero inference cost; "
                          "affine-invariant, so it supervises geometry without "
                          "touching the metric scale the GT provides")
+    ap.add_argument("--teacher-grad-weight", type=float, default=0.0,
+                    help="distil only the teacher's disparity GRADIENTS, over a "
+                         "resolution pyramid. --teacher-weight matches its "
+                         "values and was measured to hurt both domains "
+                         "(configs/main_v8.toml); gradients carry the "
+                         "sharpness without pinning the depth range, which is "
+                         "the failure that removed the value term.")
     ap.add_argument("--teacher-model",
                     default="depth-anything/Depth-Anything-V2-Small-hf")
     ap.add_argument("--bin-weight", type=float, default=0.0,
@@ -216,7 +241,8 @@ def main():
     # import DINOv2's pretrained visual features into our from-scratch
     # encoder via a trainable projection head, matched by cosine loss.
     dinov2 = load_frozen_dinov2(args.distill_model, dev) if args.distill_weight > 0 else None
-    teacher = load_frozen_teacher(args.teacher_model, dev) if args.teacher_weight > 0 else None
+    teacher = (load_frozen_teacher(args.teacher_model, dev)
+               if args.teacher_weight > 0 or args.teacher_grad_weight > 0 else None)
     # bin logits are internal to the decoder head; a forward hook collects one
     # entry per frame (forward_clip calls the decoder T times) without
     # threading them through every return signature
@@ -342,16 +368,30 @@ def main():
                         clip, force_mask=fm, return_tokens=True)
                 else:
                     depths, masks = model.forward_clip(clip, force_mask=fm)
-            losses = [si_log_loss(depths, gt, valid), grad_loss(depths, gt, valid),
-                      temporal_loss(depths, masks), normal_loss(depths, gt, valid)]
+            # the gradient and normal terms are scale-dependent, so the space
+            # they see decides whether indoor footage can reach them at all
+            per_sample = args.loss_space == "log"
+            gp, gg = ((depths.clamp(min=1e-3).log(), gt.clamp(min=1e-3).log())
+                      if per_sample else (depths, gt))
+            losses = [si_log_loss(depths, gt, valid), grad_loss(gp, gg, valid),
+                      temporal_loss(depths, masks), normal_loss(gp, gg, valid)]
             if log_vars is not None:
                 loss = sum(torch.exp(-lv) * l + lv for lv, l in zip(log_vars, losses))
             else:
-                loss = (losses[0] + 0.5 * losses[1] + 0.1 * losses[2]
-                        + args.normal_weight * losses[3])
+                # A log-space gradient is 31x smaller than a metric one and a
+                # log-space normal 7.2x smaller (medians over 8 real mixed
+                # batches under the reported checkpoint). Switching space
+                # without compensating would down-weight both terms by those
+                # factors, so the arm would measure the down-weighting rather
+                # than the space. These gains hold each term's starting
+                # contribution fixed; what changes is which sources reach it.
+                gw = 0.5 * (GRAD_LOG_GAIN if per_sample else 1.0)
+                nw = args.normal_weight * (NORMAL_LOG_GAIN if per_sample else 1.0)
+                loss = (losses[0] + gw * losses[1] + 0.1 * losses[2]
+                        + nw * losses[3])
             if args.msgrad_weight > 0:
                 loss = loss + args.msgrad_weight * multiscale_grad_loss(
-                    depths, gt, valid)
+                    depths, gt, valid, per_sample=per_sample)
             if args.warp_weight > 0:
                 loss = loss + args.warp_weight * warp_residual_loss(
                     clip, depths, gt, valid)
@@ -371,12 +411,17 @@ def main():
                     lg, model.decoder.bin_centres(), g, v)
             if teacher is not None:
                 # dense target on every pixel, including where the Kinect GT
-                # has holes — the loss is affine-invariant so the two
-                # supervisions do not fight over scale
+                # has holes — both terms are gauge-free so neither fights the
+                # GT supervision over scale
                 flat = clip.reshape(B * T, 3, *clip.shape[-2:])
                 tdisp = teacher_disparity(teacher, flat)
-                loss = loss + args.teacher_weight * affine_invariant_loss(
-                    depths.reshape(B * T, 1, *depths.shape[-2:]), tdisp)
+                dflat = depths.reshape(B * T, 1, *depths.shape[-2:])
+                if args.teacher_weight > 0:
+                    loss = loss + args.teacher_weight * affine_invariant_loss(
+                        dflat, tdisp)
+                if args.teacher_grad_weight > 0:
+                    loss = loss + args.teacher_grad_weight * teacher_grad_loss(
+                        dflat, tdisp)
             if distill_proj is not None and tokens is not None:
                 gh, gw = clip.shape[-2] // 16, clip.shape[-1] // 16
                 frames_flat = clip.reshape(B * T, 3, *clip.shape[-2:])

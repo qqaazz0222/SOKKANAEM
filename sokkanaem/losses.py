@@ -146,29 +146,39 @@ def bin_ce_loss(logits, centres, gt, valid):
     return (ce * k).sum() / k.sum().clamp(min=1)
 
 
-def _norm_disp(depth, valid):
-    """Scale-shift normalized disparity, MiDaS style: median-center and
-    mean-absolute-deviation scale, computed over valid pixels only. Puts every
-    scene on one comparable footing, which matters here because TartanAir V2
-    spans 0.5-129 m in a single frame while Bonn spans 1.5-4 m."""
-    d = 1.0 / depth.clamp(min=1e-3)
-    v = valid.bool()
-    if not bool(v.any()):
-        return d * 0
-    t = d[v].median()
-    s = (d[v] - t).abs().mean().clamp(min=1e-6)
-    return (d - t) / s
+def _norm_field(x, valid, per_sample=False):
+    """Median-centre, mean-absolute-deviation scale, over valid pixels.
+
+    per_sample=True does it per frame, which is MiDaS's rule; see `_norm_disp`
+    for why the batch-wide alternative quietly silences narrow-range frames."""
+    if not per_sample:
+        v = valid.bool()
+        if not bool(v.any()):
+            return x * 0
+        t = x[v].median()
+        s = (x[v] - t).abs().mean().clamp(min=1e-6)
+        return (x - t) / s
+    shp = x.shape
+    x = x.reshape(-1, 1, *shp[-2:])
+    vv = valid.reshape(x.shape).bool()
+    out = torch.zeros_like(x)
+    for i in range(x.shape[0]):
+        v = vv[i]
+        if not bool(v.any()):
+            continue
+        t = x[i][v].median()
+        s = (x[i][v] - t).abs().mean().clamp(min=1e-6)
+        out[i] = (x[i] - t) / s
+    return out.reshape(shp)
 
 
-def multiscale_grad_loss(pred, gt, valid, scales=4):
-    """Gradient matching on normalized disparity across a resolution pyramid
-    (MiDaS's L_reg). Single-scale gradient matching only sees 1-pixel edges;
-    the pyramid also penalizes low-frequency shape error, which is what makes
-    high-precision depth models look sharp instead of blurry."""
-    p, g = _norm_disp(pred, gt), _norm_disp(gt, gt)
-    v = valid
+def _pyramid_grad(p, g, valid, scales=4):
+    """Gradient matching across a resolution pyramid, MiDaS's L_reg. Both
+    fields must already be normalized. Single-scale matching only sees 1-pixel
+    edges; the pyramid also penalizes low-frequency shape error, which is what
+    makes high-precision depth models look sharp instead of blurry."""
     # collapse leading dims so avg_pool2d sees (N,1,H,W)
-    p, g, v = (x.reshape(-1, 1, *x.shape[-2:]) for x in (p, g, v))
+    p, g, v = (x.reshape(-1, 1, *x.shape[-2:]) for x in (p, g, valid))
     total = p.sum() * 0
     for k in range(scales):
         if k:
@@ -180,6 +190,33 @@ def multiscale_grad_loss(pred, gt, valid, scales=4):
             break
         total = total + grad_loss(p, g, v)
     return total / scales
+
+
+def _norm_disp(depth, valid, per_sample=False):
+    """Scale-shift normalized disparity, MiDaS style: median-center and
+    mean-absolute-deviation scale, computed over valid pixels only. Puts every
+    scene on one comparable footing, which matters here because TartanAir V2
+    spans 0.5-129 m in a single frame while Bonn spans 1.5-4 m.
+
+    per_sample=False is the original behaviour and normalizes over the WHOLE
+    tensor -- one median and one scale for every frame in the batch. MiDaS
+    normalizes per image, and the difference is not cosmetic here: batches are
+    drawn from a five-source mixture, so a TartanAir frame's 0.008-2 disparity
+    sets the scale and an indoor frame's 0.25-0.67 shrinks to a few percent of
+    it. The gradient term that is supposed to supply sharpness then contributes
+    almost nothing on exactly the real footage the paper reports."""
+    return _norm_field(1.0 / depth.clamp(min=1e-3), valid, per_sample)
+
+
+def multiscale_grad_loss(pred, gt, valid, scales=4, per_sample=False):
+    """Gradient matching on normalized disparity across a resolution pyramid
+    (MiDaS's L_reg).
+
+    per_sample normalizes each frame on its own, as MiDaS does -- see
+    `_norm_disp`. It is off by default because the reported checkpoint was
+    trained without it."""
+    return _pyramid_grad(_norm_disp(pred, valid, per_sample),
+                         _norm_disp(gt, valid, per_sample), valid, scales)
 
 
 def spread_loss(pred, gt, valid, min_px=64, eps=1e-6):
