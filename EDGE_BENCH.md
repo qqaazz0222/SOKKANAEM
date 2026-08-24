@@ -61,9 +61,11 @@ dense(캐시 off)는 활성률과 무관하게 평평하고, 희소는 거의 �
 optimizer 상태까지 담아 64 MB이므로, 추론용으로 줄여서 옮긴다.
 
 ```bash
-# 개발 PC에서: 추론에 필요한 가중치만 남긴다 (64 MB -> 16 MB)
+# 개발 PC에서: 추론에 필요한 가중치만 남긴다 (64 MB -> 17 MB)
+# 개발 PC에는 `python`이 없다 — torch는 conda 환경에만 있으므로 절대 경로로 부른다.
 CK=work_dirs/v11-longclip-spread-s0
-python - <<'EOF'
+PY=/home/hyunsu/miniforge3/envs/sokkanaem/bin/python
+$PY - <<'EOF'
 import torch
 st = torch.load("work_dirs/v11-longclip-spread-s0/latest.pt", map_location="cpu")
 torch.save({"ema": st.get("ema") or st["model"]}, "/tmp/edge-latest.pt")
@@ -120,7 +122,7 @@ vcgencmd measure_temp && vcgencmd get_throttled    # 측정 전후 둘 다
 
 ```bash
 python3 scripts/edge_bench.py \
-    --ckpt v11-longclip-spread-s0/latest.pt \
+    --ckpt work_dirs/edge/latest.pt \
     --device cpu --threads 4 --iters 20 --warmup 5
 ```
 
@@ -128,7 +130,7 @@ python3 scripts/edge_bench.py \
 stdout에 출력하는 명령을 넘긴다.
 
 ```bash
-python3 scripts/edge_bench.py --ckpt v11-longclip-spread-s0/latest.pt \
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt \
     --device cpu --threads 4 --power cmd --power-cmd "python3 read_watts.py"
 ```
 
@@ -259,7 +261,7 @@ sudo nvpmodel -q              # 현재 모드 확인
 
 ```bash
 python3 scripts/edge_bench.py \
-    --ckpt v11-longclip-spread-s0/latest.pt \
+    --ckpt work_dirs/edge/latest.pt \
     --device cuda --iters 20 --warmup 5 --power tegra
 ```
 
@@ -309,16 +311,16 @@ Pascal sm_62 / JetPack 4.6.x. Nano B01과 소프트웨어 제약은 같다(Pytho
 
 ```bash
 sudo nvpmodel -m 0 && sudo jetson_clocks     # MAXN, 클럭 락
-python3 scripts/edge_bench.py --ckpt v11-longclip-spread-s0/latest.pt \
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt \
     --device cuda --iters 20 --warmup 5 --power tegra
 
 # fp16 (Nano B01과 달리 여기서는 유의미하다)
-python3 scripts/edge_bench.py --ckpt v11-longclip-spread-s0/latest.pt \
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt \
     --device cuda --half --iters 20 --warmup 5 --power tegra
 
 # 저전력 끝점
 sudo nvpmodel -m 1 && sudo jetson_clocks     # 7.5W Max-Q
-python3 scripts/edge_bench.py --ckpt v11-longclip-spread-s0/latest.pt \
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt \
     --device cuda --iters 20 --warmup 5 --power tegra
 ```
 

@@ -1,0 +1,169 @@
+Raspberry Pi 4B 지연 측정 절차
+대상: tx2@210.94.194.95  작업 경로: /home/tx2/SOKKANAEM
+작성: 2026-08-24
+
+전체 런북은 EDGE_BENCH.md (저장소 루트). 이 파일은 이 기기 전용 발췌.
+
+
+[0] OS 요구사항
+--------------------------------------------------------------------
+Raspberry Pi OS Lite 64-bit (Bookworm) 또는 Ubuntu Server 24.04 arm64.
+
+64bit는 선택이 아니다. PyTorch는 32bit ARM(armv7l) 휠을 배포하지 않으므로
+32bit 이미지는 pip install 단계에서 막힌다. uname -m 이 aarch64 여야 한다.
+
+Lite(데스크톱 없음)를 쓰는 이유는 측정 안정성이다. dense 경로가 프레임당
+1초 이상 4코어를 온전히 써야 하는데 GUI가 RAM과 코어를 잡으면 회차별
+편차가 커진다.
+
+
+[1] Pi에서: 디렉터리와 파이썬 환경
+--------------------------------------------------------------------
+mkdir -p /home/tx2/SOKKANAEM/work_dirs/edge
+cd /home/tx2/SOKKANAEM
+
+uname -m                      # aarch64 확인. armv7l 이면 여기서 중단.
+
+sudo apt update && sudo apt install -y python3-venv python3-pip libopenblas0
+python3 -m venv ~/venv && source ~/venv/bin/activate
+pip install torch --index-url https://download.pytorch.org/whl/cpu
+python -c "import torch; print(torch.__version__, torch.get_num_threads())"
+
+Bookworm은 PEP 668로 시스템 pip 설치를 막으므로 venv 필수.
+
+주의: pip install -e . 는 하지 말 것. pyproject.toml이 torch 2.x를 요구해
+기기의 torch를 덮어쓰려 한다. 꼭 필요하면 pip install -e . --no-deps
+
+
+[2] 개발 PC에서: 코드와 가중치 전송
+--------------------------------------------------------------------
+저장소 전체를 clone할 필요 없다. Pi가 실제로 쓰는 것은 약 416KB.
+
+cd /workspace/SOKKANAEM
+
+# 추론용으로 줄인 체크포인트 (64MB -> 17MB)
+# 학습 체크포인트는 optimizer 상태까지 담고 있어 그대로 옮길 이유가 없다.
+# 이 PC에는 `python`이 없다. torch는 conda 환경에만 있으므로 절대 경로로 부른다.
+/home/hyunsu/miniforge3/envs/sokkanaem/bin/python - <<'PYEOF'
+import torch
+st = torch.load("work_dirs/v11-longclip-spread-s0/latest.pt", map_location="cpu")
+torch.save({"ema": st.get("ema") or st["model"]}, "/tmp/edge-latest.pt")
+PYEOF
+
+# 코드 (sokkanaem 패키지 + 벤치 스크립트만)
+scp -r sokkanaem tx2@210.94.194.95:/home/tx2/SOKKANAEM/
+ssh tx2@210.94.194.95 'mkdir -p /home/tx2/SOKKANAEM/scripts'
+scp scripts/edge_bench.py tx2@210.94.194.95:/home/tx2/SOKKANAEM/scripts/
+
+# 가중치 + config
+scp /tmp/edge-latest.pt \
+    tx2@210.94.194.95:/home/tx2/SOKKANAEM/work_dirs/edge/latest.pt
+scp work_dirs/v11-longclip-spread-s0/config.toml \
+    tx2@210.94.194.95:/home/tx2/SOKKANAEM/work_dirs/edge/config.toml
+
+*** config.toml 이 latest.pt 와 같은 디렉터리에 있어야 한다. ***
+없으면 모델이 128px 기본값으로 조용히 돌아가 수치가 전부 무의미해진다.
+에러가 나지 않으므로 눈치채기 어렵다. 헤더의 size=256 을 반드시 확인할 것.
+
+대안: git clone https://github.com/qqaazz0222/SOKKANAEM
+      저장소가 private이면 Pi에 인증이 필요하다. scp 쪽이 그 문제를 피한다.
+
+
+[3] Pi에서: 측정 조건 고정
+--------------------------------------------------------------------
+Pi는 온도와 전압에 따라 클럭이 흔들린다. 이것 없이는 재현되지 않는다.
+
+echo performance | sudo tee /sys/devices/system/cpu/cpufreq/policy0/scaling_governor
+vcgencmd measure_temp && vcgencmd get_throttled
+
+2GB 모델이면 스왑 확보:
+
+sudo dphys-swapfile swapoff
+sudo sed -i 's/^CONF_SWAPSIZE=.*/CONF_SWAPSIZE=2048/' /etc/dphys-swapfile
+sudo dphys-swapfile setup && sudo dphys-swapfile swapon
+
+
+[4] 측정
+--------------------------------------------------------------------
+cd /home/tx2/SOKKANAEM
+source ~/venv/bin/activate
+
+# 동작 확인 먼저 (2점만, 1~2분)
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt \
+    --device cpu --threads 4 --iters 3 --warmup 1 --active 0.05 1.0
+
+# 본 측정 (활성률 6점 x 캐시 on/off)
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt \
+    --device cpu --threads 4 --iters 20 --warmup 5 | tee ~/pi4b-fp32.log
+
+--threads 4 를 항상 명시할 것. 생략하면 4코어를 다 쓰면서도 회차마다
+값이 흔들린다.
+
+전력계가 있으면 (INA219를 5V 라인에 붙이거나 USB 전력 미터를 읽는
+스크립트) watts 한 줄을 stdout에 출력하는 명령을 넘긴다:
+
+python3 scripts/edge_bench.py --ckpt work_dirs/edge/latest.pt \
+    --device cpu --threads 4 --power cmd --power-cmd "python3 read_watts.py"
+
+전력계가 없어도 측정 가치는 있다. Nano B01에서 에너지 이득이 전력이 아니라
+시간에서 온다는 것이 이미 확인됐으므로(5.55W vs 6.20W, REPORT 4.37),
+지연 곡선만으로도 그림이 나온다.
+
+
+[5] 회차 폐기 기준
+--------------------------------------------------------------------
+측정이 끝난 뒤 다시 확인:
+
+vcgencmd get_throttled
+
+0x0 이 아니면 그 회차는 버린다. 방열판/팬 없이 돌리면 80~85도에서
+스로틀한다. 전원 어댑터가 공식 3A 미만이면 언더볼티지로 클럭이 떨어진다.
+
+
+[6] 기대값 (검증용)
+--------------------------------------------------------------------
+개발 PC CPU 4스레드에서 같은 슬림 체크포인트로 측정한 값
+(2026-08-24, torch 2.8.0, iters=3 이라 편차 있음):
+
+  cache  active%   ms/frame      FPS
+  on        5.1      18.76     53.3
+  on      100.0     203.90      4.9
+  off       5.1     210.32      4.8
+  off     100.0     206.22      4.8
+
+EDGE_BENCH.md 1절의 기준선(iters=20)은 on/5.1%에서 14.12ms, 15.1배.
+
+Pi는 이보다 몇 배 느린 것이 정상이다. 비교 대상은 절대값이 아니라 비율.
+
+판정 기준:
+  - dense(cache off)가 활성률에 무관하게 평평한가
+  - sparse(cache on)가 활성률에 비례해 내려가는가
+  - 두 경로의 순서가 역전되는가
+
+4090에서는 dense가 평평하게 이겼다(융합 커널 이후). Jetson Nano B01에서는
+희소가 5% active에서 13.7배 빨랐다. Pi 4B는 GPU 없는 순수 CPU 두 번째
+점이 되며, "환산 여부는 하드웨어가 연산 제약인지에 달렸다"는 서술을
+기기 두 종류가 아니라 세 종류로 받치게 된다.
+
+
+[7] 기록할 것
+--------------------------------------------------------------------
+1. 스크립트 헤더 전체 (device, dtype, threads, torch 버전,
+   fused scan available, size=256 확인)
+2. 표 전체 (cache on/off x 활성률 6점)
+3. 측정 종료 후 vcgencmd get_throttled 출력
+4. 측정 전후 vcgencmd measure_temp
+5. 전력계를 썼다면 종류와 읽은 지점 (보드 전체 5V 라인 등)
+6. Pi 모델명과 RAM 용량, OS 이미지, 방열 구성(방열판/팬 유무)
+
+
+[8] 결과 반영 위치
+--------------------------------------------------------------------
+- paper/draft.md 5.7절 "Four efficiency claims, separately scored" 표
+  및 그 아래 본문 (현재 Jetson Nano 수치만 있음, Table 13)
+- paper/draft_ko.md 같은 절
+- REPORT.md 4.37절 (엣지 실측)
+- PLAN.md T2-11 항목, PROGRESS.md 다음 액션 2번
+- paper/self-revision/r1-revision-status.md major 5번
+
+현재 이 파일들은 전부 "TX2와 Raspberry Pi 4B는 미측정"으로 적혀 있다.
