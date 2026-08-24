@@ -1,0 +1,19 @@
+######## structural ceiling, fixed sampling ########
+2026-08-20T13:43:01+00:00
+usage: ceiling_probe.py [-h] --data DATA [DATA ...] [--size SIZE]
+                        [--clip-len CLIP_LEN] [--max-clips MAX_CLIPS]
+                        [--holdout HOLDOUT] [--patch PATCH [PATCH ...]]
+ceiling_probe.py: error: unrecognized arguments: --ckpt work_dirs/v9-60k/latest.pt
+
+######## range ratio, fixed sampling ########
+2026-08-20T13:43:02+00:00
+---- work_dirs/v9-60k ----
+  source  range/gt   std/gt   AbsRel
+     tum      0.93     0.90   0.1293
+    bonn      0.75     0.74   0.1286
+---- work_dirs/v10-longclip ----
+  source  range/gt   std/gt   AbsRel
+     tum      0.94     0.91   0.1312
+    bonn      0.78     0.77   0.1264
+PROBES DONE
+2026-08-20T13:45:11+00:00

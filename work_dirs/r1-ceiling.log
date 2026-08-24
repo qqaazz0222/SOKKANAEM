@@ -1,0 +1,10 @@
+        source  patch      space   AbsRel     RMSE       d1
+------------------------------------------------------------
+           tum     16      depth   0.0858   0.5428   0.9150
+           tum     16  disparity   0.0818   0.6559   0.9209
+           tum      8      depth   0.0474   0.3764   0.9615
+           tum      8  disparity   0.0458   0.4603   0.9617
+          bonn     16      depth   0.0367   0.1686   0.9786
+          bonn     16  disparity   0.0369   0.1868   0.9797
+          bonn      8      depth   0.0204   0.1135   0.9914
+          bonn      8  disparity   0.0203   0.1285   0.9909

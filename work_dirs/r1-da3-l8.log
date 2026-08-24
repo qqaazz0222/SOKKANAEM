@@ -1,0 +1,11 @@
+---- DA3 / tum / L8 ----
+2026-08-20T11:53:29+00:00
+DA3-BASE (0.12B) [scaleshift] tum L8 on 89 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1816  RMSE=1.1658  delta1=0.8038  t-delta=0.1237  OPW=0.0180  TCE=0.0278
+  clipavg: AbsRel=0.1821 (std 0.0547)  delta1=0.8029
+---- DA3 / bonn / L8 ----
+2026-08-20T12:02:06+00:00
+DA3-BASE (0.12B) [scaleshift] bonn L8 on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0444  RMSE=0.1762  delta1=0.9811  t-delta=0.0414  OPW=0.0101  TCE=0.0123
+  clipavg: AbsRel=0.0464 (std 0.0318)  delta1=0.9771
+DA3 L8 DONE

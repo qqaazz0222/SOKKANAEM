@@ -1,0 +1,41 @@
+
+---- bin_temp=1.0 ----
+2026-08-20T20:54:53+00:00
+ckpt=work_dirs/v9-60k/latest.pt data=['bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=399 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 bin_temp=1.0 gmc=False tag=temp1.0 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     bonn            24.4  0.1283   0.4166  0.8801  0.0279   0.0144  0.0192  0.2763  1.118  0.0230  0.1286 (0.113)  100
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_temp1.0.json
+  source  range/gt   std/gt   AbsRel
+     tum      0.93     0.90   0.1293
+    bonn      0.75     0.74   0.1286
+
+---- bin_temp=0.5 ----
+2026-08-20T20:55:33+00:00
+ckpt=work_dirs/v9-60k/latest.pt data=['bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=399 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 bin_temp=0.5 gmc=False tag=temp0.5 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     bonn            24.4  0.1295   0.4199  0.8790  0.0292   0.0148  0.0196  0.2754  1.125  0.0237  0.1297 (0.117)  100
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_temp0.5.json
+  source  range/gt   std/gt   AbsRel
+     tum      0.94     0.92   0.1303
+    bonn      0.75     0.74   0.1297
+
+---- bin_temp=0.25 ----
+2026-08-20T20:56:13+00:00
+ckpt=work_dirs/v9-60k/latest.pt data=['bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=399 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 bin_temp=0.25 gmc=False tag=temp0.25 spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0.05     bonn            24.4  0.1312   0.4247  0.8766  0.0302   0.0153  0.0201  0.2777  1.127  0.0243  0.1314 (0.115)  100
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_temp0.25.json
+  source  range/gt   std/gt   AbsRel
+     tum      0.94     0.92   0.1328
+    bonn      0.74     0.75   0.1314
+TEMP PROBE DONE
+2026-08-20T20:56:53+00:00

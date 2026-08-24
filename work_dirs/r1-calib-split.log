@@ -1,0 +1,48 @@
+######## A. calibration drive only (2011_09_26_drive_0002) ########
+2026-08-20T15:32:51+00:00
+ckpt=work_dirs/v9-60k/latest.pt data=['kitti:/home/hyunsu/dataset_ssd/kitti_zs'] clips=8 size=256 max=30/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 gmc=True tag=calib-drive spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0        kitti          100.0  0.3269  15.2290  0.5550  5.0716   0.1687  0.1385  0.7839  6.001  0.0747  0.3266 (0.040)  8
+0.05     kitti          100.0  0.3269  15.2290  0.5550  5.0716   0.1687  0.1385  0.7839  6.001  0.0747  0.3266 (0.040)  8
+0.1      kitti          100.0  0.3269  15.2290  0.5550  5.0716   0.1687  0.1385  0.7839  6.001  0.0747  0.3266 (0.040)  8
+0.2      kitti           97.7  0.3231  15.1662  0.5557  5.0584   0.1671  0.1386  0.7826  5.941  0.0759  0.3228 (0.038)  8
+0.4      kitti           31.4  0.3155  13.1525  0.5687  2.1535   0.1368  0.1157  0.7715  5.484  0.0564  0.3154 (0.060)  8
+0.8      kitti            5.3  0.3309  15.5422  0.5947  1.2097   0.1172  0.0930  0.7654  5.499  0.0320  0.3312 (0.071)  8
+gmc: 0/336 frames fell back to identity (0.0%)
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_calib-drive.json
+
+######## B. held-out drives (0005/0013/0020/0023) ########
+2026-08-20T15:33:02+00:00
+ckpt=work_dirs/v9-60k/latest.pt data=['kitti:/home/hyunsu/dataset_ssd/kitti_zs'] clips=101 size=256 max=30/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 gmc=True tag=test-drives spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0        kitti          100.0  0.2821   9.8041  0.4725  1.9405   0.0884  0.0898  0.5506  2.475  0.1139  0.2919 (0.070)  30
+0.05     kitti          100.0  0.2821   9.8041  0.4725  1.9405   0.0884  0.0898  0.5506  2.475  0.1139  0.2919 (0.070)  30
+0.1      kitti          100.0  0.2821   9.8041  0.4725  1.9405   0.0884  0.0898  0.5506  2.475  0.1139  0.2919 (0.070)  30
+0.2      kitti           87.9  0.2829   9.8152  0.4707  1.9024   0.0876  0.0887  0.5516  2.472  0.1112  0.2926 (0.070)  30
+0.4      kitti           46.0  0.2910  10.4408  0.4701  1.4532   0.0875  0.0870  0.5766  2.566  0.0880  0.3001 (0.092)  30
+0.8      kitti           11.5  0.2969  10.7053  0.4702  0.7625   0.0748  0.0777  0.5752  2.595  0.0772  0.3029 (0.096)  30
+gmc: 0/1260 frames fell back to identity (0.0%)
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_test-drives.json
+
+######## C. same split, pixel gating (no GMC) ########
+2026-08-20T15:33:38+00:00
+ckpt=work_dirs/v9-60k/latest.pt data=['kitti:/home/hyunsu/dataset_ssd/kitti_zs'] clips=101 size=256 max=30/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 dense_above=0.4 gmc=False tag=test-drives-pixel spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n
+-----------------------------------------------------------------------------------------------------------------------------
+0        kitti          100.0  0.2821   9.8041  0.4725  1.9405   0.0884  0.0898  0.5506  2.475  0.1139  0.2919 (0.070)  30
+0.005    kitti          100.0  0.2821   9.8041  0.4725  1.9405   0.0884  0.0898  0.5506  2.475  0.1139  0.2919 (0.070)  30
+0.01     kitti           98.5  0.2818   9.8027  0.4727  1.9441   0.0887  0.0901  0.5526  2.478  0.1147  0.2911 (0.068)  30
+0.02     kitti           97.6  0.2819   9.7976  0.4717  1.9420   0.0887  0.0900  0.5538  2.490  0.1157  0.2912 (0.068)  30
+0.05     kitti           93.1  0.2817   9.8064  0.4729  1.9079   0.0872  0.0885  0.5544  2.505  0.1167  0.2916 (0.073)  30
+0.1      kitti           77.3  0.2793   9.7817  0.4768  1.7939   0.0879  0.0885  0.5582  2.532  0.1023  0.2890 (0.076)  30
+
+appended -> work_dirs/v9-60k/eval.txt
+per-clip -> work_dirs/v9-60k/scores_test-drives-pixel.json
+CALIB SPLIT DONE
+2026-08-20T15:34:11+00:00
