@@ -328,8 +328,11 @@ temporal $\Delta$-gating과 달리 **근사** — sparse scan이 static 패치�
 3. **시스템 (4주):** ~~블록 희소 커널(Triton) 구현~~ → **융합 selective-scan 커널로 대체 완료**
    (`sokkanaem/scan_triton.py`, REPORT §4.24). 병목이 gather가 아니라 스캔이었고, 커널이
    dense를 11.4→1.98 ms로 줄이면서 **희소 경로의 wall-clock 우위 자체를 없앴다.**
-   **엣지 실측은 Jetson Nano B01에서 완료**(§4.37) — 거기서는 희소가 이긴다. Orin급은
-   미측정이고(`sm_53`이 융합 커널을 못 돌림), TX2·Raspberry Pi 4B도 미측정이다. 데모 미착수.
+   **엣지 실측은 기기 두 종에서 완료**(§4.37) — Jetson Nano B01에서 5% active에 13.7배,
+   가속기가 아예 없는 Raspberry Pi 4B에서 14.2배. 고정 부기가 dense 프레임의 2.1%·2.4%로
+   두 기기가 일치해, 이득이 특정 가속기가 아니라 **산술 대 오버헤드 비**의 성질이다.
+   Orin급은 미측정이고(`sm_53`도 CPU도 Triton 미지원이라 **두 측정 모두 배포 구성이 아니다**),
+   TX2도 미측정이다. 데모 미착수.
 4. **논문화:** 타깃 — CVPR/ICCV (efficiency track) 또는 실시간 시스템 강조 시 CoRL/IROS.
 
 ---

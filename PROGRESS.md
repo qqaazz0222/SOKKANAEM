@@ -341,7 +341,9 @@ temporal cache가 hidden state를 bit-identical로 유지, bin 중심 단조·�
 - **256프레임 스트리밍을 주 프로토콜로 승격.** 클립 단위 벌점의 대부분이 드리프트가 아니라
   클립당 정합 창이었고, 상태 없는 baseline이 같은 클립에서 훨씬 크게 악화한다.
 - **엣지 실측 성사**(Jetson Nano B01): 4090의 서열이 뒤집힌다. 5% active에서 시간 13.7배·
-  에너지 15.3배. **TX2·Raspberry Pi 4B는 여전히 미측정.**
+  에너지 15.3배. **Raspberry Pi 4B(2026-08-24)에서 14.2배** — 가속기가 없는 보드라
+  "어느 가속기냐의 문제" 반론이 닫힌다. 고정 부기가 dense 프레임의 2.4%(Nano 2.1%)로 두 기기가
+  일치. **TX2는 여전히 미측정이고, Pi는 전력 레일이 없어 에너지는 Nano 하나에 기댄다.**
 - **rolling refresh 기각**, **dense 폴백은 운용점 2개로 정리**, **warp 가중치는 다이얼**로 확정.
 - **문서·그림 감사(08-23)**: Table 7c의 "Reported" 열이 실제로는 base 체크포인트였다.
   보고 체크포인트에서 주기 5·10·15를 새로 재고 표와 그 표를 읽던 문단을 고쳤다. 같은 감사에서
@@ -354,8 +356,9 @@ temporal cache가 hidden state를 bit-identical로 유지, bin 중심 단조·�
 1. **논문 제출본 정리** — r1 minor 1(`[CHECKPOINT-DEPENDENT]` 태그 8개 제거)과
    minor 15(저자·소속·Data Availability·Funding·Acknowledgments)는 **최종 교정본에서 처리**.
    minor 15는 사용자 정보 필요.
-2. **TX2·Raspberry Pi 4B 실측** — 절차는 `docs/EDGE_BENCH.md`에 있다. Nano B01 결과가
-   기기 종속성을 보였으므로 두 번째·세 번째 점이 곡선을 확정한다.
+2. **Jetson TX2 실측** — 절차는 `EDGE_BENCH.md`에 있다. Nano와 Pi가 이미 두 점을 찍었고
+   절편 비율이 2.1%·2.4%로 일치하므로, TX2는 그 상수성을 세 번째로 확인하는 자리다.
+   전력 레일이 있으므로 **에너지 결과를 Nano 밖에서 재현할 유일한 후보**이기도 하다.
 3. **Orin급 실측** — `sm_53`이 융합 커널을 못 돌려 Nano 수치는 배포 구성이 아니다.
    Orin이 그 공백과 실시간 처리량 공백을 동시에 닫는다.
 4. **참고문헌 검증** — 미확인 6건, 특히 Depth Anything 3(0.12B baseline으로 전편에 쓰이는데
