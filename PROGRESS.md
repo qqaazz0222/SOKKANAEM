@@ -12,6 +12,73 @@
 | 3. 시스템 (4주) | 🟡 커널 완료, 에지 실측 보류(기기 미확보) | 융합 Triton 스캔으로 dense compiled **1.29 ms(776 FPS)**, 희소 2.04 ms — 합격선 2.34 ms 통과. **단 4090에서는 dense가 항상 더 빠르다**(§4.24): 희소의 이득은 연산량 37.0%와 스트림당 state로 한정, 환산 여부는 Jetson 실측이 가른다 |
 | 4. 논문화 | 🟡 진행 중 | 초록·§5.2/5.3/5.5/5.6·결론·한계를 확정 체크포인트와 §4.24~4.26 결과로 갱신. 남은 것: 참고문헌, §6 ablation 최신화 |
 
+## PLAN 1라운드 — 계측기·게이트·D1, 그리고 순서가 바뀌었다 (2026-08-29)
+
+[PLAN.md](PLAN.md) §10의 1~3항 완료. 수치는 [REPORT.md](REPORT.md) §4.44.
+
+- **신설**: `sokkanaem/sharpness.py`(경계 P/R/F1, flat TV, overshoot, grad_ratio, edge AbsRel —
+  전부 프레임별 정규화 disparity 위, 정합 규칙 무관), `tests/test_sharpness.py`(6건),
+  `tests/test_full_res.py`(3건), `tests/test_stage_a_losses.py`(6건). pytest 109건 통과.
+- **게이트가 처음으로 실행 가능해졌다**: `scripts/acc_gate.py`에 P1(PLAN §3.1 8항)·P2(§3.2 5항)
+  추가. 보고 체크포인트는 P1 1/8, P2 2/5 통과 — 승격선은 어느 쪽으로도 열려 있지 않다.
+  `scripts/eval_acc.py --sharp`로 선명도를 **봉인 manifest**에서도 재게 해서 P1과 P2가 서로 다른
+  클립 집합에서 측정되던 문제를 없앴다.
+- **측정이 계획 순서를 바꿨다**: GT를 patch-16 토큰 그리드로 통과시킨 oracle의 grad_ratio가
+  0.2612로 **우리(0.4323)보다 낮다**. 선명도 게이트 0.756은 `dim`/`depth`를 키워서 도달할 수
+  없다 — 레버는 용량이 아니라 복원 경로다. 그래서 PLAN §8의 3번(D1)을 1·2번(M0/M1)보다 먼저
+  구현했다. 또한 우리 출력은 blur만이 아니라 **ringing도** 한다(overshoot 0.3196, 네 arm 중 최악).
+- **신설 구현**: D1 = `DPTDecoder(full_res=True)` — 1/2 해상도 pixel-shuffle residual + 전체
+  해상도 RGB detail, **둘 다 zero-init**이라 초기 출력이 D0와 동일(+0.024 GMAC, +0.8k 파라미터).
+  Stage A 손실 2종 = `boundary_location_loss`(평탄 영역 gradient L1 + 경계 단측 hinge,
+  overshoot을 사지 않음), `rank_loss`(정규화 disparity 위 pairwise ordering, gauge-free).
+  용량 노브는 CLI로 노출(`--dim/--depth/--d-state/--dec-width/--full-res`)하고 config.toml
+  왕복을 테스트로 고정.
+- **M0/M1 실측**: 10.82M/3.803G/3.56ms, 13.55M/4.587G/3.85ms (256px 4090 eager) — PLAN §4.1
+  예상과 일치, 셋 다 15M 예산 안.
+
+**arm 결과 (2026-08-29~30, 전부 보고 체크포인트에서 4k fine-tune)** — 수치는 REPORT §4.44.
+
+- **용량은 병목이 아니다**: M0(10.8M)가 학습 손실은 더 낮은데 dense 채점은 전 항목 열세.
+  4.19M 유지, M0 전체 학습 보류.
+- **선명도 레버는 `boundary_location_loss` 하나**: λ=1에서 grad_ratio 0.431→0.457,
+  λ=3에서 **0.578**, boundary F1 0.342→0.441. 가중치에는 붙고 step에는 거의 안 붙는다(12k에서 +0.008).
+- **D1(full-res 학습형 업샘플링)은 손실이 요구할 때만 값을 한다**: D1 단독은 무변화, `up_res`
+  가중치가 zero-init 그대로였다. boundary와 함께면 boundary 단독을 전 열에서 이긴다.
+- **정확도 최고는 실촬 경계띠 trim**: AbsRel 0.1253 → **0.1215**(−3.0%), near −2.8%.
+- **기각**: DA V2식 형상 감독 분리(합성 전용)는 실내 경계 감독을 없애 선명도 하락(0.431→0.416).
+  DPT식 `fuse_norm`은 AbsRel +14%·precision 하락으로 재차 기각. rank·dynamic·msgrad는 노이즈 수준.
+- 게이트는 여전히 전 항목 FAIL. 최고 선명도 arm이 grad_ratio 0.578, 목표 0.756.
+
+진행 중: boundary λ=3/λ=6 + overshoot + trim 결합 arm 2종. 이후 384px, 그래도 미달이면 PLAN §7 Q 트랙.
+
+## 정확도 우선 재설계 — Phase A 완료 (2026-08-25)
+
+[PLAN_ACC.md](PLAN_ACC.md)의 Phase A(A1~A6). **학습은 하지 않았고 평가 계약만 봉인했는데,
+계획의 전제 셋이 바뀌었다.** 수치·표는 [REPORT.md](REPORT.md) §4.43.
+
+- **신설**: `sokkanaem/alignment.py`(모든 모델 공통 정합 + 0-crossing failure 집계),
+  `scripts/make_acc_manifest.py`, `scripts/eval_acc.py`(ours·HF baseline 단일 경로),
+  `scripts/acc_gate.py`(G1/G2 판정), `scripts/acc_summary.py`, `tests/test_alignment.py`(8건).
+  `manifests/acc_real_L{8,32,256}.json`에 TUM+Bonn holdout 전 클립을 프레임 단위로 봉인 —
+  cap도 loader 순서 의존도 없다. dump 28개는 `work_dirs/acc/`.
+- **G2가 잘못 정의돼 있었다.** clip 전체 gauge에서는 **상태가 없는** DPT-Large가 L8→L256
+  +116%로 우리(+81%)보다 나쁘다 — 드리프트할 상태가 없으니 전부 정합 창이다. 프레임별 gauge를
+  구현해 분리하니 DPT-Large는 평탄(0.0847→0.0850, δ1 0.00pt)하고 **우리만 +20%·δ1 −5.06pt가
+  남는다.** 실재하는 형상 드리프트가 그동안 "정합 창 탓"에 가려져 있었다. G2 합격선을 프레임별
+  gauge로 옮겼다.
+- **재귀 상태는 정확도를 만들지 않는다.** dense(tau=0)와 매 프레임 state reset이 L8/L32/L256
+  전부에서 소수 셋째 자리까지 같다(0.1125/0.1130, 0.1180/0.1191, 0.1822/0.1823). 반대로
+  TemporalBlock 자체를 우회하면 0.1153→0.2518로 무너진다 — 블록은 **프레임당 용량**으로 필수,
+  **기억**으로는 무용. (시간 안정성 지표는 이 실행에서 껐으므로 §4.19 주장은 유효.)
+- **격차는 경계가 아니라 움직임·근거리다.** 동적 픽셀 2.66×, 근거리(<2m) 2.38× 열세인데
+  깊이 경계띠는 1.15×로 전체 배율과 같다. **TUM 정적 픽셀에서는 4.19M이 343M DPT-Large와
+  동률**(0.1097 대 0.1130). 해상도·패치 크기를 첫 레버로 쓰지 않는 판단이 측정으로 뒷받침됐다.
+- **비교군 재측정**: DPT-Large 384px가 G1 전 항목 통과(0.0876 / 중앙 0.0792 / δ1 0.9274 /
+  실패 0) — 기준선은 실재하고 도달 가능하다. DA V2 Small의 TUM 평균 0.3464는 89클립 중
+  **15클립의 정합 0-crossing** 산물이며(중앙값 0.0950), 쉬운 합격선으로 쓰지 않는다.
+- **다음**: A6가 새로 만든 후보 A7(동적·근거리 가중 재학습)·A8(상태 없는 대조 학습)을 B 단계
+  anchor 작업보다 먼저 잰다 — 둘 다 외부 가중치 없이 현재 구조로 가능하다.
+
 ## 리뷰 1차 대응 (2026-08-20)
 
 `paper/self-revision/r1.md`의 리뷰 코멘트를 검증하고 반영하는 라운드. **이 라운드에서 평가

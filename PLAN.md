@@ -1,293 +1,400 @@
-# PLAN — 약점 해소 계획
+# SOKKANAEM 정확도 우선 고도화 계획
 
-기준일 2026-07-30. 근거는 [REPORT.md](REPORT.md) §4.15(외부 비교)·§4.19(감사 후속),
-[reports/20260729.md](reports/20260729.md). 진행 기록은 [PROGRESS.md](PROGRESS.md).
+> 목표: 파라미터 수와 처리 효율의 일부를 정확도에 재투자하여, 최종 깊이 맵이 최소한
+> Depth Anything V2 Small(DA2-small) 수준의 형상 정확도와 경계 선명도를 갖도록 한다.
+>
+> 작성일: 2026-08-29  
+> 기준 체크포인트: `work_dirs/v11-longclip-spread-s0/latest.pt`
 
-비용은 실측 기준: 8k step 학습 ≈ 1.7h, 60k step ≈ 14.5h, 소스별 eval(100클립×5소스) ≈ 20분.
-GPU는 RTX 4090 1장.
+## 1. 결론
 
-체크박스 규칙: `[ ]` 미착수 · `[~]` 진행 중 · `[x]` 완료 · `[-]` 폐기/불필요 판정.
-완료 항목은 근거(REPORT 절 또는 work_dir 경로)를 한 줄로 남긴다.
+현재 4.19M 모델에 손실 항을 추가하거나 가중치만 조정하는 단계는 종료한다. 다음 주력 모델은
+10~15M 파라미터 범위의 `SOKKANAEM-M`으로 확장하고, 단일 프레임 형상 품질을 먼저 확보한 뒤
+시간 상태와 희소 연산을 재도입한다.
 
-## 약점 목록 (외부 모델 대비)
+핵심 변경은 다음 세 가지다.
 
-| # | 약점 | 처리 |
-|---|---|---|
-| W1 | 절대 δ1이 SOTA 대비 열위, 최신 모델은 baseline 재비교 자체가 없음 | T0-1 + 프레이밍 |
-| W2 | 시간 우위가 t-delta 하나뿐, OPW/TCE는 DA3·VDA에 열위 | T1-6 |
-| W3 | 움직임 많으면(active 70%) 효율 이득 소멸 | T2-12 (범위 명시) |
-| W4 | 희소 경로 compile 불가 → compiled dense와 동률 | T2-9, T2-10 |
-| W5 | ~~Jetson·전력 실측 없음~~ **해소** — Nano B01·Raspberry Pi 4B 실측(§4.37). TX2 미측정 | T2-11 |
-| W6 | 원거리 RMSE 열위(전역 64 log bin) | T1-5 |
-| W7 | 전경 물체 depth가 32px 상수 oracle보다 나쁨 | T1-7 |
-| W8 | cache가 active 40~80%에서 U자형 악화 | T0-3 |
-| W9 | sequence holdout뿐, cross-domain zero-shot 미검증 | T3-13 |
-| W10 | metric scale 신뢰 낮음(median scaling 기준) | T0-4 |
-| W11 | GMC가 합성 clean geometry에서만 검증 | T3-14 |
-| W12 | seed 반복 없음, 전 결과 1회 실행 | T0-2 |
+1. `dim/depth/d_state`를 키워 프레임당 공간 표현 용량을 확장한다.
+2. 상대 형상과 metric scale을 분리한 이중 헤드 및 full-resolution learned upsampling을 도입한다.
+3. 동적·근거리 clip을 명시적으로 더 자주 학습하고, 단일 프레임 품질 합격 후에만 희소·시간
+   학습을 수행한다.
 
-## Tier 0 — 즉시, 논문 차단 요소 (~1.5일)
+15M 이하 native 모델이 최종 품질 게이트를 넘지 못하면 손실 실험을 반복하지 않는다. 이 경우
+DA2-small의 pretrained encoder/head를 직접 초기화하는 품질 보장 트랙으로 전환하고, 이후
+SOKKANAEM-M으로 압축한다.
 
-- [x] **T0-3 · W8 고활동 dense 폴백 — 채택(기본 0.4).** detector active가 임계를 넘으면 그
-  프레임은 dense 경로로 돌리고 cache를 전부 갱신, `active_ratio`도 1.0으로 정직하게 보고.
-  실촬 AbsRel 0.1685→0.1633, δ1 0.8083→0.8211, TCE 0.0354→0.0351, 대가는 active 22.2→32.2
-  및 t-delta 0.0881→0.0915. 합성은 정확도 동결에 연산만 +12.6pt. **속도 주장은 이제 실촬
-  active 32%에서 인용해야 한다.** U자형 악화는 v6(추론 전용 캐시) 유물로 판정.
-  → REPORT §4.20a, `sokkanaem/model.py`, `tests/test_arch.py::test_high_motion_frame_falls_back_to_dense`
-- [x] **T0-1 · W1 최신 체크포인트로 baseline 공통표 재생성.** → REPORT §4.20c
-  - [x] DA3 Base 5소스 — 실촬에서 우리 열위(AbsRel 0.1244 vs 0.1633), t-delta만 우위.
-  - [x] DA v2 Small 5소스 — `baselines` env에 `transformers`가 사라져 `sokkanaem` env로 재실행
-    (`work_dirs/t0-da2.sh`, 로그 `work_dirs/t0-da2.log`).
-  - [-] VDA Small — 로컬 체크아웃 소실(`Video-Depth-Anything` 디렉터리 없음). 재클론 +
-    metric 체크포인트 다운로드가 선행 조건이라 이번 라운드 제외, §4.15의 기존 수치 인용 유지.
-- [x] **T0-2 · W12 seed 분산 분리 — bin CE는 분산 밖.** 실촬 AbsRel 0.1795±0.0026 (bin CE)
-  vs 0.1963±0.0050 (없음), 차이 −8.6%로 seed 분산의 3~6배. 새 사실 둘: bin CE는 t-delta
-  +8%·TCE +12%를 대가로 지불하고(→ T1-6), **합성 δ1의 seed 표준편차가 ±0.015**라 3pt 미만의
-  합성 δ1 차이는 노이즈다. → REPORT §4.20b, `work_dirs/t0-seed*-bin*`
-- [x] **T0-4 · W10 scale drift.** 8→32프레임에서 drift 실촬 0.0235→0.0444, 합성
-  0.0934→0.1587 (√4=2배보다 낮아 체계적 드리프트가 아니라 확산). TartanAir는 배율 1.98로
-  median scaling 없이는 무의미. metric scale 주장은 계속 하지 않는다. → REPORT §4.20d
+## 2. 현재 상태와 병목
 
-## Tier 1 — 정확도 (~1주, 대부분 GPU 대기)
+### 2.1 현재 기준선
 
-**측정된 seed 노이즈 기준선**(T0-2): 실촬 AbsRel ±0.005, 실촬 δ1 ±0.004, 합성 δ1 ±0.015.
-이보다 작은 차이는 채택 근거로 쓰지 않는다. 대조군은 `work_dirs/t0-seed0-bin0.2`.
+| 항목 | 현재 SOKKANAEM | 비교 기준 |
+|---|---:|---:|
+| 파라미터 | 4.19M | DA2-small 24.79M |
+| L8 scale-shift balanced AbsRel | 약 0.115 | DPT-Large 0.0876 |
+| L8 scale-shift balanced δ1 | 약 0.866 | DPT-Large 0.9274 |
+| 선명도 gradient ratio | 0.432 | DA2-small 0.756 |
+| 256px dense 연산량 | 1.64 GMAC | - |
 
-- [x] **T1-5 · W6 원거리 RMSE — bin 가설 기각, 목표는 edge 손실이 대신 달성.** `scripts/bin_probe.py`가
-  head의 양자화 바닥을 깊이 구간별로 측정: 80 m 미만은 이미 AbsRel 0.0000(= bin 개수는
-  병목이 아님), 반면 vkitti2 픽셀의 0.8%가 최상위 bin 중심(115 m, `d_max=150`에서 파생)을
-  넘어가고 **그 0.8%가 제곱오차의 54%**를 낸다. 원래 계획의 128 bin·log-disparity·per-image
-  adaptive는 근거가 사라져 폐기하고 2개 arm만 돌린다.
-  - [-] log-disparity binning — log-depth와 부호만 다른 동일 분할이라 무의미.
-  - [-] per-image adaptive bin / 데이터셋별 range 정규화 — 80 m 미만 바닥이 이미 0이라 불필요.
-  - [-] `t1-binrange`(`d_max` 600): 어느 지표도 seed 노이즈를 못 넘음(합성 RMSE 15.53→15.37).
-    상한을 풀어줘도 모델이 그 범위를 안 쓴다 — 원거리 열위는 head 표현력이 아니라 256px에서
-    300~600 m를 못 보는 정보 한계로 판정. `d_max`는 kwarg로 남기고 기본 150 유지.
-  - [-] `t1-bin128`: 양쪽 도메인 모두 악화. 기각.
-  - [x] **목표치는 엉뚱한 곳에서 달성됐다**: T1-7의 edge 2.0이 bin을 안 건드리고 합성 RMSE
-    15.53→**14.51**(목표 14.60)을 냈다. → REPORT §4.21a, c
-- [x] **T1-6 · W2 warp residual 손실 — 2.0 채택.** 8k에서는 시간 지표 개선을 실촬 정확도로
-  샀지만(TCE −12%·OPW −16% vs δ1 −0.0095), **60k에서 그 교환이 사라진다** — edge 2.0과 함께
-  60k를 돌린 `v9-60k`가 실촬 AbsRel 0.1633→0.1595, t-delta 0.0915→0.0751로 양쪽 다 가져갔다.
-  8k arm 스크리닝은 항의 부호는 정해도 크기는 못 정한다. → REPORT §4.21b, §4.23
-- [x] **T1-7 · W7 edge 가중 손실 — 채택.** edge 2.0: 실촬 AbsRel 0.1773→**0.1745**,
-  δ1 0.8082→**0.8107**, 합성 RMSE 15.53→**14.51**. 대가는 합성 t-delta +32%로 T1-6이
-  상쇄할 수 있는 종류. TUM 단독 AbsRel 0.1447→0.1358. 32px oracle(0.1459)은 프로토콜이
-  달라 직접 비교로 쓰지 않는다. → REPORT §4.21c
-- [x] **T1-8 최종 60k 재학습 — `work_dirs/v9-60k` 확정.** tier1b 선택자가 edge 2.0 + warp 2.0을
-  골랐고 60k(13h11m) 결과가 직전 확정 체크포인트를 **연산 증가 없이**(active 32.2% 동일) 전
-  지표에서 앞선다: 실촬 AbsRel 0.1633→**0.1595**, δ1 0.8211→**0.8262**, t-delta
-  0.0915→**0.0751**, TCE 0.0351→**0.0323**, 합성 RMSE 15.18→**14.22**. 단 대조군과 init 계보가
-  달라 **손실 항의 인과 주장은 하지 않는다**(§4.23d). → REPORT §4.23
-  - [-] `v9-edge-60k`(edge 단독 대조 arm): step 23100/60000에서 죽음, 근거였던 8k 순위가
-    60k에서 뒤집혀 재개하지 않고 폐기. → REPORT §4.23e
+DA2-small의 TUM 평균 AbsRel은 89개 clip 중 15개의 scale-shift 정합 0-crossing 때문에 오염되어
+있다. 따라서 DA2-small의 단일 평균값을 목표로 삼지 않고, 안정적인 DPT-Large 공통 게이트와
+DA2-small의 source별 유효 지표를 함께 사용한다.
 
-## Tier 2 — 시스템 (~2주). 여기가 실제 기여
+### 2.2 확인된 병목
 
-- [x] **T2-9 · W4 버킷 패딩 — 희소 경로가 compiled dense를 다시 앞선다(합격선은 미달).**
-  `pad_to_bucket`이 active 토큰 수를 64의 배수로 올리고 패드를 Δ-gating으로 꺼서 **결과 불변**
-  (`tests/test_arch.py::test_bucket_padding_does_not_change_the_result`), `compile_sparse()`가
-  그 위에서 스캔만 컴파일한다. active 22%에서 4.87 → **2.99 ms**(334 FPS)로 compiled
-  dense(4.70 ms) 대비 **1.57배**, 실촬 평균 32%에서 3.94 ms로 1.19배.
-  기준(2.34 ms)에는 미달이고 active 50%에서 동률·70%에서는 dense가 낫다 — 그 오른쪽 끝은
-  T0-3 폴백이 자동 처리. 버킷만 켜고 컴파일 안 하면 항상 느리다. → REPORT §4.22
-- [x] **T2-10 · W4 융합 Triton 스캔 — 합격선 통과, 대신 희소 우위가 사라졌다.** 병목은
-  gather가 아니라 스캔이었다(희소 프레임의 71%). `scan_triton.py`가 쌍별 감쇠 텐서를 없애고
-  재귀를 레지스터에서 돌린다(추론 전용, Δ-게이팅 bit-exact 유지, 평가 지표 불변).
-  dense eager 11.4→**1.98**, dense compiled 4.70→**1.29**, 희소+버킷+컴파일 2.99→**2.04 ms**.
-  합격선 2.34 ms는 통과했으나 **모든 active에서 dense compiled가 더 빠르다**(1.29 vs 2.0~2.2)
-  — 희소가 아끼던 스캔이 공짜가 되면서 고정 오버헤드(gather·argsort·clone·동기화)만 남았다.
-  wall-clock 기준 시스템 기여 주장은 철회하고 연산량·메모리로 한정한다. → REPORT §4.24
-- [x] **T2-11 · W5 엣지 실측 — Jetson Nano B01에서 완료(2026-08-21).** 이 측정이 무엇을
-  가르는지는 미리 명확했다: 4090에서는 모델이 오버헤드에 묶여 연산량 절감이 시간으로 나타나지
-  않으므로(§4.24d), 희소 경로의 실효는 연산에 묶인 기기에서만 판정된다. **판정 결과 서열이
-  뒤집힌다** — 5% active에서 시간 13.7배·에너지 15.3배, 손익분기 active 99%.
-  최소제곱 분해 `33 ms + 1544 ms × active`이고 4090에서는 그 절편이 측정의 전부였다.
-  에너지 이득은 전력이 아니라 시간에서 온다(5.55 W vs 6.20 W). → REPORT §4.37
-  **두 번째 기기(2026-08-24)**: Raspberry Pi 4B는 GPU 경로가 아예 없는데 **14.2배**가 나온다
-  (`sparse ≈ 169 ms + 6439 ms × active`, R²=0.9989). 고정 부기가 dense 프레임의 2.4%로 Nano의
-  2.1%와 사실상 같아, 이득이 특정 가속기가 아니라 **산술 대 오버헤드 비**의 성질임이 확정됐다.
-  손익분기 105%라 이 기기에서는 희소가 지는 구간이 없다. → REPORT §4.37e
-  **남은 공백 셋**: 두 기기 모두 융합 커널을 못 돌려(`sm_53`도 CPU도 Triton 미지원) 측정 구성이
-  배포 구성이 아니고(Orin급 필요), Pi에 전력 레일이 없어 에너지는 Nano 하나에 기대며,
-  둘 다 실시간과 멀다(8.8·2.0 FPS). **Jetson TX2는 미측정**(절차는 `EDGE_BENCH.md`).
-- [x] **T2-12 · W3 운용 범위 명시 — 경계가 이동했다.** §4.22 기준의 "active>50%면 dense"는
-  T2-10 이후 "**4090에서는 항상 dense**"가 됐다. 희소 경로는 연산량(37.0%)과 스트림당
-  state에서만 이득이며, 그것이 시간으로 환산되는지는 T2-11이 가른다. → REPORT §4.24d
+- TUM 정적 픽셀에서는 현재 4.2M 모델과 343M DPT-Large가 사실상 동률이다.
+- 오차 격차는 동적 픽셀에서 2.66배, 2m 이내 근거리에서 2.38배로 커진다.
+- 깊이 경계띠 격차는 1.15배이므로 patch 크기나 입력 해상도가 첫 번째 병목은 아니다.
+- 재귀 상태는 L8/L32/L256 정확도에 측정 가능한 이득을 주지 않는다. TemporalBlock 자체는
+  프레임당 용량으로 필요하지만, 프레임 간 기억은 정확도 생성기로 작동하지 않는다.
+- 현재 DPT decoder는 1/2 해상도에서 깊이를 만든 뒤 마지막 2배를 bilinear interpolation한다.
+  깊이 bin의 기대값 역시 경계에서 평균화를 유발할 수 있다.
+- `fuse_norm`, log-space gradient/normal, DA2 teacher-gradient, 근거리 loss 재가중은 단독으로
+  DA2 수준의 선명도에 도달하지 못했다.
+- A7 근거리 가중은 Bonn 근거리·동적 영역 일부를 개선했지만 TUM 동적 오차는 거의 그대로였다.
 
-## Tier 3 — 일반화 (선택, ~2일)
+따라서 다음 단계는 게이팅 튜닝이 아니라 **공간 표현 용량, 고해상도 복원, 동적 장면 감독**에
+집중한다.
 
-- [x] **T3-13 · W9 cross-domain zero-shot — 정확도는 넘어가고 기본 희소성은 안 넘어간다.**
-  KITTI raw 5드라이브(885프레임, 미학습). AbsRel 0.2894·δ1 0.4955로 in-domain 합성 holdout
-  (0.3619·0.3943)보다 오히려 낫지만 **난이도가 다른 문제**라 서열로 쓰지 않는다. 진짜 결과는
-  active 25.8% → **92.8%**: 스킵률이 합성에서 측정된 낙관값이었다. NYU(호스트 무응답)·
-  ScanNet(서명 필요)은 제외. → REPORT §4.25
-- [x] **T3-14 · W11 실 이동 카메라 GMC 검증 — 같은 연산에서 확실히 낫다.** 같은 30클립에
-  active-정확도 곡선 전체를 그려 비교(임계 스케일이 달라 같은 tau 비교는 무의미). GMC는
-  **active 43.8%에서 AbsRel 0.3084·δ1 0.5342**로 픽셀 게이팅 51.1%(0.3357·0.4749)를 더 적은
-  연산으로 이기고, **14.1%에서도 픽셀 51.1%보다 전 지표 우위**다. 단 기본 임계(0.1)는 실촬에서
-  active 100%라 **도메인별 재조정이 필수**. → REPORT §4.26
+## 3. 최종 합격 기준
 
-## Tier 4 — 다음 라운드 (2026-08-18 착수 대기)
+평가는 봉인된 `manifests/acc_real_L{8,32,256}.json`을 사용하며, holdout이나 clip 순서를
+변경하지 않는다.
 
-근거는 REPORT §4.27의 세 측정. **연산 예산이 있다**: fp16 dense가 0.378 ms(2646 FPS)라
-DA v2 Small(1226 FPS)까지 **2.2배를 더 쓸 수 있다**. 어디에 쓸지가 이 Tier의 전부다.
+### 3.1 단일 프레임 및 짧은 clip 정확도
 
-### 방향 1 — 깊이 정확도 (목표: 실촬 MEAN AbsRel 0.1595 → 0.13 이하) — **달성**
+L8, scale-shift 기준:
 
-> **2026-08-23.** 목표는 달성됐으나 절반은 측정 정정에서 왔다. 표본 버그를 고치자 같은
-> base 체크포인트가 0.1595에서 **0.1302**로 이동했고(§4.36), 거기서 장클립·spread 두 단계가
-> **0.1263**까지 내렸다. 즉 0.13 돌파 중 0.029는 측정이 틀렸던 몫이고 0.004가 학습의 몫이다.
-> 아래 진단은 그 사실을 반영하기 전에 쓴 것이라 절대 수치가 낡았다.
+- balanced AbsRel ≤ **0.090**
+- balanced δ1 ≥ **0.930**
+- clip P95 AbsRel ≤ **0.153**
+- 정합 실패 0, catastrophic failure 0
+- TUM clip median AbsRel ≤ **0.095**
+- Bonn pooled AbsRel ≤ **0.058**
+- Bonn δ1 ≥ **0.973**
 
-§4.27a가 방향을 뒤집었다. patch 16 상한이 AbsRel 0.065~0.084인데 우리는 0.132~0.187 —
-**상한의 2~2.9배 위**다. 해상도·패치 크기는 병목이 아니므로 거기에 연산을 쓰지 않는다.
+앞의 네 항목은 정합 실패가 없는 DPT-Large 기준을, 뒤의 두 Bonn 항목은 DA2-small의 실제 유효
+성능을 반영한다. 한 source의 평균으로 다른 source의 실패를 가리는 모델은 승격하지 않는다.
 
-- [ ] **T4-15 소스별 실패 해부 — Bonn이 전부다.** Bonn 0.1869 vs 상한 0.0651(여유 3배),
-  TUM 0.1321 vs 0.0844(2배). **Bonn을 상한 쪽으로 절반만 당겨도 MEAN이 0.13 아래**로
-  DA3(0.1244)에 근접한다. 클립별 오차 분포에서 최악 10%가 무엇인지 먼저 확인
-  (`scores_real.json` 이미 있음) — 동적 객체 가림인지, 근거리 포화인지, 특정 시퀀스인지.
-  선행 조건 없음, 반나절.
-- [ ] **T4-16 용량 증설 — dim 192 → 288.** §4.27a가 "용량·학습이 병목"이라 했고 §4.27b가
-  예산을 줬다. 백본 MAC 2.25배여도 fp16 dense ~0.85 ms로 DA v2보다 빠르다. v5(dim 384)를
-  접었던 근거는 "속도 프레임을 깬다"였는데 **그 프레임은 이미 바뀌었다**(§4.24). 60k 14.5h.
-- [ ] **T4-17 동적 객체 손실.** T4-15가 가림/동적 객체를 지목하면, 현재 손실에는 그걸 겨냥한
-  항이 없다(si_log·grad·temporal·bin CE·warp·edge). warp residual은 오히려 동적 영역에서
-  틀린 신호를 준다 — flow가 맞아도 depth 불연속이 이동하기 때문. 동적 마스크로 warp 항을
-  끄는 것부터 시험.
-- [-] patch 8 / 입력 384px — §4.27a 기준 **현 시점에서 잘못된 투자**. 상한을 못 쓰고 있는데
-  상한을 올리는 일이다. T4-16 이후 상한 대비 80%에 도달하면 그때 재검토.
+### 3.2 선명도
 
-### 방향 2 — 활성 패치 판정의 수학적 근거
+- balanced boundary gradient ratio ≥ **0.756**
+- depth-boundary F1 ≥ DA2-small
+- edge-band AbsRel ≤ DA2-small
+- flat-region total variation은 현재 보고 체크포인트보다 악화하지 않음
+- overshoot/ringing 비율은 DA2-small 이하
 
-현재 검출기는 픽셀 MSE + hysteresis + dilation + keyframe, **전부 휴리스틱**이고 임계가
-도메인마다 다시 잡혀야 한다(§4.26c: 기본 임계가 실촬에서 무력, §4.25b: 같은 tau에서 합성
-7~10% vs 실촬 40~74%). 픽셀 MSE는 **정작 중요한 양(상태에 유발되는 오차)과 아무 관계가 없다.**
+Gradient ratio 하나는 고주파 노이즈로 살 수 있으므로 boundary 위치 정확도와 평탄 영역 노이즈를
+반드시 함께 판정한다.
 
-- [ ] **T4-18 상태 오차 상계 게이팅.** 스킵이 유발하는 오차는 재귀에서 바로 나온다:
-  $e_i = (\bar A_i - I)h_{i-1} + \bar B_i x_i$. $A<0$ 대각이고 $\bar A = \exp(\Delta_i A)$이므로
-  $\|e_i\| \le (1-e^{\Delta_i a})\|h_{i-1}\| + \|\bar B_i x_i\| \lesssim \Delta_i(|a|\,\|h\| + \|Bx\|)$.
-  즉 **유발 오차는 모델 자신의 스텝 크기 $\Delta_i$에 비례**한다. 픽셀 임계 대신
-  **상태 오차 예산 $\varepsilon$ 하나**로 게이팅하면 단위가 도메인에 무관해진다.
-- [ ] **T4-19 다중 스킵 드리프트 상계 → keyframe 주기 유도.** $k$번 연속 스킵의 누적 오차는
-  $\rho = e^{\Delta a} < 1$의 등비급수로 $\|e\|/(1-\rho)$에 유계다. 이 상계가 예산을 넘을 때
-  갱신하면 **keyframe 주기가 손으로 정한 값이 아니라 유도된 값**이 된다. hysteresis도
-  같은 방식으로 상계에서 나오는지 확인.
-- [ ] **T4-20 검증.** (i) 상계가 실제 오차를 위에서 감싸는지 수치 확인(합성·실촬),
-  (ii) `gate_probe.py`로 **한 예산 값이 합성·실촬·주행에서 같은 정확도 손실을 주는지** —
-  이게 되면 §4.26c의 도메인별 재조정 문제가 사라진다. 이것이 이 방향의 합격 기준.
-- 비용: $\Delta_i$를 알려면 해당 패치를 embed해야 한다. embed는 MAC의 2.3%뿐이고, GMC 경로가
-  이미 embed 피처로 게이팅하므로(§3.5) 배관은 존재한다.
+### 3.3 긴 스트림
 
-### 방향 3 — 고활성 구간 효율
+프레임별 scale-shift gauge 기준:
 
-**§4.27b 기준 이미 달성됐다.** active 70%에서 fp16 dense 0.371 ms(2693 FPS)로 DA v2 Small
-(0.816 ms, 1226 FPS)보다 2.2배 빠르고 VRAM은 2.4배 적다.
+- L8→L256 AbsRel 증가 ≤ **5%**
+- L8→L256 δ1 하락 ≤ **1.0pt**
+- sparse와 dense의 L8 정확도 차이 ≤ **2%**
+- sparse 전환 후 선명도 하락 ≤ **3%**
 
-> **2026-08-23 정정.** "정확도도 앞선다(0.1595 vs 0.2256)"는 **철회한다**. DA v2 Small의
-> 0.2256은 정합 아티팩트였다 — 몇 클립에서 맞춘 disparity가 0에 가까워지고 역수를 취하면
-> 예측 깊이가 클립 범위를 지배한다(클립별 중앙값은 나머지 그룹과 같은 수준). 속도·메모리
-> 우위는 유효하고 정확도 우위는 아니다. 8프레임 실촬에서 우리 0.1263 vs DA v2 Small 0.2068이
-> 현재 수치이지만 같은 아티팩트가 남아 있으므로 이 비교를 근거로 쓰지 않는다. → 논문 §5.3
+### 3.4 효율 예산
 
-- [x] **T4-21 목표 달성 확인.** → REPORT §4.27b. §3.4의 낡은 "동급" 서술에 경고 삽입 완료.
-- [ ] **T4-22 고활성 구간에서 희소 경로 폐기 여부 결정.** 4090에서는 active 전 구간에서
-  dense가 빠르다(§4.24). `dense_above`를 0.4가 아니라 **0.0(항상 dense)**으로 두는 것이
-  현재 최적이며, 희소 경로는 T2-11(에지) 판정 전까지 **연구용 경로로만** 유지한다.
-  기본값 변경은 에지 실측 결과에 종속 — 지금 바꾸면 되돌리기 어렵다.
-- [ ] **T4-23 실제 경쟁 상대 재설정.** 고활성 구간의 상대는 DA v2 Small이 아니라
-  DA3-Base(0.1244)다. 속도는 우리가 압도하므로, 이 구간의 남은 과제는 방향 1과 같다.
+- 권장 파라미터 상한: **15M**
+- native 모델 hard cap: **25M**
+- 256px dense 연산량 목표: **4.5 GMAC 이하**
+- 실제 4090 및 edge latency는 DA2-small 대비 1.5배보다 느려지지 않아야 함
+- 최종 평가는 dense latency와 실촬 active ratio에서의 streaming latency를 모두 보고
+- 파라미터나 latency 게이트를 넘더라도 정확도·선명도 게이트를 통과하지 못하면 승격하지 않음
 
-## Tier 5 — 정확도 (2026-08-19 수립)
+## 3.5 게이트 개정 (2026-08-31)
 
-**문제 규모.** 실촬 비교군 전체를 한 프로토콜로 재면 우리가 정확도 최하위다(§4.29):
-2 DOF 정렬로도 AbsRel 0.1321로 DA-v1-Small(0.0736)의 1.8배, δ1 0.8268로 꼴찌.
-연산량 우위만으로는 채택 이유가 되지 않는다.
+다섯 라운드·15개 arm을 이 게이트로 판정하면서 계약 자체의 결함이 드러났다. 수치는 REPORT
+§4.44~§4.46. 아래는 **측정으로 뒷받침되는 개정안**이며, 봉인된 manifest·holdout·클립 순서는
+건드리지 않는다.
 
-**어디에 쓸지는 두 측정이 정했다.** §4.27a — patch 16 상한이 0.065~0.084인데 우리는
-0.132~0.187로 **상한의 2~3배 위**다. 해상도·패치가 아니라 용량·학습이 병목이다.
-§4.30 — **시간 상태가 정확도를 깎고 있다.** Bonn에서 프레임 0의 0.1642가 프레임 28에
-0.2636으로 +61% 악화하고 키프레임에서 복구되는 톱니가 나온다.
+1. **P1의 gauge를 모델 종류에 맞춘다.** §3.1은 전 항목을 2-DOF scale+shift로 재는데, 이는
+   **metric 모델에게 틀린 자다**: 정합이 metric 보정을 정확히 상쇄하므로, DA2 형상을 쓰는 Q0는
+   scaleshift에서 TUM 0.3101·정합실패 10인 반면 median(1-DOF)에서는 **0.1097·실패 0**이다.
+   개정: 상대 모델 비교용으로 scaleshift를 계속 보고하되, **승격 판정은 배포 gauge(metric
+   모델 = median 1-DOF)에서 하고, 그 gauge의 정합 실패 0을 필수 항목으로 둔다.**
+2. **선명도 임계는 채점 해상도를 명시해야 한다.** DA2의 grad_ratio는 256px 채점에서 0.7559,
+   384px 채점에서 0.6454다. "0.756"은 숫자가 아니라 (기준 모델, 채점 해상도) 쌍이다. 개정:
+   **"DA2-small을 같은 채점 해상도에서 잰 값 이상"** 으로 쓰고, 해상도를 표에 적는다.
+3. **grad_ratio 1.0 초과는 통과가 아니다.** Q1 arm이 1.154로 게이트를 "통과"했는데, 같은
+   실행에서 overshoot 0.347·edge AbsRel 0.187로 실패했다 — GT보다 가파른 것은 선명함이 아니라
+   오버샤프닝이다. 개정: **0.756 ≤ grad_ratio ≤ 1.0**, 그리고 overshoot·flat TV·edge AbsRel을
+   동시 판정(이미 그렇게 구현돼 있고, 이 케이스가 그 설계를 검증했다).
+4. **flat TV 기준을 "보고 체크포인트 이하"에서 "DA2 이하"로 올린다.** 자기 자신을 기준으로
+   삼으면 노이즈가 있는 현 상태가 영구 기준이 된다. 실측: 우리 0.0358, DA2 0.0319,
+   DPT-Large 0.0262.
+5. **P1의 Bonn 항목은 유지한다.** DA2의 Bonn(0.0578 / δ1 0.9733)은 실재하고, Q0가 0.0592 /
+   0.9687로 거의 재현했다 — 도달 가능한 기준임이 확인됐다. 반대로 **balanced AbsRel 0.090은
+   현재 어떤 arm도 근처에 못 갔다**(최고 0.1113). 이 값을 유지할지 완화할지는 §7 트랙의 결과를
+   보고 결정하되, 유지한다면 native 트랙으로는 도달 불가라는 것이 이번 라운드의 결론이다.
 
-### A. 스트리밍 드리프트 (최우선 — 우리 구조 고유의 문제이고 가장 싸다)
+## 4. 목표 아키텍처
 
-- [x] **T5-24 긴 클립 학습 — 가설 확인, 채택은 보류.** clip_len 4→24로 25k fine-tune
-  (`work_dirs/v10-longclip`, 25.4h). **8↔32프레임 격차가 +11.2% → +4.8%로 절반 이하**가 됐고,
-  32프레임에서 AbsRel −5.5%·δ1 +1.2pt를 동일 active로 얻었다. 학습–배포 불일치가 드리프트의
-  실제 원인이었다는 §4.30d가 확인된다. **대가는 t-delta +13%**(유일한 1위 지표, 1.35→1.19배로
-  축소되나 여전히 1위). 8프레임에서는 정확도가 seed 노이즈 안이라 **짧은 프로토콜로만 봤다면
-  효과 없음으로 오판했을 것**이다. 채택은 v10 키프레임 재스윕 후 결정. → REPORT §4.33 학습은 8프레임, 배포는 수백 프레임이다. 모델은 30프레임 동안
-  게이팅을 견디는 법을 배운 적이 없다(§4.30d). clip_len 8 → 24~32로 올려 재학습.
-  **가장 싸고 가장 직접적인 수정**이며 다른 모든 항목과 독립이다.
-- [x] **T5-25 키프레임 주기 — 30 → 10이 최적, 다만 적용은 T5-24 이후.** 32프레임 클립에서
-  주기 30이 AbsRel 0.1774인데 10이면 **0.1601(−9.8%)**, δ1 +2.5pt를 active +6.1pt로 산다.
-  **5까지 가면 t-delta가 0.1084로 올라 유일한 1위 지표를 잃는다**(비교군 최상위 0.1013).
-  10에서는 0.0914로 1위 유지. 기본값 변경은 긴 클립 학습이 최적 주기를 바꿀 수 있어 보류.
-  부수 확인: 같은 체크포인트가 8프레임 0.1595 vs 32프레임 0.1774 — **보고 수치는 낙관적**.
-  → REPORT §4.31
-- [ ] **T5-26 패치별 staleness 기반 갱신.** 전역 주기 대신 캐시가 가장 오래된 패치부터
-  강제 갱신. 같은 평균 연산으로 최악 지연을 줄인다. T4-18(상태 오차 예산)과 같은 뿌리.
-- [ ] **T5-27 동적 영역 진단.** Bonn이 TUM보다 2.4배 빨리 무너진다. 드리프트가 움직이는
-  물체에서 나오는지, 그 뒤 배경 가림 해제에서 나오는지 분리한다. warp 손실은 동적 영역에서
-  틀린 신호를 주므로(광도 대응 가정) 그 마스킹이 후속 후보.
+### 4.1 Backbone 후보
 
-### B. 용량·데이터 (표준 경로, 비싸지만 확실)
+첫 용량 프로브는 기존 구조를 유지하고 크기만 바꾼다.
 
-- [ ] **T5-28 모델 증설 dim 192 → 288.** §4.27b가 2.2배 예산을 줬고 §4.27a가 용량이 병목이라
-  했다. 백본 MAC 2.25배여도 fp16 dense ~0.85 ms로 DA v2 Small보다 빠르다. 60k 14.5h.
-- [ ] **T5-29 학습 데이터 확대.** 비교군은 자릿수가 다른 데이터로 학습했다(DA v2는 6200만 장).
-  우리는 5개 소스뿐이다. **이것이 단일 최대 지렛대일 가능성이 높다.** 어댑터는 소스당 ~5줄:
-  ScanNet, NYU, Hypersim, ARKitScenes, DIODE 순으로 실내 우선(배포 대상이 실내 고정 카메라).
-- [ ] **T5-30 학습 연장.** 60k는 짧다. T5-28·T5-29와 묶어서 판단.
-- [ ] **T5-31 교사 증류 재시도.** Depth Anything 자체가 미라벨 이미지에 교사 pseudo-label을
-  붙여 만든 모델이다. 우리 3-arm 실험에서 출력단 교사 항은 **해로웠지만**(§4.18), 그건 GT가
-  있는 데이터에 교사 항을 얹은 설정이었다. **GT 없는 비디오에 pseudo-label을 붙이는** 본래
-  용법은 시도한 적이 없다 — 스트리밍이 타깃이므로 미라벨 비디오는 무한하다.
+| 모델 | dim | depth | d_state | 예상 파라미터 | 256px dense MAC |
+|---|---:|---:|---:|---:|---:|
+| 현재 | 192 | 4 | 16 | 4.19M | 1.64G |
+| M0 | 256 | 6 | 24 | 10.83M | 3.80G |
+| M1 | 288 | 6 | 24 | 13.55M | 4.59G |
 
-### C. 출력 파라미터화
+M0를 기본 후보로 한다. M1은 M0가 표현 상한에 걸렸다는 증거가 있을 때만 전체 학습한다.
 
-- [x] **T5-32 계통 오차 = 동적 범위 압축.** 2 DOF 이득은 Bonn 특이적(78% 클립)이고, 원인은
-  **예측 깊이의 동적 범위가 GT의 47%뿐**이라는 것이다(TUM은 92%). bin head의 softmax 기댓값이
-  범인일 것으로 보고 추론 시 온도를 0.25까지 낮춰봤으나 **범위비가 안 움직이고 AbsRel은 악화** —
-  디코딩이 아니라 모델이 실제로 압축된 필드를 예측한다. 값싼 수정 없음. → REPORT §4.32
-- [x] **T5-33 범위 압축 벌점 항 — 부호 확정, 크기는 60k에서.** `losses.spread_loss`가 예측
-  log-depth의 표본별 std를 GT에 맞춘다(스케일 무관·대칭이라 노이즈로 손실을 살 수 없음,
-  테스트 6개). 8k 프로브 3 arm에서 **범위와 정확도가 함께 움직인다** — Bonn 범위비
-  0.55→0.62→0.65, 같은 소스 AbsRel 0.2738→0.2529→0.2547. TUM은 애초에 압축이 없어 거의 안
-  움직인다(**항이 압축된 곳에만 작동**). 기각 기준(범위만 늘고 정확도 정체) 통과.
-  weight 0.5가 실촬 AbsRel 0.1596→**0.1509**로 정확도 최선이나 t-delta +9.6% 지불,
-  **2.0은 대조군 대비 전 지표에서 나쁘지 않아 안전**. §4.23c 전례대로 8k로 가중치를 정하지
-  않는다 — 다음 60k에서 확정. → REPORT §4.35
-- [ ] **T5-34 다음 60k: 긴 클립 + 범위 압축 동시 적용.** T5-24와 T5-33은 §4.30·§4.32에서
-  **서로 다른 결함**을 고친다고 판정됐으므로 곱해지지 않고 더해질 것으로 본다.
-  clip_len 24 + spread 2.0 + keyframe 60으로 60k를 돌려 확인하고, 그 결과로 확정 체크포인트를
-  교체할지 정한다.
-- [-] ~~T5-32 원래 계획: disparity 공간 예측으로 해결~~ — 원인이 파라미터화가 아니라 예측
-  자체이므로 공간을 바꿔도 압축은 따라온다. 2 DOF 정렬이 실촬 AbsRel을 0.1595 → 0.1321로 **17% 개선**한다
-  (§4.29a). 1 DOF로 못 잡는 계통적 shift가 있다는 뜻이다. 원인을 찾으면 정렬 규칙과 무관하게
-  이득이다. disparity 공간 예측이 후보(§4.17 oracle에서 far-field 보존이 크게 나았다).
+### 4.2 상대 형상과 metric scale 분리
 
-### D. 보류 — 근거가 아직 반대
+현재 하나의 depth 출력이 근거리 경계와 150m 원거리 metric range를 동시에 해결한다. 이를 다음
+두 경로로 분리한다.
 
-- [-] **패치 8 / 입력 384px.** §4.27a 기준 상한을 못 쓰고 있는데 상한을 올리는 일이다.
-  A·B가 상한 대비 80%에 도달하면 재검토.
+1. **Shape head**
+   - per-frame normalized relative disparity를 예측
+   - scale-shift invariant shape, ordering, boundary를 담당
+   - full-resolution 또는 최소 1/2-resolution 특징에서 출력
 
-**순서**: T5-24(긴 클립) → T5-25(키프레임) 로 드리프트를 먼저 잡고, 그 위에서 T5-29(데이터) →
-T5-28(용량). T5-24는 반나절, 나머지는 각 14.5h.
+2. **Metric calibration head**
+   - global token에서 scale/shift 또는 log-scale/offset을 예측
+   - relative shape를 metric depth로 변환
+   - 시간 방향으로 완만하게 변화하도록 별도 안정화 가능
 
-## 고치지 않고 프레이밍으로 처리
+예시 형식은 다음과 같다.
 
-- [x] **W1 절대 δ1 — 논문 서술에 반영 완료.** 초록·§5.3·결론이 주장을 efficiency-accuracy
-  Pareto + 원시 플리커로 좁혔고, 표 3b가 동급 규모(24.8M) 대비 δ1만 열위임을 그대로 싣는다.
-  대형 모델(0.12B) 대비 정확도 열위도 숨기지 않고 같은 표에 있다. v5(dim 384) 부활은 이 프레임을
-  스스로 깨므로 계속 보류.
-- [x] **W2 확대 해석 금지 — 유지됨.** T1-6이 성공했지만(§4.23) 주장은 "후처리 없는 원시 플리커
-  억제"에 머물러 있다. 논문 §5.3과 REPORT §4.23f 모두 "시간 지표 셋 중 우위는 t-delta 하나,
-  워프 기반 OPW·TCE는 열위"를 명시한다.
+```text
+disp_metric = softplus(scale) * disp_shape + shift
+depth_metric = 1 / clamp(disp_metric, eps)
+```
 
-## 순서
+모델이 metric range 불확실성을 공간 경계 평활화로 해결하지 못하도록 shape loss와 metric loss를
+각 헤드에 분리해 적용한다.
 
-~~T0 전체 → T1-5/6/7 순차(GPU 1장) → 이긴 조합으로 T1-8 → T2-9~~ 완료(2026-08-07).
-T2-10·T2-12·T3-13·T3-14까지 완료(2026-08-18). W1/W2 프레이밍도 논문 서술에 반영됐다.
-T2-11은 기기 미확보로 보류. **실험 계획은 여기서 닫히고, 남은 것은 논문화**다 —
-참고문헌 작성, §6 ablation 최신화, `paper/draft_ko.md` 동기화.
+### 4.3 실제 멀티스케일 디코더
+
+현 구조의 얕은 RGB stem과 마지막 bilinear upsampling을 다음과 같이 교체한다.
+
+- 1/4, 1/8, 1/16 feature를 명시적으로 생성하고 각각 decoder에 전달
+- decoder 기본 폭을 64→96으로 확대하되 총 파라미터 15M 예산 안에서 조정
+- 단순 `a + b` 대신 normalized gated fusion 사용
+- 마지막 2배 bilinear interpolation을 learned convex upsampling 또는 pixel-shuffle residual로 교체
+- coarse bin/log-depth와 full-resolution continuous residual을 합성
+- full-resolution residual은 zero-init하여 초기 출력이 coarse head보다 나빠지지 않게 함
+
+`fuse_norm` 단독 arm은 기각됐으므로 동일 변경만 반복하지 않는다. 이번 변경의 검증 대상은
+정규화 자체가 아니라 **유효한 고해상도 feature와 학습형 복원 경로**다.
+
+### 4.4 시간 모듈의 역할
+
+- 공간 backbone과 decoder가 프레임별 정확도를 만든다.
+- 시간 블록은 zero-init residual adapter로 시작한다.
+- 시간 상태는 temporal stability 및 sparse update에만 사용한다.
+- dense/state-reset 모델을 정확도 oracle로 계속 보존한다.
+- 시간 모듈이 dense oracle보다 정확도를 낮추면 해당 stage를 통과시키지 않는다.
+
+## 5. 평가 도구 보강
+
+본 학습 전에 다음 지표를 `eval_acc.py` 또는 별도 sharpness evaluator에 추가한다.
+
+- multi-threshold depth-boundary precision/recall/F1
+- boundary localization error
+- edge-band AbsRel/RMSE
+- gradient magnitude ratio와 gradient 방향 오차
+- flat-region total variation
+- edge overshoot/ringing 비율
+- dynamic/static 및 near/mid/far 교차 영역 지표
+- clip별 P50/P90/P95와 정합 실패 목록
+
+필수 테스트:
+
+- 완벽한 GT 입력은 모든 boundary 지표에서 최적이어야 함
+- blur를 적용하면 gradient ratio와 boundary F1이 함께 하락해야 함
+- 고주파 노이즈를 추가하면 gradient ratio는 오를 수 있지만 flat TV/precision에서 실패해야 함
+- scale/shift 변환은 relative-shape 지표를 바꾸지 않아야 함
+
+## 6. 학습 계획
+
+### Stage A — dense single-frame 형상 학습
+
+목적: 시간 상태와 sparse approximation을 배제하고 모델의 순수 공간 표현 상한을 측정한다.
+
+- T=1 또는 매 프레임 state reset
+- `tau=0`, spatial/temporal cache off
+- 256px, 40k~60k steps
+- M0와 M1은 처음부터 전부 돌리지 않고 hard-subset saturation probe로 선별
+- pretrained 모듈이 있으면 backbone LR을 새 head LR의 0.1배로 설정
+
+주 손실:
+
+```text
+L = L_shape_ssi
+  + λ_metric L_metric_silog
+  + λ_grad L_multiscale_grad
+  + λ_boundary L_boundary_location
+  + λ_rank L_pairwise_order
+```
+
+초기에는 다섯 항 이상을 동시에 자동 가중하지 않는다. 기존 auto loss weighting의 불안정성이
+확인되어 있으므로 고정 가중치로 2~3개 arm만 스크리닝한다.
+
+Stage A 통과 조건:
+
+- 현재 dense 기준 대비 balanced AbsRel 10% 이상 개선
+- dynamic 및 near AbsRel 각각 10% 이상 개선
+- gradient ratio 0.60 이상
+- P95가 평균보다 더 크게 개선
+
+### Stage B — 디코더 및 이중 헤드
+
+Stage A 승자 하나에서 다음 순서로 단일 변수 비교를 한다.
+
+| Arm | 변경 |
+|---|---|
+| D0 | 기존 DPT decoder |
+| D1 | full-resolution learned upsampling |
+| D2 | D1 + shape/metric 이중 헤드 |
+| D3 | D2 + coarse-bin/continuous-residual 출력 |
+
+판정 우선순위는 boundary F1 → dynamic/near AbsRel → balanced AbsRel → MAC 순이다.
+
+- D1이 gradient ratio를 0.05 이상 올리지 못하면 learned upsampling 설계를 재검토한다.
+- D2가 metric 정확도를 유지하면서 shape 지표를 개선하지 못하면 이중 헤드를 기각한다.
+- D3의 bin head가 entropy와 경계 지표를 개선하지 못하면 scalar shape head로 단순화한다.
+
+### Stage C — 동적·근거리 데이터 재구성
+
+현재 데이터셋별 균등 sampler에 clip 난이도 strata를 추가한다.
+
+사전 계산할 clip 속성:
+
+- 2m 이내 유효 픽셀 비율
+- optical-flow residual 기반 동적 픽셀 비율
+- GT frame-to-frame depth 변화량
+- 유효 depth 밀도
+- 현재 보고 체크포인트의 clip AbsRel/P95
+
+배치 구성 목표:
+
+- 40~50%: 동적 또는 near-heavy clip
+- 20~30%: 일반 실촬 clip
+- 나머지: 원거리·합성 다양성 유지
+
+동적 mask는 `warp_residual_loss`가 이미 계산하는 flow를 재사용하여 추가 RAFT 호출을 피한다.
+근거리 band는 동적 mask의 대체물이 아니라 보조 가중치로만 사용한다.
+
+### Stage D — 고해상도 미세조정
+
+Stage C까지 통과한 한 모델만 진행한다.
+
+- 256→384px, 10k~20k steps
+- 낮은 LR과 frozen/unfrozen 비교 2-arm 이내
+- 384px 개선이 boundary F1과 small-object 정확도에 나타나는지 확인
+- balanced AbsRel 개선이 2% 미만이고 선명도 개선도 5% 미만이면 384 배포는 기각
+- 512px는 384px에서 정확도는 통과하고 선명도만 미달할 때만 사용
+
+### Stage E — 비디오와 희소 연산 재도입
+
+아래 순서를 건너뛰지 않는다.
+
+1. T=8 dense, state reset
+2. T=8 dense, temporal residual adapter
+3. T=24 dense long-clip
+4. random mask skip 0→50% curriculum
+5. 실제 detector mask fine-tuning
+6. L8/L32/L256 sparse 평가
+
+각 단계는 바로 앞 dense oracle 대비 accuracy와 sharpness 열화를 측정한다. 희소성 때문에 품질이
+합격선 아래로 내려가면 tau를 먼저 낮추고, 그다음 cache 정책을 조정한다. backbone 품질을 희생해
+active ratio를 맞추지 않는다.
+
+## 7. DA2 품질 보장 트랙
+
+native `SOKKANAEM-M`이 Stage D까지 수행하고도 최종 accuracy 또는 sharpness gate를 넘지 못하면
+다음 트랙으로 전환한다.
+
+### Q0 — DA2 직접 초기화
+
+- DA2-small의 DINOv2 encoder와 depth head를 직접 초기화
+- 초기 shape 출력이 DA2-small과 동일하도록 유지
+- metric calibration head와 zero-init temporal residual만 추가
+- 처음에는 모든 프레임에서 dense DA2 경로를 실행하여 품질 하한을 봉인
+
+### Q1 — metric/video 적응
+
+- relative shape head에는 낮은 LR 또는 초기 freeze 적용
+- metric GT는 calibration head와 residual을 주로 학습
+- DA2 원본 출력에 대한 retention loss로 catastrophic forgetting 방지
+- checkpoint 승격 시 DA2 sharpness와 source별 정확도보다 낮아지지 않았는지 확인
+
+### Q2 — native student 압축
+
+- teacher의 여러 encoder stage를 student의 여러 block에 정렬
+- 단일 final-token cosine loss 대신 feature affinity, pairwise ordering, boundary logit을 함께 증류
+- teacher value는 metric GT와 충돌하지 않도록 confidence가 높은 relative shape에만 사용
+- student가 최종 게이트를 통과하면 Q 모델은 학습용 teacher로만 남김
+
+예상 파라미터는 25~30M으로 native 목표보다 크지만, 요구한 DA2 수준 품질을 가장 확실하게
+보장하는 안전장치다.
+
+## 8. 실험 순서와 중단 기준
+
+| 순서 | 실험 | 예상 산출물 | Go 기준 |
+|---:|---|---|---|
+| 0 | boundary evaluator 추가 | DA2/current 기준표 | 지표 단위 테스트 통과 |
+| 1 | M0 hard-subset saturation | 용량 상한 | dynamic/near 10% 개선 |
+| 2 | M1 제한 프로브 | M0 대비 용량 효과 | M0 대비 2% 이상 개선 |
+| 3 | D1 learned upsampling | 선명도 변화 | grad ratio +0.05 이상 |
+| 4 | D2 이중 헤드 | shape/metric 분리 효과 | shape 개선, metric 무열화 |
+| 5 | D3 residual bin head | bin 평균화 해소 | boundary F1 추가 개선 |
+| 6 | 동적 strata full 256px | 본 학습 후보 | accuracy gate 근접/통과 |
+| 7 | 384px fine-tune | 최종 image model | accuracy+sharpness 통과 |
+| 8 | 3 seeds | 재현성 | CI가 합격선 안쪽 |
+| 9 | sparse/video 재도입 | 배포 후보 | long-stream gate 통과 |
+| 10 | 필요 시 Q0~Q2 | 품질 보장 모델 | DA2 이상 품질 봉인 |
+
+> **2026-08-29 측정 반영 — 순서 변경.** 3번(D1)을 1·2번(M0/M1)보다 먼저 수행한다. GT를
+> patch-16 토큰 그리드로 통과시킨 oracle의 boundary gradient ratio가 **0.2612**로 현재 모델의
+> 0.4323보다 낮다(REPORT §4.44). 즉 §3.2의 0.756은 토큰 경로 용량으로는 도달 불가이고, 선명도의
+> 레버는 `dim/depth/d_state`가 아니라 전체 해상도 복원 경로다. M0 프로브는 폐기하지 않되 그
+> 목적을 **dynamic/near 정확도**로 한정한다. 같은 측정에서 우리 출력이 blur뿐 아니라
+> ringing도 한다는 것이 드러났으므로(overshoot 0.3196, DA2 0.2255, DPT-Large 0.2237),
+> 선명도 arm은 grad_ratio 상승분을 overshoot·flat TV와 함께 판정한다.
+
+다음 경우 해당 방향을 중단한다.
+
+- 두 가지 가중치에서 개선이 없으면 같은 loss의 추가 sweep을 하지 않는다.
+- 8k probe의 미세한 차이만으로 60k 구조를 승격하지 않는다.
+- 평균은 개선하지만 P95, dynamic, near 중 두 항목 이상이 악화하면 기각한다.
+- gradient ratio만 개선하고 boundary F1 또는 flat TV가 악화하면 노이즈/oversharpening으로 기각한다.
+- sparse 성능이 나쁘면 image backbone을 재학습하지 않고 sparse adaptation stage에서 해결한다.
+
+## 9. 예상 일정과 비용
+
+현재 4090에서 4.2M 모델의 60k 학습은 약 14.5시간이다. 모델과 해상도 증가를 고려한 대략적인
+예산은 다음과 같다.
+
+| 작업 | 예상 시간 |
+|---|---:|
+| 평가기 보강 및 기준선 재생성 | 1~2일 |
+| M0/M1 제한 프로브 | 2~3일 |
+| decoder/head arm | 3~5일 |
+| M0 256px 전체 학습 | run당 약 1.5~2일 |
+| 384px fine-tune | run당 약 1~2일 |
+| 최종 3-seed | 약 5~7 GPU-day |
+| sparse/video 적응 및 평가 | 3~5일 |
+
+총 예상 기간은 native 트랙 기준 약 3~5주다. Q 트랙 전환 시 pretrained 배관과 추가 압축 실험으로
+1~2주가 더 필요할 수 있다.
+
+## 10. 첫 구현 단위
+
+다음 구현 라운드는 아래 범위로 제한한다.
+
+1. boundary F1, flat TV, overshoot 지표와 테스트 추가
+2. model config에서 `dim`, `depth`, `d_state`, decoder width를 명시적으로 기록·복원
+3. M0/M1 파라미터·MAC·latency 측정 스크립트 확장
+4. dense/state-reset hard-subset saturation probe 작성
+5. 결과를 보고 D1 구현 여부 결정
+
+첫 라운드에서는 full-resolution decoder, 이중 헤드, 새로운 sampler를 동시에 구현하지 않는다.
+먼저 **현재 decoder에서 용량 증가가 실제 dynamic/near 병목을 움직이는지** 판정한 뒤 다음 변경으로
+넘어간다.
