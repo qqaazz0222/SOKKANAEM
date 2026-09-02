@@ -1,0 +1,133 @@
+=== manifests/acc_real_L8.json : ours per-frame
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+latest.pt (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=24.7% 43s (+1 no-GT)
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1279   0.1256   0.0865   0.1157   0.2711   0.3528    0.4369  0.8261     0    0    89
+  bonn           0.1006   0.1009   0.0837   0.0943   0.1569   0.1861    0.8614  0.9047     1    0   398
+  MEAN(src)      0.1143   0.1133   0.0851   0.1050   0.2140   0.2694    0.6492  0.8654     1    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1038, 0.1237]
+  95% CI of balanced clip median AbsRel: [0.0813, 0.0899]
+
+-> work_dirs/acc/ours-L8-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : dpt-large per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 19590.76it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+dpt-large (343.0M) space=disparity infer_size=official->384x384 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 97s (+1 no-GT)
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1117   0.1124   0.1058   0.1093   0.1363   0.1775    0.2534  0.8840     0    0    89
+  bonn           0.0578   0.0581   0.0495   0.0555   0.0968   0.1154    0.2328  0.9745     0    0   398
+  MEAN(src)      0.0847   0.0852   0.0776   0.0824   0.1165   0.1464    0.2431  0.9292     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0821, 0.0886]
+  95% CI of balanced clip median AbsRel: [0.0757, 0.0795]
+
+-> work_dirs/acc/dpt-large-L8-official-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : ours per-frame
+  bonn 50/98
+latest.pt (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L32.json clips=120 active=24.7% 44s
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1374   0.1354   0.1041   0.1268   0.2410   0.3262    0.3730  0.8077     0    0    22
+  bonn           0.1152   0.1168   0.0976   0.1103   0.1642   0.2290    0.5181  0.8797     1    0    98
+  MEAN(src)      0.1263   0.1261   0.1008   0.1185   0.2026   0.2776    0.4455  0.8437     1    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1096, 0.1455]
+  95% CI of balanced clip median AbsRel: [0.0896, 0.1118]
+
+-> work_dirs/acc/ours-L32-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : dpt-large per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 23175.19it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  bonn 50/98
+dpt-large (343.0M) space=disparity infer_size=official->384x384 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 93s
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1117   0.1125   0.1070   0.1093   0.1279   0.1670    0.2056  0.8840     0    0    22
+  bonn           0.0581   0.0601   0.0522   0.0580   0.0959   0.1177    0.2165  0.9742     0    0    98
+  MEAN(src)      0.0849   0.0863   0.0796   0.0836   0.1119   0.1424    0.2111  0.9291     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0804, 0.0931]
+  95% CI of balanced clip median AbsRel: [0.0750, 0.0835]
+
+-> work_dirs/acc/dpt-large-L32-official-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : ours per-frame
+latest.pt (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L256.json clips=13 active=25.8% 38s
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1567   0.1576   0.1576   0.1576   0.1731   0.1731    0.1731  0.7593     0    0     2
+  bonn           0.1178   0.1178   0.1154   0.1178   0.1447   0.1934    0.1934  0.8703     1    0    11
+  MEAN(src)      0.1373   0.1377   0.1365   0.1377   0.1589   0.1832    0.1832  0.8148     1    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1242, 0.1517]
+  95% CI of balanced clip median AbsRel: [0.1195, 0.1501]
+
+-> work_dirs/acc/ours-L256-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : dpt-large per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 17963.09it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+dpt-large (343.0M) space=disparity infer_size=official->384x384 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 81s
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1103   0.1112   0.1112   0.1112   0.1280   0.1280    0.1280  0.8860     0    0     2
+  bonn           0.0597   0.0599   0.0541   0.0599   0.0797   0.0906    0.0906  0.9724     0    0    11
+  MEAN(src)      0.0850   0.0856   0.0826   0.0856   0.1038   0.1093    0.1093  0.9292     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.0742, 0.0972]
+  95% CI of balanced clip median AbsRel: [0.0724, 0.1000]
+
+-> work_dirs/acc/dpt-large-L256-official-pf.json
+-> work_dirs/acc/table.txt
+done -> work_dirs/acc/table.txt

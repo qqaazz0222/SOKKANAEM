@@ -1,0 +1,289 @@
+=== manifests/acc_real_L8.json : dense (tau=0)
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+latest.pt (4.2M) space=depth tau=0.0 infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=100.0% 156s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1353   0.1319   0.0732   0.1180   0.3556   0.4250    0.5203  0.8528     0    0    89
+  bonn           0.1107   0.1128   0.0909   0.1024   0.1876   0.2832    0.6171  0.9027     0    0   398
+  MEAN(src)      0.1230   0.1224   0.0821   0.1102   0.2716   0.3541    0.5687  0.8778     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1097, 0.1360]
+  95% CI of balanced clip median AbsRel: [0.0799, 0.0856]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1346   0.1314   0.0819   0.1197   0.3427   0.3982    0.4697  0.8563     0    0    89
+  bonn           0.1090   0.1112   0.0885   0.1027   0.2063   0.2817    0.5202  0.8815     0    0   398
+  MEAN(src)      0.1218   0.1213   0.0852   0.1112   0.2745   0.3400    0.4949  0.8689     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1096, 0.1338]
+  95% CI of balanced clip median AbsRel: [0.0814, 0.0888]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1308   0.1280   0.0799   0.1182   0.3182   0.3553    0.4290  0.8210     0    0    89
+  bonn           0.0942   0.0955   0.0798   0.0899   0.1587   0.1838    0.4228  0.9164     0    0   398
+  MEAN(src)      0.1125   0.1118   0.0799   0.1041   0.2384   0.2696    0.4259  0.8687     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1016, 0.1227]
+  95% CI of balanced clip median AbsRel: [0.0766, 0.0848]
+
+-> work_dirs/acc/ours-L8-dense.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : reset every frame
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+latest.pt (4.2M) space=depth reset_every=1 infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=100.0% 154s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1364   0.1330   0.0738   0.1196   0.3584   0.4109    0.5104  0.8528     0    0    89
+  bonn           0.1121   0.1144   0.0920   0.1038   0.1887   0.2735    0.6269  0.9013     0    0   398
+  MEAN(src)      0.1243   0.1237   0.0829   0.1117   0.2736   0.3422    0.5687  0.8771     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1110, 0.1373]
+  95% CI of balanced clip median AbsRel: [0.0807, 0.0862]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1354   0.1322   0.0805   0.1208   0.3536   0.3890    0.4710  0.8545     0    0    89
+  bonn           0.1107   0.1130   0.0904   0.1046   0.2030   0.2842    0.5205  0.8820     0    0   398
+  MEAN(src)      0.1231   0.1226   0.0855   0.1127   0.2783   0.3366    0.4958  0.8683     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1108, 0.1352]
+  95% CI of balanced clip median AbsRel: [0.0820, 0.0896]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1314   0.1285   0.0784   0.1188   0.3170   0.3559    0.4200  0.8171     0    0    89
+  bonn           0.0946   0.0958   0.0793   0.0903   0.1596   0.1905    0.4270  0.9169     0    0   398
+  MEAN(src)      0.1130   0.1121   0.0788   0.1046   0.2383   0.2732    0.4235  0.8670     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1019, 0.1231]
+  95% CI of balanced clip median AbsRel: [0.0763, 0.0849]
+
+-> work_dirs/acc/ours-L8-reset1.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : temporal blocks bypassed
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+latest.pt (4.2M) space=depth bypass_temporal infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=24.7% 148s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.6045   0.6014   0.5545   0.5810   0.7529   1.0029    1.5266  0.2787     0    5    89
+  bonn           0.7531   0.7462   0.6237   0.6692   1.0669   1.3199    5.7572  0.2733     0   50   398
+  MEAN(src)      0.6788   0.6738   0.5891   0.6251   0.9099   1.1614    3.6419  0.2760     0   55   487
+  95% CI of balanced clip mean   AbsRel: [0.6398, 0.7106]
+  95% CI of balanced clip median AbsRel: [0.5717, 0.6109]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.9493   0.9527   0.9037   0.9258   1.2646   1.3000    3.1341  0.2354     0   34    89
+  bonn           1.1153   1.1183   0.8575   0.9952   1.8366   2.3712    8.8457  0.2598     0  153   398
+  MEAN(src)      1.0323   1.0355   0.8806   0.9605   1.5506   1.8356    5.9899  0.2476     0  187   487
+  95% CI of balanced clip mean   AbsRel: [0.9807, 1.0967]
+  95% CI of balanced clip median AbsRel: [0.8392, 0.9329]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2423   0.2412   0.2217   0.2353   0.3477   0.3890    0.4971  0.5903     0    0    89
+  bonn           0.2613   0.2569   0.2406   0.2440   0.4366   0.5335    1.4456  0.5120     5    1   398
+  MEAN(src)      0.2518   0.2490   0.2311   0.2396   0.3921   0.4613    0.9713  0.5512     5    1   487
+  95% CI of balanced clip mean   AbsRel: [0.2394, 0.2589]
+  95% CI of balanced clip median AbsRel: [0.2242, 0.2443]
+
+-> work_dirs/acc/ours-L8-notemp.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : dense (tau=0)
+  bonn 50/98
+latest.pt (4.2M) space=depth tau=0.0 infer_size=official manifest=manifests/acc_real_L32.json clips=120 active=100.0% 47s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1362   0.1331   0.0764   0.1205   0.3662   0.4365    0.4615  0.8561     0    0    22
+  bonn           0.1150   0.1197   0.0938   0.1122   0.2352   0.2477    0.3995  0.8926     0    0    98
+  MEAN(src)      0.1256   0.1264   0.0851   0.1163   0.3007   0.3421    0.4305  0.8744     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1024, 0.1547]
+  95% CI of balanced clip median AbsRel: [0.0804, 0.0993]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1351   0.1322   0.0850   0.1204   0.3630   0.3921    0.4422  0.8388     0    0    22
+  bonn           0.1186   0.1230   0.0924   0.1157   0.2395   0.3203    0.4035  0.8504     0    0    98
+  MEAN(src)      0.1269   0.1276   0.0887   0.1181   0.3012   0.3562    0.4228  0.8446     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1048, 0.1542]
+  95% CI of balanced clip median AbsRel: [0.0803, 0.0972]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1335   0.1308   0.0866   0.1211   0.3186   0.3906    0.3967  0.8106     0    0    22
+  bonn           0.1025   0.1067   0.0874   0.1019   0.1865   0.2192    0.3421  0.9012     0    0    98
+  MEAN(src)      0.1180   0.1188   0.0870   0.1115   0.2526   0.3049    0.3694  0.8559     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0983, 0.1425]
+  95% CI of balanced clip median AbsRel: [0.0788, 0.0990]
+
+-> work_dirs/acc/ours-L32-dense.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : reset every frame
+  bonn 50/98
+latest.pt (4.2M) space=depth reset_every=1 infer_size=official manifest=manifests/acc_real_L32.json clips=120 active=100.0% 45s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1387   0.1354   0.0763   0.1237   0.3701   0.4369    0.4469  0.8578     0    0    22
+  bonn           0.1167   0.1218   0.0957   0.1140   0.2354   0.2590    0.3812  0.8902     0    0    98
+  MEAN(src)      0.1277   0.1286   0.0860   0.1189   0.3028   0.3480    0.4140  0.8740     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1046, 0.1564]
+  95% CI of balanced clip median AbsRel: [0.0811, 0.1007]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1369   0.1338   0.0861   0.1229   0.3677   0.3936    0.4262  0.8391     0    0    22
+  bonn           0.1213   0.1262   0.0936   0.1187   0.2385   0.3153    0.3942  0.8506     0    0    98
+  MEAN(src)      0.1291   0.1300   0.0899   0.1208   0.3031   0.3544    0.4102  0.8449     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1069, 0.1564]
+  95% CI of balanced clip median AbsRel: [0.0822, 0.0992]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1347   0.1319   0.0849   0.1224   0.3214   0.3866    0.3944  0.8083     0    0    22
+  bonn           0.1035   0.1074   0.0856   0.1019   0.1847   0.2203    0.3720  0.9010     0    0    98
+  MEAN(src)      0.1191   0.1196   0.0853   0.1122   0.2530   0.3034    0.3832  0.8547     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0990, 0.1433]
+  95% CI of balanced clip median AbsRel: [0.0777, 0.0989]
+
+-> work_dirs/acc/ours-L32-reset1.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : temporal blocks bypassed
+  bonn 50/98
+latest.pt (4.2M) space=depth bypass_temporal infer_size=official manifest=manifests/acc_real_L32.json clips=120 active=24.7% 44s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.5905   0.5886   0.5575   0.5752   0.8319   0.8344    1.0163  0.2717     0    1    22
+  bonn           0.8035   0.8000   0.6215   0.6917   1.0926   1.2113    7.2239  0.2674     0   14    98
+  MEAN(src)      0.6970   0.6943   0.5895   0.6335   0.9622   1.0229    4.1201  0.2696     0   15   120
+  95% CI of balanced clip mean   AbsRel: [0.6233, 0.7877]
+  95% CI of balanced clip median AbsRel: [0.5481, 0.6386]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.9387   0.9413   0.8781   0.9254   1.1947   1.2759    1.5584  0.2289     0    8    22
+  bonn           1.1749   1.1812   0.8799   1.0560   1.7859   2.2861    7.4872  0.2504     0   42    98
+  MEAN(src)      1.0568   1.0612   0.8790   0.9907   1.4903   1.7810    4.5228  0.2397     0   50   120
+  95% CI of balanced clip mean   AbsRel: [0.9618, 1.1753]
+  95% CI of balanced clip median AbsRel: [0.8114, 1.0020]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2460   0.2447   0.2162   0.2377   0.3617   0.4216    0.4523  0.5826     0    0    22
+  bonn           0.2829   0.2801   0.2497   0.2624   0.4621   0.5292    1.6909  0.4864     2    1    98
+  MEAN(src)      0.2645   0.2624   0.2329   0.2500   0.4119   0.4754    1.0716  0.5345     2    1   120
+  95% CI of balanced clip mean   AbsRel: [0.2403, 0.2872]
+  95% CI of balanced clip median AbsRel: [0.2229, 0.2524]
+
+-> work_dirs/acc/ours-L32-notemp.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : dense (tau=0)
+latest.pt (4.2M) space=depth tau=0.0 infer_size=official manifest=manifests/acc_real_L256.json clips=13 active=100.0% 41s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1688   0.1707   0.1707   0.1707   0.2035   0.2035    0.2035  0.8321     0    0     2
+  bonn           0.1848   0.1944   0.1501   0.1944   0.3414   0.4002    0.4002  0.8069     0    0    11
+  MEAN(src)      0.1768   0.1826   0.1604   0.1826   0.2724   0.3019    0.3019  0.8195     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1479, 0.2202]
+  95% CI of balanced clip median AbsRel: [0.1336, 0.2232]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1813   0.1840   0.1840   0.1840   0.2310   0.2310    0.2310  0.8300     0    0     2
+  bonn           0.1972   0.2049   0.1788   0.2049   0.3176   0.3815    0.3815  0.6530     0    0    11
+  MEAN(src)      0.1892   0.1944   0.1814   0.1944   0.2743   0.3063    0.3063  0.7415     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1525, 0.2376]
+  95% CI of balanced clip median AbsRel: [0.1309, 0.2566]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1886   0.1909   0.1909   0.1909   0.2305   0.2305    0.2305  0.7896     0    0     2
+  bonn           0.1758   0.1845   0.1363   0.1845   0.2875   0.4496    0.4496  0.7608     0    0    11
+  MEAN(src)      0.1822   0.1877   0.1636   0.1877   0.2590   0.3400    0.3400  0.7752     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1492, 0.2300]
+  95% CI of balanced clip median AbsRel: [0.1360, 0.2253]
+
+-> work_dirs/acc/ours-L256-dense.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : reset every frame
+latest.pt (4.2M) space=depth reset_every=1 infer_size=official manifest=manifests/acc_real_L256.json clips=13 active=100.0% 38s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1745   0.1759   0.1759   0.1759   0.2010   0.2010    0.2010  0.8381     0    0     2
+  bonn           0.1792   0.1886   0.1485   0.1886   0.3380   0.3808    0.3808  0.8162     0    0    11
+  MEAN(src)      0.1769   0.1823   0.1622   0.1823   0.2695   0.2909    0.2909  0.8271     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1512, 0.2162]
+  95% CI of balanced clip median AbsRel: [0.1383, 0.2192]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1859   0.1883   0.1883   0.1883   0.2295   0.2295    0.2295  0.8360     0    0     2
+  bonn           0.1947   0.2023   0.1831   0.2023   0.3086   0.3742    0.3742  0.6574     0    0    11
+  MEAN(src)      0.1903   0.1953   0.1857   0.1953   0.2691   0.3019    0.3019  0.7467     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1562, 0.2354]
+  95% CI of balanced clip median AbsRel: [0.1330, 0.2607]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1913   0.1932   0.1932   0.1932   0.2265   0.2265    0.2265  0.7937     0    0     2
+  bonn           0.1734   0.1819   0.1335   0.1819   0.2803   0.4605    0.4605  0.7757     0    0    11
+  MEAN(src)      0.1823   0.1875   0.1633   0.1875   0.2534   0.3435    0.3435  0.7847     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1515, 0.2287]
+  95% CI of balanced clip median AbsRel: [0.1371, 0.2211]
+
+-> work_dirs/acc/ours-L256-reset1.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : temporal blocks bypassed
+latest.pt (4.2M) space=depth bypass_temporal infer_size=official manifest=manifests/acc_real_L256.json clips=13 active=25.8% 39s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.7164   0.7216   0.7216   0.7216   0.8125   0.8125    0.8125  0.2466     0    0     2
+  bonn           1.1579   1.1776   1.2793   1.1776   2.0326   2.3647    2.3647  0.2174     0    6    11
+  MEAN(src)      0.9371   0.9496   1.0004   0.9496   1.4225   1.5886    1.5886  0.2320     0    6    13
+  95% CI of balanced clip mean   AbsRel: [0.7773, 1.1403]
+  95% CI of balanced clip median AbsRel: [0.6342, 1.0670]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.9165   0.9193   0.9193   0.9193   0.9669   0.9669    0.9669  0.2569     0    0     2
+  bonn           1.5539   1.5799   1.2322   1.5799   2.5808   3.5468    3.5468  0.2099     0    6    11
+  MEAN(src)      1.2352   1.2496   1.0757   1.2496   1.7739   2.2568    2.2568  0.2334     0    6    13
+  95% CI of balanced clip mean   AbsRel: [0.9978, 1.5279]
+  95% CI of balanced clip median AbsRel: [0.8203, 1.6068]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2930   0.2953   0.2953   0.2953   0.3343   0.3343    0.3343  0.5615     0    0     2
+  bonn           0.3725   0.3806   0.4275   0.3806   0.5242   0.5614    0.5614  0.3474     0    0    11
+  MEAN(src)      0.3328   0.3379   0.3614   0.3379   0.4293   0.4479    0.4479  0.4544     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.2915, 0.3839]
+  95% CI of balanced clip median AbsRel: [0.2614, 0.4136]
+
+-> work_dirs/acc/ours-L256-notemp.json
+-> work_dirs/acc/table.txt
+done -> work_dirs/acc/table.txt

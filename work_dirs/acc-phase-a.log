@@ -1,0 +1,565 @@
+=== manifests/acc_real_L8.json : ours
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+latest.pt (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=24.7% 72s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1285   0.1257   0.0814   0.1121   0.2799   0.3603    0.5203  0.8467     0    0    89
+  bonn           0.1186   0.1202   0.0986   0.1098   0.1981   0.2794    0.6625  0.8891     0    0   398
+  MEAN(src)      0.1235   0.1230   0.0900   0.1109   0.2390   0.3199    0.5914  0.8679     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1121, 0.1349]
+  95% CI of balanced clip median AbsRel: [0.0866, 0.0933]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1280   0.1256   0.0870   0.1145   0.2771   0.3465    0.4541  0.8491     0    0    89
+  bonn           0.1168   0.1186   0.0959   0.1107   0.2111   0.2955    0.5138  0.8643     0    0   398
+  MEAN(src)      0.1224   0.1221   0.0915   0.1126   0.2441   0.3210    0.4840  0.8567     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1121, 0.1329]
+  95% CI of balanced clip median AbsRel: [0.0873, 0.0953]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1278   0.1254   0.0862   0.1157   0.2717   0.3430    0.4290  0.8285     0    0    89
+  bonn           0.1029   0.1038   0.0847   0.0958   0.1587   0.1955    1.3403  0.9025     1    1   398
+  MEAN(src)      0.1153   0.1146   0.0855   0.1057   0.2152   0.2692    0.8847  0.8655     1    1   487
+  95% CI of balanced clip mean   AbsRel: [0.1049, 0.1252]
+  95% CI of balanced clip median AbsRel: [0.0820, 0.0903]
+
+-> work_dirs/acc/ours-L8.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : dpt-large @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 17546.98it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+dpt-large (343.0M) space=disparity infer_size=official->384x384 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 107s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2185   0.2130   0.1745   0.1862   0.2583   0.3435    1.9843  0.8071     0    1    89
+  bonn           0.7995   0.7860   0.3321   0.3922   0.7964   2.1529   50.8318  0.5572     0   33   398
+  MEAN(src)      0.5090   0.4995   0.2533   0.2892   0.5274   1.2482   26.4080  0.6822     0   34   487
+  95% CI of balanced clip mean   AbsRel: [0.3769, 0.6710]
+  95% CI of balanced clip median AbsRel: [0.2438, 0.2630]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2140   0.2136   0.1972   0.2076   0.2895   0.3534    0.4895  0.7715    10    0    89
+  bonn           0.4209   0.4106   0.4090   0.4014   0.6310   0.7055    1.6150  0.5697    60    4   398
+  MEAN(src)      0.3175   0.3121   0.3031   0.3045   0.4602   0.5295    1.0523  0.6706    70    4   487
+  95% CI of balanced clip mean   AbsRel: [0.3012, 0.3238]
+  95% CI of balanced clip median AbsRel: [0.2876, 0.3146]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1135   0.1141   0.1056   0.1108   0.1340   0.1823    0.2544  0.8829     0    0    89
+  bonn           0.0617   0.0626   0.0529   0.0595   0.1053   0.1240    0.2914  0.9719     0    0   398
+  MEAN(src)      0.0876   0.0884   0.0792   0.0852   0.1196   0.1532    0.2729  0.9274     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0851, 0.0919]
+  95% CI of balanced clip median AbsRel: [0.0776, 0.0815]
+
+-> work_dirs/acc/dpt-large-L8-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : dpt-large @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 18321.15it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+dpt-large (343.0M) space=disparity infer_size=256->256x256 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 67s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2391   0.2397   0.1842   0.1954   0.2806   0.3662    3.5287  0.7932     0    1    89
+  bonn           1.6649   1.6406   0.3650   0.9228   3.9934   8.4892   38.6687  0.5519     0   81   398
+  MEAN(src)      0.9520   0.9402   0.2746   0.5591   2.1370   4.4277   21.0987  0.6725     0   82   487
+  95% CI of balanced clip mean   AbsRel: [0.7514, 1.1500]
+  95% CI of balanced clip median AbsRel: [0.2582, 0.2924]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2200   0.2197   0.2069   0.2155   0.2904   0.3249    0.4411  0.7729     3    0    89
+  bonn           0.4402   0.4286   0.4316   0.4201   0.6956   0.7708    1.4379  0.5818   131    3   398
+  MEAN(src)      0.3301   0.3242   0.3193   0.3178   0.4930   0.5479    0.9395  0.6773   134    3   487
+  95% CI of balanced clip mean   AbsRel: [0.3121, 0.3363]
+  95% CI of balanced clip median AbsRel: [0.3011, 0.3336]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1240   0.1246   0.1192   0.1205   0.1499   0.1990    0.2796  0.8675     0    0    89
+  bonn           0.0689   0.0702   0.0585   0.0671   0.1183   0.1348    0.2839  0.9627     0    0   398
+  MEAN(src)      0.0965   0.0974   0.0889   0.0938   0.1341   0.1669    0.2818  0.9151     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0939, 0.1012]
+  95% CI of balanced clip median AbsRel: [0.0844, 0.0911]
+
+-> work_dirs/acc/dpt-large-L8-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : Depth-Anything-V2-Small-hf @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 20716.00it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+Depth-Anything-V2-Small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 63s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.6887   0.6451   0.2923   0.5398   1.9307   2.3557    4.7323  0.8857     0   16    89
+  bonn           0.5788   1.1188   0.4850   0.4735   0.6747   0.7397  109.8963  0.4604     0   16   398
+  MEAN(src)      0.6338   0.8819   0.3886   0.5066   1.3027   1.5477   57.3143  0.6731     0   32   487
+  95% CI of balanced clip mean   AbsRel: [0.5797, 1.3040]
+  95% CI of balanced clip median AbsRel: [0.3533, 0.4391]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2710   0.2605   0.1704   0.2407   0.5386   0.6349    1.2029  0.8942    83    1    89
+  bonn           0.6727   1.4916   0.5964   0.6266   0.9612   1.1486  225.0171  0.5054    39   30   398
+  MEAN(src)      0.4718   0.8760   0.3834   0.4336   0.7499   0.8917  113.1100  0.6998   122   31   487
+  95% CI of balanced clip mean   AbsRel: [0.4524, 1.5837]
+  95% CI of balanced clip median AbsRel: [0.3661, 0.4022]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3558   0.3464   0.0950   0.1606   0.4222   1.3691    6.0223  0.8828    15    6    89
+  bonn           0.0578   0.0588   0.0479   0.0552   0.1100   0.1342    0.2435  0.9733     0    0   398
+  MEAN(src)      0.2068   0.2026   0.0715   0.1079   0.2661   0.7517    3.1329  0.9280    15    6   487
+  95% CI of balanced clip mean   AbsRel: [0.1166, 0.3073]
+  95% CI of balanced clip median AbsRel: [0.0687, 0.0738]
+
+-> work_dirs/acc/Depth-Anything-V2-Small-hf-L8-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : Depth-Anything-V2-Small-hf @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 21043.01it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+Depth-Anything-V2-Small-hf (24.8M) space=disparity infer_size=256->252x252 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 43s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.6549   0.6520   0.4763   0.5692   1.2799   2.3257    4.1809  0.8295     0   15    89
+  bonn           0.4689   0.4700   0.4193   0.4265   0.7194   0.8176    7.4457  0.5020     0    9   398
+  MEAN(src)      0.5619   0.5610   0.4478   0.4978   0.9996   1.5717    5.8133  0.6657     0   24   487
+  95% CI of balanced clip mean   AbsRel: [0.4943, 0.6375]
+  95% CI of balanced clip median AbsRel: [0.3935, 0.4945]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3342   0.3339   0.2894   0.3159   0.5261   0.6917    0.9725  0.8436    75    0    89
+  bonn           0.5908   0.5834   0.5320   0.5590   0.9754   1.0862    3.4635  0.5292    38   38   398
+  MEAN(src)      0.4625   0.4587   0.4107   0.4374   0.7507   0.8890    2.2180  0.6864   113   38   487
+  95% CI of balanced clip mean   AbsRel: [0.4328, 0.4860]
+  95% CI of balanced clip median AbsRel: [0.3787, 0.4518]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1773   0.1765   0.1134   0.1308   0.2750   0.3196    1.6045  0.8745     7    3    89
+  bonn           0.0695   0.0712   0.0617   0.0676   0.1185   0.1395    0.2828  0.9693     0    0   398
+  MEAN(src)      0.1234   0.1238   0.0876   0.0992   0.1967   0.2296    0.9437  0.9219     7    3   487
+  95% CI of balanced clip mean   AbsRel: [0.1022, 0.1505]
+  95% CI of balanced clip median AbsRel: [0.0835, 0.0919]
+
+-> work_dirs/acc/Depth-Anything-V2-Small-hf-L8-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : ours
+  bonn 50/98
+latest.pt (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L32.json clips=120 active=24.7% 44s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1394   0.1372   0.0905   0.1262   0.2408   0.4026    0.4260  0.8352     0    0    22
+  bonn           0.1382   0.1428   0.1105   0.1339   0.2540   0.3065    0.5459  0.8499     0    0    98
+  MEAN(src)      0.1388   0.1400   0.1005   0.1300   0.2474   0.3546    0.4859  0.8426     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1197, 0.1640]
+  95% CI of balanced clip median AbsRel: [0.0944, 0.1183]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1380   0.1360   0.1009   0.1268   0.2318   0.3842    0.3854  0.8210     0    0    22
+  bonn           0.1400   0.1446   0.1117   0.1382   0.2781   0.3172    0.4006  0.8065     0    0    98
+  MEAN(src)      0.1390   0.1403   0.1063   0.1325   0.2550   0.3507    0.3930  0.8138     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1216, 0.1622]
+  95% CI of balanced clip median AbsRel: [0.0950, 0.1169]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1408   0.1386   0.1022   0.1294   0.2383   0.3720    0.3914  0.7948     0    0    22
+  bonn           0.1412   0.1453   0.1013   0.1219   0.2273   0.2700    1.5434  0.8614     2    1    98
+  MEAN(src)      0.1410   0.1419   0.1017   0.1256   0.2328   0.3210    0.9674  0.8281     2    1   120
+  95% CI of balanced clip mean   AbsRel: [0.1189, 0.1693]
+  95% CI of balanced clip median AbsRel: [0.0916, 0.1151]
+
+-> work_dirs/acc/ours-L32.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : dpt-large @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 19850.49it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  bonn 50/98
+dpt-large (343.0M) space=disparity infer_size=official->384x384 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 94s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2249   0.2197   0.1836   0.2001   0.2551   0.4127    0.7029  0.7957     0    0    22
+  bonn           0.8164   0.8019   0.3608   0.4735   0.8759   2.4900   18.1986  0.5338     0   10    98
+  MEAN(src)      0.5207   0.5108   0.2722   0.3368   0.5655   1.4514    9.4508  0.6647     0   10   120
+  95% CI of balanced clip mean   AbsRel: [0.3455, 0.7432]
+  95% CI of balanced clip median AbsRel: [0.2544, 0.2968]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2178   0.2176   0.2037   0.2128   0.2814   0.3279    0.3941  0.7630     6    0    22
+  bonn           0.4291   0.4199   0.4220   0.4138   0.6147   0.7225    0.8720  0.5553    28    0    98
+  MEAN(src)      0.3235   0.3187   0.3128   0.3133   0.4481   0.5252    0.6330  0.6591    34    0   120
+  95% CI of balanced clip mean   AbsRel: [0.3001, 0.3387]
+  95% CI of balanced clip median AbsRel: [0.2949, 0.3289]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1186   0.1191   0.1072   0.1140   0.1298   0.1919    0.2538  0.8734     0    0    22
+  bonn           0.0839   0.0872   0.0639   0.0811   0.1567   0.1973    0.3450  0.9360     0    0    98
+  MEAN(src)      0.1013   0.1032   0.0855   0.0976   0.1433   0.1946    0.2994  0.9047     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0943, 0.1132]
+  95% CI of balanced clip median AbsRel: [0.0818, 0.0934]
+
+-> work_dirs/acc/dpt-large-L32-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : dpt-large @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 22255.07it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  bonn 50/98
+dpt-large (343.0M) space=disparity infer_size=256->256x256 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 61s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2475   0.2479   0.1941   0.2066   0.2486   0.3899    1.1900  0.7836     0    1    22
+  bonn           1.7056   1.6736   0.3947   1.1895   4.6711   6.8695   23.0674  0.5271     0   28    98
+  MEAN(src)      0.9766   0.9608   0.2944   0.6980   2.4598   3.6297   12.1287  0.6553     0   29   120
+  95% CI of balanced clip mean   AbsRel: [0.6711, 1.3018]
+  95% CI of balanced clip median AbsRel: [0.2654, 0.3324]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2247   0.2246   0.2169   0.2217   0.2724   0.3101    0.3659  0.7607     2    0    22
+  bonn           0.4502   0.4397   0.4113   0.4333   0.6741   0.7249    1.0254  0.5642    43    1    98
+  MEAN(src)      0.3375   0.3321   0.3141   0.3275   0.4732   0.5175    0.6957  0.6625    45    1   120
+  95% CI of balanced clip mean   AbsRel: [0.3114, 0.3527]
+  95% CI of balanced clip median AbsRel: [0.2967, 0.3589]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1299   0.1302   0.1177   0.1246   0.1449   0.1951    0.2728  0.8570     0    0    22
+  bonn           0.0904   0.0939   0.0724   0.0884   0.1678   0.2025    0.3451  0.9239     0    0    98
+  MEAN(src)      0.1101   0.1120   0.0950   0.1065   0.1563   0.1988    0.3090  0.8904     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1032, 0.1223]
+  95% CI of balanced clip median AbsRel: [0.0904, 0.1031]
+
+-> work_dirs/acc/dpt-large-L32-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : Depth-Anything-V2-Small-hf @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 15435.26it/s]
+  bonn 50/98
+Depth-Anything-V2-Small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 60s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.7139   0.6717   0.3069   0.6072   1.7390   1.9242    2.4848  0.8651     0    5    22
+  bonn           0.6085   0.7278   0.5124   0.5569   0.7264   2.0928    9.2078  0.4427     0    8    98
+  MEAN(src)      0.6612   0.6997   0.4096   0.5821   1.2327   2.0085    5.8463  0.6539     0   13   120
+  95% CI of balanced clip mean   AbsRel: [0.5405, 0.8847]
+  95% CI of balanced clip median AbsRel: [0.3633, 0.5777]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2813   0.2711   0.1666   0.2575   0.5612   0.5695    0.6879  0.8686    22    0    22
+  bonn           0.6809   0.7503   0.6166   0.6661   1.0250   1.1630    6.6934  0.4852    23   12    98
+  MEAN(src)      0.4811   0.5107   0.3916   0.4618   0.7931   0.8663    3.6907  0.6769    45   12   120
+  95% CI of balanced clip mean   AbsRel: [0.4442, 0.5959]
+  95% CI of balanced clip median AbsRel: [0.3590, 0.4940]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2003   0.1954   0.0980   0.1324   0.3705   0.3901    1.5849  0.8587     6    1    22
+  bonn           0.0798   0.0838   0.0574   0.0781   0.1738   0.1946    0.2906  0.9361     0    0    98
+  MEAN(src)      0.1400   0.1396   0.0777   0.1052   0.2721   0.2924    0.9377  0.8974     6    1   120
+  95% CI of balanced clip mean   AbsRel: [0.0924, 0.2164]
+  95% CI of balanced clip median AbsRel: [0.0724, 0.0900]
+
+-> work_dirs/acc/Depth-Anything-V2-Small-hf-L32-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : Depth-Anything-V2-Small-hf @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 19321.45it/s]
+  bonn 50/98
+Depth-Anything-V2-Small-hf (24.8M) space=disparity infer_size=256->252x252 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 41s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.6749   0.6716   0.6142   0.6550   1.1348   1.4757    1.5424  0.8090     0    6    22
+  bonn           0.4943   0.4965   0.4490   0.4526   0.7122   0.7899    3.0490  0.4775     0    3    98
+  MEAN(src)      0.5846   0.5841   0.5316   0.5538   0.9235   1.1328    2.2957  0.6433     0    9   120
+  95% CI of balanced clip mean   AbsRel: [0.4985, 0.6750]
+  95% CI of balanced clip median AbsRel: [0.4187, 0.6602]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3460   0.3456   0.3421   0.3382   0.5621   0.6132    0.7064  0.8230    21    0    22
+  bonn           0.6015   0.5945   0.5278   0.5814   0.9644   1.1107    1.3660  0.5090    18    9    98
+  MEAN(src)      0.4738   0.4700   0.4349   0.4598   0.7632   0.8619    1.0362  0.6660    39    9   120
+  95% CI of balanced clip mean   AbsRel: [0.4280, 0.5130]
+  95% CI of balanced clip median AbsRel: [0.3612, 0.5068]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1390   0.1383   0.1249   0.1306   0.2353   0.2537    0.3335  0.8545     2    0    22
+  bonn           0.0871   0.0913   0.0689   0.0862   0.1653   0.1916    0.2886  0.9387     0    0    98
+  MEAN(src)      0.1131   0.1148   0.0969   0.1084   0.2003   0.2227    0.3110  0.8966     2    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1026, 0.1293]
+  95% CI of balanced clip median AbsRel: [0.0855, 0.1017]
+
+-> work_dirs/acc/Depth-Anything-V2-Small-hf-L32-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : ours
+latest.pt (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L256.json clips=13 active=25.8% 39s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1799   0.1817   0.1817   0.1817   0.2137   0.2137    0.2137  0.8121     0    0     2
+  bonn           0.2014   0.2107   0.1732   0.2107   0.3589   0.4071    0.4071  0.7724     0    0    11
+  MEAN(src)      0.1907   0.1962   0.1775   0.1962   0.2863   0.3104    0.3104  0.7922     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1618, 0.2335]
+  95% CI of balanced clip median AbsRel: [0.1466, 0.2437]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1836   0.1865   0.1865   0.1865   0.2382   0.2382    0.2382  0.8096     0    0     2
+  bonn           0.2092   0.2166   0.2023   0.2166   0.3224   0.3874    0.3874  0.6294     0    0    11
+  MEAN(src)      0.1964   0.2016   0.1944   0.2016   0.2803   0.3128    0.3128  0.7195     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1580, 0.2463]
+  95% CI of balanced clip median AbsRel: [0.1376, 0.2675]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1900   0.1924   0.1924   0.1924   0.2358   0.2358    0.2358  0.7747     0    0     2
+  bonn           0.2284   0.2401   0.1696   0.2401   0.3240   0.8960    0.8960  0.7348     2    0    11
+  MEAN(src)      0.2092   0.2163   0.1810   0.2163   0.2799   0.5659    0.5659  0.7548     2    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1565, 0.2977]
+  95% CI of balanced clip median AbsRel: [0.1404, 0.2315]
+
+-> work_dirs/acc/ours-L256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : dpt-large @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 16531.48it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+dpt-large (343.0M) space=disparity infer_size=official->384x384 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 81s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2879   0.2879   0.2879   0.2879   0.2883   0.2883    0.2883  0.7548     0    0     2
+  bonn           1.0045   1.0204   0.6021   1.0204   0.8902   5.3932    5.3932  0.4125     0    1    11
+  MEAN(src)      0.6462   0.6541   0.4450   0.6541   0.5892   2.8407    2.8407  0.5837     0    1    13
+  95% CI of balanced clip mean   AbsRel: [0.4004, 1.1101]
+  95% CI of balanced clip median AbsRel: [0.3695, 0.5318]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2419   0.2433   0.2433   0.2433   0.2688   0.2688    0.2688  0.7490     2    0     2
+  bonn           0.4815   0.4778   0.4696   0.4778   0.5447   0.5665    0.5665  0.4348     8    0    11
+  MEAN(src)      0.3617   0.3606   0.3565   0.3606   0.4068   0.4177    0.4177  0.5919    10    0    13
+  95% CI of balanced clip mean   AbsRel: [0.3350, 0.3857]
+  95% CI of balanced clip median AbsRel: [0.3322, 0.3977]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1765   0.1795   0.1795   0.1795   0.2320   0.2320    0.2320  0.8097     0    0     2
+  bonn           0.2018   0.2100   0.1923   0.2100   0.3325   0.4422    0.4422  0.6825     0    0    11
+  MEAN(src)      0.1892   0.1947   0.1859   0.1947   0.2822   0.3371    0.3371  0.7461     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1486, 0.2428]
+  95% CI of balanced clip median AbsRel: [0.1422, 0.2485]
+
+-> work_dirs/acc/dpt-large-L256-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : dpt-large @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 17390.67it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+dpt-large (343.0M) space=disparity infer_size=256->256x256 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 53s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3125   0.3106   0.3106   0.3106   0.3434   0.3434    0.3434  0.7190     0    0     2
+  bonn           1.8943   1.9100   0.6594   1.9100   4.2460   8.5886    8.5886  0.4092     0    5    11
+  MEAN(src)      1.1034   1.1103   0.4850   1.1103   2.2947   4.4660    4.4660  0.5641     0    5    13
+  95% CI of balanced clip mean   AbsRel: [0.5358, 1.9072]
+  95% CI of balanced clip median AbsRel: [0.3603, 1.1810]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2507   0.2512   0.2512   0.2512   0.2589   0.2589    0.2589  0.7278     1    0     2
+  bonn           0.5026   0.4983   0.5343   0.4983   0.5616   0.5988    0.5988  0.4409     7    0    11
+  MEAN(src)      0.3767   0.3747   0.3927   0.3747   0.4103   0.4288    0.4288  0.5844     8    0    13
+  95% CI of balanced clip mean   AbsRel: [0.3477, 0.3989]
+  95% CI of balanced clip median AbsRel: [0.3226, 0.4083]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1843   0.1870   0.1870   0.1870   0.2342   0.2342    0.2342  0.7973     0    0     2
+  bonn           0.2063   0.2143   0.1968   0.2143   0.3404   0.4454    0.4454  0.6764     0    0    11
+  MEAN(src)      0.1953   0.2007   0.1919   0.2007   0.2873   0.3398    0.3398  0.7369     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1572, 0.2462]
+  95% CI of balanced clip median AbsRel: [0.1510, 0.2528]
+
+-> work_dirs/acc/dpt-large-L256-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : Depth-Anything-V2-Small-hf @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 25451.73it/s]
+Depth-Anything-V2-Small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 52s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            1.0186   0.9929   0.9929   0.9929   1.4452   1.4452    1.4452  0.7815     0    1     2
+  bonn           0.9483   1.0492   0.6305   1.0492   2.7400   2.9979    2.9979  0.3644     0    3    11
+  MEAN(src)      0.9835   1.0210   0.8117   1.0210   2.0926   2.2216    2.2216  0.5729     0    4    13
+  95% CI of balanced clip mean   AbsRel: [0.6295, 1.4444]
+  95% CI of balanced clip median AbsRel: [0.5097, 1.2533]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3914   0.3889   0.3889   0.3889   0.4328   0.4328    0.4328  0.7860     2    0     2
+  bonn           0.7253   0.7452   0.7760   0.7452   1.0337   1.0656    1.0656  0.3825    10    2    11
+  MEAN(src)      0.5583   0.5670   0.5825   0.5670   0.7332   0.7492    0.7492  0.5842    12    2    13
+  95% CI of balanced clip mean   AbsRel: [0.4961, 0.6382]
+  95% CI of balanced clip median AbsRel: [0.4256, 0.6666]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.8943   0.9382   0.9382   0.9382   1.7100   1.7100    1.7100  0.7864     2    1     2
+  bonn           0.2040   0.2147   0.1949   0.2147   0.3757   0.4711    0.4711  0.6745     0    0    11
+  MEAN(src)      0.5492   0.5764   0.5665   0.5764   1.0428   1.0905    1.0905  0.7305     2    1    13
+  95% CI of balanced clip mean   AbsRel: [0.1677, 0.9865]
+  95% CI of balanced clip median AbsRel: [0.1571, 0.9554]
+
+-> work_dirs/acc/Depth-Anything-V2-Small-hf-L256-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : Depth-Anything-V2-Small-hf @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 25025.78it/s]
+Depth-Anything-V2-Small-hf (24.8M) space=disparity infer_size=256->252x252 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 37s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.8733   0.8729   0.8729   0.8729   0.8801   0.8801    0.8801  0.7029     0    0     2
+  bonn           0.6296   0.6808   0.6574   0.6808   0.9731   1.8038    1.8038  0.3975     0    1    11
+  MEAN(src)      0.7515   0.7769   0.7651   0.7769   0.9266   1.3419    1.3419  0.5502     0    1    13
+  95% CI of balanced clip mean   AbsRel: [0.6712, 0.9137]
+  95% CI of balanced clip median AbsRel: [0.5922, 0.8208]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.4272   0.4288   0.4288   0.4288   0.4561   0.4561    0.4561  0.6655     2    0     2
+  bonn           0.6101   0.6187   0.6256   0.6187   0.8866   0.9822    0.9822  0.4193     8    0    11
+  MEAN(src)      0.5187   0.5238   0.5272   0.5238   0.6713   0.7191    0.7191  0.5424    10    0    13
+  95% CI of balanced clip mean   AbsRel: [0.4580, 0.5903]
+  95% CI of balanced clip median AbsRel: [0.3958, 0.6258]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2541   0.2592   0.2592   0.2592   0.3495   0.3495    0.3495  0.6778     1    0     2
+  bonn           0.1848   0.1937   0.1784   0.1937   0.3398   0.3819    0.3819  0.7283     0    0    11
+  MEAN(src)      0.2194   0.2264   0.2188   0.2264   0.3446   0.3657    0.3657  0.7031     1    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1636, 0.2903]
+  95% CI of balanced clip median AbsRel: [0.1565, 0.2746]
+
+-> work_dirs/acc/Depth-Anything-V2-Small-hf-L256-256.json
+-> work_dirs/acc/table.txt
+done -> work_dirs/acc/table.txt

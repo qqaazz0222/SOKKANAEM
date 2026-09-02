@@ -1,0 +1,775 @@
+=== manifests/acc_real_L8.json : depth-anything-small-hf @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 10878.94it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+depth-anything-small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 79s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1897   0.1873   0.1690   0.1777   0.2333   0.3528    0.5725  0.8311     0    0    89
+  bonn           0.6034   0.7805   0.4016   0.4813   0.9330   1.2350   66.3181  0.4336     0   30   398
+  MEAN(src)      0.3965   0.4839   0.2853   0.3295   0.5832   0.7939   33.4453  0.6324     0   30   487
+  95% CI of balanced clip mean   AbsRel: [0.3619, 0.6881]
+  95% CI of balanced clip median AbsRel: [0.2752, 0.2997]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2269   0.2254   0.2081   0.2155   0.2916   0.4075    0.6994  0.8198     4    0    89
+  bonn           0.7497   0.8460   0.6676   0.7175   1.2289   1.4980   23.9192  0.4576     9   96   398
+  MEAN(src)      0.4883   0.5357   0.4379   0.4665   0.7603   0.9528   12.3093  0.6387    13   96   487
+  95% CI of balanced clip mean   AbsRel: [0.4754, 0.6197]
+  95% CI of balanced clip median AbsRel: [0.4125, 0.4635]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.0857   0.0860   0.0796   0.0818   0.1053   0.1452    0.2489  0.9009     0    0    89
+  bonn           0.0457   0.0469   0.0382   0.0438   0.0776   0.1045    0.2146  0.9854     0    0   398
+  MEAN(src)      0.0657   0.0665   0.0589   0.0628   0.0915   0.1248    0.2318  0.9432     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0632, 0.0700]
+  95% CI of balanced clip median AbsRel: [0.0552, 0.0625]
+
+-> work_dirs/acc/depth-anything-small-hf-L8-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : depth-anything-small-hf @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 20267.46it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+depth-anything-small-hf (24.8M) space=disparity infer_size=256->252x252 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 140s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2086   0.2062   0.1795   0.1942   0.2752   0.3382    0.7806  0.7418     0    0    89
+  bonn           0.5187   0.5082   0.3728   0.4718   1.0848   1.3351    1.8513  0.4859     0   51   398
+  MEAN(src)      0.3636   0.3572   0.2761   0.3330   0.6800   0.8367    1.3159  0.6138     0   51   487
+  95% CI of balanced clip mean   AbsRel: [0.3360, 0.3791]
+  95% CI of balanced clip median AbsRel: [0.2545, 0.2986]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2624   0.2618   0.2352   0.2499   0.3862   0.4868    0.9174  0.6737     1    0    89
+  bonn           0.7444   0.7264   0.5665   0.6896   1.3910   1.6768    2.4164  0.4831     1  109   398
+  MEAN(src)      0.5034   0.4941   0.4009   0.4698   0.8886   1.0818    1.6669  0.5784     2  109   487
+  95% CI of balanced clip mean   AbsRel: [0.4664, 0.5224]
+  95% CI of balanced clip median AbsRel: [0.3594, 0.4499]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1128   0.1134   0.1096   0.1101   0.1428   0.1815    0.2675  0.8689     0    0    89
+  bonn           0.0602   0.0625   0.0536   0.0579   0.0985   0.1250    0.5520  0.9745     1    0   398
+  MEAN(src)      0.0865   0.0880   0.0816   0.0840   0.1206   0.1532    0.4098  0.9217     1    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0843, 0.0919]
+  95% CI of balanced clip median AbsRel: [0.0787, 0.0845]
+
+-> work_dirs/acc/depth-anything-small-hf-L8-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : depth-anything-small-hf per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 18135.82it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+depth-anything-small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 127s (+1 no-GT)
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.0846   0.0849   0.0776   0.0809   0.1027   0.1364    0.2454  0.9018     0    0    89
+  bonn           0.0425   0.0427   0.0357   0.0400   0.0648   0.0881    0.1853  0.9858     0    0   398
+  MEAN(src)      0.0635   0.0638   0.0566   0.0604   0.0837   0.1123    0.2154  0.9438     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0607, 0.0672]
+  95% CI of balanced clip median AbsRel: [0.0538, 0.0610]
+
+-> work_dirs/acc/depth-anything-small-hf-L8-official-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : depth-anything-small-hf @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 24895.36it/s]
+  bonn 50/98
+depth-anything-small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 72s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1928   0.1906   0.1734   0.1843   0.2461   0.3552    0.3721  0.8335     0    0    22
+  bonn           0.6192   0.6511   0.4390   0.5097   0.9063   1.1651    9.2231  0.4170     0    8    98
+  MEAN(src)      0.4060   0.4208   0.3062   0.3470   0.5762   0.7602    4.7976  0.6253     0    8   120
+  95% CI of balanced clip mean   AbsRel: [0.3414, 0.5368]
+  95% CI of balanced clip median AbsRel: [0.2781, 0.3295]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2274   0.2263   0.2103   0.2190   0.2851   0.3753    0.4561  0.8152     2    0    22
+  bonn           0.7616   0.7608   0.6811   0.7351   1.1926   1.3484    2.1401  0.4428     6   22    98
+  MEAN(src)      0.4945   0.4936   0.4457   0.4770   0.7388   0.8618    1.2981  0.6290     8   22   120
+  95% CI of balanced clip mean   AbsRel: [0.4546, 0.5341]
+  95% CI of balanced clip median AbsRel: [0.4127, 0.5018]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.0895   0.0898   0.0787   0.0852   0.1072   0.1712    0.2097  0.9008     0    0    22
+  bonn           0.0606   0.0647   0.0485   0.0599   0.1268   0.1477    0.2592  0.9684     0    0    98
+  MEAN(src)      0.0751   0.0773   0.0636   0.0726   0.1170   0.1594    0.2344  0.9346     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0695, 0.0863]
+  95% CI of balanced clip median AbsRel: [0.0590, 0.0708]
+
+-> work_dirs/acc/depth-anything-small-hf-L32-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : depth-anything-small-hf @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 17213.37it/s]
+  bonn 50/98
+depth-anything-small-hf (24.8M) space=disparity infer_size=256->252x252 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 55s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2116   0.2096   0.1827   0.2031   0.2923   0.3225    0.4264  0.7365     0    0    22
+  bonn           0.5346   0.5243   0.3956   0.4937   1.0896   1.3403    1.7613  0.4613     0   14    98
+  MEAN(src)      0.3731   0.3669   0.2892   0.3484   0.6910   0.8314    1.0938  0.5989     0   14   120
+  95% CI of balanced clip mean   AbsRel: [0.3282, 0.4071]
+  95% CI of balanced clip median AbsRel: [0.2582, 0.3271]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2636   0.2634   0.2468   0.2563   0.3852   0.4059    0.5409  0.6690     1    0    22
+  bonn           0.7638   0.7439   0.6200   0.7141   1.3950   1.6828    2.2053  0.4584     1   28    98
+  MEAN(src)      0.5137   0.5037   0.4334   0.4852   0.8901   1.0444    1.3731  0.5637     2   28   120
+  95% CI of balanced clip mean   AbsRel: [0.4523, 0.5567]
+  95% CI of balanced clip median AbsRel: [0.3601, 0.5117]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1155   0.1161   0.1125   0.1126   0.1433   0.1852    0.2237  0.8658     0    0    22
+  bonn           0.0713   0.0753   0.0597   0.0712   0.1391   0.1515    0.2805  0.9619     0    0    98
+  MEAN(src)      0.0934   0.0957   0.0861   0.0919   0.1412   0.1683    0.2521  0.9139     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0883, 0.1041]
+  95% CI of balanced clip median AbsRel: [0.0794, 0.0907]
+
+-> work_dirs/acc/depth-anything-small-hf-L32-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : depth-anything-small-hf per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 16413.94it/s]
+  bonn 50/98
+depth-anything-small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 64s
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.0844   0.0849   0.0763   0.0811   0.0948   0.1334    0.1854  0.9018     0    0    22
+  bonn           0.0428   0.0437   0.0374   0.0419   0.0626   0.0956    0.1198  0.9856     0    0    98
+  MEAN(src)      0.0636   0.0643   0.0568   0.0615   0.0787   0.1145    0.1526  0.9437     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0588, 0.0709]
+  95% CI of balanced clip median AbsRel: [0.0530, 0.0652]
+
+-> work_dirs/acc/depth-anything-small-hf-L32-official-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : depth-anything-small-hf @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 21761.61it/s]
+depth-anything-small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 54s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2322   0.2319   0.2319   0.2319   0.2367   0.2367    0.2367  0.8247     0    0     2
+  bonn           0.7046   0.7075   0.6149   0.7075   1.0407   1.2296    1.2296  0.3512     0    3    11
+  MEAN(src)      0.4684   0.4697   0.4234   0.4697   0.6387   0.7332    0.7332  0.5879     0    3    13
+  95% CI of balanced clip mean   AbsRel: [0.3924, 0.5567]
+  95% CI of balanced clip median AbsRel: [0.3365, 0.6329]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2329   0.2325   0.2325   0.2325   0.2396   0.2396    0.2396  0.8116     1    0     2
+  bonn           0.7632   0.7503   0.6236   0.7503   1.1396   1.3464    1.3464  0.3698     5    2    11
+  MEAN(src)      0.4981   0.4914   0.4280   0.4914   0.6896   0.7930    0.7930  0.5907     6    2    13
+  95% CI of balanced clip mean   AbsRel: [0.4205, 0.5742]
+  95% CI of balanced clip median AbsRel: [0.4052, 0.5409]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1253   0.1268   0.1268   0.1268   0.1533   0.1533    0.1533  0.8737     0    0     2
+  bonn           0.1555   0.1651   0.1287   0.1651   0.3210   0.3686    0.3686  0.7942     0    0    11
+  MEAN(src)      0.1404   0.1460   0.1278   0.1460   0.2371   0.2609    0.2609  0.8340     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1125, 0.1821]
+  95% CI of balanced clip median AbsRel: [0.0959, 0.2000]
+
+-> work_dirs/acc/depth-anything-small-hf-L256-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : depth-anything-small-hf @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 15784.81it/s]
+depth-anything-small-hf (24.8M) space=disparity infer_size=256->252x252 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 37s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2291   0.2288   0.2288   0.2288   0.2327   0.2327    0.2327  0.7476     0    0     2
+  bonn           0.6023   0.6080   0.5300   0.6080   1.2487   1.2518    1.2518  0.3869     0    2    11
+  MEAN(src)      0.4157   0.4184   0.3794   0.4184   0.7407   0.7423    0.7423  0.5672     0    2    13
+  95% CI of balanced clip mean   AbsRel: [0.3298, 0.5232]
+  95% CI of balanced clip median AbsRel: [0.2877, 0.4647]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2529   0.2530   0.2530   0.2530   0.2549   0.2549    0.2549  0.7099     1    0     2
+  bonn           0.7657   0.7519   0.5416   0.7519   1.5435   1.5557    1.5557  0.3800     1    2    11
+  MEAN(src)      0.5093   0.5025   0.3973   0.5025   0.8992   0.9053    0.9053  0.5450     2    2    13
+  95% CI of balanced clip mean   AbsRel: [0.3910, 0.6328]
+  95% CI of balanced clip median AbsRel: [0.3382, 0.5703]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1340   0.1353   0.1353   0.1353   0.1575   0.1575    0.1575  0.8347     0    0     2
+  bonn           0.1546   0.1646   0.1206   0.1646   0.3239   0.4016    0.4016  0.7962     0    0    11
+  MEAN(src)      0.1443   0.1499   0.1279   0.1499   0.2407   0.2795    0.2795  0.8155     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1178, 0.1865]
+  95% CI of balanced clip median AbsRel: [0.1041, 0.1844]
+
+-> work_dirs/acc/depth-anything-small-hf-L256-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : depth-anything-small-hf per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 26457.54it/s]
+depth-anything-small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 63s
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.0825   0.0832   0.0832   0.0832   0.0961   0.0961    0.0961  0.9037     0    0     2
+  bonn           0.0438   0.0441   0.0451   0.0441   0.0575   0.0627    0.0627  0.9845     0    0    11
+  MEAN(src)      0.0631   0.0637   0.0642   0.0637   0.0768   0.0794    0.0794  0.9441     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.0551, 0.0723]
+  95% CI of balanced clip median AbsRel: [0.0515, 0.0738]
+
+-> work_dirs/acc/depth-anything-small-hf-L256-official-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : Depth-Anything-V2-Base-hf @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 9092.02it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+Depth-Anything-V2-Base-hf (97.5M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 107s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            2.2171   2.0886   1.3350   1.6839   4.0217   6.7063   16.4391  0.9081     0   62    89
+  bonn           0.6207   0.6938   0.5468   0.5227   0.7549   0.9409   27.9262  0.4410     0   19   398
+  MEAN(src)      1.4189   1.3912   0.9409   1.1033   2.3883   3.8236   22.1827  0.6745     0   81   487
+  95% CI of balanced clip mean   AbsRel: [1.1388, 1.6923]
+  95% CI of balanced clip median AbsRel: [0.8388, 1.0588]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3588   0.3440   0.2351   0.3071   0.7415   0.7939    1.7142  0.9131    89    3    89
+  bonn           0.7053   0.7660   0.6315   0.6793   1.0779   1.3105   14.7710  0.4820    66   55   398
+  MEAN(src)      0.5321   0.5550   0.4333   0.4932   0.9097   1.0522    8.2426  0.6976   155   58   487
+  95% CI of balanced clip mean   AbsRel: [0.5034, 0.6175]
+  95% CI of balanced clip median AbsRel: [0.4167, 0.4638]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1153   0.1137   0.0778   0.1017   0.2623   0.3372    0.5463  0.9095    11    0    89
+  bonn           0.0594   0.0600   0.0504   0.0567   0.1099   0.1371    0.2374  0.9737     1    0   398
+  MEAN(src)      0.0873   0.0869   0.0641   0.0792   0.1861   0.2372    0.3919  0.9416    12    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0773, 0.0974]
+  95% CI of balanced clip median AbsRel: [0.0617, 0.0678]
+
+-> work_dirs/acc/Depth-Anything-V2-Base-hf-L8-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : Depth-Anything-V2-Base-hf @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 19062.00it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+Depth-Anything-V2-Base-hf (97.5M) space=disparity infer_size=256->252x252 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 52s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            1.5753   1.5402   1.1832   1.3970   3.0203   3.5029    7.2604  0.8670     0   52    89
+  bonn           0.5541   0.5418   0.3925   0.4327   0.8587   1.5355    6.8091  0.5304     0   35   398
+  MEAN(src)      1.0647   1.0410   0.7878   0.9148   1.9395   2.5192    7.0347  0.6987     0   87   487
+  95% CI of balanced clip mean   AbsRel: [0.9063, 1.1905]
+  95% CI of balanced clip median AbsRel: [0.6650, 0.9662]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3782   0.3705   0.2821   0.3381   0.6225   0.8182    1.5222  0.8851    81    3    89
+  bonn           0.5016   0.4901   0.4407   0.4741   0.8886   1.0183    1.4694  0.5358   109   24   398
+  MEAN(src)      0.4399   0.4303   0.3614   0.4061   0.7555   0.9183    1.4958  0.7105   190   27   487
+  95% CI of balanced clip mean   AbsRel: [0.4027, 0.4601]
+  95% CI of balanced clip median AbsRel: [0.3367, 0.3805]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1671   0.1642   0.1010   0.1287   0.2847   0.3567    1.3216  0.8965     8    2    89
+  bonn           0.0692   0.0704   0.0603   0.0674   0.1176   0.1420    0.2862  0.9719     1    0   398
+  MEAN(src)      0.1182   0.1173   0.0806   0.0980   0.2012   0.2494    0.8039  0.9342     9    2   487
+  95% CI of balanced clip mean   AbsRel: [0.0990, 0.1404]
+  95% CI of balanced clip median AbsRel: [0.0781, 0.0848]
+
+-> work_dirs/acc/Depth-Anything-V2-Base-hf-L8-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : Depth-Anything-V2-Base-hf per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 19713.82it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+Depth-Anything-V2-Base-hf (97.5M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 95s (+1 no-GT)
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1231   0.1212   0.0770   0.1011   0.2746   0.3359    0.9396  0.9116    13    0    89
+  bonn           0.0551   0.0550   0.0480   0.0520   0.1029   0.1272    0.2336  0.9753     1    0   398
+  MEAN(src)      0.0891   0.0881   0.0625   0.0765   0.1888   0.2316    0.5866  0.9435    14    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0756, 0.1030]
+  95% CI of balanced clip median AbsRel: [0.0597, 0.0659]
+
+-> work_dirs/acc/Depth-Anything-V2-Base-hf-L8-official-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : Depth-Anything-V2-Base-hf @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 16318.48it/s]
+  bonn 50/98
+Depth-Anything-V2-Base-hf (97.5M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 110s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            2.2544   2.1362   1.5191   1.8647   3.9971   5.3028    9.1980  0.8979     0   18    22
+  bonn           0.6464   0.6579   0.5750   0.5782   0.8695   1.2489    3.7434  0.4250     0    8    98
+  MEAN(src)      1.4504   1.3971   1.0470   1.2214   2.4333   3.2759    6.4707  0.6614     0   26   120
+  95% CI of balanced clip mean   AbsRel: [1.0488, 1.8519]
+  95% CI of balanced clip median AbsRel: [0.8940, 1.1878]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3685   0.3549   0.2394   0.3329   0.6119   0.9725    0.9983  0.8988    22    0    22
+  bonn           0.7139   0.7081   0.6427   0.6998   1.0514   1.2685    1.4315  0.4607    31   13    98
+  MEAN(src)      0.5412   0.5315   0.4410   0.5163   0.8317   1.1205    1.2149  0.6797    53   13   120
+  95% CI of balanced clip mean   AbsRel: [0.4793, 0.5907]
+  95% CI of balanced clip median AbsRel: [0.4115, 0.5292]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1158   0.1143   0.0818   0.1060   0.2882   0.3416    0.3441  0.8971     4    0    22
+  bonn           0.0825   0.0858   0.0637   0.0801   0.1699   0.1954    0.3272  0.9349     0    0    98
+  MEAN(src)      0.0992   0.1001   0.0727   0.0930   0.2291   0.2685    0.3357  0.9160     4    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0823, 0.1204]
+  95% CI of balanced clip median AbsRel: [0.0669, 0.0839]
+
+-> work_dirs/acc/Depth-Anything-V2-Base-hf-L32-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : Depth-Anything-V2-Base-hf @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 12491.34it/s]
+  bonn 50/98
+Depth-Anything-V2-Base-hf (97.5M) space=disparity infer_size=256->252x252 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 59s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            1.6196   1.5926   1.6142   1.5613   2.9268   3.0820    3.5216  0.8586     0   15    22
+  bonn           0.5805   0.5696   0.4843   0.4929   0.9338   1.3126    3.0348  0.5025     0   10    98
+  MEAN(src)      1.1000   1.0811   1.0492   1.0271   1.9303   2.1973    3.2782  0.6806     0   25   120
+  95% CI of balanced clip mean   AbsRel: [0.8930, 1.2771]
+  95% CI of balanced clip median AbsRel: [0.7380, 1.2400]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3847   0.3784   0.3090   0.3544   0.6122   0.6165    1.0793  0.8758    22    1    22
+  bonn           0.5144   0.5037   0.4584   0.4928   0.9013   0.9899    1.2213  0.5100    45    4    98
+  MEAN(src)      0.4496   0.4410   0.3837   0.4236   0.7568   0.8032    1.1503  0.6929    67    5   120
+  95% CI of balanced clip mean   AbsRel: [0.3952, 0.4933]
+  95% CI of balanced clip median AbsRel: [0.3400, 0.4487]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1456   0.1438   0.1074   0.1289   0.2735   0.3299    0.4990  0.8883     3    0    22
+  bonn           0.0902   0.0941   0.0692   0.0883   0.1728   0.2020    0.3558  0.9317     0    0    98
+  MEAN(src)      0.1179   0.1189   0.0883   0.1086   0.2232   0.2660    0.4274  0.9100     3    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1003, 0.1425]
+  95% CI of balanced clip median AbsRel: [0.0826, 0.0970]
+
+-> work_dirs/acc/Depth-Anything-V2-Base-hf-L32-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : Depth-Anything-V2-Base-hf per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 16113.15it/s]
+  bonn 50/98
+Depth-Anything-V2-Base-hf (97.5M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 94s
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1236   0.1216   0.0791   0.1077   0.2856   0.3860    0.4718  0.9118     6    0    22
+  bonn           0.0557   0.0561   0.0499   0.0542   0.1038   0.1225    0.1682  0.9749     1    0    98
+  MEAN(src)      0.0897   0.0889   0.0645   0.0810   0.1947   0.2543    0.3200  0.9433     7    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0682, 0.1144]
+  95% CI of balanced clip median AbsRel: [0.0591, 0.0767]
+
+-> work_dirs/acc/Depth-Anything-V2-Base-hf-L32-official-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : Depth-Anything-V2-Base-hf @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 15872.22it/s]
+Depth-Anything-V2-Base-hf (97.5M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 80s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            3.0750   3.0246   3.0246   3.0246   3.9116   3.9116    3.9116  0.7926     0    2     2
+  bonn           0.8870   0.9295   0.6814   0.9295   1.2666   2.7539    2.7539  0.3588     0    3    11
+  MEAN(src)      1.9810   1.9770   1.8530   1.9770   2.5891   3.3327    3.3327  0.5757     0    5    13
+  95% CI of balanced clip mean   AbsRel: [1.4203, 2.5553]
+  95% CI of balanced clip median AbsRel: [1.3888, 2.4352]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.5009   0.4996   0.4996   0.4996   0.5222   0.5222    0.5222  0.8002     2    0     2
+  bonn           0.7364   0.7413   0.7310   0.7413   0.9463   0.9804    0.9804  0.3748     9    0    11
+  MEAN(src)      0.6186   0.6205   0.6153   0.6205   0.7343   0.7513    0.7513  0.5875    11    0    13
+  95% CI of balanced clip mean   AbsRel: [0.5692, 0.6718]
+  95% CI of balanced clip median AbsRel: [0.5280, 0.7106]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2244   0.2301   0.2301   0.2301   0.3315   0.3315    0.3315  0.8051     1    0     2
+  bonn           0.2058   0.2162   0.1975   0.2162   0.3733   0.4624    0.4624  0.6722     0    0    11
+  MEAN(src)      0.2151   0.2232   0.2138   0.2232   0.3524   0.3970    0.3970  0.7386     1    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1503, 0.2975]
+  95% CI of balanced clip median AbsRel: [0.1377, 0.2872]
+
+-> work_dirs/acc/Depth-Anything-V2-Base-hf-L256-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : Depth-Anything-V2-Base-hf @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 18775.39it/s]
+Depth-Anything-V2-Base-hf (97.5M) space=disparity infer_size=256->252x252 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 46s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            2.1248   2.1367   2.1367   2.1367   2.3450   2.3450    2.3450  0.7472     0    2     2
+  bonn           0.7258   0.7554   0.6271   0.7554   1.2754   1.7125    1.7125  0.4185     0    3    11
+  MEAN(src)      1.4253   1.4461   1.3819   1.4461   1.8102   2.0288    2.0288  0.5828     0    5    13
+  95% CI of balanced clip mean   AbsRel: [1.2653, 1.6333]
+  95% CI of balanced clip median AbsRel: [1.2175, 1.5966]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.4878   0.4902   0.4902   0.4902   0.5329   0.5329    0.5329  0.7261     2    0     2
+  bonn           0.5312   0.5340   0.5485   0.5340   0.6924   0.7398    0.7398  0.4232    10    0    11
+  MEAN(src)      0.5095   0.5121   0.5194   0.5121   0.6127   0.6364    0.6364  0.5747    12    0    13
+  95% CI of balanced clip mean   AbsRel: [0.4679, 0.5579]
+  95% CI of balanced clip median AbsRel: [0.4368, 0.5583]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3335   0.3445   0.3445   0.3445   0.5372   0.5372    0.5372  0.7309     1    0     2
+  bonn           0.1988   0.2096   0.1886   0.2096   0.3948   0.4200    0.4200  0.6968     0    0    11
+  MEAN(src)      0.2662   0.2770   0.2665   0.2770   0.4660   0.4786    0.4786  0.7138     1    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1606, 0.3943]
+  95% CI of balanced clip median AbsRel: [0.1436, 0.3681]
+
+-> work_dirs/acc/Depth-Anything-V2-Base-hf-L256-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : Depth-Anything-V2-Base-hf per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 19518.20it/s]
+Depth-Anything-V2-Base-hf (97.5M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 80s
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1362   0.1372   0.1372   0.1372   0.1564   0.1564    0.1564  0.9198     2    0     2
+  bonn           0.0576   0.0571   0.0505   0.0571   0.0885   0.1031    0.1031  0.9730     1    0    11
+  MEAN(src)      0.0969   0.0972   0.0939   0.0972   0.1224   0.1297    0.1297  0.9464     3    0    13
+  95% CI of balanced clip mean   AbsRel: [0.0832, 0.1116]
+  95% CI of balanced clip median AbsRel: [0.0814, 0.1110]
+
+-> work_dirs/acc/Depth-Anything-V2-Base-hf-L256-official-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : zoedepth-nyu-kitti @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/647 [00:00<?, ?it/s]Loading weights: 100%|██████████| 647/647 [00:00<00:00, 9861.49it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+zoedepth-nyu-kitti (345.1M) space=depth infer_size=official->384x384 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 153s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1240   0.1250   0.1233   0.1240   0.1447   0.1528    0.2101  0.8391     0    0    89
+  bonn           0.0740   0.0768   0.0703   0.0732   0.1149   0.1443    0.3463  0.9417     0    0   398
+  MEAN(src)      0.0990   0.1009   0.0968   0.0986   0.1298   0.1486    0.2782  0.8904     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0981, 0.1037]
+  95% CI of balanced clip median AbsRel: [0.0939, 0.0998]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1535   0.1555   0.1654   0.1556   0.1855   0.1963    0.2244  0.8402     0    0    89
+  bonn           0.0927   0.0961   0.0749   0.0892   0.1977   0.2405    0.4739  0.9167     0    0   398
+  MEAN(src)      0.1231   0.1258   0.1201   0.1224   0.1916   0.2184    0.3492  0.8784     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1213, 0.1303]
+  95% CI of balanced clip median AbsRel: [0.1168, 0.1234]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1244   0.1252   0.1283   0.1256   0.1390   0.1448    0.1757  0.8769     0    0    89
+  bonn           0.0652   0.0675   0.0603   0.0639   0.1113   0.1268    0.2888  0.9686     0    0   398
+  MEAN(src)      0.0948   0.0964   0.0943   0.0947   0.1251   0.1358    0.2323  0.9228     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0939, 0.0988]
+  95% CI of balanced clip median AbsRel: [0.0916, 0.0966]
+
+-> work_dirs/acc/zoedepth-nyu-kitti-L8-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : zoedepth-nyu-kitti @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/647 [00:00<?, ?it/s]Loading weights: 100%|██████████| 647/647 [00:00<00:00, 19378.28it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+zoedepth-nyu-kitti (345.1M) space=depth infer_size=256->256x256 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 78s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2618   0.2606   0.2330   0.2523   0.3770   0.4673    0.6042  0.6120     0    0    89
+  bonn           0.2726   0.2672   0.2210   0.2454   0.4737   0.6637    1.2656  0.5963     0    5   398
+  MEAN(src)      0.2672   0.2639   0.2270   0.2488   0.4254   0.5655    0.9349  0.6041     0    5   487
+  95% CI of balanced clip mean   AbsRel: [0.2517, 0.2764]
+  95% CI of balanced clip median AbsRel: [0.2225, 0.2474]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2507   0.2494   0.2309   0.2428   0.3537   0.4078    0.5196  0.5893     0    0    89
+  bonn           0.2438   0.2400   0.2194   0.2316   0.4223   0.4942    0.6763  0.5269     0    0   398
+  MEAN(src)      0.2472   0.2447   0.2252   0.2372   0.3880   0.4510    0.5979  0.5581     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.2355, 0.2542]
+  95% CI of balanced clip median AbsRel: [0.2199, 0.2405]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2311   0.2301   0.2111   0.2236   0.3380   0.3839    0.4518  0.6207     1    0    89
+  bonn           0.3473   0.3405   0.1994   0.2181   0.4048   0.5511    9.0812  0.6146    28   11   398
+  MEAN(src)      0.2892   0.2853   0.2052   0.2208   0.3714   0.4675    4.7665  0.6176    29   11   487
+  95% CI of balanced clip mean   AbsRel: [0.2486, 0.3286]
+  95% CI of balanced clip median AbsRel: [0.2000, 0.2100]
+
+-> work_dirs/acc/zoedepth-nyu-kitti-L8-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L8.json : zoedepth-nyu-kitti per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/647 [00:00<?, ?it/s]Loading weights: 100%|██████████| 647/647 [00:00<00:00, 18417.54it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+zoedepth-nyu-kitti (345.1M) space=depth infer_size=official->384x384 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 120s (+1 no-GT)
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1237   0.1245   0.1276   0.1250   0.1382   0.1425    0.1652  0.8773     0    0    89
+  bonn           0.0632   0.0646   0.0585   0.0617   0.1066   0.1185    0.2897  0.9705     0    0   398
+  MEAN(src)      0.0934   0.0945   0.0931   0.0933   0.1224   0.1305    0.2275  0.9239     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0922, 0.0969]
+  95% CI of balanced clip median AbsRel: [0.0904, 0.0953]
+
+-> work_dirs/acc/zoedepth-nyu-kitti-L8-official-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : zoedepth-nyu-kitti @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/647 [00:00<?, ?it/s]Loading weights: 100%|██████████| 647/647 [00:00<00:00, 17867.37it/s]
+  bonn 50/98
+zoedepth-nyu-kitti (345.1M) space=depth infer_size=official->384x384 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 121s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1243   0.1255   0.1241   0.1244   0.1463   0.1482    0.1840  0.8396     0    0    22
+  bonn           0.0819   0.0878   0.0741   0.0820   0.1349   0.1684    0.3541  0.9270     0    0    98
+  MEAN(src)      0.1031   0.1066   0.0991   0.1032   0.1406   0.1583    0.2691  0.8833     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1004, 0.1133]
+  95% CI of balanced clip median AbsRel: [0.0945, 0.1050]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1544   0.1564   0.1680   0.1573   0.1841   0.1870    0.1971  0.8390     0    0    22
+  bonn           0.1026   0.1080   0.0835   0.1028   0.2028   0.2567    0.3307  0.8997     0    0    98
+  MEAN(src)      0.1285   0.1322   0.1257   0.1301   0.1935   0.2219    0.2639  0.8693     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.1235, 0.1411]
+  95% CI of balanced clip median AbsRel: [0.1143, 0.1368]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1254   0.1262   0.1289   0.1263   0.1379   0.1405    0.1676  0.8760     0    0    22
+  bonn           0.0733   0.0788   0.0664   0.0734   0.1249   0.1700    0.2866  0.9586     0    0    98
+  MEAN(src)      0.0993   0.1025   0.0976   0.0998   0.1314   0.1553    0.2271  0.9173     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0969, 0.1084]
+  95% CI of balanced clip median AbsRel: [0.0924, 0.1036]
+
+-> work_dirs/acc/zoedepth-nyu-kitti-L32-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : zoedepth-nyu-kitti @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/647 [00:00<?, ?it/s]Loading weights: 100%|██████████| 647/647 [00:00<00:00, 18452.36it/s]
+  bonn 50/98
+zoedepth-nyu-kitti (345.1M) space=depth infer_size=256->256x256 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 87s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2668   0.2653   0.2372   0.2574   0.4064   0.4801    0.5103  0.6032     0    0    22
+  bonn           0.2871   0.2833   0.2315   0.2662   0.4859   0.6998    1.0156  0.5793     0    1    98
+  MEAN(src)      0.2769   0.2743   0.2343   0.2618   0.4462   0.5900    0.7629  0.5913     0    1   120
+  95% CI of balanced clip mean   AbsRel: [0.2503, 0.3002]
+  95% CI of balanced clip median AbsRel: [0.2214, 0.2570]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2538   0.2524   0.2312   0.2454   0.3645   0.4189    0.4681  0.5837     0    0    22
+  bonn           0.2568   0.2546   0.2256   0.2479   0.4270   0.4978    0.6246  0.5071     0    0    98
+  MEAN(src)      0.2553   0.2535   0.2284   0.2467   0.3958   0.4583    0.5464  0.5454     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.2348, 0.2732]
+  95% CI of balanced clip median AbsRel: [0.2160, 0.2465]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2360   0.2349   0.2086   0.2281   0.3649   0.4211    0.4315  0.6130     0    0    22
+  bonn           0.3725   0.3662   0.2157   0.2564   0.4320   0.7821    3.5748  0.5847    14    5    98
+  MEAN(src)      0.3043   0.3005   0.2122   0.2423   0.3984   0.6016    2.0031  0.5988    14    5   120
+  95% CI of balanced clip mean   AbsRel: [0.2454, 0.3669]
+  95% CI of balanced clip median AbsRel: [0.2032, 0.2229]
+
+-> work_dirs/acc/zoedepth-nyu-kitti-L32-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L32.json : zoedepth-nyu-kitti per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/647 [00:00<?, ?it/s]Loading weights: 100%|██████████| 647/647 [00:00<00:00, 18246.16it/s]
+  bonn 50/98
+zoedepth-nyu-kitti (345.1M) space=depth infer_size=official->384x384 manifest=manifests/acc_real_L32.json clips=120 active=100.0% 117s
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1237   0.1245   0.1288   0.1253   0.1369   0.1395    0.1499  0.8772     0    0    22
+  bonn           0.0638   0.0667   0.0607   0.0647   0.1146   0.1223    0.1919  0.9702     0    0    98
+  MEAN(src)      0.0937   0.0956   0.0948   0.0950   0.1258   0.1309    0.1709  0.9237     0    0   120
+  95% CI of balanced clip mean   AbsRel: [0.0913, 0.0999]
+  95% CI of balanced clip median AbsRel: [0.0892, 0.0990]
+
+-> work_dirs/acc/zoedepth-nyu-kitti-L32-official-pf.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : zoedepth-nyu-kitti @ official
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/647 [00:00<?, ?it/s]Loading weights: 100%|██████████| 647/647 [00:00<00:00, 18429.93it/s]
+zoedepth-nyu-kitti (345.1M) space=depth infer_size=official->384x384 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 103s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1254   0.1261   0.1261   0.1261   0.1386   0.1386    0.1386  0.8521     0    0     2
+  bonn           0.1315   0.1413   0.1020   0.1413   0.2877   0.3301    0.3301  0.8832     0    0    11
+  MEAN(src)      0.1285   0.1337   0.1140   0.1337   0.2131   0.2343    0.2343  0.8677     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1085, 0.1630]
+  95% CI of balanced clip median AbsRel: [0.0976, 0.1646]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1442   0.1453   0.1453   0.1453   0.1648   0.1648    0.1648  0.8516     0    0     2
+  bonn           0.1502   0.1584   0.1280   0.1584   0.2963   0.3203    0.3203  0.7986     0    0    11
+  MEAN(src)      0.1472   0.1519   0.1366   0.1519   0.2306   0.2426    0.2426  0.8251     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1255, 0.1809]
+  95% CI of balanced clip median AbsRel: [0.1177, 0.1921]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1282   0.1290   0.1290   0.1290   0.1437   0.1437    0.1437  0.8630     0    0     2
+  bonn           0.1314   0.1393   0.0928   0.1393   0.2721   0.3006    0.3006  0.8423     0    0    11
+  MEAN(src)      0.1298   0.1342   0.1109   0.1342   0.2079   0.2222    0.2222  0.8527     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1093, 0.1617]
+  95% CI of balanced clip median AbsRel: [0.0998, 0.1746]
+
+-> work_dirs/acc/zoedepth-nyu-kitti-L256-official.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : zoedepth-nyu-kitti @ 256
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/647 [00:00<?, ?it/s]Loading weights: 100%|██████████| 647/647 [00:00<00:00, 38807.27it/s]
+zoedepth-nyu-kitti (345.1M) space=depth infer_size=256->256x256 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 73s
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3177   0.3200   0.3200   0.3200   0.3604   0.3604    0.3604  0.6377     0    0     2
+  bonn           0.3983   0.4098   0.4265   0.4098   0.6245   0.6781    0.6781  0.5262     0    0    11
+  MEAN(src)      0.3580   0.3649   0.3732   0.3649   0.4925   0.5193    0.5193  0.5820     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.3078, 0.4226]
+  95% CI of balanced clip median AbsRel: [0.2589, 0.4584]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2974   0.2995   0.2995   0.2995   0.3372   0.3372    0.3372  0.5413     0    0     2
+  bonn           0.3446   0.3530   0.3707   0.3530   0.5043   0.5338    0.5338  0.3700     0    0    11
+  MEAN(src)      0.3210   0.3262   0.3351   0.3262   0.4208   0.4355    0.4355  0.4556     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.2829, 0.3705]
+  95% CI of balanced clip median AbsRel: [0.2483, 0.3986]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2919   0.2945   0.2945   0.2945   0.3405   0.3405    0.3405  0.5326     0    0     2
+  bonn           0.7829   0.8192   0.3890   0.8192   1.5325   2.4079    2.4079  0.4468     8    4    11
+  MEAN(src)      0.5374   0.5568   0.3417   0.5568   0.9365   1.3742    1.3742  0.4897     8    4    13
+  95% CI of balanced clip mean   AbsRel: [0.3636, 0.7812]
+  95% CI of balanced clip median AbsRel: [0.2350, 0.8773]
+
+-> work_dirs/acc/zoedepth-nyu-kitti-L256-256.json
+-> work_dirs/acc/table.txt
+=== manifests/acc_real_L256.json : zoedepth-nyu-kitti per-frame
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/647 [00:00<?, ?it/s]Loading weights: 100%|██████████| 647/647 [00:00<00:00, 19572.83it/s]
+zoedepth-nyu-kitti (345.1M) space=depth infer_size=official->384x384 manifest=manifests/acc_real_L256.json clips=13 active=100.0% 113s
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1224   0.1230   0.1230   0.1230   0.1342   0.1342    0.1342  0.8786     0    0     2
+  bonn           0.0652   0.0664   0.0627   0.0664   0.0923   0.0924    0.0924  0.9690     0    0    11
+  MEAN(src)      0.0938   0.0947   0.0928   0.0947   0.1133   0.1133    0.1133  0.9238     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.0860, 0.1035]
+  95% CI of balanced clip median AbsRel: [0.0829, 0.1034]
+
+-> work_dirs/acc/zoedepth-nyu-kitti-L256-official-pf.json
+-> work_dirs/acc/table.txt
+done -> scripts/acc_summary.py

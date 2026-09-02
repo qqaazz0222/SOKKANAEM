@@ -1,0 +1,18 @@
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+Traceback (most recent call last):
+  File "/workspace/SOKKANAEM/scripts/eval_acc.py", line 463, in <module>
+    
+  File "/workspace/SOKKANAEM/scripts/eval_acc.py", line 429, in main
+    lines.append("  sharpness (alignment-free, PLAN.md §3.2)")
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/SOKKANAEM/scripts/eval_acc.py", line 430, in <genexpr>
+    lines.append(f"  {'source':<10}" + "".join(f"{k:>13}" for k in keys))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to list.__format__

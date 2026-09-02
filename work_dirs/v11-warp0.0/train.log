@@ -1,0 +1,32 @@
+2026-08-28 13:59:43,056 work dir: work_dirs/v11-warp0.0  seed 0  commit 1d4d01a6
+2026-08-28 13:59:43,722 partial init from work_dirs/v10-longclip/latest.pt: 1 new tensors kept at init, 0 checkpoint tensors unused
+2026-08-28 13:59:44,599 mixed dataset: 205650 clips from 5 sources (size 256)
+2026-08-28 13:59:52,181 step    0  loss 3.9459  skip 0.00  lr 3.00e-07  depth_std 37.5223
+2026-08-28 14:03:32,430 step   50  loss 1.7246  skip 0.01  lr 1.53e-05  depth_std 32.2959
+2026-08-28 14:07:36,203 step  100  loss 2.0108  skip 0.01  lr 3.03e-05  depth_std 12.1701
+2026-08-28 14:11:57,295 step  150  loss 2.0968  skip 0.02  lr 4.53e-05  depth_std 42.4651
+2026-08-28 14:16:06,624 step  200  loss 4.8583  skip 0.03  lr 6.03e-05  depth_std 28.0569
+2026-08-28 14:20:15,077 step  250  loss 4.6016  skip 0.03  lr 7.53e-05  depth_std 30.7459
+2026-08-28 14:24:21,993 step  300  loss 1.6491  skip 0.04  lr 9.03e-05  depth_std 23.4103
+2026-08-28 14:28:42,473 step  350  loss 0.4997  skip 0.04  lr 1.05e-04  depth_std 2.2269
+2026-08-28 14:32:52,281 step  400  loss 1.1331  skip 0.05  lr 1.20e-04  depth_std 40.5822
+2026-08-28 14:36:45,435 step  450  loss 4.0766  skip 0.06  lr 1.35e-04  depth_std 10.9584
+2026-08-28 14:41:07,651 step  500  loss 2.4192  skip 0.06  lr 1.50e-04  depth_std 38.3708
+2026-08-28 14:44:59,914 step  550  loss 1.6251  skip 0.07  lr 1.65e-04  depth_std 1.2966
+2026-08-28 14:49:15,520 step  600  loss 2.1481  skip 0.07  lr 1.80e-04  depth_std 20.7300
+2026-08-28 14:53:03,363 step  650  loss 1.6161  skip 0.08  lr 1.95e-04  depth_std 21.3682
+2026-08-28 14:57:15,208 step  700  loss 0.5767  skip 0.09  lr 2.10e-04  depth_std 1.8564
+2026-08-28 15:01:03,037 step  750  loss 1.7700  skip 0.09  lr 2.25e-04  depth_std 1.6103
+2026-08-28 15:05:05,276 step  800  loss 0.6175  skip 0.10  lr 2.40e-04  depth_std 0.4605
+2026-08-28 15:09:11,557 step  850  loss 1.8245  skip 0.11  lr 2.55e-04  depth_std 1.4745
+2026-08-28 15:12:58,475 step  900  loss 0.7564  skip 0.11  lr 2.70e-04  depth_std 0.8446
+2026-08-28 15:16:58,809 step  950  loss 4.0574  skip 0.12  lr 2.85e-04  depth_std 9.5815
+2026-08-28 15:20:43,980 step 1000  loss 1.8982  skip 0.12  lr 3.00e-04  depth_std 16.8383
+2026-08-28 15:24:32,869 step 1050  loss 1.7496  skip 0.13  lr 3.00e-04  depth_std 5.2931
+2026-08-28 15:28:32,850 step 1100  loss 1.2269  skip 0.14  lr 3.00e-04  depth_std 9.9178
+2026-08-28 15:32:11,911 step 1150  loss 1.3252  skip 0.14  lr 3.00e-04  depth_std 15.4388
+2026-08-28 15:35:49,810 step 1200  loss 2.8121  skip 0.15  lr 2.99e-04  depth_std 7.0891
+2026-08-28 17:04:00,784 work dir: work_dirs/v11-warp0.0  seed 0  commit 1d4d01a6
+2026-08-28 17:04:01,950 resumed from work_dirs/v11-warp0.0/latest.pt at step 2000
+2026-08-28 17:04:03,605 mixed dataset: 205650 clips from 5 sources (size 256)
+2026-08-28 17:04:15,097 step 2000  loss 4.5038  skip 0.25  lr 2.85e-04  depth_std 43.0952

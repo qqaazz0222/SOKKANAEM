@@ -1,0 +1,1263 @@
+[2026-08-29T05:38:02+09:00] === d1-boundary-s0 : --full-res --boundary-weight 1.0 ===
+2026-08-29 05:38:03,000 work dir: work_dirs/d1-boundary-s0  seed 0  commit 1d4d01a6
+2026-08-29 05:38:03,442 partial init from work_dirs/v11-longclip-spread-s0/latest.pt: 7 new tensors kept at init, 0 checkpoint tensors unused
+2026-08-29 05:38:04,287 mixed dataset: 208720 clips from 5 sources (size 256)
+2026-08-29 05:38:06,343 step    0  loss 2.8215  skip 0.00  lr 2.00e-07  depth_std 28.4354
+2026-08-29 05:38:57,523 step   50  loss 2.1542  skip 0.01  lr 1.02e-05  depth_std 11.2217
+2026-08-29 05:39:51,012 step  100  loss 2.8023  skip 0.03  lr 2.02e-05  depth_std 42.4574
+2026-08-29 05:40:44,650 step  150  loss 5.1435  skip 0.04  lr 3.02e-05  depth_std 1.7203
+2026-08-29 05:41:38,005 step  200  loss 6.6794  skip 0.05  lr 4.02e-05  depth_std 11.6748
+2026-08-29 05:42:30,732 step  250  loss 3.7695  skip 0.06  lr 5.02e-05  depth_std 6.1816
+2026-08-29 05:43:22,751 step  300  loss 1.7493  skip 0.07  lr 6.02e-05  depth_std 14.7866
+2026-08-29 05:44:14,250 step  350  loss 1.7488  skip 0.09  lr 7.02e-05  depth_std 10.6585
+2026-08-29 05:45:05,360 step  400  loss 3.7415  skip 0.10  lr 8.02e-05  depth_std 16.9691
+2026-08-29 05:45:56,040 step  450  loss 2.2700  skip 0.11  lr 9.02e-05  depth_std 8.2860
+2026-08-29 05:46:46,267 step  500  loss 3.0923  skip 0.12  lr 1.00e-04  depth_std 25.5247
+2026-08-29 05:47:35,918 step  550  loss 2.8565  skip 0.14  lr 9.99e-05  depth_std 29.0135
+2026-08-29 05:48:25,185 step  600  loss 2.4781  skip 0.15  lr 9.98e-05  depth_std 28.2320
+2026-08-29 05:49:13,962 step  650  loss 3.6672  skip 0.16  lr 9.95e-05  depth_std 10.9118
+2026-08-29 05:50:02,297 step  700  loss 2.4137  skip 0.17  lr 9.92e-05  depth_std 32.7480
+2026-08-29 05:50:50,106 step  750  loss 2.4250  skip 0.19  lr 9.87e-05  depth_std 22.7559
+2026-08-29 05:51:37,465 step  800  loss 1.9687  skip 0.20  lr 9.82e-05  depth_std 0.9305
+2026-08-29 05:52:24,194 step  850  loss 1.4251  skip 0.21  lr 9.76e-05  depth_std 2.2320
+2026-08-29 05:53:10,457 step  900  loss 1.0478  skip 0.23  lr 9.68e-05  depth_std 1.5188
+2026-08-29 05:53:56,280 step  950  loss 4.0374  skip 0.24  lr 9.60e-05  depth_std 15.5650
+2026-08-29 05:54:41,491 step 1000  loss 8.3949  skip 0.25  lr 9.50e-05  depth_std 34.2575
+2026-08-29 05:55:26,395 step 1050  loss 2.4847  skip 0.26  lr 9.40e-05  depth_std 35.7718
+2026-08-29 05:56:10,672 step 1100  loss 1.9338  skip 0.28  lr 9.29e-05  depth_std 24.8810
+2026-08-29 05:56:54,558 step 1150  loss 2.6598  skip 0.29  lr 9.17e-05  depth_std 23.8446
+2026-08-29 05:57:37,906 step 1200  loss 2.6159  skip 0.30  lr 9.05e-05  depth_std 8.9133
+2026-08-29 05:58:20,763 step 1250  loss 2.4551  skip 0.31  lr 8.91e-05  depth_std 7.0815
+2026-08-29 05:59:03,203 step 1300  loss 3.5196  skip 0.33  lr 8.77e-05  depth_std 15.4986
+2026-08-29 05:59:44,963 step 1350  loss 1.8669  skip 0.34  lr 8.61e-05  depth_std 1.9187
+2026-08-29 06:00:26,322 step 1400  loss 2.4203  skip 0.35  lr 8.46e-05  depth_std 15.7535
+2026-08-29 06:01:07,224 step 1450  loss 2.9994  skip 0.36  lr 8.29e-05  depth_std 15.4594
+2026-08-29 06:01:47,397 step 1500  loss 3.0023  skip 0.38  lr 8.12e-05  depth_std 2.0132
+2026-08-29 06:02:27,361 step 1550  loss 3.5163  skip 0.39  lr 7.94e-05  depth_std 18.2883
+2026-08-29 06:03:06,635 step 1600  loss 4.2103  skip 0.40  lr 7.75e-05  depth_std 18.3105
+2026-08-29 06:03:45,579 step 1650  loss 1.5433  skip 0.41  lr 7.56e-05  depth_std 12.1537
+2026-08-29 06:04:24,086 step 1700  loss 3.4788  skip 0.42  lr 7.37e-05  depth_std 8.3819
+2026-08-29 06:05:01,952 step 1750  loss 3.9188  skip 0.44  lr 7.17e-05  depth_std 14.0524
+2026-08-29 06:05:39,384 step 1800  loss 3.3222  skip 0.45  lr 6.97e-05  depth_std 24.0328
+2026-08-29 06:06:16,266 step 1850  loss 3.3692  skip 0.46  lr 6.76e-05  depth_std 31.5035
+2026-08-29 06:06:52,514 step 1900  loss 1.7612  skip 0.47  lr 6.55e-05  depth_std 2.0021
+2026-08-29 06:07:28,497 step 1950  loss 2.6277  skip 0.49  lr 6.33e-05  depth_std 5.1661
+2026-08-29 06:08:03,953 step 2000  loss 4.2169  skip 0.50  lr 6.11e-05  depth_std 16.1353
+2026-08-29 06:08:39,188 step 2050  loss 1.8631  skip 0.50  lr 5.89e-05  depth_std 20.0166
+2026-08-29 06:09:14,347 step 2100  loss 2.6038  skip 0.50  lr 5.67e-05  depth_std 20.2183
+2026-08-29 06:09:49,576 step 2150  loss 1.5605  skip 0.50  lr 5.45e-05  depth_std 13.1967
+2026-08-29 06:10:24,712 step 2200  loss 2.9764  skip 0.50  lr 5.22e-05  depth_std 39.5260
+2026-08-29 06:10:59,855 step 2250  loss 1.4232  skip 0.50  lr 5.00e-05  depth_std 2.4623
+2026-08-29 06:11:34,885 step 2300  loss 2.3205  skip 0.50  lr 4.78e-05  depth_std 37.5193
+2026-08-29 06:12:10,031 step 2350  loss 2.8430  skip 0.50  lr 4.55e-05  depth_std 26.6961
+2026-08-29 06:12:45,310 step 2400  loss 8.1908  skip 0.50  lr 4.33e-05  depth_std 32.7141
+2026-08-29 06:13:20,505 step 2450  loss 5.7436  skip 0.50  lr 4.11e-05  depth_std 20.5601
+2026-08-29 06:13:55,634 step 2500  loss 2.2327  skip 0.50  lr 3.89e-05  depth_std 11.0416
+2026-08-29 06:14:30,701 step 2550  loss 1.6522  skip 0.50  lr 3.67e-05  depth_std 35.7835
+2026-08-29 06:15:05,877 step 2600  loss 7.4550  skip 0.50  lr 3.45e-05  depth_std 2.3698
+2026-08-29 06:15:41,050 step 2650  loss 2.1876  skip 0.50  lr 3.24e-05  depth_std 5.3101
+2026-08-29 06:16:16,429 step 2700  loss 1.4152  skip 0.50  lr 3.03e-05  depth_std 3.4271
+2026-08-29 06:16:51,689 step 2750  loss 1.3378  skip 0.50  lr 2.83e-05  depth_std 9.4302
+2026-08-29 06:17:26,777 step 2800  loss 1.7624  skip 0.50  lr 2.63e-05  depth_std 13.1674
+2026-08-29 06:18:01,917 step 2850  loss 3.6586  skip 0.50  lr 2.44e-05  depth_std 6.6243
+2026-08-29 06:18:37,085 step 2900  loss 3.1392  skip 0.50  lr 2.25e-05  depth_std 12.5493
+2026-08-29 06:19:12,296 step 2950  loss 3.7102  skip 0.50  lr 2.06e-05  depth_std 39.4853
+2026-08-29 06:19:47,651 step 3000  loss 3.0512  skip 0.50  lr 1.88e-05  depth_std 1.0427
+2026-08-29 06:20:22,842 step 3050  loss 2.6460  skip 0.50  lr 1.71e-05  depth_std 9.0611
+2026-08-29 06:20:58,081 step 3100  loss 5.8827  skip 0.50  lr 1.54e-05  depth_std 36.0856
+2026-08-29 06:21:33,202 step 3150  loss 2.6819  skip 0.50  lr 1.39e-05  depth_std 3.1079
+2026-08-29 06:22:08,469 step 3200  loss 1.8571  skip 0.50  lr 1.23e-05  depth_std 3.6802
+2026-08-29 06:22:43,753 step 3250  loss 2.2786  skip 0.50  lr 1.09e-05  depth_std 7.8442
+2026-08-29 06:23:18,927 step 3300  loss 2.5791  skip 0.50  lr 9.55e-06  depth_std 29.1840
+2026-08-29 06:23:54,064 step 3350  loss 2.3315  skip 0.50  lr 8.27e-06  depth_std 30.0443
+2026-08-29 06:24:29,195 step 3400  loss 1.8184  skip 0.50  lr 7.08e-06  depth_std 16.0149
+2026-08-29 06:25:04,445 step 3450  loss 1.1554  skip 0.50  lr 5.97e-06  depth_std 4.1454
+2026-08-29 06:25:39,725 step 3500  loss 2.4919  skip 0.50  lr 4.95e-06  depth_std 1.5477
+2026-08-29 06:26:14,723 step 3550  loss 5.1078  skip 0.50  lr 4.02e-06  depth_std 25.0040
+2026-08-29 06:26:49,968 step 3600  loss 2.3678  skip 0.50  lr 3.19e-06  depth_std 34.5782
+2026-08-29 06:27:25,102 step 3650  loss 2.8075  skip 0.50  lr 2.45e-06  depth_std 1.7447
+2026-08-29 06:28:00,188 step 3700  loss 3.1329  skip 0.50  lr 1.80e-06  depth_std 27.5228
+2026-08-29 06:28:35,428 step 3750  loss 3.1895  skip 0.50  lr 1.25e-06  depth_std 40.2790
+2026-08-29 06:29:10,591 step 3800  loss 1.6880  skip 0.50  lr 8.04e-07  depth_std 2.7150
+2026-08-29 06:29:45,718 step 3850  loss 1.9173  skip 0.50  lr 4.53e-07  depth_std 35.8314
+2026-08-29 06:30:20,810 step 3900  loss 3.7783  skip 0.50  lr 2.01e-07  depth_std 16.6031
+2026-08-29 06:30:55,989 step 3950  loss 3.2350  skip 0.50  lr 5.03e-08  depth_std 37.4001
+2026-08-29 06:31:30,639 saved -> work_dirs/d1-boundary-s0/latest.pt
+[2026-08-29T06:31:31+09:00] --- P2 screening protocol: d1-boundary-s0 ---
+
+d1-boundary-s0
+    source       absrel   absrel_dyn  absrel_near  absrel_edge   grad_ratio  boundary_f1 boundary_precision boundary_recall      flat_tv   flat_tv_gt flat_tv_ratio    overshoot
+       tum       0.1262       0.3237       0.2348       0.1730       0.4695       0.4423       0.6917       0.3820       0.0348       0.0039      10.5949       0.2245
+      bonn       0.1246       0.2476       0.2633       0.1423       0.4446       0.3016       0.5676       0.2502       0.0329       0.0086      76.1575       0.4342
+  balanced       0.1254       0.2856       0.2491       0.1576       0.4570       0.3720       0.6297       0.3161       0.0339       0.0062      43.3762       0.3294
+
+grad_ratio alone is buyable: read it with boundary_f1 (blur loses recall, noise loses precision), flat_tv_ratio (noise) and overshoot (ringing).
+[2026-08-29T06:31:52+09:00] --- P1+P2 sealed L8 manifest: d1-boundary-s0 ---
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+d1-boundary-s0 (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=24.7% 55s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1289   0.1262   0.0811   0.1121   0.2636   0.3800    0.5048  0.8458     0    0    89
+  bonn           0.1181   0.1194   0.0966   0.1086   0.1994   0.2822    0.8132  0.8868     0    0   398
+  MEAN(src)      0.1235   0.1228   0.0889   0.1103   0.2315   0.3311    0.6590  0.8663     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1118, 0.1349]
+  95% CI of balanced clip median AbsRel: [0.0849, 0.0926]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1289 0.846 100  0.1181 0.887 100  0.1235 0.866    
+  edge        0.1645 0.749  17  0.1541 0.781   7  0.1593 0.765    
+  flat        0.1216 0.866  83  0.1154 0.894  93  0.1185 0.880    
+  dynamic     0.4586 0.444   9  0.2983 0.660  13  0.3785 0.552    
+  static      0.0971 0.885  91  0.0903 0.922  87  0.0937 0.903    
+  near        0.3662 0.606  17  0.2167 0.768  25  0.2914 0.687    
+  mid         0.0741 0.903  74  0.0849 0.930  64  0.0795 0.917    
+  far         0.1287 0.829   9  0.0887 0.903  11  0.1087 0.866    
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1275   0.1250   0.0869   0.1136   0.2623   0.3641    0.4952  0.8476     0    0    89
+  bonn           0.1152   0.1168   0.0939   0.1088   0.2081   0.2906    0.5146  0.8635     0    0   398
+  MEAN(src)      0.1213   0.1209   0.0904   0.1112   0.2352   0.3274    0.5049  0.8556     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1109, 0.1319]
+  95% CI of balanced clip median AbsRel: [0.0859, 0.0928]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1275 0.848 100  0.1152 0.864 100  0.1213 0.856    
+  edge        0.1642 0.741  17  0.1548 0.756   7  0.1595 0.749    
+  flat        0.1200 0.869  83  0.1123 0.871  93  0.1161 0.870    
+  dynamic     0.3551 0.561   9  0.1983 0.717  13  0.2767 0.639    
+  static      0.1055 0.875  91  0.1024 0.886  87  0.1039 0.881    
+  near        0.2972 0.682  17  0.1539 0.823  25  0.2255 0.752    
+  mid         0.0871 0.890  74  0.1018 0.875  64  0.0945 0.883    
+  far         0.1371 0.816   9  0.1057 0.888  11  0.1214 0.852    
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1276   0.1253   0.0861   0.1157   0.2665   0.3400    0.4085  0.8287     0    0    89
+  bonn           0.1000   0.1007   0.0836   0.0952   0.1598   0.1982    0.4655  0.9041     1    0   398
+  MEAN(src)      0.1138   0.1130   0.0848   0.1055   0.2131   0.2691    0.4370  0.8664     1    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1037, 0.1231]
+  95% CI of balanced clip median AbsRel: [0.0814, 0.0900]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1276 0.829 100  0.1000 0.904 100  0.1138 0.866    
+  edge        0.1634 0.731  17  0.1470 0.790   7  0.1552 0.761    
+  flat        0.1203 0.849  83  0.0966 0.912  93  0.1084 0.881    
+  dynamic     0.3167 0.550   9  0.1776 0.787  13  0.2472 0.668    
+  static      0.1093 0.856  91  0.0880 0.922  87  0.0987 0.889    
+  near        0.2631 0.673  17  0.1465 0.844  25  0.2048 0.758    
+  mid         0.0855 0.887  74  0.0850 0.927  64  0.0852 0.907    
+  far         0.2150 0.649   9  0.0827 0.906  11  0.1489 0.778    
+
+  sharpness (alignment-free, PLAN.md §3.2)
+  source            absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv          overshoot
+  tum                    0.1839             0.4695             0.4423             0.6917             0.3820             0.0348             0.2245
+  bonn                   0.2890             0.4063             0.2914             0.5624             0.2377             0.0339             0.4341
+  balanced               0.2364             0.4379             0.3668             0.6271             0.3099             0.0343             0.3293
+
+-> work_dirs/acc/d1-boundary-s0-L8.json
+-> work_dirs/acc/table.txt
+d1-boundary-s0  gauge=scaleshift  work_dirs/acc/d1-boundary-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1138 <= 0.0900
+  [FAIL] balanced delta1                  0.8664 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2691 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [PASS] catastrophic clips (AbsRel>1)    0 <= 0
+  [PASS] TUM clip median AbsRel           0.0861 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.1000 <= 0.0580
+  [FAIL] Bonn delta1                      0.9041 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4379 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3668 >= 0.6376
+  [FAIL] edge AbsRel vs DA2               0.2364 <= 0.1663
+  [FAIL] overshoot vs DA2                 0.3293 <= 0.2255
+  [PASS] flat TV vs reported              0.0343 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1138 <= 0.1000
+  [PASS] clip medAbsRel                   0.0848 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8664 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1276 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.1000 <= 0.0700
+  [PASS] catastrophic clips (AbsRel>1)    0 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+[2026-08-29T06:32:48+09:00] === e1-boundary-s0 : --boundary-weight 1.0 ===
+2026-08-29 06:32:49,566 work dir: work_dirs/e1-boundary-s0  seed 0  commit 1d4d01a6
+2026-08-29 06:32:49,988 partial init from work_dirs/v11-longclip-spread-s0/latest.pt: 1 new tensors kept at init, 0 checkpoint tensors unused
+2026-08-29 06:32:50,829 mixed dataset: 208720 clips from 5 sources (size 256)
+2026-08-29 06:32:53,067 step    0  loss 3.0877  skip 0.00  lr 2.00e-07  depth_std 29.5725
+2026-08-29 06:33:43,939 step   50  loss 2.6713  skip 0.01  lr 1.02e-05  depth_std 7.8314
+2026-08-29 06:34:37,189 step  100  loss 3.2404  skip 0.03  lr 2.02e-05  depth_std 14.1736
+2026-08-29 06:35:30,594 step  150  loss 1.8378  skip 0.04  lr 3.02e-05  depth_std 21.1083
+2026-08-29 06:36:23,786 step  200  loss 1.5439  skip 0.05  lr 4.02e-05  depth_std 20.6683
+2026-08-29 06:37:16,398 step  250  loss 2.5856  skip 0.06  lr 5.02e-05  depth_std 28.8574
+2026-08-29 06:38:08,227 step  300  loss 2.9641  skip 0.07  lr 6.02e-05  depth_std 34.6292
+2026-08-29 06:38:59,662 step  350  loss 0.8602  skip 0.09  lr 7.02e-05  depth_std 1.9028
+2026-08-29 06:39:50,716 step  400  loss 3.1314  skip 0.10  lr 8.02e-05  depth_std 40.6023
+2026-08-29 06:40:41,392 step  450  loss 0.9096  skip 0.11  lr 9.02e-05  depth_std 0.6293
+2026-08-29 06:41:31,524 step  500  loss 2.6962  skip 0.12  lr 1.00e-04  depth_std 22.4747
+2026-08-29 06:42:21,072 step  550  loss 3.9565  skip 0.14  lr 9.99e-05  depth_std 11.4380
+2026-08-29 06:43:10,811 step  600  loss 2.7618  skip 0.15  lr 9.98e-05  depth_std 1.6146
+2026-08-29 06:43:59,770 step  650  loss 2.5979  skip 0.16  lr 9.95e-05  depth_std 3.7637
+2026-08-29 06:44:47,967 step  700  loss 2.6019  skip 0.17  lr 9.92e-05  depth_std 40.0286
+2026-08-29 06:45:35,582 step  750  loss 2.1337  skip 0.19  lr 9.87e-05  depth_std 27.0145
+2026-08-29 06:46:22,798 step  800  loss 3.3552  skip 0.20  lr 9.82e-05  depth_std 3.1778
+2026-08-29 06:47:09,384 step  850  loss 1.8205  skip 0.21  lr 9.76e-05  depth_std 0.7837
+2026-08-29 06:47:55,442 step  900  loss 2.2902  skip 0.23  lr 9.68e-05  depth_std 24.1581
+2026-08-29 06:48:41,046 step  950  loss 2.0528  skip 0.24  lr 9.60e-05  depth_std 3.2501
+2026-08-29 06:49:26,002 step 1000  loss 3.6796  skip 0.25  lr 9.50e-05  depth_std 30.8382
+2026-08-29 06:50:10,657 step 1050  loss 1.9667  skip 0.26  lr 9.40e-05  depth_std 2.3121
+2026-08-29 06:50:54,763 step 1100  loss 2.1896  skip 0.28  lr 9.29e-05  depth_std 39.4561
+2026-08-29 06:51:38,462 step 1150  loss 1.7662  skip 0.29  lr 9.17e-05  depth_std 33.2585
+2026-08-29 06:52:21,649 step 1200  loss 3.6303  skip 0.30  lr 9.05e-05  depth_std 32.5869
+2026-08-29 06:53:04,418 step 1250  loss 3.2425  skip 0.31  lr 8.91e-05  depth_std 11.1622
+2026-08-29 06:53:46,784 step 1300  loss 2.3880  skip 0.33  lr 8.77e-05  depth_std 7.6102
+2026-08-29 06:54:28,375 step 1350  loss 2.8088  skip 0.34  lr 8.61e-05  depth_std 1.4573
+2026-08-29 06:55:09,465 step 1400  loss 3.3417  skip 0.35  lr 8.46e-05  depth_std 28.6941
+2026-08-29 06:55:50,387 step 1450  loss 2.5909  skip 0.36  lr 8.29e-05  depth_std 15.2667
+2026-08-29 06:56:30,610 step 1500  loss 1.9411  skip 0.38  lr 8.12e-05  depth_std 28.8947
+2026-08-29 06:57:10,406 step 1550  loss 3.4188  skip 0.39  lr 7.94e-05  depth_std 8.5977
+2026-08-29 06:57:49,629 step 1600  loss 2.4274  skip 0.40  lr 7.75e-05  depth_std 11.4362
+2026-08-29 06:58:28,409 step 1650  loss 4.6569  skip 0.41  lr 7.56e-05  depth_std 11.1898
+2026-08-29 06:59:06,759 step 1700  loss 2.3001  skip 0.42  lr 7.37e-05  depth_std 5.0173
+2026-08-29 06:59:44,476 step 1750  loss 3.6859  skip 0.44  lr 7.17e-05  depth_std 5.2139
+2026-08-29 07:00:21,717 step 1800  loss 3.8318  skip 0.45  lr 6.97e-05  depth_std 26.1806
+2026-08-29 07:00:58,467 step 1850  loss 2.3249  skip 0.46  lr 6.76e-05  depth_std 10.0636
+2026-08-29 07:01:34,692 step 1900  loss 2.9835  skip 0.47  lr 6.55e-05  depth_std 28.7783
+2026-08-29 07:02:10,525 step 1950  loss 4.4713  skip 0.49  lr 6.33e-05  depth_std 35.4888
+2026-08-29 07:02:45,909 step 2000  loss 2.0974  skip 0.50  lr 6.11e-05  depth_std 24.7900
+2026-08-29 07:03:21,023 step 2050  loss 5.3540  skip 0.50  lr 5.89e-05  depth_std 5.6934
+2026-08-29 07:03:56,094 step 2100  loss 3.6095  skip 0.50  lr 5.67e-05  depth_std 53.8797
+2026-08-29 07:04:31,266 step 2150  loss 2.9927  skip 0.50  lr 5.45e-05  depth_std 2.5212
+2026-08-29 07:05:06,296 step 2200  loss 3.1931  skip 0.50  lr 5.22e-05  depth_std 8.9191
+2026-08-29 07:05:41,387 step 2250  loss 2.9980  skip 0.50  lr 5.00e-05  depth_std 3.5946
+2026-08-29 07:06:16,486 step 2300  loss 3.0741  skip 0.50  lr 4.78e-05  depth_std 29.2465
+2026-08-29 07:06:51,573 step 2350  loss 5.0996  skip 0.50  lr 4.55e-05  depth_std 7.1718
+2026-08-29 07:07:26,635 step 2400  loss 2.4314  skip 0.50  lr 4.33e-05  depth_std 1.8582
+2026-08-29 07:08:01,668 step 2450  loss 1.8446  skip 0.50  lr 4.11e-05  depth_std 1.2288
+2026-08-29 07:08:36,572 step 2500  loss 3.4647  skip 0.50  lr 3.89e-05  depth_std 37.9826
+2026-08-29 07:09:11,605 step 2550  loss 0.9732  skip 0.50  lr 3.67e-05  depth_std 1.8186
+2026-08-29 07:09:46,660 step 2600  loss 1.6035  skip 0.50  lr 3.45e-05  depth_std 1.6394
+2026-08-29 07:10:21,727 step 2650  loss 2.7229  skip 0.50  lr 3.24e-05  depth_std 8.9028
+2026-08-29 07:10:56,830 step 2700  loss 2.5069  skip 0.50  lr 3.03e-05  depth_std 17.7037
+2026-08-29 07:11:31,872 step 2750  loss 2.5111  skip 0.50  lr 2.83e-05  depth_std 33.9670
+2026-08-29 07:12:06,870 step 2800  loss 2.4779  skip 0.50  lr 2.63e-05  depth_std 1.8592
+2026-08-29 07:12:41,924 step 2850  loss 1.3001  skip 0.50  lr 2.44e-05  depth_std 1.3143
+2026-08-29 07:13:16,869 step 2900  loss 2.5771  skip 0.50  lr 2.25e-05  depth_std 5.9662
+2026-08-29 07:13:51,910 step 2950  loss 3.5530  skip 0.50  lr 2.06e-05  depth_std 21.2317
+2026-08-29 07:14:27,076 step 3000  loss 5.1910  skip 0.50  lr 1.88e-05  depth_std 5.3671
+2026-08-29 07:15:02,054 step 3050  loss 2.3013  skip 0.50  lr 1.71e-05  depth_std 31.5292
+2026-08-29 07:15:37,135 step 3100  loss 5.1855  skip 0.50  lr 1.54e-05  depth_std 2.0992
+2026-08-29 07:16:12,047 step 3150  loss 2.7278  skip 0.50  lr 1.39e-05  depth_std 7.0391
+2026-08-29 07:16:47,090 step 3200  loss 3.5055  skip 0.50  lr 1.23e-05  depth_std 10.0040
+2026-08-29 07:17:22,140 step 3250  loss 1.1771  skip 0.50  lr 1.09e-05  depth_std 1.5791
+2026-08-29 07:17:57,039 step 3300  loss 1.7851  skip 0.50  lr 9.55e-06  depth_std 23.9835
+2026-08-29 07:18:31,967 step 3350  loss 1.1190  skip 0.50  lr 8.27e-06  depth_std 1.5332
+2026-08-29 07:19:06,862 step 3400  loss 1.8698  skip 0.50  lr 7.08e-06  depth_std 28.1873
+2026-08-29 07:19:41,994 step 3450  loss 1.8269  skip 0.50  lr 5.97e-06  depth_std 1.9912
+2026-08-29 07:20:17,148 step 3500  loss 2.2626  skip 0.50  lr 4.95e-06  depth_std 30.0449
+2026-08-29 07:20:52,156 step 3550  loss 0.9265  skip 0.50  lr 4.02e-06  depth_std 5.8421
+2026-08-29 07:21:27,138 step 3600  loss 1.9323  skip 0.50  lr 3.19e-06  depth_std 33.1081
+2026-08-29 07:22:02,126 step 3650  loss 2.3416  skip 0.50  lr 2.45e-06  depth_std 17.6292
+2026-08-29 07:22:37,190 step 3700  loss 1.6927  skip 0.50  lr 1.80e-06  depth_std 33.0398
+2026-08-29 07:23:12,378 step 3750  loss 5.5785  skip 0.50  lr 1.25e-06  depth_std 32.4492
+2026-08-29 07:23:47,495 step 3800  loss 2.6151  skip 0.50  lr 8.04e-07  depth_std 12.1020
+2026-08-29 07:24:22,524 step 3850  loss 1.6125  skip 0.50  lr 4.53e-07  depth_std 15.2890
+2026-08-29 07:24:57,427 step 3900  loss 2.0943  skip 0.50  lr 2.01e-07  depth_std 13.9909
+2026-08-29 07:25:32,471 step 3950  loss 1.7657  skip 0.50  lr 5.03e-08  depth_std 25.7467
+2026-08-29 07:26:07,011 saved -> work_dirs/e1-boundary-s0/latest.pt
+[2026-08-29T07:26:07+09:00] --- P2 screening protocol: e1-boundary-s0 ---
+
+e1-boundary-s0
+    source       absrel   absrel_dyn  absrel_near  absrel_edge   grad_ratio  boundary_f1 boundary_precision boundary_recall      flat_tv   flat_tv_gt flat_tv_ratio    overshoot
+       tum       0.1218       0.3042       0.2251       0.1722       0.4608       0.4217       0.6489       0.3631       0.0331       0.0039      10.0673       0.2099
+      bonn       0.1238       0.2426       0.2619       0.1402       0.4514       0.2906       0.5547       0.2369       0.0342       0.0086      73.3566       0.4463
+  balanced       0.1228       0.2734       0.2435       0.1562       0.4561       0.3561       0.6018       0.3000       0.0336       0.0062      41.7119       0.3281
+
+grad_ratio alone is buyable: read it with boundary_f1 (blur loses recall, noise loses precision), flat_tv_ratio (noise) and overshoot (ringing).
+[2026-08-29T07:26:28+09:00] --- P1+P2 sealed L8 manifest: e1-boundary-s0 ---
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+e1-boundary-s0 (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=24.7% 54s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1244   0.1218   0.0786   0.1087   0.2720   0.3677    0.4951  0.8500     0    0    89
+  bonn           0.1183   0.1196   0.0990   0.1094   0.1998   0.2880    0.7078  0.8884     0    0   398
+  MEAN(src)      0.1214   0.1207   0.0888   0.1091   0.2359   0.3278    0.6014  0.8692     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1101, 0.1323]
+  95% CI of balanced clip median AbsRel: [0.0853, 0.0916]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1244 0.850 100  0.1183 0.888 100  0.1214 0.869    
+  edge        0.1639 0.751  17  0.1536 0.780   7  0.1587 0.766    
+  flat        0.1164 0.870  83  0.1157 0.896  93  0.1160 0.883    
+  dynamic     0.4285 0.466   9  0.2956 0.664  13  0.3620 0.565    
+  static      0.0951 0.887  91  0.0910 0.923  87  0.0930 0.905    
+  near        0.3482 0.617  17  0.2160 0.767  25  0.2821 0.692    
+  mid         0.0730 0.904  74  0.0852 0.931  64  0.0791 0.917    
+  far         0.1226 0.848   9  0.0901 0.914  11  0.1064 0.881    
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1236   0.1213   0.0832   0.1108   0.2684   0.3562    0.4227  0.8527     0    0    89
+  bonn           0.1157   0.1170   0.0976   0.1096   0.2165   0.2885    0.5185  0.8659     0    0   398
+  MEAN(src)      0.1197   0.1192   0.0904   0.1102   0.2424   0.3223    0.4706  0.8593     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1096, 0.1296]
+  95% CI of balanced clip median AbsRel: [0.0865, 0.0942]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1236 0.853 100  0.1157 0.866 100  0.1197 0.859    
+  edge        0.1636 0.745  17  0.1546 0.753   7  0.1591 0.749    
+  flat        0.1155 0.875  83  0.1128 0.874  93  0.1141 0.875    
+  dynamic     0.3353 0.566   9  0.1931 0.732  13  0.2642 0.649    
+  static      0.1032 0.880  91  0.1037 0.887  87  0.1035 0.884    
+  near        0.2877 0.682  17  0.1503 0.831  25  0.2190 0.757    
+  mid         0.0850 0.894  74  0.1025 0.876  64  0.0937 0.885    
+  far         0.1301 0.838   9  0.1140 0.886  11  0.1220 0.862    
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1245   0.1222   0.0826   0.1127   0.2603   0.3510    0.4074  0.8338     0    0    89
+  bonn           0.1012   0.1021   0.0836   0.0940   0.1571   0.1952    1.5449  0.9064     1    1   398
+  MEAN(src)      0.1128   0.1122   0.0831   0.1034   0.2087   0.2731    0.9762  0.8701     1    1   487
+  95% CI of balanced clip mean   AbsRel: [0.1025, 0.1228]
+  95% CI of balanced clip median AbsRel: [0.0798, 0.0886]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1245 0.834 100  0.1012 0.906 100  0.1128 0.870    
+  edge        0.1623 0.734  17  0.1462 0.788   7  0.1542 0.761    
+  flat        0.1168 0.854  83  0.0979 0.915  93  0.1073 0.885    
+  dynamic     0.3085 0.566   9  0.1915 0.798  13  0.2500 0.682    
+  static      0.1068 0.860  91  0.0872 0.923  87  0.0970 0.891    
+  near        0.2592 0.679  17  0.1529 0.851  25  0.2060 0.765    
+  mid         0.0827 0.892  74  0.0843 0.928  64  0.0835 0.910    
+  far         0.2113 0.654   9  0.0829 0.906  11  0.1471 0.780    
+
+  sharpness (alignment-free, PLAN.md §3.2)
+  source            absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv          overshoot
+  tum                    0.1840             0.4608             0.4217             0.6489             0.3631             0.0331             0.2099
+  bonn                   0.2860             0.4130             0.2811             0.5534             0.2245             0.0334             0.4527
+  balanced               0.2350             0.4369             0.3514             0.6012             0.2938             0.0332             0.3313
+
+-> work_dirs/acc/e1-boundary-s0-L8.json
+-> work_dirs/acc/table.txt
+e1-boundary-s0  gauge=scaleshift  work_dirs/acc/e1-boundary-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1128 <= 0.0900
+  [FAIL] balanced delta1                  0.8701 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2731 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [PASS] TUM clip median AbsRel           0.0826 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.1012 <= 0.0580
+  [FAIL] Bonn delta1                      0.9064 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4369 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3514 >= 0.6376
+  [FAIL] edge AbsRel vs DA2               0.2350 <= 0.1663
+  [FAIL] overshoot vs DA2                 0.3313 <= 0.2255
+  [PASS] flat TV vs reported              0.0332 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1128 <= 0.1000
+  [PASS] clip medAbsRel                   0.0831 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8701 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1245 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.1012 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+[2026-08-29T07:27:24+09:00] === e3-dynamic-s0 : --dynamic-weight 1.0 ===
+2026-08-29 07:27:25,317 work dir: work_dirs/e3-dynamic-s0  seed 0  commit 1d4d01a6
+2026-08-29 07:27:25,741 partial init from work_dirs/v11-longclip-spread-s0/latest.pt: 1 new tensors kept at init, 0 checkpoint tensors unused
+2026-08-29 07:27:26,581 mixed dataset: 208720 clips from 5 sources (size 256)
+2026-08-29 07:27:28,612 step    0  loss 2.8196  skip 0.00  lr 2.00e-07  depth_std 29.5725
+2026-08-29 07:28:21,086 step   50  loss 2.2787  skip 0.01  lr 1.02e-05  depth_std 7.8421
+2026-08-29 07:29:15,778 step  100  loss 3.0181  skip 0.03  lr 2.02e-05  depth_std 14.2523
+2026-08-29 07:30:10,541 step  150  loss 1.7280  skip 0.04  lr 3.02e-05  depth_std 21.0635
+2026-08-29 07:31:05,142 step  200  loss 1.2997  skip 0.05  lr 4.02e-05  depth_std 20.9236
+2026-08-29 07:31:59,206 step  250  loss 2.6497  skip 0.06  lr 5.02e-05  depth_std 29.2310
+2026-08-29 07:32:52,506 step  300  loss 2.9682  skip 0.07  lr 6.02e-05  depth_std 34.4657
+2026-08-29 07:33:45,290 step  350  loss 0.6187  skip 0.09  lr 7.02e-05  depth_std 1.9084
+2026-08-29 07:34:37,772 step  400  loss 3.2684  skip 0.10  lr 8.02e-05  depth_std 40.8267
+2026-08-29 07:35:29,883 step  450  loss 0.7848  skip 0.11  lr 9.02e-05  depth_std 0.6348
+2026-08-29 07:36:21,516 step  500  loss 2.4484  skip 0.12  lr 1.00e-04  depth_std 22.8349
+2026-08-29 07:37:12,312 step  550  loss 3.6932  skip 0.14  lr 9.99e-05  depth_std 11.5830
+2026-08-29 07:38:02,632 step  600  loss 2.7089  skip 0.15  lr 9.98e-05  depth_std 1.6199
+2026-08-29 07:38:52,524 step  650  loss 2.5592  skip 0.16  lr 9.95e-05  depth_std 3.6448
+2026-08-29 07:39:42,101 step  700  loss 2.4624  skip 0.17  lr 9.92e-05  depth_std 40.5022
+2026-08-29 07:40:31,029 step  750  loss 1.4247  skip 0.19  lr 9.87e-05  depth_std 27.6054
+2026-08-29 07:41:19,622 step  800  loss 3.0648  skip 0.20  lr 9.82e-05  depth_std 3.2371
+2026-08-29 07:42:07,623 step  850  loss 2.1703  skip 0.21  lr 9.76e-05  depth_std 0.7670
+2026-08-29 07:42:55,192 step  900  loss 2.1136  skip 0.23  lr 9.68e-05  depth_std 23.9834
+2026-08-29 07:43:42,301 step  950  loss 1.9275  skip 0.24  lr 9.60e-05  depth_std 3.1976
+2026-08-29 07:44:28,821 step 1000  loss 3.4252  skip 0.25  lr 9.50e-05  depth_std 31.5736
+2026-08-29 07:45:14,796 step 1050  loss 1.6072  skip 0.26  lr 9.40e-05  depth_std 2.3344
+2026-08-29 07:46:00,344 step 1100  loss 2.0817  skip 0.28  lr 9.29e-05  depth_std 39.4245
+2026-08-29 07:46:45,255 step 1150  loss 1.5458  skip 0.29  lr 9.17e-05  depth_std 33.0370
+2026-08-29 07:47:29,744 step 1200  loss 3.3605  skip 0.30  lr 9.05e-05  depth_std 32.7321
+2026-08-29 07:48:13,790 step 1250  loss 2.5679  skip 0.31  lr 8.91e-05  depth_std 10.8766
+2026-08-29 07:48:57,541 step 1300  loss 2.3077  skip 0.33  lr 8.77e-05  depth_std 7.9527
+2026-08-29 07:49:40,577 step 1350  loss 1.5618  skip 0.34  lr 8.61e-05  depth_std 1.4565
+2026-08-29 07:50:23,318 step 1400  loss 3.0132  skip 0.35  lr 8.46e-05  depth_std 28.2185
+2026-08-29 07:51:05,637 step 1450  loss 2.6237  skip 0.36  lr 8.29e-05  depth_std 15.3165
+2026-08-29 07:51:47,351 step 1500  loss 1.7749  skip 0.38  lr 8.12e-05  depth_std 28.7608
+2026-08-29 07:52:28,608 step 1550  loss 3.3876  skip 0.39  lr 7.94e-05  depth_std 8.5072
+2026-08-29 07:53:09,276 step 1600  loss 2.1394  skip 0.40  lr 7.75e-05  depth_std 11.5462
+2026-08-29 07:53:49,404 step 1650  loss 4.3184  skip 0.41  lr 7.56e-05  depth_std 11.3100
+2026-08-29 07:54:29,037 step 1700  loss 1.8289  skip 0.42  lr 7.37e-05  depth_std 5.0989
+2026-08-29 07:55:08,093 step 1750  loss 3.1307  skip 0.44  lr 7.17e-05  depth_std 5.3050
+2026-08-29 07:55:46,635 step 1800  loss 3.6321  skip 0.45  lr 6.97e-05  depth_std 26.2905
+2026-08-29 07:56:24,662 step 1850  loss 2.4188  skip 0.46  lr 6.76e-05  depth_std 10.3206
+2026-08-29 07:57:02,020 step 1900  loss 2.8623  skip 0.47  lr 6.55e-05  depth_std 29.0112
+2026-08-29 07:57:39,181 step 1950  loss 4.4791  skip 0.49  lr 6.33e-05  depth_std 35.3905
+2026-08-29 07:58:15,825 step 2000  loss 2.0927  skip 0.50  lr 6.11e-05  depth_std 24.6043
+2026-08-29 07:58:52,262 step 2050  loss 3.5261  skip 0.50  lr 5.89e-05  depth_std 5.6159
+2026-08-29 07:59:28,711 step 2100  loss 3.5949  skip 0.50  lr 5.67e-05  depth_std 54.5803
+2026-08-29 08:00:05,187 step 2150  loss 2.6500  skip 0.50  lr 5.45e-05  depth_std 2.5639
+2026-08-29 08:00:41,559 step 2200  loss 2.6022  skip 0.50  lr 5.22e-05  depth_std 8.7229
+2026-08-29 08:01:18,065 step 2250  loss 2.1808  skip 0.50  lr 5.00e-05  depth_std 3.6046
+2026-08-29 08:01:54,324 step 2300  loss 2.8800  skip 0.50  lr 4.78e-05  depth_std 28.1954
+2026-08-29 08:02:30,718 step 2350  loss 4.8297  skip 0.50  lr 4.55e-05  depth_std 7.0230
+2026-08-29 08:03:07,045 step 2400  loss 2.0320  skip 0.50  lr 4.33e-05  depth_std 1.8741
+2026-08-29 08:03:43,413 step 2450  loss 2.0777  skip 0.50  lr 4.11e-05  depth_std 1.2170
+2026-08-29 08:04:19,708 step 2500  loss 3.6166  skip 0.50  lr 3.89e-05  depth_std 37.4703
+2026-08-29 08:04:56,017 step 2550  loss 0.7004  skip 0.50  lr 3.67e-05  depth_std 1.8253
+2026-08-29 08:05:32,503 step 2600  loss 1.4207  skip 0.50  lr 3.45e-05  depth_std 1.6506
+2026-08-29 08:06:08,946 step 2650  loss 2.7240  skip 0.50  lr 3.24e-05  depth_std 8.7743
+2026-08-29 08:06:45,498 step 2700  loss 1.9502  skip 0.50  lr 3.03e-05  depth_std 17.8195
+2026-08-29 08:07:21,923 step 2750  loss 2.3252  skip 0.50  lr 2.83e-05  depth_std 34.6820
+2026-08-29 08:07:58,285 step 2800  loss 2.4479  skip 0.50  lr 2.63e-05  depth_std 1.8935
+2026-08-29 08:08:34,793 step 2850  loss 0.9904  skip 0.50  lr 2.44e-05  depth_std 1.3312
+2026-08-29 08:09:11,183 step 2900  loss 2.4337  skip 0.50  lr 2.25e-05  depth_std 5.8360
+2026-08-29 08:09:47,601 step 2950  loss 3.4957  skip 0.50  lr 2.06e-05  depth_std 21.1960
+2026-08-29 08:10:24,163 step 3000  loss 4.7928  skip 0.50  lr 1.88e-05  depth_std 5.3331
+2026-08-29 08:11:00,570 step 3050  loss 2.2083  skip 0.50  lr 1.71e-05  depth_std 31.0578
+2026-08-29 08:11:37,004 step 3100  loss 4.9399  skip 0.50  lr 1.54e-05  depth_std 2.1313
+2026-08-29 08:12:13,248 step 3150  loss 2.5829  skip 0.50  lr 1.39e-05  depth_std 7.1622
+2026-08-29 08:12:49,724 step 3200  loss 2.7325  skip 0.50  lr 1.23e-05  depth_std 9.4669
+2026-08-29 08:13:26,106 step 3250  loss 0.8309  skip 0.50  lr 1.09e-05  depth_std 1.5871
+2026-08-29 08:14:02,469 step 3300  loss 1.6708  skip 0.50  lr 9.55e-06  depth_std 23.9726
+2026-08-29 08:14:38,783 step 3350  loss 0.8415  skip 0.50  lr 8.27e-06  depth_std 1.5452
+2026-08-29 08:15:15,145 step 3400  loss 1.7052  skip 0.50  lr 7.08e-06  depth_std 28.4097
+2026-08-29 08:15:51,649 step 3450  loss 1.9115  skip 0.50  lr 5.97e-06  depth_std 2.0317
+2026-08-29 08:16:28,086 step 3500  loss 2.1198  skip 0.50  lr 4.95e-06  depth_std 30.5954
+2026-08-29 08:17:04,380 step 3550  loss 0.6792  skip 0.50  lr 4.02e-06  depth_std 5.9148
+2026-08-29 08:17:40,718 step 3600  loss 1.8296  skip 0.50  lr 3.19e-06  depth_std 33.3404
+2026-08-29 08:18:17,005 step 3650  loss 2.2733  skip 0.50  lr 2.45e-06  depth_std 17.7544
+2026-08-29 08:18:53,378 step 3700  loss 1.4685  skip 0.50  lr 1.80e-06  depth_std 33.3379
+2026-08-29 08:19:29,848 step 3750  loss 5.0180  skip 0.50  lr 1.25e-06  depth_std 33.2401
+2026-08-29 08:20:06,234 step 3800  loss 2.6487  skip 0.50  lr 8.04e-07  depth_std 12.2254
+2026-08-29 08:20:42,671 step 3850  loss 1.4820  skip 0.50  lr 4.53e-07  depth_std 15.3539
+2026-08-29 08:21:18,911 step 3900  loss 1.9197  skip 0.50  lr 2.01e-07  depth_std 14.1908
+2026-08-29 08:21:55,311 step 3950  loss 1.7030  skip 0.50  lr 5.03e-08  depth_std 25.7606
+2026-08-29 08:22:31,143 saved -> work_dirs/e3-dynamic-s0/latest.pt
+[2026-08-29T08:22:31+09:00] --- P2 screening protocol: e3-dynamic-s0 ---
+
+e3-dynamic-s0
+    source       absrel   absrel_dyn  absrel_near  absrel_edge   grad_ratio  boundary_f1 boundary_precision boundary_recall      flat_tv   flat_tv_gt flat_tv_ratio    overshoot
+       tum       0.1226       0.3054       0.2222       0.1732       0.4209       0.3957       0.5449       0.3446       0.0330       0.0039      10.1048       0.1953
+      bonn       0.1228       0.2382       0.2554       0.1394       0.4474       0.2876       0.5537       0.2352       0.0350       0.0086      73.6372       0.4406
+  balanced       0.1227       0.2718       0.2388       0.1563       0.4341       0.3417       0.5493       0.2899       0.0340       0.0062      41.8710       0.3180
+
+grad_ratio alone is buyable: read it with boundary_f1 (blur loses recall, noise loses precision), flat_tv_ratio (noise) and overshoot (ringing).
+[2026-08-29T08:22:53+09:00] --- P1+P2 sealed L8 manifest: e3-dynamic-s0 ---
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+e3-dynamic-s0 (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=24.7% 55s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1253   0.1226   0.0790   0.1094   0.2712   0.3801    0.5000  0.8504     0    0    89
+  bonn           0.1177   0.1192   0.0988   0.1091   0.1981   0.2717    0.6982  0.8895     0    0   398
+  MEAN(src)      0.1215   0.1209   0.0889   0.1093   0.2347   0.3259    0.5991  0.8699     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1102, 0.1326]
+  95% CI of balanced clip median AbsRel: [0.0854, 0.0922]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1253 0.850 100  0.1177 0.890 100  0.1215 0.870    
+  edge        0.1647 0.752  17  0.1531 0.783   7  0.1589 0.768    
+  flat        0.1172 0.870  83  0.1151 0.897  93  0.1162 0.884    
+  dynamic     0.4339 0.466   9  0.2917 0.666  13  0.3628 0.566    
+  static      0.0955 0.887  91  0.0909 0.924  87  0.0932 0.906    
+  near        0.3497 0.616  17  0.2134 0.769  25  0.2816 0.692    
+  mid         0.0738 0.904  74  0.0851 0.932  64  0.0795 0.918    
+  far         0.1226 0.855   9  0.0914 0.912  11  0.1070 0.883    
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1245   0.1222   0.0852   0.1117   0.2684   0.3660    0.4339  0.8537     0    0    89
+  bonn           0.1151   0.1167   0.0971   0.1094   0.2153   0.2845    0.5009  0.8672     0    0   398
+  MEAN(src)      0.1198   0.1195   0.0912   0.1105   0.2419   0.3252    0.4674  0.8604     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1098, 0.1299]
+  95% CI of balanced clip median AbsRel: [0.0871, 0.0951]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1245 0.854 100  0.1151 0.867 100  0.1198 0.860    
+  edge        0.1645 0.747  17  0.1541 0.755   7  0.1593 0.751    
+  flat        0.1164 0.876  83  0.1122 0.875  93  0.1143 0.875    
+  dynamic     0.3390 0.566   9  0.1921 0.734  13  0.2656 0.650    
+  static      0.1039 0.881  91  0.1032 0.888  87  0.1035 0.885    
+  near        0.2879 0.683  17  0.1499 0.831  25  0.2189 0.757    
+  mid         0.0861 0.894  74  0.1015 0.878  64  0.0938 0.886    
+  far         0.1304 0.843   9  0.1154 0.883  11  0.1229 0.863    
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1248   0.1225   0.0844   0.1129   0.2587   0.3499    0.4105  0.8346     0    0    89
+  bonn           0.0999   0.1009   0.0825   0.0937   0.1570   0.1928    1.2254  0.9075     1    1   398
+  MEAN(src)      0.1123   0.1117   0.0834   0.1033   0.2078   0.2713    0.8179  0.8711     1    1   487
+  95% CI of balanced clip mean   AbsRel: [0.1023, 0.1220]
+  95% CI of balanced clip median AbsRel: [0.0799, 0.0887]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1248 0.835 100  0.0999 0.908 100  0.1123 0.871    
+  edge        0.1629 0.735  17  0.1457 0.791   7  0.1543 0.763    
+  flat        0.1170 0.855  83  0.0966 0.916  93  0.1068 0.886    
+  dynamic     0.3085 0.565   9  0.1855 0.799  13  0.2470 0.682    
+  static      0.1071 0.861  91  0.0867 0.924  87  0.0969 0.892    
+  near        0.2580 0.679  17  0.1497 0.852  25  0.2038 0.765    
+  mid         0.0827 0.894  74  0.0834 0.930  64  0.0831 0.912    
+  far         0.2162 0.647   9  0.0838 0.903  11  0.1500 0.775    
+
+  sharpness (alignment-free, PLAN.md §3.2)
+  source            absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv          overshoot
+  tum                    0.1847             0.4209             0.3957             0.5449             0.3446             0.0330             0.1953
+  bonn                   0.2852             0.4061             0.2758             0.5482             0.2205             0.0340             0.4491
+  balanced               0.2350             0.4135             0.3357             0.5465             0.2825             0.0335             0.3222
+
+-> work_dirs/acc/e3-dynamic-s0-L8.json
+-> work_dirs/acc/table.txt
+e3-dynamic-s0  gauge=scaleshift  work_dirs/acc/e3-dynamic-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1123 <= 0.0900
+  [FAIL] balanced delta1                  0.8711 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2713 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [PASS] TUM clip median AbsRel           0.0844 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.0999 <= 0.0580
+  [FAIL] Bonn delta1                      0.9075 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4135 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3357 >= 0.6376
+  [FAIL] edge AbsRel vs DA2               0.2350 <= 0.1663
+  [FAIL] overshoot vs DA2                 0.3222 <= 0.2255
+  [PASS] flat TV vs reported              0.0335 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1123 <= 0.1000
+  [PASS] clip medAbsRel                   0.0834 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8711 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1248 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.0999 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+[2026-08-29T08:23:50+09:00] === e2-rank-s0 : --rank-weight 0.5 ===
+2026-08-29 08:23:50,884 work dir: work_dirs/e2-rank-s0  seed 0  commit 1d4d01a6
+2026-08-29 08:23:51,313 partial init from work_dirs/v11-longclip-spread-s0/latest.pt: 1 new tensors kept at init, 0 checkpoint tensors unused
+2026-08-29 08:23:52,141 mixed dataset: 208720 clips from 5 sources (size 256)
+2026-08-29 08:23:54,192 step    0  loss 2.8499  skip 0.00  lr 2.00e-07  depth_std 29.5725
+2026-08-29 08:24:44,864 step   50  loss 2.1515  skip 0.01  lr 1.02e-05  depth_std 7.7858
+2026-08-29 08:25:37,922 step  100  loss 3.5165  skip 0.03  lr 2.02e-05  depth_std 14.3587
+2026-08-29 08:26:31,187 step  150  loss 1.6976  skip 0.04  lr 3.02e-05  depth_std 21.2958
+2026-08-29 08:27:24,139 step  200  loss 1.3834  skip 0.05  lr 4.02e-05  depth_std 20.9393
+2026-08-29 08:28:16,427 step  250  loss 2.5705  skip 0.06  lr 5.02e-05  depth_std 29.0102
+2026-08-29 08:29:08,040 step  300  loss 2.9465  skip 0.07  lr 6.02e-05  depth_std 34.5262
+2026-08-29 08:29:59,081 step  350  loss 0.7007  skip 0.09  lr 7.02e-05  depth_std 1.9088
+2026-08-29 08:30:49,785 step  400  loss 3.2277  skip 0.10  lr 8.02e-05  depth_std 40.5094
+2026-08-29 08:31:40,293 step  450  loss 0.8707  skip 0.11  lr 9.02e-05  depth_std 0.6296
+2026-08-29 08:32:30,042 step  500  loss 2.5130  skip 0.12  lr 1.00e-04  depth_std 21.9134
+2026-08-29 08:33:19,408 step  550  loss 3.6024  skip 0.14  lr 9.99e-05  depth_std 11.7205
+2026-08-29 08:34:08,293 step  600  loss 2.6923  skip 0.15  lr 9.98e-05  depth_std 1.5960
+2026-08-29 08:34:56,618 step  650  loss 2.4639  skip 0.16  lr 9.95e-05  depth_std 4.0609
+2026-08-29 08:35:44,652 step  700  loss 2.4789  skip 0.17  lr 9.92e-05  depth_std 40.1879
+2026-08-29 08:36:32,017 step  750  loss 2.0184  skip 0.19  lr 9.87e-05  depth_std 27.0154
+2026-08-29 08:37:18,937 step  800  loss 2.8755  skip 0.20  lr 9.82e-05  depth_std 3.2746
+2026-08-29 08:38:05,232 step  850  loss 2.1638  skip 0.21  lr 9.76e-05  depth_std 0.7914
+2026-08-29 08:38:51,253 step  900  loss 2.2116  skip 0.23  lr 9.68e-05  depth_std 23.9977
+2026-08-29 08:39:36,776 step  950  loss 1.9346  skip 0.24  lr 9.60e-05  depth_std 3.3923
+2026-08-29 08:40:21,831 step 1000  loss 3.3666  skip 0.25  lr 9.50e-05  depth_std 31.1713
+2026-08-29 08:41:06,279 step 1050  loss 1.6222  skip 0.26  lr 9.40e-05  depth_std 2.3807
+2026-08-29 08:41:50,227 step 1100  loss 2.0731  skip 0.28  lr 9.29e-05  depth_std 39.3288
+2026-08-29 08:42:33,662 step 1150  loss 1.6312  skip 0.29  lr 9.17e-05  depth_std 32.8096
+2026-08-29 08:43:16,743 step 1200  loss 3.4128  skip 0.30  lr 9.05e-05  depth_std 32.3491
+2026-08-29 08:43:59,368 step 1250  loss 2.7753  skip 0.31  lr 8.91e-05  depth_std 11.2704
+2026-08-29 08:44:41,336 step 1300  loss 2.3551  skip 0.33  lr 8.77e-05  depth_std 7.4953
+2026-08-29 08:45:22,841 step 1350  loss 1.9726  skip 0.34  lr 8.61e-05  depth_std 1.4911
+2026-08-29 08:46:03,931 step 1400  loss 3.0240  skip 0.35  lr 8.46e-05  depth_std 28.8970
+2026-08-29 08:46:44,401 step 1450  loss 2.5458  skip 0.36  lr 8.29e-05  depth_std 15.4830
+2026-08-29 08:47:24,561 step 1500  loss 1.7233  skip 0.38  lr 8.12e-05  depth_std 28.7331
+2026-08-29 08:48:04,192 step 1550  loss 3.1642  skip 0.39  lr 7.94e-05  depth_std 8.4811
+2026-08-29 08:48:43,219 step 1600  loss 2.1278  skip 0.40  lr 7.75e-05  depth_std 11.4159
+2026-08-29 08:49:21,905 step 1650  loss 4.2503  skip 0.41  lr 7.56e-05  depth_std 10.7868
+2026-08-29 08:50:00,118 step 1700  loss 2.0115  skip 0.42  lr 7.37e-05  depth_std 5.0115
+2026-08-29 08:50:37,630 step 1750  loss 2.9680  skip 0.44  lr 7.17e-05  depth_std 5.1413
+2026-08-29 08:51:14,567 step 1800  loss 3.7745  skip 0.45  lr 6.97e-05  depth_std 26.3245
+2026-08-29 08:51:50,992 step 1850  loss 2.3269  skip 0.46  lr 6.76e-05  depth_std 10.3200
+2026-08-29 08:52:27,044 step 1900  loss 2.8240  skip 0.47  lr 6.55e-05  depth_std 28.5808
+2026-08-29 08:53:02,669 step 1950  loss 4.3274  skip 0.49  lr 6.33e-05  depth_std 34.4958
+2026-08-29 08:53:37,760 step 2000  loss 2.0811  skip 0.50  lr 6.11e-05  depth_std 25.1614
+2026-08-29 08:54:12,606 step 2050  loss 3.6798  skip 0.50  lr 5.89e-05  depth_std 5.6436
+2026-08-29 08:54:47,467 step 2100  loss 3.4741  skip 0.50  lr 5.67e-05  depth_std 54.4225
+2026-08-29 08:55:22,349 step 2150  loss 2.8582  skip 0.50  lr 5.45e-05  depth_std 3.1723
+2026-08-29 08:55:57,138 step 2200  loss 2.4541  skip 0.50  lr 5.22e-05  depth_std 8.5867
+2026-08-29 08:56:32,053 step 2250  loss 2.3519  skip 0.50  lr 5.00e-05  depth_std 3.5910
+2026-08-29 08:57:06,831 step 2300  loss 3.0010  skip 0.50  lr 4.78e-05  depth_std 29.9319
+2026-08-29 08:57:41,784 step 2350  loss 4.4381  skip 0.50  lr 4.55e-05  depth_std 6.8846
+2026-08-29 08:58:16,660 step 2400  loss 2.0082  skip 0.50  lr 4.33e-05  depth_std 1.8808
+2026-08-29 08:58:51,625 step 2450  loss 1.8923  skip 0.50  lr 4.11e-05  depth_std 1.2462
+2026-08-29 08:59:26,405 step 2500  loss 3.4256  skip 0.50  lr 3.89e-05  depth_std 39.3911
+2026-08-29 09:00:01,278 step 2550  loss 0.8337  skip 0.50  lr 3.67e-05  depth_std 1.8171
+2026-08-29 09:00:36,140 step 2600  loss 1.4899  skip 0.50  lr 3.45e-05  depth_std 1.6433
+2026-08-29 09:01:11,004 step 2650  loss 2.6041  skip 0.50  lr 3.24e-05  depth_std 8.6805
+2026-08-29 09:01:46,002 step 2700  loss 1.8378  skip 0.50  lr 3.03e-05  depth_std 17.4581
+2026-08-29 09:02:20,856 step 2750  loss 2.6026  skip 0.50  lr 2.83e-05  depth_std 34.1282
+2026-08-29 09:02:55,742 step 2800  loss 2.5330  skip 0.50  lr 2.63e-05  depth_std 1.7721
+2026-08-29 09:03:30,706 step 2850  loss 1.0625  skip 0.50  lr 2.44e-05  depth_std 1.3144
+2026-08-29 09:04:05,544 step 2900  loss 2.4391  skip 0.50  lr 2.25e-05  depth_std 5.4989
+2026-08-29 09:04:40,334 step 2950  loss 3.4512  skip 0.50  lr 2.06e-05  depth_std 20.8191
+2026-08-29 09:05:15,126 step 3000  loss 4.5816  skip 0.50  lr 1.88e-05  depth_std 5.5652
+2026-08-29 09:05:50,120 step 3050  loss 2.2400  skip 0.50  lr 1.71e-05  depth_std 31.0924
+2026-08-29 09:06:25,002 step 3100  loss 4.7804  skip 0.50  lr 1.54e-05  depth_std 2.0400
+2026-08-29 09:06:59,685 step 3150  loss 2.5711  skip 0.50  lr 1.39e-05  depth_std 7.0197
+2026-08-29 09:07:34,566 step 3200  loss 2.9254  skip 0.50  lr 1.23e-05  depth_std 9.8492
+2026-08-29 09:08:09,410 step 3250  loss 0.9344  skip 0.50  lr 1.09e-05  depth_std 1.5825
+2026-08-29 09:08:44,234 step 3300  loss 1.6755  skip 0.50  lr 9.55e-06  depth_std 23.7123
+2026-08-29 09:09:19,133 step 3350  loss 0.9370  skip 0.50  lr 8.27e-06  depth_std 1.5452
+2026-08-29 09:09:54,017 step 3400  loss 1.7819  skip 0.50  lr 7.08e-06  depth_std 28.3652
+2026-08-29 09:10:28,832 step 3450  loss 1.8630  skip 0.50  lr 5.97e-06  depth_std 1.9614
+2026-08-29 09:11:03,718 step 3500  loss 2.1183  skip 0.50  lr 4.95e-06  depth_std 29.6910
+2026-08-29 09:11:38,552 step 3550  loss 0.7484  skip 0.50  lr 4.02e-06  depth_std 5.7228
+2026-08-29 09:12:13,424 step 3600  loss 1.8246  skip 0.50  lr 3.19e-06  depth_std 32.9685
+2026-08-29 09:12:48,299 step 3650  loss 2.3519  skip 0.50  lr 2.45e-06  depth_std 17.5316
+2026-08-29 09:13:23,117 step 3700  loss 1.5164  skip 0.50  lr 1.80e-06  depth_std 32.8790
+2026-08-29 09:13:57,853 step 3750  loss 5.2761  skip 0.50  lr 1.25e-06  depth_std 33.0093
+2026-08-29 09:14:32,661 step 3800  loss 2.5541  skip 0.50  lr 8.04e-07  depth_std 11.9743
+2026-08-29 09:15:07,556 step 3850  loss 1.4697  skip 0.50  lr 4.53e-07  depth_std 15.4079
+2026-08-29 09:15:42,421 step 3900  loss 1.8919  skip 0.50  lr 2.01e-07  depth_std 13.8622
+2026-08-29 09:16:17,320 step 3950  loss 1.7062  skip 0.50  lr 5.03e-08  depth_std 25.8690
+2026-08-29 09:16:51,666 saved -> work_dirs/e2-rank-s0/latest.pt
+[2026-08-29T09:16:52+09:00] --- P2 screening protocol: e2-rank-s0 ---
+
+e2-rank-s0
+    source       absrel   absrel_dyn  absrel_near  absrel_edge   grad_ratio  boundary_f1 boundary_precision boundary_recall      flat_tv   flat_tv_gt flat_tv_ratio    overshoot
+       tum       0.1217       0.3058       0.2220       0.1734       0.4254       0.3979       0.5313       0.3488       0.0332       0.0039      10.1102       0.1996
+      bonn       0.1236       0.2409       0.2607       0.1413       0.4452       0.2934       0.5539       0.2414       0.0354       0.0086      74.4892       0.4219
+  balanced       0.1226       0.2733       0.2413       0.1573       0.4353       0.3456       0.5426       0.2951       0.0343       0.0062      42.2997       0.3107
+
+grad_ratio alone is buyable: read it with boundary_f1 (blur loses recall, noise loses precision), flat_tv_ratio (noise) and overshoot (ringing).
+[2026-08-29T09:17:13+09:00] --- P1+P2 sealed L8 manifest: e2-rank-s0 ---
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+e2-rank-s0 (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=24.7% 55s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1243   0.1217   0.0787   0.1090   0.2671   0.3586    0.4877  0.8493     0    0    89
+  bonn           0.1181   0.1193   0.0978   0.1092   0.2046   0.2873    0.6917  0.8902     0    0   398
+  MEAN(src)      0.1212   0.1205   0.0882   0.1091   0.2358   0.3230    0.5897  0.8697     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1101, 0.1318]
+  95% CI of balanced clip median AbsRel: [0.0854, 0.0918]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1243 0.849 100  0.1181 0.890 100  0.1212 0.870    
+  edge        0.1648 0.752  17  0.1536 0.783   7  0.1592 0.767    
+  flat        0.1161 0.869  83  0.1155 0.898  93  0.1158 0.884    
+  dynamic     0.4256 0.457   9  0.2980 0.663  13  0.3618 0.560    
+  static      0.0953 0.887  91  0.0904 0.925  87  0.0928 0.906    
+  near        0.3447 0.612  17  0.2169 0.769  25  0.2808 0.691    
+  mid         0.0732 0.905  74  0.0838 0.934  64  0.0785 0.920    
+  far         0.1264 0.840   9  0.0948 0.908  11  0.1106 0.874    
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1232   0.1209   0.0835   0.1105   0.2670   0.3406    0.4146  0.8521     0    0    89
+  bonn           0.1157   0.1170   0.0974   0.1096   0.2011   0.2899    0.5027  0.8659     0    0   398
+  MEAN(src)      0.1195   0.1189   0.0904   0.1100   0.2340   0.3153    0.4587  0.8590     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1095, 0.1292]
+  95% CI of balanced clip median AbsRel: [0.0868, 0.0939]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1232 0.852 100  0.1157 0.866 100  0.1195 0.859    
+  edge        0.1644 0.745  17  0.1538 0.757   7  0.1591 0.751    
+  flat        0.1148 0.874  83  0.1129 0.874  93  0.1139 0.874    
+  dynamic     0.3323 0.563   9  0.1924 0.733  13  0.2623 0.648    
+  static      0.1030 0.880  91  0.1039 0.886  87  0.1035 0.883    
+  near        0.2838 0.680  17  0.1492 0.833  25  0.2165 0.757    
+  mid         0.0849 0.894  74  0.1028 0.876  64  0.0939 0.885    
+  far         0.1332 0.830   9  0.1149 0.882  11  0.1240 0.856    
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1246   0.1223   0.0819   0.1128   0.2539   0.3496    0.4090  0.8369     0    0    89
+  bonn           0.1007   0.1016   0.0840   0.0942   0.1559   0.1957    1.3349  0.9070     1    1   398
+  MEAN(src)      0.1126   0.1119   0.0830   0.1035   0.2049   0.2727    0.8720  0.8719     1    1   487
+  95% CI of balanced clip mean   AbsRel: [0.1024, 0.1223]
+  95% CI of balanced clip median AbsRel: [0.0803, 0.0885]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1246 0.837 100  0.1007 0.907 100  0.1126 0.872    
+  edge        0.1632 0.737  17  0.1455 0.792   7  0.1543 0.764    
+  flat        0.1167 0.857  83  0.0974 0.915  93  0.1071 0.886    
+  dynamic     0.3095 0.562   9  0.1872 0.799  13  0.2484 0.681    
+  static      0.1068 0.863  91  0.0873 0.924  87  0.0971 0.894    
+  near        0.2590 0.676  17  0.1501 0.853  25  0.2046 0.764    
+  mid         0.0825 0.895  74  0.0848 0.928  64  0.0837 0.911    
+  far         0.2141 0.665   9  0.0814 0.909  11  0.1477 0.787    
+
+  sharpness (alignment-free, PLAN.md §3.2)
+  source            absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv          overshoot
+  tum                    0.1848             0.4254             0.3979             0.5313             0.3488             0.0332             0.1996
+  bonn                   0.2848             0.4092             0.2809             0.5502             0.2253             0.0346             0.4303
+  balanced               0.2348             0.4173             0.3394             0.5408             0.2871             0.0339             0.3149
+
+-> work_dirs/acc/e2-rank-s0-L8.json
+-> work_dirs/acc/table.txt
+e2-rank-s0  gauge=scaleshift  work_dirs/acc/e2-rank-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1126 <= 0.0900
+  [FAIL] balanced delta1                  0.8719 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2727 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [PASS] TUM clip median AbsRel           0.0819 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.1007 <= 0.0580
+  [FAIL] Bonn delta1                      0.9070 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4173 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3394 >= 0.6376
+  [FAIL] edge AbsRel vs DA2               0.2348 <= 0.1663
+  [FAIL] overshoot vs DA2                 0.3149 <= 0.2255
+  [PASS] flat TV vs reported              0.0339 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1126 <= 0.1000
+  [PASS] clip medAbsRel                   0.0830 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8719 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1246 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.1007 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+v11-longclip-spread-s0 (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=24.7% 55s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1285   0.1257   0.0814   0.1121   0.2799   0.3603    0.5203  0.8467     0    0    89
+  bonn           0.1186   0.1202   0.0986   0.1098   0.1981   0.2794    0.6625  0.8891     0    0   398
+  MEAN(src)      0.1235   0.1230   0.0900   0.1109   0.2390   0.3199    0.5914  0.8679     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1121, 0.1349]
+  95% CI of balanced clip median AbsRel: [0.0866, 0.0933]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1285 0.847 100  0.1186 0.889 100  0.1235 0.868    
+  edge        0.1658 0.749  17  0.1551 0.787   7  0.1605 0.768    
+  flat        0.1209 0.867  83  0.1159 0.897  93  0.1184 0.882    
+  dynamic     0.4450 0.452   9  0.3000 0.661  13  0.3725 0.556    
+  static      0.0980 0.885  91  0.0906 0.924  87  0.0943 0.905    
+  near        0.3617 0.612  17  0.2190 0.764  25  0.2904 0.688    
+  mid         0.0747 0.902  74  0.0840 0.934  64  0.0793 0.918    
+  far         0.1282 0.836   9  0.0931 0.912  11  0.1107 0.874    
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1280   0.1256   0.0870   0.1145   0.2771   0.3465    0.4541  0.8491     0    0    89
+  bonn           0.1168   0.1186   0.0959   0.1107   0.2111   0.2955    0.5138  0.8643     0    0   398
+  MEAN(src)      0.1224   0.1221   0.0915   0.1126   0.2441   0.3210    0.4840  0.8567     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1121, 0.1329]
+  95% CI of balanced clip median AbsRel: [0.0873, 0.0953]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1280 0.849 100  0.1168 0.864 100  0.1224 0.857    
+  edge        0.1659 0.743  17  0.1552 0.762   7  0.1606 0.752    
+  flat        0.1203 0.871  83  0.1140 0.872  93  0.1172 0.871    
+  dynamic     0.3500 0.561   9  0.2024 0.715  13  0.2762 0.638    
+  static      0.1066 0.877  91  0.1036 0.887  87  0.1051 0.882    
+  near        0.3001 0.682  17  0.1572 0.819  25  0.2287 0.751    
+  mid         0.0873 0.890  74  0.1016 0.877  64  0.0944 0.884    
+  far         0.1367 0.827   9  0.1142 0.892  11  0.1255 0.859    
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1278   0.1254   0.0862   0.1157   0.2717   0.3430    0.4290  0.8285     0    0    89
+  bonn           0.1029   0.1038   0.0847   0.0958   0.1587   0.1955    1.3403  0.9025     1    1   398
+  MEAN(src)      0.1153   0.1146   0.0855   0.1057   0.2152   0.2692    0.8847  0.8655     1    1   487
+  95% CI of balanced clip mean   AbsRel: [0.1049, 0.1252]
+  95% CI of balanced clip median AbsRel: [0.0820, 0.0903]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1278 0.828 100  0.1029 0.902 100  0.1153 0.865    
+  edge        0.1642 0.730  17  0.1484 0.792   7  0.1563 0.761    
+  flat        0.1203 0.849  83  0.0996 0.911  93  0.1100 0.880    
+  dynamic     0.3151 0.555   9  0.1975 0.782  13  0.2563 0.669    
+  static      0.1097 0.855  91  0.0883 0.921  87  0.0990 0.888    
+  near        0.2631 0.676  17  0.1583 0.839  25  0.2107 0.758    
+  mid         0.0846 0.888  74  0.0849 0.926  64  0.0847 0.907    
+  far         0.2244 0.635   9  0.0831 0.911  11  0.1537 0.773    
+
+  sharpness (alignment-free, PLAN.md §3.2)
+  source            absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv          overshoot
+  tum                    0.1861             0.4276             0.4005             0.5672             0.3504             0.0336             0.2058
+  bonn                   0.2874             0.3993             0.2800             0.5595             0.2254             0.0354             0.4351
+  balanced               0.2367             0.4135             0.3403             0.5633             0.2879             0.0345             0.3204
+
+-> work_dirs/acc/ours-L8-sharp.json
+-> work_dirs/acc/table.txt
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 22463.34it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+Depth-Anything-V2-Small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 64s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.6887   0.6451   0.2923   0.5398   1.9307   2.3557    4.7323  0.8857     0   16    89
+  bonn           0.5788   1.1188   0.4850   0.4735   0.6747   0.7397  109.8963  0.4604     0   16   398
+  MEAN(src)      0.6338   0.8819   0.3886   0.5066   1.3027   1.5477   57.3143  0.6731     0   32   487
+  95% CI of balanced clip mean   AbsRel: [0.5797, 1.3040]
+  95% CI of balanced clip median AbsRel: [0.3533, 0.4391]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2710   0.2605   0.1704   0.2407   0.5386   0.6349    1.2029  0.8942    83    1    89
+  bonn           0.6727   1.4916   0.5964   0.6266   0.9612   1.1486  225.0171  0.5054    39   30   398
+  MEAN(src)      0.4718   0.8760   0.3834   0.4336   0.7499   0.8917  113.1100  0.6998   122   31   487
+  95% CI of balanced clip mean   AbsRel: [0.4524, 1.5837]
+  95% CI of balanced clip median AbsRel: [0.3661, 0.4022]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3558   0.3464   0.0950   0.1606   0.4222   1.3691    6.0223  0.8828    15    6    89
+  bonn           0.0578   0.0588   0.0479   0.0552   0.1100   0.1342    0.2435  0.9733     0    0   398
+  MEAN(src)      0.2068   0.2026   0.0715   0.1079   0.2661   0.7517    3.1329  0.9280    15    6   487
+  95% CI of balanced clip mean   AbsRel: [0.1166, 0.3073]
+  95% CI of balanced clip median AbsRel: [0.0687, 0.0738]
+
+  sharpness (alignment-free, PLAN.md §3.2)
+  source            absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv          overshoot
+  tum                    0.6359             0.6641             0.4763             0.5512             0.4363             0.4926             0.5117
+  bonn                   1.0673             1.8116             0.4452             0.5325             0.4353             0.0471             0.7871
+  balanced               0.8516             1.2379             0.4608             0.5419             0.4358             0.2698             0.6494
+
+-> work_dirs/acc/da2-small-L8-sharp.json
+-> work_dirs/acc/table.txt
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 21143.95it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+dpt-large (343.0M) space=disparity infer_size=official->384x384 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 103s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2185   0.2130   0.1745   0.1862   0.2583   0.3435    1.9843  0.8071     0    1    89
+  bonn           0.7995   0.7860   0.3321   0.3922   0.7964   2.1529   50.8318  0.5572     0   33   398
+  MEAN(src)      0.5090   0.4995   0.2533   0.2892   0.5274   1.2482   26.4080  0.6822     0   34   487
+  95% CI of balanced clip mean   AbsRel: [0.3769, 0.6710]
+  95% CI of balanced clip median AbsRel: [0.2438, 0.2630]
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2140   0.2136   0.1972   0.2076   0.2895   0.3534    0.4895  0.7715    10    0    89
+  bonn           0.4209   0.4106   0.4090   0.4014   0.6310   0.7055    1.6150  0.5697    60    4   398
+  MEAN(src)      0.3175   0.3121   0.3031   0.3045   0.4602   0.5295    1.0523  0.6706    70    4   487
+  95% CI of balanced clip mean   AbsRel: [0.3012, 0.3238]
+  95% CI of balanced clip median AbsRel: [0.2876, 0.3146]
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1135   0.1141   0.1056   0.1108   0.1340   0.1823    0.2544  0.8829     0    0    89
+  bonn           0.0617   0.0626   0.0529   0.0595   0.1053   0.1240    0.2914  0.9719     0    0   398
+  MEAN(src)      0.0876   0.0884   0.0792   0.0852   0.1196   0.1532    0.2729  0.9274     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0851, 0.0919]
+  95% CI of balanced clip median AbsRel: [0.0776, 0.0815]
+
+  sharpness (alignment-free, PLAN.md §3.2)
+  source            absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv          overshoot
+  tum                    5.4738             0.3475             0.3690             0.4779             0.3082             0.0759             0.5821
+  bonn                   6.8360             1.0386             0.3432             0.6247             0.2636             0.0626             0.7889
+  balanced               6.1549             0.6930             0.3561             0.5513             0.2859             0.0693             0.6855
+
+-> work_dirs/acc/dpt-large-L8-sharp.json
+-> work_dirs/acc/table.txt
+=== screening-protocol sharpness table ===
+arm                                      absrel         absrel_dyn        absrel_near        absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv         flat_tv_gt      flat_tv_ratio          overshoot
+ours (reported v11)                      0.1253                nan                nan             0.1577             0.4323             0.3458             0.5650             0.2960             0.0358                nan            43.6637             0.3196
+oracle p16                               0.0521                nan                nan             0.1128             0.2612             0.2411             0.4219             0.1946             0.0360                nan            45.8192             0.0521
+Depth-Anything-V2-Small-hf               0.2055                nan                nan             0.1663             0.7559             0.6376             0.7565             0.5901             0.0319                nan            29.9691             0.2255
+dpt-large                                0.0881                nan                nan             0.1274             0.4682             0.4377             0.7404             0.3340             0.0262                nan            20.5140             0.2237
+d1-fullres-s0                            0.1237             0.2809             0.2416             0.1576             0.4262             0.3493             0.5618             0.2995             0.0357             0.0062            44.3995             0.3105
+d0-control-s0                            0.1234             0.2738             0.2430             0.1570             0.4310             0.3417             0.5559             0.2897             0.0343             0.0062            42.2897             0.3159
+d1-boundary-s0                           0.1254             0.2856             0.2491             0.1576             0.4570             0.3720             0.6297             0.3161             0.0339             0.0062            43.3762             0.3294
+e1-boundary-s0                           0.1228             0.2734             0.2435             0.1562             0.4561             0.3561             0.6018             0.3000             0.0336             0.0062            41.7119             0.3281
+e3-dynamic-s0                            0.1227             0.2718             0.2388             0.1563             0.4341             0.3417             0.5493             0.2899             0.0340             0.0062            41.8710             0.3180
+e2-rank-s0                               0.1226             0.2733             0.2413             0.1573             0.4353             0.3456             0.5426             0.2951             0.0343             0.0062            42.2997             0.3107
+=== capacity probe table ===
+arm                                      absrel         absrel_dyn        absrel_near        absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv         flat_tv_gt      flat_tv_ratio          overshoot
+probe-cur-s0 (fit)                       0.1291                nan             0.2335             0.1766             0.2528             0.2299             0.3962             0.1822             0.0366             0.0046           739.3732             0.2891
+probe-m0-s0 (fit)                        0.1457             0.2359             0.3007             0.1751             0.2377             0.1991             0.3872             0.1549             0.0358             0.0046           732.2742             0.3322
+probe-cur-s0 (fit dense)                 0.1165             0.1757             0.2202             0.1605             0.2301             0.2117             0.4001             0.1616             0.0345             0.0046           760.1476             0.2561
+probe-m0-s0 (fit dense)                  0.1368             0.2258             0.2905             0.1681             0.2170             0.1804             0.3920             0.1352             0.0324             0.0046           651.1723             0.3108
+=== gate: d1-fullres-s0 ===
+d1-fullres-s0  gauge=scaleshift  work_dirs/acc/d1-fullres-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1150 <= 0.0900
+  [FAIL] balanced delta1                  0.8678 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2764 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [PASS] TUM clip median AbsRel           0.0875 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.1024 <= 0.0580
+  [FAIL] Bonn delta1                      0.9057 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4112 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3431 >= 0.4608
+  [PASS] edge AbsRel vs DA2               0.2353 <= 0.8516
+  [PASS] overshoot vs DA2                 0.3126 <= 0.6494
+  [PASS] flat TV vs reported              0.0351 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1150 <= 0.1000
+  [PASS] clip medAbsRel                   0.0857 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8678 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1277 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.1024 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+=== gate: d0-control-s0 ===
+d0-control-s0  gauge=scaleshift  work_dirs/acc/d0-control-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1133 <= 0.0900
+  [FAIL] balanced delta1                  0.8691 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2700 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [PASS] TUM clip median AbsRel           0.0837 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.1010 <= 0.0580
+  [FAIL] Bonn delta1                      0.9070 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4116 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3356 >= 0.4608
+  [PASS] edge AbsRel vs DA2               0.2354 <= 0.8516
+  [PASS] overshoot vs DA2                 0.3195 <= 0.6494
+  [PASS] flat TV vs reported              0.0337 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1133 <= 0.1000
+  [PASS] clip medAbsRel                   0.0831 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8691 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1255 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.1010 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+=== gate: d1-boundary-s0 ===
+d1-boundary-s0  gauge=scaleshift  work_dirs/acc/d1-boundary-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1138 <= 0.0900
+  [FAIL] balanced delta1                  0.8664 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2691 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [PASS] catastrophic clips (AbsRel>1)    0 <= 0
+  [PASS] TUM clip median AbsRel           0.0861 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.1000 <= 0.0580
+  [FAIL] Bonn delta1                      0.9041 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4379 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3668 >= 0.4608
+  [PASS] edge AbsRel vs DA2               0.2364 <= 0.8516
+  [PASS] overshoot vs DA2                 0.3293 <= 0.6494
+  [PASS] flat TV vs reported              0.0343 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1138 <= 0.1000
+  [PASS] clip medAbsRel                   0.0848 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8664 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1276 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.1000 <= 0.0700
+  [PASS] catastrophic clips (AbsRel>1)    0 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+=== gate: e1-boundary-s0 ===
+e1-boundary-s0  gauge=scaleshift  work_dirs/acc/e1-boundary-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1128 <= 0.0900
+  [FAIL] balanced delta1                  0.8701 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2731 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [PASS] TUM clip median AbsRel           0.0826 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.1012 <= 0.0580
+  [FAIL] Bonn delta1                      0.9064 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4369 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3514 >= 0.4608
+  [PASS] edge AbsRel vs DA2               0.2350 <= 0.8516
+  [PASS] overshoot vs DA2                 0.3313 <= 0.6494
+  [PASS] flat TV vs reported              0.0332 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1128 <= 0.1000
+  [PASS] clip medAbsRel                   0.0831 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8701 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1245 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.1012 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+=== gate: e3-dynamic-s0 ===
+e3-dynamic-s0  gauge=scaleshift  work_dirs/acc/e3-dynamic-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1123 <= 0.0900
+  [FAIL] balanced delta1                  0.8711 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2713 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [PASS] TUM clip median AbsRel           0.0844 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.0999 <= 0.0580
+  [FAIL] Bonn delta1                      0.9075 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4135 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3357 >= 0.4608
+  [PASS] edge AbsRel vs DA2               0.2350 <= 0.8516
+  [PASS] overshoot vs DA2                 0.3222 <= 0.6494
+  [PASS] flat TV vs reported              0.0335 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1123 <= 0.1000
+  [PASS] clip medAbsRel                   0.0834 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8711 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1248 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.0999 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+=== gate: e2-rank-s0 ===
+e2-rank-s0  gauge=scaleshift  work_dirs/acc/e2-rank-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1126 <= 0.0900
+  [FAIL] balanced delta1                  0.8719 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2727 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [PASS] TUM clip median AbsRel           0.0819 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.1007 <= 0.0580
+  [FAIL] Bonn delta1                      0.9070 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4173 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3394 >= 0.4608
+  [PASS] edge AbsRel vs DA2               0.2348 <= 0.8516
+  [PASS] overshoot vs DA2                 0.3149 <= 0.6494
+  [PASS] flat TV vs reported              0.0339 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1126 <= 0.1000
+  [PASS] clip medAbsRel                   0.0830 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8719 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1246 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.1007 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+[2026-08-29T09:22:03+09:00] queue7 done

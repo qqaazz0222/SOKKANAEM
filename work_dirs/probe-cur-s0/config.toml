@@ -1,0 +1,62 @@
+# effective config (merged CLI + TOML), written by train.py
+data = ["tum:/home/hyunsu/dataset_ssd/tum_static", "bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset"]
+steps = 3000
+batch = 4
+lr = 0.0003
+size = 256
+clip_len = 4
+workers = 16
+max_skip = 0.0
+augment = false
+detector_mask = false
+holdout = ["walking_static", "rgbd_bonn_crowd2", "rgbd_bonn_person_tracking2", "rgbd_bonn_static_close_far", "Scene06", "OldTownFall", "/pointodyssey/val/", "/pointodyssey/test/", "rgbd_dataset_freiburg3_sitting_static", "rgbd_bonn_crowd3", "rgbd_bonn_person_tracking/", "rgbd_bonn_moving_obstructing_box", "rgbd_bonn_synchronous"]
+resume_partial = false
+work_dir = "work_dirs/probe-cur-s0"
+seed = 0
+ema_decay = 0.999
+auto_loss_weight = false
+msgrad_weight = 0.5
+normal_weight = 0.05
+warp_weight = 0.0
+spread_weight = 0.5
+loss_space = "metric"
+edge_weight = 2.0
+near_weight = 0.0
+near_band = 2.0
+near_gain = 4.0
+warmup = 1000
+grad_clip = 1.0
+collapse_patience = 1000
+collapse_eps = 0.0001
+distill_weight = 0.0
+distill_model = "facebook/dinov2-small"
+teacher_weight = 0.0
+teacher_grad_weight = 0.0
+teacher_model = "depth-anything/Depth-Anything-V2-Small-hf"
+dim = 192
+depth = 4
+d_state = 16
+train_clips = 256
+val_split = true
+bin_weight = 0.2
+
+[model]
+tau_on = 0.05
+tau_off = 0.025
+keyframe_every = 30
+decoder = "dpt"
+bins = 64
+scan_directions = 4
+local_conv = true
+spatial_cache = true
+temporal_cache = true
+dim = 192
+depth = 4
+d_state = 16
+
+[meta]
+command = "scripts/train.py --config configs/main_v8.toml --data tum:/home/hyunsu/dataset_ssd/tum_static --data bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset --holdout rgbd_dataset_freiburg3_sitting_static --holdout rgbd_bonn_crowd3 --holdout rgbd_bonn_person_tracking/ --holdout rgbd_bonn_moving_obstructing_box --holdout rgbd_bonn_synchronous --val-split --train-clips 256 --clip-len 4 --batch 4 --size 256 --steps 3000 --max-skip 0 --no-augment --warp-weight 0 --edge-weight 2.0 --spread-weight 0.5 --dim 192 --depth 4 --d-state 16 --workers 16 --work-dir work_dirs/probe-cur-s0"
+git_commit = "1d4d01a6fd8d65733532acbed2e1302f7c66c0cc"
+torch = "2.8.0+cu128"
+cuda = "12.8"
+gpu = "NVIDIA GeForce RTX 4090"

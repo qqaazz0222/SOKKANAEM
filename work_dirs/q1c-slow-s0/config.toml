@@ -1,0 +1,29 @@
+# effective config (merged CLI + TOML), written by train.py
+steps = 4000
+batch = 2
+clip_len = 4
+size = 256
+lr = 0.001
+warmup = 200
+workers = 8
+seed = 0
+infer_size = 518
+real_only = true
+unfreeze = true
+unfreeze_head = false
+shape_lr = 3e-06
+retention_weight = 4.0
+boundary_weight = 0.0
+work_dir = "work_dirs/q1c-slow-s0"
+
+[model]
+kind = "q"
+infer_size = 518
+freeze_shape = false
+
+[meta]
+command = "scripts/train_q.py --steps 4000 --real-only --work-dir work_dirs/q1c-slow-s0 --unfreeze --shape-lr 3e-6 --retention-weight 4.0"
+git_commit = "1d4d01a6fd8d65733532acbed2e1302f7c66c0cc"
+torch = "2.8.0+cu128"
+cuda = "12.8"
+gpu = "NVIDIA GeForce RTX 4090"

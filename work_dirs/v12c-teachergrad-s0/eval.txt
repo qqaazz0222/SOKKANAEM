@@ -1,0 +1,8 @@
+ckpt=work_dirs/v12c-teachergrad-s0/latest.pt data=['tum:/home/hyunsu/dataset_ssd/tum_static', 'bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset'] clips=488 size=256 max=100/source clip_len=8 stride=8 align=median gate_mode=delta keyframe_every=30 refresh=keyframe dense_above=0.4 bin_temp=1.0 gmc=False tag=sharparm spatial_cache=True temporal_cache=True
+tau_on   source        active%  AbsRel   RMSE     d1      t-delta  OPW     TCE     mAbsRel  scale  drift   sLogStd  sStep   clipAbsRel(std)  n
+----------------------------------------------------------------------------------------------------------------------------------------------
+0.05     tum             19.7  0.1387   0.8219  0.8425  0.1134   0.0239  0.0347  0.1594  1.059  0.0112  0.0112   0.0068  0.1354 (0.122)  89
+0.05     bonn            24.4  0.1263   0.4121  0.8852  0.0305   0.0154  0.0202  0.2698  1.115  0.0227  0.0231   0.0119  0.1267 (0.107)  100
+0.05     MEAN(src)       22.0  0.1325   0.6170  0.8638  0.0719   0.0197  0.0275  0.2146  1.087  0.0170  0.0171   0.0094  0.1311 (0.114)  189
+0.05     POOLED(px)      22.2  0.1315   0.6181  0.8673  0.0695   0.0190  0.0263  0.2178  1.089  0.0173  0.0175   0.0095  0.1308 (0.114)  189
+

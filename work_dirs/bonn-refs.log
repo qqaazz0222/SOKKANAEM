@@ -1,0 +1,159 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 16507.57it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+Depth-Anything-V2-Small-hf (24.8M) space=disparity infer_size=official->518x518 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 71s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.6887   0.6451   0.2923   0.5398   1.9307   2.3557    4.7323  0.8857     0   16    89
+  bonn           0.5788   1.1188   0.4850   0.4735   0.6747   0.7397  109.8963  0.4604     0   16   398
+  MEAN(src)      0.6338   0.8819   0.3886   0.5066   1.3027   1.5477   57.3143  0.6731     0   32   487
+  95% CI of balanced clip mean   AbsRel: [0.5797, 1.3040]
+  95% CI of balanced clip median AbsRel: [0.3533, 0.4391]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.6887 0.886 100  0.5788 0.460 100  0.6338 0.673    
+  edge        0.2505 0.830  17  0.6769 0.432   7  0.4637 0.631    
+  flat        0.7782 0.897  83  0.5717 0.463  93  0.6750 0.680    
+  dynamic     0.7240 0.760   9  0.8907 0.504  13  0.8074 0.632    
+  static      0.6853 0.898  91  0.5308 0.454  87  0.6080 0.676    
+  near        0.8886 0.811  17  0.3696 0.603  25  0.6291 0.707    
+  mid         0.4030 0.967  74  0.5048 0.468  64  0.4539 0.718    
+  far         2.6276 0.366   9  1.4664 0.099  11  2.0470 0.232    
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2710   0.2605   0.1704   0.2407   0.5386   0.6349    1.2029  0.8942    83    1    89
+  bonn           0.6727   1.4916   0.5964   0.6266   0.9612   1.1486  225.0171  0.5054    39   30   398
+  MEAN(src)      0.4718   0.8760   0.3834   0.4336   0.7499   0.8917  113.1100  0.6998   122   31   487
+  95% CI of balanced clip mean   AbsRel: [0.4524, 1.5837]
+  95% CI of balanced clip median AbsRel: [0.3661, 0.4022]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.2710 0.894 100  0.6727 0.505 100  0.4718 0.700    
+  edge        0.1668 0.833  17  0.7393 0.431   7  0.4530 0.632    
+  flat        0.2923 0.907  83  0.6678 0.511  93  0.4800 0.709    
+  dynamic     0.3578 0.880   9  0.6316 0.750  13  0.4947 0.815    
+  static      0.2626 0.896  91  0.6790 0.468  87  0.4708 0.682    
+  near        0.3753 0.894  17  0.2781 0.846  25  0.3267 0.870    
+  mid         0.1392 0.960  74  0.5982 0.457  64  0.3687 0.709    
+  far         1.1423 0.365   9  1.9741 0.025  11  1.5582 0.195    
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3558   0.3464   0.0950   0.1606   0.4222   1.3691    6.0223  0.8828    15    6    89
+  bonn           0.0578   0.0588   0.0479   0.0552   0.1100   0.1342    0.2435  0.9733     0    0   398
+  MEAN(src)      0.2068   0.2026   0.0715   0.1079   0.2661   0.7517    3.1329  0.9280    15    6   487
+  95% CI of balanced clip mean   AbsRel: [0.1166, 0.3073]
+  95% CI of balanced clip median AbsRel: [0.0687, 0.0738]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.3558 0.883 100  0.0578 0.973 100  0.2068 0.928    
+  edge        0.2084 0.825  17  0.0950 0.917   7  0.1517 0.871    
+  flat        0.3859 0.895  83  0.0551 0.977  93  0.2205 0.936    
+  dynamic     1.5939 0.887   9  0.1051 0.932  13  0.8495 0.909    
+  static      0.2363 0.882  91  0.0505 0.980  87  0.1434 0.931    
+  near        1.2247 0.903  17  0.0806 0.960  25  0.6527 0.931    
+  mid         0.0960 0.957  74  0.0507 0.976  64  0.0734 0.966    
+  far         0.8351 0.245   9  0.0475 0.990  11  0.4413 0.617    
+
+  sharpness (alignment-free, PLAN.md §3.2)
+  source            absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv          overshoot
+  tum                    0.2555             0.7167             0.7001             0.7495             0.6710             0.0320             0.1863
+  bonn                   0.0763             0.7675             0.5783             0.7656             0.5126             0.0350             0.2598
+  balanced               0.1659             0.7421             0.6392             0.7575             0.5918             0.0335             0.2230
+
+-> work_dirs/acc/da2-small-L8-regions.json
+-> work_dirs/acc/table.txt
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/458 [00:00<?, ?it/s]Loading weights: 100%|██████████| 458/458 [00:00<00:00, 18495.61it/s]
+[transformers] [1mDPTForDepthEstimation LOAD REPORT[0m from: Intel/dpt-large
+Key                                                            | Status  | 
+---------------------------------------------------------------+---------+-
+neck.fusion_stage.layers.0.residual_layer1.convolution2.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.bias   | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution1.weight | MISSING | 
+neck.fusion_stage.layers.0.residual_layer1.convolution2.bias   | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+dpt-large (343.0M) space=disparity infer_size=official->384x384 manifest=manifests/acc_real_L8.json clips=488 active=100.0% 108s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2185   0.2130   0.1745   0.1862   0.2583   0.3435    1.9843  0.8071     0    1    89
+  bonn           0.7995   0.7860   0.3321   0.3922   0.7964   2.1529   50.8318  0.5572     0   33   398
+  MEAN(src)      0.5090   0.4995   0.2533   0.2892   0.5274   1.2482   26.4080  0.6822     0   34   487
+  95% CI of balanced clip mean   AbsRel: [0.3769, 0.6710]
+  95% CI of balanced clip median AbsRel: [0.2438, 0.2630]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.2185 0.807 100  0.7995 0.557 100  0.5090 0.682    
+  edge        0.1949 0.746  17  0.3793 0.519   7  0.2871 0.633    
+  flat        0.2233 0.820  83  0.8301 0.560  93  0.5267 0.690    
+  dynamic     0.2413 0.710   9  0.4892 0.493  13  0.3652 0.601    
+  static      0.2163 0.817  91  0.8473 0.567  87  0.5318 0.692    
+  near        0.2588 0.738  17  0.2931 0.650  25  0.2760 0.694    
+  mid         0.1106 0.908  74  0.9885 0.586  64  0.5496 0.747    
+  far         1.0165 0.119   9  0.8436 0.187  11  0.9301 0.153    
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.2140   0.2136   0.1972   0.2076   0.2895   0.3534    0.4895  0.7715    10    0    89
+  bonn           0.4209   0.4106   0.4090   0.4014   0.6310   0.7055    1.6150  0.5697    60    4   398
+  MEAN(src)      0.3175   0.3121   0.3031   0.3045   0.4602   0.5295    1.0523  0.6706    70    4   487
+  95% CI of balanced clip mean   AbsRel: [0.3012, 0.3238]
+  95% CI of balanced clip median AbsRel: [0.2876, 0.3146]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.2140 0.771 100  0.4209 0.570 100  0.3175 0.671    
+  edge        0.2134 0.722  17  0.4200 0.497   7  0.3167 0.610    
+  flat        0.2142 0.782  83  0.4209 0.575  93  0.3176 0.678    
+  dynamic     0.1851 0.849   9  0.2487 0.768  13  0.2169 0.809    
+  static      0.2168 0.764  91  0.4474 0.539  87  0.3321 0.652    
+  near        0.1833 0.884  17  0.1418 0.879  25  0.1626 0.882    
+  mid         0.1536 0.825  74  0.4289 0.533  64  0.2913 0.679    
+  far         0.7607 0.128   9  0.9944 0.092  11  0.8775 0.110    
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1135   0.1141   0.1056   0.1108   0.1340   0.1823    0.2544  0.8829     0    0    89
+  bonn           0.0617   0.0626   0.0529   0.0595   0.1053   0.1240    0.2914  0.9719     0    0   398
+  MEAN(src)      0.0876   0.0884   0.0792   0.0852   0.1196   0.1532    0.2729  0.9274     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0851, 0.0919]
+  95% CI of balanced clip median AbsRel: [0.0776, 0.0815]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1135 0.883 100  0.0617 0.972 100  0.0876 0.927    
+  edge        0.1432 0.817  17  0.1008 0.909   7  0.1220 0.863    
+  flat        0.1074 0.896  83  0.0588 0.976  93  0.0831 0.936    
+  dynamic     0.1183 0.902   9  0.0913 0.929  13  0.1048 0.916    
+  static      0.1130 0.881  91  0.0571 0.978  87  0.0851 0.930    
+  near        0.1107 0.933  17  0.0716 0.961  25  0.0911 0.947    
+  mid         0.0753 0.957  74  0.0581 0.974  64  0.0667 0.965    
+  far         0.4283 0.189   9  0.0601 0.986  11  0.2442 0.588    
+
+  sharpness (alignment-free, PLAN.md §3.2)
+  source            absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv          overshoot
+  tum                    0.1706             0.4603             0.4968             0.7316             0.3889             0.0245             0.1818
+  bonn                   0.0835             0.4635             0.3790             0.7503             0.2782             0.0310             0.2592
+  balanced               0.1270             0.4619             0.4379             0.7409             0.3336             0.0277             0.2205
+
+-> work_dirs/acc/dpt-large-L8-regions.json
+-> work_dirs/acc/table.txt
+[2026-08-30T19:29:50+09:00] bonn refs done

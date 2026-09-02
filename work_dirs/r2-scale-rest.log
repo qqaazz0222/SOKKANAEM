@@ -1,0 +1,75 @@
+
+---- DA-v2-Small / tum / L8 ----
+2026-08-25T12:52:31+09:00
+DA-v2-Small (24.8M) tum l8 on 89 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.3557  RMSE=24.3110  delta1=0.8828  t-delta=1.8697  OPW=0.1598  TCE=0.1679
+  per-clip values -> work_dirs/baselines/da-v2-small-24-8m-tum-l8.json
+
+---- DA3-BASE / tum / L8 ----
+2026-08-25T12:53:06+09:00
+DA3-BASE (0.12B) [scaleshift] tum l8 on 89 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1816  RMSE=1.1658  delta1=0.8038  t-delta=0.1237  OPW=0.0180  TCE=0.0278
+  per-clip values -> work_dirs/baselines/da3-base-0-12b-scaleshift-tum-l8.json
+
+---- VDA / tum / L8 ----
+2026-08-25T12:53:53+09:00
+Video-Depth-Anything-Small metric (~28.4M) tum l8 on 89 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1221  RMSE=1.0869  delta1=0.8699  t-delta=0.1097  OPW=0.0227  TCE=0.0319
+  per-clip values -> work_dirs/baselines/video-depth-anything-small-metric-28-4m-tum-l8.json
+
+---- DA-v2-Small / tum / L256 ----
+2026-08-25T12:54:32+09:00
+DA-v2-Small (24.8M) tum l256 on 2 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.8941  RMSE=47.2510  delta1=0.7864  t-delta=7.0972  OPW=0.4222  TCE=0.4299
+  per-clip values -> work_dirs/baselines/da-v2-small-24-8m-tum-l256.json
+
+---- DA3-BASE / tum / L256 ----
+2026-08-25T12:55:09+09:00
+DA3-BASE (0.12B) [scaleshift] tum l256 on 2 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1831  RMSE=1.0753  delta1=0.8054  t-delta=0.1273  OPW=0.0253  TCE=0.0347
+  per-clip values -> work_dirs/baselines/da3-base-0-12b-scaleshift-tum-l256.json
+
+---- VDA / tum / L256 ----
+2026-08-25T12:56:10+09:00
+Video-Depth-Anything-Small metric (~28.4M) tum l256 on 2 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1328  RMSE=1.0218  delta1=0.8701  t-delta=0.1102  OPW=0.0248  TCE=0.0338
+  per-clip values -> work_dirs/baselines/video-depth-anything-small-metric-28-4m-tum-l256.json
+
+---- DA-v2-Small / bonn / L8 ----
+2026-08-25T12:56:42+09:00
+DA-v2-Small (24.8M) bonn l8 on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0579  RMSE=0.2351  delta1=0.9755  t-delta=0.1334  OPW=0.0192  TCE=0.0226
+  per-clip values -> work_dirs/baselines/da-v2-small-24-8m-bonn-l8.json
+
+---- DA3-BASE / bonn / L8 ----
+2026-08-25T12:57:23+09:00
+DA3-BASE (0.12B) [scaleshift] bonn l8 on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0444  RMSE=0.1762  delta1=0.9811  t-delta=0.0414  OPW=0.0101  TCE=0.0123
+  per-clip values -> work_dirs/baselines/da3-base-0-12b-scaleshift-bonn-l8.json
+
+---- VDA / bonn / L8 ----
+2026-08-25T12:58:14+09:00
+Video-Depth-Anything-Small metric (~28.4M) bonn l8 on 100 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0779  RMSE=0.4122  delta1=0.9579  t-delta=0.0560  OPW=0.0172  TCE=0.0197
+  per-clip values -> work_dirs/baselines/video-depth-anything-small-metric-28-4m-bonn-l8.json
+
+---- DA-v2-Small / bonn / L256 ----
+2026-08-25T12:58:56+09:00
+DA-v2-Small (24.8M) bonn l256 on 11 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.2040  RMSE=0.6038  delta1=0.6745  t-delta=0.0790  OPW=0.0234  TCE=0.0266
+  per-clip values -> work_dirs/baselines/da-v2-small-24-8m-bonn-l256.json
+
+---- DA3-BASE / bonn / L256 ----
+2026-08-25T13:02:00+09:00
+DA3-BASE (0.12B) [scaleshift] bonn l256 on 11 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.0494  RMSE=0.1791  delta1=0.9687  t-delta=0.0441  OPW=0.0109  TCE=0.0134
+  per-clip values -> work_dirs/baselines/da3-base-0-12b-scaleshift-bonn-l256.json
+
+---- VDA / bonn / L256 ----
+2026-08-25T13:07:09+09:00
+Video-Depth-Anything-Small metric (~28.4M) bonn l256 on 11 holdout clips (same split/protocol as SOKKANAEM):
+  pooled : AbsRel=0.1224  RMSE=0.4106  delta1=0.8916  t-delta=0.0606  OPW=0.0187  TCE=0.0211
+  per-clip values -> work_dirs/baselines/video-depth-anything-small-metric-28-4m-bonn-l256.json
+
+R2 SCALE REST DONE
+2026-08-25T13:10:03+09:00

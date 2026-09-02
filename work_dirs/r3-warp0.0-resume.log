@@ -1,0 +1,6 @@
+======== resume: warp_weight=0.0 from step 2000 ========
+2026-08-28T17:03:59+09:00
+2026-08-28 17:04:00,784 work dir: work_dirs/v11-warp0.0  seed 0  commit 1d4d01a6
+2026-08-28 17:04:01,950 resumed from work_dirs/v11-warp0.0/latest.pt at step 2000
+2026-08-28 17:04:03,605 mixed dataset: 205650 clips from 5 sources (size 256)
+2026-08-28 17:04:15,097 step 2000  loss 4.5038  skip 0.25  lr 2.85e-04  depth_std 43.0952

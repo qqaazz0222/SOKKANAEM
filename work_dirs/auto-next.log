@@ -1,0 +1,3 @@
+m0-distil-s0: AbsRel 0.2681 (base 0.1234)  grad 0.1614 (base 0.4310, Q0 0.7095)  F1 0.0968
+decision: the student cannot absorb the teacher at this size either. The native track is done; Q0 is the quality candidate and the remaining effort belongs on streaming (queue18) and the write-up
+[2026-09-02T00:34:39+09:00] auto_next done (queue18 finished too)

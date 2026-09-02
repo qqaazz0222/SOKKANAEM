@@ -1,0 +1,226 @@
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 19518.83it/s]
+
+qt-stream-s0
+    source       absrel   absrel_dyn  absrel_near  absrel_edge   grad_ratio  boundary_f1 boundary_precision boundary_recall      flat_tv   flat_tv_gt flat_tv_ratio    overshoot
+       tum       0.1373       0.2381       0.2900       0.1868       0.4173       0.5357       0.7870       0.4246       0.0303       0.0039       9.2695       0.2665
+      bonn       0.1588       0.3069       0.3253       0.1757       0.4004       0.2769       0.5766       0.2097       0.0284       0.0086      74.6775       0.3940
+  balanced       0.1481       0.2725       0.3076       0.1813       0.4089       0.4063       0.6818       0.3172       0.0294       0.0062      41.9735       0.3303
+
+grad_ratio alone is buyable: read it with boundary_f1 (blur loses recall, noise loses precision), flat_tv_ratio (noise) and overshoot (ringing).
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 17537.12it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+qt-stream-s0 (26.0M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=100.0% 68s (+3 no-GT)
+
+[align=median/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1382   0.1374   0.1173   0.1298   0.2297   0.2605    0.4087  0.8499     0    0    89
+  bonn           0.1557   0.1534   0.1251   0.1391   0.2897   0.3896    0.7842  0.8160     0    0   398
+  MEAN(src)      0.1469   0.1454   0.1212   0.1345   0.2597   0.3250    0.5964  0.8330     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1375, 0.1538]
+  95% CI of balanced clip median AbsRel: [0.1156, 0.1250]
+
+[align=scale/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1278   0.1268   0.1056   0.1201   0.2190   0.2432    0.3387  0.8473     0    0    89
+  bonn           0.1483   0.1465   0.1219   0.1375   0.2838   0.3529    0.5272  0.7601     0    0   398
+  MEAN(src)      0.1380   0.1366   0.1137   0.1288   0.2514   0.2980    0.4330  0.8037     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1298, 0.1438]
+  95% CI of balanced clip median AbsRel: [0.1113, 0.1160]
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3257   0.3194   0.0979   0.1287   0.2407   0.6161    7.6065  0.8995     3    4    89
+  bonn           0.0892   0.0877   0.0848   0.0851   0.1147   0.1405    0.2802  0.9277     0    0   398
+  MEAN(src)      0.2074   0.2036   0.0914   0.1069   0.1777   0.3783    3.9433  0.9136     3    4   487
+  95% CI of balanced clip mean   AbsRel: [0.1125, 0.3251]
+  95% CI of balanced clip median AbsRel: [0.0892, 0.0931]
+
+-> work_dirs/acc/qt-stream-s0-L8-pf.json
+-> work_dirs/acc/table.txt
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 19368.40it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+q0-calib-s0 (24.8M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=100.0% 57s (+3 no-GT)
+
+[align=median/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1102   0.1091   0.0911   0.1022   0.2113   0.2469    0.3505  0.8479     0    0    89
+  bonn           0.0832   0.0830   0.0568   0.0709   0.1848   0.2681    0.5425  0.9318     0    0   398
+  MEAN(src)      0.0967   0.0961   0.0739   0.0866   0.1981   0.2575    0.4465  0.8899     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0889, 0.1037]
+  95% CI of balanced clip median AbsRel: [0.0693, 0.0760]
+
+[align=scale/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1112   0.1100   0.0896   0.1039   0.2120   0.2511    0.3177  0.8592     0    0    89
+  bonn           0.0834   0.0845   0.0564   0.0735   0.2088   0.2676    0.5997  0.9044     0    0   398
+  MEAN(src)      0.0973   0.0973   0.0730   0.0887   0.2104   0.2594    0.4587  0.8818     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.0901, 0.1047]
+  95% CI of balanced clip median AbsRel: [0.0695, 0.0766]
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3467   0.3378   0.0937   0.1628   0.3120   2.2462    6.0876  0.8880    10    6    89
+  bonn           0.0537   0.0538   0.0444   0.0506   0.0980   0.1217    0.2181  0.9757     0    0   398
+  MEAN(src)      0.2002   0.1958   0.0691   0.1067   0.2050   1.1840    3.1528  0.9318    10    6   487
+  95% CI of balanced clip mean   AbsRel: [0.1137, 0.2984]
+  95% CI of balanced clip median AbsRel: [0.0662, 0.0710]
+
+-> work_dirs/acc/q0-calib-s0-L8-pf.json
+-> work_dirs/acc/table.txt
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 22945.47it/s]
+qt-stream-s0 (26.0M) space=depth infer_size=official manifest=manifests/acc_real_L256.json clips=13 active=100.0% 59s
+
+[align=median/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1450   0.1458   0.1458   0.1458   0.1597   0.1597    0.1597  0.8359     0    0     2
+  bonn           0.1618   0.1608   0.1462   0.1608   0.2252   0.3524    0.3524  0.8094     0    0    11
+  MEAN(src)      0.1534   0.1533   0.1460   0.1533   0.1925   0.2561    0.2561  0.8227     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1320, 0.1788]
+  95% CI of balanced clip median AbsRel: [0.1277, 0.1730]
+
+[align=scale/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1367   0.1374   0.1374   0.1374   0.1488   0.1488    0.1488  0.8271     0    0     2
+  bonn           0.1535   0.1531   0.1456   0.1531   0.2077   0.3049    0.3049  0.7459     0    0    11
+  MEAN(src)      0.1451   0.1452   0.1415   0.1452   0.1783   0.2268    0.2268  0.7865     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1274, 0.1658]
+  95% CI of balanced clip median AbsRel: [0.1245, 0.1630]
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.4604   0.4700   0.4700   0.4700   0.6383   0.6383    0.6383  0.8778     2    0     2
+  bonn           0.0933   0.0932   0.0929   0.0932   0.1069   0.1351    0.1351  0.9207     1    0    11
+  MEAN(src)      0.2769   0.2816   0.2814   0.2816   0.3726   0.3867    0.3867  0.8993     3    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1943, 0.3692]
+  95% CI of balanced clip median AbsRel: [0.1916, 0.3665]
+
+-> work_dirs/acc/qt-stream-s0-L256-pf.json
+-> work_dirs/acc/table.txt
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 22335.38it/s]
+q0-calib-s0 (24.8M) space=depth infer_size=official manifest=manifests/acc_real_L256.json clips=13 active=100.0% 50s
+
+[align=median/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1162   0.1167   0.1167   0.1167   0.1256   0.1256    0.1256  0.8348     0    0     2
+  bonn           0.0873   0.0857   0.0559   0.0857   0.1564   0.2294    0.2294  0.9241     0    0    11
+  MEAN(src)      0.1017   0.1012   0.0863   0.1012   0.1410   0.1775    0.1775  0.8795     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.0849, 0.1210]
+  95% CI of balanced clip median AbsRel: [0.0813, 0.1215]
+
+[align=scale/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1173   0.1177   0.1177   0.1177   0.1253   0.1253    0.1253  0.8498     0    0     2
+  bonn           0.0876   0.0861   0.0561   0.0861   0.1629   0.2285    0.2285  0.8929     0    0    11
+  MEAN(src)      0.1025   0.1019   0.0869   0.1019   0.1441   0.1769    0.1769  0.8713     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.0856, 0.1215]
+  95% CI of balanced clip median AbsRel: [0.0821, 0.1223]
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.4332   0.4295   0.4295   0.4295   0.4951   0.4951    0.4951  0.8893     2    0     2
+  bonn           0.0563   0.0558   0.0465   0.0558   0.0863   0.1026    0.1026  0.9733     0    0    11
+  MEAN(src)      0.2448   0.2427   0.2380   0.2427   0.2907   0.2988    0.2988  0.9313     2    0    13
+  95% CI of balanced clip mean   AbsRel: [0.2056, 0.2801]
+  95% CI of balanced clip median AbsRel: [0.2037, 0.2760]
+
+-> work_dirs/acc/q0-calib-s0-L256-pf.json
+-> work_dirs/acc/table.txt
+=== P3, per-frame gauge ===
+qt-stream-s0  gauge=scaleshift/frame  work_dirs/acc/qt-stream-s0-L8-pf.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.2074 <= 0.0900
+  [FAIL] balanced delta1                  0.9136 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.3783 <= 0.1530
+  [FAIL] alignment failures               3 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    4 <= 0
+  [FAIL] TUM clip median AbsRel           0.0979 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.0892 <= 0.0580
+  [FAIL] Bonn delta1                      0.9277 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4089 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.4063 >= 0.6392
+  [FAIL] edge AbsRel vs DA2               0.1813 <= 0.1659
+  [FAIL] overshoot vs DA2                 0.3303 <= 0.2230
+  [PASS] flat TV vs reported              0.0294 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [FAIL] L8->L256 AbsRel growth           33.5% <= 5.0%
+  [FAIL] L8->L256 delta1 drop (pt)        1.43 <= 1.00
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.2074 <= 0.1000
+  [FAIL] clip medAbsRel                   0.0914 <= 0.0900
+  [PASS] MEAN(src) delta1                 0.9136 >= 0.9100
+  [FAIL] TUM AbsRel                       0.3257 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.0892 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    4 <= 0
+  [note] 3 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [FAIL] 256f AbsRel vs 8f (x1.1)         0.2769 <= 0.2282
+  [PASS] 256f delta1 drop (pt)            1.43 <= 3.00
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+=== P3 control: frozen, stateless Q0 ===
+q0-calib-s0  gauge=scaleshift/frame  work_dirs/acc/q0-calib-s0-L8-pf.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.2002 <= 0.0900
+  [PASS] balanced delta1                  0.9318 >= 0.9300
+  [FAIL] clip P95 AbsRel                  1.1840 <= 0.1530
+  [FAIL] alignment failures               10 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    6 <= 0
+  [PASS] TUM clip median AbsRel           0.0937 <= 0.0950
+  [PASS] Bonn pooled AbsRel               0.0537 <= 0.0580
+  [PASS] Bonn delta1                      0.9757 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [SKIP] pass --sharp <file> (an eval_acc.py --sharp dump, or a sharp_metric.py JSONL)
+
+P3 - PLAN.md §3.3 long-stream gate
+  [FAIL] L8->L256 AbsRel growth           22.2% <= 5.0%
+  [PASS] L8->L256 delta1 drop (pt)        0.05 <= 1.00
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.2002 <= 0.1000
+  [PASS] clip medAbsRel                   0.0691 <= 0.0900
+  [PASS] MEAN(src) delta1                 0.9318 >= 0.9100
+  [FAIL] TUM AbsRel                       0.3467 <= 0.1150
+  [PASS] Bonn AbsRel                      0.0537 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    6 <= 0
+  [note] 10 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [FAIL] 256f AbsRel vs 8f (x1.1)         0.2448 <= 0.2203
+  [PASS] 256f delta1 drop (pt)            0.05 <= 3.00
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+[2026-09-02T00:34:08+09:00] queue18 done
