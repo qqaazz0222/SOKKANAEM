@@ -1,24 +1,27 @@
-"""Two numbers for the blur, because AbsRel does not see it.
+"""The sharpness suite, because AbsRel does not see the blur.
 
 Figure 9 shows our prediction with no object boundaries, yet its AbsRel is
 competitive: a scene's error is dominated by the large smooth background, so a
 silhouette can vanish entirely and barely move the average. Nothing reported in
-this paper measures that, which is why the defect survived to the figure stage.
+this paper measured that, which is why the defect survived to the figure stage.
 
-Two metrics, both per frame, both alignment-free by construction:
+The metrics live in `sokkanaem/sharpness.py` (tests/test_sharpness.py pins
+their directions); this script runs them on the eval.py protocol. All are per
+frame on scale-shift-normalized disparity, so no alignment rule flatters them:
 
-  edge AbsRel   AbsRel restricted to the depth-boundary band -- the pixels
-                whose GT log-depth gradient is in the top decile of that
-                frame, dilated by 3px. Same band `edge_weighted_loss` weights.
-
-  gradient ratio  mean |grad of normalized-disparity(pred)| over the same
-                band, divided by the GT's. This is the blur number: 1.0 means
-                the prediction varies as fast as the truth does across a
-                boundary, and 0.5 means it is twice as smooth. It is the
-                spatial counterpart of Table 10's range ratio, and normalizing
-                disparity per frame (MiDaS style, median-centre and
-                mean-absolute-deviation scale) makes it free of scale and
-                shift, so no alignment rule can flatter it.
+  absrel_edge     AbsRel restricted to the depth-boundary band -- the pixels
+                  whose GT log-depth gradient is in the top decile of the
+                  frame, dilated by 3px. Same band `edge_weighted_loss` weights.
+  grad_ratio      the blur number: prediction gradient over GT gradient in
+                  that band. 1.0 varies as fast as the truth, 0.5 is twice as
+                  smooth. Buyable with noise, hence the next three.
+  boundary_*      precision/recall/F1 of the boundary set at the GT's own
+                  0.90/0.95/0.99 gradient quantiles, 2px matching slack:
+                  blur loses recall, noise loses precision.
+  flat_tv[_ratio] prediction TV inside GT-flat regions, and over the GT's --
+                  the noise term.
+  overshoot       share of band pixels leaving the local GT range by >5% of
+                  it -- the ringing term.
 
 Reported per source and dataset-balanced, on the eval.py protocol: clip-len 8,
 100 clips spread evenly over each holdout.
@@ -39,57 +42,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from ceiling_probe import through_grid
 from sokkanaem import from_checkpoint
 from sokkanaem.data import build_mixed, even_subset
+from sokkanaem.losses import dynamic_mask
+from sokkanaem.sharpness import sharpness_scores
 
 D = "/home/hyunsu/dataset_ssd"
 REAL = [f"tum:{D}/tum_static", f"bonn:{D}/bonn/rgbd_bonn_dataset"]
 RHOLD = ["walking_static", "rgbd_bonn_crowd2", "rgbd_bonn_person_tracking2",
          "rgbd_bonn_static_close_far"]
-
-
-def norm_disp(depth, valid):
-    """Per-frame scale-shift normalized disparity (MiDaS). depth/valid (N,1,H,W).
-
-    Per frame, not per batch: a batch holding one 0.5-129 m scene would
-    otherwise set the scale for a 1.5-4 m one and flatten it to nothing."""
-    d = 1.0 / depth.clamp(min=1e-3)
-    out = torch.zeros_like(d)
-    for i in range(d.shape[0]):
-        v = valid[i].bool()
-        if not bool(v.any()):
-            continue
-        t = d[i][v].median()
-        s = (d[i][v] - t).abs().mean().clamp(min=1e-6)
-        out[i] = (d[i] - t) / s
-    return out
-
-
-def grad_mag(x, valid):
-    """|grad| and where it is defined, forward differences, same shape as x.
-
-    Both endpoints of a difference must be valid. Without that, every sensor
-    hole contributes a gradient the size of the hole's depth, the top decile
-    of the GT gradient becomes the set of hole borders rather than the set of
-    object boundaries, and the ratio below reads ~0 for any model."""
-    vy = valid[..., 1:, :] * valid[..., :-1, :]
-    vx = valid[..., :, 1:] * valid[..., :, :-1]
-    gy = F.pad((x[..., 1:, :] - x[..., :-1, :]).abs() * vy, (0, 0, 0, 1))
-    gx = F.pad((x[..., :, 1:] - x[..., :, :-1]).abs() * vx, (0, 1))
-    defined = F.pad(vy, (0, 0, 0, 1)) * F.pad(vx, (0, 1))
-    return gy + gx, defined
-
-
-def boundary_band(gt, valid, decile=0.9, dilate=3):
-    """Top-decile GT log-depth gradient, dilated. (N,1,H,W) bool."""
-    g, defined = grad_mag(gt.clamp(min=1e-3).log(), valid)
-    g = F.max_pool2d(g, dilate, stride=1, padding=dilate // 2) * defined
-    band = torch.zeros_like(g, dtype=torch.bool)
-    for i in range(g.shape[0]):
-        d = defined[i].bool()
-        if d.sum() < 10:
-            continue
-        thr = torch.quantile(g[i][d].float(), decile)
-        band[i] = (g[i] >= thr) & d
-    return band
 
 
 def scale_shift(pred, gt, valid):
@@ -102,9 +61,14 @@ def scale_shift(pred, gt, valid):
     return 1.0 / (s * pred + b).clamp(min=1e-3)
 
 
+KEYS = ("absrel", "absrel_dyn", "absrel_near", "absrel_edge", "grad_ratio",
+        "boundary_f1", "boundary_precision", "boundary_recall", "flat_tv",
+        "flat_tv_gt", "flat_tv_ratio", "overshoot")
+
+
 @torch.no_grad()
 def score_source(predict, loader, dev, max_clips):
-    acc = {"absrel": [], "absrel_edge": [], "grad_ratio": []}
+    acc = {k: [] for k in KEYS}
     for ci, (clip, gt, valid) in enumerate(loader):
         if ci >= max_clips:
             break
@@ -117,17 +81,22 @@ def score_source(predict, loader, dev, max_clips):
             continue
         p = f(predict(clip, gt, valid))
 
-        rel = ((p - g).abs() / g.clamp(min=1e-3))
+        rel = (p - g).abs() / g.clamp(min=1e-3)
         acc["absrel"].append(float(rel[vb].mean()))
-
-        band = boundary_band(g, v)
-        if band.sum() > 0:
-            acc["absrel_edge"].append(float(rel[band].mean()))
-            dp, dg = norm_disp(p, v), norm_disp(g, v)
-            gp, _ = grad_mag(dp, v)
-            gg, _ = grad_mag(dg, v)
-            acc["grad_ratio"].append(
-                float(gp[band].mean() / gg[band].mean().clamp(min=1e-6)))
+        near = vb & (g < 2.0)          # the 2.38x gap (REPORT 4.43)
+        if near.any():
+            acc["absrel_near"].append(float(rel[near].mean()))
+        # the 2.66x gap, and the probe's Go criterion. Same definition as
+        # eval_acc's `dynamic` region and dynamic_weighted_loss's mask: flow
+        # that disagrees with the frame's dominant motion, so a panning camera
+        # does not mark the whole scene moving.
+        if min(clip.shape[-2:]) >= 128:
+            dyn = f(dynamic_mask(clip).float()).bool() & vb
+            if dyn.any():
+                acc["absrel_dyn"].append(float(rel[dyn].mean()))
+        for k, x in sharpness_scores(p, g, v).items():
+            if k in acc and x == x:          # drop NaN (no boundary in frame)
+                acc[k].append(x)
     return {k: sum(x) / max(len(x), 1) for k, x in acc.items()}
 
 
@@ -161,6 +130,13 @@ def build_predictor(args, dev):
             return scale_shift(d, g, v)
         return predict, args.label or args.baseline.split("/")[-1]
     model = from_checkpoint(args.ckpt, dev).eval()
+    if args.tau is not None:
+        # tau=0 activates every patch, i.e. the dense path. A model trained
+        # dense (the Stage A probes) scored through its detector is being read
+        # off-distribution, and the two capacity arms were not off-distribution
+        # by the same amount -- which is how M0 came out with a LOWER training
+        # loss and WORSE fit numbers than the 4.19M arm.
+        model.detector.tau_on, model.detector.tau_off = args.tau, args.tau / 2
     def predict(clip, gt, valid):
         depths, _ = model.forward_clip(clip)      # detector-driven masks
         g = gt.reshape(-1, 1, *gt.shape[-2:])
@@ -171,8 +147,25 @@ def build_predictor(args, dev):
     return predict, args.label or Path(args.ckpt).parent.name
 
 
+def table(path):
+    """Every arm scored into one JSONL, as one comparison table. Later lines
+    win, so re-scoring an arm replaces its row rather than adding a second."""
+    rows = {}
+    for line in Path(path).read_text().splitlines():
+        if line.strip():
+            r = json.loads(line)
+            rows[r["label"]] = r["scores"]["balanced"]
+    keys = [k for k in KEYS if any(k in v for v in rows.values())]
+    print(f"{'arm':<28}" + "".join(f"{k:>19}" for k in keys))
+    for label, sc in rows.items():
+        print(f"{label:<28}" + "".join(
+            f"{sc.get(k, float('nan')):>19.4f}" for k in keys))
+
+
 def main():
     ap = argparse.ArgumentParser()
+    ap.add_argument("--table", default=None,
+                    help="print every arm in this JSONL as one table and exit")
     ap.add_argument("--ckpt", default=None, help="our checkpoint")
     ap.add_argument("--baseline", default=None,
                     help="HF depth model id, scored under its own native "
@@ -187,9 +180,14 @@ def main():
     ap.add_argument("--clip-len", type=int, default=8)
     ap.add_argument("--size", type=int, default=256)
     ap.add_argument("--max-clips", type=int, default=100)
+    ap.add_argument("--tau", type=float, default=None,
+                    help="ours: override the detector threshold (0 = every "
+                         "patch active, the dense path)")
     ap.add_argument("--label", default=None)
     ap.add_argument("--out", default=None, help="append one JSON line here")
     args = ap.parse_args()
+    if args.table:
+        return table(args.table)
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     predict, label = build_predictor(args, dev)
@@ -204,13 +202,16 @@ def main():
             even_subset(ds, args.max_clips), batch_size=1, shuffle=False)
         rows[name] = score_source(predict, loader, dev, args.max_clips)
 
-    keys = ("absrel", "absrel_edge", "grad_ratio")
+    keys = KEYS
     rows["balanced"] = {k: sum(r[k] for r in rows.values()) / len(rows)
                         for k in keys}
     print(f"\n{label}")
     print(f"{'source':>10s} " + " ".join(f"{k:>12s}" for k in keys))
     for name, r in rows.items():
         print(f"{name:>10s} " + " ".join(f"{r[k]:>12.4f}" for k in keys))
+    print("\ngrad_ratio alone is buyable: read it with boundary_f1 (blur "
+          "loses recall, noise loses precision), flat_tv_ratio (noise) and "
+          "overshoot (ringing).")
     if args.out:
         Path(args.out).parent.mkdir(parents=True, exist_ok=True)
         with open(args.out, "a") as fh:
