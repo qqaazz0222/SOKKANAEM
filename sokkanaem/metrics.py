@@ -98,8 +98,34 @@ def temporal_metrics(frames, pred, gt, valid=None, pooled=False):
     return out
 
 
+def scale_stats(pred, gt, valid):
+    """Per-frame alignment factors s_t = median(gt_t)/median(pred_t) and what
+    they do over a clip (r2 Major 1). pred may already be clip-aligned: every
+    statistic here is a ratio or a log-difference, so a constant clip-level
+    scale cancels and what is left is the model's own scale stability.
+
+    A long-clip penalty under one-scale-per-clip alignment decomposes into
+    depth-shape drift and drift of s_t itself. The second is a property of the
+    model, not of the protocol, which is why it is reported next to the error:
+
+        drift    coefficient of variation of s_t  (kept for continuity)
+        logstd   std of log s_t -- the scale-symmetric version of drift
+        step     mean |log s_t - log s_{t-1}| -- frame-to-frame scale jitter,
+                 the part a per-frame-aligned metric removes by construction
+    """
+    fs = [(gt[t][vt].median() / pred[t][vt].median().clamp(min=1e-6)).item()
+          for t in range(gt.shape[0]) if (vt := valid[t].bool()).any()]
+    if len(fs) < 2:
+        return {"scale_drift": 0.0, "scale_logstd": 0.0, "scale_step": 0.0}
+    fs = torch.tensor(fs).clamp(min=1e-12)
+    lf = fs.log()
+    return {"scale_drift": (fs.std() / fs.mean().clamp(min=1e-6)).item(),
+            "scale_logstd": lf.std().item(),
+            "scale_step": (lf[1:] - lf[:-1]).abs().mean().item()}
+
+
 @torch.no_grad()
-def clip_scores(frames, pred, gt, valid):
+def clip_scores(frames, pred, gt, valid, temporal=True):
     """Every per-clip number for one clip, computed in ONE place so eval.py
     and the baseline scripts cannot drift apart — they already had (t-delta
     was measured on raw output in eval.py and on median-scaled output in the
@@ -107,6 +133,10 @@ def clip_scores(frames, pred, gt, valid):
 
     frames (T,3,H,W) in [0,1]; pred, gt (T,1,H,W) with pred ALREADY aligned
     to gt's scale; valid (T,1,H,W) 0/1.
+
+    temporal=False drops OPW/TCE (and the RAFT pass that costs more than every
+    other metric here combined). PLAN_ACC's G1 is an accuracy gate and does not
+    read them; G2/G4 do, so the default stays on.
 
     Returns the per-clip means AND, under "_pooled", the raw sums+counts so
     callers can report the pixel-pooled dataset-level metric that the depth
@@ -132,8 +162,11 @@ def clip_scores(frames, pred, gt, valid):
     td = (pred[1:] - pred[:-1]).abs()
     out = {"absrel": rel.mean().item(), "rmse": sq.mean().sqrt().item(),
            "delta1": d1.mean().item(), "temporal_delta": td.mean().item()}
-    tm = temporal_metrics(frames, pred, gt, valid, pooled=True)
+    tm = (temporal_metrics(frames, pred, gt, valid, pooled=True) if temporal
+          else {"opw": 0.0, "tce": 0.0, "opw_sum": 0.0, "tce_sum": 0.0,
+                "warp_px": 0.0})
     out.update({k: tm[k] for k in ("opw", "tce")})
+    out.update(scale_stats(pred, gt, valid))
     out["_pooled"] = {
         "rel_sum": rel.sum().item(), "sq_sum": sq.sum().item(),
         "d1_sum": d1.sum().item(), "px": float(v.sum().item()),
@@ -142,6 +175,52 @@ def clip_scores(frames, pred, gt, valid):
         "warp_px": tm["warp_px"],
     }
     return out
+
+
+def robust(values):
+    """Mean is not enough when a handful of clips blow up: PLAN_ACC A3.
+
+    DA V2 Small reads 0.2256 mean against 0.0967 clip median on the same clips
+    -- one statistic says "twice as bad as us", the other "slightly better".
+    Both are true of the same numbers, so the table prints both and the trimmed
+    mean and tail between them, and nothing is selected after the fact.
+    """
+    import statistics
+    x = sorted(values)
+    n = len(x)
+    if n == 0:
+        return {k: float("nan") for k in
+                ("mean", "median", "trim10", "p90", "p95", "max")} | {"n": 0}
+    k = int(n * 0.05)               # 10% trimmed = 5% off each end
+    core = x[k:n - k] or x
+
+    def pct(q):
+        i = min(n - 1, max(0, int(round(q * (n - 1)))))
+        return x[i]
+
+    return {"mean": statistics.fmean(x), "median": statistics.median(x),
+            "trim10": statistics.fmean(core), "p90": pct(0.90),
+            "p95": pct(0.95), "max": x[-1], "n": n}
+
+
+def boot_ci(per_source, reps=10000, seed=0, lo=2.5, hi=97.5, stat="mean"):
+    """95% percentile CI of the dataset-BALANCED statistic, clips resampled
+    within each source (PLAN_ACC A3, G1's "CI must not overlap" clause).
+
+    per_source: {source: [per-clip values]}. Stratified because the reported
+    number is a mean over sources, not over clips -- resampling the pooled list
+    would let Bonn's 399 clips outvote TUM's 89 and understate the interval.
+    """
+    import numpy as np
+    rng = np.random.default_rng(seed)
+    f = np.median if stat == "median" else np.mean
+    draws = []
+    for v in per_source.values():
+        a = np.asarray(v, dtype=float)
+        idx = rng.integers(0, len(a), size=(reps, len(a)))
+        draws.append(f(a[idx], axis=1))
+    b = np.mean(draws, axis=0)
+    return float(np.percentile(b, lo)), float(np.percentile(b, hi))
 
 
 def pooled(sums):
@@ -187,3 +266,27 @@ def report(label, acc):
     path.write_text(json.dumps(
         {k: v for k, v in acc.items() if k != "_pooled"}))
     print(f"  per-clip values -> {path}")
+
+
+def _selfcheck():
+    """The one property the r2 scale decomposition rests on: these statistics
+    measure the model's scale wobble, NOT the clip-level alignment, so they
+    must not move when the whole prediction is rescaled."""
+    g = torch.ones(6, 1, 4, 4)
+    v = torch.ones(6, 1, 4, 4)
+    p = torch.ones(6, 1, 4, 4)
+    p[:, 0, 0, 0] = 1.0  # constant scale -> zero drift, zero step
+    a = scale_stats(p, g, v)
+    assert max(abs(x) for x in a.values()) < 1e-6, a
+    p = torch.stack([torch.full((1, 4, 4), f) for f in
+                     (1.0, 2.0, 1.0, 2.0, 1.0, 2.0)])
+    b, c = scale_stats(p, g, v), scale_stats(p * 7.3, g, v)
+    step = abs(torch.tensor(2.0).log().item())
+    assert abs(b["scale_step"] - step) < 1e-5, b
+    assert all(abs(b[k] - c[k]) < 1e-5 for k in ("scale_logstd", "scale_step")), (b, c)
+    assert abs(b["scale_drift"] - c["scale_drift"]) < 1e-5, (b, c)
+    print("scale_stats ok:", {k: round(v, 4) for k, v in b.items()})
+
+
+if __name__ == "__main__":
+    _selfcheck()

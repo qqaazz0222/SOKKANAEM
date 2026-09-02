@@ -14,7 +14,7 @@ from pathlib import Path
 
 import numpy as np
 import torch
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 
 import sys
 
@@ -24,6 +24,8 @@ from sokkanaem.data import build_mixed
 from viz import colorize
 
 D = "/home/hyunsu/dataset_ssd"
+FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+COLS = ["RGB", "Prediction", "Ground truth", "Relative error"]
 
 
 def main():
@@ -65,18 +67,39 @@ def main():
                  colorize(1.0 / np.clip(pred, 1e-3, None), lo, hi),
                  np.where(v[..., None], colorize(gd[t], lo, hi), 0),
                  np.where(v[..., None], colorize(err, 0, args.err_max), 0)]
-        gap = np.full((tiles[0].shape[0], 4, 3), 255, np.uint8)
-        rows.append(np.concatenate([x for tile in tiles for x in (tile, gap)][:-1],
-                                   axis=1))
+        rows.append((t, absrel, active, tiles))
         print(f"frame {t:3d}  AbsRel {absrel:.4f}  active {active * 100:5.1f}%")
 
-    vgap = np.full((4, rows[0].shape[1], 3), 255, np.uint8)
-    sheet = np.concatenate([x for r in rows for x in (r, vgap)][:-1], axis=0)
+    # compose with column headers and per-row frame/AbsRel/keyframe labels,
+    # same layout convention as viz_qualitative.py so the two raster figures
+    # read the same way
+    S, gap, lab_w, hdr_h = rows[0][3][0].shape[0], 6, 148, 22
+    ncol = len(rows[0][3])
+    W = lab_w + ncol * S + (ncol - 1) * gap
+    H = hdr_h + len(rows) * S + (len(rows) - 1) * gap
+    canvas = Image.new("RGB", (W, H), "white")
+    dr = ImageDraw.Draw(canvas)
+    f = ImageFont.truetype(FONT, 13)
+    fs = ImageFont.truetype(FONT, 11)
+    for c, h in enumerate(COLS):
+        x = lab_w + c * (S + gap)
+        dr.text((x + S // 2, hdr_h - 6), h, fill="black", font=f, anchor="ms")
+    for r, (t, absrel, active, tiles) in enumerate(rows):
+        y = hdr_h + r * (S + gap)
+        keyframe = active > 0.999
+        label = f"frame {t}" + ("  (keyframe)" if keyframe else "")
+        dr.text((lab_w - 10, y + S // 2 - 7), label,
+                 fill="#b8322a" if keyframe else "black", font=f, anchor="rs")
+        dr.text((lab_w - 10, y + S // 2 + 9), f"AbsRel {absrel:.3f}",
+                 fill="#555555", font=fs, anchor="rs")
+        for c, tile in enumerate(tiles):
+            canvas.paste(Image.fromarray(tile), (lab_w + c * (S + gap), y))
+
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
     name = out / f"sawtooth-{Path(args.ckpt).parent.name}.png"
-    Image.fromarray(sheet).save(name)
-    print(f"wrote {name}  (rows: {args.frames}; columns: RGB, pred, GT, error)")
+    canvas.save(name)
+    print(f"wrote {name}  ({W}x{H})")
 
 
 if __name__ == "__main__":

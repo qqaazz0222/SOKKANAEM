@@ -26,7 +26,8 @@ def eval_once(model, loader, dev, max_clips, constant=False, align="median"):
     while being useless, which is exactly why TCE is reported (metrics.py)."""
     acc = {k: [] for k in ("absrel", "rmse", "delta1", "temporal_delta",
                            "opw", "tce", "active_ratio", "absrel_metric",
-                           "scale", "scale_drift", "_pooled")}
+                           "scale", "scale_drift", "scale_logstd",
+                           "scale_step", "_pooled")}
     skipped = 0
     for ci, (clip, gt, valid) in enumerate(loader):
         if ci >= max_clips:
@@ -72,18 +73,13 @@ def eval_once(model, loader, dev, max_clips, constant=False, align="median"):
         acc["absrel_metric"].append(
             ((depths[v] - gt[v]).abs() / gt[v].clamp(min=1e-6)).mean().item())
         acc["scale"].append(s.item())
-        fs = [(gt[0, t][vt].median()
-               / depths[0, t][vt].median().clamp(min=1e-6)).item()
-              for t in range(gt.shape[1]) if (vt := v[0, t]).any()]
-        fs = torch.tensor(fs)
-        acc["scale_drift"].append(
-            (fs.std() / fs.mean().clamp(min=1e-6)).item() if len(fs) > 1 else 0.0)
     # pixel-pooled dataset-level metrics are the primary numbers (convention,
     # and not hostage to a few blown-up clips); per-clip std reports spread
     sums = acc.pop("_pooled")
     out = dict(pooled(sums))
     t = {k: torch.tensor(v) for k, v in acc.items()}
-    for k in ("active_ratio", "absrel_metric", "scale", "scale_drift"):
+    for k in ("active_ratio", "absrel_metric", "scale", "scale_drift",
+              "scale_logstd", "scale_step"):
         out[k] = t[k].mean().item()
     out["n"] = len(t["absrel"])
     out["skipped"] = skipped
@@ -213,7 +209,8 @@ def main():
     # pooled = pixel-weighted; clipAbsRel/std = per-clip. mAbsRel/scale/drift
     # are the UNSCALED numbers: median scaling hides absolute-scale error.
     hdr = ("tau_on   source        active%  AbsRel   RMSE     d1      t-delta  "
-           "OPW     TCE     mAbsRel  scale  drift   clipAbsRel(std)  n")
+           "OPW     TCE     mAbsRel  scale  drift   sLogStd  sStep   "
+           "clipAbsRel(std)  n")
     lines += [hdr, "-" * len(hdr)]
     per_clip = {}
 
@@ -226,12 +223,13 @@ def main():
                      f"{m['temporal_delta']:.4f}   {m['opw']:.4f}  "
                      f"{m['tce']:.4f}  {m['absrel_metric']:.4f}  "
                      f"{m['scale']:.3f}  {m['scale_drift']:.4f}  "
+                     f"{m['scale_logstd']:.4f}   {m['scale_step']:.4f}  "
                      f"{m['absrel_clip']:.4f} "
                      f"({m['absrel_std']:.3f})  {m['n']}"
                      + (f" (+{m['skipped']} no-GT)" if m["skipped"] else ""))
 
     CLIPK = ("active_ratio", "absrel_metric", "scale", "scale_drift",
-             "absrel_clip", "absrel_std")
+             "scale_logstd", "scale_step", "absrel_clip", "absrel_std")
 
     def combine(ms, by_pixel):
         """by_pixel=True: one number over every pixel of every source, so the
