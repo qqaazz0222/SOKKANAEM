@@ -18,8 +18,13 @@ of the draft's tables, so they go stale when a table is re-measured**; Figures
 
 The two raster figures come from the model rather than from a table:
 
-    python scripts/viz_sawtooth.py --ckpt <reported> --out outputs/sawtooth
+    python scripts/viz_sawtooth.py --ckpt work_dirs/v9-60k/latest.pt --out outputs/sawtooth
     python scripts/viz_qualitative.py --out paper/figures/qualitative.png
+
+Figure 8's checkpoint is the Base checkpoint (`v9-60k`), not the Final one `viz_qualitative.py`
+defaults to — it predates the Final checkpoint and its per-frame AbsRel values (0.3740, 0.2030)
+are quoted directly in the caption, so changing `--ckpt` there requires updating `caption.md` and
+`../draft.md`/`../draft_ko.md` to match.
 
 **Captions live in `caption.md`, not in the artwork.** The SVGs carry only axis
 labels, panel letters and element annotations, so the files can be submitted
