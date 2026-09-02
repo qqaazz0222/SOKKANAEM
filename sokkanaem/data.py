@@ -335,6 +335,34 @@ def even_subset(ds, max_clips):
     return tud.Subset(ds, idx)
 
 
+def load_manifest(path):
+    """A sealed clip set from scripts/make_acc_manifest.py (PLAN_ACC A1).
+
+    Returns [(source, ClipDataset)] holding exactly the manifest's clips, in
+    the manifest's order, one clip per dataset entry. `build_mixed` +
+    `even_subset` reproduce a clip set only as long as the adapters, the
+    holdout strings, the glob order and the cap all stay put; a manifest names
+    the frames, so a comparison table cannot silently be assembled from two
+    different sets of them.
+
+    Each manifest clip becomes a one-clip ClipDataset built from its own frame
+    list, which reuses the loading path every other number in this repo goes
+    through rather than duplicating it.
+    """
+    import json
+    with open(path) as f:
+        m = json.load(f)
+    T, size = m["clip_len"], m["size"]
+    out = []
+    for src, meta in m["sources"].items():
+        seqs = [[tuple(p) for p in c["pairs"]]
+                for c in m["clips"] if c["source"] == src]
+        out.append((src, ClipDataset(seqs, meta["scale"], clip_len=T,
+                                     clip_stride=T, size=size,
+                                     depth_mode=meta["mode"])))
+    return out
+
+
 def eval_clip_len(default=8):
     """CLIP_LEN / CLIP_STRIDE overrides, so a baseline script can be measured at
     the same clip length as scripts/eval.py --clip-len. The streaming protocol
@@ -343,11 +371,37 @@ def eval_clip_len(default=8):
     return n, int(os.environ.get("CLIP_STRIDE", n))
 
 
-def build_mixed(specs, holdout=None, val=False, **kw):
+# GT that is sharp at a depth boundary, and GT that is not. Kinect/ToF depth
+# smears every silhouette and drops out around thin structures, so training the
+# SHAPE terms on it teaches exactly the blur we are trying to remove -- this is
+# Depth Anything V2's central finding, and our own numbers say the same thing:
+# the GT's own flat-region TV is 0.0046 (quantized) while its boundary band is
+# the noisiest part of the frame. Metric supervision still has to come from the
+# real sources; only the shape terms are restricted.
+SYNTHETIC = {"vkitti2", "tartanair2", "pointodyssey"}
+
+
+class _Tagged(Dataset):
+    """Appends a per-sample flag: 1.0 if this source's GT is synthetic."""
+
+    def __init__(self, ds, synthetic):
+        self.ds, self.synthetic = ds, float(synthetic)
+
+    def __len__(self):
+        return len(self.ds)
+
+    def __getitem__(self, i):
+        return (*self.ds[i], torch.tensor(self.synthetic))
+
+
+def build_mixed(specs, holdout=None, val=False, tag_source=False, **kw):
     """specs: ["scannet:/path", "folder:/path:2000", ...].
     holdout: list of path substrings (e.g. ["Scene06"]) naming the val
     split; sequences whose paths match go to val. val=False returns the
     train split (matches excluded), val=True the val split (matches only).
+    tag_source=True appends a 1.0/0.0 flag per sample marking synthetic GT
+    (see SYNTHETIC), which is what lets a shape loss skip the blurry real
+    sensor labels.
     Returns (ConcatDataset, sampler) — sampler equalizes per-dataset draw
     probability so a huge dataset doesn't drown a small one."""
     datasets = []
@@ -362,6 +416,8 @@ def build_mixed(specs, holdout=None, val=False, **kw):
             seqs = [s for s in seqs
                     if any(h in s[0][0] for h in holdout) == val]
         ds = ClipDataset(seqs, scale, depth_mode=mode, **kw)
+        if tag_source:
+            ds = _Tagged(ds, name in SYNTHETIC)
         if len(ds) == 0:
             raise ValueError(f"no clips found for {spec}"
                              + (f" (holdout={holdout}, val={val})" if holdout else ""))
