@@ -19,7 +19,7 @@ import argparse
 
 def macs(dim=192, depth=4, d_state=16, p=16, size=256, chunk=16,
          decoder="conv", scan_directions=2, local_conv=False, bins=0,
-         dpt_width=64):
+         dpt_width=64, full_res=False):
     """Per-frame MACs, split into the pieces that scale with active% and the
     pieces that do not. Returns a dict of component -> (fixed, per_token)."""
     N = (size // p) ** 2
@@ -57,6 +57,8 @@ def macs(dim=192, depth=4, d_state=16, p=16, size=256, chunk=16,
             dec += res[k] * (cin * c + c * c * 9)   # reduce 1x1 + mix 3x3
         dec += res[2] * (widths[-1] * widths[-1] * 9
                          + widths[-1] * max(bins, 1) * 9)   # head
+        if full_res:   # D1: 1/2-res shuffle residual + full-res RGB detail
+            dec += res[2] * widths[-1] * 4 * 9 + r3 * (3 * 8 * 9 + 9)
     else:  # original: 64->32 and 32->1 convs run at FULL resolution
         dec = (N * dim * 128 * 9 + r2 * 128 * 64 * 9
                + r3 * 64 * 32 * 9 + r3 * 32 * 1 * 9)
@@ -98,12 +100,21 @@ def main():
     ap.add_argument("--scan-directions", type=int, default=2, choices=[2, 4])
     ap.add_argument("--local-conv", action="store_true")
     ap.add_argument("--bins", type=int, default=0)
+    ap.add_argument("--dpt-width", type=int, default=64,
+                    help="DPTDecoder fusion width (model.dec_width)")
+    ap.add_argument("--full-res", action="store_true",
+                    help="D1 learned full-resolution upsampling")
+    ap.add_argument("--measure", action="store_true",
+                    help="also build the model to count real parameters and "
+                         "time a dense clip step -- the two numbers a MAC "
+                         "count cannot stand in for (PLAN.md 3.4)")
     args = ap.parse_args()
 
     m = macs(dim=args.dim, depth=args.depth, d_state=args.d_state,
              size=args.size, decoder=args.decoder,
              scan_directions=args.scan_directions,
-             local_conv=args.local_conv, bins=args.bins)
+             local_conv=args.local_conv, bins=args.bins,
+             dpt_width=args.dpt_width, full_res=args.full_res)
     full = curve(m, 1.0)
     N = m["N"]
     print(f"dim={args.dim} depth={args.depth} d_state={args.d_state} "
@@ -131,9 +142,51 @@ def main():
         print(f"{a*100:6.1f}   {g/1e9:8.3f}      {g/full*100:5.1f}%   "
               f"{gc/1e9:11.3f}      {gc/full*100:5.1f}%   "
               f"{gb/1e9:8.3f}      {gb/full*100:5.1f}%   {a*100:5.1f}%")
+    if args.measure:
+        measure(args)
+
     print("\n'ideal' = the compute-proportional-to-change-rate claim taken "
           "literally. The gap is the honest cost of a dense embed+decoder "
           "plus a readout that Δ-gating cannot skip.")
+
+
+def measure(args):
+    """Real parameter count and dense latency for these knobs, on an
+    untrained model -- both are architecture properties, so they do not need a
+    checkpoint, and the capacity probe needs them before it spends a day."""
+    import time
+
+    import torch
+
+    from sokkanaem import SOKKANAEM
+
+    dev = "cuda" if torch.cuda.is_available() else "cpu"
+    kw = dict(dim=args.dim, depth=args.depth, d_state=args.d_state,
+              decoder=args.decoder, scan_directions=args.scan_directions,
+              local_conv=args.local_conv, bins=args.bins)
+    if args.decoder == "dpt":
+        kw["dec_width"] = args.dpt_width
+        kw["full_res"] = args.full_res
+    model = SOKKANAEM(**kw).to(dev).eval()
+    n = sum(p.numel() for p in model.parameters())
+    print(f"\nparameters {n/1e6:.2f} M")
+    if dev == "cpu":
+        print("no CUDA: latency skipped")
+        return
+    clip = torch.randn(1, 8, 3, args.size, args.size, device=dev)
+    mask = torch.ones(1, 8, (args.size // 16) ** 2, device=dev)
+    with torch.no_grad():
+        for _ in range(3):
+            model.forward_clip(clip, force_mask=mask)
+        torch.cuda.synchronize()
+        t = time.perf_counter()
+        for _ in range(5):
+            model.forward_clip(clip, force_mask=mask)
+        torch.cuda.synchronize()
+    per_frame = (time.perf_counter() - t) / (5 * 8) * 1e3
+    print(f"dense eager latency {per_frame:.2f} ms/frame "
+          f"({1e3/per_frame:.0f} FPS), peak "
+          f"{torch.cuda.max_memory_allocated()/2**20:.0f} MiB")
 
 
 if __name__ == "__main__":

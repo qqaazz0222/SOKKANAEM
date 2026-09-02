@@ -278,7 +278,8 @@ class DPTDecoder(nn.Module):
     """
 
     def __init__(self, dim, patch_size=16, width=64, disparity=True,
-                 bins=0, d_min=0.3, d_max=150.0, fuse_norm=False):
+                 bins=0, d_min=0.3, d_max=150.0, fuse_norm=False,
+                 full_res=False):
         super().__init__()
         assert patch_size == 16
         self.disparity = disparity
@@ -315,6 +316,32 @@ class DPTDecoder(nn.Module):
             nn.Conv2d(widths[-1], widths[-1], 3, padding=1), nn.GELU(),
             nn.Conv2d(widths[-1], max(bins, 1), 3, padding=1),
         )
+        # D1 (PLAN 4.3): the last 2x is bilinear, so nothing in the network can
+        # place a depth step anywhere but on an even pixel pair -- a bilinear
+        # upsample of a 1/2-res map has a two-pixel ramp at every edge by
+        # construction. Measured evidence that this, not capacity, is the
+        # sharpness bottleneck: GT pushed through a patch-16 token grid scores
+        # grad_ratio 0.26, below our own 0.43, i.e. the token path cannot reach
+        # the 0.756 gate at any dim (work_dirs/sharp-suite.log).
+        #
+        # Two cheap paths instead, both ZERO-INIT so a fresh D1 model emits
+        # exactly D0's output and the arm can only improve on it:
+        #   up_res   4 channels at 1/2 res -> pixel shuffle: four independent
+        #            values inside each 2x2 block, which is what lets an edge
+        #            land on an odd pixel at all.
+        #   up_stem  full-res RGB detail (8 ch), so the residual can put that
+        #            edge where the image says it is, not where the 1/2-res
+        #            feature grid rounds it to.
+        # ~0.8k parameters and 0.024 GMAC at 256px, against 1.64 GMAC total.
+        self.full_res = full_res
+        if full_res:
+            self.up_stem = nn.Sequential(
+                nn.Conv2d(3, 8, 3, padding=1), nn.GELU())
+            self.up_res = nn.Conv2d(widths[-1], 4, 3, padding=1)
+            self.up_mix = nn.Conv2d(8 + 1, 1, 1)
+            for m in (self.up_res, self.up_mix):
+                nn.init.zeros_(m.weight)
+                nn.init.zeros_(m.bias)
         if bins:
             self.bin_logits = nn.Parameter(torch.zeros(bins))
             self.bin_temp = 1.0
@@ -334,6 +361,18 @@ class DPTDecoder(nn.Module):
     def set_n_blocks(self, n):
         self.proj = nn.ModuleList(
             nn.Conv2d(self.dim, self.width, 1) for _ in range(n))
+
+    def _upsample(self, m, x, frame):
+        """1/2-res map `m` (1 channel) to full resolution. Bilinear, plus the
+        zero-init learned residual when full_res is on. `x` is the 1/2-res
+        fused feature the residual reads, `frame` the RGB frame."""
+        up = F.interpolate(m, scale_factor=2, mode="bilinear",
+                           align_corners=False)
+        if not self.full_res:
+            return up
+        r = F.pixel_shuffle(self.up_res(x), 2)
+        r = r + self.up_mix(torch.cat([self.up_stem(frame), r], 1))
+        return up + r
 
     def forward(self, feats2d, frame):
         """feats2d: list of (B, dim, gh, gw), one per backbone block.
@@ -361,10 +400,8 @@ class DPTDecoder(nn.Module):
             # test needs a knob rather than a patched forward pass.
             p = (self.head(x) / self.bin_temp).softmax(1)
             logd = (p * self.bin_centres().view(1, -1, 1, 1)).sum(1, keepdim=True)
-            return F.interpolate(logd, scale_factor=2, mode="bilinear",
-                                 align_corners=False).exp()
-        out = F.interpolate(self.head(x), scale_factor=2, mode="bilinear",
-                           align_corners=False)
+            return self._upsample(logd, x, frame).exp()
+        out = self._upsample(self.head(x), x, frame)
         if self.disparity:
             # regress disparity (MiDaS/DA v2 practice): 0.5-129 m ranges like
             # TartanAir V2's are far better conditioned in inverse space.
@@ -381,7 +418,8 @@ class SOKKANAEM(nn.Module):
                  spatial_cache=False, gate_mode="delta", decoder="conv",
                  scan_directions=2, local_conv=False, bins=0,
                  temporal_cache=False, dense_above=0.4,
-                 d_min=0.3, d_max=150.0, bucket=0, fuse_norm=False):
+                 d_min=0.3, d_max=150.0, bucket=0, fuse_norm=False,
+                 dec_width=64, full_res=False):
         """gmc=True enables the ego-motion path (IDEA.md §3.5): Low-Res GMC
         warps frame t-1 onto t, then the change score is the relative L1
         between the *embed features* of both — not pixel MSE — so tau_on/
@@ -432,9 +470,9 @@ class SOKKANAEM(nn.Module):
             # d_max is a real accuracy knob, not a formality: at 150 the top
             # bin centre sits at 115 m, and on vkitti2 the 0.8% of pixels past
             # that carry 54% of the squared error (scripts/bin_probe.py)
-            self.decoder = DPTDecoder(dim, patch_size, bins=bins,
-                                      d_min=d_min, d_max=d_max,
-                                      fuse_norm=fuse_norm)
+            self.decoder = DPTDecoder(dim, patch_size, width=dec_width,
+                                      bins=bins, d_min=d_min, d_max=d_max,
+                                      fuse_norm=fuse_norm, full_res=full_res)
             self.decoder.set_n_blocks(depth)
         else:
             assert not bins, "bins head lives in the dpt decoder"
@@ -675,7 +713,12 @@ def from_checkpoint(ckpt, device="cpu", **overrides):
     checkpoint (work_dirs/<name>/config.toml, saved by train.py), load
     weights, return it. overrides win — e.g. gmc=True with feature-scale
     taus replaces the trained pixel-scale ones."""
-    kw = checkpoint_config(ckpt).get("model", {})
+    kw = dict(checkpoint_config(ckpt).get("model", {}))
+    if kw.get("kind") == "q":
+        # PLAN §7's track: a different model class behind the same call, so
+        # eval_acc / sharp_metric / bench need no branch of their own
+        from .qmodel import from_q_checkpoint
+        return from_q_checkpoint(ckpt, device, **overrides)
     kw.update(overrides)
     model = SOKKANAEM(**kw).to(device)
     state = torch.load(ckpt, map_location=device)

@@ -226,3 +226,37 @@ def test_bucket_padding_does_not_change_the_result():
         db, sb, ib = padded.step(f, sb)
         assert ia["active_ratio"] == ib["active_ratio"]
         assert torch.allclose(da, db, atol=1e-5), "bucket padding changed depth"
+
+
+def test_capacity_knobs_survive_a_checkpoint_round_trip(tmp_path):
+    """dim/depth/d_state/dec_width/full_res are the probe's variables, and
+    from_checkpoint rebuilds the arm from config.toml alone -- an unrecorded
+    knob loads M0's weights into a 4.19M shape and raises, or worse, silently
+    reverts the decoder width."""
+    import sys
+
+    from sokkanaem import from_checkpoint
+
+    sys.path.insert(0, "scripts")
+    from train import write_config
+
+    kw = dict(dim=64, depth=2, d_state=8, decoder="dpt", bins=16,
+              dec_width=48, full_res=True)
+    model = SOKKANAEM(**kw)
+    work = tmp_path / "run"
+    work.mkdir()
+
+    class Args:  # write_config takes the argparse namespace's __dict__
+        size = 256
+        seed = 0
+    write_config(work / "config.toml", Args(), kw)
+    torch.save({"model": model.state_dict()}, work / "latest.pt")
+
+    back = from_checkpoint(str(work / "latest.pt"))
+    assert back.dim == 64 and back.decoder.width == 48
+    assert back.decoder.full_res and back.decoder.bins == 16
+    clip = torch.rand(1, 2, 3, 64, 64)
+    with torch.no_grad():
+        a, _ = model.forward_clip(clip)
+        b, _ = back.forward_clip(clip)
+    assert torch.allclose(a, b, atol=1e-6)
