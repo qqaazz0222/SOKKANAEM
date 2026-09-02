@@ -27,16 +27,20 @@ from pathlib import Path
 import torch
 
 from sokkanaem import SOKKANAEM
-from sokkanaem.data import SynthClips, build_mixed
+from sokkanaem.data import SynthClips, build_mixed, even_subset
 from sokkanaem.collapse import update_streak
 from sokkanaem.distill import (affine_invariant_loss, dinov2_features,
                                distill_loss, load_frozen_dinov2,
                                load_frozen_teacher, teacher_disparity,
                                teacher_grad_loss)
 from sokkanaem.ema import ema_update_
-from sokkanaem.losses import (bin_ce_loss, edge_weighted_loss, grad_loss,
-                              multiscale_grad_loss, normal_loss, si_log_loss,
-                              spread_loss, temporal_loss, warp_residual_loss)
+from sokkanaem.losses import (bin_ce_loss, boundary_location_loss,
+                              dynamic_weighted_loss, edge_weighted_loss,
+                              grad_loss,
+                              multiscale_grad_loss, near_weighted_loss,
+                              normal_loss, rank_loss, si_log_loss,
+                              overshoot_loss, spread_loss, temporal_loss,
+                              warp_residual_loss)
 from sokkanaem.schedule import lr_at, parse_size_schedule, size_for_step
 
 
@@ -164,6 +168,16 @@ def main():
     ap.add_argument("--edge-weight", type=float, default=0.0,
                     help="GT-depth-gradient weighted log L1, aimed at "
                          "foreground objects at depth discontinuities (0 = off)")
+    ap.add_argument("--near-weight", type=float, default=0.0,
+                    help="close-range weighted log L1 (PLAN_ACC A7). REPORT "
+                         "§4.43 puts our error inside 2 m at 2.38x a 343M "
+                         "reference while the rest of the frame sits at 1.13x, "
+                         "and 73%% of the dynamic pixels are in that band "
+                         "(0 = off)")
+    ap.add_argument("--near-band", type=float, default=2.0,
+                    help="metres; the depth below which --near-weight applies")
+    ap.add_argument("--near-gain", type=float, default=4.0,
+                    help="relative weight inside the band (1 = no reweighting)")
     ap.add_argument("--size-schedule", default=None,
                     help="progressive resolution curriculum: "
                          "'step:size,step:size,...' e.g. '0:128,20000:256' "
@@ -199,6 +213,76 @@ def main():
                          "the failure that removed the value term.")
     ap.add_argument("--teacher-model",
                     default="depth-anything/Depth-Anything-V2-Small-hf")
+    # capacity knobs on the CLI: [model] used to be TOML-only, which meant a
+    # capacity probe needed a new config file per arm. write_config records
+    # whatever lands in model_kw, so from_checkpoint still rebuilds the arm.
+    ap.add_argument("--dim", type=int, default=None)
+    ap.add_argument("--depth", type=int, default=None)
+    ap.add_argument("--d-state", type=int, default=None)
+    ap.add_argument("--dec-width", type=int, default=None,
+                    help="DPTDecoder fusion width (default 64)")
+    ap.add_argument("--fuse-norm", action="store_true", default=None,
+                    help="DPT-style normalized fusion: one GroupNorm per branch "
+                         "before the decoder's skip add, so the backbone arm "
+                         "stops drowning the RGB arm 5-10x. Rejected as a solo "
+                         "arm (REPORT 4.44's A); worth re-testing under a loss "
+                         "that asks for boundary detail")
+    ap.add_argument("--full-res", action="store_true", default=None,
+                    help="D1: learned full-resolution upsampling (zero-init "
+                         "pixel-shuffle residual + full-res RGB detail) "
+                         "instead of the final bilinear 2x")
+    ap.add_argument("--train-clips", type=int, default=None,
+                    help="train on this many clips, spread evenly (saturation "
+                         "probes measure capacity on a small hard subset, not "
+                         "generalization on 200k clips)")
+    ap.add_argument("--val-split", action="store_true",
+                    help="train on the --holdout MATCHES instead of the rest: "
+                         "a saturation probe deliberately fits the clips it is "
+                         "scored on. Never use with the sealed real holdout.")
+    ap.add_argument("--boundary-weight", type=float, default=0.0,
+                    help="PLAN Stage A L_boundary_location: L1 on the "
+                         "prediction's gradient outside the GT boundary band, "
+                         "plus a one-sided hinge to reach the GT's gradient "
+                         "inside it. Targets boundary precision / flat TV / "
+                         "overshoot, which the symmetric grad terms do not see")
+    ap.add_argument("--q-teacher", default=None,
+                    help="PLAN §7 Q2: distil from a Q checkpoint (frozen DA2 "
+                         "shape + metric calibration). Unlike the rejected "
+                         "teacher arms, this teacher is METRIC and stable "
+                         "(zero alignment failures under the median gauge), so "
+                         "it can be matched in depth space instead of through "
+                         "an affine-invariant fit -- and it is DENSE, which is "
+                         "the sharp indoor supervision our Kinect GT cannot "
+                         "give (REPORT 4.44/4.45)")
+    ap.add_argument("--q-weight", type=float, default=0.5,
+                    help="si-log against the teacher's depth")
+    ap.add_argument("--q-grad-weight", type=float, default=0.5,
+                    help="multiscale gradient match against the teacher -- the "
+                         "term that carries its boundaries")
+    ap.add_argument("--shape-on-synthetic", action="store_true",
+                    help="Depth Anything V2's central choice, ported: run the "
+                         "SHAPE terms (grad, multiscale grad, boundary, rank) "
+                         "only on sources whose GT is synthetic, and keep the "
+                         "metric terms on everything. Kinect GT smears every "
+                         "silhouette, so supervising shape with it teaches the "
+                         "blur we are trying to remove")
+    ap.add_argument("--trim-real-band", action="store_true",
+                    help="drop the GT boundary band from the metric terms on "
+                         "REAL sources (DA V2 discards its noisiest pseudo-"
+                         "label pixels for the same reason). Needs "
+                         "--shape-on-synthetic's source tags")
+    ap.add_argument("--overshoot-weight", type=float, default=0.0,
+                    help="penalty for leaving the local GT range at a boundary "
+                         "-- the ringing the one-sided boundary hinge permits")
+    ap.add_argument("--dynamic-weight", type=float, default=0.0,
+                    help="log-depth L1 weighted towards independently-moving "
+                         "pixels (flow residual vs the frame's dominant "
+                         "motion). Targets the 2.66x dynamic-pixel gap; costs "
+                         "one RAFT pass per batch")
+    ap.add_argument("--dynamic-gain", type=float, default=4.0)
+    ap.add_argument("--rank-weight", type=float, default=0.0,
+                    help="PLAN Stage A L_pairwise_order: logistic ordering "
+                         "loss on random pixel pairs, gauge-free")
     ap.add_argument("--bin-weight", type=float, default=0.0,
                     help="soft cross-entropy on the depth-bin distribution "
                          "(0 = off; needs a bins>0 dpt decoder). Without it "
@@ -220,6 +304,12 @@ def main():
             ap.set_defaults(data=specs)
         ap.set_defaults(**cfg)
     args = ap.parse_args()
+    for flag, key in (("dim", "dim"), ("depth", "depth"),
+                      ("d_state", "d_state"), ("dec_width", "dec_width"),
+                      ("full_res", "full_res"), ("fuse_norm", "fuse_norm")):
+        v = getattr(args, flag)
+        if v is not None:
+            model_kw[key] = v
 
     random.seed(args.seed)
     torch.manual_seed(args.seed)
@@ -246,6 +336,14 @@ def main():
     # bin logits are internal to the decoder head; a forward hook collects one
     # entry per frame (forward_clip calls the decoder T times) without
     # threading them through every return signature
+    q_teacher = None
+    if args.q_teacher:
+        from sokkanaem import from_checkpoint as _load
+        q_teacher = _load(args.q_teacher, dev).eval()
+        for prm in q_teacher.parameters():
+            prm.requires_grad_(False)
+        log(f"Q teacher: {args.q_teacher} "
+            f"({sum(p.numel() for p in q_teacher.parameters())/1e6:.1f}M, frozen)")
     bin_logits = []
     if args.bin_weight > 0:
         assert getattr(model.decoder, "bins", 0), \
@@ -306,9 +404,16 @@ def main():
         if args.data:
             dataset, sampler = build_mixed(args.data, clip_len=args.clip_len,
                                            size=size, holdout=args.holdout,
+                                           val=args.val_split,
+                                           tag_source=tag_source,
                                            augment=args.augment)
+            if args.train_clips:
+                # the per-source equalizing sampler indexes the full concat, so
+                # it cannot survive the subset -- shuffle instead
+                dataset, sampler = even_subset(dataset, args.train_clips), None
             ld = torch.utils.data.DataLoader(
                 dataset, batch_size=args.batch, sampler=sampler,
+                shuffle=sampler is None,
                 num_workers=args.workers, drop_last=True,
                 # measured: throughput was ~48 decoded frames/s regardless of
                 # resolution, i.e. PNG/JPEG decode from /archive was the wall,
@@ -324,6 +429,7 @@ def main():
                 SynthClips(size, args.clip_len), batch_size=args.batch)
         return ld
 
+    tag_source = args.shape_on_synthetic or args.trim_real_band
     size_schedule = parse_size_schedule(args.size_schedule, args.size)
     cur_size = size_for_step(size_schedule, start_step)
     loader = make_loader(cur_size)
@@ -347,11 +453,27 @@ def main():
             cur_size = new_size
             loader = make_loader(cur_size)
             N = (cur_size // 16) ** 2
-        for clip, gt, valid in loader:
+        for batch in loader:
             if step >= args.steps or size_for_step(size_schedule, step) != cur_size:
                 break
-            clip, gt, valid = clip.to(dev), gt.to(dev), valid.to(dev)
+            clip, gt, valid = (x.to(dev) for x in batch[:3])
             B, T = clip.shape[:2]
+            # per-sample: 1 where the GT is synthetic (sharp at boundaries)
+            synth = (batch[3].to(dev).view(B, 1, 1, 1, 1)
+                     if tag_source else None)
+            # what the shape terms are allowed to see, and what the metric
+            # terms are allowed to see. Defaults keep every pixel of both.
+            v_shape = valid if synth is None or not args.shape_on_synthetic \
+                else valid * synth
+            v_metric = valid
+            if args.trim_real_band and synth is not None:
+                from sokkanaem.sharpness import boundary_band
+                shp = (-1, 1) + tuple(gt.shape[-2:])
+                band = boundary_band(gt.reshape(shp),
+                                     valid.reshape(shp)).reshape(gt.shape)
+                # real sources only: their boundary band is where the sensor
+                # is least trustworthy, and it is 10% of the pixels
+                v_metric = valid * (1 - (1 - synth) * band.float())
             bin_logits.clear()
 
             tokens = None
@@ -373,8 +495,10 @@ def main():
             per_sample = args.loss_space == "log"
             gp, gg = ((depths.clamp(min=1e-3).log(), gt.clamp(min=1e-3).log())
                       if per_sample else (depths, gt))
-            losses = [si_log_loss(depths, gt, valid), grad_loss(gp, gg, valid),
-                      temporal_loss(depths, masks), normal_loss(gp, gg, valid)]
+            losses = [si_log_loss(depths, gt, v_metric),
+                      grad_loss(gp, gg, v_shape),
+                      temporal_loss(depths, masks),
+                      normal_loss(gp, gg, v_shape)]
             if log_vars is not None:
                 loss = sum(torch.exp(-lv) * l + lv for lv, l in zip(log_vars, losses))
             else:
@@ -391,13 +515,38 @@ def main():
                         + nw * losses[3])
             if args.msgrad_weight > 0:
                 loss = loss + args.msgrad_weight * multiscale_grad_loss(
-                    depths, gt, valid, per_sample=per_sample)
+                    depths, gt, v_shape, per_sample=per_sample)
             if args.warp_weight > 0:
                 loss = loss + args.warp_weight * warp_residual_loss(
                     clip, depths, gt, valid)
             if args.edge_weight > 0:
                 loss = loss + args.edge_weight * edge_weighted_loss(
-                    depths, gt, valid)
+                    depths, gt, v_shape)
+            if args.near_weight > 0:
+                loss = loss + args.near_weight * near_weighted_loss(
+                    depths, gt, v_metric, args.near_band, args.near_gain)
+            if args.boundary_weight > 0:
+                loss = loss + args.boundary_weight * boundary_location_loss(
+                    depths, gt, v_shape)
+            if args.dynamic_weight > 0:
+                loss = loss + args.dynamic_weight * dynamic_weighted_loss(
+                    clip, depths, gt, v_metric, args.dynamic_gain)
+            if args.overshoot_weight > 0:
+                loss = loss + args.overshoot_weight * overshoot_loss(
+                    depths, gt, v_shape)
+            if args.rank_weight > 0:
+                loss = loss + args.rank_weight * rank_loss(depths, gt, v_shape)
+            if q_teacher is not None:
+                with torch.no_grad():
+                    tgt, _ = q_teacher.forward_clip(clip)
+                # every pixel, including where the Kinect GT has a hole: the
+                # teacher's value there is the only supervision available
+                ones = torch.ones_like(tgt)
+                if args.q_weight > 0:
+                    loss = loss + args.q_weight * si_log_loss(depths, tgt, ones)
+                if args.q_grad_weight > 0:
+                    loss = loss + args.q_grad_weight * multiscale_grad_loss(
+                        depths, tgt, ones, per_sample=True)
             if args.spread_weight > 0:
                 loss = loss + args.spread_weight * spread_loss(
                     depths, gt, valid)
