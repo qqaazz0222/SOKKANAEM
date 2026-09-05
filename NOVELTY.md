@@ -1,52 +1,66 @@
 # NOVELTY
 
-SOKKANAEM이 기존 연구 대비 실제로 새로운 부분만 추림. 배경·실험은 [IDEA.md](IDEA.md), 진행 상황은 [PROGRESS.md](PROGRESS.md), 수치는 [REPORT.md](REPORT.md) 참조.
+SOKKANAEM이 기존 연구 대비 실제로 새로운 부분만 추림. 배경·실험은 [IDEA.md](IDEA.md),
+진행 상황은 [PROGRESS.md](PROGRESS.md), 수치는 [REPORT.md](REPORT.md) 참조.
+
+> **2026-09-05 개정.** 선명도 라운드(REPORT §4.44~4.47)의 결과로 주장 축이 바뀌었다. 기존
+> 프레이밍("연산량 ∝ 변화율")은 §4.11에서 이미 정직한 형태로 축소됐고, 이번 라운드는 **측정
+> 기여**와 **재현 가능한 부정 결과**를 앞세울 근거를 만들었다. 아래는 각 주장에 붙는 수치와
+> 그 강도를 함께 적는다.
 
 ## 핵심 통찰 (one-liner)
 
-Mamba의 이산화 파라미터 Δ에 변화 마스크를 곱하면 (`Δ̃ = M · Δ`), **정적 패치의 연산 스킵이 근사가 아니라 hidden state의 정확한(exact) 항등 복사가 된다.** 별도 캐시·정합성 관리 없이 "스킵 = 상태 유지"가 수식 그 자체로 성립 (IDEA.md §1.3, §3.2).
+Mamba의 이산화 파라미터 Δ에 변화 마스크를 곱하면 (`Δ̃ = M · Δ`), **정적 패치의 연산 스킵이
+근사가 아니라 hidden state의 정확한(exact) 항등 복사가 된다.** 별도 캐시·정합성 관리 없이
+"스킵 = 상태 유지"가 수식 그 자체로 성립 (IDEA.md §1.3, §3.2).
 
-## 관련 연구 대비 차별점
+## A. 모델 기여
+
+| # | 주장 | 근거 | 강도 |
+|---|---|---|---|
+| A1 | **Δ-Gating** — 조건부 SSM 게이팅을 이산화 수식 레벨에서 구현. `M=0 → Ā=I, B̄=0 → h_t=h_{t-1}` | `tests/test_gating.py` (bit-exact state copy) | 확정 |
+| A2 | **후처리 없는 플리커 제거** — t-delta 0.2455 대 DA3 1.80 · VDA 2.18 · DA v2 9.47 | REPORT §4.15, 1000클립 동일 프로토콜 | 확정. **"플리커"로 한정** — 모션 보정 지표(OPW/TCE)에서는 우위 없음 |
+| A3 | **D1: 학습형 전체 해상도 복원 경로** — 1/2 해상도 pixel-shuffle residual + 전체 해상도 RGB detail, 둘 다 zero-init(초기 출력 불변), +0.024 GMAC · +0.8k 파라미터 | `tests/test_full_res.py` | 확정 |
+| A4 | **25.5k 파라미터 metric calibration head가 상대 모델을 metric으로 전환** — median gauge에서 DA2 0.6451/1.1188 → 0.1097/0.0871 (TUM/Bonn), 정합 실패 0 | REPORT §4.45 | 확정. 독립 기여로 분리 가능 |
+| A5 | **입력 적응적 연산량**(정직한 형태) — 시간축 state 경로 비용이 변화율에 비례하고, 종단 절감은 dense embed/decoder와 공간축에 의해 제한된다 | REPORT §4.11, §4.24 | 축소된 형태로 확정 |
+
+## B. 측정 기여 (이번 라운드 신설, 다른 연구에 그대로 이식 가능)
+
+| # | 주장 | 근거 |
+|---|---|---|
+| B1 | **선명도는 단일 지표로 잴 수 없다** — gradient ratio는 노이즈로도, 링잉으로도 살 수 있다. 경계 P/R/F1(멀티 임계) + flat TV + overshoot 동시 판정이 필요하다 | 실제 arm이 grad_ratio 1.154로 게이트를 "통과"하면서 overshoot 0.347 · edge AbsRel 0.187로 실패. 또 다른 arm은 2.25까지 갔다 |
+| B2 | **패치 그리드 상한 진단** — GT를 patch-P 토큰 그리드로 통과시킨 oracle이 grad_ratio 0.2612로 **모델(0.4323)보다 낮다** ⇒ 선명도는 토큰 용량이 아니라 복원 경로가 만든다 | REPORT §4.44. patch-based 모델 어디에나 적용 가능한 값싼 진단 |
+| B3 | **균일 배율은 지역 손실로 못 좁힌다** — Bonn에서 우리/DA2 배율이 edge 1.55 · flat 1.75 · dynamic 1.64 · near 1.77 · far 1.79로 균일 ⇒ 지역 가중 손실이 무효라는 예측이 실측과 일치 | REPORT §4.44a |
+| B4 | **정합 gauge가 metric 모델을 측정 불가로 만든다** — 2-DOF scale+shift는 metric 보정을 정확히 상쇄. 같은 체크포인트가 median 0.110/0.087, scaleshift 0.310/0.060(실패 10클립) | REPORT §4.45, PLAN §3.5 |
+| B5 | **선명도 임계는 (기준 모델, 채점 해상도) 쌍이다** — DA2 grad_ratio 0.7559@256, 0.6454@384 | REPORT §4.45 |
+| B6 | **단측 경계 손실** — 경계에서 GT 기울기 도달까지만 보상하고 초과는 무보상, 평탄 영역은 gradient L1로 억제 | `boundary_location_loss`, grad_ratio 0.431 → 0.578 |
+
+## C. 재현 가능한 부정 결과
+
+| # | 주장 | 근거 |
+|---|---|---|
+| C1 | **실촬 센서 GT는 metric 스케일 보정에 충분하고 형상 학습에 부족하다** — 다섯 실험이 같은 결론: 합성 전용 형상 감독(선명도 하락), 사전학습 형상 미세조정 3설정(전부 악화), teacher 증류(악화), GT로 학습한 시간축 어댑터(악화). GT를 스케일에만 쓴 Q0만 성공 | REPORT §4.44~4.46 |
+| C2 | **용량은 병목이 아니다** — 10.8M이 4.19M보다 학습 손실은 낮고 채점은 전 항목 열세 | REPORT §4.44 |
+| C3 | **디코더 용량은 손실이 요구하지 않으면 죽은 무게다** — D1의 shuffle 경로가 zero-init 그대로(norm 0.008) 남고, boundary 손실을 켜야 작동. 반대로 처음부터 학습하면 D1이 선명도의 대부분을 만든다(제거 시 grad_ratio 0.5624 → 0.2023, F1 0.4745 → 0.1183) | REPORT §4.47 |
+| C4 | **재귀 상태는 정확도를 만들지 않는다** — dense와 매 프레임 리셋이 소수 셋째 자리까지 동일. 단 TemporalBlock 자체는 프레임당 용량으로 필수(우회 시 0.1153 → 0.2518) | REPORT §4.43 |
+| C5 | **해상도 상향(384px)은 채점 계약을 바꾸지 않으면 걷을 수 없다** | REPORT §4.45 |
+| C6 | **사전 형상 없이 gradient를 요구하면 albedo가 깊이로 샌다** — from-scratch 10.8M 증류 4회 실패, grad_ratio 1.80·2.25, D1의 RGB 분기 norm이 fine-tune arm의 1.95 대비 4.84까지 성장 | REPORT §4.47 |
+
+## D. 관련 연구 대비 차별점
 
 | 계열 | 대표 연구 | 공유하는 것 | SOKKANAEM만 갖는 것 |
 |---|---|---|---|
-| 단안/비디오 깊이 추정 | MiDaS, DPT, Depth Anything, Video Depth Anything, NVDS | 깊이 추정 태스크 | 프레임당 연산량이 변화율에 비례 (이들은 고정 비용) |
-| 토큰 감축 (이미지) | ToMe, EViT, DynamicViT | 토큰 단위 연산 절감 | 단일 프레임 내부가 아니라 **프레임 간** 중복 활용, dense 출력 복원 문제 없음 (마스크는 공간 위치 고정, 손실 없음) |
-| 변화 기반 스킵 | Skip-Convolutions, DeltaCNN, Eventful Transformer | "변한 것만 재계산" 원칙 | 스킵된 토큰의 정보를 **별도 캐시가 아니라 SSM hidden state 자체**가 보존 — 캐시 무효화/정합성 로직 불필요 |
-| Vision Mamba | Vim, VMamba, VideoMamba | SSM 백본, $O(N)$ 스캔 | 입력 적응적 연산 스킵 없음(항상 전체 토큰 스캔) → 본 연구가 최초로 Δ-gating 결합 |
+| 단안/비디오 깊이 | MiDaS, DPT, Depth Anything (v1/v2/3), VDA, NVDS | 깊이 추정 태스크 | 프레임당 연산이 변화율에 반응(이들은 고정 비용), 후처리 없는 플리커 억제 |
+| 토큰 감축 | ToMe, EViT, DynamicViT | 토큰 단위 절감 | 프레임 **간** 중복 활용, dense 출력 복원 문제 없음 |
+| 변화 기반 스킵 | Skip-Convolutions, DeltaCNN, Eventful Transformer | "변한 것만 재계산" | 스킵된 토큰 정보를 별도 캐시가 아니라 SSM hidden state가 보존 |
+| Vision Mamba | Vim, VMamba, VideoMamba | SSM 백본, O(N) 스캔 | 입력 적응적 스킵 결합(본 연구가 최초) |
+| 선명도 평가 | DA-2K(DA V2), boundary F1 계열 | 경계 품질을 따로 잰다 | **살 수 없게(non-gameable) 구성한 다항 게이트** + 정합·해상도 의존성 명시 |
 
-**한 문장 요약:** 변화 기반 스킵(Eventful Transformer 계열)과 SSM의 상태 유지 능력을 결합한 최초 시도.
+## E. 주장하면 안 되는 것
 
-## 기여 4가지와 그 근거
-
-1. **Δ-Gating** — 조건부 SSM 게이팅을 이산화 수식 레벨에서 구현. `M=0 → Ā=I, B̄=0 → h_t=h_{t-1}` (근사 아님, 극한값). 검증: `tests/test_gating.py` (mask=0 ⇒ bit-exact state copy).
-2. **후처리 없는 플리커 제거** — hidden state가 프레임 간 시각적 기억을 유지하므로 NVDS류 후처리
-   없이 프레임 간 출력이 흔들리지 않는다. 실측(1,000 클립 동일 프로토콜, REPORT §4.15):
-   t-delta 0.2455 vs DA3 1.80·VDA 2.18·DA v2 9.47 (**7.3–38.6배**). 명시적 시간 모듈(VDA)이나
-   8프레임 동시 처리(DA3)로도 안 되는 부분. 스킵률↑에 t-delta가 단조 개선되는 것도 재확인 —
-   스킵이 부작용이 아니라 안정성의 **원인**.
-   **범위 제한(중요)**: 모션 보정 지표에서는 우위가 없다 — OPW에서 DA3가, GT 기준 TCE에서는
-   DA3·VDA 둘 다 우리보다 낫다(REPORT §4.15). 기여 2는 "플리커 없음"으로 좁혀 주장해야 하고
-   "시간 일관성 전반의 우위"로 확대하면 즉시 반박된다.
-   대조 증거: 같은 마스크로 state는 동결하되 readout만 없애면(token drop) 같은 active%에서
-   AbsRel 4.0배·t-delta 29배 붕괴 — 스킵이 공짜인 이유가 "state를 계속 읽는 것"임을 분리 실증
-   (REPORT §4.14).
-3. **입력 적응적 연산량** — *정직한 형태*: **시간축 state 경로의 비용이 변화율에 비례하고,
-   종단 절감은 dense embed/decoder와 공간축에 의해 제한된다.** "연산량 ∝ 변화율"이라는 원래
-   주장은 실측 FLOPs 회계에서 기각됨 — v1~v5 구조에서 Δ-gating만으로는 active 0%에서도
-   풀연산의 96.4%(REPORT.md §4.11). 이유: 디코더가 MAC의 67.8%(§3.3의 자체 "백본 10% 이하"
-   예산을 22배 위반)이고, Δ-gating은 static 토큰의 state 갱신만 없애고 readout(58.5%)은
-   남긴다. v6(경량 디코더 + 학습된 sparse spatial 경로)에서 active 16.6% 시 38.6%로 개선.
-   고정 카메라 active% 자체는 실촬로 입증됨(TUM static, $\tau$=0.05에서 5.9%, §4.12).
-4. **센서리스 이동 카메라 확장 (§3.5)** — Low-Res GMC(호모그래피 정렬) + Feature-level Gating 하이브리드. IMU 없이 순수 RGB만으로 ego-motion 환경 대응. 저해상도 정렬의 잔차 오차를 Mamba의 순차 hidden state 전파가 흡수한다는 "노이즈 강인성" 자체가 학술적 어필 포인트 (IDEA.md §3.5 기대효과).
-
-## 검증되지 않은 novelty 주장 (주의)
-
-- 기여 2의 근거였던 t-delta는 **상수 출력이 전역 최적**인 퇴화 지표다(§4.6 붕괴가 0.0000 기록).
-  flow warping(OPW)도 상수 필드엔 무력. 퇴화하지 않는 TCE와 const 제어행을 함께 도입했고
-  (REPORT.md §4.10), 실촬 고정카메라에서는 **상수가 TCE에서도 모델을 이겼다**(§4.12) —
-  "스킵이 시간 안정성의 원인" 주장은 외부 baseline 대비로는 유효하나, 절대적 의미의 시간
-  일관성 우위로 확대 해석하면 안 된다.
-
-- §3.5의 "노이즈 강인성 흡수"는 vkitti2(합성, 이미 clean geometry) 기준 실증이며, 실제 노이즈 있는 ego-motion 영상(블랙박스 등) 미검증 — REPORT.md 한계 참조.
-- "학습-배포 분포 일치가 중요하다"는 통념은 3-arm ablation에서 **기각**됨 (iid random 마스크가 detector-driven fine-tune보다 우세) — 이 자체도 반직관적 결과로 novelty 주장에 포함 가능 (IDEA.md §4.5).
+- **"DA2급 정확도"** — DA2 자신이 P1을 못 넘는다(TUM 평균 0.3464, 정합 실패 15클립). "DA2급"은
+  선명도 축에서만 쓸 수 있다.
+- **효율 예산 안의 DA2급 품질** — 10.8M student는 네 번 실패했다. 현재 DA2급 선명도(94~106%)는
+  Q0(24.81M, 57.6 GMAC)에서만 나온다.
+- **장스트림(P3)** — 최고값이 L8→L256 +19.3%(목표 5%). 미해결.
+- **"연산량 ∝ 변화율"의 원래 형태** — §4.11에서 실측으로 기각됨. A5의 축소된 형태만 유효.
