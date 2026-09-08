@@ -1,0 +1,5 @@
+sequence,frames,refreshes,refresh_local_defect_max,refresh_history_rms_median,refresh_history_rms_min,max_cache_age,max_fp32_shadow_gap
+rgbd_dataset_freiburg3_walking_static,256,8,0.0,0.9316158671982089,0.736752712475744,29.0,3.590982493051342e-05
+rgbd_bonn_crowd2,256,8,0.0,0.4895339223830738,0.24365146277700792,29.0,2.529491388969518e-05
+rgbd_bonn_person_tracking2,256,8,0.0,0.7209863543867775,0.41122742935714346,29.0,3.5652441717104466e-05
+rgbd_bonn_static_close_far,256,8,0.0,1.0686954877938653,0.7993829276004744,29.0,2.525091715455119e-05

@@ -1,0 +1,423 @@
+[2026-09-05T22:22:54+09:00] === v11-teacher-s0 : --full-res --boundary-weight 1.0 --overshoot-weight 1.0 --q-teacher work_dirs/q0-calib-s0/latest.pt --q-weight 1.0 --q-grad-weight 0.0 ===
+2026-09-05 22:22:54,968 work dir: work_dirs/v11-teacher-s0  seed 0  commit b751d365
+2026-09-05 22:22:56,708 HTTP Request: HEAD https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-09-05 22:22:56,889 HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/depth-anything/Depth-Anything-V2-Small-hf/5426e4f0f36572d16453bbda7a8389317b1bef99/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 17642.24it/s]
+2026-09-05 22:22:57,189 Q teacher: work_dirs/q0-calib-s0/latest.pt (24.8M, frozen)
+2026-09-05 22:22:57,274 partial init from work_dirs/v11-longclip-spread-s0/latest.pt: 7 new tensors kept at init, 0 checkpoint tensors unused
+2026-09-05 22:22:58,245 mixed dataset: 208720 clips from 5 sources (size 256)
+2026-09-05 22:23:00,424 step    0  loss 41.0245  skip 0.00  lr 2.00e-07  depth_std 12.2073
+2026-09-05 22:23:56,515 step   50  loss 4.1782  skip 0.01  lr 1.02e-05  depth_std 10.6492
+2026-09-05 22:24:54,678 step  100  loss 7.5692  skip 0.03  lr 2.02e-05  depth_std 23.8894
+2026-09-05 22:25:52,584 step  150  loss 5.5189  skip 0.04  lr 3.02e-05  depth_std 1.2877
+2026-09-05 22:26:50,108 step  200  loss 49.0500  skip 0.05  lr 4.02e-05  depth_std 2.2225
+2026-09-05 22:27:46,923 step  250  loss 6.4703  skip 0.06  lr 5.02e-05  depth_std 12.0588
+2026-09-05 22:28:43,082 step  300  loss 3.1762  skip 0.07  lr 6.02e-05  depth_std 13.1508
+2026-09-05 22:29:38,701 step  350  loss 13.1785  skip 0.09  lr 7.02e-05  depth_std 12.8059
+2026-09-05 22:30:33,884 step  400  loss 9.1209  skip 0.10  lr 8.02e-05  depth_std 13.4000
+2026-09-05 22:31:28,748 step  450  loss 5.2804  skip 0.11  lr 9.02e-05  depth_std 18.3855
+2026-09-05 22:32:23,282 step  500  loss 4.3189  skip 0.12  lr 1.00e-04  depth_std 1.3441
+2026-09-05 22:33:17,141 step  550  loss 37.8961  skip 0.14  lr 9.99e-05  depth_std 14.1301
+2026-09-05 22:34:10,548 step  600  loss 2.3015  skip 0.15  lr 9.98e-05  depth_std 1.5681
+2026-09-05 22:35:03,416 step  650  loss 26.5142  skip 0.16  lr 9.95e-05  depth_std 9.5783
+2026-09-05 22:35:55,888 step  700  loss 45.0580  skip 0.17  lr 9.92e-05  depth_std 6.1021
+2026-09-05 22:36:47,796 step  750  loss 25.1366  skip 0.19  lr 9.87e-05  depth_std 14.0668
+2026-09-05 22:37:39,337 step  800  loss 15.3448  skip 0.20  lr 9.82e-05  depth_std 3.0721
+2026-09-05 22:38:30,092 step  850  loss 3.8343  skip 0.21  lr 9.76e-05  depth_std 14.1788
+2026-09-05 22:39:20,535 step  900  loss 12.5821  skip 0.23  lr 9.68e-05  depth_std 15.9113
+2026-09-05 22:40:10,433 step  950  loss 3.2205  skip 0.24  lr 9.60e-05  depth_std 2.9762
+2026-09-05 22:40:59,733 step 1000  loss 19.2643  skip 0.25  lr 9.50e-05  depth_std 1.9216
+2026-09-05 22:41:48,638 step 1050  loss 8.1788  skip 0.26  lr 9.40e-05  depth_std 8.3251
+2026-09-05 22:42:37,082 step 1100  loss 4.7266  skip 0.28  lr 9.29e-05  depth_std 11.2188
+2026-09-05 22:43:24,989 step 1150  loss 6.5587  skip 0.29  lr 9.17e-05  depth_std 18.1384
+2026-09-05 22:44:12,496 step 1200  loss 3.4938  skip 0.30  lr 9.05e-05  depth_std 6.1116
+2026-09-05 22:44:59,504 step 1250  loss 12.6238  skip 0.31  lr 8.91e-05  depth_std 8.9695
+2026-09-05 22:45:46,037 step 1300  loss 3.8249  skip 0.33  lr 8.77e-05  depth_std 6.9612
+2026-09-05 22:46:32,119 step 1350  loss 10.4962  skip 0.34  lr 8.61e-05  depth_std 5.9933
+2026-09-05 22:47:17,719 step 1400  loss 3.2865  skip 0.35  lr 8.46e-05  depth_std 2.3103
+2026-09-05 22:48:02,935 step 1450  loss 1.8321  skip 0.36  lr 8.29e-05  depth_std 2.0995
+2026-09-05 22:48:47,413 step 1500  loss 1.9889  skip 0.38  lr 8.12e-05  depth_std 0.5476
+2026-09-05 22:49:31,547 step 1550  loss 6.4846  skip 0.39  lr 7.94e-05  depth_std 18.5358
+2026-09-05 22:50:15,046 step 1600  loss 2.4178  skip 0.40  lr 7.75e-05  depth_std 6.9653
+2026-09-05 22:50:58,027 step 1650  loss 31.9014  skip 0.41  lr 7.56e-05  depth_std 1.9316
+2026-09-05 22:51:40,680 step 1700  loss 5.6179  skip 0.42  lr 7.37e-05  depth_std 17.5628
+2026-09-05 22:52:22,636 step 1750  loss 16.0666  skip 0.44  lr 7.17e-05  depth_std 19.1053
+2026-09-05 22:53:04,194 step 1800  loss 3.9003  skip 0.45  lr 6.97e-05  depth_std 15.5947
+2026-09-05 22:53:45,248 step 1850  loss 4.6071  skip 0.46  lr 6.76e-05  depth_std 12.0311
+2026-09-05 22:54:25,686 step 1900  loss 3.1656  skip 0.47  lr 6.55e-05  depth_std 10.2072
+2026-09-05 22:55:05,734 step 1950  loss 22.5928  skip 0.49  lr 6.33e-05  depth_std 3.8455
+2026-09-05 22:55:45,394 step 2000  loss 1.8699  skip 0.50  lr 6.11e-05  depth_std 2.3037
+2026-09-05 22:56:24,754 step 2050  loss 2.5111  skip 0.50  lr 5.89e-05  depth_std 0.9286
+2026-09-05 22:57:04,025 step 2100  loss 7.7308  skip 0.50  lr 5.67e-05  depth_std 9.8669
+2026-09-05 22:57:43,384 step 2150  loss 3.1648  skip 0.50  lr 5.45e-05  depth_std 2.1337
+2026-09-05 22:58:22,694 step 2200  loss 5.6306  skip 0.50  lr 5.22e-05  depth_std 13.4279
+2026-09-05 22:59:01,964 step 2250  loss 3.8424  skip 0.50  lr 5.00e-05  depth_std 4.3263
+2026-09-05 22:59:41,275 step 2300  loss 1.5948  skip 0.50  lr 4.78e-05  depth_std 3.1802
+2026-09-05 23:00:20,539 step 2350  loss 4.8961  skip 0.50  lr 4.55e-05  depth_std 11.3905
+2026-09-05 23:00:59,879 step 2400  loss 7.5860  skip 0.50  lr 4.33e-05  depth_std 14.7495
+2026-09-05 23:01:39,139 step 2450  loss 4.3626  skip 0.50  lr 4.11e-05  depth_std 3.5110
+2026-09-05 23:02:18,415 step 2500  loss 15.5774  skip 0.50  lr 3.89e-05  depth_std 1.9462
+2026-09-05 23:02:57,579 step 2550  loss 2.9630  skip 0.50  lr 3.67e-05  depth_std 15.3711
+2026-09-05 23:03:36,897 step 2600  loss 4.8129  skip 0.50  lr 3.45e-05  depth_std 10.0695
+2026-09-05 23:04:16,119 step 2650  loss 1.3387  skip 0.50  lr 3.24e-05  depth_std 2.1394
+2026-09-05 23:04:55,607 step 2700  loss 5.0981  skip 0.50  lr 3.03e-05  depth_std 11.6612
+2026-09-05 23:05:35,000 step 2750  loss 4.4678  skip 0.50  lr 2.83e-05  depth_std 15.6497
+2026-09-05 23:06:14,246 step 2800  loss 2.8585  skip 0.50  lr 2.63e-05  depth_std 3.4460
+2026-09-05 23:06:53,579 step 2850  loss 7.2355  skip 0.50  lr 2.44e-05  depth_std 14.0358
+2026-09-05 23:07:32,766 step 2900  loss 1.0611  skip 0.50  lr 2.25e-05  depth_std 2.7690
+2026-09-05 23:08:12,175 step 2950  loss 5.4319  skip 0.50  lr 2.06e-05  depth_std 11.9568
+2026-09-05 23:08:51,507 step 3000  loss 19.3945  skip 0.50  lr 1.88e-05  depth_std 6.3910
+2026-09-05 23:09:30,816 step 3050  loss 5.9281  skip 0.50  lr 1.71e-05  depth_std 6.0907
+2026-09-05 23:10:10,142 step 3100  loss 12.9062  skip 0.50  lr 1.54e-05  depth_std 8.7717
+2026-09-05 23:10:49,376 step 3150  loss 8.2876  skip 0.50  lr 1.39e-05  depth_std 1.2868
+2026-09-05 23:11:28,756 step 3200  loss 1.8221  skip 0.50  lr 1.23e-05  depth_std 1.7528
+2026-09-05 23:12:08,125 step 3250  loss 3.8294  skip 0.50  lr 1.09e-05  depth_std 11.8023
+2026-09-05 23:12:47,354 step 3300  loss 13.5509  skip 0.50  lr 9.55e-06  depth_std 5.5408
+2026-09-05 23:13:26,708 step 3350  loss 2.4954  skip 0.50  lr 8.27e-06  depth_std 16.6086
+2026-09-05 23:14:05,964 step 3400  loss 16.5070  skip 0.50  lr 7.08e-06  depth_std 1.2016
+2026-09-05 23:14:45,376 step 3450  loss 4.7764  skip 0.50  lr 5.97e-06  depth_std 16.7273
+2026-09-05 23:15:24,811 step 3500  loss 1.0821  skip 0.50  lr 4.95e-06  depth_std 2.3593
+2026-09-05 23:16:04,036 step 3550  loss 6.3758  skip 0.50  lr 4.02e-06  depth_std 6.4714
+2026-09-05 23:16:43,353 step 3600  loss 5.0912  skip 0.50  lr 3.19e-06  depth_std 14.5625
+2026-09-05 23:17:22,615 step 3650  loss 35.3036  skip 0.50  lr 2.45e-06  depth_std 4.0807
+2026-09-05 23:18:01,905 step 3700  loss 1.3366  skip 0.50  lr 1.80e-06  depth_std 1.5831
+2026-09-05 23:18:41,193 step 3750  loss 7.6126  skip 0.50  lr 1.25e-06  depth_std 2.0847
+2026-09-05 23:19:20,516 step 3800  loss 2.8573  skip 0.50  lr 8.04e-07  depth_std 7.0228
+2026-09-05 23:19:59,789 step 3850  loss 4.0244  skip 0.50  lr 4.53e-07  depth_std 1.5134
+2026-09-05 23:20:38,969 step 3900  loss 13.0600  skip 0.50  lr 2.01e-07  depth_std 1.1677
+2026-09-05 23:21:18,234 step 3950  loss 26.1484  skip 0.50  lr 5.03e-08  depth_std 7.8331
+2026-09-05 23:21:56,895 saved -> work_dirs/v11-teacher-s0/latest.pt
+[2026-09-05T23:21:57+09:00] --- P2 screening protocol: v11-teacher-s0 ---
+
+v11-teacher-s0
+    source       absrel   absrel_dyn  absrel_near  absrel_edge   grad_ratio  boundary_f1 boundary_precision boundary_recall      flat_tv   flat_tv_gt flat_tv_ratio    overshoot
+       tum       0.1432       0.3779       0.2682       0.1774       0.4286       0.4213       0.6350       0.3708       0.0363       0.0039      11.2727       0.1958
+      bonn       0.1255       0.2505       0.2695       0.1439       0.4349       0.2940       0.5534       0.2482       0.0381       0.0086      78.7023       0.3995
+  balanced       0.1343       0.3142       0.2689       0.1606       0.4317       0.3576       0.5942       0.3095       0.0372       0.0062      44.9875       0.2976
+
+grad_ratio alone is buyable: read it with boundary_f1 (blur loses recall, noise loses precision), flat_tv_ratio (noise) and overshoot (ringing).
+[2026-09-05T23:22:20+09:00] --- P1+P2 sealed L8 manifest: v11-teacher-s0 ---
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+v11-teacher-s0 (4.2M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=24.7% 58s (+3 no-GT)
+
+[align=median]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1468   0.1432   0.0835   0.1262   0.3168   0.4776    0.5916  0.8476     0    0    89
+  bonn           0.1201   0.1215   0.0963   0.1106   0.2185   0.2893    0.5838  0.8874     0    0   398
+  MEAN(src)      0.1334   0.1323   0.0899   0.1184   0.2677   0.3834    0.5877  0.8675     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1189, 0.1471]
+  95% CI of balanced clip median AbsRel: [0.0875, 0.0939]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1468 0.848 100  0.1201 0.887 100  0.1334 0.867    
+  edge        0.1707 0.745  17  0.1536 0.788   7  0.1622 0.767    
+  flat        0.1419 0.868  83  0.1176 0.895  93  0.1298 0.882    
+  dynamic     0.5500 0.472   9  0.3100 0.646  13  0.4300 0.559    
+  static      0.1079 0.884  91  0.0908 0.925  87  0.0993 0.904    
+  near        0.4456 0.624  17  0.2249 0.754  25  0.3353 0.689    
+  mid         0.0814 0.897  74  0.0828 0.936  64  0.0821 0.916    
+  far         0.1179 0.867   9  0.1003 0.905  11  0.1091 0.886    
+
+[align=scale]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1486   0.1454   0.0928   0.1312   0.3104   0.4615    0.6453  0.8495     0    0    89
+  bonn           0.1190   0.1206   0.0956   0.1120   0.2228   0.3080    0.5374  0.8565     0    0   398
+  MEAN(src)      0.1338   0.1330   0.0942   0.1216   0.2666   0.3848    0.5914  0.8530     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1206, 0.1467]
+  95% CI of balanced clip median AbsRel: [0.0911, 0.0996]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1486 0.849 100  0.1190 0.856 100  0.1338 0.853    
+  edge        0.1713 0.740  17  0.1551 0.759   7  0.1632 0.749    
+  flat        0.1440 0.872  83  0.1163 0.864  93  0.1302 0.868    
+  dynamic     0.4679 0.580   9  0.2068 0.703  13  0.3374 0.641    
+  static      0.1178 0.876  91  0.1054 0.880  87  0.1116 0.878    
+  near        0.3920 0.694  17  0.1587 0.812  25  0.2753 0.753    
+  mid         0.0945 0.885  74  0.1034 0.869  64  0.0990 0.877    
+  far         0.1318 0.856   9  0.1197 0.882  11  0.1257 0.869    
+
+[align=scaleshift]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1364   0.1338   0.0896   0.1243   0.2819   0.3609    0.4417  0.8030     0    0    89
+  bonn           0.1041   0.1052   0.0829   0.0943   0.1587   0.2001    2.0919  0.9024     1    1   398
+  MEAN(src)      0.1203   0.1195   0.0863   0.1093   0.2203   0.2805    1.2668  0.8527     1    1   487
+  95% CI of balanced clip mean   AbsRel: [0.1086, 0.1315]
+  95% CI of balanced clip median AbsRel: [0.0829, 0.0896]
+  region                   tum              bonn         MEAN(src)
+              AbsRel  d1   px%  AbsRel  d1   px%  AbsRel  d1   px%
+  all         0.1364 0.803 100  0.1041 0.902 100  0.1203 0.853    
+  edge        0.1663 0.713  17  0.1465 0.796   7  0.1564 0.754    
+  flat        0.1303 0.821  83  0.1010 0.910  93  0.1157 0.866    
+  dynamic     0.3405 0.543   9  0.2115 0.778  13  0.2760 0.661    
+  static      0.1167 0.828  91  0.0876 0.922  87  0.1021 0.875    
+  near        0.2801 0.669  17  0.1645 0.838  25  0.2223 0.753    
+  mid         0.0896 0.875  74  0.0846 0.925  64  0.0871 0.900    
+  far         0.2470 0.469   9  0.0819 0.914  11  0.1645 0.692    
+
+  sharpness (alignment-free, PLAN.md §3.2)
+  source            absrel_edge         grad_ratio        boundary_f1 boundary_precision    boundary_recall            flat_tv          overshoot
+  tum                    0.1756             0.4286             0.4213             0.6350             0.3708             0.0363             0.1958
+  bonn                   0.1247             0.3977             0.2831             0.5469             0.2323             0.0362             0.4060
+  balanced               0.1501             0.4131             0.3522             0.5909             0.3015             0.0362             0.3009
+
+-> work_dirs/acc/v11-teacher-s0-L8.json
+-> work_dirs/acc/table.txt
+v11-teacher-s0  gauge=scaleshift  work_dirs/acc/v11-teacher-s0-L8.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.1203 <= 0.0900
+  [FAIL] balanced delta1                  0.8527 >= 0.9300
+  [FAIL] clip P95 AbsRel                  0.2805 <= 0.1530
+  [FAIL] alignment failures               1 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [PASS] TUM clip median AbsRel           0.0896 <= 0.0950
+  [FAIL] Bonn pooled AbsRel               0.1041 <= 0.0580
+  [FAIL] Bonn delta1                      0.9024 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.4131 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.3522 >= 0.6376
+  [PASS] edge AbsRel vs DA2               0.1501 <= 0.1663
+  [FAIL] overshoot vs DA2                 0.3009 <= 0.2255
+  [FAIL] flat TV vs reported              0.0362 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [SKIP] needs an L8 and an L256 dump
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.1203 <= 0.1000
+  [PASS] clip medAbsRel                   0.0863 <= 0.0900
+  [FAIL] MEAN(src) delta1                 0.8527 >= 0.9100
+  [FAIL] TUM AbsRel                       0.1364 <= 0.1150
+  [FAIL] Bonn AbsRel                      0.1041 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    1 <= 0
+  [note] 1 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [SKIP] no 256-frame dump
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+2026-09-05 23:23:20,477 work dir: work_dirs/qt-balanced-s0  commit 3675d792
+2026-09-05 23:23:22,010 HTTP Request: HEAD https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-09-05 23:23:22,011 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+2026-09-05 23:23:22,189 HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/depth-anything/Depth-Anything-V2-Small-hf/5426e4f0f36572d16453bbda7a8389317b1bef99/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 20403.49it/s]
+2026-09-05 23:23:22,917 HTTP Request: HEAD https://huggingface.co/depth-anything/Depth-Anything-V2-Small-hf/resolve/main/config.json "HTTP/1.1 307 Temporary Redirect"
+2026-09-05 23:23:23,098 HTTP Request: HEAD https://huggingface.co/api/resolve-cache/models/depth-anything/Depth-Anything-V2-Small-hf/5426e4f0f36572d16453bbda7a8389317b1bef99/config.json "HTTP/1.1 200 OK"
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 22890.06it/s]
+2026-09-05 23:23:23,161 trainable 1.207M of 25.99M
+2026-09-05 23:23:23,247 mixed dataset: 13197 clips from 2 sources
+2026-09-05 23:23:23,975 step      0  loss 1.9662  median 3.33 m
+2026-09-05 23:23:30,526 step     50  loss 2.1319  median 3.30 m
+2026-09-05 23:23:37,078 step    100  loss 0.4276  median 3.12 m
+2026-09-05 23:23:43,635 step    150  loss 0.8925  median 2.48 m
+2026-09-05 23:23:50,192 step    200  loss 0.6248  median 1.93 m
+2026-09-05 23:23:56,749 step    250  loss 0.8613  median 2.14 m
+2026-09-05 23:24:03,309 step    300  loss 0.8559  median 2.13 m
+2026-09-05 23:24:09,865 step    350  loss 0.5916  median 2.33 m
+2026-09-05 23:24:16,420 step    400  loss 0.6092  median 2.40 m
+2026-09-05 23:24:22,975 step    450  loss 0.7543  median 2.63 m
+2026-09-05 23:24:29,533 step    500  loss 0.5829  median 2.51 m
+2026-09-05 23:24:36,090 step    550  loss 0.4303  median 2.30 m
+2026-09-05 23:24:42,648 step    600  loss 0.5013  median 2.04 m
+2026-09-05 23:24:49,203 step    650  loss 0.5841  median 2.74 m
+2026-09-05 23:24:55,761 step    700  loss 0.5724  median 2.54 m
+2026-09-05 23:25:02,316 step    750  loss 0.7726  median 2.56 m
+2026-09-05 23:25:08,875 step    800  loss 0.8237  median 2.72 m
+2026-09-05 23:25:15,431 step    850  loss 0.6610  median 2.67 m
+2026-09-05 23:25:21,988 step    900  loss 0.7585  median 2.53 m
+2026-09-05 23:25:28,546 step    950  loss 0.6108  median 2.47 m
+2026-09-05 23:25:35,106 step   1000  loss 1.2363  median 2.83 m
+2026-09-05 23:25:41,665 step   1050  loss 0.5198  median 2.06 m
+2026-09-05 23:25:48,222 step   1100  loss 0.5750  median 2.33 m
+2026-09-05 23:25:54,780 step   1150  loss 0.5600  median 2.19 m
+2026-09-05 23:26:01,341 step   1200  loss 0.5431  median 1.85 m
+2026-09-05 23:26:07,898 step   1250  loss 0.9491  median 2.93 m
+2026-09-05 23:26:14,457 step   1300  loss 0.4895  median 2.33 m
+2026-09-05 23:26:21,014 step   1350  loss 0.9150  median 2.95 m
+2026-09-05 23:26:27,576 step   1400  loss 1.1922  median 2.44 m
+2026-09-05 23:26:34,133 step   1450  loss 0.9450  median 1.90 m
+2026-09-05 23:26:40,693 step   1500  loss 0.6792  median 2.59 m
+2026-09-05 23:26:47,251 step   1550  loss 0.8637  median 2.25 m
+2026-09-05 23:26:53,810 step   1600  loss 0.8238  median 2.27 m
+2026-09-05 23:27:00,366 step   1650  loss 0.6193  median 2.61 m
+2026-09-05 23:27:06,923 step   1700  loss 0.5318  median 2.69 m
+2026-09-05 23:27:13,477 step   1750  loss 0.4227  median 2.87 m
+2026-09-05 23:27:20,037 step   1800  loss 1.1033  median 2.50 m
+2026-09-05 23:27:26,595 step   1850  loss 0.5911  median 2.52 m
+2026-09-05 23:27:33,151 step   1900  loss 0.5986  median 2.51 m
+2026-09-05 23:27:39,707 step   1950  loss 0.9179  median 2.07 m
+2026-09-05 23:27:46,266 step   2000  loss 0.5504  median 3.04 m
+2026-09-05 23:27:52,822 step   2050  loss 0.6275  median 2.52 m
+2026-09-05 23:27:59,379 step   2100  loss 0.5764  median 2.35 m
+2026-09-05 23:28:05,936 step   2150  loss 0.7442  median 3.09 m
+2026-09-05 23:28:12,495 step   2200  loss 0.6121  median 2.62 m
+2026-09-05 23:28:19,050 step   2250  loss 0.5876  median 2.77 m
+2026-09-05 23:28:25,608 step   2300  loss 0.4368  median 2.19 m
+2026-09-05 23:28:32,165 step   2350  loss 0.3790  median 2.76 m
+2026-09-05 23:28:38,721 step   2400  loss 0.4666  median 2.89 m
+2026-09-05 23:28:45,279 step   2450  loss 0.5227  median 2.51 m
+2026-09-05 23:28:51,834 step   2500  loss 1.4510  median 2.14 m
+2026-09-05 23:28:58,390 step   2550  loss 0.3101  median 1.81 m
+2026-09-05 23:29:04,948 step   2600  loss 0.5311  median 2.62 m
+2026-09-05 23:29:11,504 step   2650  loss 0.5375  median 2.65 m
+2026-09-05 23:29:18,064 step   2700  loss 0.7681  median 1.80 m
+2026-09-05 23:29:24,620 step   2750  loss 1.0046  median 2.12 m
+2026-09-05 23:29:31,176 step   2800  loss 0.9672  median 2.67 m
+2026-09-05 23:29:37,733 step   2850  loss 0.4493  median 3.10 m
+2026-09-05 23:29:44,291 step   2900  loss 0.4878  median 2.43 m
+2026-09-05 23:29:50,850 step   2950  loss 0.5449  median 2.73 m
+2026-09-05 23:29:57,408 step   3000  loss 0.5111  median 2.91 m
+2026-09-05 23:30:03,966 step   3050  loss 0.2819  median 1.93 m
+2026-09-05 23:30:10,526 step   3100  loss 0.4594  median 3.18 m
+2026-09-05 23:30:17,085 step   3150  loss 0.4861  median 1.95 m
+2026-09-05 23:30:23,645 step   3200  loss 0.5134  median 2.22 m
+2026-09-05 23:30:30,204 step   3250  loss 0.5564  median 2.50 m
+2026-09-05 23:30:36,770 step   3300  loss 0.5830  median 2.02 m
+2026-09-05 23:30:43,329 step   3350  loss 0.3935  median 2.17 m
+2026-09-05 23:30:49,888 step   3400  loss 0.5320  median 2.91 m
+2026-09-05 23:30:56,447 step   3450  loss 0.4423  median 2.98 m
+2026-09-05 23:31:03,009 step   3500  loss 0.5464  median 2.82 m
+2026-09-05 23:31:09,567 step   3550  loss 0.6533  median 2.79 m
+2026-09-05 23:31:16,129 step   3600  loss 0.7040  median 2.96 m
+2026-09-05 23:31:22,693 step   3650  loss 0.6162  median 3.18 m
+2026-09-05 23:31:29,262 step   3700  loss 0.5168  median 2.39 m
+2026-09-05 23:31:35,827 step   3750  loss 0.6463  median 2.72 m
+2026-09-05 23:31:42,391 step   3800  loss 0.5670  median 2.44 m
+2026-09-05 23:31:48,957 step   3850  loss 0.5008  median 2.90 m
+2026-09-05 23:31:55,524 step   3900  loss 0.6988  median 2.37 m
+2026-09-05 23:32:02,090 step   3950  loss 0.5810  median 2.14 m
+2026-09-05 23:32:08,579 saved -> work_dirs/qt-balanced-s0/latest.pt
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 22478.44it/s]
+
+qt-balanced-s0
+    source       absrel   absrel_dyn  absrel_near  absrel_edge   grad_ratio  boundary_f1 boundary_precision boundary_recall      flat_tv   flat_tv_gt flat_tv_ratio    overshoot
+       tum       0.1239       0.2121       0.1740       0.1682       0.6850       0.6768       0.7624       0.6287       0.0313       0.0039       9.3958       0.2060
+      bonn       0.1234       0.2470       0.2735       0.1402       0.6880       0.5313       0.7418       0.4523       0.0321       0.0086      51.1321       0.2932
+  balanced       0.1236       0.2295       0.2237       0.1542       0.6865       0.6041       0.7521       0.5405       0.0317       0.0062      30.2640       0.2496
+
+grad_ratio alone is buyable: read it with boundary_f1 (blur loses recall, noise loses precision), flat_tv_ratio (noise) and overshoot (ringing).
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 27369.50it/s]
+  tum 50/89
+  bonn 50/399
+  bonn 100/399
+  bonn 150/399
+  bonn 200/399
+  bonn 250/399
+  bonn 300/399
+  bonn 350/399
+qt-balanced-s0 (26.0M) space=depth infer_size=official manifest=manifests/acc_real_L8.json clips=488 active=100.0% 69s (+3 no-GT)
+
+[align=median/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1244   0.1231   0.0966   0.1155   0.2185   0.2689    0.3852  0.8312     0    0    89
+  bonn           0.1177   0.1166   0.0793   0.1013   0.2794   0.3616    0.7147  0.8870     0    0   398
+  MEAN(src)      0.1211   0.1199   0.0879   0.1084   0.2489   0.3152    0.5499  0.8591     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1118, 0.1284]
+  95% CI of balanced clip median AbsRel: [0.0863, 0.0903]
+
+[align=scale/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1238   0.1223   0.0955   0.1158   0.2162   0.2611    0.3352  0.8399     0    0    89
+  bonn           0.1159   0.1156   0.0815   0.1051   0.2743   0.3403    0.5191  0.8408     0    0   398
+  MEAN(src)      0.1198   0.1190   0.0885   0.1105   0.2452   0.3007    0.4272  0.8403     0    0   487
+  95% CI of balanced clip mean   AbsRel: [0.1116, 0.1268]
+  95% CI of balanced clip median AbsRel: [0.0866, 0.0912]
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.3701   0.3599   0.0921   0.1822   0.3179   2.9137    5.5139  0.8898     8    6    89
+  bonn           0.0576   0.0576   0.0514   0.0548   0.0978   0.1256    0.1936  0.9738     0    0   398
+  MEAN(src)      0.2138   0.2087   0.0717   0.1185   0.2079   1.5197    2.8538  0.9318     8    6   487
+  95% CI of balanced clip mean   AbsRel: [0.1229, 0.3123]
+  95% CI of balanced clip median AbsRel: [0.0701, 0.0737]
+
+-> work_dirs/acc/qt-balanced-s0-L8-pf.json
+-> work_dirs/acc/table.txt
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 19310.30it/s]
+qt-balanced-s0 (26.0M) space=depth infer_size=official manifest=manifests/acc_real_L256.json clips=13 active=100.0% 60s
+
+[align=median/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1345   0.1351   0.1351   0.1351   0.1450   0.1450    0.1450  0.8125     0    0     2
+  bonn           0.1232   0.1216   0.0943   0.1216   0.2045   0.3194    0.3194  0.8800     0    0    11
+  MEAN(src)      0.1289   0.1283   0.1147   0.1283   0.1747   0.2322    0.2322  0.8463     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1072, 0.1545]
+  95% CI of balanced clip median AbsRel: [0.1012, 0.1559]
+
+[align=scale/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.1338   0.1342   0.1342   0.1342   0.1413   0.1413    0.1413  0.8222     0    0     2
+  bonn           0.1213   0.1199   0.0952   0.1199   0.2014   0.2892    0.2892  0.8277     0    0    11
+  MEAN(src)      0.1275   0.1270   0.1147   0.1270   0.1714   0.2153    0.2153  0.8249     0    0    13
+  95% CI of balanced clip mean   AbsRel: [0.1083, 0.1496]
+  95% CI of balanced clip median AbsRel: [0.1022, 0.1548]
+
+[align=scaleshift/frame]
+  source         pooled     mean   median   trim10      P90      P95       max      d1  fail  cat     n
+  tum            0.4712   0.4695   0.4695   0.4695   0.4988   0.4988    0.4988  0.8919     2    0     2
+  bonn           0.0600   0.0599   0.0530   0.0599   0.0895   0.1058    0.1058  0.9707     0    0    11
+  MEAN(src)      0.2656   0.2647   0.2613   0.2647   0.2942   0.3023    0.3023  0.9313     2    0    13
+  95% CI of balanced clip mean   AbsRel: [0.2459, 0.2839]
+  95% CI of balanced clip median AbsRel: [0.2459, 0.2807]
+
+-> work_dirs/acc/qt-balanced-s0-L256-pf.json
+-> work_dirs/acc/table.txt
+qt-balanced-s0  gauge=scaleshift/frame  work_dirs/acc/qt-balanced-s0-L8-pf.json
+
+P1 - PLAN.md §3.1 promotion gate (8-frame, real TUM+Bonn)
+  [FAIL] balanced AbsRel                  0.2138 <= 0.0900
+  [PASS] balanced delta1                  0.9318 >= 0.9300
+  [FAIL] clip P95 AbsRel                  1.5197 <= 0.1530
+  [FAIL] alignment failures               8 <= 0
+  [FAIL] catastrophic clips (AbsRel>1)    6 <= 0
+  [PASS] TUM clip median AbsRel           0.0921 <= 0.0950
+  [PASS] Bonn pooled AbsRel               0.0576 <= 0.0580
+  [PASS] Bonn delta1                      0.9738 >= 0.9730
+
+P2 - PLAN.md §3.2 sharpness gate
+  [FAIL] balanced grad_ratio              0.6865 >= 0.7560
+  [FAIL] boundary F1 vs DA2               0.6041 >= 0.6392
+  [PASS] edge AbsRel vs DA2               0.1542 <= 0.1659
+  [FAIL] overshoot vs DA2                 0.2496 <= 0.2230
+  [PASS] flat TV vs reported              0.0317 <= 0.0358
+
+P3 - PLAN.md §3.3 long-stream gate
+  [FAIL] L8->L256 AbsRel growth           24.2% <= 5.0%
+  [PASS] L8->L256 delta1 drop (pt)        0.05 <= 1.00
+  [SKIP] sparse-vs-dense L8 gap (<=2%) and sharpness drop after the sparse switch (<=3%): need the tau=0 dump and its sharpness block
+
+G1 - relative depth accuracy (8-frame, real TUM+Bonn)
+  [FAIL] MEAN(src) AbsRel                 0.2138 <= 0.1000
+  [PASS] clip medAbsRel                   0.0717 <= 0.0900
+  [PASS] MEAN(src) delta1                 0.9318 >= 0.9100
+  [FAIL] TUM AbsRel                       0.3701 <= 0.1150
+  [PASS] Bonn AbsRel                      0.0576 <= 0.0700
+  [FAIL] catastrophic clips (AbsRel>1)    6 <= 0
+  [note] 8 clips needed a disparity fit that crossed zero; their depth is clamped fiction
+  [SKIP] 3-seed agreement and non-overlapping CI vs the current model: needs 3 seed dumps (run this per seed)
+
+G2 - long-stream accuracy
+  [SKIP] no 32-frame dump
+  [FAIL] 256f AbsRel vs 8f (x1.1)         0.2656 <= 0.2352
+  [PASS] 256f delta1 drop (pt)            0.05 <= 3.00
+  [SKIP] late/early frame ratio and keyframe sawtooth amplitude: need per-frame traces (scripts/frame_index_probe.py)
+
+P1 FAIL   P2 FAIL   P3 FAIL   G1 FAIL   G2 FAIL
+promotion needs P1, P2 and P3 (PLAN.md §3); G1/G2 are the older PLAN_ACC set, kept so a run between the two is visible
+[2026-09-05T23:34:54+09:00] queue26 done

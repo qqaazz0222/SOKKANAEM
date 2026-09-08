@@ -6,10 +6,9 @@ t-delta (REPORT §4.10). Here they share the manifest (A1), the alignment
 (sokkanaem/alignment.py, A2), the scorer (sokkanaem/metrics.py) and the
 statistics (A3), so the only thing that differs between two rows is the model.
 
-Reported per alignment gauge, because the gauge is the comparison's main
-confound: relative models need the 2-DOF disparity fit and ours does not, and
-forcing either family onto the other's rule decides the table by protocol
-(draft §5.4). G1's primary gauge is `scaleshift` for exactly that reason.
+Report separate metric (no GT fit), scale-aligned and relative-shape panels.
+Different fitted gauges answer different questions; their scores must not be
+combined into one accuracy ranking. See paper/PROTOCOL.md.
 
 Statistics per A3: mean AND median AND 10% trimmed AND the P90/P95 tail, with
 the failures counted rather than averaged in. A model whose mean is carried by
@@ -30,14 +29,14 @@ from pathlib import Path
 import torch
 from PIL import Image
 
-from sokkanaem.alignment import MODES, align
+from sokkanaem.alignment import LEGACY_MODES, MODES, align
 from sokkanaem.data import load_manifest
 from sokkanaem.metrics import boot_ci, clip_scores, pooled, robust
 from sokkanaem.sharpness import sharpness_scores
+from sokkanaem.protocol import VERSION, check_final_test, provenance, runtime_versions
 
 OUT = Path("work_dirs/acc")
-# which gauge's aligned depth the sharpness suite is scored on. scaleshift is
-# G1's primary gauge and the only rule fair to both model families.
+# Fixed relative-shape gauge for the sharpness suite; edge AbsRel depends on it.
 SHARP_GAUGE = "scaleshift"
 
 # A6's regions, in report order. Every one is computed from GT depth and RGB
@@ -133,12 +132,18 @@ def ours_runner(ckpt, dev, tau=None, reset_every=0, bypass_temporal=False,
             if isinstance(b, TemporalBlock):
                 b.step = lambda tokens, mask, h, gate_mode="delta": (tokens, h)
 
+    eff = {}
+
     @torch.no_grad()
     def run(clip):
+        eff.setdefault("size", (getattr(model, "infer_size", None) or clip.shape[-2],
+                                getattr(model, "infer_size", None) or clip.shape[-1]))
         clip = clip[None].to(dev)
         if not reset_every:
             depths, masks = model.forward_clip(clip)
-            return depths[0], {"active": masks[:, 1:].mean().item()}
+            return depths[0], {"active": masks[:, 1:].mean().item()
+                              if masks.shape[1] > 1 else masks.mean().item(),
+                              "active_all": masks.mean().item()}
         state, depths, masks = None, [], []
         for t in range(clip.shape[1]):
             if t % reset_every == 0:
@@ -146,10 +151,12 @@ def ours_runner(ckpt, dev, tau=None, reset_every=0, bypass_temporal=False,
             d, state, info = model.step(clip[:, t], state)
             depths.append(d)
             masks.append(info["mask"])
+        masks = torch.stack(masks, 1)
         return (torch.stack(depths, 1)[0],
-                {"active": torch.stack(masks, 1)[:, 1:].mean().item()})
+                {"active": masks[:, 1:].mean().item() if masks.shape[1] > 1
+                           else masks.mean().item(), "active_all": masks.mean().item()})
 
-    return run, "depth", model, {}
+    return run, "depth", model, eff
 
 
 def da3_runner(name, dev, chunk=32):
@@ -237,7 +244,8 @@ def main():
                          "Default = the model's official one (A4's ceiling "
                          "row); pass the manifest size for the fair row.")
     ap.add_argument("--align", action="append", choices=list(MODES),
-                    help="repeatable; default all three")
+                    help="repeatable; default historical three GT-fit gauges. "
+                         "Use --align none for GT-unadjusted metric depth.")
     ap.add_argument("--per-frame", action="store_true",
                     help="fit the gauge on each frame instead of once per "
                          "clip. PLAN_ACC §1.3 asks for both: the clip-wide fit "
@@ -261,15 +269,25 @@ def main():
                     help="also score PLAN.md §3.2's sharpness suite on these "
                          "sealed clips, so P1 and P2 are measured on the same "
                          "clip set instead of on two different protocols. "
-                         "Alignment-free by construction, so it is computed "
-                         "once from the raw prediction, not per gauge.")
+                         "Computed after scaleshift alignment; edge AbsRel "
+                         "is not alignment-free.")
     ap.add_argument("--regions", action="store_true",
                     help="also break the error down by depth-edge band, "
                          "dynamic/static and near/mid/far (PLAN_ACC A6). "
                          "Costs a RAFT pass per clip.")
     ap.add_argument("--tag", default=None, help="name of the JSON dump")
+    ap.add_argument("--out-dir", type=Path, default=OUT)
+    ap.add_argument("--final-test", action="store_true",
+                    help="evaluate the reserved test only after model selection is frozen")
     ap.add_argument("--reps", type=int, default=10000, help="bootstrap draws")
     args = ap.parse_args()
+    role = check_final_test(args.manifest, args.final_test)
+    if args.per_frame and args.temporal:
+        ap.error("per-frame GT fitting removes temporal scale variation; use clip alignment for temporal metrics")
+    if args.sharp and SHARP_GAUGE not in (args.align or LEGACY_MODES):
+        ap.error("--sharp requires --align scaleshift (edge AbsRel is gauge-dependent)")
+    manifest_meta = json.loads(Path(args.manifest).read_text())
+    origin = provenance(args.model, args.manifest)
 
     dev = "cuda" if torch.cuda.is_available() else "cpu"
     kind, name = args.model.split(":", 1)
@@ -286,8 +304,10 @@ def main():
         sys.exit(f"unknown model kind {kind!r} (want ours:, hf: or da3:)")
     space = args.space or space
     n_par = sum(p.numel() for p in net.parameters()) / 1e6
-    modes = args.align or list(MODES)
-    gname = (lambda m: f"{m}/frame") if args.per_frame else (lambda m: m)
+    modes = list(dict.fromkeys(args.align or LEGACY_MODES))
+    if "none" in modes and space != "depth":
+        ap.error("--align none requires a metric-depth model; relative disparity has no calibrated metres")
+    gname = lambda m: f"{m}/frame" if args.per_frame and m != "none" else m
 
     sources = load_manifest(args.manifest)
     # "latest.pt" identifies nothing once three arms have one: name the run by
@@ -305,29 +325,39 @@ def main():
     sums = {m: {s: [] for s, _ in sources} for m in modes}
     reg = {m: {s: {} for s, _ in sources} for m in modes}
     sharp = {s: {} for s, _ in sources}
-    no_gt, active, t0 = 0, [], time.time()
+    no_gt, active, active_all, t0 = 0, [], [], time.time()
+    clip_ids = {s: [] for s, _ in sources}
 
     for src, ds in sources:
+        declared = [c for c in manifest_meta["clips"] if c["source"] == src]
         for i in range(len(ds)):
             clip, gt, valid = ds[i]
+            valid = (valid.bool() & torch.isfinite(gt) & (gt > 0)).float()
+            if not bool(valid.any()):
+                no_gt += 1
+                continue
+            gt = torch.where(valid.bool(), gt, torch.zeros_like(gt))
             pred, extra = run(clip)
+            c = declared[i]
+            clip_ids[src].append({"manifest_index_within_source": i,
+                                 "sequence": c.get("sequence"),
+                                 "first_rgb": c["pairs"][0][0]})
             # everything downstream on one device, and that device is the GPU:
             # the scorer's RAFT pass on CPU cost more than the models did
             clip, pred = clip.to(dev), pred.to(dev)
             gt, valid = gt.to(dev), valid.to(dev)
             active.append(extra["active"])
+            active_all.append(extra.get("active_all", extra["active"]))
             rmask = region_masks(clip, gt, valid) if args.regions else None
             for mode in modes:
                 a = align(pred, gt, valid, mode, space, args.per_frame)
                 if a is None:
-                    no_gt += 1
-                    continue
+                    raise RuntimeError("alignment unexpectedly rejected a clip with valid GT")
                 depth, info = a
                 sc = clip_scores(clip, depth, gt, valid,
                                  temporal=args.temporal)
                 if sc is None:
-                    no_gt += 1
-                    continue
+                    raise RuntimeError("scoring unexpectedly rejected a clip with valid GT")
                 fails[mode][src]["align"] += int(info["failed"])
                 fails[mode][src]["catastrophic"] += int(sc["absrel"] > 1.0)
                 sums[mode][src].append(sc.pop("_pooled"))
@@ -335,13 +365,9 @@ def main():
                 for k, v in sc.items():
                     per_clip[mode][src].setdefault(k, []).append(v)
                 if args.sharp and mode == SHARP_GAUGE:
-                    # on the ALIGNED depth, not the raw prediction: the shape
-                    # metrics are invariant to a scale+shift of disparity, so
-                    # this changes nothing for a metric model, but edge AbsRel
-                    # is not gauge-free and a relative baseline's raw output is
-                    # not metres at all -- scored raw, DA2 read grad_ratio 1.24
-                    # and DPT-Large edge AbsRel 6.15, which is a unit error
-                    # rather than a measurement
+                    # Score aligned depth in a declared gauge. Edge AbsRel
+                    # depends on the fit, and inversion/clamping can also
+                    # affect shape metrics; do not claim unconditional invariance.
                     g2 = gt.reshape(-1, 1, *gt.shape[-2:])
                     v2 = valid.reshape(-1, 1, *valid.shape[-2:])
                     for k, x in sharpness_scores(
@@ -358,6 +384,9 @@ def main():
             if (i + 1) % 50 == 0:
                 print(f"  {src} {i+1}/{len(ds)}", file=sys.stderr)
 
+    empty = [s for s, _ in sources if not clip_ids[s]]
+    if empty:
+        raise ValueError(f"no scorable GT clips for sources: {empty}; cannot form a balanced table")
     dt = time.time() - t0
     # each field tested against its OWN default: `tau=0` is the dense A5 arm
     # and is exactly the value a truthiness test would drop from the header
@@ -367,7 +396,7 @@ def main():
              + (f" keyframe_every={args.keyframe_every}"
                 if args.keyframe_every else ""))
     head = (f"{label} ({n_par:.1f}M) space={space}{mode5} "
-            f"infer_size={args.infer_size or 'official'}"
+            f"infer_size={args.infer_size or ('native' if kind == 'ours' else 'official')}"
             f"{'->' + 'x'.join(map(str, eff['size'])) if eff.get('size') else ''} "
             f"manifest={args.manifest} clips={sum(len(d) for _, d in sources)} "
             f"active={sum(active)/max(len(active),1)*100:.1f}% "
@@ -443,7 +472,7 @@ def main():
                 "overshoot")
         nan = float("nan")
         row = lambda d: "".join(f"{d.get(k, nan):>19.4f}" for k in keys)
-        lines.append("  sharpness (alignment-free, PLAN.md §3.2)")
+        lines.append(f"  sharpness (gauge={gname(SHARP_GAUGE)}; edge AbsRel is alignment-dependent)")
         lines.append(f"  {'source':<10}" + "".join(f"{k:>19}" for k in keys))
         for src, _ in sources:
             lines.append(f"  {src:<10}" + row(sharp_mean[src]))
@@ -452,9 +481,21 @@ def main():
              for k in keys}) + "\n")
 
     print("\n".join(lines))
-    OUT.mkdir(parents=True, exist_ok=True)
+    if provenance(args.model, args.manifest) != origin:
+        raise RuntimeError("checkpoint, config, manifest or evaluation code changed during this run")
+    out_dir = args.out_dir
+    out_dir.mkdir(parents=True, exist_ok=True)
     ren = {m: gname(m) for m in modes}
-    (OUT / f"{tag}.json").write_text(json.dumps({
+    (out_dir / f"{tag}.json").write_text(json.dumps({
+        "protocol_version": VERSION, "provenance": origin, "dataset_role": role,
+        "runtime_versions": runtime_versions(),
+        "evaluation_options": {k: str(v) if isinstance(v, Path) else v
+                               for k, v in vars(args).items()},
+        "device": dev, "parameter_dtype": str(next(net.parameters()).dtype),
+        "bootstrap_seed": 0,
+        "scoring_size": manifest_meta["size"], "temporal_computed": args.temporal,
+        "clip_ids": clip_ids,
+        "hf_revision": getattr(getattr(net, "config", None), "_commit_hash", None),
         "label": label, "model": args.model, "space": space,
         "infer_size": args.infer_size, "effective_size": eff.get("size"),
         "params_m": n_par,
@@ -469,10 +510,11 @@ def main():
         "pooled": {ren[m]: {s: pooled(sums[m][s]) for s, _ in sources}
                    for m in modes},
         "active": sum(active) / max(len(active), 1),
+        "active_all_frames": sum(active_all) / max(len(active_all), 1),
     }))
-    with open(OUT / "table.txt", "a") as f:
+    with open(out_dir / "table.txt", "a") as f:
         f.write("\n".join(lines) + "\n")
-    print(f"-> {OUT / f'{tag}.json'}\n-> {OUT / 'table.txt'}")
+    print(f"-> {out_dir / f'{tag}.json'}\n-> {out_dir / 'table.txt'}")
 
 
 if __name__ == "__main__":

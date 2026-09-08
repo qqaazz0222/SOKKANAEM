@@ -1,0 +1,138 @@
+{
+  "generator": {
+    "path": "/workspace/SOKKANAEM/scripts/paper_revision_report.py",
+    "bytes": 7962,
+    "sha256": "2732fbe09c6dec13c8d69384fa80fe2b9469b07208dc81a9f4dd9fe71940b665"
+  },
+  "post_hoc": true,
+  "inference_performed": false,
+  "inputs": [
+    {
+      "path": "paper/self-revision/r3/plan.md",
+      "bytes": 1941,
+      "sha256": "ef21f0f84fb4f7c05b7db1ceac61c003a95e4ea0b85c46f3440243487219e90e"
+    },
+    {
+      "path": "work_dirs/paper_closeout/final_complete.json",
+      "bytes": 621,
+      "sha256": "884acdda4be46ed0053a5ec2523554ed16c49f5755057c93cd4ce26334d63be3"
+    },
+    {
+      "path": "scripts/paper_closeout_report.py",
+      "bytes": 18348,
+      "sha256": "83df799a70736b4a3944678e6e8c7a3fa0ba34cbeb94de8b5f5b6b5bfa643d4f"
+    },
+    {
+      "path": "work_dirs/paper_closeout/final_contract.json",
+      "bytes": 1648952,
+      "sha256": "5ae9f91e47e5f6df31ecf42f01096659e78b1464f06bb5381611a233758f1681"
+    },
+    {
+      "path": "work_dirs/paper_closeout/final_L256.jsonl",
+      "bytes": 5041068,
+      "sha256": "4e225c53b1585a8339b8a66e3608b4e6ede5851b70a73aac2e4f8040f0394626"
+    },
+    {
+      "path": "work_dirs/paper_closeout/final_L8.jsonl",
+      "bytes": 12689600,
+      "sha256": "fa99e3a1c4b2a2445c3cce0a96be938daa29d60c0ff93e801644e73ca3d46090"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "paper/submission/tables/revision_scale_clips.csv",
+      "bytes": 478889,
+      "sha256": "cd18112ee6da64232b3111fdf7dbfb33ff362987297690424f2aa928149100f8"
+    },
+    {
+      "path": "paper/submission/tables/revision_scale_sequences.csv",
+      "bytes": 7821,
+      "sha256": "9f187d8374964fa45dc8febf15013b724c652d8c4fa3ba7489ea503ea5676f09"
+    },
+    {
+      "path": "paper/submission/tables/revision_scale_summary.csv",
+      "bytes": 7282,
+      "sha256": "c174eafa6218a11090dcf5736df78b7a70ab0c59c57b24e8c15b80a5c0561d2f"
+    },
+    {
+      "path": "paper/submission/revision_results.tex",
+      "bytes": 2663,
+      "sha256": "f8572875174a6b5c18856c7c42f366f10c99062282ddd0dd43025303dac669cb"
+    }
+  ],
+  "legacy_context": [
+    {
+      "path": "work_dirs/r1-ls1024.log",
+      "bytes": 5572,
+      "sha256": "bafba10862b25e4bbb7becde8daef5096ed1acd4dfcf36fe2d8e709a4548a939"
+    },
+    {
+      "path": "work_dirs/r1-nofallback.log",
+      "bytes": 23586,
+      "sha256": "a4d0d58811728c297102b3e9ee2ff3dec1d7dd234002662dbfdfb687a4e7acc8"
+    },
+    {
+      "path": "work_dirs/r2-bootstrap.log",
+      "bytes": 11859,
+      "sha256": "da1f8582f408ad418187a864e24a6f410b472db299acd1ad1f0bb8033324da27"
+    },
+    {
+      "path": "work_dirs/baselines/video-depth-anything-small-metric-28-4m-tum-l256.json",
+      "bytes": 498,
+      "sha256": "80650c5e90ab36f58d89953aeac591caec83ef9b47278858a483eed2c7d472b1"
+    },
+    {
+      "path": "work_dirs/baselines/video-depth-anything-small-metric-28-4m-bonn-l256.json",
+      "bytes": 2203,
+      "sha256": "5d59213dbb8e1fd74c375ea1c90da6e592bfb13bc398bf47e55104fb26c49d9d"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_L256K30.json",
+      "bytes": 3604,
+      "sha256": "95d2124435d8f694a8a7fc6d72e96bd06ce07318162ba53871a6f8232e133ac9"
+    },
+    {
+      "path": "scripts/eval_baseline_vda.py",
+      "bytes": 4473,
+      "sha256": "321bff699c57bf807c987d1da558183f0dd97b29a138189baffb6fbd69b1c2f9"
+    },
+    {
+      "path": "scripts/bootstrap_ci.py",
+      "bytes": 4925,
+      "sha256": "f7833114cfba1de5cb4afeb264ecf6baaa6e00f36ec67d77fd68c223eec9b962"
+    },
+    {
+      "path": "scripts/train.py",
+      "bytes": 35700,
+      "sha256": "a864c27259210b9a2b9b19661b997288c7fc8686904ea55751fbb95aafa0c06c"
+    },
+    {
+      "path": "sokkanaem/data.py",
+      "bytes": 19420,
+      "sha256": "5acdd72fc89a981ad939b4fcc33e90fef3cb306d6000df4091db26dbe99926ea"
+    },
+    {
+      "path": "sokkanaem/schedule.py",
+      "bytes": 1185,
+      "sha256": "4f34cc34051d12e92a13ee6b45e084fb6d3b88fb6f6c1dfbe1e9e4b28fd48ae4"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/config.toml",
+      "bytes": 1681,
+      "sha256": "e2f127e061e8ca7fbb32b4e7e1e1e01d13c4cb460983f36f71c04e92b8d743ff"
+    }
+  ],
+  "inspected_external_sources": [
+    {
+      "path": "/home/hyunsu/checkouts/Video-Depth-Anything/video_depth_anything/video_depth.py",
+      "bytes": 6712,
+      "sha256": "208e882d60a41434b3a0d9935a7025b01cce0756c17b3d889c6db0c4c945eb29"
+    },
+    {
+      "path": "/home/hyunsu/checkouts/Video-Depth-Anything/video_depth_anything/motion_module/motion_module.py",
+      "bytes": 12744,
+      "sha256": "73d6a9cee40681532ae2603dd426405e840dc5c592a313005fa367f6fe4c69e8"
+    }
+  ],
+  "legacy_linkage_verified": false
+}

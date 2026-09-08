@@ -1,0 +1,17 @@
+{
+  "phase": "seeds",
+  "smoke": false,
+  "verified_additional_records": 174,
+  "results": [
+    {
+      "path": "work_dirs/paper_study_9_11/seeds_L8.jsonl",
+      "bytes": 3066191,
+      "sha256": "5384520b3fb0f754dee2e5ec570f6bb8d5e1569384c40a5a9adee4ffe0dd23d9"
+    },
+    {
+      "path": "work_dirs/paper_study_9_11/seeds_L256.jsonl",
+      "bytes": 743116,
+      "sha256": "05736a1a0ba4dd7a89cbc343260928edcf206d7f28073de8052666c56a3b5136"
+    }
+  ]
+}

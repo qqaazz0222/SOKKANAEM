@@ -1,5 +1,10 @@
 # SOKKANAEM 정확도 우선 고도화 계획
 
+> 2026-09-06 논문화 주의: 아래 개발 게이트는 저널의 채택 기준이 아니다. 특히 §3.5의
+> median 보정을 deployment metric 정확도로 간주하지 않는다. 향후 논문용 평가는
+> [paper/PROTOCOL.md](paper/PROTOCOL.md)의 no-GT-fit / scale-aligned / relative-shape
+> 분리 계약을 따른다. 기존 holdout은 개발 검증이며 최종 테스트가 아니다.
+
 > 목표: 파라미터 수와 처리 효율의 일부를 정확도에 재투자하여, 최종 깊이 맵이 최소한
 > Depth Anything V2 Small(DA2-small) 수준의 형상 정확도와 경계 선명도를 갖도록 한다.
 >

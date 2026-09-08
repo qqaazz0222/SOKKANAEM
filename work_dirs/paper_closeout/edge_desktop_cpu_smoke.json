@@ -1,0 +1,378 @@
+{
+  "environment": {
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "python": "3.11.15 | packaged by conda-forge | (main, Jun 11 2026, 03:34:02) [GCC 14.3.0]",
+    "board": null,
+    "jetson_release": null,
+    "meminfo": "MemTotal:       64594844 kB\nMemFree:         8481328 kB\nMemAvailable:   57990648 kB\nBuffers:         2076104 kB\nCached:         42821744 kB\nSwapCached:           80 kB\nActive:          7818632 kB\nInactive:       41307640 kB\nActive(anon):    3940684 kB\nInactive(anon):   316952 kB\nActive(file):    3877948 kB\nInactive(file): 40990688 kB\nUnevictable:       27452 kB\nMlocked:           27452 kB\nSwapTotal:       8388604 kB\nSwapFree:        8383740 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              3056 kB\nWriteback:             0 kB\nAnonPages:       4255808 kB\nMapped:          1657292 kB\nShmem:             20452 kB\nKReclaimable:    5366228 kB\nSlab:            5915868 kB\nSReclaimable:    5366228 kB\nSUnreclaim:       549640 kB\nKernelStack:       23536 kB\nPageTables:        62164 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    40686024 kB\nCommitted_AS:   15505520 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      120844 kB\nVmallocChunk:          0 kB\nPercpu:            29568 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:      6144 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:     2205068 kB\nDirectMap2M:    29057024 kB\nDirectMap1G:    37748736 kB",
+    "thermal": {
+      "/sys/class/thermal/thermal_zone2/temp": "51000",
+      "/sys/class/thermal/thermal_zone0/temp": "27800",
+      "/sys/class/thermal/thermal_zone1/temp": null
+    },
+    "cpu_governors": {
+      "/sys/devices/system/cpu/cpu21/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu28/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu18/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu26/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu16/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu24/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu14/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu22/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu12/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu30/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu20/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu29/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu19/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu27/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu17/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu25/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu15/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu23/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu13/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor": "powersave",
+      "/sys/devices/system/cpu/cpu31/cpufreq/scaling_governor": "powersave"
+    },
+    "torch": "2.8.0+cu128",
+    "numpy": "2.4.6",
+    "pillow": "12.3.0",
+    "cuda": "12.8",
+    "device": "cpu",
+    "threads": 2,
+    "gpu": null,
+    "scan": "reference_chunked",
+    "precision": "FP32 eager, TF32 off"
+  },
+  "manifest_sha256": "c41c61c4b23a71bb33c62a09fcd62b7fae7dc9c83d88cd23e74f891d8b27e8d9",
+  "smoke": true,
+  "boundary": "warm-cache PNG file read/decode/crop/normalize/transfer/model/CPU output; excludes load/hash/telemetry",
+  "warmup": 0,
+  "repeats": 1,
+  "results": [
+    {
+      "clip": "development:0",
+      "sequence": "rgbd_dataset_freiburg3_walking_static",
+      "model": "sparse_k30",
+      "repeat": 0,
+      "frame_ms": [
+        431.89796901424415,
+        13.005396001972258,
+        12.781330005964264,
+        12.831215979531407,
+        38.398403994506225,
+        70.57219397393055,
+        13.394924986641854,
+        12.840526993386447
+      ],
+      "mean_ms": 75.71524511877215,
+      "p50_ms": 13.200160494307056,
+      "p95_ms": 305.43394775013417,
+      "prediction_sha256": "fd9207751ab431daef76b59c17cd594028444d4465240b7c8057e6d9be93d1fa",
+      "telemetry": [
+        {
+          "keyframe": true,
+          "active": 1.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": false,
+          "active": 0.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": false,
+          "active": 0.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": false,
+          "active": 0.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": false,
+          "active": 0.0703125,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": false,
+          "active": 0.11328125,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": false,
+          "active": 0.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": false,
+          "active": 0.0,
+          "dense_fallback": false
+        }
+      ],
+      "peak_cuda_allocated_bytes": null,
+      "before": {
+        "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+        "python": "3.11.15 | packaged by conda-forge | (main, Jun 11 2026, 03:34:02) [GCC 14.3.0]",
+        "board": null,
+        "jetson_release": null,
+        "meminfo": "MemTotal:       64594844 kB\nMemFree:         8207452 kB\nMemAvailable:   57716784 kB\nBuffers:         2076108 kB\nCached:         42821740 kB\nSwapCached:           80 kB\nActive:          8114152 kB\nInactive:       41307652 kB\nActive(anon):    4236204 kB\nInactive(anon):   316952 kB\nActive(file):    3877948 kB\nInactive(file): 40990700 kB\nUnevictable:       27452 kB\nMlocked:           27452 kB\nSwapTotal:       8388604 kB\nSwapFree:        8383740 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              3056 kB\nWriteback:             0 kB\nAnonPages:       4551384 kB\nMapped:          1940516 kB\nShmem:             20452 kB\nKReclaimable:    5366228 kB\nSlab:            5915864 kB\nSReclaimable:    5366228 kB\nSUnreclaim:       549636 kB\nKernelStack:       23584 kB\nPageTables:        63516 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    40686024 kB\nCommitted_AS:   16365332 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      120860 kB\nVmallocChunk:          0 kB\nPercpu:            29568 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:      6144 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:     2205068 kB\nDirectMap2M:    29057024 kB\nDirectMap1G:    37748736 kB",
+        "thermal": {
+          "/sys/class/thermal/thermal_zone2/temp": "63000",
+          "/sys/class/thermal/thermal_zone0/temp": "27800",
+          "/sys/class/thermal/thermal_zone1/temp": null
+        },
+        "cpu_governors": {
+          "/sys/devices/system/cpu/cpu21/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu28/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu18/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu26/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu16/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu24/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu14/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu22/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu12/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu30/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu20/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu29/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu19/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu27/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu17/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu25/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu15/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu23/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu13/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu31/cpufreq/scaling_governor": "powersave"
+        }
+      },
+      "after": {
+        "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+        "python": "3.11.15 | packaged by conda-forge | (main, Jun 11 2026, 03:34:02) [GCC 14.3.0]",
+        "board": null,
+        "jetson_release": null,
+        "meminfo": "MemTotal:       64594844 kB\nMemFree:         8022188 kB\nMemAvailable:   57534384 kB\nBuffers:         2076112 kB\nCached:         42824636 kB\nSwapCached:           80 kB\nActive:          8208380 kB\nInactive:       41308396 kB\nActive(anon):    4328312 kB\nInactive(anon):   316952 kB\nActive(file):    3880068 kB\nInactive(file): 40991444 kB\nUnevictable:       27452 kB\nMlocked:           27452 kB\nSwapTotal:       8388604 kB\nSwapFree:        8383740 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              3200 kB\nWriteback:             0 kB\nAnonPages:       4643644 kB\nMapped:          1981448 kB\nShmem:             20460 kB\nKReclaimable:    5366228 kB\nSlab:            5915888 kB\nSReclaimable:    5366228 kB\nSUnreclaim:       549660 kB\nKernelStack:       23664 kB\nPageTables:        65016 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    40686024 kB\nCommitted_AS:   16495248 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      120812 kB\nVmallocChunk:          0 kB\nPercpu:            29568 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:      6144 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:     2205068 kB\nDirectMap2M:    29057024 kB\nDirectMap1G:    37748736 kB",
+        "thermal": {
+          "/sys/class/thermal/thermal_zone2/temp": "65000",
+          "/sys/class/thermal/thermal_zone0/temp": "27800",
+          "/sys/class/thermal/thermal_zone1/temp": null
+        },
+        "cpu_governors": {
+          "/sys/devices/system/cpu/cpu21/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu28/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu18/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu26/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu16/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu24/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu14/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu22/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu12/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu30/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu20/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu29/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu19/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu27/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu17/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu25/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu15/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu23/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu13/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu31/cpufreq/scaling_governor": "powersave"
+        }
+      }
+    },
+    {
+      "clip": "development:0",
+      "sequence": "rgbd_dataset_freiburg3_walking_static",
+      "model": "dense_carry",
+      "repeat": 0,
+      "frame_ms": [
+        380.6370660022367,
+        371.70741899171844,
+        366.7179289914202,
+        359.63453401927836,
+        361.9961299991701,
+        361.9286559987813,
+        359.1969739936758,
+        365.0924399844371
+      ],
+      "mean_ms": 365.86389349758974,
+      "p50_ms": 363.5442849918036,
+      "p95_ms": 377.5116895485553,
+      "prediction_sha256": "fae1f488d66860e0e32d28b5dac8c7b45f3a3e9872e5389c095ca64877f87ca7",
+      "telemetry": [
+        {
+          "keyframe": true,
+          "active": 1.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": true,
+          "active": 1.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": true,
+          "active": 1.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": true,
+          "active": 1.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": true,
+          "active": 1.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": true,
+          "active": 1.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": true,
+          "active": 1.0,
+          "dense_fallback": false
+        },
+        {
+          "keyframe": true,
+          "active": 1.0,
+          "dense_fallback": false
+        }
+      ],
+      "peak_cuda_allocated_bytes": null,
+      "before": {
+        "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+        "python": "3.11.15 | packaged by conda-forge | (main, Jun 11 2026, 03:34:02) [GCC 14.3.0]",
+        "board": null,
+        "jetson_release": null,
+        "meminfo": "MemTotal:       64594844 kB\nMemFree:         8025812 kB\nMemAvailable:   57538008 kB\nBuffers:         2076112 kB\nCached:         42824636 kB\nSwapCached:           80 kB\nActive:          8199244 kB\nInactive:       41308396 kB\nActive(anon):    4319176 kB\nInactive(anon):   316952 kB\nActive(file):    3880068 kB\nInactive(file): 40991444 kB\nUnevictable:       27452 kB\nMlocked:           27452 kB\nSwapTotal:       8388604 kB\nSwapFree:        8383740 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:              3200 kB\nWriteback:             0 kB\nAnonPages:       4634364 kB\nMapped:          1981448 kB\nShmem:             20460 kB\nKReclaimable:    5366228 kB\nSlab:            5915888 kB\nSReclaimable:    5366228 kB\nSUnreclaim:       549660 kB\nKernelStack:       23664 kB\nPageTables:        65184 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    40686024 kB\nCommitted_AS:   16486072 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      120812 kB\nVmallocChunk:          0 kB\nPercpu:            29568 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:      6144 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:     2205068 kB\nDirectMap2M:    29057024 kB\nDirectMap1G:    37748736 kB",
+        "thermal": {
+          "/sys/class/thermal/thermal_zone2/temp": "64000",
+          "/sys/class/thermal/thermal_zone0/temp": "27800",
+          "/sys/class/thermal/thermal_zone1/temp": null
+        },
+        "cpu_governors": {
+          "/sys/devices/system/cpu/cpu21/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu28/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu18/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu26/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu16/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu24/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu14/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu22/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu12/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu30/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu20/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu29/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu19/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu27/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu17/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu25/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu15/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu23/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu13/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu31/cpufreq/scaling_governor": "powersave"
+        }
+      },
+      "after": {
+        "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+        "python": "3.11.15 | packaged by conda-forge | (main, Jun 11 2026, 03:34:02) [GCC 14.3.0]",
+        "board": null,
+        "jetson_release": null,
+        "meminfo": "MemTotal:       64594844 kB\nMemFree:         7771416 kB\nMemAvailable:   57357972 kB\nBuffers:         2077268 kB\nCached:         42896240 kB\nSwapCached:           80 kB\nActive:          8333628 kB\nInactive:       41378092 kB\nActive(anon):    4450576 kB\nInactive(anon):   316952 kB\nActive(file):    3883052 kB\nInactive(file): 41061140 kB\nUnevictable:       27452 kB\nMlocked:           27452 kB\nSwapTotal:       8388604 kB\nSwapFree:        8383740 kB\nZswap:                 0 kB\nZswapped:              0 kB\nDirty:             50680 kB\nWriteback:             0 kB\nAnonPages:       4765932 kB\nMapped:          1986200 kB\nShmem:             20456 kB\nKReclaimable:    5367908 kB\nSlab:            5917644 kB\nSReclaimable:    5367908 kB\nSUnreclaim:       549736 kB\nKernelStack:       23648 kB\nPageTables:        65268 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:    40686024 kB\nCommitted_AS:   16684244 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:      120892 kB\nVmallocChunk:          0 kB\nPercpu:            29568 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:      6144 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:         0 kB\nFilePmdMapped:         0 kB\nUnaccepted:            0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:     2205068 kB\nDirectMap2M:    29057024 kB\nDirectMap1G:    37748736 kB",
+        "thermal": {
+          "/sys/class/thermal/thermal_zone2/temp": "64000",
+          "/sys/class/thermal/thermal_zone0/temp": "27800",
+          "/sys/class/thermal/thermal_zone1/temp": null
+        },
+        "cpu_governors": {
+          "/sys/devices/system/cpu/cpu21/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu11/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu9/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu7/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu28/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu18/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu5/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu26/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu16/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu3/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu24/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu14/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu1/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu22/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu12/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu30/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu20/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu10/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu8/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu29/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu19/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu6/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu27/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu17/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu4/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu25/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu15/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu2/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu23/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu13/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu0/cpufreq/scaling_governor": "powersave",
+          "/sys/devices/system/cpu/cpu31/cpufreq/scaling_governor": "powersave"
+        }
+      }
+    }
+  ],
+  "energy_measured": false,
+  "energy_j_per_frame": null,
+  "accuracy_evaluated": false,
+  "caveat": "No GT here. Compare quality separately on this runtime before any accuracy-preserving speed claim."
+}

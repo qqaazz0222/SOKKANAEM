@@ -1,0 +1,10 @@
+{
+  "phase": "accuracy",
+  "verified_file_records": 7838,
+  "smoke": false,
+  "result": {
+    "path": "work_dirs/paper_study_5_8/accuracy.jsonl",
+    "bytes": 13686148,
+    "sha256": "b3130490c4a3d61f9ac14aea96987de6c46c6359d12a8f7f57bf7a8975fe222b"
+  }
+}

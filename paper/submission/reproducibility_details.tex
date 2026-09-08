@@ -1,0 +1,82 @@
+\subsection{Checkpoint, training record and interventions}
+The archived effective configuration beside the seed-0 v11 checkpoint records
+8000 final-stage steps, clip length 24, batch size 2, image size 256, learning
+rate $3\times10^{-4}$, 1000 warmup steps, gradient-norm clipping at 1 and EMA
+decay 0.999. The checkpoint resumes partially from v10. The recorded loss
+weights are multiscale gradient 0.5, normal 0.05, warp 2, spread 0.5, edge 2,
+and bin classification 0.2. Teacher and feature-distillation weights are zero
+in this stage only. Training uses random masks with maximum skip fraction 0.5;
+the image-change detector is not used to generate these training masks.
+
+The archived training implementation uses AdamW (default weight decay 0.01),
+warmup followed by cosine learning-rate decay, and source-balanced weighted
+sampling over TUM, Bonn, VKITTI2, TartanAir2 and PointOdyssey. Clip-consistent
+augmentation comprises zoom/crop with scale 0.55--1.0, horizontal flip with
+probability 0.5, brightness/contrast factors 0.75--1.3, saturation 0.7--1.4,
+and gamma 0.8--1.25. The effective v11
+sidecar records augmentation enabled and the dataset paths, but not all of
+these sampler/optimizer implementation details or the RNG trajectory.
+These are reproduction settings read from the archived implementation, not
+an independently reconstructed historical run. The sidecar's recorded source
+commit is \texttt{0a3f5e06abbf448898a65c0a42c53534531912e5}.
+The four-stage ancestry, rather than the earlier three-stage summary, must be
+used when describing training cost. Full-training seed variation remains unknown.
+
+Only one reference operating configuration is selected: K30, thresholds
+0.05/0.025, fallback 0.4, both caches on and GMC off. K5, dense carry, dense
+reset and output hold are frozen diagnostic controls, not post-test deployment
+recommendations. The development cache/readout interventions are available in
+the study-5--8 tables. Historical threshold/fallback sweeps remain in the older
+draft's Table 9, not a newly validated frozen-protocol sensitivity panel. None
+of these should be mixed with final-test scores. A token-drop control zeroes
+the inactive temporal residual contribution (retaining the identity bypass
+and frozen hidden state); it is not equivalent to dropping input
+video frames. No universal accuracy gain over that control is claimed.
+
+\subsection{Temporal-score equations and masking}
+Let $D_t$ be depth after the declared clip gauge and $G_t$ ground truth.
+RAFT Small uses RGB mapped from $[0,1]$ to $[-1,1]$ at the common evaluation
+resolution and its final refinement output, with the default pretrained
+weights resolved by the frozen dependency record. Flow maps the current
+frame to the preceding frame. Let $W_t$ warp that preceding frame with
+nearest-neighbor sampling, border padding and aligned grid corners.
+The common mask $m_t$ is the product of the in-bounds indicator, current
+GT validity and warped previous GT validity. There is no forward--backward
+flow-consistency or semantic occlusion filter. With $N_m=\max(1,\sum_{t,i}m_{t,i})$,
+\begin{align}
+ \mathrm{OPW}&=\frac{1}{N_m}\sum_{t,i}m_{t,i}
+  \frac{|(W_tD_{t-1})_i-D_{t,i}|}{\max(G_{t,i},10^{-6})},\\
+ \mathrm{TCE}&=\frac{1}{N_m}\sum_{t,i}m_{t,i}
+  \frac{|(W_tD_{t-1})_i-D_{t,i}-(W_tG_{t-1})_i+G_{t,i}|}
+       {\max(G_{t,i},10^{-6})}.
+\end{align}
+Both are dimensionless. Raw temporal delta is the mean absolute consecutive
+depth difference over all pixels, without warping or a GT-validity mask,
+after the declared clip alignment; it has depth units and is not itself a
+ground-truth temporal-accuracy measure. Temporal scores are not reported after
+per-frame fitting, which would change the temporal signal. All code-level
+clamps and invalid-fit conventions remain those of the frozen scorer.
+
+\subsection{Memory, edge evidence and portability}
+For $N$ independent streams, persistent storage is $W+NS$, before input/output
+buffers, temporary activations and allocator overhead. The native FP32 weights
+occupy about 15.968 MiB; K30 state plus caches occupies 13.501 MiB per stream,
+versus 12.000 MiB for dense carry without output caches. This is not peak VRAM,
+and inactive states are still densely allocated. Fewer parameters or updates
+therefore do not by themselves establish lower latency or multi-stream memory.
+
+Historical Nano Developer Kit B01 logs cover user-confirmed 5 W and 10 W modes,
+but use a reference scan, fixed-ratio activity and repeated synthetic inputs.
+They are not the fused desktop path or the measured PNG-to-depth pipeline.
+The power source is module VDD\_IN, not whole-system wall power. Missing
+historical weight/code linkage and independent power repetitions prevent
+those logs from establishing final-model real-video energy savings. Their
+separate audit is supplied without a quantitative edge claim in this paper.
+
+The private package includes source, derived scores, manifests, configuration
+and native weights; original media and third-party baseline weights require
+separate authorized acquisition. Frozen paths may need a versioned relocation
+manifest on another machine. Full clean-machine training/inference reproduction
+and independent human verification have not been performed. The complete
+40-item internal-review response is provided separately; partial and withdrawn
+items must not be read as experimentally resolved.

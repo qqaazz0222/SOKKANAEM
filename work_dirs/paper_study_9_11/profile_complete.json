@@ -1,0 +1,12 @@
+{
+  "phase": "profile",
+  "smoke": false,
+  "verified_additional_records": 174,
+  "results": [
+    {
+      "path": "work_dirs/paper_study_9_11/profile.jsonl",
+      "bytes": 5430688,
+      "sha256": "05037f09d1a013ecb7911b12881f1707e6efc2af34b6d678b9ff90501289233a"
+    }
+  ]
+}

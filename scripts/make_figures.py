@@ -583,11 +583,11 @@ def fig_deltagate():
     gat = Box(500, 110, 150, 64, "Δ-gating", ["", "Δ̃ = M · Δ"], "#eef5f2",
               TEAL, title_colour=TEAL)
     act = Box(706, 52, 158, 74, "M = 1  changed",
-              ["Ā = exp(ΔA),  B̄ ≠ 0",
+              ["Ā = exp(ΔA),  B̄ = ΔB",
                "h(t) = Ā h(t-1) + B̄ x(t)", "computed"], "#f7f7f7")
     sta = Box(706, 176, 158, 74, "M = 0  static",
               ["Ā = I,   B̄ = 0",
-               "h(t) = h(t-1)  exactly", "computation skipped"], "#eef5f2",
+               "h(t) = h(t-1)  exactly", "state update skipped"], "#eef5f2",
               TEAL, title_colour=TEAL)
     o.append(arrow(fr1.right(), (172, 143), mid=("x", 160)))
     o.append(arrow(fr2.right(), (172, 143), mid=("x", 160)))

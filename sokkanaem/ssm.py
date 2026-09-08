@@ -5,12 +5,16 @@ style): within a chunk the recurrence is closed-form via pairwise decay
 factors exp(Lcum_i − Lcum_j), i ≥ j — exponents are always ≤ 0 (A < 0,
 Δ ≥ 0), so this is numerically stable with no clamping. Chunks carry the
 state sequentially, so the Python loop runs L/CHUNK times instead of L.
-The math is exact — identical to the step-by-step recurrence.
+In real arithmetic the scan equals the implemented step-by-step recurrence;
+floating-point regrouping can introduce rounding differences.
 
-Discretization (Mamba simplified ZOH):
+Discretization (exponential transition, first-order input approximation):
     Ābar = exp(Δ · A),  B̄x = Δ · B · x
     h_i  = Ābar_i * h_{i-1} + B̄x_i
 Gating: Δ̃ = mask · Δ.  mask=0 ⇒ Ābar=1, B̄x=0 ⇒ h_i = h_{i-1} exactly.
+The exact ZOH input is integral_0^Δ exp(s A) ds Bx, not Δ Bx. Both vanish
+at Δ=0; identity preservation does not imply exact active-input integration
+or equality of sparse outputs with an ungated dense model.
 """
 import math
 import torch

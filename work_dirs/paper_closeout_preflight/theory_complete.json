@@ -1,0 +1,20 @@
+{
+  "role": "development_diagnostic",
+  "frames": 1024,
+  "final_test_used": false,
+  "result": {
+    "path": "work_dirs/paper_closeout/theory_dev.jsonl",
+    "bytes": 486644,
+    "sha256": "96ace944523008100d3523d82d1b81a38cdcbbf46be99605332b218f0db8feb7"
+  },
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/paper_closeout_study.py",
+    "bytes": 13843,
+    "sha256": "7c18099d01169acd021a9758e8fd950dcccdafe92156f0bba63dbd4665686754"
+  },
+  "plan": {
+    "path": "paper/CLOSEOUT_PLAN.md",
+    "bytes": 5137,
+    "sha256": "e38531ad6da584b7a95f81e152dd209ecd2978ebbe0092140eb860cce99c44df"
+  }
+}

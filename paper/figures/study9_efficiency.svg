@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="570" viewBox="0 0 980 570">
+<title>Development operating points: matched 1024 frames, PNG-to-CPU-depth FP32 eager</title>
+<rect width="980" height="570" fill="white"/>
+<g font-family="Arial,sans-serif" font-size="12" fill="#222">
+<text x="70" y="26" font-size="17">Matched development quality and pipeline latency</text>
+<path d="M70.0,55v385 M70,440.0h780" fill="none" stroke="#ddd"/>
+<text x="70.0" y="460" text-anchor="middle">0.0</text>
+<text x="62" y="444.0" text-anchor="end">0.00</text>
+<path d="M226.0,55v385 M70,363.0h780" fill="none" stroke="#ddd"/>
+<text x="226.0" y="460" text-anchor="middle">3.2</text>
+<text x="62" y="367.0" text-anchor="end">0.04</text>
+<path d="M382.0,55v385 M70,286.0h780" fill="none" stroke="#ddd"/>
+<text x="382.0" y="460" text-anchor="middle">6.4</text>
+<text x="62" y="290.0" text-anchor="end">0.09</text>
+<path d="M538.0,55v385 M70,209.0h780" fill="none" stroke="#ddd"/>
+<text x="538.0" y="460" text-anchor="middle">9.5</text>
+<text x="62" y="213.0" text-anchor="end">0.13</text>
+<path d="M694.0,55v385 M70,132.0h780" fill="none" stroke="#ddd"/>
+<text x="694.0" y="460" text-anchor="middle">12.7</text>
+<text x="62" y="136.0" text-anchor="end">0.17</text>
+<path d="M850.0,55v385 M70,55.0h780" fill="none" stroke="#ddd"/>
+<text x="850.0" y="460" text-anchor="middle">15.9</text>
+<text x="62" y="59.0" text-anchor="end">0.21</text>
+<circle cx="444.37" cy="163.07" r="5" fill="#0077bb"><title>sparse_k5</title></circle>
+<path d="M444.37,163.07L456.37,150.07" stroke="#0077bb" stroke-width="0.6"/>
+<text x="452.37" y="155.07" fill="#0077bb">1</text>
+<circle cx="441.59" cy="162.27" r="5" fill="#0077bb"><title>sparse_k10</title></circle>
+<path d="M441.59,162.27L429.59,149.27" stroke="#0077bb" stroke-width="0.6"/>
+<text x="425.59" y="154.27" fill="#0077bb">2</text>
+<circle cx="437.48" cy="145.86" r="5" fill="#0077bb"><title>sparse_k30</title></circle>
+<path d="M437.48,145.86L449.48,132.86" stroke="#0077bb" stroke-width="0.6"/>
+<text x="445.48" y="137.86" fill="#0077bb">3</text>
+<circle cx="468.94" cy="134.82" r="5" fill="#0077bb"><title>sparse_k60</title></circle>
+<path d="M468.94,134.82L480.94,121.82" stroke="#0077bb" stroke-width="0.6"/>
+<text x="476.94" y="126.82" fill="#0077bb">4</text>
+<circle cx="438.68" cy="148.16" r="5" fill="#0077bb"><title>dense_carry</title></circle>
+<path d="M438.68,148.16L404.68,135.16" stroke="#0077bb" stroke-width="0.6"/>
+<text x="400.68" y="140.16" fill="#0077bb">5</text>
+<circle cx="438.61" cy="136.20" r="5" fill="#0077bb"><title>dense_reset</title></circle>
+<path d="M438.61,136.20L426.61,123.20" stroke="#0077bb" stroke-width="0.6"/>
+<text x="422.61" y="128.20" fill="#0077bb">6</text>
+<circle cx="419.32" cy="120.87" r="5" fill="#0077bb"><title>output_hold</title></circle>
+<path d="M419.32,120.87L407.32,107.87" stroke="#0077bb" stroke-width="0.6"/>
+<text x="403.32" y="112.87" fill="#0077bb">7</text>
+<circle cx="489.39" cy="130.56" r="5" fill="#0077bb"><title>gmc_k30</title></circle>
+<path d="M489.39,130.56L501.39,117.56" stroke="#0077bb" stroke-width="0.6"/>
+<text x="497.39" y="122.56" fill="#0077bb">8</text>
+<circle cx="523.69" cy="110.75" r="5" fill="#cc3311"><title>da2_196</title></circle>
+<path d="M523.69,110.75L535.69,97.75" stroke="#cc3311" stroke-width="0.6"/>
+<text x="531.69" y="102.75" fill="#cc3311">9</text>
+<circle cx="540.71" cy="124.03" r="5" fill="#cc3311"><title>da2_256</title></circle>
+<path d="M540.71,124.03L556.71,111.03" stroke="#cc3311" stroke-width="0.6"/>
+<text x="548.71" y="116.03" fill="#cc3311">10</text>
+<circle cx="704.38" cy="122.86" r="5" fill="#cc3311"><title>da2_350</title></circle>
+<path d="M704.38,122.86L720.38,109.86" stroke="#cc3311" stroke-width="0.6"/>
+<text x="712.38" y="114.86" fill="#cc3311">11</text>
+<circle cx="779.09" cy="113.24" r="5" fill="#cc3311"><title>da2_518</title></circle>
+<path d="M779.09,113.24L795.09,100.24" stroke="#cc3311" stroke-width="0.6"/>
+<text x="787.09" y="105.24" fill="#cc3311">12</text>
+<circle cx="554.21" cy="141.95" r="5" fill="#009988"><title>midas_192</title></circle>
+<path d="M554.21,141.95L570.21,128.95" stroke="#009988" stroke-width="0.6"/>
+<text x="562.21" y="133.95" fill="#009988">13</text>
+<circle cx="532.72" cy="144.67" r="5" fill="#009988"><title>midas_256</title></circle>
+<path d="M532.72,144.67L548.72,131.67" stroke="#009988" stroke-width="0.6"/>
+<text x="540.72" y="136.67" fill="#009988">14</text>
+<circle cx="638.67" cy="90.00" r="5" fill="#009988"><title>midas_384</title></circle>
+<path d="M638.67,90.00L654.67,77.00" stroke="#009988" stroke-width="0.6"/>
+<text x="646.67" y="82.00" fill="#009988">15</text>
+<text x="420" y="484" text-anchor="middle">PNG-file to CPU output, mean ms/frame (lower is better)</text>
+<text x="20" y="240" transform="rotate(-90 20 240)" text-anchor="middle">Clip scale-shift AbsRel (lower is better)</text>
+<text x="70" y="515">Blue: native; red: DA2 Small; green: MiDaS Small. IDs map to the report table.</text>
+<text x="70" y="541">Equal-source means; same 4 x 256 frames. Different input resolutions are explicit operating points.</text>
+</g></svg>

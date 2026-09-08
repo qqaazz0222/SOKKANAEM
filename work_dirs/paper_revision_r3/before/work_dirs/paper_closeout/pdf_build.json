@@ -1,0 +1,66 @@
+{
+  "pdf": {
+    "path": "paper/submission/manuscript.pdf",
+    "bytes": 115152,
+    "sha256": "bece701d45311276eb97e4c27bebcf5c7a642433ff6b56a9aebb5b80d7ee1361"
+  },
+  "log": {
+    "path": "paper/submission/manuscript.log",
+    "bytes": 44474,
+    "sha256": "4b7f08e9e402b8830978692f4d94da47f7f53e76045511128b12822127f1be18"
+  },
+  "tools": [
+    {
+      "path": "work_dirs/paper_tools/ghostscript/bin/gs",
+      "bytes": 28859864,
+      "sha256": "07ee7676acf5e8ec0f4ede99e9804f4f07e2e7b286fcffd19fe172c4b1c76a06"
+    },
+    {
+      "path": "work_dirs/paper_tools/tectonic-0.15.0/tectonic",
+      "bytes": 37185032,
+      "sha256": "4df19452c202c5bef9f7c7e4a01a3f2b9d5199f0a1f73b70b4fe1bffbc9837f6"
+    }
+  ],
+  "source": [
+    {
+      "path": "paper/submission/author_details.tex",
+      "bytes": 351,
+      "sha256": "758bad83ebac77b2c58c067567581d052e3a4d41a4d43723d1d427971ba56c0b"
+    },
+    {
+      "path": "paper/submission/generated_macros.tex",
+      "bytes": 131,
+      "sha256": "55d1c131beed2675d85cd5150ffce1c2206ff770713738f6221e7cbe367c096c"
+    },
+    {
+      "path": "paper/submission/generated_results.tex",
+      "bytes": 4884,
+      "sha256": "69e39456ce7e09e342087e5c10cd31a0ff9970573c1cb11784a50936e53e1011"
+    },
+    {
+      "path": "paper/submission/manuscript.tex",
+      "bytes": 18144,
+      "sha256": "25fb6077ff87892bc94a41833e64bea07dead808d1eb6e5b354e189c1b8d858a"
+    },
+    {
+      "path": "paper/submission/theory_appendix.tex",
+      "bytes": 12416,
+      "sha256": "4253d1c5edf218995c3cad082f478c3c3ef5d8b59bb1dead61c958445baecf0c"
+    }
+  ],
+  "converted_logos": [
+    {
+      "path": "paper/submission/converted/logo-mdpi.pdf",
+      "bytes": 12936,
+      "sha256": "298dbdeecb5143dcc1e9098c690fa2073ccd0d1046087590bdf9c5f6b956fc89"
+    },
+    {
+      "path": "paper/submission/converted/logo-updates.pdf",
+      "bytes": 15235,
+      "sha256": "ad17d5e775a87a32a64911788db2bb3d02f9cb18c6192f5a9aafd8bdce988981"
+    }
+  ],
+  "critical_layout_or_reference_errors": [],
+  "author_review_required": true,
+  "warning": "Noncritical package/underfull-box warnings may remain; inspect the PDF visually."
+}

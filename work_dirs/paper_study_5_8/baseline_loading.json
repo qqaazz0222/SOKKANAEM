@@ -1,0 +1,133 @@
+{
+  "dpt": {
+    "loading": {
+      "missing_keys": [
+        "neck.fusion_stage.layers.0.residual_layer1.convolution1.bias",
+        "neck.fusion_stage.layers.0.residual_layer1.convolution1.weight",
+        "neck.fusion_stage.layers.0.residual_layer1.convolution2.bias",
+        "neck.fusion_stage.layers.0.residual_layer1.convolution2.weight"
+      ],
+      "unexpected_keys": []
+    },
+    "guard": "missing-parameter modules raise if executed",
+    "model_code": {
+      "path": "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/transformers/models/dpt/modeling_dpt.py",
+      "bytes": 48579,
+      "sha256": "18d6d1498921513b9e70e497d83a999988a16e0d140d6c3dc6950e9bc64eedde"
+    },
+    "processor_code": {
+      "path": "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/transformers/models/dpt/image_processing_dpt.py",
+      "bytes": 18713,
+      "sha256": "646937f80e26520fa9b0b2ba86aeb30d9a7f673b99ed6bcbdf3f082685d1cd1a"
+    },
+    "official_processor": {
+      "do_normalize": true,
+      "do_resize": true,
+      "ensure_multiple_of": 1,
+      "image_mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "image_std": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "keep_aspect_ratio": false,
+      "resample": 2,
+      "size": {
+        "height": 384,
+        "width": 384
+      },
+      "do_rescale": true,
+      "rescale_factor": 0.00392156862745098,
+      "do_pad": false,
+      "image_processor_type": "DPTImageProcessor"
+    }
+  },
+  "da2": {
+    "loading": {
+      "missing_keys": [],
+      "unexpected_keys": []
+    },
+    "guard": "missing-parameter modules raise if executed",
+    "model_code": {
+      "path": "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/transformers/models/depth_anything/modeling_depth_anything.py",
+      "bytes": 16126,
+      "sha256": "c01560e7a1ed75ab904fd0c86f62e4c797a7386d2664a748ac6455f180b67036"
+    },
+    "processor_code": {
+      "path": "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/transformers/models/dpt/image_processing_dpt.py",
+      "bytes": 18713,
+      "sha256": "646937f80e26520fa9b0b2ba86aeb30d9a7f673b99ed6bcbdf3f082685d1cd1a"
+    },
+    "official_processor": {
+      "do_normalize": true,
+      "do_pad": false,
+      "do_rescale": true,
+      "do_resize": true,
+      "ensure_multiple_of": 14,
+      "image_mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "image_processor_type": "DPTImageProcessor",
+      "image_std": [
+        0.229,
+        0.224,
+        0.225
+      ],
+      "keep_aspect_ratio": true,
+      "resample": 3,
+      "rescale_factor": 0.00392156862745098,
+      "size": {
+        "height": 518,
+        "width": 518
+      }
+    }
+  },
+  "zoe": {
+    "loading": {
+      "missing_keys": [],
+      "unexpected_keys": []
+    },
+    "guard": "missing-parameter modules raise if executed",
+    "model_code": {
+      "path": "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/transformers/models/zoedepth/modeling_zoedepth.py",
+      "bytes": 54325,
+      "sha256": "676b902ecd65797f676345dd17f361b9d3439efaed2cb9245de0da307a93f946"
+    },
+    "processor_code": {
+      "path": "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/transformers/models/zoedepth/image_processing_zoedepth.py",
+      "bytes": 14539,
+      "sha256": "5fcc3f8b01246b70cd95351791edbc48bfafa6c996ae3a210e97851b07141afd"
+    },
+    "official_processor": {
+      "do_normalize": true,
+      "do_pad": true,
+      "do_rescale": true,
+      "do_resize": true,
+      "ensure_multiple_of": 32,
+      "image_mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "image_processor_type": "ZoeDepthImageProcessor",
+      "image_std": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "keep_aspect_ratio": true,
+      "resample": 2,
+      "rescale_factor": 0.00392156862745098,
+      "size": {
+        "height": 384,
+        "width": 512
+      }
+    }
+  }
+}

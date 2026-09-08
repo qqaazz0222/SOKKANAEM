@@ -1,0 +1,85 @@
+{
+  "generator": {
+    "path": "/workspace/SOKKANAEM/scripts/render_paper_draft.py",
+    "bytes": 9880,
+    "sha256": "1c43f5e7fcc99a822f08b3f11b8034d5727a07898b4133156b80fd212c5acb13"
+  },
+  "pandoc": {
+    "path": "work_dirs/paper_tools/document_python/pypandoc/files/pandoc",
+    "bytes": 152163104,
+    "sha256": "4715627586c5d9c732e8f5a6b6bb9e27c4216a76a7729e043b24374dedf8a1f0"
+  },
+  "pandoc_version": "pandoc 3.6.1",
+  "inputs": [
+    {
+      "path": "paper/submission/author_details.tex",
+      "bytes": 351,
+      "sha256": "758bad83ebac77b2c58c067567581d052e3a4d41a4d43723d1d427971ba56c0b"
+    },
+    {
+      "path": "paper/submission/generated_macros.tex",
+      "bytes": 131,
+      "sha256": "55d1c131beed2675d85cd5150ffce1c2206ff770713738f6221e7cbe367c096c"
+    },
+    {
+      "path": "paper/submission/generated_results.tex",
+      "bytes": 4884,
+      "sha256": "69e39456ce7e09e342087e5c10cd31a0ff9970573c1cb11784a50936e53e1011"
+    },
+    {
+      "path": "paper/submission/manuscript.tex",
+      "bytes": 33869,
+      "sha256": "aec6c0478ad7441430ba29ff6dbefdc79c799ffaf5bda08ae1979a80ab669822"
+    },
+    {
+      "path": "paper/submission/reproducibility_details.tex",
+      "bytes": 5373,
+      "sha256": "ecdccb61e7a4e51caaa8f0a271f45240738cb842030d3bbc0d93e8118572ed08"
+    },
+    {
+      "path": "paper/submission/revision_figures.tex",
+      "bytes": 1821,
+      "sha256": "56566d0bd753711fd85dc9ce664e2fec3d8d0b74d1e53c829994f70151ba410c"
+    },
+    {
+      "path": "paper/submission/revision_results.tex",
+      "bytes": 2663,
+      "sha256": "f8572875174a6b5c18856c7c42f366f10c99062282ddd0dd43025303dac669cb"
+    },
+    {
+      "path": "paper/submission/theory_appendix.tex",
+      "bytes": 12416,
+      "sha256": "4253d1c5edf218995c3cad082f478c3c3ef5d8b59bb1dead61c958445baecf0c"
+    },
+    {
+      "path": "work_dirs/paper_revision_r3/figures.json",
+      "bytes": 3577,
+      "sha256": "82c4f139485bfda195b23dabf5f88983c0ab4f377039c8237565b8fb1df70737"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/render.json",
+      "bytes": 6035,
+      "sha256": "78af4e2e78a9f17dd94de75b9e49ae30f13f75958165c28d9bdd340ff9f20737"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "paper/draft.md",
+      "bytes": 57408,
+      "sha256": "2c21dc538214f73cfd5a09a51a2df94046ae509a0c6d6f9979f8fde2db8ddae0"
+    }
+  ],
+  "images": [
+    "submission/figures/development_state_diagnostic.png",
+    "submission/figures/qualitative_spatial.png",
+    "submission/figures/qualitative_temporal.png",
+    "submission/figures/r3_accuracy.png",
+    "submission/figures/r3_architecture.png",
+    "submission/figures/r3_cost.png",
+    "submission/figures/r3_scale.png"
+  ],
+  "reference_count": 14,
+  "full_manuscript": true,
+  "author_review_required": true,
+  "conversion_warnings": ""
+}

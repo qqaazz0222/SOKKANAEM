@@ -1,0 +1,996 @@
+# SOKKANAEM: Exact Change-Gated State-Space Modeling for Efficient and Stable Video Depth
+
+> **Historical draft, corrected 2026-09-07; not the submission source.** Use
+> [the current manuscript](submission/manuscript.tex) and [R3 review map](self-revision/r3/revision-status.md).
+> Earlier superiority, training-lineage and uncertainty claims below require the current evidence contract;
+> a table-check pass is numerical traceability, not proof of matching models, samples or statistical validity.
+
+> **2026-09-06 protocol revision.** The frozen reporting baseline, data roles and
+> evaluation contract are recorded in [PREPARATION.md](PREPARATION.md) and
+> [PROTOCOL.md](PROTOCOL.md). Existing result tables remain development evidence
+> from their original protocols; they are not results on the newly reserved test.
+
+> **Working draft — 24 August 2026.** Author names, affiliations, and venue formatting remain to be added. All numerical claims below are limited to completed experiments in this repository, and every table row is checked against a single measurement run (`scripts/table_check.py`).
+>
+> **Protocol note.** Numbers in this draft supersede every figure we reported before 20 August 2026. A clip cap was sampling the first held-out sequence of each source rather than the holdout (Section 4.2); the correction moves the real-domain operating point from 0.1595 AbsRel at 32.2% activity to 0.1302 at 22.0%, and it withdraws or reduces three diagnostic findings.
+>
+> **Section tags.** Headings carry a status marker so a reader knows which numbers are settled and which are moving:
+>
+> - `[UNDER TEST]` — a running or queued experiment targets this section's conclusion directly, and the conclusion may reverse.
+> - `[CHECKPOINT-DEPENDENT]` — the finding holds for the reported checkpoint. The numbers move if the checkpoint is replaced, though the qualitative claim is not expected to.
+> - Untagged sections are settled: they follow from the architecture, the data, or measurements that a retrain does not affect.
+
+## Abstract
+
+Video depth models reprocess large static regions every frame and often flicker. We introduce **SOKKANAEM**, a compact recurrent video-depth model that ties patch-level change detection to the discretization step of a selective state-space model: a binary activity mask \(M\) sets the step size to \(\widetilde{\Delta}=M\Delta\), so a static patch has \(\bar A=I\) and \(\bar B=0\) and its hidden state is carried exactly rather than approximately reconstructed. Conditional recurrent updates have precedent; the contribution is the combination of an external untrained change signal, an exact no-op, and a dense streaming output, together with a measurement of where the resulting claims stop.
+
+A 4.19M-parameter model reaches 0.1263 AbsRel on a real indoor holdout while updating 22.0% of patches per frame, and cutting the update rate to 4.6% costs 6.7% relative error. Against seven commonly cited depth models under one protocol it is last or nearly last on accuracy and first on raw frame-to-frame difference: 1.23x at 256-frame clips, a lead that survives a paired clip-level bootstrap (95% CI 1.18 to 1.29), and 1.10x at eight-frame clips, a margin the same bootstrap does not resolve. It does not lead motion-compensated or ground-truth-referenced consistency, and we claim no general temporal-consistency advantage.
+
+**The sharpest result is a negative one about protocol.** Clip length changes the answer: our clip-level error grows 128% from eight-frame to 512-frame clips, and long-clip fine-tuning removes a fifth of that while leaving the eight-frame number unchanged to four decimal places — so the eight-frame convention this literature uses is blind to the intervention that most improves streaming behaviour. Frame-by-frame scoring of 1,024-frame streams separates the causes: per-frame error rises 1.1% from the first frame to the thousandth while clip-level error worsens by 36%, so most of the clip-level penalty is a temporally varying global scale rather than local depth-shape drift. Sparsity's benefit is likewise device-dependent: after a fused scan kernel, dense execution beats the sparse path at every activity level on a desktop GPU, while on a compute-bound Jetson Nano the ordering inverts, by 13.7x at 5% activity — so wall-clock benefit from sparsity is a property of the arithmetic-to-overhead ratio, not of the mechanism, and we report it as such.
+
+## 1. Introduction
+
+Monocular depth estimation has advanced rapidly, but applying image models independently to video leaves two structural inefficiencies. First, every frame is processed at nearly fixed cost even when most of the scene is unchanged. This is particularly wasteful for fixed surveillance cameras, where foreground motion may occupy only a small fraction of the image. Second, independent predictions can flicker even when the underlying geometry is stable. Video-specific models improve temporal coherence, but commonly retain dense per-frame computation or add a separate temporal refinement stage.
+
+This work asks a narrower question: **can an SSM treat “no visual change” as an exact no-op on its temporal memory?** The zero-order-hold discretization of a selective SSM (Gu & Dao, 2023) provides a direct construction. Multiplying its step size by a binary patch mask makes a masked update equal the identity map on hidden state. Static patches therefore retain memory without a learned approximation, feature imputation, or a separately invalidated temporal cache.
+
+We instantiate this idea in SOKKANAEM, a streaming video-depth architecture with alternating temporal and spatial SSM blocks. A lightweight detector produces patch activity masks using hysteresis, dilation, and periodic keyframes. A sensor-free GMC and feature-space detector extend the mechanism to ego-motion. We evaluate not only depth accuracy and raw frame variation, but also optical-flow-warped consistency (OPW), a GT-referenced temporal consistency error (TCE), constant-output controls, analytical MACs, and measured latency.
+
+Conditional recurrent updates have precedent, and one algebraic identity is not by itself a contribution; Section 2.4 places this work against learned skip gates and event-driven state-space models. What we claim is the combination: an external, untrained change signal wired to the discretization parameter so that a static patch's transition is an exact identity rather than a suppressed update; a clean separation between that exact temporal preservation and the approximate spatial caching a dense output still requires; an iso-mask token-drop control that isolates what reading preserved state buys from what merely skipping static tokens buys; and an empirical characterization of where the resulting efficiency and stability claims stop holding — on a desktop GPU after kernel fusion, on real capture where sparsity does not transfer, and over a stream long enough for drift to appear.
+
+One scope note runs through the paper. **Exact** describes the temporal hidden-state transition and nothing else. The spatial output cache is an approximation, the decoder is dense, and the sparse inference path as a whole is not bit-exact against full computation; only the state a static patch carries is.
+
+The completed experiments support five conclusions:
+
+4. **The efficiency claim has a sharp boundary.** The frozen study measures 7.496/7.521 ms sparse/dense and 13.501/12.000 MiB stream state. Historical Nano/Pi synthetic activity sweeps are separate evidence, not real-video end-to-end acceleration.
+
+We claim no accuracy advantage. Against the comparison group in Section 5.3, SOKKANAEM is last on AbsRel and \(\delta_1\) on real footage and leads exactly one measure, raw frame difference. Depth Anything 3 is stronger on motion-compensated and GT-referenced temporal error. The contribution is the mechanism and the efficiency-stability point it reaches, not the depth numbers.
+
+## 2. Related Work
+
+### 2.1 Monocular and video depth
+
+Modern monocular systems built on dense prediction transformers (Ranftl et al., 2021) and large-scale mixed-dataset training (Ranftl et al., 2022; Yang et al., 2024) provide strong frame-wise depth but hold no persistent state across a stream. Video depth methods introduce temporal attention, motion modules, or post-processing to improve consistency (Chen et al., 2025). Their primary objective is prediction quality; computation generally remains dense in space and time. SOKKANAEM instead studies conditional temporal state updates and is complementary to stronger pretrained encoders and decoders.
+
+### 2.2 Dynamic token and change-based computation
+
+Token pruning, merging, and early exiting reduce computation within an image (Rao et al., 2021; Kong et al., 2022). DeltaCNN (Parger et al., 2022), skip convolutions (Habibian et al., 2021), and eventful transformers (Dutson et al., 2023) exploit change across frames. SOKKANAEM shares this reuse principle and stores temporal information in SSM hidden state. Its zero-step state identity is distinct from the optional caching of temporal readouts and spatial outputs; those caches remain approximations. Our token-drop ablation tests the readout contribution while both arms preserve inactive states (Section 5.5).
+
+### 2.3 Visual state-space models
+
+State-space sequence models (Gu et al., 2022) with input-dependent selection (Gu & Dao, 2023) replace quadratic attention with linear scans, and have been extended to images and video (Zhang et al., 2023; Liu et al., 2024). Standard variants still update every token.
+
+### 2.4 Conditional and event-driven state updates
+
+Making a recurrent state update conditional is not new, and the closest prior work is worth stating precisely rather than by contrast alone. Skip RNN (Campos et al., 2018) augments a recurrent cell with a learned binary gate that either updates the state or copies it forward, with a budget term encouraging copies. Spiking state-space models reformulate the selective scan so that sparse spike signals drive state transitions, giving event-driven computation on time series (Tang et al., 2026). Concurrently with this work, event-gated video generation predicts token-level activity with a learned head and applies latent updates mainly where an interaction is forming, using hysteresis on the activity signal much as our detector does (Maduabuchi & Wang, 2026).
+
+Three things separate the mechanism studied here from that group, and only their combination is our claim.
+
+1. **The gate is external and untrained.** The activity signal comes from patch-level pixel or feature change, not from a learned head with a sparsity budget. Nothing in the objective can trade accuracy for a lower skip rate, and the operating point is set at inference by a threshold rather than fixed at training time — which is also why it must be recalibrated per domain (Section 5.6).
+2. **The identity is implemented through the SSM step size.** Skip RNN already implements exact copying: \(h_t=m_tF(h_{t-1},x_t)+(1-m_t)h_{t-1}\). For a binary mask, our gated recurrence has the same update-or-copy form. Exact copying itself, and the possibility of skipping its computation, are therefore shared properties, not our novelty. Our implementation connects an external patch-change signal to the selective-SSM discretization and studies its interaction with readout and dense prediction (Section 3.3).
+3. **The task keeps a dense spatial output.** Skipping a token's temporal update does not excuse producing its depth. The separation between exact temporal state preservation and the approximate spatial caching that supplies the missing context — and the cost floor that separation implies — is specific to dense prediction and is where the efficiency claim runs out (Section 5.8).
+
+Change-based computation in vision (Section 2.2) also reuses information through caches. We do not claim that those systems cannot preserve values exactly. Here the temporal hidden-state transition has an explicit identity case, while cached block outputs can still be approximate. The token-drop ablation studies the readout choice at matched masks (Section 5.5).
+
+## 3. Method
+
+### 3.1 Overview
+
+![Streaming pipeline](figures/pipeline.svg)
+
+**Figure 1. Streaming pipeline.** A change detector compares consecutive frames patch-wise and emits a binary activity mask, which reaches the backbone as the \(\Delta\)-gating signal. Static patches retain their hidden state exactly and their computation is skipped. Two caches — spatial outputs and temporal hidden state — are where the reduction in multiply–accumulate operations comes from, taking a frame from 1.644 to 0.608 GMAC at 15.4% activity. The global motion compensation branch is used only for moving cameras. Frames above 40% activity are routed through the dense path instead.
+
+For frames \(I_{t-1}\) and \(I_t\), the model:
+
+1. partitions the image into \(p\times p\) patches (\(p=16\) in completed main experiments);
+2. estimates a binary activity mask \(M_t\);
+3. embeds the current frame;
+4. alternates temporal \(\Delta\)-gated SSM and spatial SSM blocks;
+5. decodes the dense depth map \(\widehat D_t\);
+6. carries detector state and per-patch SSM state into the next frame.
+
+The model supports independent state dictionaries, allowing a single set of weights to serve multiple streams without state leakage.
+
+### 3.2 Patch change detector
+
+The default pixel detector assigns patch \(i\) the mean squared change
+
+\[
+s_{t,i}=\frac{\lVert P_{t,i}-P_{t-1,i}\rVert_2^2}{p^2 C}.
+\]
+
+Two thresholds implement hysteresis:
+
+\[
+M_{t,i} =
+\begin{cases}
+1,&s_{t,i}>\tau_{\mathrm{on}},\\
+0,&s_{t,i}<\tau_{\mathrm{off}},\\
+M_{t-1,i},&\text{otherwise}.
+\end{cases}
+\]
+
+We dilate active regions by one patch to protect object boundaries and force a full update every \(K\) frames to limit drift. \(K\) turns out to be an accuracy control rather than a safety valve, and the drift it bounds is larger than clip-level numbers suggest (Section 5.8). Evaluation-only ablations found pixel MSE and cosine detection comparable at matched activity, so MSE remains the default. Training with i.i.d. random masks was at least as robust as detector-driven fine-tuning in the completed three-arm study.
+
+### 3.3 Exact \(\Delta\)-gating
+
+![Delta-gating](figures/delta-gating.svg)
+
+**Figure 2. Exact \(\Delta\)-gating.** The binary mask multiplies the discretization step, \(\widetilde{\Delta}=M\Delta\). A masked temporal state is preserved. Our token-drop control preserves that same state but bypasses its block readout; it does not necessarily zero the state. Neither variant is guaranteed to reproduce an ungated dense model's output.
+
+For a continuous SSM with input and coefficients held constant over a step, exact zero-order-hold discretization gives
+
+\[
+\bar A_i=\exp(\Delta_i A),\qquad
+\bar B_i^{\mathrm{ZOH}}=\int_0^{\Delta_i}\exp(sA)\,ds\,B_i
+=\Delta_i\varphi_1(\Delta_i A)B_i,
+\]
+
+\[
+\varphi_1(Z)=\sum_{k=0}^{\infty}\frac{Z^k}{(k+1)!},\qquad \varphi_1(0)=I.
+\]
+
+This expression is well defined at zero step and does not require an inverse of \(\Delta_i A\). The released implementation uses the exact exponential transition and a first-order input term \(\bar B_i^{\mathrm{impl}}=\Delta_i B_i\), not the exact ZOH input integral. Its actual recurrence, for diagonal negative \(A\) and nonnegative per-channel steps, is
+
+\[
+h_i=\exp(\widetilde\Delta_i A)\odot h_{i-1}
+  +\widetilde\Delta_i B_i x_i,\qquad
+y_i=C_i h_i+D\odot x_i,
+\]
+
+followed by the implemented SiLU output gate and output projection. We apply the binary activity mask to the step:
+
+\[
+\widetilde{\Delta}_i=M_i\Delta_i.
+\]
+
+If \(M_i=0\), then
+
+\[
+\bar A_i=I,\qquad \bar B_i=0,\qquad h_i=h_{i-1}.
+\]
+
+Both the exact ZOH formula and the implemented first-order input term vanish at zero step. Thus the implemented masked temporal state transition is the identity; this does not assert exact continuous-time integration for active inputs. In real arithmetic, for binary \(M_i\), it also equals \(M_iF_{\Delta_i}(h_{i-1},x_i)+(1-M_i)h_{i-1}\). This equivalence need not hold for a soft mask. Finite-valued single-step temporal state copying is tested with bitwise equality; floating-point scan regrouping is checked separately with tolerances.
+
+The current input-dependent \(C_i,x_i\) and output gate may change even when the state does not. Reusing temporal readouts or spatial outputs is an additional approximation. State preservation therefore guarantees neither an unchanged output nor agreement with an ungated dense predictor, and it does not itself prove bounded prediction drift.
+
+### 3.4 Spatiotemporal backbone
+
+The temporal block scans each spatial patch through the frame axis, so its hidden state is a memory tied to a fixed image location. The spatial block mixes context within a frame. Alternating these blocks combines temporal persistence with spatial reasoning. The reported model uses dimension 192, four blocks, state dimension 16, patch size 16, and 4,185,872 parameters (16.7 MB of fp32 weights).
+
+An optional spatial output cache gathers active patches, updates them, and scatters them back while reusing previous outputs for static locations. Unlike temporal \(\Delta\)-gating, this operation is approximate because static spatial tokens no longer contribute fresh context. It is useful only at low activity in the current inference-only implementation.
+
+### 3.5 Moving-camera extension
+
+Camera motion makes raw pixel differences dense. We therefore estimate a homography from at most 50 tracked points on a low-resolution frame using Lucas–Kanade tracking and RANSAC. The previous frame is warped to the current view, after which relative \(L_1\) differences between patch embeddings produce the activity mask. Failure falls back to the identity transform, increasing activity rather than silently suppressing changes.
+
+On Virtual KITTI 2, GMC plus feature gating reaches 23.7% activity with only +0.7% relative AbsRel over full computation. Section 5.6 tests the same mechanism on real driving footage, where it also holds — but only after per-domain threshold recalibration, because the feature-scale thresholds tuned on rendered video are inoperative on real capture. That experiment is a feasibility demonstration on one dataset, not a claim of robustness to camera motion in general.
+
+### 3.6 Decoder and objective
+
+The reported checkpoints use a dense upsampling decoder in the DPT family (Ranftl et al., 2021) with a binned depth head (Bhat et al., 2021). Training minimizes
+
+\[
+\mathcal L =
+\mathcal L_{\mathrm{SI-log}}
++0.5\mathcal L_{\mathrm{grad}}
++0.1\mathcal L_{\mathrm{temp}}
++0.05\mathcal L_{\mathrm{normal}}.
+\]
+
+The mask is binary and non-differentiable, so gradients pass through a straight-through estimator (Bengio et al., 2013). Random mask scheduling increases the skip ratio during training. A failed run used Kendall-style automatic loss weighting: the optimizer drove the temporal-loss weight to its upper clamp, making a constant depth map optimal. That checkpoint was discarded, fixed weights were restored, and a prediction-variance collapse detector was added.
+
+## 4. Experimental Setup
+
+### 4.1 Data
+
+The main synthetic training mixture contains Virtual KITTI 2 (Cabon et al., 2020), TartanAir v2 (Wang et al., 2020), and PointOdyssey (Zheng et al., 2023). Dataset-balanced sampling prevents the largest source from dominating. Historical tables used either capped deterministic clips or the full held-out clip set; the count and manifest must be attached to each table. These repeatedly used holdouts are development validation, not untouched final tests. PROTOCOL.md specifies the newly reserved sequence-disjoint transfer test and its limited scope.
+
+For the deployment-relevant real domain, we use TUM RGB-D fixed-camera sequences (Sturm et al., 2012) and Bonn RGB-D Dynamic (Palazzolo et al., 2019). RGB and depth are paired by nearest timestamp within 20 ms, allowing depth-frame reuse. The historical 60k-stage timing does not describe the frozen v11 model's entire ancestry; the recorded stages are listed in Section 4.4 and freeze/baseline.json. The split inventory separates 24 real training-pool sequences from four development-validation sequences.
+
+The early proof of concept uses the full Virtual KITTI 2 corpus (42,520 frames; 21,120 training clips) at 128 pixels and 30k optimization steps.
+
+### 4.2 Evaluation protocol
+
+Three protocol choices decide what the numbers mean, and each has bitten us.
+
+**State is reset at every clip boundary and nowhere else.** Within a clip the model runs as it would in deployment: detector state, per-patch SSM state, and both caches carry from frame to frame, and the keyframe counter runs from the clip's first frame. Between clips everything is discarded. A clip is therefore a stream of its own length, which is why clip length is a protocol parameter rather than a batching detail — an eight-frame clip never reaches a keyframe at period 30, and a 256-frame clip crosses eight of them.
+
+**Clips are disjoint and spread over the whole holdout.** Clips tile each held-out sequence without overlap, and when the clip count is capped the retained clips are spread evenly over the source rather than taken from its front. This is not a refinement: sequences are concatenated in order, so a cap of 100 on Bonn's 399 clips evaluates its first held-out sequence alone, and the same checkpoint then reads 44.7% activity under one cap and 55.8% under another. Every number in this paper is measured under even spacing; earlier versions of our own reports were not, and their Bonn and PointOdyssey columns describe one sequence rather than a holdout.
+
+**Alignment defines separate evaluation questions.** The revised contract reports metric-output models without a GT fit, depth-median scaling per clip, and disparity scale-and-shift fitting per clip in separate panels. Per-frame fitting is an additional shape diagnostic: it removes time-varying scale/shift, including real model inconsistency. It is not used for primary temporal metrics. The legacy tables below retain their stated original gauges and require regeneration before a final-test claim.
+
+### 4.3 Metrics
+
+We report AbsRel, RMSE, and \(\delta_1\) (Eigen et al., 2014) separately under no GT fit and the declared alignment gauges. Activity is the fraction of patch updates enabled by the detector, reported with and without the first frame.
+
+Temporal metrics are:
+
+- **t-delta:** mean adjacent-frame output difference; it measures raw flicker but is minimized by a constant output.
+- **OPW:** optical-flow-warped prediction error using RAFT-small (Teed & Deng, 2020).
+- **TCE:** the difference between the prediction's warped residual and the GT's warped residual. This penalizes a constant prediction when GT geometry changes.
+
+Every full temporal table includes a per-clip optimal constant-depth control. This control exposes the degeneracy of t-delta and OPW and supplies the dataset-specific residual floor for TCE.
+
+### 4.4 Baselines and implementation
+
+Historical comparisons include DPT-Large, ZoeDepth, Depth Anything variants and Video Depth Anything Small. Correction: the VDA runner calls the offline infer_video_depth path, which processes 32-frame windows with unmasked temporal attention in the current local implementation. It is not a frame-causal comparator. Historical runtime revision and frame/weight hashes are missing, so those results remain separate from the frozen final table.
+
+Relative-depth models are eligible for the relative-shape panel, and metric-output models are additionally eligible for the no-GT-fit panel. Median scaling uses evaluation GT and does not establish absolute distance calibration. An extra least-squares degree of freedom cannot increase its optimized disparity squared error, but it can worsen depth AbsRel after inversion and can cause nonpositive fitted disparities. We count those failures and do not combine different gauges into a single accuracy ranking. All details and pending re-evaluations are specified in PROTOCOL.md.
+
+**The frozen native model and its ancestry.** The v11 baseline has 4,185,872 parameters; this count does not describe the larger or pretrained Q variants. Checkpoint inspection establishes the following recorded stages. Their step fields sum to 153k, not 93k; this is a stage-count sum, not an independently verified optimizer-update total. No earlier parent is recorded for v8, which alone does not prove fresh initialization. Later teacher-free stages do not make the whole ancestry teacher-free.
+
+| Name | Recipe | Where it appears |
+|---|---|---|
+| v8 parent | 60k recorded steps | initialization of the base stage |
+| Base | 60k steps, clip length 4 | the eight-frame history, and as the ablation baseline |
+| Long-clip | + 25k steps at clip length 24 | Section 5.8, where clip length is the variable |
+| **Final** | + 8k steps at clip length 24 with the spread term | **the reported model** |
+
+Latency is measured with batch size 1 on an RTX 4090. Analytical multiply–accumulate counts are derived from the configured model. No edge-device result is available yet.
+
+## 5. Results
+
+### 5.1 Activity–accuracy trade-off `[CHECKPOINT-DEPENDENT]`
+
+The sweep below comes from the base checkpoint (4.19M parameters, 60k steps) so that no row mixes model versions; the reported checkpoint's sweep follows it. Each row sweeps the detector threshold; 100 clips per source spread over the whole holdout, dataset-balanced mean, eight-frame clips.
+
+**Table 1. Activity sweep on both domains, reported checkpoint. The constant-depth control is the per-clip optimal constant prediction.**
+
+| \(\tau_{\mathrm{on}}\) | Real active (%) | Real AbsRel | Real \(\delta_1\) | Real t-delta | Synth. active (%) | Synth. AbsRel | Synth. \(\delta_1\) |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 0 (full compute) | 100.0 | 0.1242 | **0.8778** | 0.0554 | 100.0 | **0.4304** | 0.5666 |
+| 0.005 | 94.9 | 0.1243 | 0.8773 | 0.0673 | 62.8 | 0.4354 | 0.5618 |
+| 0.01 | 85.0 | 0.1243 | 0.8768 | 0.0806 | 58.1 | 0.4352 | 0.5624 |
+| 0.02 | 63.6 | **0.1240** | 0.8750 | 0.1018 | 51.2 | 0.4354 | 0.5628 |
+| 0.05 (default) | 22.0 | 0.1263 | 0.8681 | 0.0750 | 40.9 | 0.4355 | 0.5642 |
+| 0.1 | **4.6** | 0.1325 | 0.8634 | **0.0272** | 32.1 | 0.4368 | **0.5670** |
+| Constant control | — | 0.2761 | 0.5831 | 0.0000 | — | 0.6303 | 0.4152 |
+
+**The trade-off is better than we previously reported, and in the same direction.** On real footage, cutting the update rate by a factor of 22 — 100% to 4.6% activity — costs 6.7% relative AbsRel and 1.4 points of \(\delta_1\), while raw frame difference improves by a factor of two and both motion-referenced measures improve as well. At the default operating point, 22.0% activity, accuracy is within 1.7% of full computation. On synthetic footage a threefold cut costs 1.5%.
+
+Two features of the curve are worth naming. Accuracy is *non-monotonic*: at 63.6% activity on real footage it is better than at full computation (0.1240 against 0.1242, inside the seed spread and so not claimed, but the shape is consistent across checkpoints), which is what gating removing stale context rather than only saving work would look like. And the temporal metrics are non-monotonic in the other direction — t-delta rises from 0.0554 at full compute to 0.1018 at 63.6% before falling to 0.0272 at 4.6%. Partial gating updates some patches and not others, which is itself a source of frame-to-frame difference; heavy gating freezes most of the field and removes it. The stability our architecture is built for arrives at low activity, not at every activity.
+
+The gap to the constant control remains large at every operating point — a factor of 2.1 on real AbsRel even at 4.6% activity — which the t-delta column alone would not establish, since a constant prediction scores zero there by construction.
+
+![Activity–accuracy trade-off](figures/tradeoff.svg)
+
+**Figure 3. Activity against accuracy** on the real indoor and synthetic holdouts, sweeping the detector threshold. Accuracy is flat to within 2% down to roughly 20% activity and then bends. On real footage a 22-fold cut in the update rate costs 6.7% relative AbsRel, and the default operating point (circled) costs 1.7%. The per-clip optimal constant-depth control lies far above both panels and is marked off scale, so the vertical axis can resolve the curve the panel exists to show.
+
+The synthetic sweep does not reach low activity because TartanAir stays between 80% and 100% active regardless of threshold. This is the same phenomenon quantified in Section 5.6: how much a stream can skip is a property of the capture, not only of the method.
+
+### 5.2 Real indoor results `[CHECKPOINT-DEPENDENT]`
+
+An earlier synthetic-only checkpoint failed to transfer to real indoor Kinect depth and lost to a constant predictor. Mixed-domain fine-tuning reverses this failure, and two auxiliary losses added at the final training stage — a flow-warped log-depth residual term and a depth-boundary-weighted term — improve accuracy and temporal stability together at unchanged compute.
+
+**Table 2. Held-out real indoor RGB-D (TUM and Bonn), eight-frame clips, 100 clips per source spread evenly over the holdout, dataset-balanced mean. The two rows share an activity ratio, so the improvement is not bought with computation.**
+
+| Model | AbsRel | \(\delta_1\) | t-delta | OPW | TCE | Active (%) |
+|---|---:|---:|---:|---:|---:|---:|
+| Previous checkpoint (first-sequence sampling) | 0.1633 | 0.8211 | 0.0915 | 0.0271 | 0.0351 | 32.2 |
+| Reported checkpoint (first-sequence sampling) | 0.1595 | 0.8262 | 0.0751 | 0.0243 | 0.0323 | 32.2 |
+| Base checkpoint (4.19M), full holdout | 0.1302 | 0.8613 | **0.0607** | **0.0184** | **0.0262** | **22.0** |
+| Long-clip checkpoint, full holdout | 0.1302 | 0.8684 | 0.0702 | 0.0196 | 0.0273 | **22.0** |
+| **Final checkpoint, full holdout** | **0.1263** | **0.8681** | 0.0750 | 0.0193 | 0.0270 | **22.0** |
+
+The first two rows are the comparison of training recipes we previously reported, and they are kept because the auxiliary-loss conclusion rests on them; both were measured before the sampling fix of Section 4.2 and therefore describe Bonn's first held-out sequence. Rows three and four are the same checkpoints on the full holdout, and they are the numbers used everywhere else in this paper. The sampling change moves the base checkpoint from 0.1595 to 0.1302 AbsRel and its activity from 32.2% to 22.0% — the first-sequence subset is the crowd scene, which is both harder and more active than the holdout it stood for.
+
+Per source under the fixed sampling, the reported (final) model reaches 0.1285 AbsRel and 0.8467 \(\delta_1\) on TUM at 19.7% activity, and 0.1241 and 0.8894 on Bonn at 24.4%. The Bonn column previously read 0.1869 at 44.7% activity, which was the crowd sequence alone. All three checkpoints share the same detector and therefore the same activity, so the rows above differ only in weights.
+
+Two cautions apply. The synthetic \(\delta_1\) difference between these checkpoints lies inside a measured seed standard deviation of \(\pm\)0.015 and is not claimed. More importantly, the two rows differ in initialisation lineage and cumulative steps, so Table 2 is a comparison of checkpoints, not a controlled loss ablation; the controlled ablation exists only at 8k steps, where the ranking was in fact reversed. Short-probe rankings of loss terms did not survive to convergence, which we report as a methodological finding: brief probes can settle whether a term helps but not how strongly to weight it.
+
+### 5.3 Comparison with larger depth models `[CHECKPOINT-DEPENDENT]`
+
+Every model in this section is measured on the same holdout clips, at 256 pixels, through the same metric implementation, under the protocol of Section 4.2. We report two clip lengths, because they answer different questions and disagree. Eight frames is the convention in this literature. 256 frames is the streaming setting the architecture is for, and it is the primary table.
+
+**Table 3a. The comparison group at 256 frames — the streaming protocol. Real indoor holdout (TUM, Bonn), disjoint clips, 13 clips per model, dataset-balanced mean. DA3 receives the whole clip at once and is not causal; every other row is causal. Alignment is each model's native rule (Section 4.4); Section 5.4 reports the whole group under both rules. Thirteen clips is a small sample, so the ranking on this table carries a clip-level bootstrap interval in Table 3d rather than a disclaimer.**
+
+| Model | Params | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| DA 3 Base (non-causal) | 120M | **0.1163** | **0.8871** | 0.0857 | **0.0181** | **0.0241** |
+| Video Depth Anything S (metric) | 28.4M | 0.1276 | 0.8808 | 0.0854 | 0.0217 | 0.0274 |
+| ZoeDepth N-K | 345M | 0.1285 | 0.8677 | 0.0871 | 0.0227 | 0.0278 |
+| DA V1 Small | 24.8M | 0.1404 | 0.8339 | 0.1222 | 0.0271 | 0.0324 |
+| DPT-Large | 343M | 0.1891 | 0.7461 | 0.1631 | 0.0352 | 0.0404 |
+| **SOKKANAEM (final)** | **4.19M** | 0.1907 | 0.7922 | **0.0692** | 0.0264 | 0.0340 |
+| DA V2 Base | 97.5M | 0.2151 | 0.7387 | 0.3194 | 0.0483 | 0.0541 |
+| SOKKANAEM (base) | 4.19M | 0.2434 | 0.7134 | 0.0719 | 0.0291 | 0.0366 |
+| DA V2 Small | 24.8M | 0.5491 | 0.7305 | 3.5881 | 0.2228 | 0.2283 |
+
+**Table 3b. The same group at eight frames, the conventional protocol. 189 clips per model.**
+
+| Model | Params | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| DA V1 Small | 24.8M | **0.0650** | 0.9439 | 0.0892 | 0.0202 | 0.0261 |
+| DPT-Large | 343M | 0.0875 | 0.9276 | 0.1162 | 0.0270 | 0.0326 |
+| DA V2 Base | 97.5M | 0.0877 | **0.9420** | 0.3814 | 0.0306 | 0.0367 |
+| ZoeDepth N-K | 345M | 0.0992 | 0.8900 | 0.0866 | 0.0211 | 0.0264 |
+| Video Depth Anything S (metric) | 28.4M | 0.1000 | 0.9139 | 0.0829 | 0.0200 | 0.0258 |
+| DA 3 Base (non-causal) | 120M | 0.1130 | 0.8924 | 0.0825 | **0.0140** | **0.0200** |
+| **SOKKANAEM (final)** | **4.19M** | 0.1263 | 0.8681 | **0.0750** | 0.0193 | 0.0270 |
+| SOKKANAEM (base) | 4.19M | 0.1302 | 0.8613 | **0.0607** | 0.0184 | 0.0262 |
+| DA V2 Small | 24.8M | 0.2068 | 0.9292 | 1.0015 | 0.0895 | 0.0953 |
+
+![Comparison group](figures/comparison.svg)
+
+**Figure 4. Accuracy against temporal stability across the comparison group.** Marker area scales as the logarithm of parameter count; down and to the left is better on both axes. Our model is the smallest marker and the lowest on the stability axis in both panels. The stability axis is logarithmic because t-delta spans two orders of magnitude across the group.
+
+Four things follow, and only one of them flatters us.
+
+**We lead raw frame-to-frame difference under both protocols, and the video-specific baseline does not take it.** At 256 frames the reported model scores 0.0692 against 0.0854 for Video Depth Anything, the one baseline with an explicit temporal module, and 0.0857 for the non-causal DA3 — a factor of 1.23 over the best of them. At eight frames the margin is 1.10 (0.0750 against 0.0825). This is the claim the architecture was built to make, and adding the class of baseline that was missing from our earlier tables did not overturn it. It does not survive equally at both clip lengths, and Table 3d is where that is visible.
+
+**Table 3d. Clip-level bootstrap on the raw-frame-difference lead.** 10,000 resamples of the clips, stratified by source so each draw reproduces the dataset-balanced mean the tables report, and *paired* — every model is scored on the same resampled clips, because between-clip variation is much larger than the gap between models. The ratio is baseline/ours, so above 1 is our lead. Computed from the per-clip values the evaluation already persists (`scripts/bootstrap_ci.py`); no model was re-run.
+
+| Protocol | Baseline | t-delta ratio | 95% CI | P(ours lower) |
+|---|---|---:|---|---:|
+| 256 frames | DA 3 Base (non-causal) | 1.239 | [1.183, 1.305] | 1.000 |
+| 256 frames | Video Depth Anything S | 1.234 | [1.184, 1.290] | 1.000 |
+| 256 frames | ZoeDepth N-K | 1.259 | [1.151, 1.367] | 1.000 |
+| 8 frames | DA 3 Base (non-causal) | 1.101 | [0.951, 1.283] | 0.905 |
+| 8 frames | Video Depth Anything S | 1.106 | [0.947, 1.292] | 0.904 |
+| 8 frames | ZoeDepth N-K | 1.156 | [0.998, 1.347] | 0.973 |
+
+**The 256-frame lead is resolvable on thirteen clips; the eight-frame margin is not, on 189.** Against the three baselines within 30% of us on this metric, every 256-frame interval clears 1.15 and our model is lower on every one of 10,000 resamples. At eight frames the intervals contain 1 for the two closest baselines: the 1.10 and 1.11 margins there are real in the point estimate and not established by this sample, which is the honest reading of a 0.0750-against-0.0825 gap. The interval is narrower at 256 frames despite fourteen times fewer clips because pairing removes the between-clip variance, and because the effect itself is larger. Intervals are computed on per-clip means while the table rows are pixel-pooled within a source, which moves the AbsRel centre slightly (0.1962 against 0.1907 at 256 frames) and leaves t-delta, OPW and TCE unchanged, since every clip contributes the same pixel count to those.
+
+**Promoting the final checkpoint narrows that margin, and we report the trade rather than choosing the flattering configuration.** The spread term of Section 6.5 widens the predicted depth field, which necessarily lets it move more: it buys 3.0% relative AbsRel at eight frames and 4.2% at 256, and costs 24% of raw frame difference at eight frames (0.0607 to 0.0750) and 2.7% at 256. Dropping that stage — the long-clip checkpoint, Table 7a — restores the wider stability margin at the higher error. Both configurations are the same 4.19M weights trained one stage apart, and a deployment that cares more about flicker than about absolute error should use the earlier one.
+
+**We are last or nearly last on accuracy, under both protocols.** At eight frames, 0.1263 AbsRel against 0.0650 for a 24.8M-parameter baseline: a factor of 1.9, at six times fewer parameters. At 256 frames we are fifth of nine on AbsRel, ahead of DPT-Large and DA V2 Base. The gap narrows with clip length but does not close, and nothing in this paper claims otherwise.
+
+**Motion-referenced consistency is not ours in absolute terms — but it is better than our accuracy predicts.** DA3 is better on OPW and TCE under both protocols, and at 256 frames Video Depth Anything and ZoeDepth are too. Every model that beats us on those two is more accurate than we are, which is not a coincidence: TCE compares the prediction's warped residual against the ground truth's, so it is bounded below by depth error, and a model cannot score well on it while placing the surface wrongly. Regressing the group's OPW and TCE on AbsRel and reading off our operating point makes the size of that confound explicit:
+
+| Protocol | Metric | Group trend at our AbsRel | Ours | Difference |
+|---|---|---:|---:|---:|
+| 8 frames | OPW | 0.0409 | **0.0193** | **-53%** |
+| 8 frames | TCE | 0.0466 | **0.0270** | **-42%** |
+| 256 frames | OPW | 0.0393 | **0.0264** | **-33%** |
+| 256 frames | TCE | 0.0448 | **0.0338** | **-25%** |
+
+**Relative to the cross-model regression trend at our accuracy — a correlational baseline, not causal evidence — we are 25% to 53% better on the motion-referenced measures, and one pair in the table makes the point without any regression at all.** At 256 frames DPT-Large scores 0.1891 AbsRel against our 0.1907 — a 0.8% difference, inside neither model's favour — and on the same clips we are 2.4x better on raw frame difference, 1.33x on OPW and 1.20x on TCE, at 82x fewer parameters. Where a model of our accuracy sits, this mechanism gives better temporal behaviour on every measure; what it does not do is buy the accuracy that would make those numbers competitive outright.
+
+This also explains why leading all three at once is not a coherent target for this contribution. t-delta rewards a prediction that does not move, TCE penalises one that moves differently from the scene, and a prediction that moves *exactly* as the true geometry does is an accurate prediction, not a stable one. The mechanism studied here buys stability; the remaining error is accuracy, and Section 5.9 localises it.
+
+**The two protocols rank the group differently, which is the point of reporting both.** Every model degrades from eight frames to 256 — the per-clip alignment window grows with the clip, so a single scale (or scale and shift) must serve a longer span — but they degrade by very different factors: DPT-Large by 116% and DA V2 Base by 145%, our reported checkpoint by 87%, our long-clip checkpoint by 53%, DA3 by only 3%. A model that carries state and one that processes the whole clip jointly both hold up better than per-frame models over a long stream, for opposite reasons: ours accumulates evidence causally and DA3 is allowed to see the future. Read only the eight-frame table and none of that is visible.
+
+**Table 3c. Synthetic holdout (Virtual KITTI 2, TartanAir v2, PointOdyssey), eight-frame clips, 300 clips per model, dataset-balanced mean. Our row is full computation; the sweep is in Table 1.**
+
+| Model | Params | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| DA 3 Base (non-causal) | 120M | **0.3003** | 0.5699 | 0.8901 | 0.0452 | 0.0623 |
+| ZoeDepth N-K | 345M | 0.3973 | 0.5459 | 0.7789 | 0.1080 | 0.1388 |
+| **SOKKANAEM** | **4.19M** | 0.4299 | 0.5939 | **0.3761** | **0.0398** | **0.0812** |
+| DA V2 Small | 24.8M | 1.0121 | 0.7343 | 8.4370 | 0.5096 | 0.5278 |
+| DA V2 Base | 97.5M | 1.0228 | **0.7398** | 9.5212 | 0.9094 | 0.9244 |
+| DA V1 Small | 24.8M | 1.2032 | 0.7175 | 7.7437 | 0.5908 | 0.6103 |
+| DPT-Large | 343M | 1.2035 | 0.6793 | 10.3811 | 0.7401 | 0.7629 |
+
+Synthetic footage inverts the accuracy ranking. The relative-depth models, which lead on real indoor footage, produce AbsRel above 1.0 here: their disparity-space affine fit cannot span scenes with structure at hundreds of metres, and their \(\delta_1\) stays high while AbsRel explodes, which is the signature of a few catastrophically scaled clips rather than uniformly poor depth. We are third of seven on AbsRel behind two metric-capable models, and 2.1x better than the best relative model. Raw frame difference is 2.1x better than the runner-up and OPW is best in the group. TCE is not: DA3's 0.0623 beats our 0.0812.
+
+**A correction to our own earlier reporting.** We previously claimed to beat a comparable-size model on every real-domain metric except \(\delta_1\). That claim rested on Depth Anything V2 Small's real AbsRel, which is an alignment artifact: on a handful of clips the fitted disparity approaches zero and inverting it sends predicted depth to the clip range, dominating the mean (its per-clip median is in line with the rest of the group). **We withdraw the claim.**
+
+### 5.4 Alignment: why one rule for every model would be worse
+
+Scale-ambiguous depth has to be aligned to ground truth before it can be scored, and the choice of rule is not neutral. Relative-depth models are trained to produce disparity up to an affine transform, so they are conventionally fitted with a two-degree-of-freedom scale and shift in disparity space. Metric models, and ours, are fitted with a one-degree-of-freedom per-clip median scale. Reporting each model under its native rule invites the objection that "one protocol" is not one protocol. We therefore ran the whole group under both.
+
+**Table 12. Every model under its native alignment rule and under the other one. Real indoor holdout, eight-frame clips, 189 clips, AbsRel.**
+
+| Model | Native rule | AbsRel, native | AbsRel, other rule |
+|---|---|---:|---:|
+| DA V1 Small | 2-DOF disparity | **0.0650** | 1.0620 |
+| DPT-Large | 2-DOF disparity | 0.0875 | 0.8962 |
+| DA V2 Base | 2-DOF disparity | 0.0877 | 0.8963 |
+| DA V2 Small | 2-DOF disparity | 0.2068 | 0.8722 |
+| ZoeDepth N-K | 1-DOF median | 0.0992 | 0.3782 |
+| DA 3 Base | 2-DOF, depth space | 0.1130 | **0.1023** |
+| **SOKKANAEM** | 1-DOF median | 0.1302 | 0.1155 |
+
+**A single common rule would not be fairer; it would be meaningless for most of the group.** Fitting a relative-depth model with one degree of freedom in depth space raises its error by an order of magnitude, because the quantity being scaled is not the quantity it predicts. Fitting the metric baseline in disparity space costs it a factor of four. Neither number measures depth quality; both measure a protocol mismatch. The native-rule column is the only defensible main comparison, and the paper uses it.
+
+Two things follow for our own claims. The extra degree of freedom is worth 11% to us (0.1302 to 0.1155), which is what Section 6.5 uses as evidence of a systematic error a single scale cannot absorb — and it is worth *less* to us than to any relative-depth model, so it is not the source of our accuracy gap. And DA3 is the one model that prefers the median rule, which is why we report it at 0.1130 in Table 3b rather than at its better 0.1023: quoting a baseline at its worse number would flatter us.
+
+### 5.5 What preserved-state readout actually buys `[CHECKPOINT-DEPENDENT]`
+
+\(\Delta\)-gating freezes hidden state at static positions but still reads it through \(C_i h_i\). A token-drop arm freezes the same state under the same masks and additionally bypasses the temporal block's output. Comparing the two isolates the value of the readout itself.
+
+**Table 4. Gating-location ablation at matched masks (40.9% activity), base checkpoint, synthetic holdout, 300 clips. The long-clip checkpoint reproduces the pattern and is quoted in the text. Both arms run with the temporal cache disabled so that the \(\Delta\)-gating arm actually performs the dense readout under test.**
+
+| Method | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|
+| \(\Delta\)-gating | 0.4354 | 0.5641 | **0.2658** | **0.0433** | **0.0834** |
+| Token drop | **0.4350** | **0.5692** | 0.3166 | 0.0469 | 0.0869 |
+
+**This result reverses an earlier finding of ours and we report the reversal rather than the earlier number.** On an earlier checkpoint whose sparse path was an inference-time approximation never seen during training, token dropping collapsed: 1.7178 AbsRel against 0.4292 at 31.6% activity, a factor of four. On the confirmed checkpoint, trained with the sparse path in the loop and with randomised mask ratios, accuracy is a wash — 0.4354 against 0.4350 AbsRel, and \(\delta_1\) marginally favours token dropping — while the entire difference has moved into the temporal metrics: 19% worse raw frame difference, 8% worse OPW, 4% worse TCE. The base and long-clip checkpoints reproduce the same pattern (0.4317 against 0.4329 with t-delta 0.1923 against 0.2508, and 0.4347 against 0.4361 with 0.2112 against 0.2601).
+
+The honest reading is that the earlier experiment measured the fragility of an untrained sparse path, not the value of state readout. What survives is narrower and still meaningful: **reading preserved state buys temporal stability, not depth accuracy.** A model trained to tolerate missing static tokens recovers the accuracy on its own, but only the readout keeps consecutive predictions from moving. Since flicker suppression is the property this architecture is built around, the ablation still supports the design — it simply supports a smaller claim than we first made.
+
+### 5.6 Cross-domain transfer and real moving cameras `[CHECKPOINT-DEPENDENT]`
+
+We evaluate the confirmed checkpoint on five KITTI raw drives (Geiger et al., 2012) (885 frames) that appear in no training split. Only the synthetic clone of this domain was trained on, so the experiment isolates the synthetic-to-real axis rather than an arbitrary domain shift. Ground truth is projected LiDAR: capped near 80 m and 30% valid.
+
+**Table 5. Zero-shot real driving against the in-domain synthetic holdout, base checkpoint.**
+
+| Setting | Active (%) | AbsRel | RMSE (m) | \(\delta_1\) | t-delta | TCE | Median scale |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| KITTI raw, zero-shot | **92.8** | 0.2894 | 11.03 | 0.4955 | 2.0716 | 0.0995 | 2.630 |
+| Virtual KITTI 2 holdout, in-domain | 25.8 | 0.3619 | 33.89 | 0.3943 | 0.3115 | 0.0243 | 0.760 |
+
+Accuracy does not collapse; it is nominally better on real footage. That ordering should not be read as a generalization result, because the two rows solve problems of different difficulty: the synthetic holdout contains structure at hundreds of metres that a 256-pixel input cannot resolve, while the LiDAR ground truth is capped and concentrated in the near field. The defensible statement is that representations learned on synthetic driving remain usable on real driving.
+
+**What does not transfer is sparsity.** Activity rises from 25.8% to 92.8% on the same scene type. Measuring the detector alone with the deployment fallback disabled reproduces this: at a pixel threshold of 0.05, synthetic sequences leave 7-10% of patches active while real drives leave 40-74%. Sensor noise, exposure variation, rolling shutter, and compression artifacts all register as change. The skip ratios reported for fixed cameras are therefore measured values for that setting, and the synthetic driving ratios are optimistic.
+
+**Moving-camera gating.** Pixel gating and GMC feature gating operate on different score scales, so comparing them at equal thresholds is meaningless — at their default thresholds the two are indistinguishable in accuracy while GMC uses more computation. The fair comparison is the activity-accuracy curve.
+
+![Gating strategies](figures/gating.svg)
+
+**Figure 5. Pixel gating against global-motion-compensated feature gating** on real driving footage, swept as curves. The two strategies score change on different scales, so only the curves are comparable and points at equal thresholds are not. At matched activity the compensated variant is better on both axes, and it reaches 14% activity while still beating pixel gating at 51%.
+
+**Table 6. Same 30 clips, both gating strategies swept, base checkpoint.**
+
+| Gating | Active (%) | AbsRel | \(\delta_1\) | t-delta | TCE |
+|---|---:|---:|---:|---:|---:|
+| Pixel | 100.0 | 0.3083 | 0.5142 | 3.0852 | 0.1189 |
+| Pixel | 92.7 | 0.3093 | 0.5089 | 3.1016 | 0.1236 |
+| Pixel | 51.1 | 0.3357 | 0.4749 | 2.5108 | 0.1074 |
+| GMC + feature | 87.1 | 0.3065 | 0.5170 | 3.0533 | 0.1173 |
+| **GMC + feature** | **43.8** | **0.3084** | **0.5342** | 1.9319 | 0.0992 |
+| **GMC + feature** | **14.1** | 0.3178 | **0.5341** | **1.2314** | **0.0922** |
+
+At matched activity GMC is clearly better: 43.8% active gives 0.3084 AbsRel and 0.5342 \(\delta_1\) against 0.3357 and 0.4749 for pixel gating at 51.1% — less computation and 8.1% lower relative error. GMC at 14.1% activity still beats the pixel-gating point at 51.1% on every metric. Within the GMC curve, cutting computation sevenfold costs 3.1% relative AbsRel while \(\delta_1\) and both temporal metrics improve monotonically, reproducing on real footage the pattern previously observed only in simulation.
+
+The practical caveat is that GMC's default threshold leaves real driving at 100% activity. The correct statement is not that enabling GMC suffices, but that GMC plus per-domain threshold calibration recovers most of the sparsity that pixel gating loses on real video.
+
+Homography estimation itself does not fail on this footage: over 210 frames of KITTI raw at three thresholds, the identity fallback fired **0 times**, and over 1,260 frames in the split experiment below it fired 0 times again. The failure mode this branch guards against — no texture, degenerate fit — is not what limits the moving-camera path here; the threshold scale is.
+
+**What "per-domain calibration" actually requires.** The sweep above chooses a threshold on the same clips it reports, which is an oracle. To measure the honest version we split the five drives: the threshold is chosen on one drive (2011_09_26_drive_0002, 8 clips) and every reported number comes from the other four (30 clips), which the threshold never saw.
+
+**Table 6b. Calibrating the GMC threshold on one drive and reporting on four unseen drives.**
+
+| Threshold | Calibration drive: active (%) | Held-out drives: active (%) | Held-out AbsRel | Held-out \(\delta_1\) | Held-out t-delta |
+|---|---:|---:|---:|---:|---:|
+| 0.05 (full compute) | 100.0 | 100.0 | **0.2821** | 0.4725 | 1.9405 |
+| 0.2 | 97.7 | 87.9 | 0.2829 | 0.4707 | 1.9024 |
+| 0.4 | 31.4 | 46.0 | 0.2910 | 0.4701 | 1.4532 |
+| 0.8 | **5.3** | **11.5** | 0.2969 | **0.4702** | **0.7625** |
+| Pixel gating, best available | — | 77.3 | 0.2793 | **0.4768** | 1.7939 |
+
+Four answers follow, and they are what the protocol question was really about.
+
+1. **Calibration needs no ground truth.** The target is an activity ratio, which the detector computes from the video alone. Nothing in the procedure inspects depth labels, so it can be run on deployment footage.
+2. **The trade-off transfers; the operating point does not.** A threshold that gives 5.3% activity on the calibration drive gives 11.5% on the unseen drives — a factor of two in cost, from one drive to four of the same scene type. What does transfer is the shape: on the held-out drives, going from full computation to 11.5% activity costs 5.2% relative AbsRel and improves raw frame difference by 2.5x, which is the same pattern the in-domain sweep shows.
+3. **One drive was sufficient in this split, and not enough to predict cost.** Eight clips sufficed to place the threshold in the right range; a different drive as the calibration source was not tried, so this is one transfer measurement and not a claim about any single drive; they did not predict the resulting activity within a factor of two. A deployment that needs a compute budget must measure activity on its own footage, which is cheap, rather than inherit a number from a paper.
+4. **The comparison against pixel gating survives the split.** At its most aggressive setting the pixel detector still leaves 77.3% of patches active on real driving, where the compensated detector reaches 11.5% at 5% relative accuracy cost. This is the claim the section exists to make, and it is now measured on drives that played no part in choosing the threshold.
+
+### 5.7 Compute and wall-clock analysis
+
+Two results in this section point in opposite directions, and both matter.
+
+**Analytical compute.** The current architecture costs 1.644 GMAC/frame at full activity. With both caches, 15.4% activity costs 0.608 GMAC — 37.0% of full. The decoder is 23.1% of the dense floor and patch embedding 2.3%, so the saving is real and comes from the backbone, where sparsity applies.
+
+**Measured latency.** The scan implementation, not the gather, dominated wall-clock. Profiling a sparse frame at 22% activity attributes 71% of it to the spatial scan and only 6% to gathering and scattering active tokens. The reference scan is chunked and materialises a \((B, C, C, P, S)\) pairwise-decay tensor per chunk: at \(L=64\), \(P=384\), \(S=16\) it moves roughly 25 MB to perform 0.4 MMAC. We therefore replaced it with a fused Triton (Tillet et al., 2019) kernel that keeps the recurrence in registers, used at inference while training retains the differentiable chunked path. \(\Delta\)-gating remains bit-exact through the kernel — \(\widetilde{\Delta}=0\) gives \(\exp(0)=1\) and a zero input term — and every evaluation metric is unchanged to four decimal places.
+
+![Latency before and after the fused kernel](figures/latency.svg)
+
+**Figure 6. Per-frame latency before and after the fused scan kernel**, measured at 22% activity on one RTX 4090 at 256 pixels, batch size one, fp32. Every path became faster and the ordering inverted: what sparsity was saving was the scan, and the scan is now nearly free, leaving the sparse path with bookkeeping that does not scale with activity.
+
+Per-frame latency on one RTX 4090 at 256 pixels, single stream, fp32, 22% activity:
+
+| Path | Chunked scan | Fused kernel | Speedup |
+|---|---:|---:|---:|
+| Full compute, eager | 11.38 ms | 1.98 ms | 5.7x |
+| **Full compute, compiled** | 4.70 ms | **1.29 ms** (776 FPS) | 3.6x |
+| Sparse, eager | 4.87 ms | 2.40 ms | 2.0x |
+| Sparse + bucket padding | 5.39 ms | 2.55 ms | 2.1x |
+| Sparse + bucket + compiled | 2.99 ms | 2.04 ms (491 FPS) | 1.5x |
+
+In fp16 the sparse path reaches 1.69 ms (593 FPS) with 37 MB peak memory and 6.38 MB of persistent state per stream; four batched streams run at 2,060 FPS aggregate on the full-compute path.
+
+**The inversion.** Before the kernel, the sparse path was 1.57x faster than compiled full compute at 22% activity. After it, compiled full compute is faster at *every* activity level (1.29 ms against 2.03–2.20 ms). The explanation is immediate: what sparsity saved was the scan, and the scan is now nearly free. What remains is fixed bookkeeping that does not scale with activity — `nonzero` gather, the column-major argsort, bucket padding, cache cloning, scatter, and the host synchronisations these force. Latency is now flat in activity for every path (full compute varies only between 1.973 and 1.994 ms across 5–70% activity), which is the signature of an overhead-bound rather than compute-bound regime.
+
+We report this plainly because it bounds the contribution. Exact state preservation, the MAC reduction, and the kernel itself all stand. The claim that the sparse path is *faster* does not stand on this GPU. Whether a 63% MAC reduction converts into time and energy depends on the hardware being compute-bound, which a 4090 at this model scale is not; settling that requires the edge measurement listed in Section 7.
+
+**Four efficiency claims, separately scored.** The word "efficient" covers four different assertions in this literature, and they have different evidence here. It is worth stating which is which, because the model *is* fast and that speed is not the mechanism's doing:
+
+| Claim | Status | Where it comes from |
+|---|---|---|
+| Fewer parameters and MACs than the comparison group | demonstrated | 4.19M parameters, 1.644 GMAC dense; model scale, not sparsity |
+| Lower per-frame latency than a comparable-size baseline | demonstrated | 1.29 ms compiled dense; model scale and the fused kernel, **not** the sparse path |
+| MAC reduction from sparsity | demonstrated | 1.644 to 0.608 GMAC at 15.4% activity |
+| Reduced per-stream state, so one weight set serves many streams | demonstrated | 6.38 MB fp16 state against 8.4 MB of weights |
+| Wall-clock speedup *from sparsity* | **demonstrated where arithmetic is the constraint, not on a desktop GPU** | 13.7x at 5% activity on a Jetson Nano and 14.2x on a Raspberry Pi 4B; compiled dense is faster at every activity level on a 4090 |
+| Energy per frame reduction from sparsity | **demonstrated on the same device** | 15.3x at 5% activity, from finishing sooner rather than drawing less (Table 13a) |
+| Advantage on an edge accelerator running the *reported* implementation | **not measured** | Triton targets neither the pre-Volta SMs of the Jetson nor a CPU-only board, so both edge measurements are the reference scan |
+
+The headline latency and memory numbers therefore belong to a small model with a fused kernel, and on this GPU the sparsity mechanism's benefit is arithmetic and state, not time. A reader who takes "2.2x faster" as the sparse path beating the dense one has read the opposite of what we measured *there*. Whether that ordering is a property of the mechanism or of the device is the next measurement.
+
+**Where arithmetic is the constraint, the ordering inverts.** We ran the same model on a Jetson Nano Developer Kit B01 (Maxwell, 128 CUDA cores, 25.6 GB/s), which is compute-bound at this scale where the 4090 is overhead-bound. Triton does not target `sm_53`, so this is the reference chunked scan rather than the fused kernel; the log records that fact.
+
+**Table 13a. Per-frame latency and energy against forced activity on a Jetson Nano B01, 256 pixels, fp32, *reference scan* (not the fused kernel we ship), 10W mode. Dense is the same model with both caches disabled. Power is the board input rail read from the INA3221.**
+
+| Activity (%) | Sparse (ms) | Dense (ms) | Time | Sparse (mJ) | Dense (mJ) | Energy |
+|---:|---:|---:|---:|---:|---:|---:|
+| 5.1 | **114.27** | 1564.05 | **13.7x** | **634.6** | 9701.2 | **15.3x** |
+| 14.8 | 256.54 | 1564.08 | 6.1x | 1463.8 | 9777.2 | 6.7x |
+| 30.1 | 496.18 | 1564.16 | 3.2x | 2861.5 | 9841.3 | 3.4x |
+| 50.0 | 808.93 | 1564.19 | 1.9x | 4671.7 | 9905.2 | 2.1x |
+| 69.9 | 1118.15 | 1564.15 | 1.4x | 6493.4 | 9959.1 | 1.5x |
+| 100.0 | 1572.58 | 1564.19 | 0.99x | 9318.0 | 10025.1 | 1.1x |
+
+Four things follow, and together they turn Section 5.7's conjecture into a measurement.
+
+**Sparsity converts to time when the device is compute-bound.** Dense latency is flat in activity here exactly as on the 4090 — 1564.05 to 1564.19 ms across the whole sweep — while the sparse path scales with it, from 1572.58 ms at full update down to 114.27 ms at 5%. A least-squares fit gives `sparse ≈ 33 ms + 1544 ms x activity`: an activity-proportional term that is the compute, and a 33 ms intercept that is the bookkeeping. On the 4090 that intercept was the entire measurement.
+
+**It converts to energy too, but by finishing sooner rather than by drawing less.** Energy per frame falls 15.3x at 5% activity. Instantaneous power barely moves — 5.55 W sparse against 6.20 W dense, a 10% difference — so the 15x comes almost entirely from the 13.7x in time. This is worth stating precisely because "sparse computation saves energy" invites the wrong mental model: on this board the idle floor dominates the power draw, and what sparsity buys is a shorter integration window.
+
+**The crossover is quantified rather than asserted.** Sparse loses to dense only at essentially full activity (break-even at 99%), where the bookkeeping is no longer amortised. Reading the two devices together: the mechanism pays whenever the arithmetic it removes exceeds the fixed cost of deciding what to remove, and that condition holds by a factor of 14 on a 10W SoC and fails outright on a desktop card with a fused kernel.
+
+**The power budget changes the scale, not the shape.** At 5W (two CPU cores instead of four, lower clocks) every latency grows by about 1.35x while the ratios are unchanged to two significant figures — 13.5x in time and 14.4x in energy at 5% activity, break-even again at 99%. Absolute power drops from 6.2 W to 4.2 W, so energy per frame at the default operating point is similar in both modes. The trade-off curve is a property of the model and the mask, not of the power envelope.
+
+What this does not establish: the device is far from real time (8.8 FPS at 5% activity, 0.6 FPS dense), so this is a statement about arithmetic converting to time and energy, not about deployable throughput. And because `sm_53` cannot run the fused kernel, the configuration measured here is not the one we ship. An Orin-class device would close both gaps.
+
+**A third device, with no accelerator at all.** The Nano still has a GPU, so one reading of the inversion is that it is about *which* accelerator rather than about arithmetic. A Raspberry Pi 4B settles that: four Cortex-A72 cores, no GPU path, the same model and the same forced-activity sweep.
+
+**Table 13b. Per-frame latency against forced activity on a Raspberry Pi 4B, 256 pixels, fp32, four threads, *reference scan* (not the fused kernel we ship), performance governor. Dense is the same model with both caches disabled. This board exposes no power rail, so energy is not measured here.**
+
+| Activity (%) | Sparse (ms) | Dense (ms) | Speedup |
+|---:|---:|---:|---:|
+| 5.1 | **497.32** | 7055.93 | **14.2x** |
+| 14.8 | 1141.04 | 6988.25 | 6.1x |
+| 30.1 | 2103.56 | 6840.12 | 3.3x |
+| 50.0 | 3446.39 | 6836.74 | 2.0x |
+| 69.9 | 4528.06 | 6852.05 | 1.5x |
+| 100.0 | 6676.42 | 6901.17 | 1.0x |
+
+**The shape is the same and the fit is tighter.** Dense is flat across the sweep — 6836.7 to 7055.9 ms, a spread of 3.2% with no trend in activity — while the sparse path tracks it almost exactly linearly: `sparse ≈ 169 ms + 6439 ms x activity`, with \(R^2 = 0.9989\) over the six points. The two devices differ by a factor of four in absolute speed and agree on the structure, and they agree on the part that matters most: the fixed bookkeeping is 2.4% of a dense frame here against 2.1% on the Nano. The overhead of deciding what to skip is a near-constant *fraction* of the work skipped, on two processors that share no architecture.
+
+**On this device the sparse path never loses.** Break-even sits at 105% activity — outside the achievable range — so even a fully active frame is marginally faster sparse than dense (1.03x). The Nano's break-even was 99% and the 4090's was below every operating point. The three devices order exactly as their arithmetic-to-overhead ratio does, which is the claim this section makes: gating pays when the arithmetic it removes exceeds the cost of deciding what to remove, and nothing about that condition is specific to GPUs.
+
+What the Pi does not establish: it is much further from real time than the Nano (2.0 FPS at 5% activity, 0.14 FPS dense), it has no readable power rail so the energy result rests on the Nano alone, and being CPU-only it runs the reference scan for the same reason the Nano does — so neither edge measurement uses the fused kernel we ship. A Jetson TX2 is the obvious fourth point and is not measured.
+
+### 5.8 Streaming drift, and how much of it is ours `[CHECKPOINT-DEPENDENT]`
+
+A streaming model is supposed to accumulate evidence across frames, so depth at frame 7 should be better than at frame 0 — that is the reason to carry state at all. The eight-frame clip mean conventional in this literature cannot see whether that happens, and for a long time we did not measure it either.
+
+**The clip-length ladder.** The same two checkpoints, evaluated on disjoint clips of increasing length, with the keyframe period fixed at 30:
+
+**Table 7a. Accuracy against clip length, real indoor holdout, dataset-balanced mean, keyframe period 30. Clip counts fall with length because the holdout is finite: 189 clips at eight frames, 6 at 512. The 512-frame row rests on one TUM clip and five Bonn clips and is reported for the trend, not for its third decimal.**
+
+| Clip length | Clips | Base AbsRel | Penalty | Long-clip AbsRel | Penalty | Final AbsRel | Penalty |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 8 | 189 | 0.1302 | — | 0.1302 | — | **0.1263** | — |
+| 32 | 120 | 0.1487 | +14.2% | 0.1424 | +9.4% | **0.1388** | +9.9% |
+| 128 | 28 | 0.1961 | +50.6% | 0.1719 | +32.0% | — | — |
+| 256 | 13 | 0.2434 | +86.9% | 0.1990 | +52.8% | **0.1907** | +51.0% |
+| 512 | 6 | 0.2972 | +128% | 0.2318 | +78% | **0.2234** | +77% |
+
+**The short-clip convention is optimistic by a factor we had badly underestimated.** We previously reported an eight-to-32-frame penalty of 11.2% and treated it as the size of the effect. Measured out to 512 frames — the longest stream the real holdout supports, since its sequences run 567 to 1,752 frames — it is 128% for the reported checkpoint. Deployment runs hundreds of frames, so this is the number that describes the setting the architecture is for.
+
+**The long-clip checkpoint's advantage grows with the stream.** At eight frames the two checkpoints are indistinguishable; at 256 frames the fine-tuned one is 18% better; at 512 frames it is 22% better and holds 9.7 more points of \(\delta_1\) (0.7389 against 0.6417). Whatever the fine-tune taught is specifically about holding state, and it pays more the longer it has to hold.
+
+**But not all of that penalty is drift, and the honest accounting needs a control.** Per-clip alignment fits one scale for the whole clip, so a longer clip gives the fit a harder job irrespective of any state. Stateless per-frame baselines measure that effect directly, since they have no state to drift: over the same clips, DPT-Large degrades by 116% and Depth Anything V2 Base by 145% from eight frames to 256 — *more* than our 87%. Depth Anything 3, which is handed the whole clip at once and is not causal, degrades by 3%.
+
+So there are two effects and they point in opposite directions. The protocol penalises every causal model as the clip grows, and it penalises per-frame models hardest; carried state, drift and all, is a net advantage over a long stream rather than a liability. What remains true, and is the reason this section exists, is that **the carried state does not accumulate accuracy within a keyframe cycle** — the frame-index curve below shows error growing between refreshes — and that **an eight-frame protocol cannot see either effect**.
+
+**Where inside a clip the error lives.** Scoring by frame index, with each frame aligned independently so the curve cannot be an artefact of one clip-level fit:
+
+![Streaming drift](figures/drift.svg)
+
+**Figure 7. Accuracy decays between keyframes.** Panel (a) scores by frame index, each frame aligned independently; panel (b) sweeps the refresh period. Preserved state does not accumulate accuracy, and the recovery at frame 31 is the keyframe firing at frame 30.
+
+**Table 7b. Accuracy and consistency by frame index, 32-frame clips, full holdout (22 TUM and 98 Bonn clips), keyframe refresh every 30 frames. OPW and TCE are scored on the pair (t-1, t).**
+
+| Frame | TUM AbsRel | TUM \(\delta_1\) | Bonn AbsRel | Bonn \(\delta_1\) | Bonn OPW | Bonn TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| 0 | 0.1353 | **0.8616** | **0.1167** | **0.8994** | — | — |
+| 4 | 0.1206 | 0.8559 | 0.1239 | 0.8858 | 0.0229 | 0.0255 |
+| 8 | 0.1249 | 0.8431 | 0.1316 | 0.8630 | 0.0194 | 0.0216 |
+| 12 | 0.1510 | 0.8327 | 0.1383 | 0.8405 | 0.0228 | 0.0250 |
+| 16 | 0.1521 | 0.8068 | 0.1485 | 0.8197 | 0.0213 | 0.0236 |
+| 20 | 0.1415 | 0.8041 | 0.1538 | 0.8246 | 0.0198 | 0.0226 |
+| 24 | 0.1585 | 0.7983 | 0.1582 | 0.8162 | 0.0204 | 0.0227 |
+| 28 | 0.1697 | 0.7935 | **0.1668** | 0.8095 | 0.0228 | 0.0250 |
+| 31 | **0.1323** | 0.8413 | 0.1340 | 0.8695 | 0.0260 | 0.0283 |
+
+**There is no accumulation benefit, and on dynamic scenes there is an accumulation cost.** Bonn degrades monotonically from 0.1167 at frame 0 to 0.1668 at frame 28 — 43% worse — and loses 9.0 points of \(\delta_1\) over the same span. TUM improves for the first few frames and then degrades. We previously put the Bonn figure at 61%, measured on the crowd sequence alone; on the full holdout it is 43%, and the shape is unchanged.
+
+**The decay is in accuracy, not in motion-referenced consistency.** Bonn's OPW and TCE are flat across the cycle — 0.0229 at frame 4 against 0.0228 at frame 28 — while AbsRel and \(\delta_1\) move steadily. What drifts is where the surface is placed, not how consistently it moves, which is exactly the distinction the two metric families exist to draw and the reason a single "temporal consistency" claim would be wrong in both directions.
+
+The recovery at frame 31 is the keyframe: a full refresh fires at frame 30 and the error snaps back, on Bonn recovering 6 points of \(\delta_1\) at once. The refresh is not free in the other direction: raw frame difference *spikes* at the keyframe (TUM 0.0824 at frame 28 against 0.1751 at frame 31), because a full recomputation is a discontinuity in the output sequence. Accuracy sawtooths down and flicker sawtooths up, out of phase. Long-clip fine-tuning flattens both: on the same clips its Bonn curve runs 0.1139 to 0.1548, a 36% rise rather than 43%, and it holds 0.8380 \(\delta_1\) at frame 28 against 0.8095.
+
+![Depth and error either side of a keyframe](figures/sawtooth.png)
+
+**Figure 8. The sawtooth, as pictures.** One 32-frame clip of the dynamic-object holdout; rows are frames 24, 28, 29, 30 and 31; columns are RGB, prediction, ground truth and relative error (black is invalid ground truth). Frame 30 is the keyframe: activity goes to 100% and clip AbsRel falls from 0.3740 to 0.2030 in one frame, visible as the error column darkening over the moving person. The prediction column is also where range compression (Section 6.5) shows without a histogram — it is uniformly flatter than the ground-truth column that shares its colour scale.
+
+**Out to 256 frames the sawtooth rides a trend and then levels off.** On disjoint 256-frame clips, Bonn's per-frame error grows from 0.0912 at frame 0 to 0.2817 by frame 224 — a factor of three — and then falls back to 0.1712 at frame 255. The error is bounded rather than divergent, but the trend over the first two hundred frames is real, and a keyframe period tuned on 32-frame clips does not contain it.
+
+**At 1,024 frames the two effects separate cleanly, and this is the section's central measurement.** PointOdyssey's held-out sequences are long enough for 20 disjoint 1,024-frame streams, which is the only place we can measure a stream of that length with a usable sample.
+
+**Table 7d. Historical 1,024-frame experiments. Clip scores use 20 PointOdyssey clips; endpoint curves use a separate 8-clip subset. The rows compare v9 and v10, not the frozen v11 reporting model. Per-frame alignment removes global scale error; these unmatched summaries are not an additive error decomposition.**
+
+| Source | Clips | Checkpoint | Clip AbsRel | vs 8 frames | Per-frame AbsRel, frame 0 → 1023 | Drift |
+|---|---:|---|---:|---:|---|---:|
+| PointOdyssey | 20 score / 8 curve | v9 base | 0.5344 | +58% | 0.2842 → 0.3227 | +13.5% |
+| PointOdyssey | 20 score / 8 curve | v10 long-clip | **0.4638** | **+36%** | 0.2700 → **0.2730** | **+1.1%** |
+| Bonn (static\_close\_far) | 1 | v9 base | 0.4820 | — | — | — |
+| Bonn (static\_close\_far) | 1 | Long-clip | **0.4170** | — | — | — |
+
+**Historical endpoint diagnostic, not a matched decomposition.** The v10 curve changes from 0.2700 to 0.2730 between endpoints on eight PointOdyssey clips. The 0.4638 clip score uses twenty clips. Neither the small endpoint difference nor this unmatched comparison establishes uniformly stable depth over the stream, and neither measures the frozen v11 model.
+
+**Scale and shape must be distinguished without blaming the protocol.** Per-frame GT alignment can remove time-varying global scale errors. Metric output does not remove those errors automatically; metric deployment incurs them. Because Table 7d uses different sample sets for the two columns, their difference is not a quantified scale/shape decomposition. The summaries below are historical descriptive evidence, not a causal explanation of that unmatched gap.
+
+**Table 7f. Drift of the per-frame alignment factor \(s_t\), real indoor holdout, reported checkpoint. Coefficient of variation of \(s_t\) within a clip, dataset-balanced mean, with the paired clip-level bootstrap interval of Table 3d's method. \(s_t\) is a ratio, so the clip-level scale cancels and the statistic measures the model rather than the alignment rule.**
+
+| Clip length | Clips | CV of \(s_t\) | 95% CI |
+|---|---:|---:|---|
+| 8 frames | 189 | 0.0165 | [0.0128, 0.0211] |
+| 32 frames | 120 | 0.0411 | [0.0324, 0.0515] |
+| 256 frames | 13 | 0.1127 | [0.0750, 0.1545] |
+
+The intervals do not overlap: our own global scale is roughly seven times less stable over a 256-frame clip than over an eight-frame one. That is a real temporal weakness of this model, not an artefact of anyone's protocol.
+
+**The same statistic on the comparison group, requested by a reviewer of an earlier version, does not flatter us.** The frame-to-frame magnitude \(\left|\log s_t - \log s_{t-1}\right|\) is instrumented alongside the coefficient of variation (`sokkanaem/metrics.py:scale_stats`), and both are now measured for every model in Table 3a at 256 frames, paired to the same resampled clips as Table 3d.
+
+**Table 7g. Scale-factor drift at 256 frames, ours against the comparison group. Real indoor holdout, dataset-balanced mean, paired clip-level bootstrap (Table 3d's method). Ratio is baseline/ours, so above 1 is our lead, matching Table 3d's convention. Ordered by CV of \(s_t\), most stable first.**
+
+| Model | Params | CV of \(s_t\) \(\downarrow\) | ratio | 95% CI | P(ours lower) | Step \(\lvert\Delta\log s_t\rvert\) \(\downarrow\) | ratio |
+|---|---:|---:|---:|---|---:|---:|---:|
+| ZoeDepth N-K | 345M | **0.0854** | 0.757 | [0.637, 0.893] | 0.000 | 0.0155 | **1.314** |
+| DA 3 Base (non-causal) | 120M | 0.0920 | 0.816 | [0.323, 1.191] | 0.188 | **0.0106** | 0.895 |
+| Video Depth Anything S (metric) | 28.4M | 0.0924 | 0.820 | [0.644, 1.088] | 0.089 | 0.0122 | 1.034 |
+| **SOKKANAEM (final)** | **4.19M** | 0.1127 | — | — | — | 0.0118 | — |
+| DA V1 Small | 24.8M | 0.1377 | 1.221 | [1.051, 1.494] | 0.999 | 0.0195 | 1.652 |
+| DA V2 Base | 97.5M | 0.1711 | 1.517 | [1.371, 1.755] | 1.000 | 0.0168 | 1.420 |
+| DA V2 Small | 24.8M | 0.1736 | 1.540 | [1.360, 1.848] | 1.000 | 0.0196 | 1.656 |
+| DPT-Large | 343M | 0.1896 | 1.522 | [1.335, 1.859] | 1.000 | 0.0245 | 2.067 |
+
+**The three relative-depth models with no built-in scale reference are clearly less scale-stable than we are, and the three models with a metric or temporal prior are not.** DA V1/V2 and DPT-Large — the same models that degrade hardest on AbsRel with clip length in Table 3a — have a CV of \(s_t\) 1.2 to 1.5 times ours, resolved at every one of the four. But ZoeDepth's metric head, DA3's non-causal full-clip view, and Video Depth Anything's temporal module are as stable as or more stable than we are on this axis: ZoeDepth's CV is 0.757 of ours and the interval clears 1 (P(ours lower) = 0.000), while DA3 and VDA sit close enough to us that the direction is not resolved (P = 0.188 and 0.089). This is not a contradiction of Table 3a — it is the same ranking, on a different quantity — but it is a real limit on the earlier claim: **the mechanism that keeps our raw frame-to-frame difference lowest of the group does not, by itself, keep our global scale the most stable one; ZoeDepth's metric prior beats us on exactly the axis our carried state is supposed to help with, and DA3 and VDA are close enough that we cannot claim a lead over them either.**
+
+The step column adds one more distinction worth naming. Our frame-to-frame step is smaller than ZoeDepth's (ratio 1.314, P(ours lower) = 1.000) even though our clip-level CV is larger than ZoeDepth's — so our scale does not jitter from frame to frame, it drifts as a slow trend across the clip, consistent with a carried state that changes gradually rather than a per-frame estimate refit from scratch each step. DA3 is the opposite case: its step is smaller than ours (ratio 0.895) but the direction is not resolved (P = 0.246, from the same run, not tabulated above), so we do not claim a step-level lead or deficit against it.
+
+**Scope of the long-horizon evidence.** Per-frame-aligned shape, unaligned metric accuracy and global scale variation are separate quantities. Current v11 claims use the frozen L256 evaluation, not these v9/v10 endpoint results. Neither a small endpoint change nor metric units guarantee preservation of short-clip accuracy throughout a long stream.
+
+Two consequences follow. First, the fix already exists in the architecture and is simply applied too rarely: the keyframe period is a knob on exactly this decay.
+
+**Table 7c. Keyframe period against accuracy, stability and cost. 32-frame clips, full holdout, both checkpoints.**
+
+| Period | Active (%) | Reported AbsRel | Reported \(\delta_1\) | Reported t-delta | Long-clip AbsRel | Long-clip \(\delta_1\) | Long-clip t-delta |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 5 | 39.4 | **0.1239** | **0.8695** | 0.1035 | 0.1281 | 0.8663 | 0.0951 |
+| 10 | 29.4 | 0.1274 | 0.8635 | 0.0868 | 0.1313 | 0.8602 | 0.0817 |
+| 15 | 26.0 | 0.1304 | 0.8559 | 0.0831 | 0.1340 | 0.8521 | 0.0788 |
+| 30 (default) | 22.7 | 0.1388 | 0.8426 | 0.0751 | 0.1424 | 0.8384 | 0.0729 |
+| 60 | **19.6** | 0.1412 | 0.8391 | 0.0617 | 0.1447 | 0.8345 | **0.0608** |
+
+The trade is monotone in all three quantities and there is no free point on it: refreshing six times more often buys 12% relative AbsRel and 3.0 points of \(\delta_1\) for double the compute and 68% worse raw frame difference. A keyframe is by construction a discontinuity in the output sequence, so the metric this architecture leads on is the one that pays for accuracy. The reported checkpoint is better than the long-clip one at every period on accuracy and \(\delta_1\) and worse on raw frame difference at every period, which is the spread term's price paid again in a second place: the fine-tune widens the predicted field, and a wider field moves more between frames.
+
+**Spreading the refresh over time instead of concentrating it makes everything worse.** The keyframe is a discontinuity in the output sequence, so the obvious fix is to refresh a fraction of the patches on every frame instead of all of them every \(K\) frames — the same amortised compute, no spike. We implemented it as a fixed rotation over patch indices and measured it on the reported checkpoint:
+
+**Table 7e. Rolling refresh against keyframe refresh, relative change. Positive is worse for every column except \(\delta_1\), where the sign is flipped so that positive is also worse.**
+
+| Clip | Period | Activity | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 32 | 30 | +7.9% | +7.8% | +3.1 pt | +22.4% | +12.6% | +8.4% |
+| 32 | 60 | +13.3% | −0.1% | +0.1 pt | +26.6% | +12.2% | +7.6% |
+| 256 | 30 | +5.9% | +17.4% | +9.9 pt | +41.0% | +23.9% | +16.5% |
+| 256 | 60 | +3.2% | +14.9% | +7.9 pt | +30.0% | +21.5% | +15.2% |
+
+**Every column is worse, and the long-clip protocol is where it is worst.** The interpretation we came in with — that the refresh discontinuity is what costs us on the motion-referenced metrics — is wrong, or at least secondary. What the comparison actually says is that **spatial coherence of the refresh matters more than its temporal concentration**: an index rotation leaves fresh and stale patches interleaved in a lattice across the frame, the spatial SSM and the output cache lose local context, and that costs more than the spike it removes. Mean activity also rises by 3 to 13 points, because the rotation's stripe does not coincide with what the detector was already going to update.
+
+We report this because the idea is cheap enough that a reader would otherwise try it, and because it constrains how the mechanism should be thought about: the periodic full refresh is not merely a safety valve against drift, it is the operation that restores a globally consistent spatial context.
+
+Second, the cause is a train-deploy mismatch rather than a flaw in \(\Delta\)-gating itself. Training uses four-frame clips, so the model has never had to hold state through more than three consecutive gated frames. Randomised mask ratios make it robust to *how much* is skipped, not to *how long*.
+
+**Testing that explanation.** We fine-tuned the reported checkpoint for 25k steps at clip length 24 — long enough that no mid-clip keyframe fires, so the model must hold state through 23 consecutive gated frames. The diagnostic quantity is not the absolute error but the gap between protocols, which is the Penalty column of Table 7a: the eight-to-32-frame penalty falls from 14.2% to 9.4%, the eight-to-128 from 50.6% to 32.0%, and the eight-to-256 from 86.9% to 52.8%. **The mismatch is a real contributor at every horizon, and its removal is worth 18% of absolute error at 256 frames** (0.2434 to 0.1990).
+
+One observation comes with it, and it is about evaluation rather than about the model. The two checkpoints score **identically to four decimal places on eight-frame clips** — 0.1302 both. An evaluation restricted to short clips would have scored a 25k-step intervention that removes a fifth of the long-horizon error as having no effect whatsoever. The short-clip convention is not only optimistic about streaming, it is blind to improvements aimed at it.
+
+**The refresh period moves with the checkpoint.** A model taught to tolerate sustained gating needs refreshing less often, and the saved refreshes buy back the stability that a longer period would otherwise cost:
+
+**Table 8. Refresh period against checkpoint. The period that is worth choosing depends on which checkpoint is running, which is why they are swept together. Final rows are seed 0; their three-seed spreads are in Appendix A and are smaller than every difference discussed below.**
+
+| Configuration | Clip | Active (%) | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Base, period 30 | 32 | 22.7 | 0.1487 | 0.8264 | 0.0682 | 0.0219 | 0.0298 |
+| Long-clip, period 60 | 32 | **19.6** | 0.1447 | 0.8345 | **0.0608** | **0.0195** | **0.0274** |
+| **Final, period 30** | 32 | 22.7 | **0.1388** | **0.8426** | 0.0751 | 0.0222 | 0.0299 |
+| Final, period 60 | 32 | **19.6** | 0.1412 | 0.8391 | 0.0617 | 0.0197 | 0.0276 |
+| Base, period 30 | 256 | 23.9 | 0.2434 | 0.7134 | 0.0719 | 0.0291 | 0.0366 |
+| Long-clip, period 60 | 256 | 22.1 | 0.2087 | 0.7716 | 0.0665 | 0.0252 | 0.0329 |
+| **Final, period 30** | 256 | 23.9 | **0.1907** | **0.7922** | 0.0692 | 0.0264 | 0.0340 |
+| Final, period 60 | 256 | 22.1 | 0.2006 | 0.7770 | **0.0684** | 0.0260 | 0.0336 |
+
+Two things follow. **On the long-clip checkpoint, lengthening the period is free stability** — period 60 gives up nothing on accuracy that the fine-tune had not already paid for, and takes 1.8 to 3.1 points off activity. **On the final checkpoint it is no longer free**, because the spread term has already spent some raw-frame-difference budget: period 30 is better on accuracy and \(\delta_1\) at both clip lengths, and period 60 buys back only 1% of raw frame difference at 256 frames. The reported configuration is therefore **the final checkpoint at period 30**, and a deployment weighting flicker over error should run the long-clip checkpoint at period 60 instead. Both rows are in Table 3 so neither choice is hidden.
+
+**Table 8b. Recommended operating configurations.** Same 4.19M weights; the choice is a training stage and a refresh period, both already measured above. 256-frame numbers, real indoor holdout.
+
+| Weighting | Checkpoint | Period | Active (%) | AbsRel | t-delta |
+|---|---|---:|---:|---:|---:|
+| Accuracy (reported) | Final | 30 | 22.0 | **0.1907** | 0.0692 |
+| Flicker | Long-clip | 60 | 22.1 | 0.2087 | **0.0665** |
+| Lowest compute | Final, fallback off | 30 | **18.0** | 0.1924 | 0.0694 |
+
+The third row is the dense-fallback finding of Section 6.3 read as a deployment choice: switching the fallback off takes 4 points off activity at 256 frames and costs 0.9% relative AbsRel (16.1% activity at eight frames, Table 9).
+
+### 5.9 Where the remaining accuracy error is
+
+Two measurements localise the accuracy gap of Section 5.3, and both say the same thing about where work should go next. We state them here rather than only among the diagnostics, because they are the paper's main negative result about the model itself.
+
+**The output structure is not the limit.** Pushing ground truth through the model's own patch-token bottleneck gives the best score this output could reach: 0.0858 AbsRel on TUM and 0.0367 on Bonn, against the reported model's 0.1285 and 0.1241. The balanced ceiling, 0.0613, is better than every model in the comparison group, so neither patch size nor input resolution is what stands between this architecture and the leaders (Section 6.4). The gap is concentrated on the dynamic-object source, where we sit 3.5 times above the ceiling against 1.5 on the static one.
+
+**The predicted depth field is compressed on exactly that source.** Its dynamic range is 0.75 of ground truth on Bonn against 0.93 on TUM, so a ratio metric like \(\delta_1\) is punished for a flattened field rather than a misplaced one. This is not a decoder artefact — sharpening the binned head's softmax at inference moves the ratio not at all — but a property of the objective, which contains no term penalising compression. Adding one recovers the range monotonically, to 0.90 at the strongest weight tested, at a small cost in raw frame difference and no cost in compute (Section 6.5).
+
+Together they say the next accuracy improvement is neither a bigger output nor a finer patch: it is dynamic-scene handling and an objective that does not reward shrinking the prediction.
+
+![Qualitative comparison](figures/qualitative.png)
+
+**Figure 9. Qualitative comparison on three held-out scene types**, last frame of an eight-frame clip. Columns: RGB, the detector's activity mask (selected patches keep their brightness, skipped ones are dimmed, the boundary outlined), our prediction, Depth Anything V2 Small, DPT-Large, and ground truth. Each model is aligned by its own native rule and every depth tile in a row shares one colour range taken from that row's ground truth. The detector fires on the walking person and almost nowhere else while the static scene lights almost nothing; the driving row lights 80% of the field, which is the transfer failure of Section 5.6. Our prediction is visibly smoother than the ground truth has structure — the visual signature of the two defects named just above, the ceiling gap and the range compression. The percentage beside each row is the detector's own selection; above the 40% fallback threshold the shipped model overrules it and computes densely, so the compute paid is 17.9%, 49.9% and 100% against the detector's 9.8%, 34.4% and 79.6%. KITTI's ground truth is projected LiDAR, valid on 18.1% of pixels, which is why that tile is mostly black.
+
+
+## 6. Ablations and Diagnostic Findings
+
+### 6.1 Mask policy
+
+MSE and cosine change scores perform similarly at matched activity. Keyframe intervals between the tested settings have little effect on short-clip accuracy. Training with i.i.d. random masks produced better robustness than detector-driven mask fine-tuning, contrary to the initial expectation that train–deployment mask matching would be essential.
+
+### 6.2 DINOv2 feature distillation
+
+Matching final backbone tokens to frozen DINOv2-small features does not improve depth accuracy: 0.4315 AbsRel against 0.4292 without it, measured on an earlier checkpoint pair. It yields small improvements in temporal metrics (TCE 0.0846 versus 0.0879), suggesting regularization rather than better geometric representation.
+
+### 6.3 Design decisions behind the reported checkpoint
+
+Three choices in the final recipe were made from measurements rather than intuition, and each carries a cost worth stating.
+
+**Binned depth head.** A 64-bin cross-entropy term alongside the regression loss is worth 8.6% relative AbsRel on real footage (0.1795 against 0.1963), measured across three seeds per arm so the effect is three to six times the seed noise. It is not free: it costs 8% on raw frame difference and 12% on TCE. The reported model keeps it and buys the temporal loss back with the auxiliary terms below.
+
+**Dense fallback, and a claim it no longer supports.** A frame whose activity exceeds a threshold is routed through the dense path. We previously reported that this improves real accuracy (AbsRel 0.1685 to 0.1633) at the cost of raising mean activity, and adopted 40% as the default. Sweeping the threshold over the full holdout says otherwise:
+
+**Table 9. Dense-fallback threshold, real indoor holdout, eight-frame clips, reported checkpoint.**
+
+| Threshold | Active (%) | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---:|---:|---:|---:|
+| off | **16.1** | 0.1255 | 0.8637 | 0.0728 | **0.0184** | **0.0262** |
+| 0.2 | 36.5 | 0.1259 | **0.8724** | **0.0627** | 0.0188 | 0.0265 |
+| 0.4 (default) | 22.0 | 0.1263 | 0.8681 | 0.0750 | 0.0193 | 0.0270 |
+| 0.6 | 16.9 | **0.1254** | 0.8643 | 0.0736 | 0.0186 | 0.0264 |
+
+**AbsRel is flat across the sweep** — 0.1254 to 0.1263, a spread within the measured seed standard deviation of \(\pm\)0.0012 — while activity varies by a factor of 2.3. What the fallback actually buys is 0.9 points of \(\delta_1\) and a 16% improvement in raw frame difference, for 14 points of activity at threshold 0.2. The earlier accuracy claim was measured on the first-sequence subset, where the crowd scene both dominates and is dense enough that the threshold fires often; on the full holdout it does not survive.
+
+**Disabling it entirely is the cheapest operating point, and it is a trade rather than a free lunch.** Measured across the three final-stage seeds:
+
+| Configuration | Clip | Active (%) | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---|---|---|---|---|
+| Fallback at 0.4 (reported) | 8 | 22.0 | 0.1272 ± 0.0012 | **0.8680 ± 0.0006** | 0.0746 | 0.0194 | 0.0272 |
+| **Fallback off** | 8 | **16.1** | 0.1263 ± 0.0007 | 0.8635 ± 0.0004 | **0.0727** | **0.0187** | **0.0264** |
+| Fallback at 0.4 (reported) | 256 | 23.9 | 0.1919 ± 0.0019 | **0.7914 ± 0.0008** | 0.0693 | 0.0262 | 0.0338 |
+| **Fallback off** | 256 | **18.0** | 0.1926 ± 0.0004 | 0.7834 ± 0.0022 | **0.0691** | **0.0255** | **0.0331** |
+
+Switching it off leaves AbsRel unchanged (the differences are inside the seed spread), improves OPW and TCE by 2 to 4%, cuts mean activity by 22 to 27% — and costs 0.45 to 0.80 points of \(\delta_1\), which at a seed standard deviation of 0.0004 to 0.0022 is a real difference rather than noise.
+
+We therefore keep the fallback on for the reported configuration and name the alternative rather than burying it: **\(\delta_1\) is the accuracy measure this model is weakest on, and spending half a point of it to buy 3% of OPW is a bad trade for the claims in this paper — while a 25% cut in update rate at unchanged AbsRel is exactly what a compute-constrained deployment should take.** The two rows are the same weights and differ only in a threshold at inference, so the choice belongs to the deployment, not to the training.
+
+**Auxiliary losses, and a methodological caution.** A depth-boundary-weighted term and a flow-warped residual term are both enabled at weight 2.0. Screened at 8k steps, they looked like a trade: the boundary term improved accuracy while worsening temporal metrics, and the warp term did the reverse, degrading \(\delta_1\) beyond the noise floor. At 60k steps the trade disappears and both improve together (Table 2). **The ranking of loss terms at 8k did not survive to convergence.** We report this because short screening runs are standard practice for choosing loss weights, and in our case they were reliable for deciding whether a term helps but not for deciding how strongly to weight it. Section 6.6 returns to the warp term's magnitude with a noise floor tight enough to settle it.
+
+### 6.4 Where the remaining accuracy error lives
+
+Average-pooling valid ground-truth pixels to a patch grid, bilinearly upsampling, and median-aligning gives a fixed-resampling reference. It does not optimize over the learned multichannel decoder, so it is not a mathematical accuracy ceiling. The historical patch-16 reference scores are 0.0858 AbsRel and 0.9150 \(\delta_1\) on TUM and 0.0367 and 0.9786 on Bonn; the balanced AbsRel is 0.0613. References to a "ceiling" in the historical discussion below mean this diagnostic only.
+
+Halving the reference patch size to 8 gives 0.0474 and 0.0204. This motivates checking reconstruction, optimization, and dynamic-scene handling, but does not establish that token capacity or input resolution cannot be bottlenecks. That requires controlled model ablations rather than this fixed GT transformation.
+
+The gap is concentrated, and more sharply than we previously reported: TUM sits 1.5 times above its ceiling while Bonn sits **3.5 times** above, and Bonn is the source with moving people and occlusion. On the first-sequence subset this asymmetry read as three times against two; on the full holdout Bonn's ceiling drops to 0.0367 — its scenes are geometrically easy for a patch-grid output and hard for our model, which is the sharpest statement in this section. Closing half of Bonn's gap alone would bring the dataset-balanced mean from 0.1302 to 0.107. This also suggested a specific suspect among the auxiliary losses — the flow-warped residual term assumes photometric correspondence, which is precisely what fails at a moving object's depth discontinuity. Section 6.6 tests that suspicion directly, by removing the term rather than only raising its weight, and it does not survive the test: accuracy on Bonn gets worse without the term, not better, so the ceiling gap is not explained by it.
+
+This measurement is easy to get wrong. Our first version pooled ground truth without a validity mask, so sensor holes averaged in; in disparity space a single zero becomes 1/eps and dominates its patch, giving 11.4 AbsRel on TUM, and the corresponding depth-space numbers suggested the model had already surpassed the ceiling — the opposite conclusion.
+
+### 6.5 Range compression, a cheap fix that failed, and one that works
+
+Section 5.4 reports our model under both alignment rules, and the two-degree-of-freedom fit improves real AbsRel from 0.1302 to 0.1155 — 11%. An extra degree of freedom helping that much means a systematic error the one-parameter fit cannot absorb.
+
+Splitting by clip localises it. The two-degree-of-freedom fit helps 78% of Bonn clips (median improvement 9.6%) but only 31% of TUM clips, where the median clip is actually worse. Measuring the predicted and ground-truth disparity distributions on the same clips explains why:
+
+**Table 10. Predicted dynamic range as a fraction of ground truth, full holdout.**
+
+| Checkpoint | Source | Range ratio | Std ratio |
+|---|---|---:|---:|
+| Base | TUM | 0.93 | 0.90 |
+| Base | Bonn | **0.75** | **0.74** |
+| Long-clip | TUM | 0.94 | 0.91 |
+| Long-clip | Bonn | 0.78 | 0.77 |
+| **Final** (with the spread term) | TUM | 0.95 | 0.91 |
+| **Final** (with the spread term) | Bonn | **0.85** | **0.84** |
+
+**The model compresses range on the dynamic-object source, by about a quarter.** We previously reported this ratio as 0.47 — less than half — but that measurement was the crowd sequence alone; over the full holdout it is 0.75. The direction of the effect is unchanged and it is still concentrated on Bonn, where the true range is widest, but its magnitude is a quarter rather than a half, and any statement resting on the larger figure has to be read down accordingly. It remains one phenomenon behind three symptoms: the low \(\delta_1\) (a ratio metric punishes a flattened field), the Bonn-specific alignment gap, and Bonn sitting 3.5 times above its structural ceiling in Section 6.4.
+
+The obvious suspect was the decoder. The binned head predicts depth as a softmax expectation over log-depth bin centres, and an expectation pulls toward the distribution mean whenever the model is uncertain. That hypothesis is testable without retraining, by sharpening the softmax at inference:
+
+| Softmax temperature | Bonn AbsRel | Bonn \(\delta_1\) | Range ratio |
+|---:|---:|---:|---:|
+| 1.00 | **0.1283** | **0.8801** | **0.75** |
+| 0.50 | 0.1295 | 0.8790 | 0.75 |
+| 0.25 | 0.1312 | 0.8766 | 0.74 |
+
+**The range ratio does not move and accuracy gets slightly worse.** The bin distributions are already peaked; the compression is in the predicted centres themselves. The model genuinely predicts a flattened field, which rules out a decoding fix and also rules out longer-clip training as a remedy — drift and range compression are separate defects with separate causes.
+
+What the diagnosis does point at is the objective. Nothing in it penalises compression: the scale-invariant log loss punishes the mismatch indirectly, but under uncertainty shrinking the prediction still lowers it, which is the ordinary bias-variance trade. So we added a term that penalises it directly: the squared log ratio of the standard deviation of predicted log depth to that of ground truth, taken per sample over valid pixels rather than per batch, since compression is a property of a scene and a wide scene would otherwise cancel a narrow one. Comparing in log space makes the term scale-free and symmetric, so over-spreading is penalised as much as under-spreading and the loss cannot be bought with noise. We fine-tuned the reported checkpoint for 8k steps at three weights, with everything else held fixed. All three arms run at the same 22.0% activity, so nothing here is bought with computation.
+
+**Table 11. A spread term against the compression it targets. Same 8k fine-tune from the base checkpoint, same activity, real indoor holdout. Stacking the same stage on the long-clip checkpoint is what produces the reported model.**
+
+| Spread weight | AbsRel | \(\delta_1\) | t-delta | OPW | TCE | TUM range/GT | Bonn range/GT |
+|---:|---:|---:|---:|---:|---:|---:|---:|
+| 0.0 (control) | 0.1286 | 0.8633 | 0.0656 | 0.0179 | **0.0257** | 0.93 | 0.77 |
+| 0.5 | **0.1254** | **0.8638** | 0.0720 | **0.0178** | **0.0256** | 0.94 | 0.85 |
+| 2.0 | 0.1293 | 0.8634 | **0.0637** | 0.0188 | 0.0266 | 0.94 | **0.90** |
+
+**The term moves the quantity it targets, and only that quantity clearly.** Bonn's range ratio recovers monotonically with the weight, 0.77 to 0.90, while TUM — already at 0.93 — does not move. The intervention lands exactly where the diagnosis said the defect was, which is the strongest evidence that the diagnosis is right.
+
+**The accuracy gain is not claimable.** Dataset-balanced AbsRel improves from 0.1286 to 0.1254 at weight 0.5, which is 0.0032 — inside the \(\pm\)0.005 seed-noise floor — and \(\delta_1\) moves by half a point of noise. Weight 2.0 is no better than the control. Measured on the first-sequence subset the same arms read as a 5.5% AbsRel improvement, and that figure does not survive the full holdout. What survives is a mechanism that corrects a specific, separately measured defect at no cost in compute and a small cost in raw frame difference (10% at weight 0.5), which is worth having for the range itself rather than for the error metric.
+
+Widening a predicted field necessarily lets it move more, so a term that fights compression works against the flicker suppression this architecture is built for. The useful statement is that range compression is a defect of the objective rather than of the decoder or the gating, and that it is correctable at a stated price.
+
+**The two stages compose, which is how the reported checkpoint is built.** Running the same 8k spread stage on top of the long-clip checkpoint rather than the base one lifts Bonn's range ratio from 0.78 to 0.85 — closer to TUM's 0.95 than any earlier checkpoint reaches — and improves accuracy at every clip length by 3 to 4% (Table 7a). It costs raw frame difference, by 24% at eight frames and 3% at 256, which is the price named above and the reason Table 3 reports the stage-before as well. The final configuration in this paper is therefore base → long-clip → spread, at keyframe period 30.
+
+### 6.6 The warp weight is a dial, and its cost lands on the long protocol
+
+The objective carries a flow-warped residual term whose job is the motion-referenced metrics: it penalises the prediction at frame \(t\) against the previous frame warped forward by optical flow, so it targets exactly what OPW and TCE score. Its weight had never been swept, because under the \(\pm\)0.005 noise floor we had been quoting from 8k-step probes, a 3% change in OPW was not resolvable. The three-seed spread of the final stage (Appendix A) makes it resolvable, so the question is now answerable: what does a heavier warp term buy, and what does it cost?
+
+Three additional arms, each fine-tuned from the long-clip checkpoint for 8k steps with everything else held fixed at the reported configuration: two above the reported weight, at 4.0 and 8.0, and — motivated by Section 6.4's suspicion that the term's photometric-correspondence assumption is what costs Bonn its accuracy — one with the term removed entirely, weight 0.0. Weight 2.0 is the reported model, so it needs no retraining.
+
+**Table 14. Warp weight against accuracy and the temporal metrics, real indoor holdout. The 2.0 row is the reported checkpoint; parentheses give each arm's distance from the three-seed mean of that row in units of its standard deviation (Appendix A) — a final-stage conditional spread, three fine-tunes of one long-clip checkpoint, not the variance of the whole pipeline. Activity is identical across all four arms at every protocol.**
+
+| Protocol | Weight | Active (%) | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---:|---|---|---|---|---|
+| 8 frames | 0.0 | 22.0 | 0.1296 (+2.0\(\sigma\)) | 0.8658 (−3.7\(\sigma\)) | 0.0740 | 0.0209 (+7.5\(\sigma\)) | 0.0286 (+4.7\(\sigma\)) |
+| | 2.0 | 22.0 | 0.1263 | 0.8681 | 0.0750 | 0.0193 | 0.0270 |
+| | 4.0 | 22.0 | 0.1274 (+0.2\(\sigma\)) | **0.8694** (+2.3\(\sigma\)) | 0.0681 | 0.0183 (−5.5\(\sigma\)) | 0.0261 (−3.7\(\sigma\)) |
+| | 8.0 | 22.0 | 0.1282 (+0.8\(\sigma\)) | 0.8679 (−0.2\(\sigma\)) | **0.0665** | **0.0170** (−12\(\sigma\)) | **0.0249** (−7.7\(\sigma\)) |
+| 32 frames, period 30 | 0.0 | 22.7 | 0.1423 (+4.8\(\sigma\)) | 0.8379 (−0.8\(\sigma\)) | 0.0760 | 0.0238 (+3.6\(\sigma\)) | 0.0315 (+3.4\(\sigma\)) |
+| | 2.0 | 22.7 | 0.1388 | 0.8426 | 0.0751 | 0.0222 | 0.0299 |
+| | 4.0 | 22.7 | 0.1401 (+1.2\(\sigma\)) | 0.8426 (+0.7\(\sigma\)) | 0.0699 | 0.0212 (−1.6\(\sigma\)) | 0.0290 (−1.6\(\sigma\)) |
+| | 8.0 | 22.7 | 0.1408 (+2.3\(\sigma\)) | 0.8398 (−0.2\(\sigma\)) | **0.0680** | **0.0197** (−4.6\(\sigma\)) | **0.0276** (−4.4\(\sigma\)) |
+| 256 frames, period 30 | 0.0 | 23.9 | 0.1958 (+2.1\(\sigma\)) | 0.7881 (−4.1\(\sigma\)) | 0.0698 | 0.0284 (+5.5\(\sigma\)) | 0.0359 (+5.3\(\sigma\)) |
+| | 2.0 | 23.9 | **0.1907** | **0.7922** | 0.0692 | 0.0264 | 0.0340 |
+| | 4.0 | 23.9 | 0.1966 (+2.5\(\sigma\)) | 0.7897 (−2.1\(\sigma\)) | 0.0648 | 0.0252 (−2.5\(\sigma\)) | 0.0328 (−2.5\(\sigma\)) |
+| | 8.0 | 23.9 | 0.1995 (+4.0\(\sigma\)) | 0.7851 (−7.9\(\sigma\)) | **0.0637** | **0.0233** (−7.2\(\sigma\)) | **0.0310** (−7.0\(\sigma\)) |
+
+**The sweep is genuinely one variable.** Mean activity is identical across all four arms at every protocol — 22.0, 22.7 and 23.9% — so the term changes what the model predicts without changing what the detector selects, and nothing in the table is bought or paid for with computation.
+
+**The trade we expected is not the trade we measured.** The premise was that a heavier warp term buys the motion-referenced metrics by paying in raw frame difference, since a loss that ties frame \(t\) to a warped frame \(t-1\) permits motion that a flicker penalty would suppress. Instead t-delta improves alongside OPW and TCE as the weight rises from 2.0, by 5 to 11% across every protocol. OPW and TCE move monotonically with the weight across the full range tested, including down to zero — removing the term costs 4.7 to 7.5 standard deviations on those two measures at eight frames, which is the cleanest evidence in this section that the term is doing real work for exactly the metrics it targets. t-delta is the one exception: it improves a little at weight 0.0 relative to 2.0 (0.0740 against 0.0750 at eight frames) before resuming its downward trend at 4.0 and 8.0, a small, single-seed reversal we do not build an argument on. Across the range where all three move together, the term is not trading between kinds of temporal error but reducing temporal error as a whole — the warped residual is a better-specified target than raw frame difference, and optimising it happens to suppress raw difference too.
+
+**The cost is real, and it is concentrated where the paper's main protocol sits.** At eight frames the temporal gains are close to free in accuracy: weight 8.0 costs 0.8 standard deviations of AbsRel and nothing measurable in \(\delta_1\). At 256 frames the same weight costs 4.6% of AbsRel and 0.71 points of \(\delta_1\), at 4.0 and 7.9 standard deviations. A term that constrains each frame to a warped version of its predecessor is a smoothness prior over the state trajectory, and the longer the stream, the more the accumulated prior pulls the prediction away from the measurement. The short protocol cannot see this; the streaming protocol this paper argues for is exactly where it shows.
+
+**Raising the weight hands back part of what the spread term bought — but removing it does not hand that back.** Bonn's range ratio falls from 0.86 to 0.80 to 0.79 as the weight rises from 2.0, while TUM's is unchanged at 0.94. Warping toward the previous frame is another averaging operation, so raising it compresses the dynamic range in the same place Section 6.5 found compression to begin with, and the give-back saturates: nearly all of it happens between 2.0 and 4.0, and 8.0 costs almost nothing further. At weight 0.0, though, Bonn's ratio is 0.86 — statistically indistinguishable from the reported checkpoint's own 0.86 on the same quick probe. The low end of the dial is flat on this axis: the term is not the source of the compression Section 6.5 diagnoses, it only adds a little more of it once its weight climbs past the reported value.
+
+**The response is not monotone once the low end is measured, and that changes what "we keep 2.0" means.** We had reported this as a dial with no optimum — a pure trade of accuracy for temporal stability, so where to set it was a statement about deployment priorities rather than a measurement. Adding the weight-0.0 arm overturns that: AbsRel is *worse* at 0.0 than at 2.0, at both eight frames (0.1296 against 0.1263) and 256 frames (0.1958 against 0.1907), and \(\delta_1\) is worse too (−3.7\(\sigma\) and −4.1\(\sigma\)). Accuracy is worst at the two ends of the range we have measured (0.0 and 8.0) and best at 2.0, a U-shape rather than a monotone slope — Section 6.4's hypothesis that the term's photometric-correspondence failure was costing us the Bonn gap predicted the opposite of this, and does not survive the direct test. Our reading is that the term is doing two things at once: at low weight it supplies a correspondence-consistent signal that a purely spatial loss does not, which the accuracy columns credit; past 2.0 the smoothness-prior cost identified above starts to dominate, which is what the original sweep showed. **2.0 is not only where we chose to stop paying the stability tax — on this evidence it is close to where accuracy peaks as well**, which the temporal metrics do not need to be traded away to get. A deployment that scores stability above absolute accuracy should still set the weight higher, and Table 14 is what it needs to make that call; a deployment that wants both should not go looking below the reported value. Unlike the dense-fallback threshold of Section 6.3, which is one inference-time number away from a shipped checkpoint, this one costs a retrain.
+
+**Scope.** Each new arm, including the 0.0 one, is a single seed compared against a three-seed mean, so the sigma figures measure distance from a distribution estimated on the reported configuration only. The temporal differences past five standard deviations are safe from a single draw. The 2.5 and 4.0 standard-deviation AbsRel gaps at 256 frames for the high-weight arms are believed because the response is consistent across five protocols, not on the strength of either number alone; the 0.0 arm's 2.0–2.1\(\sigma\) AbsRel gaps are smaller and rest on one seed in each direction, so we call the U-shape a real pattern but do not claim its exact width.
+
+## 7. Limitations
+
+The present study has several important limitations.
+
+1. Every table in Section 5 comes from one checkpoint, but two diagnostic results in Section 6 (mask policy, feature distillation) were measured on earlier checkpoints and are reported as such rather than re-run.
+2. The comparison group now includes Video Depth Anything (metric, Small), the video-specific class that was missing, and Depth Anything 3, which is non-causal and therefore not a streaming competitor at all — we report it because it is strong, not because the comparison is like for like. Neural Video Depth Stabilizer is still absent.
+3. OPW and TCE do not support a general temporal-consistency lead. Raw t-delta can be gamed by constant predictions and is interpreted only alongside accuracy and the constant control.
+4. A fused scan kernel removed the dominant cost and, in doing so, removed the sparse path's wall-clock advantage on an RTX 4090: compiled full compute is now faster at every activity level. The remaining sparse-path cost is activity-independent bookkeeping. Sparsity's benefit is presently established in MACs and per-stream state, not in measured latency on this device.
+5. Execution on an RTX 4090 is overhead-bound at this model scale, so reduced analytical MACs do not become higher FPS *there*; on compute-bound edge hardware they do — 13.7x in time and 15.3x in energy per frame at 5% activity on a Jetson Nano, and 14.2x in time on a CPU-only Raspberry Pi 4B (Section 5.7). Three gaps remain. Neither device runs the fused kernel we ship — Triton targets neither `sm_53` nor a CPU — so the inverted ordering is measured on the reference scan throughout. The energy result rests on the Nano alone, because the Pi exposes no power rail. And both boards are far from real time at this input size (8.8 and 2.0 FPS at 5% activity), so this is a statement about arithmetic converting to time, not about deployable throughput. An Orin-class device would close the first and third; a Jetson TX2 is the obvious fourth measurement and is not made.
+6. GMC is validated on real ego-motion (Section 5.6), but only on five driving sequences from one dataset, and only with per-domain threshold calibration; its default threshold is inoperative on real video. Handheld and aerial motion remain untested.
+7. Cross-domain evaluation covers real driving only. Unseen indoor domains (NYU, ScanNet) were not evaluated: the former's host was unreachable and the latter requires a signed agreement. The claim of generalization is therefore limited to the synthetic-to-real axis of one scene type.
+8. Clip-length dependence is severe under per-clip alignment: the base checkpoint scores 0.1302 AbsRel on eight-frame clips and 0.2972 on 512-frame clips of real footage, and the reported one 0.1263 and 0.1907 at 256 frames (Section 5.8). The 1,024-frame measurement separates the causes — per-frame drift is 13.5% for the base checkpoint and 1.1% for the long-clip one, against clip-level penalties of 58% and 36% — so most of the effect is a temporally varying global scale rather than local depth-shape drift, and our own scale factor is seven times less stable over 256 frames than over eight (Table 7f), which is our weakness and not the protocol's — and it is a weakness relative to three of seven baselines specifically, not the group as a whole: ZoeDepth, DA3 and Video Depth Anything hold their own scale as well as or better than we do at 256 frames (Table 7g), so carried state does not automatically win this axis against a model with a metric or temporal prior. What we cannot do is remove the alignment window from the comparison tables, because scale-ambiguous depth has to be aligned somehow; the decomposition is reported instead. The 1,024-frame streams come from one synthetic source (20 clips) and one real sequence (1 clip); the real holdout does not contain more.
+
+9. The 256-frame protocol rests on 13 disjoint clips of real footage, because a finite holdout yields few long clips. Overlapping windows would multiply the count at the cost of independence, and one outlier frame then aliases into several frame indices. Table 3d puts a paired clip-level bootstrap on the one ranking claim we make from it: the 1.23x raw-frame-difference lead holds (95% CI 1.18 to 1.29), while the corresponding eight-frame margin does not separate from 1 and we no longer state it as established. Differences of a few percent at that clip length remain unresolvable, and we claim none.
+10. The predicted depth field has under half the ground truth's dynamic range on the dynamic-object source (Section 6.5). A spread term recovers part of it at a stated cost in motion-referenced consistency; the defect is not eliminated.
+11. Patch-size, refinement, and fully trained decoder/cache ablations remain incomplete.
+12. The base checkpoint is single-seed at 60k steps. The final stage was repeated across three seeds and its spread is \(\pm\)0.0012 AbsRel at eight frames, four to eight times tighter than the 8k-step estimate (Appendix A) — but that measures the last 8k steps only, with base and long-clip initialisation held fixed. Full-pipeline variance is unmeasured, and differences below the stage spread are not claimed. Seed variance was characterised only at 8k steps (Appendix A), and differences below that noise floor are not claimed.
+
+## 8. Conclusion
+
+SOKKANAEM demonstrates that patch-level visual change can control an SSM through its discretization step, turning a static observation into an exact identity transition on temporal state rather than a suppressed update. Across synthetic and real RGB-D evaluations, patch sparsity costs little depth accuracy — a 22-fold cut in the update rate costs 6.4% relative error on real indoor footage — and the model suppresses raw frame-to-frame variation better than any baseline in the comparison group, including the video-specific one, while remaining 6x to 82x smaller. That is a statement about raw prediction variation only. It does not establish an advantage in motion-compensated or ground-truth-referenced consistency, where a 120M baseline is ahead of us under both protocols.
+
+The experiments also mark the boundary of the idea, and most of the work of this paper was finding those boundaries rather than the result inside them.
+
+**On the mechanism.** Exact state skipping is not end-to-end sparse inference: dense readout, spatial context and decoding remain, and only the temporal state transition is exact. An iso-mask token-drop control, which we had read as proving that reading preserved state is critical, proves something narrower once the sparse path is trained — the readout buys stability, and the accuracy it seemed to buy was an artefact of an untrained path.
+
+**On efficiency.** A fused scan kernel closed the kernel gap and, unexpectedly, made dense streaming the faster configuration on a desktop GPU. Two edge devices then settled what that meant: on a Jetson Nano and on a CPU-only Raspberry Pi 4B the ordering inverts and the sparse path wins by 13.7x and 14.2x at 5% activity. The efficiency argument is therefore about where a device sits on the arithmetic-to-overhead ratio, not about the mechanism in the abstract. What remains undone is measuring the *shipped* configuration at the edge — neither board can run the fused kernel — and a power rail on a second device to corroborate the energy result.
+
+**On evaluation.** Two protocol choices moved our own numbers further than any architectural change in this paper. A clip cap that sampled the first held-out sequence rather than the holdout was worth 0.03 AbsRel and ten points of activity, and it inflated three separate diagnostic findings — a dense-fallback accuracy gain that does not exist, a range compression twice its true size, and a spread-term improvement inside the noise floor. Clip length was worth 87% of our error, and the eight-frame convention this literature uses is blind to a fine-tune that removes a fifth of the long-horizon error. We report both because a reader has no way to discover either from a table that does not name its protocol.
+
+**What remains open.** Accuracy is limited by drift between keyframes and by a predicted depth field at three quarters of the true dynamic range on dynamic scenes — not by patch size or output resolution, which sit 1.5 to 3.5 times above where the model operates. The drift is largely a training artefact: long-clip fine-tuning removes 18% of the 256-frame error and a longer refresh period converts the rest into stability. Range compression is correctable in the objective, at a cost in the metric this architecture leads on. Within these boundaries, exact \(\Delta\)-gating provides a principled foundation for change-adaptive streaming vision, and a fairly complete map of where its advantages stop.
+
+## Appendix A. Reproducibility `[CHECKPOINT-DEPENDENT]`
+
+**Model.** Dimension 192, four alternating temporal/spatial blocks, state dimension 16, four-direction spatial cross-scan, depthwise local convolution branch, DPT-style decoder with a 64-bin depth head over 0.3-150 m. 4,185,872 parameters; 16.7 MB fp32 weights; 12.75 MB of persistent state per stream in fp32 and 6.38 MB in fp16. Stream state lives entirely in an external dictionary, so one set of weights serves many streams without leakage.
+
+**Training.** Three stages, all at input 256x256 on a single RTX 4090. (1) Base: 60,000 steps at clip length 4, seed 0, 13 h 11 min. (2) Long-clip: 25,000 further steps at clip length 24, batch 2, 18 h 45 min. (3) Final: 8,000 further steps at clip length 24 with the spread term at weight 0.5, 7 h 20 min. Stage 1 defines the loss below; stages 2 and 3 keep it and add only what their names say. Loss is scale-invariant log depth plus 0.5 gradient, 0.1 temporal, 0.05 normal, a 64-bin cross-entropy term at weight 0.2, and two auxiliary terms at weight 2.0 — a flow-warped log-depth residual and a depth-boundary-weighted term. Mask ratios are sampled i.i.d. during training rather than taken from the detector.
+
+**Optimization.** AdamW, learning rate 3e-4, weight decay 0.01 (the PyTorch default), gradient-norm clipping at 1.0, 1,000 linear warm-up steps followed by cosine decay to zero, full fp32 (no mixed precision). Batch is four clips of four frames, so 16 frames per step. Evaluation uses shadow EMA weights with decay 0.999, not the raw parameters.
+
+**Data sampling and augmentation.** The five sources are drawn through a weighted sampler that equalizes per-dataset draw probability, so the largest source does not dominate the gradient any more than it dominates the reported mean. Augmentation is drawn once per clip and applied to every frame in it — random-resized crop (scale 0.55–1.0 of the shorter side, random position), horizontal flip with probability 0.5, and brightness and contrast jitter in 0.75–1.3 on RGB only. Clip-consistent transforms are not a convenience: a per-frame transform would inject apparent motion, which the change detector would register as activity and the temporal loss would penalise. Depth is never photometrically altered. The random mask ratio ramps from 0 to 0.5 over training.
+
+**Temporal metric definitions.** t-delta is the mean absolute difference between consecutive predicted depth maps, in metres, computed *after* per-clip alignment and over every pixel — a prediction is defined everywhere, so t-delta needs no GT-validity mask. Alignment order matters: our own model and every baseline are scored through one implementation, after an earlier version of this pipeline measured t-delta on raw output for our model and on scale-aligned output for the baselines, which is a difference of the scale factor itself. It is not normalised by depth, which is why its magnitude tracks a scene's depth range and why synthetic and real columns are not comparable to each other. OPW and TCE are normalised by ground-truth depth, and both are averaged over pixels that are valid in both frames of a pair and land in-bounds after warping. Flow comes from RAFT-small (torchvision `Raft_Small_Weights.DEFAULT`) applied to the 256-pixel RGB frames the model sees, scaled to [-1, 1], last refinement iteration. Occlusion is handled by the in-bounds test and the warped GT-validity mask only, without a forward-backward consistency check; every model is scored through the identical mask, so the comparison is fair even where absolute values would not match another paper's definition.
+
+**Memory.** Weight and per-stream state memory scale differently, and a streaming deployment cares about the second:
+
+| Component | fp32 | fp16 |
+|---|---:|---:|
+| Weights \(W\), shared across streams | 16.7 MB | 8.4 MB |
+| Persistent state \(S\), per stream | 12.75 MB | 6.38 MB |
+| Peak working set, single sparse stream | — | 37 MB |
+
+Serving \(N\) streams from one set of weights costs \(W + N \times S\): 8.4 MB + 6.38N MB in fp16. State overtakes weights at two streams, which is the regime the external state dictionary exists for.
+
+**Detector defaults.** \(\tau_{\mathrm{on}}=0.05\), \(\tau_{\mathrm{off}}=0.025\), one-patch dilation, keyframe refresh every 30 frames, dense fallback above 40% activity. For GMC these thresholds are on a feature scale and must be recalibrated per domain (Section 5.6).
+
+**Evaluation.** 100 clips per source, 8 frames per clip, held-out sequences only, per-clip median alignment before every metric. Temporal metrics use RAFT-small flow. Every full temporal table carries the per-clip optimal constant-depth control.
+
+**Measured variance.** The final stage was repeated with three seeds, and every protocol point was re-scored for each:
+
+| Protocol | Active (%) | AbsRel | \(\delta_1\) | t-delta | OPW | TCE |
+|---|---:|---|---|---|---|---|
+| 8 frames | 22.0 | 0.1272 ± 0.0012 | 0.8680 ± 0.0006 | 0.0746 ± 0.0009 | 0.0194 ± 0.0002 | 0.0272 ± 0.0003 |
+| 32 frames, period 30 | 22.7 | 0.1394 ± 0.0006 | 0.8404 ± 0.0031 | 0.0752 ± 0.0004 | 0.0220 ± 0.0005 | 0.0298 ± 0.0005 |
+| 32 frames, period 60 | 19.6 | 0.1418 ± 0.0006 | 0.8367 ± 0.0032 | 0.0613 ± 0.0007 | 0.0196 ± 0.0004 | 0.0274 ± 0.0004 |
+| 256 frames, period 30 | 23.9 | 0.1919 ± 0.0019 | 0.7914 ± 0.0008 | 0.0693 ± 0.0004 | 0.0262 ± 0.0004 | 0.0338 ± 0.0004 |
+| 256 frames, period 60 | 22.1 | 0.2020 ± 0.0021 | 0.7763 ± 0.0017 | 0.0681 ± 0.0004 | 0.0258 ± 0.0003 | 0.0334 ± 0.0003 |
+
+**The spread of the final stage is four to eight times tighter than the 8k-step estimate we had been quoting** (real AbsRel \(\pm\)0.005, real \(\delta_1\) \(\pm\)0.004, synthetic \(\delta_1\) \(\pm\)0.015 over six runs). Two cautions on scope. These three runs share the same base and long-clip initialisation and differ only in the seed of the last 8k steps, so \(\pm\)0.0012 is the variance of that stage, not of the whole pipeline; the base checkpoint is still single-seed at 60k. And the tables elsewhere in this paper report seed 0 — a specific checkpoint one could ship — rather than the mean, so a table entry can sit up to one standard deviation from the mean above.
+
+With that spread, the differences this paper does claim are resolvable: the reported checkpoint's 0.0030 AbsRel improvement over the long-clip one at eight frames is 2.5 standard deviations, and its 0.0083 improvement at 256 frames is 4.4. The differences it declines to claim — the dense-fallback sweep's 0.0009 spread, the 63.6%-activity dip of 0.0002 — are inside it.
+
+**Timing protocol.** Batch size 1, 256 pixels, 100 iterations after 20 warm-up, fastest of three repetitions, on an otherwise idle GPU. Activity is forced by a detector stub so the x axis is identical across configurations, and the dense-fallback policy is disabled during timing so that each configuration is actually measured.
+
+## References
+
+Bengio, Y., Léonard, N., & Courville, A. (2013). *Estimating or propagating gradients through stochastic neurons for conditional computation*. arXiv:1308.3432.
+
+Bhat, S. F., Alhashim, I., & Wonka, P. (2021). AdaBins: Depth estimation using adaptive bins. *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition*, 4009–4018.
+
+Campos, V., Jou, B., Giró-i-Nieto, X., Torres, J., & Chang, S.-F. (2018). Skip RNN: Learning to skip state updates in recurrent neural networks. *International Conference on Learning Representations*.
+
+Cabon, Y., Murray, N., & Humenberger, M. (2020). *Virtual KITTI 2*. arXiv:2001.10773.
+
+Chen, S., Guo, H., Zhu, S., Zhang, F., Huang, Z., Feng, J., & Kang, B. (2025). Video Depth Anything: Consistent depth estimation for super-long videos. *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition*.
+
+Dosovitskiy, A., Beyer, L., Kolesnikov, A., Weissenborn, D., Zhai, X., Unterthiner, T., Dehghani, M., Minderer, M., Heigold, G., Gelly, S., Uszkoreit, J., & Houlsby, N. (2021). An image is worth 16x16 words: Transformers for image recognition at scale. *International Conference on Learning Representations*.
+
+Eigen, D., Puhrsch, C., & Fergus, R. (2014). Depth map prediction from a single image using a multi-scale deep network. *Advances in Neural Information Processing Systems*, 27.
+
+Geiger, A., Lenz, P., & Urtasun, R. (2012). Are we ready for autonomous driving? The KITTI vision benchmark suite. *Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition*, 3354–3361.
+
+Gu, A., & Dao, T. (2023). *Mamba: Linear-time sequence modeling with selective state spaces*. arXiv:2312.00752.
+
+Gu, A., Goel, K., & Ré, C. (2022). Efficiently modeling long sequences with structured state spaces. *International Conference on Learning Representations*.
+
+Habibian, A., Ben Yahia, H., Abati, D., Gavves, E., & Porikli, F. (2021). Skip-convolutions for efficient video processing. *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition*, 2695–2704.
+
+Kong, L., Wu, B., Chen, Y., Zhang, X., & Sun, J. (2022). *EViT: Expediting vision transformers via token reorganization*. arXiv:2202.07800.
+
+Dutson, M., Li, Y., & Gupta, M. (2023). Eventful transformers: Leveraging temporal redundancy in vision transformers. *Proceedings of the IEEE/CVF International Conference on Computer Vision*, 16911–16923. https://openaccess.thecvf.com/content/ICCV2023/html/Dutson_Eventful_Transformers_Leveraging_Temporal_Redundancy_in_Vision_Transformers_ICCV_2023_paper.html
+
+Maduabuchi, C., & Wang, J. (2026). *Event-driven video generation*. arXiv:2603.13402. To appear, *European Conference on Computer Vision*.
+
+
+Liu, Y., Tian, Y., Zhao, Y., Yu, H., Xie, L., Wang, Y., Ye, Q., & Liu, Y. (2024). VMamba: Visual state space model. *Advances in Neural Information Processing Systems*, 37.
+
+Palazzolo, E., Behley, J., Lottes, P., Giguère, P., & Stachniss, C. (2019). ReFusion: 3D reconstruction in dynamic environments for RGB-D cameras exploiting residuals. *IEEE/RSJ International Conference on Intelligent Robots and Systems*.
+
+Parger, M., Tang, C., Twigg, C. D., Keskin, C., Wang, R., & Steinberger, M. (2022). DeltaCNN: End-to-end CNN inference of sparse frame differences in videos. *Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition*, 12497–12506.
+
+Rao, Y., Zhao, W., Liu, B., Lu, J., Zhou, J., & Hsieh, C.-J. (2021). DynamicViT: Efficient vision transformers with dynamic token sparsification. *Advances in Neural Information Processing Systems*, 34.
+
+Ranftl, R., Bochkovskiy, A., & Koltun, V. (2021). Vision transformers for dense prediction. *Proceedings of the IEEE/CVF International Conference on Computer Vision*, 12179–12188.
+
+Ranftl, R., Lasinger, K., Hafner, D., Schindler, K., & Koltun, R. (2022). Towards robust monocular depth estimation: Mixing datasets for zero-shot cross-dataset transfer. *IEEE Transactions on Pattern Analysis and Machine Intelligence*, 44(3), 1623–1637.
+
+Tang, K., Zheng, J., Jin, Y., Qiu, Y., Sun, G., Yan, Z., & Wong, W.-F. (2026). *SpikySpace: A spiking state space model for energy-efficient time series forecasting*. arXiv:2601.02411.
+
+Sturm, J., Engelhard, N., Endres, F., Burgard, W., & Cremers, D. (2012). A benchmark for the evaluation of RGB-D SLAM systems. *IEEE/RSJ International Conference on Intelligent Robots and Systems*, 573–580.
+
+Teed, Z., & Deng, J. (2020). RAFT: Recurrent all-pairs field transforms for optical flow. *European Conference on Computer Vision*, 402–419.
+
+Tillet, P., Kung, H. T., & Cox, D. (2019). Triton: An intermediate language and compiler for tiled neural network computations. *Proceedings of the 3rd ACM SIGPLAN International Workshop on Machine Learning and Programming Languages*, 10–19.
+
+Wang, W., Zhu, D., Wang, X., Hu, Y., Qiu, Y., Wang, C., Hu, Y., Kapoor, A., & Scherer, S. (2020). TartanAir: A dataset to push the limits of visual SLAM. *IEEE/RSJ International Conference on Intelligent Robots and Systems*.
+
+Yang, L., Kang, B., Huang, Z., Zhao, Z., Xu, X., Feng, J., & Zhao, H. (2024). Depth Anything V2. *Advances in Neural Information Processing Systems*, 37.
+
+Zhang, Y., et al. (2023). *Vision Mamba: Efficient visual representation learning with bidirectional state space model*. arXiv:2401.09417.
+
+Zheng, Y., Harley, A. W., Shen, B., Wetzstein, G., & Guibas, L. J. (2023). PointOdyssey: A large-scale synthetic dataset for long-term point tracking. *Proceedings of the IEEE/CVF International Conference on Computer Vision*.
+
+**Bibliographic entries still to verify against the originals before submission.** Depth Anything 3 (used as a measured baseline throughout; author list, venue and year unconfirmed). TartanAir V2 (the entry above is the original TartanAir paper; whether V2 has its own citable reference is unconfirmed). Vision Mamba (venue, page numbers and full author list unconfirmed). NVDS is cited in the related-work discussion but has no entry yet. Eventful Transformers was corrected against the official ICCV record on 2026-09-06. The Skip RNN, SpikySpace and event-driven video generation entries were checked against their arXiv records; the last is listed as to appear at ECCV 2026 and should be re-checked for final page numbers.

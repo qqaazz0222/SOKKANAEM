@@ -1,0 +1,3236 @@
+{
+  "records": [
+    {
+      "path": "work_dirs/acc/DA3-BASE-L256-official-pf.json",
+      "bytes": 3217,
+      "sha256": "aab5f61865f80fb4aaff12cbe9d1aa75ad410b89acdee4ed041939b5228a9472",
+      "model_claimed_by_dump": "da3:depth-anything/DA3-BASE",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 135.366599,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/DA3-BASE-L256-official.json",
+      "bytes": 8733,
+      "sha256": "6052eda176e0c7253fd18c6537335e66325901d91a30f36a769bef6be38a807b",
+      "model_claimed_by_dump": "da3:depth-anything/DA3-BASE",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 135.366599,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/DA3-BASE-L32-official-pf.json",
+      "bytes": 20776,
+      "sha256": "b32bc80fc1bc299dd7038be7a5a481814d84389a0db82f0841ad320c140822cf",
+      "model_claimed_by_dump": "da3:depth-anything/DA3-BASE",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 135.366599,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/DA3-BASE-L32-official.json",
+      "bytes": 61446,
+      "sha256": "c86726242a99e0d14701bd0a53a1a2c7e866279e4b4d6dfdc425fbefa59d3e10",
+      "model_claimed_by_dump": "da3:depth-anything/DA3-BASE",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 135.366599,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/DA3-BASE-L8-official-pf.json",
+      "bytes": 81498,
+      "sha256": "224d6c7fce0bfe2942695092469502c9528136ed30f09e01b28e35b49de54879",
+      "model_claimed_by_dump": "da3:depth-anything/DA3-BASE",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 135.366599,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/DA3-BASE-L8-official.json",
+      "bytes": 242208,
+      "sha256": "9f32b2ee54900dd2396b8e4ba8acbcebc597a9c37ea3b82030a5a94f5690ea6d",
+      "model_claimed_by_dump": "da3:depth-anything/DA3-BASE",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 135.366599,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Base-hf-L256-256.json",
+      "bytes": 8922,
+      "sha256": "4c2d8b079ec38931426ac60858fce9c3bab5dab078c2bab846ac9b3e7522addd",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Base-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 97.470785,
+      "infer_size": 256,
+      "effective_size": [
+        252,
+        252
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Base-hf-L256-official-pf.json",
+      "bytes": 3270,
+      "sha256": "c3f302d60889b20ab32ee6632fd3c76284a01912b30191439b3b3131c194283d",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Base-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 97.470785,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Base-hf-L256-official.json",
+      "bytes": 8916,
+      "sha256": "ccfe5198e87eea808fd4ef7fe0223d0b2bb6da6c8a20b745f2e76b0911f26cff",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Base-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 97.470785,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Base-hf-L32-256.json",
+      "bytes": 61102,
+      "sha256": "29435a38c1eb73371d472ffa29066de54efeafab404fe80de9ba50f96ebaa835",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Base-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 97.470785,
+      "infer_size": 256,
+      "effective_size": [
+        252,
+        252
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Base-hf-L32-official-pf.json",
+      "bytes": 20775,
+      "sha256": "7aa16c425f45a3ddd093c50792f51beee311695d9d398642262a897c4d27910e",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Base-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 97.470785,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Base-hf-L32-official.json",
+      "bytes": 60997,
+      "sha256": "7345caf41acf281b174359fad4d3af4c41485cfa9585dae16a29816ef4d4b890",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Base-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 97.470785,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Base-hf-L8-256.json",
+      "bytes": 239439,
+      "sha256": "be5f8a715223fe87f88f2fe7c139f8b221d727f3ba538046d32bf7471ced8d37",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Base-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 97.470785,
+      "infer_size": 256,
+      "effective_size": [
+        252,
+        252
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Base-hf-L8-official-pf.json",
+      "bytes": 80873,
+      "sha256": "df170c2319df09509fedeb2119cf93ef505edc875a38a83c18b20952005d4126",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Base-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 97.470785,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Base-hf-L8-official.json",
+      "bytes": 239707,
+      "sha256": "9a37342a94850d9e860d0bcc7975861752f8261dd1fdcb76a43be2d1de8bf0c2",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Base-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 97.470785,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Small-hf-L256-256.json",
+      "bytes": 8903,
+      "sha256": "8ef9bec824ea46bc7bdc39ddb73ad9e21ee5c58c2a5e853ea6d2fbc15146e3af",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": 256,
+      "effective_size": [
+        252,
+        252
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Small-hf-L256-official.json",
+      "bytes": 8961,
+      "sha256": "3d2810575010c317bac10a9e05c0494bbb0ce8c7f7ab63d68d05af606a519b99",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Small-hf-L32-256.json",
+      "bytes": 60602,
+      "sha256": "fd3358395e85394c37e91a0eaa2d6a7003b4d138a608a901d42213c724630455",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": 256,
+      "effective_size": [
+        252,
+        252
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Small-hf-L32-official.json",
+      "bytes": 60874,
+      "sha256": "aff17322640f8aef571c318b9f2a3bbc3618db7975ac6d24a0267130828b2183",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Small-hf-L8-256.json",
+      "bytes": 238201,
+      "sha256": "1c38ba6e400217a2956aaffd321a60ab239fd61ff1c040f48a47c58c366af5b9",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": 256,
+      "effective_size": [
+        252,
+        252
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/Depth-Anything-V2-Small-hf-L8-official.json",
+      "bytes": 238913,
+      "sha256": "0696ae6b2fad0232435d8f92e0ce78d59dcf054660db207830137590088e25af",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/a1-384-s0-L8.json",
+      "bytes": 244537,
+      "sha256": "025c87eb56ff61f3a58e9987380155df4de62b18eaa0bd4b04f53a6a22c62c2b",
+      "model_claimed_by_dump": "ours:work_dirs/a1-384-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/combined-s0-L8.json",
+      "bytes": 244649,
+      "sha256": "cfbdd5b8a339299c7022188d535ed0a8d06f9e0d2b39a2ba1813384d201dd264",
+      "model_claimed_by_dump": "ours:work_dirs/combined-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/d0-control-s0-L8.json",
+      "bytes": 244773,
+      "sha256": "04ce4e8595b6b6d7f053a9be710dc7b2853de77f4ef9e992e39616d4cd904b93",
+      "model_claimed_by_dump": "ours:work_dirs/d0-control-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/d1-boundary-long-s0-L8.json",
+      "bytes": 244878,
+      "sha256": "d69629cd8830025d9561a8182d62d43b98acaaaed4f60552ddca85003cf39244",
+      "model_claimed_by_dump": "ours:work_dirs/d1-boundary-long-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/d1-boundary-s0-L8.json",
+      "bytes": 244763,
+      "sha256": "d619b8cfe1f281fd6a9d78984a3ee07f53a1a47f27e1cd1de4011e89bc0e63fb",
+      "model_claimed_by_dump": "ours:work_dirs/d1-boundary-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/d1-boundary3-s0-L8.json",
+      "bytes": 244730,
+      "sha256": "e5111d660c5421b204e65067e0c77a6af40c5f0c38e1e69ca280ffef680b8330",
+      "model_claimed_by_dump": "ours:work_dirs/d1-boundary3-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/d1-fullres-s0-L8.json",
+      "bytes": 244709,
+      "sha256": "a3a20d01ab4114e41f72b0819505c968af1a946cc0c4226786b7b79b9e9e42c9",
+      "model_claimed_by_dump": "ours:work_dirs/d1-fullres-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/da2-small-L8-regions.json",
+      "bytes": 243152,
+      "sha256": "b95071094d5e73f7f8b5b4bdaf99d43dbd81af03494d03a37060bd3500284fc8",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/da2-small-L8-sharp.json",
+      "bytes": 239591,
+      "sha256": "ea4b8fccea9b820447c50a4f352370c8da8c42d467011f1ea0b0692d23c63086",
+      "model_claimed_by_dump": "hf:depth-anything/Depth-Anything-V2-Small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/depth-anything-small-hf-L256-256.json",
+      "bytes": 8743,
+      "sha256": "700f9e43dd19d865d24791cc330bba84efe4063981e22a47c28ebffd28fe5ae5",
+      "model_claimed_by_dump": "hf:LiheYoung/depth-anything-small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": 256,
+      "effective_size": [
+        252,
+        252
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/depth-anything-small-hf-L256-official-pf.json",
+      "bytes": 3212,
+      "sha256": "2a7a1d69e662094dc1a7159afc3019ac20529d0a66edd72beadcf860f9989021",
+      "model_claimed_by_dump": "hf:LiheYoung/depth-anything-small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/depth-anything-small-hf-L256-official.json",
+      "bytes": 8819,
+      "sha256": "92f62dd217ef0d21cc7a3ab8dbdec1b4a13004bb24752187e8ec9997d14ee167",
+      "model_claimed_by_dump": "hf:LiheYoung/depth-anything-small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/depth-anything-small-hf-L32-256.json",
+      "bytes": 60032,
+      "sha256": "5ba7526abdc2a918217b45296d3c91d256686d089634952b7202cbf98edf6c7d",
+      "model_claimed_by_dump": "hf:LiheYoung/depth-anything-small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": 256,
+      "effective_size": [
+        252,
+        252
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/depth-anything-small-hf-L32-official-pf.json",
+      "bytes": 20683,
+      "sha256": "b0fafda5c8ea8f3a1cca6459f8236fe25bba466515981b6f6d2b24dbc439d489",
+      "model_claimed_by_dump": "hf:LiheYoung/depth-anything-small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/depth-anything-small-hf-L32-official.json",
+      "bytes": 60284,
+      "sha256": "c6861a487e981573c6fdc2282f175c0149423b6f3e96c499a87a695df6617a25",
+      "model_claimed_by_dump": "hf:LiheYoung/depth-anything-small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/depth-anything-small-hf-L8-256.json",
+      "bytes": 236447,
+      "sha256": "95b352a9efe5acd95d9bdf8572527b69574e4de15b4b00bbefe89965566124c5",
+      "model_claimed_by_dump": "hf:LiheYoung/depth-anything-small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": 256,
+      "effective_size": [
+        252,
+        252
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/depth-anything-small-hf-L8-official-pf.json",
+      "bytes": 80659,
+      "sha256": "8d0e05b5867f028cf76d6949142cd8fb5d6becaaac4a7be7a0c39226ff721d04",
+      "model_claimed_by_dump": "hf:LiheYoung/depth-anything-small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/depth-anything-small-hf-L8-official.json",
+      "bytes": 237465,
+      "sha256": "063e08b758e8950a7459a44b915f14ecd8bd780ae446d445d730e7b5d43c16a0",
+      "model_claimed_by_dump": "hf:LiheYoung/depth-anything-small-hf",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.785089,
+      "infer_size": null,
+      "effective_size": [
+        518,
+        518
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L256-256.json",
+      "bytes": 8808,
+      "sha256": "4f1aa3050194d7c0633026de5abcd99adfbc8ad5de63e72ec3c0b48cdb547c4c",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 343.030465,
+      "infer_size": 256,
+      "effective_size": [
+        256,
+        256
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L256-official-pf.json",
+      "bytes": 3171,
+      "sha256": "47c48dca25d9ea4c5bf72fab3ac9ae351d461d7ad10206da9a69e9fbedd706a4",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 343.030465,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L256-official.json",
+      "bytes": 8832,
+      "sha256": "d784df92808658696e2dea7b66e38360c1ada4e60d589f6e3acc93182fe5d3ee",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 343.030465,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L256-regions.json",
+      "bytes": 4228,
+      "sha256": "3e64efc92ffa8ee7cc39b24b776922aa1e146c0053af6fab601dffde1c3f2042",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "scaleshift"
+      ],
+      "params_m": 343.030465,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L32-256.json",
+      "bytes": 60526,
+      "sha256": "7dbcde5bee9dc69f148cf056140288e344820ad3150fa882545c241f71b08fd5",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 343.030465,
+      "infer_size": 256,
+      "effective_size": [
+        256,
+        256
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L32-official-pf.json",
+      "bytes": 20581,
+      "sha256": "f87f17da1fcf05ba243eccc0f6d82d6894f13d2562f644ebaf7ae07dfa069c9a",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 343.030465,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L32-official.json",
+      "bytes": 60484,
+      "sha256": "939ac4087a93c3b0eb78e409d1466791160b6b1dac70253763a0765203d238de",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 343.030465,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L8-256.json",
+      "bytes": 238017,
+      "sha256": "a6471a3c568ea45143e16d4078cb860cc8a75bc54d427f6ab4c108e2dc51e28d",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 343.030465,
+      "infer_size": 256,
+      "effective_size": [
+        256,
+        256
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L8-official-pf.json",
+      "bytes": 80323,
+      "sha256": "c3b24b45e75b880bf286bd3c3d64d939d0ce1bc939e4d957629964f9248268c9",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 343.030465,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L8-official.json",
+      "bytes": 237568,
+      "sha256": "04bad0c8ddcdf3b607456994d27ae8eeae1b22a1445c6560b91f50f30b6e3455",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 343.030465,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L8-regions.json",
+      "bytes": 241794,
+      "sha256": "9df3a3dff19374529ad938d3216f5c05d47cfe8afde1c21f14b916f9b837e1d2",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 343.030465,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/dpt-large-L8-sharp.json",
+      "bytes": 238252,
+      "sha256": "7e4a5147896fdada5b2f78ddea63a374159f87e8d8009f25d08a2e1ee940c0fc",
+      "model_claimed_by_dump": "hf:Intel/dpt-large",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 343.030465,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/e1-boundary-s0-L8.json",
+      "bytes": 244683,
+      "sha256": "64fcac7558e6c77ebdb5336660097de7975786054c9056228f8ccda98bd5a5c0",
+      "model_claimed_by_dump": "ours:work_dirs/e1-boundary-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/e2-rank-s0-L8.json",
+      "bytes": 244698,
+      "sha256": "c6332dc85bcdc5104aeeeb8b58de5efae4f19491c4b02b2100144cc22f00a0f1",
+      "model_claimed_by_dump": "ours:work_dirs/e2-rank-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/e3-dynamic-s0-L8.json",
+      "bytes": 244756,
+      "sha256": "10820a41f2790b214a3bf2a0e3599502ce57db75591d41fab2651dd7c3fc10cc",
+      "model_claimed_by_dump": "ours:work_dirs/e3-dynamic-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/m0-distil-60k-s0-L8.json",
+      "bytes": 243067,
+      "sha256": "ed1d7c0d7200498d495bf375ac4e3da8a8865e27c1328a9f8a0c821675d12d97",
+      "model_claimed_by_dump": "ours:work_dirs/m0-distil-60k-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 10.825486,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/m0-distil-s0-L8.json",
+      "bytes": 243238,
+      "sha256": "d7ea63f4470c82e19c4043544d19e4872057416d6dac778e3d9c12a311de1a06",
+      "model_claimed_by_dump": "ours:work_dirs/m0-distil-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 10.825486,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/m0-fixed-60k-s0-L8.json",
+      "bytes": 243123,
+      "sha256": "d5d3189e483b244f46764dd3fb0fefd518b646ba09cbe81b8a9050b7a14e24bb",
+      "model_claimed_by_dump": "ours:work_dirs/m0-fixed-60k-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 10.825486,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near1.0-L256-pf.json",
+      "bytes": 3216,
+      "sha256": "0bdba61a3d4163e4ec74985d69aeb9bfcdf92133b6b17565f98f2f6b571d29b4",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near1.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near1.0-L256.json",
+      "bytes": 8780,
+      "sha256": "f5992ac1c1c7779cd0bde8e877c8a2aeb007702c0aa18b53848a21dc1029d94e",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near1.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near1.0-L32-pf.json",
+      "bytes": 20608,
+      "sha256": "e7753a85f1000b2bc8c1c6015a91b71242dac92943a562bc07a132faad4a58a1",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near1.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near1.0-L32.json",
+      "bytes": 60783,
+      "sha256": "f34e4299033f55f30e1ea3e37695f8f63e24f6fbb3f228031742897c679463a9",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near1.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near1.0-L8-pf.json",
+      "bytes": 80508,
+      "sha256": "8991000ff835355a52cee3eeecedf81357a2d05106eb46dfdeec378ba6a79cfc",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near1.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near1.0-L8-regions.json",
+      "bytes": 81558,
+      "sha256": "e885a1e8d3638f148dd24e46b999b36533609b42fee8cf21f447a736118d14af",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near1.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near1.0-L8.json",
+      "bytes": 240273,
+      "sha256": "deb90b4da5c6bfd6f72efe0ec634d72524e54546dca63e9d4aa25baec8941642",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near1.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near3.0-L256-pf.json",
+      "bytes": 3231,
+      "sha256": "f0161cba163edb8a769e0940cbfd489d83dece8c191e30ddac743232f92078f1",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near3.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near3.0-L256.json",
+      "bytes": 8794,
+      "sha256": "d1cfd5c0dfe25d7fc09519a254e2f12afbec0dc2b74bf3cea763ee40c28b08a6",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near3.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near3.0-L32-pf.json",
+      "bytes": 20597,
+      "sha256": "bd1c5ea9e5d2ecc26b48cf394fbd5c995be338ca7c0312307ff247dda34d254e",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near3.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near3.0-L32.json",
+      "bytes": 60768,
+      "sha256": "88bcab6109af5194fccb18ea73f9f12cd7afe548f0ca83b9b2fc6b64affb1f8e",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near3.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near3.0-L8-pf.json",
+      "bytes": 80417,
+      "sha256": "3a6c1219b9a443b72adce297fca28faf5fec97e3b1cff8f83a0e5e44e4f49677",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near3.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near3.0-L8-regions.json",
+      "bytes": 81546,
+      "sha256": "1b97252b74f6083e11c7c9db2153cdd02abd3d23a7abddd6962d2a3ebe47f7fb",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near3.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/near3.0-L8.json",
+      "bytes": 240335,
+      "sha256": "e3a8f0c9f6d171ecf00d43079b1ce4fac1ad42c1bbd32af79bf4232d15a8ec2f",
+      "model_claimed_by_dump": "ours:work_dirs/v13-near3.0-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L256-dense.json",
+      "bytes": 8774,
+      "sha256": "c7c70e5273db33be10f88d782b5917eb81062247bb503085680f4fc9be49a772",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L256-notemp.json",
+      "bytes": 8724,
+      "sha256": "c9f591fc6c4bc00b92f587de52435394867b2fbe5d22cffaae91d0564afa8684",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L256-pf.json",
+      "bytes": 3202,
+      "sha256": "056eeaacb5b8cdce7008838c60f962df7fcf1c8cf875c7eed92ae89ee503813e",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L256-regions.json",
+      "bytes": 4310,
+      "sha256": "03cc84316df44633367874295dc79cf9dceba112c78082775bbcd9e98c2ad731",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L256-reset1.json",
+      "bytes": 8800,
+      "sha256": "1bcb19ca274388ead208bfa85a4323192e2f74e526c1ae0ddbe05071e13a42e0",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L256.json",
+      "bytes": 8830,
+      "sha256": "c13af29228cae6403e09226439c4f4266941081d492937959eef4be646853d45",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L32-dense.json",
+      "bytes": 60848,
+      "sha256": "0e977dcbdf55ae564b229015e55e4134b391b23e2180467e98e2abc45ea69af3",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L32-notemp.json",
+      "bytes": 59992,
+      "sha256": "18ecd118d25de02e7cb0b706092353df6192eafc7680a2929b6e58c697095e58",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L32-pf.json",
+      "bytes": 20548,
+      "sha256": "1caa0620251fb29ee9de71ba5073a23b4f419a136fbeb1cac54ba18e040783f7",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L32-reset1.json",
+      "bytes": 60790,
+      "sha256": "74372c127e7ff1ca0e145b16cf0c1d1ac6fe825d62226f4c2e152f9f8b83588b",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L32.json",
+      "bytes": 60827,
+      "sha256": "262823cfa1e1395814fe6ebeb1cbcd1a94233b7c1640152b76551cad18a5a8be",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L8-dense.json",
+      "bytes": 240173,
+      "sha256": "096c42dadaf311a87587631789d21e3eba551c9a4de35f5d2c0e421de948d68a",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L8-notemp.json",
+      "bytes": 236898,
+      "sha256": "68647d3a5f1979a8430f2ec026d2d7fedad36b570fdcd5b41b55083cf994ed9f",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L8-pf.json",
+      "bytes": 80504,
+      "sha256": "027e55be8810f9f47bdd58e26aecff013af1da205d490084f26972f64e7fe5eb",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L8-regions.json",
+      "bytes": 81584,
+      "sha256": "ba9b2065535f8a0c61cd218803e4520f5e6f16d94de4394c2a7a769ee7b8f166",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L8-reset1.json",
+      "bytes": 239938,
+      "sha256": "c7c45344351807acd2e386ca79fde700cb9558d37abf278776ae0c0af90dfe51",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L8-sharp.json",
+      "bytes": 244836,
+      "sha256": "2a93886c22392107643ee672a5468802ac18f0ed1074ffa1d2673f82e89d3240",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/ours-L8.json",
+      "bytes": 240575,
+      "sha256": "8bfa5af8cee272de69ae75f19aae6cf68bbe9d8e59c9d7f3170503747ff7c5e0",
+      "model_claimed_by_dump": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.185872,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/q0-calib-s0-L256-pf.json",
+      "bytes": 9016,
+      "sha256": "04ae57463220874560fad1ba37985d5874219c0bfc395f4585a8f7b55f855c95",
+      "model_claimed_by_dump": "ours:work_dirs/q0-calib-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median/frame",
+        "scale/frame",
+        "scaleshift/frame"
+      ],
+      "params_m": 24.810627,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/q0-calib-s0-L8-pf.json",
+      "bytes": 233903,
+      "sha256": "1f1a06a5cffd1872dd3caa6895166b41ece296c28deb954da46fe28776eef3b4",
+      "model_claimed_by_dump": "ours:work_dirs/q0-calib-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median/frame",
+        "scale/frame",
+        "scaleshift/frame"
+      ],
+      "params_m": 24.810627,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/q0-calib-s0-L8.json",
+      "bytes": 243924,
+      "sha256": "d88ede5917bde4cae06db995938d6135a3807f1876298b0a6c97b9aa3dc325c3",
+      "model_claimed_by_dump": "ours:work_dirs/q0-calib-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.810627,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/q1-unfrozen-s0-L8.json",
+      "bytes": 244757,
+      "sha256": "4775078d4300a0175e16aed2c52ff4225e28bd7f5a6d7d71cdaf7f74ffec7072",
+      "model_claimed_by_dump": "ours:work_dirs/q1-unfrozen-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.810627,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/q1b-head-s0-L8.json",
+      "bytes": 244025,
+      "sha256": "b8a3fa965ba5c04978133a725af2e1cf1aabf72347c173703d5e6aa15c093f66",
+      "model_claimed_by_dump": "ours:work_dirs/q1b-head-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.810627,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/q1c-slow-s0-L8.json",
+      "bytes": 243977,
+      "sha256": "776932bb8e66e3810cc8af67ce8c64fef081cd922db6470f3441759a5467a76d",
+      "model_claimed_by_dump": "ours:work_dirs/q1c-slow-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 24.810627,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/q2-distil-s0-L8.json",
+      "bytes": 244656,
+      "sha256": "50989459f210429d0d8627dd506d2e9a18d365fe2fa2e052ad2e9610292fbcf0",
+      "model_claimed_by_dump": "ours:work_dirs/q2-distil-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/q2-teacheronly-s0-L8.json",
+      "bytes": 244676,
+      "sha256": "74ab04efe5b41b8d177eed8653eb2d42dc3c5e8d8020d5978a4eed8ade77b0cc",
+      "model_claimed_by_dump": "ours:work_dirs/q2-teacheronly-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/qt-balanced-s0-L256-pf.json",
+      "bytes": 9005,
+      "sha256": "1bd121408ffe5399106c37eec449103c3ce417bd062a37d1c25c288c0b2457b7",
+      "model_claimed_by_dump": "ours:work_dirs/qt-balanced-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median/frame",
+        "scale/frame",
+        "scaleshift/frame"
+      ],
+      "params_m": 25.991815,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/qt-balanced-s0-L8-pf.json",
+      "bytes": 230308,
+      "sha256": "e1d1f9fb8e3d8e21a154a66c022b7576def5842f78615ef8121522ce73b288f1",
+      "model_claimed_by_dump": "ours:work_dirs/qt-balanced-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median/frame",
+        "scale/frame",
+        "scaleshift/frame"
+      ],
+      "params_m": 25.991815,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/qt-retain-s0-L256-pf.json",
+      "bytes": 8953,
+      "sha256": "9c845c8874377542e516c6e8bf7bc997cc7bafebc8e6ff1ad1e9f637158149c7",
+      "model_claimed_by_dump": "ours:work_dirs/qt-retain-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median/frame",
+        "scale/frame",
+        "scaleshift/frame"
+      ],
+      "params_m": 25.991815,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/qt-retain-s0-L8-pf.json",
+      "bytes": 222819,
+      "sha256": "b048a543c54c290d6a4e590ca1d08bb0915c55e18e15a929fd774ab4fbe10bff",
+      "model_claimed_by_dump": "ours:work_dirs/qt-retain-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median/frame",
+        "scale/frame",
+        "scaleshift/frame"
+      ],
+      "params_m": 25.991815,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/qt-stream-s0-L256-pf.json",
+      "bytes": 9014,
+      "sha256": "4e661802ac30284097de164451796a05fb0f657159e5774afd32cfd77083be73",
+      "model_claimed_by_dump": "ours:work_dirs/qt-stream-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median/frame",
+        "scale/frame",
+        "scaleshift/frame"
+      ],
+      "params_m": 25.991815,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/qt-stream-s0-L8-pf.json",
+      "bytes": 229541,
+      "sha256": "579e2a64830a4cc2690e0c62062012ee595e438b4a750d8c9a6eb9ba76ee615c",
+      "model_claimed_by_dump": "ours:work_dirs/qt-stream-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median/frame",
+        "scale/frame",
+        "scaleshift/frame"
+      ],
+      "params_m": 25.991815,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/r4a-b3-os2-trim-s0-L8.json",
+      "bytes": 244573,
+      "sha256": "9c4b7b019059dcbf437ae7f4a77222af2903aefbf4231b69634b650ab97ede9a",
+      "model_claimed_by_dump": "ours:work_dirs/r4a-b3-os2-trim-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/r4b-b6-os3-trim-s0-L8.json",
+      "bytes": 244436,
+      "sha256": "f5afc69a01f26ab702c9d3bd0915efb9a34cfd879709ef7dade6cea56dcfc1fe",
+      "model_claimed_by_dump": "ours:work_dirs/r4b-b6-os3-trim-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/s1-synthshape-s0-L8.json",
+      "bytes": 244638,
+      "sha256": "d74da2e3649ac4cbfcba403a15133b9462b088eda94f213cad3bd0a83435f317",
+      "model_claimed_by_dump": "ours:work_dirs/s1-synthshape-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/s2-trim-s0-L8.json",
+      "bytes": 244698,
+      "sha256": "a51ac69d4d7719d6df5f132acd073655a502742f89699483b5a2c2c2f10ef16f",
+      "model_claimed_by_dump": "ours:work_dirs/s2-trim-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/s3-overshoot-s0-L8.json",
+      "bytes": 244600,
+      "sha256": "59fd74d6678836f79a9f3d32f0f3c1761710c87912b674b069fbee5b28a5ae96",
+      "model_claimed_by_dump": "ours:work_dirs/s3-overshoot-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/s4-msgrad2-s0-L8.json",
+      "bytes": 244834,
+      "sha256": "38636f7d112ddf2a5732bcab69eca13c6bc837f5365934e2a2adaff6fb846f92",
+      "model_claimed_by_dump": "ours:work_dirs/s4-msgrad2-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/s5-fusenorm-s0-L8.json",
+      "bytes": 244158,
+      "sha256": "50a99e3ad39d95c93cfb5f48fbecb9b0aac72279dcbecd795c5606deb8209dcb",
+      "model_claimed_by_dump": "ours:work_dirs/s5-fusenorm-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.187134,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/v11-teacher-s0-L8.json",
+      "bytes": 244642,
+      "sha256": "1a9e3de34c4bd2e8ca022d450bba10bf9efe4c07c877a8c2bd41f458542ee3e5",
+      "model_claimed_by_dump": "ours:work_dirs/v11-teacher-s0/latest.pt",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 4.186686,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/zoedepth-nyu-kitti-L256-256.json",
+      "bytes": 8868,
+      "sha256": "c1346089a7a9bf07982c083cb22355edf198c37631226abc31897864f03f5b17",
+      "model_claimed_by_dump": "hf:Intel/zoedepth-nyu-kitti",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 345.073307,
+      "infer_size": 256,
+      "effective_size": [
+        256,
+        256
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/zoedepth-nyu-kitti-L256-official-pf.json",
+      "bytes": 3185,
+      "sha256": "78f6adcf4a434e095c8578e15b3a390615d9da5dddc5057b994c69d2bede8c09",
+      "model_claimed_by_dump": "hf:Intel/zoedepth-nyu-kitti",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 345.073307,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/zoedepth-nyu-kitti-L256-official.json",
+      "bytes": 8784,
+      "sha256": "a7ff94ceb6c8a9932d4001a20da50d76c42a7361249efc9bbb905516544460b5",
+      "model_claimed_by_dump": "hf:Intel/zoedepth-nyu-kitti",
+      "manifest_claimed_by_dump": "manifests/acc_real_L256.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L256.json",
+        "bytes": 751921,
+        "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 345.073307,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/zoedepth-nyu-kitti-L32-256.json",
+      "bytes": 60691,
+      "sha256": "a1af091ffb610b8775c0aaff6514f1612ccb81817d0dc2b14afdef77e916e725",
+      "model_claimed_by_dump": "hf:Intel/zoedepth-nyu-kitti",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 345.073307,
+      "infer_size": 256,
+      "effective_size": [
+        256,
+        256
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/zoedepth-nyu-kitti-L32-official-pf.json",
+      "bytes": 20623,
+      "sha256": "c6b59551957b728073116cd2404219b6a5bfc7832fca9375b32691edfb3c73ca",
+      "model_claimed_by_dump": "hf:Intel/zoedepth-nyu-kitti",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 345.073307,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/zoedepth-nyu-kitti-L32-official.json",
+      "bytes": 60783,
+      "sha256": "53fcbf4efb52ab7f02384fdf921a3fcc8d6424292b4f80b53f829a461d17449d",
+      "model_claimed_by_dump": "hf:Intel/zoedepth-nyu-kitti",
+      "manifest_claimed_by_dump": "manifests/acc_real_L32.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L32.json",
+        "bytes": 877337,
+        "sha256": "2c526016f49f2bfbbaf0718058f7119e2cf2528e388cedc3380867fdad9f8d61"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 345.073307,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/zoedepth-nyu-kitti-L8-256.json",
+      "bytes": 239381,
+      "sha256": "da517ab9d3f52e4adf07342fcfa32fcd5414e7c8503fe7ef21b7571bd1da2a48",
+      "model_claimed_by_dump": "hf:Intel/zoedepth-nyu-kitti",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 345.073307,
+      "infer_size": 256,
+      "effective_size": [
+        256,
+        256
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/zoedepth-nyu-kitti-L8-official-pf.json",
+      "bytes": 80543,
+      "sha256": "d0148311acaeed49acc524eda7a4575336361b7b353a8b7b9493261e86ce40b8",
+      "model_claimed_by_dump": "hf:Intel/zoedepth-nyu-kitti",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "scaleshift/frame"
+      ],
+      "params_m": 345.073307,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/acc/zoedepth-nyu-kitti-L8-official.json",
+      "bytes": 239534,
+      "sha256": "26eff34394b65b6ac16676a96b9a7b87fa1329575d5d2715b36eb8c87615a720",
+      "model_claimed_by_dump": "hf:Intel/zoedepth-nyu-kitti",
+      "manifest_claimed_by_dump": "manifests/acc_real_L8.json",
+      "manifest_snapshot": {
+        "path": "manifests/acc_real_L8.json",
+        "bytes": 923628,
+        "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+      },
+      "gauges": [
+        "median",
+        "scale",
+        "scaleshift"
+      ],
+      "params_m": 345.073307,
+      "infer_size": null,
+      "effective_size": [
+        384,
+        384
+      ],
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_L256K30.json",
+      "bytes": 3604,
+      "sha256": "95d2124435d8f694a8a7fc6d72e96bd06ce07318162ba53871a6f8232e133ac9",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_L256K60.json",
+      "bytes": 5350,
+      "sha256": "aa983ffde03232935b8f390e033a37f9d582af793a3dbceb98c0e6227bfafcfc",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_L32K30.json",
+      "bytes": 30437,
+      "sha256": "95f6664233e692102ecfb4571d0b0b49a4cee8e68f2c5b60eeb553c30b377c94",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_L32K60.json",
+      "bytes": 44561,
+      "sha256": "824d3451a5b0efacf1eccb74db8e721c6c8bdd28cf42648c45fbb606527d1a58",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_L8K30.json",
+      "bytes": 47541,
+      "sha256": "b056556a426cb025f65c13686d04c58d0ebc620d448788b8966b6aa5ba8e3808",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_L8K60.json",
+      "bytes": 68628,
+      "sha256": "307a934b7fd6dfedb461fb68200143847f6ec5e648a120a44625c19edb7422ee",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_evenkf10.json",
+      "bytes": 25154,
+      "sha256": "4226861b4e8eb7cfcc966eb2673e7ad5f9bc52aec6564c1298a6d030cb1257ff",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_evenkf15.json",
+      "bytes": 25195,
+      "sha256": "509141999de43abd82897cc11faf674de51361edd2b1707c7d0b798cf9740d99",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_evenkf5.json",
+      "bytes": 25164,
+      "sha256": "2f240767a14f938e5c8865bdfeb76acdbac6fc66cff148379094528be38b2887",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-L1024-po.json",
+      "bytes": 4261,
+      "sha256": "975d2b3ef66ea81ea2c414b9f7096579e4bd45a997fcf8e45e5bf7a0c46617b6",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-L512.json",
+      "bytes": 1538,
+      "sha256": "d0d36eb67791046b5bf3246555ea197210c838925bee63c61f4a2853c0c46016",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-dense0.0.json",
+      "bytes": 39250,
+      "sha256": "48cce7861d92fa3f9865bf4bd86f1d1e2d1f3338038226a6499e083d2c51c1aa",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-dense0.2.json",
+      "bytes": 38865,
+      "sha256": "a47105621021c763023b76cbd8076bf193ef71876823dd753eb27932f9aab578",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-dense0.4.json",
+      "bytes": 39171,
+      "sha256": "8039f8ae358545fad9a6766ca36d88815edbf72a27f656900f26a7281766b2de",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-dense0.6.json",
+      "bytes": 39237,
+      "sha256": "f4fc5d3a7a6c2f9efd355c1ba0b432f788d1f4feebda19055a863e772b2c9192",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-kitti-gmc.json",
+      "bytes": 35276,
+      "sha256": "3eceeadcf801c81f5f91fb1e038b0952dd9dddfbf03996105f3d86646a96a333",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-kitti-pixel.json",
+      "bytes": 34703,
+      "sha256": "f9c5551afa50cc5d8b728c2dd348c7007d96c2fef8f5a49ecae354b0f3348f8e",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-real-sweep.json",
+      "bytes": 256975,
+      "sha256": "d7b53133dd00841e502d7e814804331a0bbd53da7f80cac3a158b40dcf95ead5",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-synth-delta.json",
+      "bytes": 59627,
+      "sha256": "6ea338d6f9f3cc7116739dd1584e0a0e39d7bcf6cc7aca0283e39308a2e2b3ed",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-synth-drop.json",
+      "bytes": 59300,
+      "sha256": "79988409180d0a1ed50af2439e6c85774adfb7d72bdae2801a3fc4ef2f965729",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_final-synth-sweep.json",
+      "bytes": 400030,
+      "sha256": "8de74c9f578c992854434a4761fb24e37d10f6319fe11918a6286d733ba52670",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_keyframe-L256K30.json",
+      "bytes": 2982,
+      "sha256": "b5580504ea3406ce722e9c32a3d95aca6704634c065f60fd610548275ef5d2dc",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_keyframe-L256K60.json",
+      "bytes": 2979,
+      "sha256": "ec5a31d693100bf08d891b83afc07bd8ff95c611a86a3a46dc9b096fd6684d06",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_keyframe-L32K30.json",
+      "bytes": 25151,
+      "sha256": "c5f5ea8ecbcd768717fff2c5cce28a3acf27a1c4f1ada92752bf02ccee529e9a",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_keyframe-L32K60.json",
+      "bytes": 25220,
+      "sha256": "ef10b23dcdaecff3ee33b0840f0a73e855cc8c6f69d6e08c5a426a1158dac3f6",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_nofb-L256K30.json",
+      "bytes": 2986,
+      "sha256": "b3ce7a36eb670ae188a8d616f115a68f2ed2ffbb9b82420caa45a3c0f3809aed",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_nofb-L256K60.json",
+      "bytes": 2994,
+      "sha256": "80c5256600b90fe6e2173c93bfd21db5de07b3702f19802a91fb2d12d52c8a8b",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_nofb-L32K30.json",
+      "bytes": 25214,
+      "sha256": "ce76e917d5f91e2c0e34c9453df0610c633969f32193a4a39b5aacbc06886166",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_nofb-L32K60.json",
+      "bytes": 25215,
+      "sha256": "12ced719bf975bee52e339e4c4d008ec45aaec719450a4e36605abac1b6ce8a2",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_nofb-L8K30.json",
+      "bytes": 39250,
+      "sha256": "48cce7861d92fa3f9865bf4bd86f1d1e2d1f3338038226a6499e083d2c51c1aa",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_nofb-L8K60.json",
+      "bytes": 39250,
+      "sha256": "48cce7861d92fa3f9865bf4bd86f1d1e2d1f3338038226a6499e083d2c51c1aa",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_rolling-L256K30.json",
+      "bytes": 2985,
+      "sha256": "46ae26e22faaefc48ec62fe5edd03c4e63b9506d0b59da28f5f5ab1aaf842bc9",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_rolling-L256K60.json",
+      "bytes": 2982,
+      "sha256": "7675290e50f205d6ef91d60d8174659b244c119d6dc2571a3e90ea9705700c9d",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_rolling-L32K30.json",
+      "bytes": 25142,
+      "sha256": "ca3d034ea09751741944aab49c0bd7641542e71f68d78cc894a702407dff9088",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/scores_rolling-L32K60.json",
+      "bytes": 25207,
+      "sha256": "20dd1d0c1bf3d5d14de9337ddfb0239d69b0953cbc407686222725380d18856a",
+      "model_claimed_by_dump": null,
+      "manifest_claimed_by_dump": null,
+      "manifest_snapshot": null,
+      "gauges": [],
+      "params_m": null,
+      "infer_size": null,
+      "effective_size": null,
+      "status": "legacy_provenance_incomplete",
+      "role": "development evidence; not final-test results"
+    }
+  ],
+  "caveat": "hashing old dumps now preserves their bytes; it does not establish which weight/code bytes originally produced them",
+  "legacy_timing_records": [
+    {
+      "path": "work_dirs/t2-10-bench.log",
+      "bytes": 1912959,
+      "sha256": "258c2e7f9e0278922731f826153f82e9492d0ca392662f0f02219c34baf23b1e"
+    },
+    {
+      "path": "work_dirs/tier2-bench.log",
+      "bytes": 4553,
+      "sha256": "354ce005df796f4d88480557c44cf1a23dce1f1bcb28b826714bf960642a24d3"
+    },
+    {
+      "path": "EDGE_BENCH.md",
+      "bytes": 16446,
+      "sha256": "ac140dc8457960e51de9037764ef95f0e4566688040a34aa87eee244bcac1f9f"
+    }
+  ],
+  "timing_status": "legacy, no linked checkpoint hash; remeasure before claiming the frozen run's deployment speed"
+}

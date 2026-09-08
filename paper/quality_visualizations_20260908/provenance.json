@@ -1,0 +1,135 @@
+{
+  "role": "development_visualization_not_final",
+  "checkpoint": {
+    "path": "/workspace/SOKKANAEM/work_dirs/quality_refinement_local_20260908/local_edge_0.5.pt",
+    "bytes": 15157,
+    "sha256": "8e91318c581869a4013d0f693c758f783941cb59b87d5adf0f3fd76f6f9beaf9"
+  },
+  "cache": {
+    "path": "/workspace/SOKKANAEM/work_dirs/quality_refinement_20260908/development_cache.pt",
+    "bytes": 192992591,
+    "sha256": "7e8f98b5e1d37d4ced6350267ff38f06b75ebe269cf12d971c6bc966900f4a86"
+  },
+  "results": {
+    "path": "/workspace/SOKKANAEM/work_dirs/quality_refinement_local_20260908/results.json",
+    "bytes": 71900,
+    "sha256": "58b21911486d20555723a98186162ca9692f7b81d2658b2da3cb364446224e2b"
+  },
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/visualize_quality_refinement.py",
+    "bytes": 9083,
+    "sha256": "ae97ed55e9780d7d772f0f644c4d605cdc935fd08d72cd7f8285ac4ebbed05d0"
+  },
+  "model_code": [
+    {
+      "path": "/workspace/SOKKANAEM/sokkanaem/edge_local_refiner.py",
+      "bytes": 1933,
+      "sha256": "c4bb695b05fcb82cf18aab714d126658ffd55936c1469a44ac37480529539d32"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/sokkanaem/bounded_refiner.py",
+      "bytes": 2954,
+      "sha256": "37fe04fb4977ac79d952e378ef3afa5f99ea60948004f687fe272cc1a0d95651"
+    }
+  ],
+  "selection_rule": "first cached clip per scene; t=T//2; crop maximum GT log-gradient mass, 64x64",
+  "selection": [
+    {
+      "cache_index": 0,
+      "frame": 4,
+      "name": "walking_static",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static/rgb/1341846226.950000.png",
+        "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static/depth/1341846226.950012.png"
+      ],
+      "crop_xywh": [
+        15,
+        31,
+        64,
+        64
+      ]
+    },
+    {
+      "cache_index": 4,
+      "frame": 4,
+      "name": "crowd2",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2/rgb/1548339892.36830.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2/depth/1548339892.36054.png"
+      ],
+      "crop_xywh": [
+        0,
+        103,
+        64,
+        64
+      ]
+    },
+    {
+      "cache_index": 8,
+      "frame": 4,
+      "name": "person_tracking2",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2/rgb/1548265919.63476.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2/depth/1548265919.62736.png"
+      ],
+      "crop_xywh": [
+        28,
+        71,
+        64,
+        64
+      ]
+    },
+    {
+      "cache_index": 12,
+      "frame": 4,
+      "name": "static_close_far",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far/rgb/1548340550.12937.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far/depth/1548340550.11499.png"
+      ],
+      "crop_xywh": [
+        79,
+        34,
+        64,
+        64
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/workspace/SOKKANAEM/paper/quality_visualizations_20260908/depth_comparison.png",
+      "bytes": 1639785,
+      "sha256": "1dcf2de04fd625bd93b2fae2d8955baf97b29595c54606c6d11d401efd8c3cb3"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/paper/quality_visualizations_20260908/depth_comparison.pdf",
+      "bytes": 1470064,
+      "sha256": "4685454e74a6d0d94fc24d00bbf64d92e8aaf536ad221e4944ec5fcd809d6300"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/paper/quality_visualizations_20260908/boundary_crops.png",
+      "bytes": 249168,
+      "sha256": "e386184e3a16d37a19fe211e702e46fecce7281a40ca21504ab0876b6bf52abf"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/paper/quality_visualizations_20260908/boundary_crops.pdf",
+      "bytes": 148479,
+      "sha256": "7624d82d1b314abc9df47fb1f1bd9c498274259ff7813d5470a9798ac5709109"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/paper/quality_visualizations_20260908/metric_comparison.png",
+      "bytes": 123134,
+      "sha256": "774a8c8af1ce24a37030d8123546ccba255e15465e283870645d4986227c8297"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/paper/quality_visualizations_20260908/metric_comparison.pdf",
+      "bytes": 18705,
+      "sha256": "c535227c74d9b22915b4a76cfef5a733b60593007a8ba29af35ba618551af2f6"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/paper/quality_visualizations_20260908/selected_predictions.npz",
+      "bytes": 3761234,
+      "sha256": "9b8c6f623651d40949306705bfe33a451c5db295f806f8b8c1b0c55a358831c3"
+    }
+  ]
+}

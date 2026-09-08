@@ -1,0 +1,284 @@
+{
+  "runs": [
+    {
+      "checkpoint": {
+        "path": "work_dirs/v11-longclip-spread-s0/latest.pt",
+        "bytes": 67200316,
+        "sha256": "92565d186cb4448a71793597dea930a2faa77c0205093c892e8443d491193f1a"
+      },
+      "config": {
+        "path": "work_dirs/v11-longclip-spread-s0/config.toml",
+        "bytes": 1681,
+        "sha256": "e2f127e061e8ca7fbb32b4e7e1e1e01d13c4cb460983f36f71c04e92b8d743ff"
+      },
+      "step": 8000,
+      "meta": {
+        "command": "scripts/train.py --config configs/main_v8.toml --resume work_dirs/v10-longclip/latest.pt --resume-partial --clip-len 24 --batch 2 --steps 8000 --seed 0 --warp-weight 2.0 --edge-weight 2.0 --spread-weight 0.5 --work-dir work_dirs/v11-longclip-spread-s0",
+        "git_commit": "0a3f5e06abbf448898a65c0a42c53534531912e5",
+        "torch": "2.8.0+cu128",
+        "cuda": "12.8",
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "args": {
+          "config": "configs/main_v8.toml",
+          "data": [
+            "tum:/home/hyunsu/dataset_ssd/tum_static",
+            "bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset",
+            "vkitti2:/home/hyunsu/dataset_ssd/vkitti2",
+            "tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2",
+            "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey"
+          ],
+          "steps": 8000,
+          "batch": 2,
+          "lr": 0.0003,
+          "size": 256,
+          "clip_len": 24,
+          "workers": 16,
+          "max_skip": 0.5,
+          "augment": true,
+          "detector_mask": false,
+          "holdout": [
+            "walking_static",
+            "rgbd_bonn_crowd2",
+            "rgbd_bonn_person_tracking2",
+            "rgbd_bonn_static_close_far",
+            "Scene06",
+            "OldTownFall",
+            "/pointodyssey/val/",
+            "/pointodyssey/test/"
+          ],
+          "resume": "work_dirs/v10-longclip/latest.pt",
+          "resume_partial": true,
+          "work_dir": "work_dirs/v11-longclip-spread-s0",
+          "seed": 0,
+          "ema_decay": 0.999,
+          "auto_loss_weight": false,
+          "msgrad_weight": 0.5,
+          "normal_weight": 0.05,
+          "warp_weight": 2.0,
+          "spread_weight": 0.5,
+          "edge_weight": 2.0,
+          "size_schedule": null,
+          "warmup": 1000,
+          "grad_clip": 1.0,
+          "collapse_patience": 1000,
+          "collapse_eps": 0.0001,
+          "distill_weight": 0.0,
+          "distill_model": "facebook/dinov2-small",
+          "teacher_weight": 0.0,
+          "teacher_model": "depth-anything/Depth-Anything-V2-Small-hf",
+          "bin_weight": 0.2
+        },
+        "model": {
+          "tau_on": 0.05,
+          "tau_off": 0.025,
+          "keyframe_every": 30,
+          "decoder": "dpt",
+          "bins": 64,
+          "scan_directions": 4,
+          "local_conv": true,
+          "spatial_cache": true,
+          "temporal_cache": true
+        }
+      },
+      "historical_tracked_sources": {
+        "scripts/train.py": "07e8b687c9a37d6c70a7d817224567c56efbff918428b842c7b1a1ca371e3f58",
+        "sokkanaem/model.py": "4c60f290e6a2fd5a02e235f62eba14bb7f67322cb70028795dad7055e81fd081",
+        "sokkanaem/ssm.py": "28579ecb9d7b123e3ab9f4a49eeddeabe652b12a126c43584634314d23a69ad4",
+        "sokkanaem/data.py": "fa7a28c478de580733551b4ae5b52496112782b9bef934f7bd6fc7a1eb2afe4b",
+        "sokkanaem/losses.py": "59a5bda1095ebe30ec628ea276e8a347aa95328092ceae2a1ff6eeca0294768b",
+        "sokkanaem/metrics.py": "4e390727e2f1fb398febde89b5047fd6f696c7bca0be30d24f4dd97569a7d3ca",
+        "sokkanaem/ema.py": "00134fb3780ff27db8f7ec44afbfb85950619e11eb970deaee321811f228dd0d",
+        "sokkanaem/distill.py": "ec81f1c123cc1b79e6076a7c76c19d8be1019f1b7ebec2fa3afae0d48001c3da"
+      }
+    },
+    {
+      "checkpoint": {
+        "path": "work_dirs/v11-longclip-spread-s1/latest.pt",
+        "bytes": 67200316,
+        "sha256": "6ced376155e5046623d9aa9eac4f236c67b522620cf27d88f64c9671bd3d75e0"
+      },
+      "config": {
+        "path": "work_dirs/v11-longclip-spread-s1/config.toml",
+        "bytes": 1681,
+        "sha256": "a4de16d2d26971b00c92b6621b989d1615d314278aff1390c36e78f6f968255b"
+      },
+      "step": 8000,
+      "meta": {
+        "command": "scripts/train.py --config configs/main_v8.toml --resume work_dirs/v10-longclip/latest.pt --resume-partial --clip-len 24 --batch 2 --steps 8000 --seed 1 --warp-weight 2.0 --edge-weight 2.0 --spread-weight 0.5 --work-dir work_dirs/v11-longclip-spread-s1",
+        "git_commit": "8a6307d49e3735444a6a9dd856086c5af54e7568",
+        "torch": "2.8.0+cu128",
+        "cuda": "12.8",
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "args": {
+          "config": "configs/main_v8.toml",
+          "data": [
+            "tum:/home/hyunsu/dataset_ssd/tum_static",
+            "bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset",
+            "vkitti2:/home/hyunsu/dataset_ssd/vkitti2",
+            "tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2",
+            "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey"
+          ],
+          "steps": 8000,
+          "batch": 2,
+          "lr": 0.0003,
+          "size": 256,
+          "clip_len": 24,
+          "workers": 16,
+          "max_skip": 0.5,
+          "augment": true,
+          "detector_mask": false,
+          "holdout": [
+            "walking_static",
+            "rgbd_bonn_crowd2",
+            "rgbd_bonn_person_tracking2",
+            "rgbd_bonn_static_close_far",
+            "Scene06",
+            "OldTownFall",
+            "/pointodyssey/val/",
+            "/pointodyssey/test/"
+          ],
+          "resume": "work_dirs/v10-longclip/latest.pt",
+          "resume_partial": true,
+          "work_dir": "work_dirs/v11-longclip-spread-s1",
+          "seed": 1,
+          "ema_decay": 0.999,
+          "auto_loss_weight": false,
+          "msgrad_weight": 0.5,
+          "normal_weight": 0.05,
+          "warp_weight": 2.0,
+          "spread_weight": 0.5,
+          "edge_weight": 2.0,
+          "size_schedule": null,
+          "warmup": 1000,
+          "grad_clip": 1.0,
+          "collapse_patience": 1000,
+          "collapse_eps": 0.0001,
+          "distill_weight": 0.0,
+          "distill_model": "facebook/dinov2-small",
+          "teacher_weight": 0.0,
+          "teacher_model": "depth-anything/Depth-Anything-V2-Small-hf",
+          "bin_weight": 0.2
+        },
+        "model": {
+          "tau_on": 0.05,
+          "tau_off": 0.025,
+          "keyframe_every": 30,
+          "decoder": "dpt",
+          "bins": 64,
+          "scan_directions": 4,
+          "local_conv": true,
+          "spatial_cache": true,
+          "temporal_cache": true
+        }
+      },
+      "historical_tracked_sources": {
+        "scripts/train.py": "07e8b687c9a37d6c70a7d817224567c56efbff918428b842c7b1a1ca371e3f58",
+        "sokkanaem/model.py": "4c60f290e6a2fd5a02e235f62eba14bb7f67322cb70028795dad7055e81fd081",
+        "sokkanaem/ssm.py": "28579ecb9d7b123e3ab9f4a49eeddeabe652b12a126c43584634314d23a69ad4",
+        "sokkanaem/data.py": "fa7a28c478de580733551b4ae5b52496112782b9bef934f7bd6fc7a1eb2afe4b",
+        "sokkanaem/losses.py": "59a5bda1095ebe30ec628ea276e8a347aa95328092ceae2a1ff6eeca0294768b",
+        "sokkanaem/metrics.py": "56d2190cb529fda2e0d7d3c9fe453b09e451877e356fde8513ed459aea18c789",
+        "sokkanaem/ema.py": "00134fb3780ff27db8f7ec44afbfb85950619e11eb970deaee321811f228dd0d",
+        "sokkanaem/distill.py": "ec81f1c123cc1b79e6076a7c76c19d8be1019f1b7ebec2fa3afae0d48001c3da"
+      }
+    },
+    {
+      "checkpoint": {
+        "path": "work_dirs/v11-longclip-spread-s2/latest.pt",
+        "bytes": 67200316,
+        "sha256": "11ff0fc3c53a287e409cb28647d7042feab8b2c42eab02821a803a204dc46440"
+      },
+      "config": {
+        "path": "work_dirs/v11-longclip-spread-s2/config.toml",
+        "bytes": 1681,
+        "sha256": "03beb5b5f4a36ea310faaa027c7e355967e716a88a467a4b340aa397a9da7448"
+      },
+      "step": 8000,
+      "meta": {
+        "command": "scripts/train.py --config configs/main_v8.toml --resume work_dirs/v10-longclip/latest.pt --resume-partial --clip-len 24 --batch 2 --steps 8000 --seed 2 --warp-weight 2.0 --edge-weight 2.0 --spread-weight 0.5 --work-dir work_dirs/v11-longclip-spread-s2",
+        "git_commit": "69cd2e80b17bb7367ee4da55be34b3c1bb32c1a3",
+        "torch": "2.8.0+cu128",
+        "cuda": "12.8",
+        "gpu": "NVIDIA GeForce RTX 4090",
+        "args": {
+          "config": "configs/main_v8.toml",
+          "data": [
+            "tum:/home/hyunsu/dataset_ssd/tum_static",
+            "bonn:/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset",
+            "vkitti2:/home/hyunsu/dataset_ssd/vkitti2",
+            "tartanair2:/home/hyunsu/dataset_ssd/tartanair_v2",
+            "pointodyssey:/home/hyunsu/dataset_ssd/pointodyssey"
+          ],
+          "steps": 8000,
+          "batch": 2,
+          "lr": 0.0003,
+          "size": 256,
+          "clip_len": 24,
+          "workers": 16,
+          "max_skip": 0.5,
+          "augment": true,
+          "detector_mask": false,
+          "holdout": [
+            "walking_static",
+            "rgbd_bonn_crowd2",
+            "rgbd_bonn_person_tracking2",
+            "rgbd_bonn_static_close_far",
+            "Scene06",
+            "OldTownFall",
+            "/pointodyssey/val/",
+            "/pointodyssey/test/"
+          ],
+          "resume": "work_dirs/v10-longclip/latest.pt",
+          "resume_partial": true,
+          "work_dir": "work_dirs/v11-longclip-spread-s2",
+          "seed": 2,
+          "ema_decay": 0.999,
+          "auto_loss_weight": false,
+          "msgrad_weight": 0.5,
+          "normal_weight": 0.05,
+          "warp_weight": 2.0,
+          "spread_weight": 0.5,
+          "edge_weight": 2.0,
+          "size_schedule": null,
+          "warmup": 1000,
+          "grad_clip": 1.0,
+          "collapse_patience": 1000,
+          "collapse_eps": 0.0001,
+          "distill_weight": 0.0,
+          "distill_model": "facebook/dinov2-small",
+          "teacher_weight": 0.0,
+          "teacher_model": "depth-anything/Depth-Anything-V2-Small-hf",
+          "bin_weight": 0.2
+        },
+        "model": {
+          "tau_on": 0.05,
+          "tau_off": 0.025,
+          "keyframe_every": 30,
+          "decoder": "dpt",
+          "bins": 64,
+          "scan_directions": 4,
+          "local_conv": true,
+          "spatial_cache": true,
+          "temporal_cache": true
+        }
+      },
+      "historical_tracked_sources": {
+        "scripts/train.py": "07e8b687c9a37d6c70a7d817224567c56efbff918428b842c7b1a1ca371e3f58",
+        "sokkanaem/model.py": "fe923bf1b9b7b04f54145fcba492debfce09490de9e83552be235386397ccf29",
+        "sokkanaem/ssm.py": "28579ecb9d7b123e3ab9f4a49eeddeabe652b12a126c43584634314d23a69ad4",
+        "sokkanaem/data.py": "fa7a28c478de580733551b4ae5b52496112782b9bef934f7bd6fc7a1eb2afe4b",
+        "sokkanaem/losses.py": "59a5bda1095ebe30ec628ea276e8a347aa95328092ceae2a1ff6eeca0294768b",
+        "sokkanaem/metrics.py": "56d2190cb529fda2e0d7d3c9fe453b09e451877e356fde8513ed459aea18c789",
+        "sokkanaem/ema.py": "00134fb3780ff27db8f7ec44afbfb85950619e11eb970deaee321811f228dd0d",
+        "sokkanaem/distill.py": "ec81f1c123cc1b79e6076a7c76c19d8be1019f1b7ebec2fa3afae0d48001c3da"
+      }
+    }
+  ],
+  "parent": {
+    "path": "work_dirs/v10-longclip/latest.pt",
+    "bytes": 67200188,
+    "sha256": "6318b6fc2effaa9301b373fe59347f709aaea17fbb56dcecf771302bf4255eeb"
+  },
+  "scope": "three last-stage 8k fine-tuning seeds from the SAME v10 parent; not full independent training",
+  "historical_worktree_caveat": "recorded commit does not attest historical uncommitted changes"
+}

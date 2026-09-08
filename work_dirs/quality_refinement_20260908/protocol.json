@@ -1,0 +1,68 @@
+{
+  "role": "development_screen_not_final",
+  "seed": 20260908,
+  "steps": 400,
+  "batch": 8,
+  "lr": 0.001,
+  "variants": {
+    "metric_only": 0.0,
+    "metric_gradient": 0.5
+  },
+  "max_log_delta": 0.15,
+  "inference": "native 256, K30, reset at clip start",
+  "train_clip_len": 4,
+  "development_clip_len": 8,
+  "aggregation": "clip -> scene -> source -> equal-source mean",
+  "selection": {
+    "path": "work_dirs/quality_refinement_20260908/selection.json",
+    "bytes": 80751,
+    "sha256": "1de8dcf2b81c92af65a57568813b482f70685c0c7ac4507cd9532cb09f32ae6a"
+  },
+  "checkpoint": {
+    "path": "work_dirs/v11-longclip-spread-s0/latest.pt",
+    "bytes": 67200316,
+    "sha256": "92565d186cb4448a71793597dea930a2faa77c0205093c892e8443d491193f1a"
+  },
+  "config": {
+    "path": "work_dirs/v11-longclip-spread-s0/config.toml",
+    "bytes": 1681,
+    "sha256": "e2f127e061e8ca7fbb32b4e7e1e1e01d13c4cb460983f36f71c04e92b8d743ff"
+  },
+  "manifest": {
+    "path": "manifests/acc_real_L8.json",
+    "bytes": 923628,
+    "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+  },
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "sokkanaem/bounded_refiner.py",
+      "bytes": 2884,
+      "sha256": "6e27a75bafc961cbc9fa2b1936800a11fc7607f1a6ca4f56fc10f6fc88230149"
+    },
+    {
+      "path": "sokkanaem/model.py",
+      "bytes": 37170,
+      "sha256": "104ac2b43c1fc80df9b9f2f430ff99c447e5a73481e066ed2b6597a10d8648f5"
+    },
+    {
+      "path": "sokkanaem/data.py",
+      "bytes": 19420,
+      "sha256": "5acdd72fc89a981ad939b4fcc33e90fef3cb306d6000df4091db26dbe99926ea"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    },
+    {
+      "path": "sokkanaem/alignment.py",
+      "bytes": 9386,
+      "sha256": "4dd37cabea900d9dc51400659fb519674794625a4b1ca2fc8ff2dff794a51ce8"
+    }
+  ]
+}

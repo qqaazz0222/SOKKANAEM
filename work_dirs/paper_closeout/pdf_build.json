@@ -1,0 +1,81 @@
+{
+  "pdf": {
+    "path": "paper/submission/manuscript.pdf",
+    "bytes": 2873341,
+    "sha256": "f444bd04e880584d4f99d8ea92e2fc24b51ac20f480346d1cc8851dc2b7cd481"
+  },
+  "log": {
+    "path": "paper/submission/manuscript.log",
+    "bytes": 49263,
+    "sha256": "2647ca5648242e2a1fa43fa1b35f1f17b4ccfe4fd6766776546a87afc93752dc"
+  },
+  "tools": [
+    {
+      "path": "work_dirs/paper_tools/ghostscript/bin/gs",
+      "bytes": 28859864,
+      "sha256": "07ee7676acf5e8ec0f4ede99e9804f4f07e2e7b286fcffd19fe172c4b1c76a06"
+    },
+    {
+      "path": "work_dirs/paper_tools/tectonic-0.15.0/tectonic",
+      "bytes": 37185032,
+      "sha256": "4df19452c202c5bef9f7c7e4a01a3f2b9d5199f0a1f73b70b4fe1bffbc9837f6"
+    }
+  ],
+  "source": [
+    {
+      "path": "paper/submission/author_details.tex",
+      "bytes": 351,
+      "sha256": "758bad83ebac77b2c58c067567581d052e3a4d41a4d43723d1d427971ba56c0b"
+    },
+    {
+      "path": "paper/submission/generated_macros.tex",
+      "bytes": 131,
+      "sha256": "55d1c131beed2675d85cd5150ffce1c2206ff770713738f6221e7cbe367c096c"
+    },
+    {
+      "path": "paper/submission/generated_results.tex",
+      "bytes": 4884,
+      "sha256": "69e39456ce7e09e342087e5c10cd31a0ff9970573c1cb11784a50936e53e1011"
+    },
+    {
+      "path": "paper/submission/manuscript.tex",
+      "bytes": 33869,
+      "sha256": "aec6c0478ad7441430ba29ff6dbefdc79c799ffaf5bda08ae1979a80ab669822"
+    },
+    {
+      "path": "paper/submission/reproducibility_details.tex",
+      "bytes": 5373,
+      "sha256": "ecdccb61e7a4e51caaa8f0a271f45240738cb842030d3bbc0d93e8118572ed08"
+    },
+    {
+      "path": "paper/submission/revision_figures.tex",
+      "bytes": 1821,
+      "sha256": "56566d0bd753711fd85dc9ce664e2fec3d8d0b74d1e53c829994f70151ba410c"
+    },
+    {
+      "path": "paper/submission/revision_results.tex",
+      "bytes": 2663,
+      "sha256": "f8572875174a6b5c18856c7c42f366f10c99062282ddd0dd43025303dac669cb"
+    },
+    {
+      "path": "paper/submission/theory_appendix.tex",
+      "bytes": 12416,
+      "sha256": "4253d1c5edf218995c3cad082f478c3c3ef5d8b59bb1dead61c958445baecf0c"
+    }
+  ],
+  "converted_logos": [
+    {
+      "path": "paper/submission/converted/logo-mdpi.pdf",
+      "bytes": 12937,
+      "sha256": "758517a022847440b4f36de8cdb82ca9785f0b85a49ef96d79610a55d4982127"
+    },
+    {
+      "path": "paper/submission/converted/logo-updates.pdf",
+      "bytes": 15235,
+      "sha256": "2be90fe6ac06ccd1de63a98793ba572830ee73e6c33a14036141f78ede42ab6f"
+    }
+  ],
+  "critical_layout_or_reference_errors": [],
+  "author_review_required": true,
+  "warning": "Noncritical package/underfull-box warnings may remain; inspect the PDF visually."
+}

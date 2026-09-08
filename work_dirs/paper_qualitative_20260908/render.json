@@ -1,0 +1,163 @@
+{
+  "generator": {
+    "path": "/workspace/SOKKANAEM/scripts/render_paper_qualitative.py",
+    "bytes": 6815,
+    "sha256": "bce24d0ea3e41e1975adb3dc82ee707c56691955f77fd4ddd1f703ce045d0ef9"
+  },
+  "inputs": [
+    {
+      "path": "work_dirs/paper_qualitative_20260908/inference.json",
+      "bytes": 1606590,
+      "sha256": "4ccb052f1ffd9c199ef30e0062153bcf0f007c8cfbe040240c63f1c20c5fb1e9"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_0_input.npz",
+      "bytes": 61840426,
+      "sha256": "599ba5a863f571c4f391510d5594c81d75b4342c4fa4d11f6c1a3f15c855cfcc"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_0_sparse_k30.npz",
+      "bytes": 109478444,
+      "sha256": "e13aa4d318eadebe4779a31b41211e3469ff5029c6af197cf241c7de0317a6da"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_0_dense_carry.npz",
+      "bytes": 107829105,
+      "sha256": "9aeb412692d93ad420428dd87d489d2386cf94ea6196de08185b6940e10b3fe2"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_0_midas_256.npz",
+      "bytes": 113474422,
+      "sha256": "0b6dd9a7db8032bcf431d8829d3ce6efaa035e5dab7ea4fd1d800f2626939e56"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_0_output_hold.npz",
+      "bytes": 106906352,
+      "sha256": "2338748aa426b7f4d6d79a54c5b43197ac8f8c64c0bb03ea4f91a47f81a38f36"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_4_input.npz",
+      "bytes": 56690730,
+      "sha256": "48d835ab276ba2b5294758bf0f800c5629e0fadd1da6f2abe4a9f862e63f8102"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_4_sparse_k30.npz",
+      "bytes": 109800005,
+      "sha256": "1f5f9a7e139ed9911c5f91e6a7995495d158b64813e2e6d02a3ad29d4abf51d3"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_4_dense_carry.npz",
+      "bytes": 109654187,
+      "sha256": "acd366b64e8675276184641af0fcdec6e48e9af5430534d2af2f30790b137845"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_4_midas_256.npz",
+      "bytes": 111455911,
+      "sha256": "252fc90bcab422e7cee6aee043376ec66191b0d6858232bda7950a08eca58453"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_4_output_hold.npz",
+      "bytes": 107420036,
+      "sha256": "18dec2c8dc825fbe9e095c1fe84fadf1b56bf1e251079662a58d74a81b6d359b"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_7_input.npz",
+      "bytes": 60200232,
+      "sha256": "bc272528e84572638ee316719ffeca08f6fef04c8e0bf045f0d6c22406122458"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_7_sparse_k30.npz",
+      "bytes": 109831488,
+      "sha256": "478f1deb5630e7ce7e711b80acf42399a5de213374472e059db8e6c26734e007"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_7_dense_carry.npz",
+      "bytes": 109394516,
+      "sha256": "a00e9fda78e6f2803292d1eb64f598a316d805caeb9f14108af7bd37f55dcba8"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_7_midas_256.npz",
+      "bytes": 114384004,
+      "sha256": "488c6ed91e76d6d81146473279cca09ed1f4ad04bc7b7e8441b45f04f75c09b1"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_7_output_hold.npz",
+      "bytes": 108387901,
+      "sha256": "76bb72fd71011136b7cc5c8b347e8427b320cc733e2137a8e128c9713857cef9"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_10_input.npz",
+      "bytes": 57817843,
+      "sha256": "57e97ff11267d03639ce5a459e3f64b8cd9ddbfdcafdcc607ce5578022a22b86"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_10_sparse_k30.npz",
+      "bytes": 110573065,
+      "sha256": "7f817e2ff526de49fae4c3abf7905005e270e7f782fcf2ac021c7152085a88a8"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_10_dense_carry.npz",
+      "bytes": 110280479,
+      "sha256": "4a7732cc8f417a9d6644fd92341ba70943b361e975d5cb6faaa9b1da17b96c8a"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_10_midas_256.npz",
+      "bytes": 115025340,
+      "sha256": "3fabe6c25721d1d2ebde7b73f9d0d4cc667bb6d92b5395ad957f92cf84683d4f"
+    },
+    {
+      "path": "work_dirs/paper_qualitative_20260908/tum_10_output_hold.npz",
+      "bytes": 105907558,
+      "sha256": "e911e5b3b4ddcf6f33301517cd72820ed445830be116a23f729097517eb64862"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "paper/submission/figures/qualitative_spatial.pdf",
+      "bytes": 993102,
+      "sha256": "01e53e7506d3cc03ce92dbcf80c6110776131e6e51943841fc992a3e6e52d00b"
+    },
+    {
+      "path": "paper/submission/figures/qualitative_spatial.png",
+      "bytes": 1000326,
+      "sha256": "4bc2da4fc0abb69a64b30ca39980e5a61bf00d1a2a88f10cf206ed30e83868af"
+    },
+    {
+      "path": "paper/submission/figures/qualitative_temporal.pdf",
+      "bytes": 1313922,
+      "sha256": "e9cfcc436a37311cee074e30ac54fbaf9687abe98308b509a0b15cdd56b8ebe4"
+    },
+    {
+      "path": "paper/submission/figures/qualitative_temporal.png",
+      "bytes": 946377,
+      "sha256": "76dc5d75923fca6a38caa404a651b46263dddbe549f4242522acab68e8a83c32"
+    },
+    {
+      "path": "paper/submission/qualitative/tum_0.mp4",
+      "bytes": 3656132,
+      "sha256": "756ae0c4363a8f63c63d7467ac6ce5b60a33621cfa226197ae6c370accb6a6b1"
+    },
+    {
+      "path": "paper/submission/qualitative/tum_4.mp4",
+      "bytes": 3732235,
+      "sha256": "9bc34db6e865f2d53213f563249f32bf5e23535c5059a71f0cb4c16d03d1bb63"
+    },
+    {
+      "path": "paper/submission/qualitative/tum_7.mp4",
+      "bytes": 4868200,
+      "sha256": "7b9bcb01b2faa1ec65d1347a7767348326a0f599cc3ea1215ac6b72e1930f548"
+    },
+    {
+      "path": "paper/submission/qualitative/tum_10.mp4",
+      "bytes": 4469453,
+      "sha256": "e0f96fec6465eceaf8b69fc94acd7896eea3eb138d59ae3eaf5de9bee5ece7bc"
+    },
+    {
+      "path": "paper/submission/qualitative/provenance.json",
+      "bytes": 1602084,
+      "sha256": "55e75c75b9a9bf8593440bcac45849cf33f424ce73c23c6ad54b72927d4f36d8"
+    }
+  ],
+  "post_hoc": true,
+  "synthetic_predictions": false
+}

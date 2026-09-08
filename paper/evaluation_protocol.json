@@ -1,0 +1,29 @@
+{
+  "id": "sokkanaem-paper-v1",
+  "date": "2026-09-06",
+  "reported_model": "ours:work_dirs/v11-longclip-spread-s0/latest.pt",
+  "weight_selection": "ema_if_present_else_model",
+  "native_inference_size": 256,
+  "scoring_size": 256,
+  "resize": "short-side resize and center crop; bilinear RGB, nearest depth",
+  "timestamp_pairing": "nearest depth within 0.02 seconds; depth frame reuse allowed (legacy adapter)",
+  "clip_lengths": [8, 32, 256],
+  "state": "reset at each clip boundary; otherwise carry; keyframe period 30",
+  "panels": {
+    "metric": {"align": "none", "space": "depth", "gt_fit": false},
+    "scale_aligned": {"align": "median", "scope": "clip", "gt_fit": true},
+    "relative_shape": {"align": "scaleshift", "scope": "clip", "gt_fit": true},
+    "shape_diagnostic": {"align": "scaleshift", "scope": "frame", "gt_fit": true}
+  },
+  "gt_validity": "finite GT and depth > 0 after sensor sentinel removal; no extra upper cutoff",
+  "prediction_clipping": "none in metric panel; legacy disparity conversion uses floor 0.001 and reports failures",
+  "nonfinite_prediction": "explicit error; never silently omit pixels or clips",
+  "unreadable_clip": "retry same clip, then fail; no random replacement",
+  "statistics": "pixel pooled within source, equal source mean; also clip mean/median/P95 and failures",
+  "tail_definition": "balanced P95 is the mean of source P95s, not a global quantile",
+  "temporal": "clip gauge or no fit; per-frame GT fitting is a shape diagnostic only",
+  "activity": "report all-frame and post-first-frame means separately",
+  "resolution_comparison": "separate common-input target 256 (report processor actual size) and official-input panels; score at 256",
+  "legacy_results": "development evidence; snapshots taken now cannot prove historical execution provenance",
+  "final_test": "reserved TUM moving-camera sequences; no model inference in preparation steps 1-4"
+}

@@ -1,0 +1,1456 @@
+**
+(manuscript.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-02-24> (Definitions/mdpi.cls
+Document Class: Definitions/mdpi 18/06/2025 MDPI paper class
+(article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(size10.clo
+File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count181
+\c@section=\count182
+\c@subsection=\count183
+\c@subsubsection=\count184
+\c@paragraph=\count185
+\c@subparagraph=\count186
+\c@figure=\count187
+\c@table=\count188
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+) (fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+lmr on input line 11
+2.
+ (t1lmr.fd
+File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)) (inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+
+
+Package inputenc Warning: inputenc package ignored with utf8 based engines.
+
+) (calc.sty
+Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count189
+\calc@Bcount=\count190
+\calc@Adimen=\dimen139
+\calc@Bdimen=\dimen140
+\calc@Askip=\skip49
+\calc@Bskip=\skip50
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count191
+\calc@Cskip=\skip51
+) (indentfirst.sty
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+) (fancyhdr.sty
+Package: fancyhdr 2021/01/28 v4.0.1 Extensive control of page headers and foote
+rs
+\f@nch@headwidth=\skip52
+\f@nch@O@elh=\skip53
+\f@nch@O@erh=\skip54
+\f@nch@O@olh=\skip55
+\f@nch@O@orh=\skip56
+\f@nch@O@elf=\skip57
+\f@nch@O@erf=\skip58
+\f@nch@O@olf=\skip59
+\f@nch@O@orf=\skip60
+) (graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+ (keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks18
+)
+(graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+ (trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+) (graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 107.
+ (xetex.def
+File: xetex.def 2021/03/18 v5.0k Graphics/color driver for xetex
+))
+\Gin@req@height=\dimen141
+\Gin@req@width=\dimen142
+) (epstopdf.sty
+Package: epstopdf 2020-01-24 v2.11 Conversion with epstopdf on the fly (HO)
+
+(infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+) (grfext.sty
+Package: grfext 2019/12/03 v1.3 Manage graphics extensions (HO)
+ (kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)) (kvoptions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+ (ltxcmds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(kvsetkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+)) (pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+ (iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+) (epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+
+
+Package epstopdf Warning: Drivers other than `pdftex' and `luatex' are not supp
+orted.
+
+)) (lastpage.sty
+Package: lastpage 2021/09/03 v1.2n Refers to last page's name (HMM; JPG)
+) (ifthen.sty
+Package: ifthen 2020/11/24 v1.1c Standard LaTeX ifthen package (DPC)
+) (float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count192
+\float@exts=\toks19
+\float@box=\box50
+\@float@everytoks=\toks20
+\@floatcapt=\box51
+) (amsmath.sty
+Package: amsmath 2021/10/15 v2.17l AMS math features
+\@mathmargin=\skip61
+
+For additional information on amsmath, use the `?' option.
+(amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+ (amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks21
+\ex@=\dimen143
+)) (amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen144
+) (amsopn.sty
+Package: amsopn 2021/08/26 v2.02 operator names
+)
+\inf@bad=\count193
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count194
+\leftroot@=\count195
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count196
+\DOTSCASE@=\count197
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box52
+\strutbox@=\box53
+\big@size=\dimen145
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count198
+\c@MaxMatrixCols=\count199
+\dotsspace@=\muskip16
+\c@parentequation=\count266
+\dspbrk@lvl=\count267
+\tag@help=\toks22
+\row@=\count268
+\column@=\count269
+\maxfields@=\count270
+\andhelp@=\toks23
+\eqnshift@=\dimen146
+\alignsep@=\dimen147
+\tagshift@=\dimen148
+\tagwidth@=\dimen149
+\totwidth@=\dimen150
+\lineht@=\dimen151
+\@envbody=\toks24
+\multlinegap=\skip62
+\multlinetaggap=\skip63
+\mathdisplay@stack=\toks25
+LaTeX Info: Redefining \[ on input line 2938.
+LaTeX Info: Redefining \] on input line 2939.
+) (amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+
+(amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+Invalid UTF-8 byte or sequence at line 296 replaced by U+FFFD.
+\linenopenalty=\count271
+\output=\toks26
+\linenoprevgraf=\count272
+\linenumbersep=\dimen152
+\linenumberwidth=\dimen153
+\c@linenumber=\count273
+\c@pagewiselinenumber=\count274
+\c@LN@truepage=\count275
+\c@internallinenumber=\count276
+\c@internallinenumbers=\count277
+\quotelinenumbersep=\dimen154
+\bframerule=\dimen155
+\bframesep=\dimen156
+\bframebox=\box54
+LaTeX Info: Redefining \\ on input line 3056.
+) (setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+) (enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip64
+\enit@outerparindent=\dimen157
+\enit@toks=\toks27
+\enit@inbox=\box55
+\enit@count@id=\count278
+\enitdp@description=\count279
+) (mathpazo.sty
+Package: mathpazo 2020/03/25 PSNFSS-v9.3 Palatino w/ Pazo Math (D.Puga, WaS) 
+\symupright=\mathgroup6
+)
+(booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen158
+\lightrulewidth=\dimen159
+\cmidrulewidth=\dimen160
+\belowrulesep=\dimen161
+\belowbottomsep=\dimen162
+\aboverulesep=\dimen163
+\abovetopsep=\dimen164
+\cmidrulesep=\dimen165
+\cmidrulekern=\dimen166
+\defaultaddspace=\dimen167
+\@cmidla=\count280
+\@cmidlb=\count281
+\@aboverulesep=\dimen168
+\@belowrulesep=\dimen169
+\@thisruleclass=\count282
+\@lastruleclass=\count283
+\@thisrulewidth=\dimen170
+) (titlesec.sty
+Package: titlesec 2021/07/05 v2.14 Sectioning titles
+\ttl@box=\box56
+\beforetitleunit=\skip65
+\aftertitleunit=\skip66
+\ttl@plus=\dimen171
+\ttl@minus=\dimen172
+\ttl@toksa=\toks28
+\titlewidth=\dimen173
+\titlewidthlast=\dimen174
+\titlewidthfirst=\dimen175
+) (etoolbox.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count284
+) (tabto.sty
+Package: tabto 2018/12/28  v 1.4  Another tabbing mechanism
+\CurrentLineWidth=\dimen176
+\TabPrevPos=\dimen177
+) (xcolor.sty
+Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
+ (color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 227.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1368.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1370.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1371.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
+) (colortbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+ (array.sty
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen178
+\ar@mcellbox=\box57
+\extrarowheight=\dimen179
+\NC@list=\toks29
+\extratabsurround=\skip67
+\backup@length=\skip68
+\ar@cellbox=\box58
+)
+\everycr=\toks30
+\minrowclearance=\skip69
+) (soul.sty
+Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
+\SOUL@word=\toks31
+\SOUL@lasttoken=\toks32
+\SOUL@cmds=\toks33
+\SOUL@buffer=\toks34
+\SOUL@token=\toks35
+\SOUL@spaceskip=\skip70
+\SOUL@ttwidth=\dimen180
+\SOUL@uldp=\dimen181
+\SOUL@ulht=\dimen182
+) (multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip71
+\multirow@cntb=\count285
+\multirow@dima=\skip72
+\bigstrutjot=\dimen183
+) (microtype.sty
+Package: microtype 2022/03/14 v3.0d Micro-typographical refinements (RS)
+\MT@toks=\toks36
+\MT@tempbox=\box59
+\MT@count=\count286
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1027.
+LaTeX Info: Redefining \leftprotrusion on input line 1028.
+LaTeX Info: Redefining \rightprotrusion on input line 1036.
+LaTeX Info: Redefining \textls on input line 1195.
+\MT@outer@kern=\dimen184
+LaTeX Info: Redefining \textmicrotypecontext on input line 1781.
+\MT@listname@count=\count287
+
+(microtype-xetex.def
+File: microtype-xetex.def 2022/03/14 v3.0d Definitions specific to xetex (RS)
+LaTeX Info: Redefining \lsstyle on input line 236.
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+ (microtype.cfg
+File: microtype.cfg 2022/03/14 v3.0d microtype main configuration file (RS)
+)) (tikz.sty (pgf.sty (pgfrcs.sty
+(pgfutil-common.tex
+\pgfutil@everybye=\toks37
+\pgfutil@tempdima=\dimen185
+\pgfutil@tempdimb=\dimen186
+ (pgfutil-common-lists.tex)) (pgfutil-latex.def
+\pgfutil@abb=\box60
+)
+(pgfrcs.code.tex (pgf.revision.tex)
+Package: pgfrcs 2021/05/15 v3.1.9a (3.1.9a)
+))
+Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
+ (pgfcore.sty (pgfsys.sty (pgfsys.code.tex
+Package: pgfsys 2021/05/15 v3.1.9a (3.1.9a)
+(pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks38
+\pgfkeys@temptoks=\toks39
+ (pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks40
+))
+\pgf@x=\dimen187
+\pgf@y=\dimen188
+\pgf@xa=\dimen189
+\pgf@ya=\dimen190
+\pgf@xb=\dimen191
+\pgf@yb=\dimen192
+\pgf@xc=\dimen193
+\pgf@yc=\dimen194
+\pgf@xd=\dimen195
+\pgf@yd=\dimen196
+\w@pgf@writea=\write3
+\r@pgf@reada=\read2
+\c@pgf@counta=\count288
+\c@pgf@countb=\count289
+\c@pgf@countc=\count290
+\c@pgf@countd=\count291
+\t@pgf@toka=\toks41
+\t@pgf@tokb=\toks42
+\t@pgf@tokc=\toks43
+\pgf@sys@id@count=\count292
+ (pgf.cfg
+File: pgf.cfg 2021/05/15 v3.1.9a (3.1.9a)
+)
+Driver file for pgf: pgfsys-xetex.def
+ (pgfsys-xetex.def
+File: pgfsys-xetex.def 2021/05/15 v3.1.9a (3.1.9a)
+
+(pgfsys-dvipdfmx.def
+File: pgfsys-dvipdfmx.def 2021/05/15 v3.1.9a (3.1.9a)
+ (pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2021/05/15 v3.1.9a (3.1.9a)
+)
+\pgfsys@objnum=\count293
+))) (pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfsyssoftpath@smallbuffer@items=\count294
+\pgfsyssoftpath@bigbuffer@items=\count295
+)
+(pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (pgfcore.code.tex
+Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
+ (pgfmath.code.tex
+(pgfmathcalc.code.tex (pgfmathutil.code.tex) (pgfmathparser.code.tex
+\pgfmath@dimen=\dimen197
+\pgfmath@count=\count296
+\pgfmath@box=\box61
+\pgfmath@toks=\toks44
+\pgfmath@stack@operand=\toks45
+\pgfmath@stack@operation=\toks46
+)
+(pgfmathfunctions.code.tex (pgfmathfunctions.basic.code.tex)
+(pgfmathfunctions.trigonometric.code.tex) (pgfmathfunctions.random.code.tex)
+(pgfmathfunctions.comparison.code.tex) (pgfmathfunctions.base.code.tex)
+(pgfmathfunctions.round.code.tex) (pgfmathfunctions.misc.code.tex)
+(pgfmathfunctions.integerarithmetics.code.tex))) (pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count297
+))
+(pgfint.code.tex) (pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@picminx=\dimen198
+\pgf@picmaxx=\dimen199
+\pgf@picminy=\dimen256
+\pgf@picmaxy=\dimen257
+\pgf@pathminx=\dimen258
+\pgf@pathmaxx=\dimen259
+\pgf@pathminy=\dimen260
+\pgf@pathmaxy=\dimen261
+\pgf@xx=\dimen262
+\pgf@xy=\dimen263
+\pgf@yx=\dimen264
+\pgf@yy=\dimen265
+\pgf@zx=\dimen266
+\pgf@zy=\dimen267
+) (pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@path@lastx=\dimen268
+\pgf@path@lasty=\dimen269
+)
+(pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@shorten@end@additional=\dimen270
+\pgf@shorten@start@additional=\dimen271
+) (pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfpic=\box62
+\pgf@hbox=\box63
+\pgf@layerbox@main=\box64
+\pgf@picture@serial@count=\count298
+)
+(pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgflinewidth=\dimen272
+) (pgfcoretransformations.code.tex
+File: pgfcoretransformations.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@pt@x=\dimen273
+\pgf@pt@y=\dimen274
+\pgf@pt@temp=\dimen275
+)
+(pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(pgfcorepathprocessing.code.tex
+File: pgfcorepathprocessing.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfarrowsep=\dimen276
+)
+(pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@max=\dimen277
+\pgf@sys@shading@range@num=\count299
+\pgf@shadingcount=\count300
+) (pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+ (pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfexternal@startupbox=\box65
+))
+(pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (pgfcorerdf.code.tex
+File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))) (pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfnodeparttextbox=\box66
+)
+(pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+) (pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@nodesepstart=\dimen278
+\pgf@nodesepend=\dimen279
+) (pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2021/05/15 v3.1.9a (3.1.9a)
+)) (pgffor.sty (pgfkeys.sty (pgfkeys.code.tex)) (pgfmath.sty (pgfmath.code.tex)
+)
+(pgffor.code.tex
+Package: pgffor 2021/05/15 v3.1.9a (3.1.9a)
+ (pgfmath.code.tex)
+\pgffor@iter=\dimen280
+\pgffor@skip=\dimen281
+\pgffor@stack=\toks47
+\pgffor@toks=\toks48
+)) (tikz.code.tex
+Package: tikz 2021/05/15 v3.1.9a (3.1.9a)
+
+(pgflibraryplothandlers.code.tex
+File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgf@plot@mark@count=\count301
+\pgfplotmarksize=\dimen282
+)
+\tikz@lastx=\dimen283
+\tikz@lasty=\dimen284
+\tikz@lastxsaved=\dimen285
+\tikz@lastysaved=\dimen286
+\tikz@lastmovetox=\dimen287
+\tikz@lastmovetoy=\dimen288
+\tikzleveldistance=\dimen289
+\tikzsiblingdistance=\dimen290
+\tikz@figbox=\box67
+\tikz@figbox@bg=\box68
+\tikz@tempbox=\box69
+\tikz@tempbox@bg=\box70
+\tikztreelevel=\count302
+\tikznumberofchildren=\count303
+\tikznumberofcurrentchild=\count304
+\tikz@fig@count=\count305
+ (pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+\pgfmatrixcurrentrow=\count306
+\pgfmatrixcurrentcolumn=\count307
+\pgf@matrix@numberofcolumns=\count308
+)
+\tikz@expandcount=\count309
+
+(tikzlibrarytopaths.code.tex
+File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+))) (refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (changepage.sty
+Package: changepage 2009/10/20 v1.0c check page and change page layout
+\c@cp@cntr=\count310
+\cp@tempcnt=\count311
+) (attrib.sty
+Package: attrib 2001/08/31 v1.3 attribution of block elements (Frankenstein's h
+at)
+
+(moredefs.sty
+Package: moredefs 2001/08/31 v1.8 more defining commands (Frankenstein's brain)
+
+\sc@toks@a=\toks49
+\sc@toks@b=\toks50
+)
+\AttribMinSkip=\skip73
+) (upgreek.sty
+Package: upgreek 2003/02/12 v2.0 (WaS)
+Package upgreek Info: Using Euler Roman for upright Greek on input line 31.
+\symugrf@m=\mathgroup7
+LaTeX Font Info:    Overwriting symbol font `ugrf@m' in version `bold'
+(Font)                  U/eur/m/n --> U/eur/b/n on input line 38.
+) (tabularx.sty
+Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
+\TX@col@width=\dimen291
+\TX@old@table=\dimen292
+\TX@old@col=\dimen293
+\TX@target=\dimen294
+\TX@delta=\dimen295
+\TX@cols=\count312
+\TX@ftn=\toks51
+) (pbox.sty
+Package: pbox 2011/12/07 v1.2 Dynamic parboxes
+\pb@xlen=\skip74
+) (ragged2e.sty
+Package: ragged2e 2021/12/15 v3.1 ragged2e Package
+\CenteringLeftskip=\skip75
+\RaggedLeftLeftskip=\skip76
+\RaggedRightLeftskip=\skip77
+\CenteringRightskip=\skip78
+\RaggedLeftRightskip=\skip79
+\RaggedRightRightskip=\skip80
+\CenteringParfillskip=\skip81
+\RaggedLeftParfillskip=\skip82
+\RaggedRightParfillskip=\skip83
+\JustifyingParfillskip=\skip84
+\CenteringParindent=\skip85
+\RaggedLeftParindent=\skip86
+\RaggedRightParindent=\skip87
+\JustifyingParindent=\skip88
+)
+(tocloft.sty
+Package: tocloft 2017/08/31 v2.3i parameterised ToC, etc., typesetting
+Package tocloft Info: The document has section divisions on input line 51.
+\cftparskip=\skip89
+\cftbeforetoctitleskip=\skip90
+\cftaftertoctitleskip=\skip91
+\cftbeforepartskip=\skip92
+\cftpartnumwidth=\skip93
+\cftpartindent=\skip94
+\cftbeforesecskip=\skip95
+\cftsecindent=\skip96
+\cftsecnumwidth=\skip97
+\cftbeforesubsecskip=\skip98
+\cftsubsecindent=\skip99
+\cftsubsecnumwidth=\skip100
+\cftbeforesubsubsecskip=\skip101
+\cftsubsubsecindent=\skip102
+\cftsubsubsecnumwidth=\skip103
+\cftbeforeparaskip=\skip104
+\cftparaindent=\skip105
+\cftparanumwidth=\skip106
+\cftbeforesubparaskip=\skip107
+\cftsubparaindent=\skip108
+\cftsubparanumwidth=\skip109
+\cftbeforeloftitleskip=\skip110
+\cftafterloftitleskip=\skip111
+\cftbeforefigskip=\skip112
+\cftfigindent=\skip113
+\cftfignumwidth=\skip114
+\cftbeforelottitleskip=\skip115
+\cftafterlottitleskip=\skip116
+\cftbeforetabskip=\skip117
+\cfttabindent=\skip118
+\cfttabnumwidth=\skip119
+\cftbeforesubfigskip=\skip120
+\cftsubfigindent=\skip121
+\cftsubfignumwidth=\skip122
+\cftbeforesubtabskip=\skip123
+\cftsubtabindent=\skip124
+\cftsubtabnumwidth=\skip125
+) (marginnote.sty
+Package: marginnote 2018/08/09 v1.4b non floating margin notes for LaTeX
+\c@mn@abspage=\count313
+) (marginfix.sty
+Package: marginfix 2020/05/06 v1.2 Fix Margin Paragraphs
+\Mfx@inject@insert=\insert252
+\Mfx@marginbox=\box71
+\Mfx@marginpos@min=\dimen296
+\Mfx@marginpos@max=\dimen297
+\Mfx@marginspace=\dimen298
+\Mfx@marginheight=\dimen299
+\Mfx@piece@content=\box72
+\Mfx@piece@count=\count314
+\Mfx@mparshift=\dimen300
+\marginheightadjustment=\dimen301
+\marginposadjustment=\dimen302
+\Mfx@strutheight=\dimen303
+) (enotez.sty (expl3.sty
+Package: expl3 2022-02-24 L3 programming layer (loader) 
+
+(l3backend-xetex.def
+File: l3backend-xetex.def 2022-02-07 L3 backend support: XeTeX
+\c__kernel_sys_dvipdfmx_version_int=\count315
+\l__color_backend_stack_int=\count316
+\g__color_backend_stack_int=\count317
+\g__graphics_track_int=\count318
+\l__pdf_internal_box=\box73
+\g__pdf_backend_object_int=\count319
+\g__pdf_backend_annotation_int=\count320
+\g__pdf_backend_link_int=\count321
+)) (xparse.sty
+Package: xparse 2022-01-12 L3 Experimental document command parser
+) (l3keys2e.sty
+Package: l3keys2e 2022-01-12 LaTeX2e option processing using LaTeX3 keys
+) (xtemplate.sty
+Package: xtemplate 2022-01-12 L3 Experimental prototype document functions
+\l__xtemplate_tmp_dim=\dimen304
+\l__xtemplate_tmp_int=\count322
+\l__xtemplate_tmp_muskip=\muskip17
+\l__xtemplate_tmp_skip=\skip126
+)
+Package: enotez 2022/01/04 v0.10d Endnotes for LaTeX2e
+\l__enotez_list_preamble_skip=\skip127
+\l__enotez_list_postamble_skip=\skip128
+\g__enotez_endnote_id_int=\count323
+\g__enotez_endnote_mark_int=\count324
+\c@endnote=\count325
+\g__enotez_list_printed_int=\count326
+\l__enotez_tmpa_int=\count327
+
+Package xtemplate Info: Declaring object type 'enotez-list' taking 1
+(xtemplate)             argument(s) on line 473.
+
+\l__enotez_list_notes_sep_dim=\dimen305
+
+(translations.sty
+Package: translations 2022/02/05 v1.12 internationalization of LaTeX2e packages
+ (CN)
+)) (xstring.sty (xstring.tex
+\integerpart=\count328
+\decimalpart=\count329
+)
+Package: xstring 2021/07/21 v1.84 String manipulations (CT)
+) (subfig.sty
+Package: subfig 2005/06/28 ver: 1.3 subfig package
+ (caption.sty
+Package: caption 2022/03/01 v3.6b Customizing captions (AR)
+
+(caption3.sty
+Package: caption3 2022/03/17 v2.3b caption3 kernel (AR)
+\caption@tempdima=\dimen306
+\captionmargin=\dimen307
+\caption@leftmargin=\dimen308
+\caption@rightmargin=\dimen309
+\caption@width=\dimen310
+\caption@indent=\dimen311
+\caption@parindent=\dimen312
+\caption@hangindent=\dimen313
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count330
+\c@continuedfloat=\count331
+Package caption Info: changepage package is loaded.
+\caption@adjustwidth@hsize=\dimen314
+\caption@adjustwidth@linewidth=\dimen315
+Package caption Info: float package is loaded.
+)
+\c@KVtest=\count332
+\sf@farskip=\skip129
+\sf@captopadj=\dimen316
+\sf@capskip=\skip130
+\sf@nearskip=\skip131
+\c@subfigure=\count333
+\c@subfigure@save=\count334
+\c@lofdepth=\count335
+\c@subtable=\count336
+\c@subtable@save=\count337
+\c@lotdepth=\count338
+\sf@top=\skip132
+\sf@bottom=\skip133
+) (Definitions/journalnames) (amsthm.sty
+Package: amsthm 2020/05/29 v2.20.6
+\thm@style=\toks52
+\thm@bodyfont=\toks53
+\thm@headfont=\toks54
+\thm@notefont=\toks55
+\thm@headpunct=\toks56
+\thm@preskip=\skip134
+\thm@postskip=\skip135
+\thm@headsep=\skip136
+\dth@everypar=\toks57
+)
+\c@theorem=\count339
+\c@lemma=\count340
+\c@corollary=\count341
+\c@proposition=\count342
+\c@characterization=\count343
+\c@property=\count344
+\c@problem=\count345
+\c@example=\count346
+\c@examplesanddefinitions=\count347
+\c@remark=\count348
+\c@definition=\count349
+\c@hypothesis=\count350
+\c@notation=\count351
+\c@assumption=\count352
+\c@algorithm=\count353
+ (natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip137
+\bibsep=\skip138
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count354
+)
+(scrextend.sty
+Package: scrextend 2021/11/13 v3.35 KOMA-Script package (extend other classes w
+ith features of KOMA-Script classes)
+ (scrkbase.sty
+Package: scrkbase 2021/11/13 v3.35 KOMA-Script package (KOMA-Script-dependent b
+asics and keyval usage)
+ (scrbase.sty
+Package: scrbase 2021/11/13 v3.35 KOMA-Script package (KOMA-Script-independent 
+basics and keyval usage)
+ (scrlfile.sty
+Package: scrlfile 2021/11/13 v3.35 KOMA-Script package (file load hooks)
+ (scrlfile-hook.sty
+Package: scrlfile-hook 2021/11/13 v3.35 KOMA-Script package (using LaTeX hooks)
+
+
+(scrlogo.sty
+Package: scrlogo 2021/11/13 v3.35 KOMA-Script package (logo)
+)))
+Applying: [2021/05/01] Usage of raw or classic option list on input line 252.
+Already applied: [0000/00/00] Usage of raw or classic option list on input line
+ 368.
+)))
+\MyLen=\skip139
+\MyBox=\box74
+\leftcolumnlength=\skip140
+\extralength=\skip141
+\fulllength=\skip142
+ (geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+ (ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count355
+\Gm@cntv=\count356
+\c@Gm@tempcnt=\count357
+\Gm@bindingoffset=\dimen317
+\Gm@wd@mp=\dimen318
+\Gm@odd@mp=\dimen319
+\Gm@even@mp=\dimen320
+\Gm@layoutwidth=\dimen321
+\Gm@layoutheight=\dimen322
+\Gm@layouthoffset=\dimen323
+\Gm@layoutvoffset=\dimen324
+\Gm@dimlist=\toks58
+) (newfloat.sty
+Package: newfloat 2019/09/02 v1.1l Defining new floating environments (AR)
+)
+Package newfloat Info: New float `listing' with options `' on input line 1607.
+\c@listing=\count358
+Package newfloat Info: float type `listing'=4 on input line 1607.
+\c@lolistingdepth=\count359
+Package newfloat Info: New float `boxenv' with options `name=Box' on input line
+ 1608.
+\c@boxenv=\count360
+Package newfloat Info: float type `boxenv'=8 on input line 1608.
+\c@loboxenvdepth=\count361
+Package newfloat Info: New float `chart' with options `' on input line 1609.
+\c@chart=\count362
+Package newfloat Info: float type `chart'=16 on input line 1609.
+\c@lochartdepth=\count363
+Package newfloat Info: New float `scheme' with options `' on input line 1610.
+\c@scheme=\count364
+Package newfloat Info: float type `scheme'=32 on input line 1610.
+\c@loschemedepth=\count365
+Package newfloat Info: New float `figurewide' with options `' on input line 161
+1.
+\c@figurewide=\count366
+Package newfloat Info: float type `figurewide'=64 on input line 1611.
+\c@lofigurewidedepth=\count367
+Package newfloat Info: New float `graph' with options `' on input line 1612.
+\c@graph=\count368
+Package newfloat Info: float type `graph'=128 on input line 1612.
+\c@lographdepth=\count369
+\@justcentbox=\box75
+ (seqsplit.sty
+Package: seqsplit 2006/08/07 v0.1 Splitting long sequences (DNA, RNA, proteins,
+ etc.) 
+)
+\cellWidtha=\skip143
+\cellWidthb=\skip144
+\cellWidthc=\skip145
+\cellWidthd=\skip146
+\cellWidthe=\skip147
+\cellWidthf=\skip148
+\cellWidthg=\skip149
+\cellWidthh=\skip150
+\cellWidthi=\skip151
+\cellWidthj=\skip152
+\cellWidthk=\skip153
+\cellWidthl=\skip154
+\cellWidthm=\skip155
+\cellWidthn=\skip156
+\cellWidtho=\skip157
+\cellWidthp=\skip158
+\cellWidthq=\skip159
+\cellWidthr=\skip160
+\cellWidths=\skip161
+\cellWidtht=\skip162
+\cellWidthu=\skip163
+\cellWidthv=\skip164
+\cellWidthw=\skip165
+\cellWidthx=\skip166
+\cellWidthy=\skip167
+\cellWidthz=\skip168
+\cellWidthA=\skip169
+\cellWidthB=\skip170
+\cellWidthC=\skip171
+\cellWidthD=\skip172
+\cellWidthE=\skip173
+\cellWidthF=\skip174
+\cellWidthG=\skip175
+\cellWidthH=\skip176
+\cellWidthI=\skip177
+\cellWidthJ=\skip178
+\cellWidthK=\skip179
+\cellWidthL=\skip180
+\cellWidthM=\skip181
+\cellWidthN=\skip182
+\cellWidthO=\skip183
+\cellWidthP=\skip184
+\cellWidthQ=\skip185
+\cellWidthR=\skip186
+\cellWidthS=\skip187
+\cellWidthT=\skip188
+\cellWidthU=\skip189
+\cellWidthV=\skip190
+\cellWidthW=\skip191
+\cellWidthX=\skip192
+\cellWidthY=\skip193
+\cellWidthZ=\skip194
+)
+\PaperTableMeasureBox=\box76
+\PaperTableNaturalWidth=\dimen325
+\PaperTableTargetWidth=\dimen326
+
+(generated_macros.tex) (author_details.tex)
+Package translations Info: No language package found. I am going to use `englis
+h' as default language. on input line 95.
+ (hyperref.sty
+Package: hyperref 2022-02-21 v7.00n Hypertext links for LaTeX
+ (pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+)
+(hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (letltxmacro.sty
+Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
+) (auxhook.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+\@linkdim=\dimen327
+\Hy@linkcounter=\count370
+\Hy@pagecounter=\count371
+ (pd1enc.def
+File: pd1enc.def 2022-02-21 v7.00n Hyperref: PDFDocEncoding definition (HO)
+) (intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+(etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+\Hy@SavedSpaceFactor=\count372
+ (puenc.def
+File: puenc.def 2022-02-21 v7.00n Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4018.
+Package hyperref Info: Option `bookmarksopen' set `true' on input line 4018.
+Package hyperref Info: Option `pdffitwindow' set `true' on input line 4018.
+Package hyperref Info: Option `colorlinks' set `true' on input line 4018.
+Package hyperref Info: Option `hyperfootnotes' set `true' on input line 4018.
+Package hyperref Info: Hyper figures OFF on input line 4137.
+Package hyperref Info: Link nesting OFF on input line 4142.
+Package hyperref Info: Hyper index ON on input line 4145.
+Package hyperref Info: Plain pages OFF on input line 4152.
+Package hyperref Info: Backreferencing OFF on input line 4157.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4390.
+\c@Hy@tempcnt=\count373
+ (url.sty
+\Urlmuskip=\muskip18
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4749.
+\XeTeXLinkMargin=\dimen328
+ (bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+ (bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
+)
+))
+\Fld@menulength=\count374
+\Field@Width=\dimen329
+\Fld@charsize=\dimen330
+Package hyperref Info: Hyper figures OFF on input line 6027.
+Package hyperref Info: Link nesting OFF on input line 6032.
+Package hyperref Info: Hyper index ON on input line 6035.
+Package hyperref Info: backreferencing OFF on input line 6042.
+Package hyperref Info: Link coloring ON on input line 6045.
+Package hyperref Info: Link coloring with OCG OFF on input line 6052.
+Package hyperref Info: PDF/A mode OFF on input line 6057.
+LaTeX Info: Redefining \ref on input line 6097.
+LaTeX Info: Redefining \pageref on input line 6101.
+
+(atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count375
+\c@Item=\count376
+\c@Hfootnote=\count377
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+ (hxetex.def
+File: hxetex.def 2022-02-21 v7.00n Hyperref driver for XeTeX
+ (stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO
+)
+)
+\pdfm@box=\box77
+\c@Hy@AnnotLevel=\count378
+\HyField@AnnotCount=\count379
+\Fld@listcount=\count380
+\c@bookmark@seq@number=\count381
+ (rerunfilecheck.sty
+Package: rerunfilecheck 2019/12/05 v1.9 Rerun checks for auxiliary files (HO)
+
+(atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
+kage
+with kernel methods
+) (uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+86.
+)
+\Hy@SectionHShift=\skip195
+) (cleveref.sty
+Package: cleveref 2018/03/27 v0.21.4 Intelligent cross-referencing
+Package cleveref Info: `hyperref' support loaded on input line 2370.
+LaTeX Info: Redefining \cref on input line 2370.
+LaTeX Info: Redefining \Cref on input line 2370.
+LaTeX Info: Redefining \crefrange on input line 2370.
+LaTeX Info: Redefining \Crefrange on input line 2370.
+LaTeX Info: Redefining \cpageref on input line 2370.
+LaTeX Info: Redefining \Cpageref on input line 2370.
+LaTeX Info: Redefining \cpagerefrange on input line 2370.
+LaTeX Info: Redefining \Cpagerefrange on input line 2370.
+LaTeX Info: Redefining \labelcref on input line 2370.
+LaTeX Info: Redefining \labelcpageref on input line 2370.
+Package cleveref Info: `amsthm' support loaded on input line 3026.
+Package cleveref Info: `subfig' support loaded on input line 3164.
+Package cleveref Info: always capitalise cross-reference names on input line 78
+25.
+Package cleveref Info: always capitalise cross-reference names on input line 78
+52.
+Package cleveref Info: no abbreviation of names on input line 7852.
+)
+LaTeX Font Info:    Trying to load font information for T1+ppl on input line 95
+.
+ (t1ppl.fd
+File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
+)
+(manuscript.aux)
+\openout1 = `manuscript.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 95.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 9
+5.
+ (ts1cmr.fd
+File: ts1cmr.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 95.
+LaTeX Font Info:    ... okay on input line 95.
+Package lastpage Info: Please have a look at the pageslts package at
+(lastpage)             https://www.ctan.org/pkg/pageslts
+(lastpage)             ! on input line 95.
+LaTeX Info: Redefining \microtypecontext on input line 95.
+Package microtype Info: Applying patch `item' on input line 95.
+Package microtype Info: Applying patch `toc' on input line 95.
+Package microtype Info: Applying patch `eqnum' on input line 95.
+Package microtype Info: Applying patch `footnote' on input line 95.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+ (mt-ppl.cfg
+File: mt-ppl.cfg 2005/11/16 v1.6 microtype config. file: Palatino (RS)
+)
+(translations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `tra
+nslations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' f
+or `english'. on input line 95.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: subfig package v1.3 is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: End \AtBeginDocument code.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+*geometry* verbose mode - [ preamble ] result:
+* driver: xetex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: includehead includefoot 
+* h-part:(L,W,R)=(167.01753pt, 394.35522pt, 36.13512pt)
+* v-part:(T,H,B)=(36.13512pt, 778.18271pt, 30.72902pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=394.35522pt
+* \textheight=706.18271pt
+* \oddsidemargin=94.74754pt
+* \evensidemargin=94.74754pt
+* \topmargin=-36.13487pt
+* \headheight=24.0pt
+* \headsep=24.0pt
+* \topskip=10.0pt
+* \footskip=36.0pt
+* \marginparwidth=116.65646pt
+* \marginparsep=14.51074pt
+* \columnsep=10.0pt
+* \skip\footins=17.07182pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemargintrue
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package newfloat Info: `float' package detected.
+Package hyperref Info: Link coloring ON on input line 95.
+(nameref.sty
+Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
+ (gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count382
+)
+LaTeX Info: Redefining \ref on input line 95.
+LaTeX Info: Redefining \pageref on input line 95.
+LaTeX Info: Redefining \nameref on input line 95.
+ (manuscript.out) (manuscript.out)
+\@outlinefile=\write4
+\openout4 = `manuscript.out'.
+
+LaTeX Font Info:    Trying to load font information for TS1+ppl on input line 9
+5.
+ (ts1ppl.fd
+File: ts1ppl.fd 2001/06/04 font definitions for TS1/ppl.
+)
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 9
+5.
+ (t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+LaTeX Font Info:    Trying to load font information for OT1+ppl on input line 9
+5.
+ (ot1ppl.fd
+File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
+)
+LaTeX Font Info:    Trying to load font information for OML+zplm on input line 
+95.
+ (omlzplm.fd
+File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OMS+zplm on input line 
+95.
+ (omszplm.fd
+File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
+)
+LaTeX Font Info:    Trying to load font information for OMX+zplm on input line 
+95.
+ (omxzplm.fd
+File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
+)
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 95.
+ (mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 95.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.29405pt on input line 95.
+
+(mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 5.21004pt on input line 95.
+LaTeX Font Info:    Trying to load font information for OT1+zplm on input line 
+95.
+ (ot1zplm.fd
+File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `zplm' (encoding: OT1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+ (mt-eur.cfg
+File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
+)
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 95.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 95.
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 95.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 10.42007pt on input line 95.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 7.91925pt on input line 95.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 6.25204pt on input line 95.
+LaTeX Font Info:    Redeclaring symbol font `AMSb' on input line 95.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `normal'
+(Font)                  U/msb/m/n --> U/msb/m/n on input line 95.
+LaTeX Font Info:    Overwriting symbol font `AMSb' in version `bold'
+(Font)                  U/msb/m/n --> U/msb/m/n on input line 95.
+Package marginnote Info: Margin note 1.1 is on absolute page 1 on input line 95
+.
+Package marginnote Info: right page because not two side mode on input line 95.
+
+Package marginnote Info: xpos seems to be 167.01753pt on input line 95.
+File: converted/logo-mdpi.pdf Graphic file (type pdf)
+<use converted/logo-mdpi.pdf>
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 95.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 8.33606pt on input line 95.
+LaTeX Font Info:    Trying to load font information for T1+lmss on input line 9
+5.
+ (t1lmss.fd
+File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmss' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+Underfull \hbox (badness 1097) in paragraph at lines 103--109
+[]\T1/ppl/m/n/10 We present SOKKANAEM, a com-pact re-cur-rent video-depth ar-ch
+i-tec-ture built
+ []
+
+[1
+
+]
+File: figures/r3_architecture.pdf Graphic file (type pdf)
+<use figures/r3_architecture.pdf>
+
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[2]
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[3]
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[4] (generated_results.tex
+LaTeX Font Info:    Font shape `U/msa/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 18.
+LaTeX Font Info:    Font shape `U/msb/m/n' will be
+(Font)              scaled to size 9.37807pt on input line 18.
+
+PAPER-TABLE natural=261.67412pt; target=394.35522pt
+PAPER-TABLE natural=275.17412pt; target=394.35522pt
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[5]
+PAPER-TABLE natural=199.83202pt; target=394.35522pt
+PAPER-TABLE natural=245.405pt; target=394.35522pt
+File: figures/development_state_diagnostic.pdf Graphic file (type pdf)
+<use figures/development_state_diagnostic.pdf>
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[6])
+PAPER-TABLE natural=378.11914pt; target=394.35522pt
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[7] (revision_results.tex
+PAPER-TABLE natural=331.21616pt; target=394.35522pt
+) (revision_figures.tex
+File: figures/r3_accuracy.pdf Graphic file (type pdf)
+<use figures/r3_accuracy.pdf>
+
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[8]
+File: figures/r3_cost.pdf Graphic file (type pdf)
+<use figures/r3_cost.pdf>
+File: figures/r3_scale.pdf Graphic file (type pdf)
+<use figures/r3_scale.pdf>
+)
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[9]
+File: figures/qualitative_spatial.pdf Graphic file (type pdf)
+<use figures/qualitative_spatial.pdf>
+
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[10]
+File: figures/qualitative_temporal.pdf Graphic file (type pdf)
+<use figures/qualitative_temporal.pdf>
+
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[11]
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[12]
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[13] (theory_appendix.tex
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[14]
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[15]
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[16]) (reproducibility_details.tex
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[17]
+Underfull \hbox (badness 2158) in paragraph at lines 11--24
+\T1/ppl/m/n/10 pling over TUM, Bonn, VKITTI2, Tar-tanAir2 and PointOdyssey. Cli
+p-consistent
+ []
+
+
+Underfull \hbox (badness 1895) in paragraph at lines 11--24
+\T1/ppl/m/n/10 not all of these sam-pler/optimizer im-ple-men-ta-tion de-tails 
+or the RNG tra-jec-tory.
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[18])
+Underfull \hbox (badness 4254) in paragraph at lines 498--501
+\T1/ppl/m/n/9 Any-thing: Temporally-Consistent Depth Pre-dic-tion with Low Mem-
+ory Con-sump-tion.
+ []
+
+
+Underfull \hbox (badness 1412) in paragraph at lines 504--506
+[]\T1/ppl/m/n/9 Gu, A.; Dao, T. Mamba: Linear-Time Se-quence Mod-el-ing with Se
+-lec-tive State Spaces.
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[19] 
+AED: lastpage setting LastPage
+
+Package fancyhdr Warning: \headheight is too small (24.0pt): 
+(fancyhdr)                Make it at least 24.18796pt, for example:
+(fancyhdr)                \setlength{\headheight}{24.18796pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.18796pt}.
+
+[20] (manuscript.aux)
+Package rerunfilecheck Info: File `manuscript.out' has not changed.
+(rerunfilecheck)             Checksum: B849ECE3D64F469A670E264C614B6360;6906.
+ )
+Output written on manuscript.xdv (20 pages, 145824 bytes).

@@ -1,19 +1,12 @@
-"""What is the best score this output structure could possibly reach?
+"""Fixed GT-resampling diagnostic (historically named the ceiling probe).
 
-The model predicts one token per patch and upsamples. That alone caps
-accuracy, independent of capacity or training. Pushing the ground truth
-through the same bottleneck -- average-pool to the token grid, bilinear back
-up, median-scale -- measures that cap.
-
-The point is to tell two very different situations apart:
-
-  model far below the cap  -> capacity or training is the bottleneck
-  model near the cap       -> the patch grid is, and only finer patches or
-                              higher input resolution can help
-
-REPORT 4.17 ran this on synthetic data at patch 16 and found plenty of room.
-Whether the same holds on real indoor footage was never measured, and the two
-answers imply opposite next steps.
+Valid-pixel average pooling, bilinear upsampling and median scaling produce
+a reference score, not an accuracy bound for a learned multichannel decoder.
+This transformation does not optimize its reconstruction under depth AbsRel.
+Differences can motivate ablations but cannot prove which capacity, patch
+size, resolution or training choice is the bottleneck. Historical numbers
+and the retained filename do not turn this diagnostic into a mathematical
+upper bound. See paper/PROTOCOL.md and paper/PREPARATION.md.
 
     python scripts/ceiling_probe.py --data tum:/data/tum bonn:/data/bonn
 """
@@ -27,7 +20,7 @@ from sokkanaem.metrics import clip_scores, pooled
 
 
 def through_grid(gt, valid, patch, disparity):
-    """GT -> token grid -> back up, i.e. the best a patch-token head can do.
+    """GT -> fixed pooled grid -> bilinear reconstruction, not an optimal head.
 
     Pools over VALID pixels only. Real depth sensors leave holes as zeros, and
     averaging those in is bad enough in depth space but catastrophic in

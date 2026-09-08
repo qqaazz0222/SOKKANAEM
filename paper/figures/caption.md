@@ -4,8 +4,9 @@ Captions are kept out of the SVGs so the artwork can be submitted as-is and the
 journal typesets the caption. The text below is the authoritative wording; the
 inline captions in `../draft.md` mirror it.
 
-No section of the draft carries `[UNDER TEST]` any more, so these numbers are
-the reported ones. They are still copies: `make_figures.py` holds its own copy
+2026-09-06: quantitative figures remain historical development evidence, not
+results on the reserved final test. See `../PROTOCOL.md`. The numbers are
+copies: `make_figures.py` holds its own copy
 of each table, and a table re-measured without updating that copy leaves the
 figure quietly stale — which has happened, and is why the figures are checked
 against the draft whenever a table moves.
@@ -23,11 +24,13 @@ are routed through the dense path instead.
 
 **Figure 2.** Exact \(\Delta\)-gating. The activity mask multiplies the
 discretization step, \(\widetilde{\Delta} = M\Delta\). A changed patch takes the
-standard selective-SSM update. A static patch takes \(\bar A = I\) and
-\(\bar B = 0\), so its hidden state is copied rather than reconstructed:
-skipping the computation is not compensated for, it is algebraically identical
-to preserving the state. Early exit and token dropping instead substitute zero
-or an approximation, and that error accumulates across frames.
+implemented selective-SSM update with exponential transition and first-order
+input term \(\bar B=\Delta B\), not the exact ZOH input integral. A static patch
+takes \(\bar A = I\) and \(\bar B = 0\), preserving its temporal state.
+The token-drop control preserves the same state but bypasses the block readout.
+State identity guarantees neither an unchanged input-dependent readout nor
+agreement with the ungated dense predictor; output caches are additional
+approximations. Exact binary state copying is also shared with Skip RNN.
 
 **Figure 3.** Activity against accuracy on the real indoor and synthetic
 holdouts, sweeping the detector threshold. Accuracy is nearly flat until

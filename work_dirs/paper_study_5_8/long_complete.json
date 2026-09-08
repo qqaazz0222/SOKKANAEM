@@ -1,0 +1,10 @@
+{
+  "phase": "long",
+  "verified_file_records": 7838,
+  "smoke": false,
+  "result": {
+    "path": "work_dirs/paper_study_5_8/long.jsonl",
+    "bytes": 10324604,
+    "sha256": "1137e2878eef07496acee1e0d17ad5d36c0d56edc380821c8eca336aafa02988"
+  }
+}

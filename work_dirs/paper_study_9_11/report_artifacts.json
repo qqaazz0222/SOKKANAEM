@@ -1,0 +1,106 @@
+{
+  "generator": {
+    "path": "/workspace/SOKKANAEM/scripts/paper_efficiency_report.py",
+    "bytes": 36466,
+    "sha256": "e31342770775d4a467964f8d7c93bfb307d269f7fb4e0b52bcbab5819166c4fb"
+  },
+  "inputs": [
+    {
+      "path": "work_dirs/paper_study_9_11/study.json",
+      "bytes": 43504,
+      "sha256": "79810cd084eea1bae67ba1b45c199012f7e8a2f725e02baf542e8f6dc63cfe8e"
+    },
+    {
+      "path": "work_dirs/paper_study_9_11/seed_provenance.json",
+      "bytes": 11604,
+      "sha256": "06508f1a29257f62b8779c52caa34d5a6b51edf220dedc66e60d03987b27ccbb"
+    },
+    {
+      "path": "work_dirs/paper_study_9_11/quality_complete.json",
+      "bytes": 278,
+      "sha256": "b4c6636f63bf3ade40f86ffe687379a48a68756e6104f763a2845d9a44cdcf74"
+    },
+    {
+      "path": "work_dirs/paper_study_9_11/latency_complete.json",
+      "bytes": 279,
+      "sha256": "79a66754410bd69e7ba96eed4acfb1faba21e8fa22876f476cf8f266ba350063"
+    },
+    {
+      "path": "work_dirs/paper_study_9_11/profile_complete.json",
+      "bytes": 278,
+      "sha256": "c0435d1395ce50a0d0c1168e7f20b6c0822e10bd1bb7dde92d3ad95b2a04171b"
+    },
+    {
+      "path": "work_dirs/paper_study_9_11/seeds_complete.json",
+      "bytes": 457,
+      "sha256": "2822dfb21c2bf0c6684930034945f22a84afe84e4174fc5da65e9168b381a903"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "paper/STUDY_9_11.md",
+      "bytes": 13008,
+      "sha256": "73180284191d0f5895899fb249cb6782646719251018076d0f0720d2656113be"
+    },
+    {
+      "path": "paper/figures/study9_efficiency.svg",
+      "bytes": 5143,
+      "sha256": "6fe87720e73bb8f9f1ef66636b52b2a03b8cb87ba395fd12d5dacbc5198ebcd1"
+    },
+    {
+      "path": "paper/tables/study10_components.csv",
+      "bytes": 12384,
+      "sha256": "77c4225632c909a93cef43a73dcaadbadde2457c294ff6842785e0eb432f04af"
+    },
+    {
+      "path": "paper/tables/study10_frame_events.csv",
+      "bytes": 10472,
+      "sha256": "8fbff299403155073ad32c274233f021a3f7851de8effc412fc1613adf0dddb6"
+    },
+    {
+      "path": "paper/tables/study10_latency_sequences.csv",
+      "bytes": 12009,
+      "sha256": "4c6e5df5748990f9c8f641a78d655567f26fca2c0cee8d4bf4d81253cd9b6070"
+    },
+    {
+      "path": "paper/tables/study11_paired_ci.csv",
+      "bytes": 49936,
+      "sha256": "57d5c6c527bf1cd75f3fd82e68b682c2ddeba57d55814faf1caa1eeecdd078da"
+    },
+    {
+      "path": "paper/tables/study11_paired_details.json",
+      "bytes": 189303,
+      "sha256": "f7af90bcff1b06f327b3d19dbb16549f60098a61897d2917b992bdabce318428"
+    },
+    {
+      "path": "paper/tables/study11_seed_runs.csv",
+      "bytes": 1853,
+      "sha256": "a3cf3a7365efde83a6aa50b860debf34393468f23a7e6ea6260dd7fda48b3c1c"
+    },
+    {
+      "path": "paper/tables/study11_seed_summary.csv",
+      "bytes": 2433,
+      "sha256": "6cbd5777c5fc7d75684718dd209d7ac134de7ec8d746c0cb3c253e2c6f761f15"
+    },
+    {
+      "path": "paper/tables/study11_sequences.csv",
+      "bytes": 64897,
+      "sha256": "0223d646b66a5aa48af82f10de8ac3de8c9fd93ba21dc1d0c746a64a16a8a2ff"
+    },
+    {
+      "path": "paper/tables/study9_matched_points.json",
+      "bytes": 898,
+      "sha256": "1c08c7eb8e8a9f183d5b689085d3d792128f1ad216d79a7c2424b0b22368af72"
+    },
+    {
+      "path": "paper/tables/study9_operating_points.csv",
+      "bytes": 3860,
+      "sha256": "caac7909cd1fcf88652a47bd26e411d4506c6a9a9bd0c5bd251ff7cb41c82498"
+    },
+    {
+      "path": "paper/tables/study9_quality.csv",
+      "bytes": 20073,
+      "sha256": "ec460e9ddcf0508566a0e01dfef7addeb2115a1f7028e6873c6bbdb43f6e20ce"
+    }
+  ]
+}

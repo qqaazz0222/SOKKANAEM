@@ -1,0 +1,19 @@
+\subsection{Post-hoc scale-variation diagnostic}
+To address the earlier self-review, we summarize statistics already stored during final evaluation. This analysis was added after test access, not preregistered as a primary endpoint. It includes all eight frozen models and both lengths without tuning or new inference. For each valid frame, $s_t=\operatorname{median}(G_t)/\operatorname{median}(D_t)$ uses the same GT-valid pixels. We report the within-clip sample coefficient of variation $\operatorname{sd}(s_t)/\overline{s}$, sample standard deviation of $\log s_t$, and mean absolute log difference between consecutive retained valid frames. The scorer skips frames without valid GT and returns zero if fewer than two remain; these conventions are unchanged. Native models use no-fit depth; relative models use their median-gauge inverse-disparity depth, not an affine-fit depth. Away from numerical clamp activation, a positive constant clip scaling cancels from these statistics; an affine disparity shift does not. The stored scorer clamps the predicted median at $10^{-6}$, the scale factor at $10^{-12}$ and the CV denominator at $10^{-6}$.
+\begin{table}[H]
+\caption{Post-hoc scale statistics: clip means within each sequence, then four-sequence means. The CV interval enumerates sequence-bootstrap resamples; it is exploratory and unadjusted. Full intervals and gauge/failure counts are supplied as CSV.}\label{tab:scale}
+\centering\small
+\begin{tabular}{lrrrrr}\toprule
+Model & CV L8 & CV L256 & L256 CV interval & Log-SD & Log-step \\
+\midrule
+Sparse K30 & 0.0312 & 0.2185 & [0.0770, 0.3601] & 0.1800 & 0.0180 \\
+Sparse K5 & 0.0318 & 0.2131 & [0.0677, 0.3585] & 0.1752 & 0.0183 \\
+Dense carry & 0.0312 & 0.2101 & [0.0642, 0.3560] & 0.1723 & 0.0169 \\
+Dense reset & 0.0355 & 0.2463 & [0.0677, 0.4248] & 0.1903 & 0.0235 \\
+Output hold & 0.0338 & 0.2466 & [0.0683, 0.4250] & 0.1905 & 0.0218 \\
+DA2 Small 252 & 0.0744 & 0.2477 & [0.1753, 0.3201] & 0.2418 & 0.0696 \\
+MiDaS Small 256 & 0.0603 & 0.1892 & [0.1104, 0.2680] & 0.1760 & 0.0559 \\
+DPT-Large 256 & 0.0774 & 0.2554 & [0.1613, 0.3496] & 0.2219 & 0.0704 \\
+\bottomrule\end{tabular}
+\end{table}
+A smaller scale statistic alone does not establish better depth, and per-frame fitting can hide scale errors that a metric deployment still incurs. L8 and L256 use partly different footage and reset schedules, so their difference is not an isolated causal effect of history length. Local shape changes can also affect the scale medians. These summaries are not an additive decomposition of AbsRel into scale and shape terms. Confidence intervals containing a null difference do not establish equivalence.

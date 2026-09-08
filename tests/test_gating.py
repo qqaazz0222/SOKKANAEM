@@ -19,6 +19,27 @@ def test_delta_gating_exact_state_copy():
     assert not torch.equal(h2, h0), "mask=1 must update hidden state"
 
 
+def test_binary_delta_gate_equals_update_or_copy():
+    torch.manual_seed(12)
+    ssm = SelectiveSSM(dim=8, d_state=4).eval()
+    u, h0 = torch.randn(3, 8), torch.randn(3, 16, 4)
+    mask = torch.tensor([0., 1., 0.])
+    _, active = ssm.step(u, torch.ones(3), h0)
+    _, gated = ssm.step(u, mask, h0)
+    expected = torch.where(mask[:, None, None].bool(), active, h0)
+    assert torch.equal(gated, expected)
+
+
+def test_zero_step_preserves_state_but_not_input_dependent_readout():
+    torch.manual_seed(13)
+    ssm = SelectiveSSM(dim=8, d_state=4).eval()
+    h0 = torch.randn(2, 16, 4)
+    a, ha = ssm.step(torch.randn(2, 8), torch.zeros(2), h0)
+    b, hb = ssm.step(torch.randn(2, 8), torch.zeros(2), h0)
+    assert torch.equal(ha, h0) and torch.equal(hb, h0)
+    assert not torch.allclose(a, b)
+
+
 def test_static_scene_skips_and_depth_stable():
     torch.manual_seed(0)
     model = SOKKANAEM(keyframe_every=1000).eval()

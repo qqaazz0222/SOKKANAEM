@@ -176,12 +176,14 @@ class ClipDataset(Dataset):
     """
 
     def __init__(self, sequences, depth_scale, clip_len=4, frame_stride=1,
-                 clip_stride=2, size=128, depth_mode="u16", augment=False):
+                 clip_stride=2, size=128, depth_mode="u16", augment=False,
+                 strict=False):
         self.scale = depth_scale
         self.mode = depth_mode
         self.T = clip_len
         self.size = size
         self.augment = augment
+        self.strict = strict
         span = clip_len * frame_stride
         self.clips = [(seq, s, frame_stride)
                       for seq in sequences if len(seq) >= span
@@ -270,7 +272,7 @@ class ClipDataset(Dataset):
         except (OSError, ValueError) as e:
             if _same_retries < 2:
                 return self.__getitem__(i, _retries, _same_retries + 1)
-            if _retries >= 10:
+            if self.strict or _retries >= 10:
                 raise
             print(f"WARNING: skipping unreadable clip {i} after retries ({e})")
             return self.__getitem__(random.randrange(len(self)), _retries + 1)
@@ -353,13 +355,18 @@ def load_manifest(path):
     with open(path) as f:
         m = json.load(f)
     T, size = m["clip_len"], m["size"]
+    if not m["clips"] or T < 1:
+        raise ValueError("manifest must contain clips of positive length")
+    for clip in m["clips"]:
+        if len(clip["pairs"]) != T or clip["source"] not in m["sources"]:
+            raise ValueError("manifest clip length/source mismatch")
     out = []
     for src, meta in m["sources"].items():
         seqs = [[tuple(p) for p in c["pairs"]]
                 for c in m["clips"] if c["source"] == src]
         out.append((src, ClipDataset(seqs, meta["scale"], clip_len=T,
                                      clip_stride=T, size=size,
-                                     depth_mode=meta["mode"])))
+                                     depth_mode=meta["mode"], strict=True)))
     return out
 
 
@@ -415,6 +422,10 @@ def build_mixed(specs, holdout=None, val=False, tag_source=False, **kw):
         if holdout:
             seqs = [s for s in seqs
                     if any(h in s[0][0] for h in holdout) == val]
+        # Reserved paper tests are accessible only through their sealed
+        # manifests, never through a train/validation dataset builder.
+        from .protocol import guard_training_sequences
+        guard_training_sequences(seqs)
         ds = ClipDataset(seqs, scale, depth_mode=mode, **kw)
         if tag_source:
             ds = _Tagged(ds, name in SYNTHETIC)

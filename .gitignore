@@ -3,12 +3,13 @@
 # are how a result stays checkable months later. Only the things that are big
 # and reproducible from them are excluded.
 
-# model weights and optimizer state (~67 MB each, 2.1 GB total)
+# model weights, optimizer state, and raw tensor dumps (~67 MB+ each)
 *.pt
 *.pth
 *.ckpt
 *.safetensors
 *.onnx
+*.npz
 
 # archives and datasets
 *.zip
@@ -20,6 +21,13 @@ data/
 # anything a run can regenerate cheaply and that bloats the tree
 work_dirs/**/viz/
 outputs/**/*.png
+
+# vendored/downloaded toolchains and third-party repos, not our code
+work_dirs/paper_tools/
+work_dirs/paper_dependencies/
+
+# generated deployment bundle (code + weights + input frames snapshot)
+work_dirs/paper_edge_bundle/
 
 # python
 __pycache__/
@@ -42,3 +50,7 @@ uv.lock
 # AI
 .agent/
 .claude/
+
+# symlink to an out-of-repo Drive folder (trailing slash misses it: git
+# tests symlinks by lstat type, not target, so "paper_work/" never matches)
+paper_work

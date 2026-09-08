@@ -1,0 +1,10 @@
+{
+  "utc": "2026-09-06T18:36:32.430147+00:00",
+  "contract": {
+    "path": "work_dirs/paper_closeout/final_contract.json",
+    "bytes": 1648952,
+    "sha256": "5ae9f91e47e5f6df31ecf42f01096659e78b1464f06bb5381611a233758f1681"
+  },
+  "event": "final inference authorized and starting",
+  "historical_seal": "paper/freeze/final_test.json remains an immutable historical record"
+}

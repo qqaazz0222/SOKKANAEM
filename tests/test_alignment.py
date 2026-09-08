@@ -7,6 +7,7 @@ mean anything: each gauge undoes exactly the freedom it fits, a fit that sends
 valid pixels through zero disparity is reported rather than clamped away, and a
 metric model and a relative model reach the scorer through the same code.
 """
+import pytest
 import torch
 
 from sokkanaem.alignment import EPS, align
@@ -38,10 +39,8 @@ def test_scaleshift_gauge_undoes_a_disparity_affine():
     assert not info["failed"]
 
 
-def test_one_dof_gauges_cannot_zero_cross():
-    """A shift is the only way the fitted disparity reaches zero, so the gauges
-    that fit no shift are structurally failure-free -- and must report that
-    rather than leaving the caller to guess."""
+def test_one_dof_gauges_keep_positive_predictions_positive():
+    """Positive inputs and positive GT admit a positive scale-only fit."""
     gt, v = _scene()
     for mode, space, pred in (("median", "depth", gt * 2),
                               ("scale", "disparity", 1.0 / gt + 0.9)):
@@ -92,3 +91,41 @@ def test_partial_validity_fits_on_valid_pixels_only():
                       "scaleshift", "disparity")
     m = v.bool()
     assert (out[m] - gt[m]).abs().max() < 1e-3, info
+
+
+def test_metric_panel_does_not_fit_ground_truth():
+    gt, valid = _scene()
+    pred = gt * 2
+    for per_frame in (False, True):
+        out, info = align(pred, gt, valid, "none", "depth", per_frame)
+        assert torch.equal(out, pred)
+        assert info["s"] == 1 and info["b"] == 0
+        assert torch.allclose(((out - gt).abs() / gt).mean(), torch.tensor(1.0))
+    scaled, _ = align(pred, gt, valid, "median", "depth")
+    assert torch.allclose(scaled, gt)
+
+
+def test_metric_panel_rejects_relative_disparity():
+    gt, valid = _scene()
+    with pytest.raises(ValueError, match="metric depth"):
+        align(1 / gt, gt, valid, "none", "disparity")
+
+
+def test_nonpositive_metric_prediction_is_reported_without_clipping():
+    gt, valid = _scene()
+    pred = -torch.ones_like(gt)
+    out, info = align(pred, gt, valid, "none", "depth")
+    assert torch.equal(out, pred)
+    assert info["failed"] and info["neg_frac"] == 1
+    _, info = align(pred, gt, valid, "median", "depth")
+    assert info["failed"] and info["neg_frac"] == 1
+
+
+@pytest.mark.parametrize("mode", ["none", "median", "scale", "scaleshift"])
+@pytest.mark.parametrize("bad", [float("nan"), float("inf")])
+def test_nonfinite_prediction_is_explicit_failure(mode, bad):
+    gt, valid = _scene()
+    pred = gt.clone()
+    pred[0, 0, 0, 0] = bad
+    with pytest.raises(ValueError, match="non-finite prediction"):
+        align(pred, gt, valid, mode, "depth")

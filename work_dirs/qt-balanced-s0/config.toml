@@ -1,0 +1,33 @@
+# effective config (merged CLI + TOML), written by train.py
+steps = 4000
+batch = 1
+clip_len = 8
+size = 256
+lr = 0.001
+warmup = 200
+workers = 8
+seed = 0
+infer_size = 518
+real_only = true
+unfreeze = false
+temporal = true
+warp_weight = 2.0
+unfreeze_head = false
+shape_lr = 1e-05
+gt_weight = 1.0
+retention_weight = 4.0
+boundary_weight = 0.0
+work_dir = "work_dirs/qt-balanced-s0"
+
+[model]
+kind = "q"
+infer_size = 518
+freeze_shape = true
+temporal = true
+
+[meta]
+command = "scripts/train_q.py --steps 4000 --clip-len 8 --batch 1 --real-only --temporal --warp-weight 2.0 --retention-weight 4.0 --gt-weight 1.0 --work-dir work_dirs/qt-balanced-s0"
+git_commit = "3675d792bf0361bc563391499f4381f491996ca4"
+torch = "2.8.0+cu128"
+cuda = "12.8"
+gpu = "NVIDIA GeForce RTX 4090"

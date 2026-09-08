@@ -1,0 +1,34 @@
+{
+  "reference": "sparse_k30",
+  "same_quality_tolerance": {
+    "absrel_factor": 1.05,
+    "delta1_loss": 0.01,
+    "failures_increase": 0
+  },
+  "latency_factor": 1.1,
+  "fastest_quality_match": {
+    "id": 14,
+    "model": "midas_256",
+    "input": "256x256",
+    "original_resolution_roi": false,
+    "params": 21320545,
+    "absrel": 0.1636699687458587,
+    "rmse": 0.7637138037033862,
+    "delta1": 0.7758085598044446,
+    "tce": 0.045876012726529414,
+    "failed": 0,
+    "catastrophic": 0,
+    "mean_ms": 9.43939098728303,
+    "p50_ms": 9.476991413976066,
+    "p95_ms": 9.589754960325081,
+    "equal_sequence_mean_ms": 9.3939119883089,
+    "repeat_min_ms": 9.352450743885282,
+    "repeat_max_ms": 9.495776912028003,
+    "peak_allocated_mib": 156.75244140625,
+    "state_mib": 0.0,
+    "frames": 1024,
+    "repeats": 5,
+    "pareto_absrel_latency": false
+  },
+  "best_latency_match": null
+}

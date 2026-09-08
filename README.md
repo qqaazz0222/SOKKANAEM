@@ -2,9 +2,34 @@
 
 # SOKKANAEM
 
+2026-09-08: [모델 중심 논문 개정](paper/MODEL_FOCUS.md). 제안 구조·실행·기여 분리 실험을
+중심으로 재편했으며, 수학 분석과 기존 증거의 한계는 유지한다. 새 성능 개선 완료 주장은 없다.
+
 **S**patial-temporal **O**ptimized **K**ey-patch **K**ernel for **A**daptive **N**etwork **A**rchitecture and **E**fficient **M**amba
 
 프레임 간 변화가 발생한 패치만 연산하는 실시간 비디오 깊이 추정 프레임워크. 설계 문서는 [IDEA.md](IDEA.md).
+
+논문화 준비의 최신 기준(2026-09-07): [후속 작업·현재 상태](paper/CLOSEOUT.md),
+[영문 원고 PDF](paper/submission/manuscript.pdf), [최종 평가](paper/FINAL_EVALUATION.md).
+[최신 전체 draft.md](paper/draft.md)에 본문·표·증명·재현 부록과 그림 5개를 통합했다.
+[40항목 R3 대응표](paper/self-revision/r3/revision-status.md)는 반영/부분/범위 제외/저자 대기를 구별한다.
+최종 TUM L256 13클립/L8 462클립의 8개 모델 평가를 완료했다. 테스트는 이제 미사용 상태가 아니다.
+저자 입력·인간 검토·정책/권리 확인이 남아 **투고 준비 전체 완료는 아니다**.
+[Nano B01 5W/10W 과거 실측 로그 감사](paper/submission/EDGE_LEGACY_AUDIT.md)를 추가했다.
+과거 합성 활성률·캐시 실측은 존재하며, 새 실제 영상 경로의 기기 검증과는 구분한다.
+과거 기록은 아래에 보존한다.
+
+이전 준비 기록(2026-09-06): [1~4번 작업 결과](paper/PREPARATION.md),
+[5~8번 실측 결과·표·그림](paper/STUDY_5_8.md),
+[9~11번 효율성·비용 분해·통계 결과](paper/STUDY_9_11.md),
+[12번 조건부 오차·refresh·비용 증명](paper/THEORY_12.md), [전체 작업 순서](paper/WORK_PLAN.md),
+[평가 계약](paper/PROTOCOL.md). 기존 holdout 결과는 개발 검증이다.
+GT median 보정 정확도는 보정 없는 metric 정확도와 구분한다.
+최신 실측에서는 기본 희소 경로와 dense의 파일-to-depth 시간이 7.496/7.521 ms로 유사하며,
+기본 경로의 stream state도 dense보다 작지 않다. 아래 과거 벤치마크 설명의 속도·상태 이득을
+현재 end-to-end 결과로 일반화하지 않는다. 전체 L256 정확도 격차도 남아 있다.
+12번에서는 상태 보존과 dense 근사 오차를 분리했다. 키프레임은 누적 state 오차를 리셋하지
+않으며, 작은 픽셀 변화만으로 작은 깊이 오차가 보장되지는 않는다. 후속 통합 원고는 위 PDF를 사용한다.
 
 ## 핵심 아이디어
 

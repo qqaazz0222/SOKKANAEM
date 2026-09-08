@@ -1,0 +1,104 @@
+% Official MDPI class, Mathematics, submission layout. XeLaTeX/Tectonic: no pdftex option.
+\documentclass[mathematics,article,submit,moreauthors]{Definitions/mdpi}
+\firstpage{1}
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2026}
+\copyrightyear{2026}
+\datereceived{ }
+\daterevised{ }
+\dateaccepted{ }
+\datepublished{ }
+\doinum{}
+\hreflink{DOI not assigned}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\emergencystretch=3em
+\setlength{\headheight}{24pt}
+% Keep the official class unmodified. Tectonic cannot directly include its EPS logos.
+% build_paper_submission.py makes vector PDF copies with Ghostscript.
+\let\OriginalIncludeGraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{%
+  \IfStrEq{#2}{Definitions/logo-mdpi.eps}
+    {\OriginalIncludeGraphics[#1]{converted/logo-mdpi.pdf}}
+    {\IfStrEq{#2}{Definitions/logo-updates.eps}
+      {\OriginalIncludeGraphics[#1]{converted/logo-updates.pdf}}
+      {\OriginalIncludeGraphics[#1]{#2}}}}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[L]{\footnotesize Working draft for author review}%
+  \fancyfoot[R]{\footnotesize Not submitted; DOI not assigned}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0.4pt}}
+\lhead{\fontsize{8}{8}\selectfont Working draft for \emph{Mathematics}; not submitted\\
+\rule{\fulllength}{0.4pt}}
+% Automatic table width: fill textwidth; use the MDPI full-page span only if needed.
+% Keep generated table data untouched. Measure at the table's own font size.
+\usepackage{xparse}
+\newsavebox{\PaperTableMeasureBox}
+\newdimen\PaperTableNaturalWidth
+\newdimen\PaperTableTargetWidth
+\let\PaperOriginalTable\table
+\let\PaperOriginalEndTable\endtable
+\let\PaperOriginalTabular\tabular
+\let\PaperOriginalEndTabular\endtabular
+\RenewDocumentEnvironment{table}{O{H}+b}{%
+  \global\PaperTableNaturalWidth=0pt
+  \begingroup
+    \renewcommand{\caption}[2][]{}
+    \renewcommand{\label}[1]{}
+    \RenewDocumentEnvironment{tabular}{O{c}m+b}{%
+      \sbox{\PaperTableMeasureBox}{\PaperOriginalTabular[##1]{##2}##3\PaperOriginalEndTabular}%
+      \ifdim\wd\PaperTableMeasureBox>\PaperTableNaturalWidth
+        \global\PaperTableNaturalWidth=\wd\PaperTableMeasureBox
+      \fi
+    }{}%
+    \setbox0=\vbox{\hsize=\fulllength\linewidth=\fulllength #2}%
+  \endgroup
+  \begingroup
+  \PaperOriginalTable[#1]
+  \PaperTableTargetWidth=\textwidth
+  \ifdim\PaperTableNaturalWidth>\textwidth
+    \PaperTableTargetWidth=\fulllength
+  \fi
+  \typeout{PAPER-TABLE natural=\the\PaperTableNaturalWidth; target=\the\PaperTableTargetWidth}%
+  \RenewDocumentEnvironment{tabular}{O{c}m+b}{%
+    \ifdim\PaperTableNaturalWidth>\PaperTableTargetWidth
+      \PackageWarning{paper-tables}{Table exceeds full width; scaling to fit}%
+      \resizebox{\PaperTableTargetWidth}{!}{%
+        \PaperOriginalTabular[##1]{##2}##3\PaperOriginalEndTabular}%
+    \else
+      \begin{tabular*}{\PaperTableTargetWidth}[##1]{@{\extracolsep{\fill}}##2}%
+        ##3
+      \end{tabular*}%
+    \fi
+  }{}%
+  \ifdim\PaperTableTargetWidth>\textwidth
+    \begin{adjustwidth}{-\extralength}{0cm}
+      \captionsetup{width=\PaperTableTargetWidth}%
+      #2
+    \end{adjustwidth}
+  \else
+    \captionsetup{width=\PaperTableTargetWidth}%
+    #2
+  \fi
+  \endtable
+  \endgroup
+}{}
+\input{generated_macros.tex}
+\Title{SOKKANAEM: Change-Gated State-Space Modeling with Cached Readout for Streaming Video Depth}
+\TitleCitation{SOKKANAEM for Streaming Video Depth}
+\input{author_details.tex}
+\abstract{Streaming video depth requires dense predictions on every frame, even when much of the image changes little. We present SOKKANAEM, a 4.19-million-parameter recurrent model that combines patch-change gating, selective state-space updates, temporal and spatial output caches, and a dense depth decoder. Binary gating preserves inactive temporal states, while periodic refresh and an all-active fallback limit reuse duration and handle high activity. We evaluate the frozen model with same-weight controls that separate state carry, retained-state readout, spatial context and output reuse. On four reserved TUM sequences, the reference model obtains clip scale--shift AbsRel \FinalNative{} at 256 frames, compared with \FinalDense{} for dense carry and \FinalMidas{} for MiDaS Small. Its motion-referenced TCE is 0.0352 versus 0.0640 for MiDaS, although its scale variation is not uniformly smaller. The measured development PNG-to-depth latency is 7.496 ms/frame versus 7.521 for dense carry. Thus, computational reuse does not yet establish substantial pipeline acceleration. Conditional error and cache-age analysis explains the design trade-offs. The contribution is a compact streaming architecture and a controlled characterization of its accuracy, temporal behavior and implementation cost, rather than a claim of universal performance superiority.}
+\keyword{state-space model; conditional computation; video depth; error propagation; cache refresh; reproducible evaluation}
+
+\begin{document}
+\begin{table}[H]
+\caption{Width fallback smoke test (not manuscript content).}
+\centering\small
+\begin{tabular}{lr}\toprule
+\rule{410pt}{0pt} & Value\\\midrule
+Wide test cell & 1\\\bottomrule
+\end{tabular}
+\end{table}
+\end{document}

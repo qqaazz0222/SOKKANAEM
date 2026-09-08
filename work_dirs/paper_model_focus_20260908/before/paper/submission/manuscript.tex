@@ -1,0 +1,305 @@
+% Official MDPI class, Mathematics, submission layout. XeLaTeX/Tectonic: no pdftex option.
+\documentclass[mathematics,article,submit,moreauthors]{Definitions/mdpi}
+\firstpage{1}
+\pubvolume{1}
+\issuenum{1}
+\articlenumber{0}
+\pubyear{2026}
+\copyrightyear{2026}
+\datereceived{ }
+\daterevised{ }
+\dateaccepted{ }
+\datepublished{ }
+\doinum{}
+\hreflink{DOI not assigned}
+\providecommand{\norm}[1]{\left\lVert#1\right\rVert}
+\emergencystretch=3em
+\setlength{\headheight}{24pt}
+% Keep the official class unmodified. Tectonic cannot directly include its EPS logos.
+% build_paper_submission.py makes vector PDF copies with Ghostscript.
+\let\OriginalIncludeGraphics\includegraphics
+\renewcommand{\includegraphics}[2][]{%
+  \IfStrEq{#2}{Definitions/logo-mdpi.eps}
+    {\OriginalIncludeGraphics[#1]{converted/logo-mdpi.pdf}}
+    {\IfStrEq{#2}{Definitions/logo-updates.eps}
+      {\OriginalIncludeGraphics[#1]{converted/logo-updates.pdf}}
+      {\OriginalIncludeGraphics[#1]{#2}}}}
+\fancypagestyle{plain}{%
+  \fancyhf{}%
+  \fancyfoot[L]{\footnotesize Working draft for author review}%
+  \fancyfoot[R]{\footnotesize Not submitted; DOI not assigned}%
+  \renewcommand{\headrulewidth}{0pt}%
+  \renewcommand{\footrulewidth}{0.4pt}}
+\lhead{\fontsize{8}{8}\selectfont Working draft for \emph{Mathematics}; not submitted\\
+\rule{\fulllength}{0.4pt}}
+\input{generated_macros.tex}
+\Title{State Preservation Is Not Output Equivalence: Conditional Error and Pipeline-Cost Analysis of Change-Gated Video Depth}
+\TitleCitation{Conditional Analysis of Change-Gated Video Depth}
+\input{author_details.tex}
+\abstract{Conditional updates can preserve recurrent state exactly while approximating the output of a dense video model. We study this distinction in a fixed 4.19-million-parameter depth model with change-gated selective state-space blocks and output caches. We derive conditional defect-propagation, cache-age and refresh bounds and an additive pipeline-cost criterion. Counterexamples show why small pixel changes do not certify small dense-state errors. On four development sequences, same-state local defects vanish at keyframes while differences from a continuously dense history remain. The FP32 PNG-to-depth pipeline takes 7.496 ms per frame for the sparse path and 7.521 ms for its dense counterpart; input processing accounts for 69.4\% of a separate synchronized profile. A frozen evaluation on four previously reserved, same-scene TUM sequences gives L256 scale--shift AbsRel \FinalNative{} for the reference sparse model, \FinalDense{} for dense carry, and \FinalMidas{} for MiDaS Small. The study does not establish general sparse acceleration, scene-disjoint generalization, or a global accuracy certificate. Its contribution is an implementation-specific separation of exact preservation, approximation error and paid computation.}
+\keyword{state-space model; conditional computation; video depth; error propagation; cache refresh; reproducible evaluation}
+
+\begin{document}
+
+\section{Introduction}
+Video depth inference often processes similar images repeatedly. Change-based computation
+offers a way to reuse work, but several distinct claims are easily conflated: copying an
+internal state exactly, approximating a dense network accurately, producing correct depth,
+and reducing wall-clock time. None follows automatically from another.
+
+We examine these distinctions using a fixed SOKKANAEM checkpoint. A binary pixel-change
+mask multiplies the discretization step of each temporal selective SSM. An inactive step
+is an identity on hidden state; optional temporal and spatial output caches introduce
+additional approximations. The objective is not to establish a new accuracy leader, but
+to determine what the implementation and its measurements actually support.
+
+The contributions are (i) an implementation-aligned conditional error analysis with explicit
+counterexamples; (ii) same-checkpoint interventions separating state carry, gating, readout
+reuse and spatial context; (iii) a measured input-to-output cost decomposition; and (iv)
+a frozen, limited transfer evaluation after development-based model selection.
+The algebraic inequalities are applications of established perturbation reasoning, not
+new universal stability theorems. Author and independent mathematical review remain
+required before submission of this working manuscript.
+
+\section{Related Work and Scope of Novelty}
+Skip RNN explicitly uses a binary update/copy operation~\cite{campos2018}. Mamba introduces
+input-selective state-space dynamics and hardware-aware scanning~\cite{gu2024}. We do not
+claim either binary preservation or input selection as a first contribution.
+DeltaCNN propagates sparse frame differences through CNN operators~\cite{deltacnn}, and
+Eventful Transformers reuse computation based on changing tokens~\cite{eventful}.
+Change-based reuse itself is therefore also established. Spiking SSMs such as
+SPikE-SSM~\cite{spikessm} and SpikySpace~\cite{spikyspace} investigate sparse dynamics
+in sequence learning and forecasting. Their architectures and tasks differ from dense
+RGB video-depth readout, but they preclude a broad claim of the first sparse or event-driven SSM.
+
+The distinction investigated here is the combination of externally selected patch updates,
+selective SSM states, separate output caches, and measured depth/pipeline error.
+The literature comparison is targeted, not an exhaustive priority search. We do not report
+cross-task numerical comparisons against those methods. DPT~\cite{dpt}, MiDaS~\cite{midas}
+and Depth Anything V2~\cite{da2} provide independent-image depth references, not a complete
+benchmark of causal and noncausal video-depth systems.
+Video Depth Anything (VDA)~\cite{vda} adds a spatial--temporal depth head;
+online VDA~\cite{ovda} is a distinct online formulation. Historical VDA scores in
+this repository do not have frame-ID and weight/source-hash linkage sufficient
+for inclusion in the frozen comparison. The audited historical wrapper calls
+a 32-frame offline, unmasked temporal-attention path, not frame-causal inference.
+The supplementary audit preserves those results separately. A matched modern
+video-depth baseline remains a limitation, not a completed comparison.
+
+\section{Model and Conditional Analysis}
+\subsection{Frozen implementation}
+The model uses a stride-16 RGB embedding, four alternating temporal/spatial blocks,
+192-dimensional tokens, inner dimension 384, state dimension 16, four-direction spatial
+scans, local spatial convolution, and a dense DPT-style binned depth decoder.
+It has 4,185,872 parameters. The baseline is the seed-0 EMA checkpoint at 256 pixels,
+with pixel-MSE hysteresis thresholds 0.05/0.025, keyframe interval 30, both output caches,
+and an all-active fallback above activity 0.4. GMC is disabled in the primary model.
+The recorded training ancestry contains 60k, 60k, 25k and 8k stage steps; this is not an
+independently verified optimizer-update count or evidence of teacher-free ancestry.
+\begin{figure}[H]
+\begin{adjustwidth}{-\extralength}{0cm}
+\centering
+\includegraphics[width=\fulllength]{figures/r3_architecture.pdf}
+\caption{Frozen-model schematic. Binary inactive temporal steps copy hidden state;
+readout reuse and spatial-context omission remain separate approximations.
+The diagram distinguishes these claims from measured pipeline cost, and does not
+specify kernel execution order.}\label{fig:architecture}
+\end{adjustwidth}
+\end{figure}
+
+\subsection{What preservation guarantees}
+For a shared token input, write $F_t(h)=\Phi_t h+q_t$, with
+$\Phi_t=\operatorname{diag}(\exp(-\lambda_j\Delta_{t,j}))$ and
+$q_{t,j}=\Delta_{t,j}(B_tx_t)_j$. Binary gating implements
+$\widetilde h_t=M_tF_t(\widetilde h_{t-1})+(I-M_t)\widetilde h_{t-1}$.
+Zero step preserves state, but the input term is a first-order approximation to exact
+ZOH. Current-input-dependent readout and spatial-context omission need separate analysis.
+
+With $e_t=\widetilde h_t-h_t$ and
+$r_t=(I-M_t)((I-\Phi_t)\widetilde h_{t-1}-q_t)$, the exact shared-input identity is
+$e_t=\Phi_te_{t-1}+r_t$. Products of transition norms bound the propagated initial
+error and injected defects. A uniform geometric bound additionally requires a uniform
+contraction and a valid defect bound. Different deep-layer token trajectories add
+parameter/input perturbations; a negative diagonal $A$ alone does not certify the full network.
+
+The first temporal block admits a conditional cache bound
+$L_R\norm{W}a\sqrt{Cp^2\tau_{\rm on}}$ after $a$ inactive steps, provided the
+state-fixed readout has the stipulated Lipschitz constant. It is not a tau-only
+depth guarantee. Keyframes bound cache age by $K-1$ and remove the local approximation
+at the same incoming state, but they do not recover the state of a continuously dense history.
+Full assumptions, proofs, counterexamples and the no-fit AbsRel connection are in Appendix~\ref{app:proofs}.
+
+\subsection{Paid computation}
+Under the explicitly additive model $C_d=F+V$ and
+$\overline C_s=F+\overline a_{\rm eff}V+\overline H$, normalized speedup is
+$[f+(1-f)\overline a_{\rm eff}+\omega]^{-1}$. Overhead must be smaller than
+saved variable cost for acceleration. This is Amdahl-style reasoning~\cite{amdahl1967},
+not a conversion of MAC reductions into observed time. Keyframes and fallback events
+are counted as a union. At 256 frames and $K=30$, even a static stream has nine keyframes.
+The analysis links two constraints on refresh: a certified cache-only tolerance
+would impose an upper bound on $K$, whereas a target speedup in the fixed-cost
+model imposes a lower bound. Their intersection is a conditional design check,
+not a selected operating point or an accuracy certificate. The constants needed
+for a useful numerical cache guarantee have not been certified for this network.
+
+\section{Evaluation Protocol}
+\subsection{Development and reserved transfer sequences}
+The previously reused TUM/Bonn holdout is development data, not an independent test.
+It contains 488 L8 clips, of which 487 have scorable GT, and 13 L256 clips (3328 frames)
+from four sequences. The final evaluation uses four reserved TUM Freiburg3 sequences:
+sitting\_xyz, sitting\_rpy, walking\_xyz and walking\_rpy. The frozen lists contain
+462 L8 clips and 13 L256 clips. These are new sequences in the same capture setting;
+they do not establish scene-disjoint or fixed-camera generalization. L32 is not evaluated
+in this final protocol. The lengths share underlying footage and are not independent samples.
+RGB/depth timestamps are paired within 20 ms, with possible reuse of a depth frame.
+Sensor validity, resize/crop and depth scale follow the frozen evaluation contract and
+the TUM data documentation~\cite{tumdata}; Bonn supplies dynamic indoor development
+sequences~\cite{bonndata}.
+
+\subsection{Comparisons and scoring}
+Final conditions were fixed before reserved predictions: K30, K5, dense carry, dense reset,
+output hold, MiDaS v2.1 Small at 256, DA2 Small at common target 256 (actual input 252),
+and DPT-Large at common 256. No model was retrained or promoted after test results.
+Native controls share the frozen weights; external baselines have different training
+data and budgets, whose overlap is not fully known. DPT's four missing checkpoint
+parameters belong to an unused branch; execution hooks reject any use of that branch.
+
+All models score the same 256-pixel ROI. Native metric outputs have a no-GT-fit panel;
+relative models are not relabeled as metric. Median and disparity scale--shift alignment
+are separate panels. The main shape comparison uses one fit per clip. Frame-fit L256
+scores are supplementary shape diagnostics without temporal scores. Nonpositive fitted
+disparity is counted as an alignment failure; the resulting errors remain in aggregates.
+The frozen inverse-disparity conversion uses $1/\max(d,10^{-3})$, so an invalid
+fitted disparity can produce a 1000-unit fallback depth. This is not a physical depth
+estimate; it explains the sensitivity of RMSE to failed fits and is reported rather than removed.
+Nonfinite predictions fail execution. No-GT clips are explicitly counted, not substituted.
+Optical-flow-based temporal error uses a shared RAFT estimate and the frozen scoring
+equations; flow and GT are never fed to a predictor. Dynamic masks are a flow-residual
+heuristic, not semantic annotations.
+
+\subsection{Statistics and timing}
+Source pixel-pooled and equal-sequence means are reported separately. Paired sequence
+bootstrap enumerates $4^4$ ordered resamples, while sign flipping enumerates $2^4$ cases.
+The minimum possible two-sided sign-flip $p$ is 0.125. Intervals are exploratory,
+unadjusted for multiple comparisons, and not finite-sample coverage guarantees.
+Frames, neighboring clips and repeated timing runs are not independent sequence replicates.
+The three existing training seeds differ only in the final 8k stage from a common parent.
+
+Timing is development-only: the first L256 clip of each development sequence, 1024 matched
+frames, batch one, FP32 eager, TF32 off, RTX 4090, one complete warmup and five repeats.
+The boundary includes warm-cache PNG read/decode, crop/normalization, transfer, actual
+detector/fallback/keyframes, model, interpolation and CPU output copy. Model loading,
+GT, flow, fitting, scoring and output-file writes are excluded. A separate synchronized
+pass measures components. No final-test accuracy is paired with development latency
+as a same-quality speedup. No edge timing or energy claim is made.
+
+\section{Results}
+\input{generated_results.tex}
+\input{revision_results.tex}
+\input{revision_figures.tex}
+
+\section{Discussion and Limitations}
+The central distinction is between preservation and approximation. A constant input can
+leave an ungated SSM approaching equilibrium while a skipped state remains frozen.
+Similarly, recomputing every cache entry on a keyframe does not erase the history carried
+by temporal states. Local defect elimination and global trajectory synchronization
+are different operations, as the development diagnostic demonstrates.
+
+The shared-input bound is useful for identifying omitted innovations, but an observed
+small shadow-model residual does not certify the complete FP32 depth network. The
+pixel threshold does not control all deeper features, and the spatial subsequence path
+omits context even at active coordinates. Global Lipschitz constants have not been
+certified. Synthetic checks and this internal derivation audit do not replace mathematical
+review by the authors and an independent domain expert.
+
+The external efficiency comparison also cannot isolate architecture from training.
+MiDaS Small and DA2 Small are larger than the native network, and we have not covered
+all similarly sized CNNs or modern causal video baselines. The present study supports
+bounded, implementation-specific statements rather than broad accuracy or efficiency
+superiority. More independent scenes and full-training replicates would be needed for
+stronger generalization and stability conclusions. Test access was a one-time finalization
+stage; any subsequent development would require a new untouched evaluation set.
+Our 1024 development diagnostic frames comprise four separate L256 clips, not
+one continuous L1024 trajectory. The older L1024 evidence concerns v9/v10,
+not the present v11; its PointOdyssey aggregate scores and frame curves use
+20 and 8 clips, respectively. Nearly equal endpoints cannot establish stability
+throughout a trajectory. We therefore do not inherit the earlier continuous-stream
+or scale/shape decomposition claims. Current-checkpoint qualitative sequences
+and longer continuous evaluation remain useful extensions.
+
+\section{Conclusions}
+Change-gated temporal state copying is exact in its algebraic scope, whereas readout
+reuse, spatial-context omission and end-to-end speed are separate questions. Conditional
+defect bounds and refresh analysis clarify these boundaries; matched implementation
+experiments show why low activity alone is insufficient. The evidence is best understood
+as an analysis of when claims hold and where they stop, not as a universal acceleration
+or accuracy certificate.
+
+\supplementary{The accompanying package contains complete per-model/per-sequence tables,
+frame-level development diagnostics, derivations, source hashes and reproduction commands.
+Raw third-party datasets and baseline weights are obtained from their original providers.}
+\authorcontributions{AUTHOR TO COMPLETE: actual contributions and approval by every author.}
+\funding{AUTHOR TO COMPLETE: funding sources and grant identifiers, or a verified no-funding statement.}
+\institutionalreview{AUTHOR TO CONFIRM: applicability of institutional review and dataset-use permissions.}
+\informedconsent{AUTHOR TO CONFIRM: applicability of consent requirements for the reused datasets.}
+\dataavailability{Derived results, code and manifest hashes are included in the local reproducibility
+package. Public repository URL/DOI and redistribution permissions must be supplied and confirmed
+by the authors before submission. Original TUM/Bonn data and external weights remain subject to
+their providers' terms.}
+\acknowledgments{AI assistance was used for code development, experiment orchestration,
+mathematical drafting, analysis and manuscript preparation. The authors must supply tool/version
+details, review and edit all outputs, and confirm responsibility before submission. This working
+draft does not assert that such author review has already occurred.}
+\conflictsofinterest{AUTHOR TO COMPLETE: actual competing interests or a verified absence thereof.}
+
+\appendixtitles{yes}
+\appendixstart
+\appendix
+\section{Analytic Proofs}\label{app:proofs}
+\input{theory_appendix.tex}
+\section{Reproduction Details and Evidence Boundaries}\label{app:repro}
+\input{reproducibility_details.tex}
+
+\reftitle{References}
+\begin{thebibliography}{99}
+\bibitem{vda} Chen, S.; Guo, H.; Zhu, S.; Zhang, F.; Huang, Z.; Feng, J.; Kang, B.
+Video Depth Anything: Consistent Depth Estimation for Super-Long Videos. CVPR, 2025.
+\url{https://arxiv.org/abs/2501.12375}.
+\bibitem{ovda} Feiden, J.-F.; K\"uchler, T.; Zavadski, D.; Savchynskyy, B.; Rother, C.
+Online Video Depth Anything: Temporally-Consistent Depth Prediction with Low Memory Consumption.
+arXiv:2510.09182, 2025. \url{https://arxiv.org/abs/2510.09182}.
+\bibitem{campos2018} Campos, V.; Jou, B.; Gir\'o-i-Nieto, X.; Torres, J.; Chang, S.-F.
+Skip RNN: Learning to Skip State Updates in Recurrent Neural Networks. ICLR, 2018.
+\url{https://arxiv.org/abs/1708.06834}.
+\bibitem{gu2024} Gu, A.; Dao, T. Mamba: Linear-Time Sequence Modeling with Selective State Spaces.
+arXiv:2312.00752v2, 2024. \url{https://arxiv.org/abs/2312.00752}.
+\bibitem{deltacnn} Parger, M.; Tang, C.; Twigg, C.D.; Keskin, C.; Wang, R.; Steinberger, M.
+DeltaCNN: End-to-End CNN Inference of Sparse Frame Differences in Videos. CVPR, 2022.
+\url{https://arxiv.org/abs/2203.03996}.
+\bibitem{eventful} Dutson, M.; Li, Y.; Gupta, M.
+Eventful Transformers: Leveraging Temporal Redundancy in Vision Transformers. ICCV, 2023.
+\url{https://arxiv.org/abs/2308.13494}.
+\bibitem{spikessm} Zhong, Y.; Zhao, R.; Wang, C.; Guo, Q.; Zhang, J.; Lu, Z.; Leng, L.
+SPikE-SSM: A Sparse, Precise, and Efficient Spiking State Space Model for Long Sequences Learning.
+arXiv:2410.17268, 2024. \url{https://arxiv.org/abs/2410.17268}.
+\bibitem{spikyspace} Tang, K.; Zheng, J.; Jin, Y.; Qiu, Y.; Sun, G.; Yan, Z.; Wong, W.-F.
+SpikySpace: A Spiking State Space Model for Energy-Efficient Time Series Forecasting.
+arXiv:2601.02411v2, 2026. \url{https://arxiv.org/abs/2601.02411}.
+\bibitem{dpt} Ranftl, R.; Bochkovskiy, A.; Koltun, V.
+Vision Transformers for Dense Prediction. ICCV, 2021. \url{https://arxiv.org/abs/2103.13413}.
+\bibitem{midas} Ranftl, R.; Lasinger, K.; Hafner, D.; Schindler, K.; Koltun, V.
+Towards Robust Monocular Depth Estimation: Mixing Datasets for Zero-shot Cross-dataset Transfer.
+\url{https://arxiv.org/abs/1907.01341}.
+\bibitem{da2} Yang, L.; Kang, B.; Huang, Z.; Zhao, Z.; Xu, X.; Feng, J.; Zhao, H.
+Depth Anything V2. arXiv:2406.09414, 2024. \url{https://arxiv.org/abs/2406.09414}.
+\bibitem{amdahl1967} Amdahl, G.M. Validity of the single processor approach to achieving
+large scale computing capabilities. AFIPS Spring Joint Computer Conference, 1967, 483--485.
+\url{https://doi.org/10.1145/1465482.1465560}.
+\bibitem{tumdata} Sturm, J.; Engelhard, N.; Endres, F.; Burgard, W.; Cremers, D.
+A Benchmark for the Evaluation of RGB-D SLAM Systems. IROS, 2012, 573--580.
+\url{https://cvg.cit.tum.de/_media/spezial/bib/sturm12iros.pdf}.
+\bibitem{bonndata} Palazzolo, E.; Behley, J.; Lottes, P.; Gigu\`ere, P.; Stachniss, C.
+ReFusion: 3D Reconstruction in Dynamic Environments for RGB-D Cameras Exploiting Residuals.
+IROS, 2019. \url{https://arxiv.org/abs/1905.02082}.
+\end{thebibliography}
+\end{document}

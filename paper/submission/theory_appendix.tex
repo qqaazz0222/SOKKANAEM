@@ -1,0 +1,245 @@
+% Derived from immutable paper/theory12.tex.
+\subsection{Implemented recurrence and zero step}
+Vectorize the inner-channel and state coordinates of one temporal SSM.
+For a shared exogenous token sequence, write
+\begin{equation}\label{eq:recurrence}
+ F_t(h)=\Phi_t h+q_t,\qquad
+ \Phi_t=\operatorname{diag}(e^{-\lambda_j\Delta_{t,j}}),\quad
+ q_{t,j}=\Delta_{t,j}(B_tx_t)_j,
+\end{equation}
+where $\lambda_j>0$ and $\Delta_{t,j}\ge0$. A channel's step size is repeated
+over its state coordinates. The code uses $A=-\exp(A_{\log})$ and a softplus
+step size. Norms are Euclidean and induced operator norms unless specified.
+
+\begin{Proposition}[Binary zero-step identity]\label{prop:identity}
+For a diagonal binary mask $M_t$, multiplying the step size by the mask gives
+\begin{equation}\label{eq:gate}
+ \widetilde h_t=M_tF_t(\widetilde h_{t-1})+(I-M_t)\widetilde h_{t-1}.
+\end{equation}
+Thus each inactive hidden-state coordinate is unchanged in real arithmetic.
+\end{Proposition}
+\begin{proof}
+On an active coordinate the original update is used. On an inactive coordinate
+the transition is $e^0=1$ and the input term is zero. These cases give the
+stated expression. Fractional masks do not generally have this update/copy
+interpretation because $e^{m\Delta A}\ne m e^{\Delta A}+1-m$.
+\end{proof}
+
+The input term is first order, not exact zero-order hold (ZOH). With the input
+held constant, the ZOH coefficient is $(1-e^{-\lambda\Delta})/\lambda$;
+see the ZOH definition in Mamba~\cite{gu2024}. Its difference from the
+implemented coefficient obeys
+\begin{equation}\label{eq:zoh}
+ \left|\Delta b-\frac{1-e^{-\lambda\Delta}}{\lambda}b\right|
+ \le \frac{\lambda\Delta^2}{2}|b|.
+\end{equation}
+Indeed, the coefficient difference is
+$\int_0^\Delta(1-e^{-\lambda s})\,ds\le\int_0^\Delta\lambda s\,ds$.
+This local discretization error is distinct from skipping error: both paths
+below use the same implemented recurrence. State identity also does not imply
+readout identity, since the current input affects $C,x,z,D$ and the residual.
+Finite CPU/CUDA tests supplement the real-arithmetic statement; they do not
+establish bitwise identity for exceptional values or all floating-point scan
+reassociations.
+
+\subsection{Skipping defects and state error}
+\begin{Theorem}[Shared-input defect propagation]\label{thm:defect}
+Let $h_t=F_t(h_{t-1})$ and let $\widetilde h_t$ satisfy
+\eqref{eq:gate}, using the same $\Phi_t,q_t$. Define
+\begin{equation}
+ e_t=\widetilde h_t-h_t,\qquad
+ r_t=(I-M_t)((I-\Phi_t)\widetilde h_{t-1}-q_t),\qquad d_t=\norm{r_t}.
+\end{equation}
+Then $e_t=\Phi_t e_{t-1}+r_t$. If $\norm{\Phi_t}\le\rho_t$, then
+\begin{equation}\label{eq:bound}
+ \norm{e_T}\le\left(\prod_{j=1}^T\rho_j\right)\norm{e_0}
+ +\sum_{i=1}^T\left(\prod_{j=i+1}^T\rho_j\right)d_i.
+\end{equation}
+Empty products equal one. In particular, if $\rho_t\le\rho<1$ and
+$d_t\le\epsilon$, the bound is
+$\rho^T\norm{e_0}+\epsilon(1-\rho^T)/(1-\rho)$.
+\end{Theorem}
+\begin{proof}
+Add and subtract $\Phi_t\widetilde h_{t-1}+q_t$ in the gated update and
+subtract the dense update. Iteration gives a sum of propagated defects.
+Submultiplicativity and the triangle inequality give \eqref{eq:bound};
+the uniform case follows by summing a geometric series.
+\end{proof}
+
+A uniform lower bound $\lambda_j\ge\lambda_{\min}>0$ and
+$\Delta_{t,j}\ge\Delta_{\min}>0$ would yield
+$\rho=e^{-\lambda_{\min}\Delta_{\min}}<1$ for the ungated comparison
+transition. The actual gated transition equals one on skipped coordinates.
+Without a useful uniform contraction bound, the nonexpansive estimate
+$\norm{e_T}\le\norm{e_0}+\sum_i d_i$ remains available.
+
+\paragraph{Counterexample: zero input change.}
+For $F(h)=h/2+1$, equal zero initial states and all updates skipped,
+$\widetilde h_t=0$ while $h_t=2(1-2^{-t})$, despite constant inputs.
+The error at $t=4$ is $1.875$. An all-active first frame does not remove
+the subsequent discrepancy. Thus a small pixel-change threshold alone does
+not bound the omitted innovation, even when the input change is exactly zero.
+
+\paragraph{Different token trajectories.}
+If the gated branch uses $\widetilde\Phi_t,\widetilde q_t$, define its skip
+defect using those parameters. The error recurrence acquires the extra term
+$(\widetilde\Phi_t-\Phi_t)\widetilde h_{t-1}+\widetilde q_t-q_t$.
+Its norm is at most
+$\norm{\widetilde\Phi_t-\Phi_t}\norm{\widetilde h_{t-1}}
++\norm{\widetilde q_t-q_t}$. This term cannot be dropped for deeper blocks
+whose inputs depend on previously approximated features.
+
+\begin{Theorem}[Whole-network conditional perturbation]\label{thm:network}
+Fix the frame sequence and the masks selected by the sparse trajectory.
+Let $z$ comprise all temporal states and block output caches, with the dense
+comparison overwriting an identically shaped set of caches at every step.
+Let $F_t$ be the all-active network step and $G_t$ the sparse step. Put
+$d_t^{\rm net}=\norm{G_t(\widetilde z_{t-1})-F_t(\widetilde z_{t-1})}$.
+If $F_t$ is $L_t$-Lipschitz on a region containing both states, then
+\begin{equation}
+ E_t^{\rm net}\le L_tE_{t-1}^{\rm net}+d_t^{\rm net}.
+\end{equation}
+Equation~\eqref{eq:bound} holds with $L_t,d_t^{\rm net}$ in place of
+$\rho_t,d_t$. For dense and sparse output maps $P_t,\widetilde P_t$, if
+$P_t$ is $L_{P,t}$-Lipschitz and
+$\eta_t=\norm{\widetilde P_t(\widetilde z_{t-1})-P_t(\widetilde z_{t-1})}$,
+then $\norm{\widetilde y_t-y_t}\le L_{P,t}E_{t-1}^{\rm net}+\eta_t$.
+\end{Theorem}
+\begin{proof}
+Add and subtract $F_t(\widetilde z_{t-1})$, or respectively
+$P_t(\widetilde z_{t-1})$, and apply the assumed Lipschitz inequality.
+Iterate the state bound.
+\end{proof}
+
+No whole-network $L_t<1$ or practically small global constant is certified
+here. Negative diagonal $A$ alone is insufficient: the elementary map
+$F(h)=0.5h+u(h)$ with $u(h)=h$ expands by $1.5$. This is a counterexample
+to an inference about feedback, not an identification of v11 with that map.
+Computing a counterfactual dense defect also costs work; the detector does
+not provide it as a free online certificate. Threshold-induced mask changes
+under perturbed images are outside this fixed-mask comparison.
+
+For $n$ fixed pixels with ground truth $d_i\ge d_*>0$, the reverse triangle
+inequality gives the additional, no-fit statement
+\begin{equation}
+ |\operatorname{AbsRel}(\widetilde y,d)-\operatorname{AbsRel}(y,d)|
+ \le \frac1n\sum_i\frac{|\widetilde y_i-y_i|}{d_i}
+ \le \frac{\norm{\widetilde y-y}_1}{nd_*}.
+\end{equation}
+This does not remove the dense reference's own ground-truth error. Separately
+refitted scale--shift alignment requires conditioning assumptions of its own;
+threshold accuracy metrics require margin assumptions. No new depth cutoff
+has been introduced into the evaluation protocol.
+
+\subsection{Cached readout and refresh}
+\begin{Proposition}[Conditional first-block cache bound]\label{prop:cache}
+Consider a pixel-gated patch with $C p^2$ pixel values that remains inactive
+for $a=t-s$ steps after its last update. Suppose its embedding is $u=WI+b$
+and the state-fixed block readout $R(u,h_s)$ is $L_R$-Lipschitz in $u$ on
+the relevant region. Then
+\begin{equation}\label{eq:cache}
+ \norm{R(u_t,h_s)-R(u_s,h_s)}
+ \le L_R\norm{W}\,a\sqrt{Cp^2\tau_{\rm on}}.
+\end{equation}
+\end{Proposition}
+\begin{proof}
+Inactivity implies patch MSE at most the applicable hysteresis threshold,
+which is at most $\tau_{\rm on}$. Dilation and forced activation only turn
+zeros into ones and preserve this implication for a final zero mask.
+Each consecutive patch difference is at most $\sqrt{Cp^2\tau_{\rm on}}$.
+Sum these differences, apply the embedding norm and then the readout bound.
+The cached readout at $s$ used the already updated state $h_s$, which remains
+unchanged during the inactive interval.
+\end{proof}
+
+The readout includes normalization, residual and input-dependent projections.
+This first-block, pixel-MSE statement does not directly apply to deeper-layer
+tokens or GMC relative-feature scores. Spatial active-subsequence computation
+has an additional context defect
+$\norm{S_A(u_A)-[S(u)]_A}$, even on active tokens. For example, the spatial
+recurrence $s_i=\rho s_{i-1}+b_i$ with $b_1=1,b_2=0,s_0=0$ produces $s_2=\rho$;
+omitting token 1 gives zero, even if the current inputs equal past inputs.
+Current GMC warps the comparison image, not the hidden-state or output caches.
+
+\begin{Theorem}[Refresh is not state reset]\label{thm:refresh}
+An all-active keyframe makes $G_t=F_t$ at the same incoming extended state;
+hence $d_t^{\rm net}=0$, but generally
+$E_t^{\rm net}\le L_tE_{t-1}^{\rm net}\ne0$.
+For the shared-input SSM of Theorem~\ref{thm:defect}, assume a common
+$\rho<1$, skip defects at most $\epsilon$, and a refresh every $K$ steps.
+If $B_n$ is the error immediately after refresh $n$, then
+\begin{align}
+ B_{n+1}&\le\rho^KB_n+\rho\epsilon\frac{1-\rho^{K-1}}{1-\rho},\\
+ \limsup_{n\to\infty}B_n&\le
+ \frac{\rho\epsilon(1-\rho^{K-1})}{(1-\rho)(1-\rho^K)}.
+\end{align}
+\end{Theorem}
+\begin{proof}
+All-active branches recompute block outputs but pass the carried temporal
+states to the recurrence. Thus only the same-state local defect vanishes.
+For the scalar norm recurrence, propagate $K-1$ bounded defects and apply
+the final zero-defect refresh. Each injected term receives at least one
+factor $\rho$. Sum the resulting cycle recurrence as a geometric series.
+\end{proof}
+
+At $j\le K-1$ steps after a refresh, the bound is
+$\rho^jB_n+\epsilon(1-\rho^j)/(1-\rho)$. Actual errors need not be monotone
+in $K$: changing $K$ also changes the trajectories and defects. Keyframes
+bound cache age by $K-1$, not dense-history error by zero. Resetting only one
+path to zero is a different intervention. True state synchronization would
+require the reference state or replay. Rolling refresh bounds per-patch age
+but is not an all-active whole-network refresh.
+
+\subsection{Fixed cost, refresh frequency and overhead}
+\begin{Proposition}[Conditional pipeline speedup]\label{prop:cost}
+Assume an additive cost model with dense reference $C_d=F+V>0$ and mean
+sparse cost $\overline C_s=F+\overline a_{\rm eff}V+\overline H$, where
+$F,V,\overline H\ge0$ and $\overline C_s>0$.
+Define $f=F/C_d$ and $\omega=\overline H/C_d$.
+Then
+\begin{equation}
+ S=\frac{C_d}{\overline C_s}
+ =\frac1{f+(1-f)\overline a_{\rm eff}+\omega},\qquad
+ S>1\ \Longleftrightarrow\ \omega<(1-f)(1-\overline a_{\rm eff}).
+\end{equation}
+For $f>0$, $S\le1/f$.
+\end{Proposition}
+\begin{proof}
+Divide by $C_d$ and compare the positive denominator with one.
+Dropping its other nonnegative terms yields the upper bound.
+\end{proof}
+
+This is an application of Amdahl-style fixed-cost reasoning~\cite{amdahl1967},
+not a new universal speed law. Detector, gather/scatter, cache-copy and launch
+overheads must be counted without double counting. Keyframe and fallback
+events are a union: $a_{{\rm eff},t}=1$ on either event, and otherwise equals
+the normal activity. Padding and nonlinear kernel costs must be modeled
+separately if active fraction does not scale variable work linearly.
+
+For $T$ frames starting at frame index zero, the keyframe fraction is
+$\lceil T/K\rceil/T$, even on a static stream. At $T=256,K=30$ this is
+$9/256$, not exactly $1/30$. In a long stream without fallback and with
+constant nonkeyframe mean $a$, the effective activity tends to
+$a+(1-a)/K$. If a verified cache-only coefficient
+$c=L_R\norm{W}\sqrt{Cp^2\tau}>0$ and tolerance $E_c$ are available,
+\eqref{eq:cache} gives the sufficient condition
+$K\le1+\lfloor E_c/c\rfloor$. In the nondegenerate fixed-cost model,
+a target speedup $S_*>1$ requires
+\begin{equation}
+ D=1/S_*-f-(1-f)a-\omega>0,\qquad
+ K\ge\left\lceil\frac{(1-f)(1-a)}{D}\right\rceil.
+\end{equation}
+Nonoverlap means these sufficient error conditions cannot certify a feasible
+$K$; it is not a proof that no accurate fast policy exists.
+
+The existing K30 synchronized profile assigns about $69.4\%$ of its time
+to image read/decode/preprocessing. Holding that component fixed and deleting
+all remaining profiled time gives an idealized ceiling of about $1.44\times$
+relative to that same profile. This is neither a measured speedup nor a bound
+for a redesigned input path or GPU-resident pipeline. Main matched-subset
+latencies remain $7.496$ ms sparse and $7.521$ ms dense.
+Persistent temporal states are densely allocated:
+\[ bBN\sum_{\ell\in\mathrm{temporal}}P_\ell S_\ell \]
+bytes, independent of activity.
+For v11 this is $12$ MiB in FP32; output caches add storage.
+

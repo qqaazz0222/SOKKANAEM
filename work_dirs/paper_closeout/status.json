@@ -1,0 +1,55 @@
+{
+  "submission_ready": false,
+  "external_submission": false,
+  "public_upload": false,
+  "final_test_used": true,
+  "final_lengths": {
+    "L256": 13,
+    "L8": 462
+  },
+  "final_models": 8,
+  "new_training": false,
+  "theory_development_frames": 1024,
+  "task13": "conditional nonexecution: frozen-model analysis scope",
+  "task14": "Nano B01 5W/10W historical synthetic logs audited; new real-video runner has desktop CPU smoke only",
+  "task15": "integrated review manuscript/PDF and local evidence package built",
+  "blockers": [
+    "author identity/declarations/contributions/approval",
+    "human mathematical and novelty/venue-fit review",
+    "current journal policy and redistribution rights confirmation"
+  ],
+  "self_review": "R3: 40 items mapped; partial/excluded/author-pending items remain",
+  "revision": {
+    "path": "work_dirs/paper_revision_r3/results.json",
+    "bytes": 4656,
+    "sha256": "ddeee80cc4af5a8e35e90b6097a58c80582d8df951b394b0bc5cb54ad4bd44ea"
+  },
+  "extra_limitations": [
+    "no clean-machine full reproduction",
+    "no provenance-matched modern video baseline in the frozen final table",
+    "current-weight continuous L1024/range extensions incomplete; qualitative replay is post-hoc",
+    "historical edge logs lack weight/code linkage, real-video accuracy and end-to-end validation"
+  ],
+  "evidence": [
+    {
+      "path": "work_dirs/paper_closeout/final_complete.json",
+      "bytes": 621,
+      "sha256": "884acdda4be46ed0053a5ec2523554ed16c49f5755057c93cd4ce26334d63be3"
+    },
+    {
+      "path": "work_dirs/paper_closeout/report_artifacts.json",
+      "bytes": 3791,
+      "sha256": "b1bf72107a052e9af876fc99d883343fcc5d56d6986e31c7f2110b6ce03370b0"
+    },
+    {
+      "path": "work_dirs/paper_closeout/pdf_build.json",
+      "bytes": 2665,
+      "sha256": "b71c9c6e5134224695b75606ee8989811a2a58e5f3eb9ca9e3f694d79079d132"
+    },
+    {
+      "path": "work_dirs/paper_closeout/verification.json",
+      "bytes": 14322,
+      "sha256": "c91e742217f074f12f51e77ad5f80febd7370007c40c6a0a179f4dfdc6787899"
+    }
+  ]
+}

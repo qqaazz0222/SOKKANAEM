@@ -1,0 +1,980 @@
+{
+  "role": "development_validation",
+  "smoke": true,
+  "training_performed": false,
+  "final_test_used": false,
+  "points": {
+    "sparse_k5": {
+      "kind": "native",
+      "keyframe_every": 5
+    },
+    "sparse_k10": {
+      "kind": "native",
+      "keyframe_every": 10
+    },
+    "sparse_k30": {
+      "kind": "native",
+      "keyframe_every": 30
+    },
+    "sparse_k60": {
+      "kind": "native",
+      "keyframe_every": 60
+    },
+    "dense_carry": {
+      "kind": "native",
+      "dense": true
+    },
+    "dense_reset": {
+      "kind": "native",
+      "dense": true,
+      "reset": true
+    },
+    "output_hold": {
+      "kind": "native",
+      "hold": true
+    },
+    "gmc_k30": {
+      "kind": "native",
+      "gmc": true,
+      "tau_on": 0.1,
+      "tau_off": 0.05
+    },
+    "da2_196": {
+      "kind": "da2",
+      "size": 196,
+      "original": true
+    },
+    "da2_256": {
+      "kind": "da2",
+      "size": 256,
+      "original": false
+    },
+    "da2_350": {
+      "kind": "da2",
+      "size": 350,
+      "original": true
+    },
+    "da2_518": {
+      "kind": "da2",
+      "size": 518,
+      "original": true
+    },
+    "midas_192": {
+      "kind": "midas",
+      "size": 192,
+      "original": true
+    },
+    "midas_256": {
+      "kind": "midas",
+      "size": 256,
+      "original": false
+    },
+    "midas_384": {
+      "kind": "midas",
+      "size": 384,
+      "original": true
+    }
+  },
+  "sources": [
+    {
+      "path": "scripts/paper_efficiency_study.py",
+      "bytes": 14254,
+      "sha256": "b96278706e8f68e6a57a1e3e0fe8f74ad9b33faef1c214ae0b5fee854cd482b3"
+    },
+    {
+      "path": "sokkanaem/performance_study.py",
+      "bytes": 14386,
+      "sha256": "161607eacc30cb0c5875da7a69566dd2eebbc4bcbe8a7df5742774086b0b894f"
+    },
+    {
+      "path": "paper/STUDY_9_11_PLAN.md",
+      "bytes": 5791,
+      "sha256": "52a8b2c61314f49b78ccee4b99ca3d37eee5851cfc9a9ecca3ae1db5b484ba8d"
+    },
+    {
+      "path": "work_dirs/paper_study_5_8/study.json",
+      "bytes": 9449,
+      "sha256": "98cb536dddab69a8dade6e92a532b260e418dc47944721f91d25f6cfbe6176d5"
+    },
+    {
+      "path": "work_dirs/paper_study_5_8/accuracy.jsonl",
+      "bytes": 13686148,
+      "sha256": "b3130490c4a3d61f9ac14aea96987de6c46c6359d12a8f7f57bf7a8975fe222b"
+    },
+    {
+      "path": "work_dirs/paper_study_5_8/long.jsonl",
+      "bytes": 10324604,
+      "sha256": "1137e2878eef07496acee1e0d17ad5d36c0d56edc380821c8eca336aafa02988"
+    },
+    {
+      "path": "work_dirs/paper_study_9_11_smoke/seed_provenance.json",
+      "bytes": 11604,
+      "sha256": "06508f1a29257f62b8779c52caa34d5a6b51edf220dedc66e60d03987b27ccbb"
+    }
+  ],
+  "dependencies": [
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/midas_v21_small_256.pt",
+      "bytes": 85761505,
+      "sha256": "70d6b9c891758c67f974a6097fb0c608c7ee67fb81ac3e5588847d5596d56fca"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/.gitignore",
+      "bytes": 1233,
+      "sha256": "3d9bf7a218eb2437ed30bac1062cfa1fa4f4c10da509b4ee8325b4ff1a454db4"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/Dockerfile",
+      "bytes": 809,
+      "sha256": "0610e8b15f5b1d3c611c4de74e69022f4d4efb0ca3f18bd43265b9d953bee87c"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/LICENSE",
+      "bytes": 1098,
+      "sha256": "99ec0b9f9bcc9234b649787b8f03b07dbece95764b7879e1e72fb76cb0f96876"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/README.md",
+      "bytes": 5268,
+      "sha256": "5bdaf039bc6405a74b8099b9fdc8f9a536d8e5e0a1f3c16a93d23616279eae54"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/hubconf.py",
+      "bytes": 2164,
+      "sha256": "1eff18f6ae85552c6b24144f3689f6d7c62a36a1b7d72f3825c748995fb8d768"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/input/.placeholder",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/midas/base_model.py",
+      "bytes": 367,
+      "sha256": "a50dc79482afbcd023a3c401d17d21e5f8b5c0c51c9060ef849a75bd1816496b"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/midas/blocks.py",
+      "bytes": 7963,
+      "sha256": "136edc1546ba1eeb9b99a6da9d9af41c41a3a77dd17e31d0c230b8bfdbe262dd"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/midas/midas_net.py",
+      "bytes": 2709,
+      "sha256": "04483f4377e930b341483a27e6a58410c683c686a177776458d24e35deec3b98"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/midas/midas_net_custom.py",
+      "bytes": 5207,
+      "sha256": "0c3aa730942911186085acf4b1540853444f1c0575b971680101e8667ca7b6cb"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/midas/transforms.py",
+      "bytes": 7869,
+      "sha256": "ab3d20b77065606332e6a9bac96a44f60f22923a7848d62b57b5690959a9883d"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/README.md",
+      "bytes": 2987,
+      "sha256": "49e4cc700d3e06e299367d8dfd586d9f999e9eb58b76c7158945802a43bf1840"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/.gitignore",
+      "bytes": 155,
+      "sha256": "5b80f624779d994ff74d5e4b7fccbb20e90df2e9957869563dd7f9dd20a10522"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/EXPLORE_THE_CODE.md",
+      "bytes": 16569,
+      "sha256": "29c5a5649e4a4b1d0d1c36d29bba66534fff3b908ac7a7cdfd08ce2db09c546a"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/LICENSE",
+      "bytes": 1063,
+      "sha256": "5be4086b5bab1b85e0aeda9c86d2e6d505e4f93599532ce77303b8a127664036"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/README.md",
+      "bytes": 524,
+      "sha256": "7c5219c482c4437e7d67f5ddb43ed11603a26fc39ed8fefce88b8cec93861967"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/.gitignore",
+      "bytes": 15,
+      "sha256": "35c0c5a4da424ff005f91d4ea39e3ad88202e78772902f8906816e3877d4fe73"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/build.gradle",
+      "bytes": 1684,
+      "sha256": "4f8d89f67105ca722f60ce43ed071701962fd8041177d663d049f6637664faff"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/proguard-rules.pro",
+      "bytes": 751,
+      "sha256": "1cf8c57e8f79c250b0af9c1a5a4edad71a5c348a79ab70243b6bae086c150ad2"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/androidTest/assets/fox-mobilenet_v1_1.0_224_support.txt",
+      "bytes": 58,
+      "sha256": "00487a8d7ec113e456a3bd62d423edfe7e57fcb434c42db45ea0fca4fc198f66"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/androidTest/assets/fox-mobilenet_v1_1.0_224_task_api.txt",
+      "bytes": 40,
+      "sha256": "0761366c2a5533658c7e2229cb7de2651979254566f53e2d38280b6e48454c75"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/androidTest/java/AndroidManifest.xml",
+      "bytes": 193,
+      "sha256": "e15467a9dfe964401df04a9b4ca2ceafbae70f906f6d4232c16cf3d3626f8b74"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/androidTest/java/org/tensorflow/lite/examples/classification/ClassifierTest.java",
+      "bytes": 4811,
+      "sha256": "bf2d8af2415393ae6845d454cfa7672925f7160023a534059086d63f62b3c874"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/AndroidManifest.xml",
+      "bytes": 1058,
+      "sha256": "38abb3140b1c7cc3d40292a2ff4a4648095960117f94f1befbfc78271741eafc"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/java/org/tensorflow/lite/examples/classification/CameraActivity.java",
+      "bytes": 23403,
+      "sha256": "0215cf3ad9a63ddd84feedde68da894f2c275d4d66b8a7755a6523b6ed95d112"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/java/org/tensorflow/lite/examples/classification/CameraConnectionFragment.java",
+      "bytes": 22027,
+      "sha256": "1c64e9446b0ab2693b050543035b4ad6695c76e0dd4ef54d24730feada04ffdc"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/java/org/tensorflow/lite/examples/classification/ClassifierActivity.java",
+      "bytes": 8867,
+      "sha256": "74c6b1878b821e0bb452178fbb91dfbac1f14a1ac8ce6c197627363adab6af9d"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/java/org/tensorflow/lite/examples/classification/LegacyCameraConnectionFragment.java",
+      "bytes": 7089,
+      "sha256": "d142db834e8662468ed665b609f773a464372cab004ded88624158781ff7c6c3"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/java/org/tensorflow/lite/examples/classification/customview/AutoFitTextureView.java",
+      "bytes": 2581,
+      "sha256": "95762bc336432c77cab65c30d284de36926ecab53993f3027acfafaf84f25b55"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/java/org/tensorflow/lite/examples/classification/customview/OverlayView.java",
+      "bytes": 1613,
+      "sha256": "c9c3781e212a126ddb611f90729882591e4438fd38f8e15cb8d99d4f7a7f4e7d"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/java/org/tensorflow/lite/examples/classification/customview/RecognitionScoreView.java",
+      "bytes": 2187,
+      "sha256": "56e4e44933662b7380d1bd410f926ed3b25c2390f2eb8474a05e0db7efca4f21"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/java/org/tensorflow/lite/examples/classification/customview/ResultsView.java",
+      "bytes": 933,
+      "sha256": "4997a3d20c39ff1e010e7a97d11a5d9e1e82c471525a408c9a514a8f2d85f9ae"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml",
+      "bytes": 1755,
+      "sha256": "b039e78aa72bbc1ed0af22fe58d93f2f3fa2c5fde878b7e3fc1f92f5be4999f4"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/drawable/bottom_sheet_bg.xml",
+      "bytes": 418,
+      "sha256": "dac7891e6c2b45e1cd2c456e7d31d94bf232e8f7c81d2729c673986983ac1622"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/drawable/ic_baseline_add.xml",
+      "bytes": 299,
+      "sha256": "b5d2c4fa0e43273f77173a7829a650df1b0061b157b0b47e79b0c0ed3ff6ed42"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/drawable/ic_baseline_remove.xml",
+      "bytes": 281,
+      "sha256": "ee484650cb4465ca6610c672302f4bb74b2cecb99c194cc26ef2b07d742f7573"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/drawable/ic_launcher_background.xml",
+      "bytes": 5606,
+      "sha256": "718ba51adf166bb55c3e9936bb8199a0148457f7f0191aaa2f37a94f3159d6ec"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/drawable/rectangle.xml",
+      "bytes": 422,
+      "sha256": "ba70fbe2d99099c193ae1fdf0bb77f4c0659197ccce31613c5eaa67b344f27d3"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/layout/tfe_ic_activity_camera.xml",
+      "bytes": 2251,
+      "sha256": "fbeebfc5e440672953f0dfd9ece5bc67c5480778dd146b1d3ee8ae2834e9351e"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/layout/tfe_ic_camera_connection_fragment.xml",
+      "bytes": 1219,
+      "sha256": "008d826eeaa70ad1eed256492efd1010ab8f87a5d32cb6895234341e3aa22e8a"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/layout/tfe_ic_layout_bottom_sheet.xml",
+      "bytes": 11506,
+      "sha256": "c4336a994ab0a04fdb10fb7e8b2ac4c49edbf926fab44000a29f4324940aebee"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml",
+      "bytes": 257,
+      "sha256": "354ef3e61f540ca158623374dab9358231ef9858c5555d20488ca296fc6d8b50"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml",
+      "bytes": 257,
+      "sha256": "354ef3e61f540ca158623374dab9358231ef9858c5555d20488ca296fc6d8b50"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/values/colors.xml",
+      "bytes": 282,
+      "sha256": "9493f4d8dc3ff5d12637ecf9a8e507b11290d9eb47ae8b4f6d8f5d7c2851e750"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/values/dimens.xml",
+      "bytes": 184,
+      "sha256": "8f448fea907550a86d22057045a2e54c084c78d2cad16a4e837fa81d5e630fab"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/values/strings.xml",
+      "bytes": 1043,
+      "sha256": "8f26b34d6c8ee0367d128274f548d256b30079bcfd0e9ff81bad81dbc80233dd"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/app/src/main/res/values/styles.xml",
+      "bytes": 417,
+      "sha256": "3e5187b3517ac5595a839d19a2a07959f7d19f57e88793d73cb66deb1d548ec2"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/build.gradle",
+      "bytes": 594,
+      "sha256": "b02372693ee941b6ce169108c84c6323e70b8fd612109e2e0a654aa9fe848512"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/gradle.properties",
+      "bytes": 779,
+      "sha256": "6e31b9ab1951e416eb30fdc97069286e42b861dfd114aeccfcce8ca15247829f"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/gradle/wrapper/gradle-wrapper.jar",
+      "bytes": 58695,
+      "sha256": "96f793a18e056c23ffeec67c1f3bb8eccff5a4a407fc9ceac183527e7eedf4b6"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/gradle/wrapper/gradle-wrapper.properties",
+      "bytes": 202,
+      "sha256": "ae7af1135c9f89ce22c69e2431b5b621b4238a8f7a42b348678c4dc3007d82f0"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/gradlew",
+      "bytes": 5764,
+      "sha256": "52f7d03f603956bb91f3fb4f18e08578aab89cc98ec606dc8dd811337f5bce3d"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/gradlew.bat",
+      "bytes": 2842,
+      "sha256": "87268485ac5c93f230997f2715a9831dcaafb3a631c7a1646dca2afc2dbda7f2"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_support/build.gradle",
+      "bytes": 1379,
+      "sha256": "0b06ab0e560a08744eb305f975b73069c5d1ff3aed1f664e709dbe32e2fdde49"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_support/proguard-rules.pro",
+      "bytes": 751,
+      "sha256": "1cf8c57e8f79c250b0af9c1a5a4edad71a5c348a79ab70243b6bae086c150ad2"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_support/src/main/AndroidManifest.xml",
+      "bytes": 147,
+      "sha256": "47b498b37f200be7b1a1192321afdb8f1bf54b747d5462cd3586a0fb99bf4f86"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_support/src/main/java/org/tensorflow/lite/examples/classification/tflite/Classifier.java",
+      "bytes": 13367,
+      "sha256": "95ff4ea1a9e7c98887ddfda2c2b8ed5be556074bc774f93d24d717479b69d72b"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_support/src/main/java/org/tensorflow/lite/examples/classification/tflite/ClassifierFloatEfficientNet.java",
+      "bytes": 2408,
+      "sha256": "33f6af9b9e15fe8cc1d1102dc5e072b1469fae8a88e6a62e164c74001e9863bd"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_support/src/main/java/org/tensorflow/lite/examples/classification/tflite/ClassifierFloatMobileNet.java",
+      "bytes": 2386,
+      "sha256": "374f13352e128981d783f6e94db464aaed939f5fa401c4949f225255e3bef6ea"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_support/src/main/java/org/tensorflow/lite/examples/classification/tflite/ClassifierQuantizedEfficientNet.java",
+      "bytes": 2343,
+      "sha256": "865a72d16d03cf965bc45df7de7d23300ed1541d7c13ec23bd63617a1978098a"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_support/src/main/java/org/tensorflow/lite/examples/classification/tflite/ClassifierQuantizedMobileNet.java",
+      "bytes": 2394,
+      "sha256": "9b8d55acbf309b0bc8333aa56212fb4d9cfb2a9c5f9b3ef403be3bf19e6ec139"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_task_api/build.gradle",
+      "bytes": 1309,
+      "sha256": "f14a7b8ad19c9caba086cdbd07a25a2012131282f5732892b00286202f21b447"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_task_api/proguard-rules.pro",
+      "bytes": 751,
+      "sha256": "1cf8c57e8f79c250b0af9c1a5a4edad71a5c348a79ab70243b6bae086c150ad2"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_task_api/src/main/AndroidManifest.xml",
+      "bytes": 147,
+      "sha256": "47b498b37f200be7b1a1192321afdb8f1bf54b747d5462cd3586a0fb99bf4f86"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_task_api/src/main/java/org/tensorflow/lite/examples/classification/tflite/Classifier.java",
+      "bytes": 10164,
+      "sha256": "d84b51b4e73c5d2e4a42a9948ab5c9c5658954af5e43793db218c38f10f96a9c"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_task_api/src/main/java/org/tensorflow/lite/examples/classification/tflite/ClassifierFloatEfficientNet.java",
+      "bytes": 1716,
+      "sha256": "3cf49d1929087acdc31e26231fcc069af2d97abbd2421f59ad989e622eec09e7"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_task_api/src/main/java/org/tensorflow/lite/examples/classification/tflite/ClassifierFloatMobileNet.java",
+      "bytes": 1674,
+      "sha256": "c1e3f61b5ab066d278510e32da8ae684183e7af7deb662cd838003571525fb8d"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_task_api/src/main/java/org/tensorflow/lite/examples/classification/tflite/ClassifierQuantizedEfficientNet.java",
+      "bytes": 1627,
+      "sha256": "58594235b85b98e42b5f9013a55e455374f0b6b5c29aeda336b7178d60475062"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/lib_task_api/src/main/java/org/tensorflow/lite/examples/classification/tflite/ClassifierQuantizedMobileNet.java",
+      "bytes": 1698,
+      "sha256": "870d247d01e3e84e32d8ddb69c70b019a1865580610d2f44bfe41946b8819aaa"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/models/build.gradle",
+      "bytes": 1050,
+      "sha256": "bbf46af74f15c4ff6b794fb6227459740cbd4f35c790b87a4431b30a1cfefcf8"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/models/download.gradle",
+      "bytes": 336,
+      "sha256": "de721d41fd5dff0340416aec8e17a6a5da01ae3f35f60bf878fd5a122d8954f3"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/models/proguard-rules.pro",
+      "bytes": 751,
+      "sha256": "1cf8c57e8f79c250b0af9c1a5a4edad71a5c348a79ab70243b6bae086c150ad2"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/models/src/main/AndroidManifest.xml",
+      "bytes": 147,
+      "sha256": "eb02c9746cbcbc69c8ea93842b11f612a5f8e8937793a65042050bd9d1c400b0"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/models/src/main/assets/labels.txt",
+      "bytes": 10484,
+      "sha256": "536feacc519de3d418de26b2effb4d75694a8c4c0063e36499a46fa8061e2da9"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/models/src/main/assets/labels_without_background.txt",
+      "bytes": 10473,
+      "sha256": "e697a491aa735cc6c2aaf982f8e86e8fc7b0a1ea7750a2cc6a2bdfc1e109012f"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/models/src/main/assets/run_tflite.py",
+      "bytes": 2581,
+      "sha256": "aa40f3fe79e9e62340a2dded2f95804696b02dffa8afff84285010b49141f6fc"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/android/settings.gradle",
+      "bytes": 116,
+      "sha256": "93e6124af4d3c4ca633a3878162aba19c5c4800fa2cd67fd0a6aefab40021fa1"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/.gitignore",
+      "bytes": 30,
+      "sha256": "dda4ebc647398f917e1fd0c89bf527d8f30f98ea2888ceabbbb91e2b93af1a66"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas.xcodeproj/project.pbxproj",
+      "bytes": 23228,
+      "sha256": "747ba820bd0bd1da7470b885e5ca7a3c6e51f9093796c33bfdc29d929f0fc542"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas.xcodeproj/project.xcworkspace/contents.xcworkspacedata",
+      "bytes": 135,
+      "sha256": "7f3b00b5c3fdb45242d7b87e1e5c4e25d1fa8129a16c94295ecc4e8ea2235c5f"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist",
+      "bytes": 238,
+      "sha256": "dfa0f9bb85b95ccba9c6811adadf8cb407fb5d52088e89db83ebc308ec448542"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas.xcodeproj/project.xcworkspace/xcuserdata/admin.xcuserdatad/UserInterfaceState.xcuserstate",
+      "bytes": 11925,
+      "sha256": "5b7105e98136fb95e1555f75f0f0512cab807ac0e2f8855fceef8ff33cfefd73"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas.xcodeproj/xcuserdata/admin.xcuserdatad/xcschemes/xcschememanagement.plist",
+      "bytes": 342,
+      "sha256": "dbc7215d3609bd6ac77e51c254eb2426a915a01dc5a4a1f51684dbebf436ffde"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/AppDelegate.swift",
+      "bytes": 1264,
+      "sha256": "e2a4b50d0437e49e293f5e83612891ff5bb1e714b794a07e40918e385a2458d8"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Assets.xcassets/AppIcon.appiconset/Contents.json",
+      "bytes": 3396,
+      "sha256": "fab828773564becd55af50ce18f589b6eeaac6670c078d2a1babcbb02229ef56"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Assets.xcassets/Contents.json",
+      "bytes": 62,
+      "sha256": "972ec1fd42325872438eb085ac29e94f51c10788ec18ec5549439950866c541d"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Camera Feed/CameraFeedManager.swift",
+      "bytes": 10810,
+      "sha256": "64daebf544755de31f0ea019dbc88bd917aa5debe1eca0dacd9cf19860c4e29e"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Camera Feed/PreviewView.swift",
+      "bytes": 1176,
+      "sha256": "dc89b300e36e5f98670af24198ec493fb10a07bdc6a07ce3688cd98baf555178"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Cells/InfoCell.swift",
+      "bytes": 810,
+      "sha256": "e62c304f10d88f1f87b37e577b51e79092d380d0796cdbb3ba2aa0a274818187"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Constants.swift",
+      "bytes": 1072,
+      "sha256": "f984e48203600f09b435a9cfb95d93e6b20f95de8e4c10670a0cf91f811e2294"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Extensions/CGSizeExtension.swift",
+      "bytes": 1854,
+      "sha256": "dc677bb578ddccffdf45111b9286da08ff8247ce4a5e4ae1ccccf818b3425044"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Extensions/CVPixelBufferExtension.swift",
+      "bytes": 6194,
+      "sha256": "e3ee11a1247b2256a3a2aab2e93f05ef81ac19963186d611235513ec3b4e88a5"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Extensions/TFLiteExtension.swift",
+      "bytes": 2557,
+      "sha256": "ad929be7d31c087750bb7b2c8e36de1e62898c920cb0dceb569320614314d2f1"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Info.plist",
+      "bytes": 1301,
+      "sha256": "fd10991b3d0c5903906648645ea4bece6ca22bed81198d9e8f6b5faeb22405b3"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/ModelDataHandler/ModelDataHandler.swift",
+      "bytes": 15782,
+      "sha256": "68d1d276d11785cda3fbce5df0d093874cd5193f347c7f6cc48d69192510efdb"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Storyboards/Base.lproj/Launch Screen.storyboard",
+      "bytes": 4556,
+      "sha256": "ebef3fc88e35093e762ca93bb2eb50b3b9076c0f5148dc435225a0e466b32a6f"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Storyboards/Base.lproj/Main.storyboard",
+      "bytes": 29518,
+      "sha256": "2a536ca80fecbf0d190ee7aeba6c364ab2699385013038b2a262c2d2b2dc6250"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/ViewControllers/ViewController.swift",
+      "bytes": 15209,
+      "sha256": "85a6205b2361e19d8ff142d1fff5b8f6323f481d5f7e6552a9dbc1b5781b7cdc"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Midas/Views/OverlayView.swift",
+      "bytes": 1737,
+      "sha256": "592fbc1471c0f3ad70d03fb7aae4c7097d5cc2aedbe7d43bd5ebe54f82a2fe64"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/Podfile",
+      "bytes": 408,
+      "sha256": "02d6f27a37530ee96cd8ae93fdded13b688b1c63aaeab97cbaabfb2b616ef0e4"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/README.md",
+      "bytes": 4169,
+      "sha256": "521cabc20f4a73461ff23f6a94b3d94c4b9563b6f26df8b7ce3132c1ba86a8ab"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/mobile/ios/RunScripts/download_models.sh",
+      "bytes": 501,
+      "sha256": "71381b59a907829be25d9de03e0ea88270ec9cfe99ec377a118e55807f36d27f"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/output/.placeholder",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/LICENSE",
+      "bytes": 1063,
+      "sha256": "5be4086b5bab1b85e0aeda9c86d2e6d505e4f93599532ce77303b8a127664036"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/README.md",
+      "bytes": 3873,
+      "sha256": "355ccba3424e6cafd271574ad2f80e1ecdefbc1c605d96fef26cab8e9628e8fa"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/additions/do_catkin_make.sh",
+      "bytes": 97,
+      "sha256": "e54fdfca4658f34d6826ffd39c7c1c5e66040e58a74d04c18407ba9ce72e1f1c"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/additions/downloads.sh",
+      "bytes": 156,
+      "sha256": "81c5b52c15ddfab994b9b316f6e6f3e1c782713007556a1a8f29146e97106070"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/additions/install_ros_melodic_ubuntu_17_18.sh",
+      "bytes": 1117,
+      "sha256": "828050640bd94d4d4143afba35b7f3e85cc70d583f6bfa8151d6fb3e99bab8c1"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/additions/install_ros_noetic_ubuntu_20.sh",
+      "bytes": 1002,
+      "sha256": "24839295fa7e8e958cbe91186ff5cca2e508400ad56c0bea00304e1744365231"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/additions/make_package_cpp.sh",
+      "bytes": 384,
+      "sha256": "3d2d0fde38b1a5e3db0dac954ab789536e0b2b2e32ed4b6675dbb172cca82658"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/launch_midas_cpp.sh",
+      "bytes": 185,
+      "sha256": "b0c90e7179b1044271a5e2d9b77b420645f387b3bc212fabcc75174303be715f"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/midas_cpp/CMakeLists.txt",
+      "bytes": 6599,
+      "sha256": "6e3a770b02bf4c1fefd4e6190c4834e0cb1991cab8841640cce32951ae8b49b7"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/midas_cpp/launch/midas_cpp.launch",
+      "bytes": 891,
+      "sha256": "53a02297f3c87c679c882d5ff832b2f3c652d227fc5113948c8c3acf8010b426"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/midas_cpp/package.xml",
+      "bytes": 3191,
+      "sha256": "546164bf47c3bf2aceed52b7940df97cd3cbe22113d1087b95649d491faf48b3"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/ros/midas_cpp/src/main.cpp",
+      "bytes": 9891,
+      "sha256": "38e0800a0ed61f55268ea12d15909db166c29616a5b46ab656873032efa42fe3"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/run.py",
+      "bytes": 4496,
+      "sha256": "54120bffe0891766ba8ab36fc3204b3ad24751eb86b9737a20ecaa3fd9941d7e"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/tf/README.md",
+      "bytes": 3795,
+      "sha256": "9bd2a5d6b4f96b3b5ac6160e7432b5c71908142bb4d386a21ccf6e1f6925696f"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/tf/input/.placeholder",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/tf/make_onnx_model.py",
+      "bytes": 2879,
+      "sha256": "8a5ce191db28fe316651da6af403011e0b4400ce9c486b085ad7bc5a53c0a631"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/tf/output/.placeholder",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/tf/run_onnx.py",
+      "bytes": 3215,
+      "sha256": "5af900bfb2b8f6d93acb7d6edd64caf9a00544e61fe26bcd9b1c28108daf7182"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/tf/run_pb.py",
+      "bytes": 4094,
+      "sha256": "e744d6c90563ba16ba92673dac0dd332245fe4125f1d8bb50dba80199968e377"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/tf/transforms.py",
+      "bytes": 7869,
+      "sha256": "ab3d20b77065606332e6a9bac96a44f60f22923a7848d62b57b5690959a9883d"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/tf/utils.py",
+      "bytes": 2096,
+      "sha256": "ba997e313dadd54954cff3f7e9944abae2e1de46d1e7067c3f9e0078ae894e0f"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/MiDaS-v2_1/utils.py",
+      "bytes": 4583,
+      "sha256": "8e4cbe25022e08aa9fdef246ae4217aceb51f74d512715439f034c6371d0ba97"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/.gitignore",
+      "bytes": 1248,
+      "sha256": "f467fada89bf02ca4ed01d4e0975c4356d102d6f350bcc2fdf10703ec2bafe8e"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/BENCHMARK.md",
+      "bytes": 19144,
+      "sha256": "55b82865320ac0b25de1a22ca5938f3502b79582d4a60791ac5b5eea6538c0f6"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/LICENSE",
+      "bytes": 11343,
+      "sha256": "7187e79d7b369ce3b3b815b3bec8727dbbf79c87e8e37fea10ba5709d9a93902"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/README.md",
+      "bytes": 22111,
+      "sha256": "8f01f6a8b79bdf897f6b574ce8168ae40953476e269ac267515c901747cd1ba6"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/caffe2_benchmark.py",
+      "bytes": 2428,
+      "sha256": "3b297a918f1bf6e62e7094400c3b47fa0e5bf73adadd14e18fdb0cfd7d44664f"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/caffe2_validate.py",
+      "bytes": 5993,
+      "sha256": "fc05adde7c0ed184547619c81cba2e0cf7496bd74a13d74bf7d5bb88473b0950"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/data/__init__.py",
+      "bytes": 89,
+      "sha256": "fbdbf480f9f3dc9e9c3c5930dc6b6ec962a7852eaa2df7de1d553bd897cf683c"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/data/dataset.py",
+      "bytes": 3000,
+      "sha256": "58f101121e750b4f607f970a2a714dc614d79863f9106e83485f398423b62b1b"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/data/loader.py",
+      "bytes": 3113,
+      "sha256": "84cc04958abafa0acb60ad05b210344bb06de4ffc8d73a4ca234c2105c08766a"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/data/tf_preprocessing.py",
+      "bytes": 9187,
+      "sha256": "44ee92976f6a9a1c9515d85c945e850848ca07d1383049b7205a603d889cd201"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/data/transforms.py",
+      "bytes": 4760,
+      "sha256": "877f3ea601ce871d448010b5eb98b5180ae512db8c993d311e84a85e4eab793b"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/__init__.py",
+      "bytes": 206,
+      "sha256": "1dcde27254dc19485d90b2f8d2a6ccd6aef1036e1a742b2158fa5868faa75309"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/activations/__init__.py",
+      "bytes": 4170,
+      "sha256": "2b1cadb7eb1f107a68faae1f3789d7a958cc2e887f3a2d19dcb190e2def1500d"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/activations/activations.py",
+      "bytes": 2690,
+      "sha256": "9b42a5284658e723530decbead9b8d0e600e34cb14e78edcc19c76e57f1d01e5"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/activations/activations_jit.py",
+      "bytes": 2294,
+      "sha256": "a8636690d86c7b2ae6f2b1bc558bf5ed6c7b4a0b879eaa78f2a7f0a00cba0372"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/activations/activations_me.py",
+      "bytes": 4549,
+      "sha256": "1f360fb8789d688abf2f82bd3d501320bbf0417e70c2e7140f0e87d90acc093b"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/config.py",
+      "bytes": 3350,
+      "sha256": "c999834ac28916f3e0e2b591733cf19f3a4e70308c35c67660c50d021a4b8fd3"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/conv2d_layers.py",
+      "bytes": 12093,
+      "sha256": "1ae6bc2eab9dae1822ab0cdb57342f390436ebd3ca5ae053851d4f9ab89e761c"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/efficientnet_builder.py",
+      "bytes": 26514,
+      "sha256": "476cfea0edb379d0a1ecbe911556165f6bd8c59b159251326bb122b881b6b04c"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/gen_efficientnet.py",
+      "bytes": 59925,
+      "sha256": "353ace0689f526e70e5941f4c9590b6dd88e1d063ed139f4d5a6e6c508c5e859"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/helpers.py",
+      "bytes": 2833,
+      "sha256": "15565ffca282912b3bf9af1ba5b753e8569dd64038566297f8167ab4e8904f16"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/mobilenetv3.py",
+      "bytes": 15009,
+      "sha256": "a5cf20e385c6ff7e1935edac5ae2a6e965174653d475b1dec4601cabd5b1b289"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/model_factory.py",
+      "bytes": 707,
+      "sha256": "e8666720ca6c4500126486abccd29bae359aafac4dc6b23a428737716d3111e8"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/geffnet/version.py",
+      "bytes": 22,
+      "sha256": "6538a9347eb0c82eaab2ad47fe566cbc9c95aee51ad67bb7cb8132b0c764a6e5"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/hubconf.py",
+      "bytes": 2730,
+      "sha256": "981e882e6c146ef2335e7b57d4f4c3168ad3bb32a59c40a2a2d7f363c6219de6"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/onnx_export.py",
+      "bytes": 5821,
+      "sha256": "c6d04afca8f7de81a1bc21d504ff8d7aedd857f994ae35d0effc2756d0fe5108"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/onnx_optimize.py",
+      "bytes": 2932,
+      "sha256": "e1fceee3de4f735b46243cbfaf5a87fe8f281e46c83d2ffb110a21a717cc6420"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/onnx_to_caffe.py",
+      "bytes": 843,
+      "sha256": "a00d7e2e145c8d4467709c3b354f5eeb3fc75536c38125d8f455b2b7e69ae2b5"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/onnx_validate.py",
+      "bytes": 4905,
+      "sha256": "39d669f0b4f239d66da2abec05e156aeeaca749d670dc60da3c6978b7573cc9c"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/requirements.txt",
+      "bytes": 32,
+      "sha256": "ea4e7480e49689aaef03e1c9d70c22a3a2390e4b09bed6fef385e5390e17b950"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/setup.py",
+      "bytes": 1737,
+      "sha256": "2f4594aa21c9bfa75bcc77800651d7c9142f48368c1069635818c76181d2290c"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/utils.py",
+      "bytes": 1297,
+      "sha256": "d67ab1a1c971c2d103d9d400a3d143b46735d0425a1d36a38bf266f647add0c2"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/work_dirs/paper_dependencies/gen-efficientnet-pytorch/validate.py",
+      "bytes": 6632,
+      "sha256": "b3db3dd58a35b9124f1c5b4d34eaf8d5fef9cca066fa7936702a2951d6ab9234"
+    }
+  ],
+  "dependency_revisions": {
+    "MiDaS-v2_1": "94afff70fe0873c3af70355e5388e4d482bfc807",
+    "gen-efficientnet-pytorch": "771ce082b2ce6d033f55b3d47c1f77389ad3c180"
+  },
+  "seed_inputs": [
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/latest.pt",
+      "bytes": 67200316,
+      "sha256": "92565d186cb4448a71793597dea930a2faa77c0205093c892e8443d491193f1a"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s0/config.toml",
+      "bytes": 1681,
+      "sha256": "e2f127e061e8ca7fbb32b4e7e1e1e01d13c4cb460983f36f71c04e92b8d743ff"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s1/latest.pt",
+      "bytes": 67200316,
+      "sha256": "6ced376155e5046623d9aa9eac4f236c67b522620cf27d88f64c9671bd3d75e0"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s1/config.toml",
+      "bytes": 1681,
+      "sha256": "a4de16d2d26971b00c92b6621b989d1615d314278aff1390c36e78f6f968255b"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s2/latest.pt",
+      "bytes": 67200316,
+      "sha256": "11ff0fc3c53a287e409cb28647d7042feab8b2c42eab02821a803a204dc46440"
+    },
+    {
+      "path": "work_dirs/v11-longclip-spread-s2/config.toml",
+      "bytes": 1681,
+      "sha256": "03beb5b5f4a36ea310faaa027c7e355967e716a88a467a4b340aa397a9da7448"
+    }
+  ],
+  "parent": {
+    "path": "work_dirs/v10-longclip/latest.pt",
+    "bytes": 67200188,
+    "sha256": "6318b6fc2effaa9301b373fe59347f709aaea17fbb56dcecf771302bf4255eeb"
+  },
+  "environment": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "timing": {
+    "batch": 1,
+    "precision": "FP32 eager TF32 off",
+    "torch_threads": 2,
+    "opencv_threads": 1,
+    "warmup_clips": 1,
+    "repeats": 5,
+    "frames": 256,
+    "selection": "first complete L256 per development sequence",
+    "scope": "warm-cache PNG file to CPU depth; model load/GT/flow/scoring/output saving excluded"
+  }
+}

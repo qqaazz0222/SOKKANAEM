@@ -1,7 +1,125 @@
 # PROGRESS
 
+2026-09-08: [깊이 품질 고도화 1·2단계](paper/QUALITY_IMPROVEMENT_20260908.md).
+동결 v11 + 2,634파라미터 제한형/경계 국소 보정기 구현, 총 4개 후보 2,400 step 학습,
+개발 16클립에서 기존 D1·교사 후보와 동일 조건 비교. 국소 λ=0.5의 경계 F1은
+0.3387→0.3581이지만 overshoot 악화로 채택 보류. 관련 테스트 39개 통과.
+원본 체크포인트와 논문 final은 유지. 다음 우선순위는 경계 보정 안전성이다.
+
+2026-09-08: [모델 중심 개정](paper/MODEL_FOCUS.md). 제목/초록/서론/방법/결론 재편,
+동일 가중치·마스크 ablation 7행 복원. 새 학습·추론·테스트 선택은 없으며 기존 final은 변경하지 않음.
+
 작업 상태 추적용. 실험 수치는 [REPORT.md](REPORT.md), 아이디어 배경은 [IDEA.md](IDEA.md) 참조.
 로드맵 4단계는 IDEA.md §7 기준.
+
+## 논문화 후속 작업 — 통합 검토 원고 (2026-09-07)
+
+R3 후속: [최신 draft.md](paper/draft.md)를 LaTeX와 동기화하고 구조/정확도/비용/scale
+벡터 그림 4종 및 기존 상태 진단 PNG를 통합했다. 저장된 최종 점수만으로 all-8 scale
+통계를 사후 집계했다. [40항목 대응표](paper/self-revision/r3/revision-status.md)와
+정정/VDA 감사/재현 부록을 추가했으며, 아래 183개 테스트 기록은 이 보강 전의 기록이다.
+R3 검증은 CPU **190 passed / 6 skipped**, CUDA **6 passed**, 기존 freeze **7,608쌍 통과**다.
+
+기기 정보 후속 정정: 사용자가 Nano Developer Kit B01 및 5W/10W 측정을 확인했다.
+`measures/nano-b01-5w.log`, `nano-b01-10w.log`를 찾아 [감사 기록](paper/submission/EDGE_LEGACY_AUDIT.md)에
+정리했다. 엣지 실측이 전혀 없다는 이전 설명을 철회한다. 과거 합성 활성률·캐시 실측은 존재하나,
+고정 가중치/코드 연결과 새 실제 영상 경로의 정확도·end-to-end 검증은 여전히 남아 있다.
+
+[현재 상태](paper/CLOSEOUT.md), [영문 PDF](paper/submission/manuscript.pdf),
+[최종 평가](paper/FINAL_EVALUATION.md), [재현 안내](paper/submission/README.md).
+이전 단계의 “최종 테스트 미실행/PDF 미검증/원고 통합 미실행”은 당시 기록이며 현재 상태가 아니다.
+
+- 4×256프레임 개발 진단 완료: 후속 keyframe 32곳의 국소 결손 0, dense-history 차이는 잔존.
+- 조건·해시 봉인 후 8개 모델로 최종 L256 13클립 및 L8 462클립 전수 평가 완료, 새 학습/튜닝 없음.
+- L256 clip scale–shift AbsRel: K30 0.1869, dense carry 0.1837, MiDaS Small 0.1849.
+- MDPI 공식 클래스 기반 영문 검토 원고·이론 부록·표·그림·저자 확인란·로컬 재현 묶음 작성.
+- CPU 183 passed/6 CUDA skipped, CUDA 6 passed; 기존 freeze 7,608개 file/hash 쌍 보존 확인.
+- Pi 4/미확정 Jetson용 비공개 측정 묶음 준비, 데스크톱 CPU smoke만 확인. 기기 접속 정보 대기.
+
+**투고 준비 전체 완료 아님.** 저자는 개인/연구비/COI 정보를 나중에 입력하기로 했다.
+인간의 수학·신규성 검토, 공동저자 승인, 현행 정책·재배포 권리 확인이 남아 있다.
+새로운 성능 개선·엣지 실측·공개 업로드·외부 투고는 수행하지 않았다.
+
+## 논문화 준비 12번 완료 (2026-09-06)
+
+고정 v11 구현에 맞춘 [수학적 분석·증명](paper/THEORY_12.md)과
+[영문 LaTeX 이론 절](paper/theory12.tex)을 작성했다. 신규 학습·모델 변경·실제 영상 재평가·
+최종 test 추론은 하지 않았다. 전체 원고 통합과 13~15번은 이번 작업 범위가 아니다.
+
+| 항목 | 완료 내용 | 해석 제한 |
+|---|---|---|
+| Skip 오차 | binary update/copy 항등식, 구현/ZOH 차이, 공통 입력 SSM의 결손 전파식과 기하급수 상한 | 단일 SSM 수축을 전체 모델 수축으로 확대하지 않음 |
+| Cache·출력 | 첫 block의 조건부 age·sqrt(tau) 상한, 전체 모델 perturbation 식, no-fit AbsRel 연결 | 전역 Lipschitz 상수·작은 실용 오차를 인증한 것이 아님 |
+| Refresh | 같은 입력 상태 기준 국소 결손 제거, K주기의 조건부 누적 오차 상한 | keyframe은 state reset/dense-history 복원이 아님 |
+| 고정 비용 | Amdahl형 가속 손익분기, keyframe/fallback 합집합, 조건부 오차–시간 K 범위 | 1.44×는 입력 비용 고정 후 나머지 profile 비용을 0으로 한 이상화이며 실측 가속이 아님 |
+| 반례 | 입력 변화 0에서 dense-state 오차 발생, 공간 문맥 생략, 내부 수축만으로 전체 수축 불충분 | tau 하나로 정확도나 출력 동등성을 보장할 수 없음 |
+
+추가 검증 27개 통과. CPU 전체 테스트 174 passed/6 CUDA skipped, CUDA scan 6 passed.
+합성 100개×128step×9좌표에서 오차 항등식 잔차 최대 1.45e−15 미만, 부등식 위반 0.
+이는 해석적 증명의 보조 수치 검증이며 실제 데이터의 전역 오차 인증이 아니다.
+고정 v11 state 구조 12 MiB와 기존 profile 산술을 재확인했다. 기존 freeze 7,608개 file/hash
+쌍은 보존됐고 분석 입력·산출물 해시는 `work_dirs/paper_theory_12/artifacts.json`에 기록했다.
+환경에 TeX 엔진이 없어 LaTeX의 링크/환경/참조 구조만 검사했으며 PDF 조판은 미검증이다.
+
+## 논문화 준비 9~11번 완료 (2026-09-06)
+
+고정 v11 및 기존 seed 1/2의 개발 검증을 완료했다. 신규 학습·최종 테스트 추론·외부 제출은
+하지 않았다. [전체 보고서·표·그림](paper/STUDY_9_11.md),
+[사전 실행 계획](paper/STUDY_9_11_PLAN.md) 참조. 아래 과거 기록과 충돌하는 효율성·상태 비용
+해석은 이번 결과를 우선하며, 서로 다른 측정 경계의 시간을 혼합하지 않는다.
+
+| 번호 | 완료한 작업 | 주요 결과 |
+|---|---|---|
+| 9 | DA2 Small/MiDaS Small 해상도 및 native K 변경 등 15개 운용점, L256 13개 전수 품질 평가 | 시간 측정 subset 4개에서 native/MiDaS256 AbsRel 0.1630/0.1637, 시간 비 1.26×. 전체 13개에서는 0.2091/0.1749로 정확도 열세가 남음 |
+| 10 | 동일 4개×256프레임×5회 파일-to-depth 시간, 별도 구성요소 계측, 메모리·state 기록 | native 7.496 ms, dense carry 7.521 ms: 희소화 시간 절감 0.33%에 그침. 별도 계측의 입력 읽기·디코딩·전처리 비중 69.4% |
+| 11 | 네 시퀀스 단위 paired bootstrap/sign-flip 및 기존 마지막 8k 단계 seed 0/1/2 평가 | 시퀀스 수가 4라 최소 양측 p=0.125. L256 scale–shift AbsRel 0.2040±0.0077(표본 SD); 독립적인 전체 학습 3회가 아님 |
+
+표의 정확도는 clip scale–shift 보정 후 값이다. 품질 허용선 내 1.26× 시간 비는 사전 지정한
+동일 1,024프레임 subset의 운용점 비교일 뿐 통계적 동등성이나 전체 장기 영상의 품질 보존을
+뜻하지 않는다. 주 표는 TUM/Bonn 균형 평균, paired 통계는 네 시퀀스 균형 평균으로 구분했다.
+작은 모델의 이점과 솎아냄의 이점은 별개이며, native의 최대 stream state 13.501 MiB도
+dense carry의 12.000 MiB보다 작지 않았다. 9~11 완료는 투고 준비 완료가 아니다.
+
+검증: CPU 전체 테스트 147 passed/6 CUDA skipped, CUDA scan 별도 6 passed.
+기존 freeze 7,608개 file/hash 쌍 보존 확인. 네 실험 단계 각각 기존 7,838개 입력 기록과
+추가 174개 기록 재검증 완료. 기존 native 7조건×13클립의 점수 동등성 및 모든 시간/비용
+계측 출력의 품질 pass 대비 SHA-256 일치를 확인했다. 생성기·입력·보고서와 12개 보조 산출물의
+해시는 `work_dirs/paper_study_9_11/report_artifacts.json`에 기록했다.
+
+## 논문화 준비 5~8번 완료 (2026-09-06)
+
+고정 v11의 개발 검증 재평가를 완료했다. 신규 학습·최종 테스트 예측·외부 제출은 하지 않았다.
+전체 결과, 재현 명령, 소스별 CSV와 동일 프레임 곡선은
+[paper/STUDY_5_8.md](paper/STUDY_5_8.md), 번호별 범위는
+[paper/WORK_PLAN.md](paper/WORK_PLAN.md) 참조. 아래 과거 기록과 충돌하는 정확도·기여 해석은
+새 평가 계약 아래의 이번 결과를 우선한다.
+
+| 번호 | 완료한 작업 | 주요 결과 |
+|---|---|---|
+| 5 | L8 488개 전수, 유효 GT 487개에서 native + DPT/DA2/Zoe common·official 7행 | common-input scale–shift AbsRel native 0.1153, DPT 0.0965: +19.6% 열세 |
+| 6 | 모든 비교군의 영역·P50/P95·실패·worst-5 목록 | native는 동적/근거리에서 특히 취약; P95 0.2692 vs DPT 0.1669 |
+| 7 | 동일 L256 13개·3,328프레임의 carry/reset/희소/refresh 비교 | K30 0.2091 vs dense carry 0.1822; carry/reset 정확도는 유사하나 TCE는 0.0294 vs 0.0331 |
+| 8 | 동일 mask의 Δ/drop/출력 재사용/캐시 분리, 부분 MAC·제한된 추론 시간 측정 | Δ는 drop보다 유리하나 단순 output_hold보다 기본 경로가 우월하다는 근거는 없음 |
+
+위 표의 비교 정확도는 clip scale–shift 후 값이다. No-fit/median 결과도 보고서에 별도로 보존했다.
+5~8 완료는 성능 목표 달성이나 투고 준비 완료가 아니다. 시간 측정은 시퀀스당 앞 64프레임의
+FP32 eager 고정-mask 경로로 검출기·I/O를 제외한다. MAC은 Linear/Conv2d만 포함한다.
+당시 남았던 9~10번 end-to-end/경량 경쟁군, 11번 시퀀스 단위 통계·학습 seed 검증은
+위 9~11번 항목에서 후속 완료했다.
+
+검증: CPU 전체 테스트 134 passed/6 CUDA skipped, CUDA scan 별도 6 passed.
+기존 freeze 7,608개 file/hash 쌍 보존 확인. 세 실험 단계 각각 7,838개 입력 기록 재검증 완료.
+보고서 생성기는 전체 manifest/동일 모델 집합/영역 픽셀 분할/벤치마크 창/결과 해시를 검사하며,
+`work_dirs/paper_study_5_8/report_artifacts.json`에 생성기·입력·산출물 해시를 남긴다.
+
+## 논문화 준비 1~4번 (2026-09-06)
+
+기준 v11 가중치/코드/설정 해시와 v8부터의 계보를 기록하고, 기존 holdout은 개발 검증으로 재분류했다.
+새 TUM 네 시퀀스의 원본과 L8/L32/L256 목록을 봉인했다(최종 추론 없음). no-GT-fit metric 평가,
+실패 처리, 자료 보호와 provenance 기록을 추가하고 ZOH·Skip RNN·상태/출력 구분을 정정했다.
+산출물과 검증 결과는 [paper/PREPARATION.md](paper/PREPARATION.md) 참조.
+아래 과거 기록의 median=metric, 무조건 정합 불변, GT pooling=엄밀 상한 같은 해석은
+[새 평가 계약](paper/PROTOCOL.md)과 [NOVELTY.md](NOVELTY.md)의 개정 내용으로 대체한다.
 
 ## 로드맵 상태
 

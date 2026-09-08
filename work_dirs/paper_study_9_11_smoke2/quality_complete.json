@@ -1,0 +1,12 @@
+{
+  "phase": "quality",
+  "smoke": true,
+  "verified_additional_records": 174,
+  "results": [
+    {
+      "path": "work_dirs/paper_study_9_11_smoke2/quality.jsonl",
+      "bytes": 82502,
+      "sha256": "f5a20213daaa9c634c8201074aba0ce63140a6bed04606a7a6ebd0798c9f7ea7"
+    }
+  ]
+}

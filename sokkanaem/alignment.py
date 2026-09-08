@@ -7,23 +7,27 @@ construction, and all three hid the same defect — a 2-DOF disparity fit can pu
 valid pixels at or below zero disparity, and `1/clamp(disp, 1e-3)` turns an
 undefined depth into a large-but-finite 1000 m error that the mean quietly
 absorbs. DA V2 Small's mean AbsRel of 0.2256 against a clip median of 0.0967 is
-that failure mode, not a property of the model (PLAN_ACC §1.2).
+consistent with that failure mode (PLAN_ACC §1.2). It reflects a model–gauge
+interaction, not a gauge-independent measure of model quality.
 
 So alignment returns the failure alongside the depth, and the caller counts it.
 
 Gauges, all fitted per clip over the clip's valid pixels:
 
     median      1 DOF in DEPTH space, s = median(gt)/median(pred). What every
-                metric SOKKANAEM number uses; the only gauge that keeps metres.
-    scale       1 DOF in disparity space, y ~= s*x. Cannot 0-cross.
+                metric-output SOKKANAEM numbers historically use. It removes
+                absolute-scale error; this is NOT uncalibrated metric accuracy.
+    none        no GT fit, only for a model whose output is metric depth.
+    scale       1 DOF in disparity space, y ~= s*x; auxiliary diagnostic.
     scaleshift  2 DOF in disparity space, y ~= s*x + b. The MiDaS protocol
                 relative-depth baselines are designed for, and the primary
-                gauge for PLAN_ACC's G1 because it is the only one that is
-                fair to both families at once.
+                gauge for relative-shape comparison in the paper protocol.
+                Its least-squares objective is not depth AbsRel.
 """
 import torch
 
-MODES = ("median", "scale", "scaleshift")
+MODES = ("none", "median", "scale", "scaleshift")
+LEGACY_MODES = ("median", "scale", "scaleshift")
 
 # Depth floor for the disparity round-trip. 1e-3 m matches what eval.py and the
 # baseline scripts already used, so numbers stay comparable to the existing
@@ -55,16 +59,17 @@ def align(pred, gt, valid, mode="scaleshift", space="depth", per_frame=False):
     one per frame answer different questions and a long-stream number quoted
     from only the first is unreadable: measured here, a STATELESS 343M
     DPT-Large loses 116% going from 8-frame to 256-frame clips under the
-    clip-wide fit. It has no state to drift, so that growth is the alignment
-    window failing to cover a longer stream, not the model. The per-frame fit
-    removes exactly that term and leaves depth-shape error behind.
+    clip-wide fit. A per-frame fit removes time-varying global scale/shift,
+    which can itself be real model inconsistency. Different clip-length sets
+    also contain different frames; this comparison alone does not identify
+    recurrent drift. Both gauges and a matched-frame experiment are needed.
 
     A frame with no valid GT keeps the clip-level fit rather than becoming
     nan -- its pixels are masked out of every accuracy metric anyway, but
     t-delta and OPW are measured over all of them.
     """
     clip = _align_clip(pred, gt, valid, mode, space)
-    if not per_frame or clip is None:
+    if not per_frame or clip is None or mode == "none":
         return clip
     depth, _ = clip
     out, negs, failed = depth.clone(), [], 0
@@ -95,9 +100,10 @@ def _align_clip(pred, gt, valid, mode="scaleshift", space="depth"):
 
     info carries the fit and what it broke:
         s, b        fitted parameters (b = 0 for the 1-DOF gauges)
-        neg_frac    fraction of valid pixels the fit put at disparity <= 0
-        failed      neg_frac > 0, i.e. the returned depth is clamped fiction
-                    somewhere. G1 counts these clips; it does not average them.
+        neg_frac    fraction of nonpositive predictions (none/median), or
+                    nonpositive fitted disparities (scale/scaleshift)
+        failed      neg_frac > 0. Count these clips explicitly and retain their
+                    errors in pooled scores; never silently drop failures.
     """
     assert mode in MODES, mode
     assert space in ("depth", "disparity"), space
@@ -105,11 +111,21 @@ def _align_clip(pred, gt, valid, mode="scaleshift", space="depth"):
     if not bool(v.any()):
         return None
 
+    if not bool(torch.isfinite(pred).all()):
+        raise ValueError("non-finite prediction: cannot report a finite accuracy score")
+    if mode == "none":
+        if space != "depth":
+            raise ValueError("align=none requires metric depth, not relative disparity")
+        neg = float((pred[v] <= 0).float().mean().item())
+        return pred, {"mode": mode, "s": 1.0, "b": 0.0,
+                      "neg_frac": neg, "failed": neg > 0}
+
     if mode == "median":
         depth = pred if space == "depth" else 1.0 / pred.clamp(min=EPS)
         s = (gt[v].median() / depth[v].median().clamp(min=EPS)).item()
+        neg = float((pred[v] <= 0).float().mean().item())
         return depth * s, {"mode": mode, "s": s, "b": 0.0,
-                           "neg_frac": 0.0, "failed": False}
+                           "neg_frac": neg, "failed": neg > 0}
 
     x = pred if space == "disparity" else 1.0 / pred.clamp(min=EPS)
     y = 1.0 / gt.clamp(min=EPS)

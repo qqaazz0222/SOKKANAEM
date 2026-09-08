@@ -1,0 +1,276 @@
+{
+  "kind": "development_diagnostic",
+  "smoke": true,
+  "base": {
+    "path": "work_dirs/v11-longclip-spread-s0/latest.pt",
+    "bytes": 67200316,
+    "sha256": "92565d186cb4448a71793597dea930a2faa77c0205093c892e8443d491193f1a"
+  },
+  "sources": [
+    {
+      "path": "sokkanaem/__init__.py",
+      "bytes": 351,
+      "sha256": "ac8b62178d62b934bf708d0758623aa7b6f04bb95a8c265337e23465746e8b66"
+    },
+    {
+      "path": "scripts/eval_acc.py",
+      "bytes": 26881,
+      "sha256": "dcd4636b813fe455e340a643d0eaaeaa7fb806cd39ade65d6b7c35d447faf9fd"
+    },
+    {
+      "path": "sokkanaem/alignment.py",
+      "bytes": 9386,
+      "sha256": "4dd37cabea900d9dc51400659fb519674794625a4b1ca2fc8ff2dff794a51ce8"
+    },
+    {
+      "path": "sokkanaem/data.py",
+      "bytes": 19420,
+      "sha256": "5acdd72fc89a981ad939b4fcc33e90fef3cb306d6000df4091db26dbe99926ea"
+    },
+    {
+      "path": "sokkanaem/metrics.py",
+      "bytes": 13255,
+      "sha256": "5efc9b4dca4bc9bda99da386b06cf9fe2bd0fd9d5dcdff5b20c9e972bc79ec9d"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    },
+    {
+      "path": "sokkanaem/protocol.py",
+      "bytes": 3129,
+      "sha256": "75faa10ba741e6dae1fd8362aaa6648574e3e6f4abcb1c3b2ec9c062f35e3d2e"
+    },
+    {
+      "path": "sokkanaem/model.py",
+      "bytes": 37170,
+      "sha256": "104ac2b43c1fc80df9b9f2f430ff99c447e5a73481e066ed2b6597a10d8648f5"
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "bytes": 12181,
+      "sha256": "5f4b95ecdfd0c1a929d6e44c00a2d451620949fc43de6fca2a209079ef0dc6a5"
+    },
+    {
+      "path": "sokkanaem/ssm.py",
+      "bytes": 7846,
+      "sha256": "e1ec51be51ece9aa88b22e822b3af4c2039bcfc90b4a4debab88a506e90e32f8"
+    },
+    {
+      "path": "sokkanaem/scan_triton.py",
+      "bytes": 4374,
+      "sha256": "61d180111b238df636294bda36fb848de75247933796b9e3bea6acf581a2406f"
+    },
+    {
+      "path": "sokkanaem/detector.py",
+      "bytes": 4110,
+      "sha256": "b9f8414395930b3e4b4913e1e006b1d91def3850b3944b668a0573d7bfd6809d"
+    },
+    {
+      "path": "sokkanaem/gmc.py",
+      "bytes": 3722,
+      "sha256": "e53f7ea72f91dc2b215c6353b03cf6c216d05c6835a4a543803c2a35f1678ec8"
+    },
+    {
+      "path": "paper/evaluation_protocol.json",
+      "bytes": 1915,
+      "sha256": "ad83da9cbcbd9fab770aec3b5d02174c86bcaf21fe8adacdcdce200a8b5d008a"
+    },
+    {
+      "path": "sokkanaem/study.py",
+      "bytes": 10657,
+      "sha256": "8c486933fd88490676a16988a8c305e433419f7bcee429f9fd88168add80721a"
+    },
+    {
+      "path": "scripts/paper_study.py",
+      "bytes": 12995,
+      "sha256": "514a20b3487822dc0a8cb5cae51e834a8dab9ed8a2862eeb0d85f5a7b43d5fbf"
+    },
+    {
+      "path": "paper/WORK_PLAN.md",
+      "bytes": 3802,
+      "sha256": "8f181acf0ed52919a51c27f02b3edda65331c5e5e6abd5cfd850e51fcd6c456f"
+    },
+    {
+      "path": "paper/freeze/baseline.json",
+      "bytes": 22077,
+      "sha256": "48f36cd9c2590c42bebe066f975d031c026f0f2f0eb141512204428ce66b3662"
+    }
+  ],
+  "manifests": [
+    {
+      "path": "manifests/acc_real_L8.json",
+      "bytes": 923628,
+      "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+    },
+    {
+      "path": "manifests/acc_real_L256.json",
+      "bytes": 751921,
+      "sha256": "991af585f91fc2a90c8f87637002aaef325b26d9aa06df2ad626c4feebe12eed"
+    }
+  ],
+  "data_inventory": {
+    "path": "work_dirs/paper_study_5_8_smoke/data_files.json",
+    "bytes": 1832050,
+    "sha256": "f8dc680581342555691c72d147ed2bc41539724ead96154c6e97dfa19c77d9a1"
+  },
+  "baselines": {
+    "dpt": {
+      "id": "Intel/dpt-large",
+      "revision": "bc15f29aa3a80d532f2ed650b5e16ac48d8958f9",
+      "snapshot": "/home/hyunsu/.cache/huggingface/hub/models--Intel--dpt-large/snapshots/bc15f29aa3a80d532f2ed650b5e16ac48d8958f9",
+      "future_frames": false,
+      "files": [
+        {
+          "path": "/home/hyunsu/.cache/huggingface/hub/models--Intel--dpt-large/snapshots/bc15f29aa3a80d532f2ed650b5e16ac48d8958f9/config.json",
+          "bytes": 942,
+          "sha256": "93aa698ce1f8e886160f760677fdc2c8c956da072735c44cbe1244d78e41c98e"
+        },
+        {
+          "path": "/home/hyunsu/.cache/huggingface/hub/models--Intel--dpt-large/snapshots/bc15f29aa3a80d532f2ed650b5e16ac48d8958f9/model.safetensors",
+          "bytes": 1367456044,
+          "sha256": "c173e7fd575c4d6c2164621063fed3a0e7e2eb6adbfb7c1845b364bc0fed9ce8"
+        },
+        {
+          "path": "/home/hyunsu/.cache/huggingface/hub/models--Intel--dpt-large/snapshots/bc15f29aa3a80d532f2ed650b5e16ac48d8958f9/preprocessor_config.json",
+          "bytes": 285,
+          "sha256": "42e2f4e243da22ec0090fc525a6774dfc641bdd95be9b02e1c07aa97fdd6d8fa"
+        }
+      ]
+    },
+    "da2": {
+      "id": "depth-anything/Depth-Anything-V2-Small-hf",
+      "revision": "5426e4f0f36572d16453bbda7a8389317b1bef99",
+      "snapshot": "/home/hyunsu/.cache/huggingface/hub/models--depth-anything--Depth-Anything-V2-Small-hf/snapshots/5426e4f0f36572d16453bbda7a8389317b1bef99",
+      "future_frames": false,
+      "files": [
+        {
+          "path": "/home/hyunsu/.cache/huggingface/hub/models--depth-anything--Depth-Anything-V2-Small-hf/snapshots/5426e4f0f36572d16453bbda7a8389317b1bef99/config.json",
+          "bytes": 950,
+          "sha256": "c56698d3643dde1f83ea2212759e6b31a22b8f827246a36dd007ee8a22b3ff75"
+        },
+        {
+          "path": "/home/hyunsu/.cache/huggingface/hub/models--depth-anything--Depth-Anything-V2-Small-hf/snapshots/5426e4f0f36572d16453bbda7a8389317b1bef99/model.safetensors",
+          "bytes": 99173660,
+          "sha256": "3152477ce0d8d6978d76b995120de97cb5b928701fd0f817769f59e249a16b70"
+        },
+        {
+          "path": "/home/hyunsu/.cache/huggingface/hub/models--depth-anything--Depth-Anything-V2-Small-hf/snapshots/5426e4f0f36572d16453bbda7a8389317b1bef99/preprocessor_config.json",
+          "bytes": 775,
+          "sha256": "d41175c0d889477ca8fc67191e540faef14baf6275157b3fdecf78469e6bbf84"
+        }
+      ]
+    },
+    "zoe": {
+      "id": "Intel/zoedepth-nyu-kitti",
+      "revision": "f364d4c7936e91f465abba182208dd68142bf0ca",
+      "snapshot": "/home/hyunsu/.cache/huggingface/hub/models--Intel--zoedepth-nyu-kitti/snapshots/f364d4c7936e91f465abba182208dd68142bf0ca",
+      "future_frames": false,
+      "files": [
+        {
+          "path": "/home/hyunsu/.cache/huggingface/hub/models--Intel--zoedepth-nyu-kitti/snapshots/f364d4c7936e91f465abba182208dd68142bf0ca/config.json",
+          "bytes": 2225,
+          "sha256": "58494c160c520023c4d5bdeebb3b2d035e37e48cc81225580f49fcb06e175913"
+        },
+        {
+          "path": "/home/hyunsu/.cache/huggingface/hub/models--Intel--zoedepth-nyu-kitti/snapshots/f364d4c7936e91f465abba182208dd68142bf0ca/model.safetensors",
+          "bytes": 1380374404,
+          "sha256": "c5494fa0938f18d71e215e245472470c3aefebd7b434abd89750e5ae4008e2dc"
+        },
+        {
+          "path": "/home/hyunsu/.cache/huggingface/hub/models--Intel--zoedepth-nyu-kitti/snapshots/f364d4c7936e91f465abba182208dd68142bf0ca/preprocessor_config.json",
+          "bytes": 723,
+          "sha256": "0b64d8edc980d7b7abb819085650c43da8b8183acbd4336ab5a9e0e9caf4648e"
+        }
+      ]
+    }
+  },
+  "long_arms": {
+    "sparse_k30": {
+      "keyframe_every": 30
+    },
+    "dense_carry": {
+      "dense": true
+    },
+    "dense_reset": {
+      "dense": true,
+      "reset": true
+    },
+    "sparse_k5": {
+      "keyframe_every": 5
+    },
+    "sparse_k10": {
+      "keyframe_every": 10
+    },
+    "sparse_k60": {
+      "keyframe_every": 60
+    },
+    "delta_sp": {
+      "forced": true,
+      "spatial_cache": true,
+      "temporal_cache": false
+    },
+    "drop_sp": {
+      "forced": true,
+      "spatial_cache": true,
+      "temporal_cache": false,
+      "gate_mode": "drop"
+    },
+    "delta_no_sp": {
+      "forced": true,
+      "spatial_cache": false,
+      "temporal_cache": false
+    },
+    "drop_no_sp": {
+      "forced": true,
+      "spatial_cache": false,
+      "temporal_cache": false,
+      "gate_mode": "drop"
+    },
+    "temporal_cache_only": {
+      "forced": true,
+      "spatial_cache": false,
+      "temporal_cache": true
+    },
+    "both_cache_replay": {
+      "forced": true,
+      "spatial_cache": true,
+      "temporal_cache": true
+    },
+    "output_hold": {
+      "forced": true,
+      "output_hold": true,
+      "spatial_cache": false,
+      "temporal_cache": false
+    }
+  },
+  "common_input": "frozen 256 RGB -> processor requested 256; record actual grid",
+  "official_input": "original-resolution scoring ROI -> official processor; scoring at 256",
+  "flow": {
+    "path": "/home/hyunsu/.cache/torch/hub/checkpoints/raft_small_C_T_V2-01064c6d.pth",
+    "bytes": 4006189,
+    "sha256": "01064c6dba73b0fc9fc8edf772248560a00a3acfd62ac6677e9eeebad9680e27"
+  },
+  "precision": "FP32, eager, TF32 off",
+  "environment": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "device": "NVIDIA GeForce RTX 4090",
+  "training_performed": false,
+  "final_test_used": false,
+  "bench": {
+    "frames": 64,
+    "warmups": 1,
+    "repeats": 3,
+    "selection": "earliest L256 clip of each development sequence, same masks and frames"
+  }
+}

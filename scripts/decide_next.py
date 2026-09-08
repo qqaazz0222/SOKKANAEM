@@ -45,6 +45,19 @@ def main():
           f"grad {grad:.4f} (base {BASE['grad_ratio']:.4f}, Q0 {Q0['grad_ratio']:.4f})  "
           f"F1 {f1:.4f}")
 
+    if grad > 1.0:
+        # PLAN §3.5's third revision, which this rule failed to encode: a
+        # gradient ratio above the ground truth's own is oversharpening, not
+        # sharpness. The 60k distillation arm read 1.80 with flat TV 0.16 and
+        # overshoot 0.76, and the branch below would have called that progress
+        # and spent another 30 GPU-hours widening it.
+        branch, why = None, (
+            f"grad_ratio {grad:.3f} is ABOVE the ground truth's -- the arm is "
+            f"oversharpened, not sharp (read flat TV and overshoot with it). "
+            f"No branch: lower the gradient-pushing weights or add the "
+            f"overshoot penalty before spending more")
+        print(f"decision: {why}")
+        return 0
     if grad >= 0.65 and absrel <= BASE["absrel"]:
         # the teacher is absorbable and capacity was the limit: spend it
         branch, why = "work_dirs/queue19.sh", (

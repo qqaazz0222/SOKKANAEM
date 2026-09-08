@@ -1,0 +1,107 @@
+{
+  "generator": {
+    "path": "/workspace/SOKKANAEM/scripts/paper_revision_figures.py",
+    "bytes": 13358,
+    "sha256": "16feb4ac307ef31f722fd7d1527bb89b33fa3aec5b75e58b88a758eea557628d"
+  },
+  "inference_performed": false,
+  "inputs": [
+    {
+      "path": "paper/submission/tables/final_quality.csv",
+      "bytes": 10612,
+      "sha256": "e1083a9427d02671b5336f4cb1fb7a63b2fd04f7e7a74523012954e5414cbb8c"
+    },
+    {
+      "path": "paper/submission/tables/revision_scale_summary.csv",
+      "bytes": 7282,
+      "sha256": "c174eafa6218a11090dcf5736df78b7a70ab0c59c57b24e8c15b80a5c0561d2f"
+    },
+    {
+      "path": "paper/tables/study9_operating_points.csv",
+      "bytes": 3860,
+      "sha256": "caac7909cd1fcf88652a47bd26e411d4506c6a9a9bd0c5bd251ff7cb41c82498"
+    },
+    {
+      "path": "paper/submission/figures/development_state_diagnostic.pdf",
+      "bytes": 37537,
+      "sha256": "18f962da892ff458b49ccaca96cf336373bb3135407c6dddf3a3b6a1083e10a7"
+    },
+    {
+      "path": "work_dirs/paper_revision_r3/results.json",
+      "bytes": 4656,
+      "sha256": "ddeee80cc4af5a8e35e90b6097a58c80582d8df951b394b0bc5cb54ad4bd44ea"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "paper/submission/figures/r3_architecture.svg",
+      "bytes": 11108,
+      "sha256": "5a732f3ef60e3663c60826cc6c0547400e1e2194bea6084d344dcd9791130a04"
+    },
+    {
+      "path": "paper/submission/figures/r3_architecture.pdf",
+      "bytes": 270415,
+      "sha256": "9d852353087b568527375f62046be45d1a50bf8061813147680e545a2d8a9068"
+    },
+    {
+      "path": "paper/submission/figures/r3_architecture.png",
+      "bytes": 130235,
+      "sha256": "080822498b0848c000689684a8d33e12f5c6ebccac3a297a6bf4d672d3f3ab04"
+    },
+    {
+      "path": "paper/submission/figures/r3_accuracy.svg",
+      "bytes": 8988,
+      "sha256": "173c5399a8f67e50d543b7df7f882c04a8e69499167605253622e46fbc9db932"
+    },
+    {
+      "path": "paper/submission/figures/r3_accuracy.pdf",
+      "bytes": 65365,
+      "sha256": "2e4185aec49b7e0662f468b176f592bc7b988f7665c487c28669ba99a672982c"
+    },
+    {
+      "path": "paper/submission/figures/r3_accuracy.png",
+      "bytes": 100445,
+      "sha256": "3dd66f2f48fcb268e22bd83ca54888a90b73ff957a88702a1c01810a0d5af730"
+    },
+    {
+      "path": "paper/submission/figures/r3_cost.svg",
+      "bytes": 7987,
+      "sha256": "dd7c919609edda3f9f46a3271eee42367cb9a7517cdfa66bd883b13f966e9b7d"
+    },
+    {
+      "path": "paper/submission/figures/r3_cost.pdf",
+      "bytes": 65389,
+      "sha256": "292052bf9f27892f3d4adac75f0e9d2868519c0d2dd16ca04fb44536049d735e"
+    },
+    {
+      "path": "paper/submission/figures/r3_cost.png",
+      "bytes": 77848,
+      "sha256": "be78b606ddc7962e946647157b7f0bcf0f033df91bdbe18bff1d1841a34dd8fc"
+    },
+    {
+      "path": "paper/submission/figures/r3_scale.svg",
+      "bytes": 13401,
+      "sha256": "1fa35e9a9941073980f3c594782b81bc8ddaae43e6ce36174b894e19f6b2bc5a"
+    },
+    {
+      "path": "paper/submission/figures/r3_scale.pdf",
+      "bytes": 65883,
+      "sha256": "531d31d338da0b1f79598edf283b10c4574050dc7582af9512d952cad7f24141"
+    },
+    {
+      "path": "paper/submission/figures/r3_scale.png",
+      "bytes": 107540,
+      "sha256": "744e04c3ad93e3697b74a0f4d29af7c34019d531b48aaeac5f40c0b5150e74e1"
+    },
+    {
+      "path": "paper/submission/figures/development_state_diagnostic.png",
+      "bytes": 245130,
+      "sha256": "2c34a69ef370380cc951eb8ad914da328773626d060463f3581566414c586413"
+    }
+  ],
+  "rendering": {
+    "pymupdf": "1.26.4",
+    "png_scale": 1.5,
+    "chart_axes_start_at_zero": true
+  }
+}

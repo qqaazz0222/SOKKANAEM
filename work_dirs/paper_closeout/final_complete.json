@@ -1,0 +1,21 @@
+{
+  "final_test_used": true,
+  "training_performed": false,
+  "contract": {
+    "path": "work_dirs/paper_closeout/final_contract.json",
+    "bytes": 1648952,
+    "sha256": "5ae9f91e47e5f6df31ecf42f01096659e78b1464f06bb5381611a233758f1681"
+  },
+  "results": [
+    {
+      "path": "work_dirs/paper_closeout/final_L256.jsonl",
+      "bytes": 5041068,
+      "sha256": "4e225c53b1585a8339b8a66e3608b4e6ede5851b70a73aac2e4f8040f0394626"
+    },
+    {
+      "path": "work_dirs/paper_closeout/final_L8.jsonl",
+      "bytes": 12689600,
+      "sha256": "fa99e3a1c4b2a2445c3cce0a96be938daa29d60c0ff93e801644e73ca3d46090"
+    }
+  ]
+}

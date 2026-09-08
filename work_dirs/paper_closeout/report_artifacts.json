@@ -1,0 +1,111 @@
+{
+  "generator": {
+    "path": "/workspace/SOKKANAEM/scripts/paper_closeout_report.py",
+    "bytes": 18348,
+    "sha256": "83df799a70736b4a3944678e6e8c7a3fa0ba34cbeb94de8b5f5b6b5bfa643d4f"
+  },
+  "inputs": [
+    {
+      "path": "work_dirs/paper_closeout/final_complete.json",
+      "bytes": 621,
+      "sha256": "884acdda4be46ed0053a5ec2523554ed16c49f5755057c93cd4ce26334d63be3"
+    },
+    {
+      "path": "work_dirs/paper_closeout/theory_complete.json",
+      "bytes": 606,
+      "sha256": "46afc44a56078e744a40f112085439b128ba1e2d42c3f711c9a422081c8f31b3"
+    },
+    {
+      "path": "paper/theory12.tex",
+      "bytes": 14643,
+      "sha256": "54ade4270deeca35a81a2de3c0aa89d913161475f49a6b8dc993e04fdefc7981"
+    },
+    {
+      "path": "work_dirs/paper_tools/MDPI_template.zip",
+      "bytes": 1130428,
+      "sha256": "8746ade43f6ba8e78250ff1b95f28025ef53aa6a270f66633677d346a2699fbd"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "paper/FINAL_EVALUATION.md",
+      "bytes": 1863,
+      "sha256": "484fe18ff1d682b14c2aaeeac232dcf89082a45fda82f2be951267d23760d25d"
+    },
+    {
+      "path": "paper/submission/figures/development_state_diagnostic.pdf",
+      "bytes": 37537,
+      "sha256": "18f962da892ff458b49ccaca96cf336373bb3135407c6dddf3a3b6a1083e10a7"
+    },
+    {
+      "path": "paper/submission/generated_macros.tex",
+      "bytes": 131,
+      "sha256": "55d1c131beed2675d85cd5150ffce1c2206ff770713738f6221e7cbe367c096c"
+    },
+    {
+      "path": "paper/submission/generated_results.tex",
+      "bytes": 4884,
+      "sha256": "69e39456ce7e09e342087e5c10cd31a0ff9970573c1cb11784a50936e53e1011"
+    },
+    {
+      "path": "paper/submission/tables/development_diagnostic_frames.csv",
+      "bytes": 222790,
+      "sha256": "b2ee32b3d4c3c202006d5b1fbc0bea97044308beb1f5849309edbb97592a75b2"
+    },
+    {
+      "path": "paper/submission/tables/development_diagnostic_summary.csv",
+      "bytes": 552,
+      "sha256": "fc0646566a7a6313c52d54dfa73111ec6fd57f87f9ae4038cd23ad1dcf774e7b"
+    },
+    {
+      "path": "paper/submission/tables/final_framefit.csv",
+      "bytes": 1707,
+      "sha256": "f1cbb7ced1370c9068336afd66f0b7dde5f31c204bab90ddc85bd36957d557fa"
+    },
+    {
+      "path": "paper/submission/tables/final_paired.csv",
+      "bytes": 3606,
+      "sha256": "dfcc2e027aa6a2b72d76f284674b3763d1b3e49fb119918e40004c2826d40c06"
+    },
+    {
+      "path": "paper/submission/tables/final_quality.csv",
+      "bytes": 10612,
+      "sha256": "e1083a9427d02671b5336f4cb1fb7a63b2fd04f7e7a74523012954e5414cbb8c"
+    },
+    {
+      "path": "paper/submission/tables/final_regions.csv",
+      "bytes": 37239,
+      "sha256": "34e28e64cf053db2b92275450fde9d6ac7ca9c538ab425aa8f950fa0493bcf50"
+    },
+    {
+      "path": "paper/submission/tables/final_sequences.csv",
+      "bytes": 30647,
+      "sha256": "01e8e0d5127b12e9fbe95294b5bb62f75a564f90aba6c02869f2180c44c38644"
+    },
+    {
+      "path": "paper/submission/tables/revision_scale_clips.csv",
+      "bytes": 478889,
+      "sha256": "cd18112ee6da64232b3111fdf7dbfb33ff362987297690424f2aa928149100f8"
+    },
+    {
+      "path": "paper/submission/tables/revision_scale_sequences.csv",
+      "bytes": 7821,
+      "sha256": "9f187d8374964fa45dc8febf15013b724c652d8c4fa3ba7489ea503ea5676f09"
+    },
+    {
+      "path": "paper/submission/tables/revision_scale_summary.csv",
+      "bytes": 7282,
+      "sha256": "c174eafa6218a11090dcf5736df78b7a70ab0c59c57b24e8c15b80a5c0561d2f"
+    },
+    {
+      "path": "paper/submission/template_source.json",
+      "bytes": 1895,
+      "sha256": "0ef623b5dc93b0b3163a7ed925289016e7ab901dd9598a59b07d54fbcfd67a87"
+    },
+    {
+      "path": "paper/submission/theory_appendix.tex",
+      "bytes": 12416,
+      "sha256": "4253d1c5edf218995c3cad082f478c3c3ef5d8b59bb1dead61c958445baecf0c"
+    }
+  ]
+}

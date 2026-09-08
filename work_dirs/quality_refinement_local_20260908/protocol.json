@@ -1,0 +1,48 @@
+{
+  "role": "adaptive_second_development_screen_not_final",
+  "parent": {
+    "path": "work_dirs/quality_refinement_20260908/protocol.json",
+    "bytes": 2086,
+    "sha256": "56130ca902ab5939c87ca8a9a7472ff53f1cd4be71fc9ad08b1f2b0b814e1ca6"
+  },
+  "train_cache": {
+    "path": "work_dirs/quality_refinement_20260908/train_cache.pt",
+    "bytes": 289524855,
+    "sha256": "77030ddd8d78dcbf897ac41a8334198a6af9e14ade9f844f05f01fb85f74e8c0"
+  },
+  "dev_cache": {
+    "path": "work_dirs/quality_refinement_20260908/development_cache.pt",
+    "bytes": 192992591,
+    "sha256": "7e8f98b5e1d37d4ced6350267ff38f06b75ebe269cf12d971c6bc966900f4a86"
+  },
+  "steps": 800,
+  "seed": 20260908,
+  "lr": 0.001,
+  "batch": 8,
+  "variants": {
+    "local_edge_0.5": 0.5,
+    "local_edge_2.0": 2.0
+  },
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/quality_refinement_followup.py",
+      "bytes": 5725,
+      "sha256": "7fe4dad440984be78b60ffa885107b79c5f6d0077cc2c69b0f28bc9a40b6239f"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "sokkanaem/edge_local_refiner.py",
+      "bytes": 1933,
+      "sha256": "c4bb695b05fcb82cf18aab714d126658ffd55936c1469a44ac37480529539d32"
+    },
+    {
+      "path": "sokkanaem/bounded_refiner.py",
+      "bytes": 2884,
+      "sha256": "6e27a75bafc961cbc9fa2b1936800a11fc7607f1a6ca4f56fc10f6fc88230149"
+    }
+  ]
+}

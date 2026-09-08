@@ -1,0 +1,30 @@
+{
+  "status": "sealed_not_evaluated",
+  "sequences": [
+    "rgbd_dataset_freiburg3_sitting_xyz",
+    "rgbd_dataset_freiburg3_sitting_rpy",
+    "rgbd_dataset_freiburg3_walking_xyz",
+    "rgbd_dataset_freiburg3_walking_rpy"
+  ],
+  "inventory": "paper/freeze/final_test_files.json",
+  "inventory_sha256": "84974f3e2219057b42796b6e5e74b877d763a9fef6ea390f51339c53b6812d3c",
+  "manifests": [
+    {
+      "path": "manifests/paper_test_tum_L8.json",
+      "sha256": "dc8356125f182f87c8b4503b65b7e2e9d9b9708a03831908e5ef7eab581cf6be",
+      "clips": 462
+    },
+    {
+      "path": "manifests/paper_test_tum_L32.json",
+      "sha256": "7fdbc8bd2a6d4b0bc94074d475f5d47cd0bc7070775d49b396a360b98410fe2f",
+      "clips": 114
+    },
+    {
+      "path": "manifests/paper_test_tum_L256.json",
+      "sha256": "00a3384c48b20acc60cb649cc760c77f9332bb84c0b9ffd2912df3231c39a914",
+      "clips": 13
+    }
+  ],
+  "model_inference_performed": false,
+  "pretraining_overlap": "unknown for external pretrained baselines"
+}

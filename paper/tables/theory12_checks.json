@@ -1,0 +1,77 @@
+{
+  "role": "analytic_and_synthetic_validation",
+  "training_performed": false,
+  "dataset_inference_performed": false,
+  "final_test_used": false,
+  "global_network_lipschitz_certified": false,
+  "learned_error_certificate": false,
+  "latex_pdf_compiled": false,
+  "prior_hash_records_verified": 58,
+  "environment": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "temporal_blocks": [
+    {
+      "block": "blocks.0",
+      "lambda_min": 0.5283938494827171,
+      "lambda_max": 18.089956477904302,
+      "inner": 384,
+      "state": 16
+    },
+    {
+      "block": "blocks.2",
+      "lambda_min": 0.4563010893755859,
+      "lambda_max": 21.53958503019736,
+      "inner": 384,
+      "state": 16
+    }
+  ],
+  "frozen_structure": {
+    "params": 4185872,
+    "keyframe": 30,
+    "tau_on": 0.05,
+    "patch_values": 768,
+    "first_block_input_bound_uncapped": 179.70642726402414,
+    "pixel_range_cap": 27.712812921102035,
+    "temporal_state_fp32_mib": 12.0,
+    "finite_horizon_keyframes_256": 9
+  },
+  "synthetic": {
+    "trials": 100,
+    "steps_per_trial": 128,
+    "state_coordinates": 9,
+    "maximum_identity_residual": 1.4432899320127035e-15,
+    "maximum_bound_violation": 0.0,
+    "constant_input_four_skips_error": 1.875,
+    "periodic_example": {
+      "rho": 0.8,
+      "epsilon": 0.1,
+      "period": 5,
+      "bound_after_100_refreshes": 0.3512613041408854,
+      "limiting_after_refresh": 0.3512613041408854
+    }
+  },
+  "measured_arithmetic": {
+    "input_profile_ms": 5.303725554256289,
+    "total_profile_ms": 7.638086296291627,
+    "fixed_input_fraction": 0.6943788468102677,
+    "ideal_same_profile_speedup_ceiling_if_all_other_cost_vanishes": 1.4401360361042799,
+    "sparse_main_ms": 7.496391518486689,
+    "dense_main_ms": 7.520990652687942,
+    "sparse_time_reduction_percent": 0.3270730590851287,
+    "warning": "Profile-only idealization, not measured speedup or whole-model accuracy guarantee"
+  },
+  "document_checks": {
+    "local_links_checked": true,
+    "tex_environments_and_references_checked": true,
+    "pdf_compiled": false
+  }
+}

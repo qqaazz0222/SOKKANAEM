@@ -1,0 +1,12 @@
+{
+  "phase": "latency",
+  "smoke": false,
+  "verified_additional_records": 174,
+  "results": [
+    {
+      "path": "work_dirs/paper_study_9_11/latency.jsonl",
+      "bytes": 12504409,
+      "sha256": "d590f76dee326ff7b5b573b946a2f8be41ba7791647373574bf8eab53ba69435"
+    }
+  ]
+}
