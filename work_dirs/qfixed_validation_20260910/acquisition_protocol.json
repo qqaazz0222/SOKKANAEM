@@ -1,0 +1,24 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/acquire_fixed_camera_sbm.py",
+    "bytes": 3035,
+    "sha256": "63e166ba60368e77fbc1d5696374b00d8f208378341145827d11d4acef8df1c1"
+  },
+  "url": "https://rgbd2017.na.icar.cnr.it/SBM-RGBDdataset/Shadows/Shadows.zip",
+  "expected_archive_bytes": 630619899,
+  "correction": {
+    "path": "work_dirs/qfixed_public_probe_20260910/sbm_fall01cam1_update.zip",
+    "bytes": 29792821,
+    "sha256": "edad4bd69896dc82b77031f02d69b12b7cc3f2c7a5330bc7cf1a4a8bef43b809"
+  },
+  "sequence": "fall01cam1",
+  "role": "data admission before any model predictions",
+  "candidate": {
+    "path": "paper/streaming_draft/frozen_candidate.json",
+    "bytes": 5331,
+    "sha256": "5fc6546287ffab7967bd4c4d099a4f88b67039c1525949b3e47cab4d7b0ac345"
+  },
+  "selection_reason": "Previously selected first fall event, documented ceiling camera; not model quality",
+  "independent_locations": "not established; a single event is not broad validation",
+  "no_model_training_or_predictions": true
+}

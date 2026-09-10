@@ -1,0 +1,87 @@
+{
+  "role": "reused_development_frozen_adapter_architectural_transfer_not_final",
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "adapter": {
+    "path": "work_dirs/qquality_feature_20260908/adapter.pt",
+    "bytes": 616993,
+    "sha256": "a8a02c36e1885196ebdeef74ed1c0acfbdd62a05160f27350a98816133800cc1"
+  },
+  "data": [
+    {
+      "path": "work_dirs/qstream_20260908/development_data.pt",
+      "bytes": 285277993,
+      "sha256": "788b4bddf15b2d3b19bd6f81e7c3280308e3d8b644e5b39c4cf29814c03ae7a1"
+    },
+    {
+      "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+      "bytes": 1141081851,
+      "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+    }
+  ],
+  "experiment": "nearest/bilinear feature+h warp x SSM update on/off; same weights, same original RGB-change mask; output-nearest and unwarped-SSM controls",
+  "training": "none; adapter trained without this DIS alignment, distribution shift is a limitation",
+  "state": "K2 full refresh resets h; transporting h is implemented but h is zero before each skip; not a recurrent memory contribution",
+  "globals": "CLS and raw pooled held, no depth blending or global metric delta",
+  "timing": "same synchronized GPU-resident evaluator; includes two CPU flows, all transfers, feature+h warp, SSM and decoder; no edge deployment claim",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qflow_features_study.py",
+      "bytes": 4740,
+      "sha256": "42db096ad1744d70daf449453e5243673cc5b4527ec54aa2408ed2145c217fee"
+    },
+    {
+      "path": "sokkanaem/qflow_features.py",
+      "bytes": 3552,
+      "sha256": "c08f397842e834c2404b5cb3a53d800f76fe0ae00f54fb91854574ed7b6eefaa"
+    },
+    {
+      "path": "sokkanaem/qflow.py",
+      "bytes": 5116,
+      "sha256": "734664ad90d9ab64049cf38f685c87c0a77ed0abc8214590d6a2ee8bf5c5d6a3"
+    },
+    {
+      "path": "sokkanaem/qseparated.py",
+      "bytes": 733,
+      "sha256": "1d9641764792989c66356802956c0af8f02640ef64b2699485bf0dc04224888f"
+    },
+    {
+      "path": "sokkanaem/qdelta_ssm.py",
+      "bytes": 2959,
+      "sha256": "efd2ec60e7bbaaa0c2e5ff3e6b9aa9298b49525a3026a95a520872e2991ff8ca"
+    },
+    {
+      "path": "scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "bytes": 12181,
+      "sha256": "5f4b95ecdfd0c1a929d6e44c00a2d451620949fc43de6fca2a209079ef0dc6a5"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    }
+  ]
+}

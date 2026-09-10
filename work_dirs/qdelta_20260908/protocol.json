@@ -1,0 +1,1069 @@
+{
+  "role": "adaptive_Q0_feature_prediction_development_not_final",
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "parent": {
+    "path": "work_dirs/qstream_20260908/protocol.json",
+    "bytes": 65480,
+    "sha256": "60e0c9b3cd6bf4e456246941e6ded68aea32d9b0e852c9cb36e46b65f83bd89c"
+  },
+  "train_source": {
+    "path": "work_dirs/architecture_readout_20260908/train_cache.pt",
+    "bytes": 1158096471,
+    "sha256": "12aca88d0cabe5b8f2210a5f84fc2db149348e7ddd751716ad6dfe55f5001d8b"
+  },
+  "train_selection": [
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845693.421993.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845693.422010.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845693.453700.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845693.453745.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845693.489783.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845693.489830.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845693.522084.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845693.522101.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845699.595416.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845699.596305.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845699.628631.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845699.629601.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845699.663810.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845699.663822.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845699.696113.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845699.696125.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845710.413817.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845710.413838.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845710.445824.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845710.445880.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845710.481794.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845710.481804.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845710.513650.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845710.513666.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845703.477741.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845703.477755.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845703.509995.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845703.510010.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845703.541800.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845703.541814.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845703.577765.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845703.577775.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845702.673733.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845702.673762.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845702.705735.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845702.705745.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845702.737648.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845702.737657.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845702.773644.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845702.773695.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845699.889686.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845699.889722.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845699.925749.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845699.925760.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845699.957536.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845699.957572.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845699.989671.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845699.989683.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845708.301629.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845708.301652.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845708.337612.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845708.337710.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845708.369900.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845708.369915.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845708.401883.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845708.401925.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845693.557666.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845693.557674.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845693.589792.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845693.589819.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845693.622158.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845693.622169.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845693.689929.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845693.689976.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845698.113733.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845698.113744.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845698.145605.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845698.146114.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845698.181637.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845698.181693.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845698.213981.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845698.213996.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845695.665980.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845695.666032.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845695.701693.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845695.701740.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845695.733686.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845695.733705.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845695.769679.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845695.769689.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845702.201769.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845702.201779.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845702.237691.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845702.237707.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845702.269760.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845702.269861.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845702.301761.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845702.301780.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845694.935679.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845694.935692.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845694.967669.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845694.967680.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845695.003730.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845695.003745.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845695.035689.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845695.035701.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845689.401592.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845689.401608.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845689.433744.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845689.433787.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845689.465651.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845689.465664.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845689.501840.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845689.501883.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845707.597603.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845707.597620.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845707.633748.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845707.633794.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845707.665870.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845707.665934.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845707.698455.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845707.703403.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845689.802003.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845689.802034.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845689.833757.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845689.833775.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845689.869861.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845689.869882.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845689.901825.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845689.902478.png"
+        ]
+      ]
+    },
+    {
+      "source": "tum",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845701.197714.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845701.197724.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845701.230497.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845701.230507.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845701.265852.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845701.265862.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/rgb/1341845701.297730.png",
+          "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static/depth/1341845701.297738.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263337.49657.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263337.48594.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263337.52999.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263337.51931.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263337.56345.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263337.55267.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263337.59695.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263337.58604.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263239.16419.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263239.15046.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263239.19771.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263239.18384.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263239.23126.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263239.21720.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263239.26474.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263239.25058.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263485.83128.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263485.83906.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263485.86480.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263485.87243.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263485.89832.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263485.90580.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263485.93184.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263485.93915.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box3/rgb/1548265382.88766.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box3/depth/1548265382.87655.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box3/rgb/1548265382.92120.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box3/depth/1548265382.90992.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box3/rgb/1548265382.95482.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box3/depth/1548265382.94329.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box3/rgb/1548265382.98833.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box3/depth/1548265382.97666.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box2/rgb/1548265610.72345.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box2/depth/1548265610.71935.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box2/rgb/1548265610.75699.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box2/depth/1548265610.75275.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box2/rgb/1548265610.79051.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box2/depth/1548265610.78612.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box2/rgb/1548265610.82403.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box2/depth/1548265610.81949.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263387.66650.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263387.67047.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263387.69996.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263387.70384.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263387.73348.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263387.73716.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263387.76699.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263387.77053.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_obstructing_box/rgb/1548339486.77261.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_obstructing_box/depth/1548339486.75668.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_obstructing_box/rgb/1548339486.80613.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_obstructing_box/depth/1548339486.79004.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_obstructing_box/rgb/1548339486.83955.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_obstructing_box/depth/1548339486.82341.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_obstructing_box/rgb/1548339486.87306.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_obstructing_box/depth/1548339486.85678.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box2/rgb/1548339382.87697.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box2/depth/1548339382.87614.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box2/rgb/1548339382.91049.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box2/depth/1548339382.90949.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box2/rgb/1548339382.94400.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box2/depth/1548339382.94286.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box2/rgb/1548339382.97752.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box2/depth/1548339382.97625.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box/rgb/1548265512.79225.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box/depth/1548265512.80620.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box/rgb/1548265512.82577.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box/depth/1548265512.83955.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box/rgb/1548265512.85929.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box/depth/1548265512.87290.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box/rgb/1548265512.89280.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box/depth/1548265512.90627.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/rgb/1548340303.66051.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/depth/1548340303.65314.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/rgb/1548340303.69399.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/depth/1548340303.68651.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/rgb/1548340303.72749.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/depth/1548340303.71988.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/rgb/1548340303.76101.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/depth/1548340303.75325.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263506.67770.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263506.69424.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263506.71117.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263506.72761.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263506.74469.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263506.76098.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263506.77820.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263506.79434.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263364.44157.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263364.44668.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263364.47509.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263364.48005.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263364.50885.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263364.51342.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263364.54236.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263364.54679.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box/rgb/1548339363.70651.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box/depth/1548339363.71022.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box/rgb/1548339363.74003.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box/depth/1548339363.74359.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box/rgb/1548339363.77354.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box/depth/1548339363.77695.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box/rgb/1548339363.80706.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box/depth/1548339363.81032.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/rgb/1548340309.69326.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/depth/1548340309.69271.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/rgb/1548340309.72678.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/depth/1548340309.72609.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/rgb/1548340309.76030.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/depth/1548340309.75948.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/rgb/1548340309.79386.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous/depth/1548340309.79281.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263371.00995.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263371.02008.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263371.04351.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263371.05345.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263371.07703.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263371.08682.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263371.11055.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263371.12019.png"
+        ]
+      ]
+    },
+    {
+      "source": "bonn",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263267.28410.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263267.28046.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263267.31814.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263267.31384.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263267.35178.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263267.34721.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/rgb/1548263267.38529.png",
+          "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static/depth/1548263267.38058.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/fog/frames/rgb/Camera_0/rgb_00204.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/fog/frames/depth/Camera_0/depth_00204.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/fog/frames/rgb/Camera_0/rgb_00205.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/fog/frames/depth/Camera_0/depth_00205.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/fog/frames/rgb/Camera_0/rgb_00206.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/fog/frames/depth/Camera_0/depth_00206.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/fog/frames/rgb/Camera_0/rgb_00207.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/fog/frames/depth/Camera_0/depth_00207.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/overcast/frames/rgb/Camera_0/rgb_00056.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/overcast/frames/depth/Camera_0/depth_00056.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/overcast/frames/rgb/Camera_0/rgb_00057.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/overcast/frames/depth/Camera_0/depth_00057.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/overcast/frames/rgb/Camera_0/rgb_00058.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/overcast/frames/depth/Camera_0/depth_00058.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/overcast/frames/rgb/Camera_0/rgb_00059.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/overcast/frames/depth/Camera_0/depth_00059.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene02/sunset/frames/rgb/Camera_0/rgb_00224.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene02/sunset/frames/depth/Camera_0/depth_00224.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene02/sunset/frames/rgb/Camera_0/rgb_00225.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene02/sunset/frames/depth/Camera_0/depth_00225.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene02/sunset/frames/rgb/Camera_0/rgb_00226.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene02/sunset/frames/depth/Camera_0/depth_00226.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene02/sunset/frames/rgb/Camera_0/rgb_00227.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene02/sunset/frames/depth/Camera_0/depth_00227.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/fog/frames/rgb/Camera_1/rgb_00248.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/fog/frames/depth/Camera_1/depth_00248.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/fog/frames/rgb/Camera_1/rgb_00249.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/fog/frames/depth/Camera_1/depth_00249.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/fog/frames/rgb/Camera_1/rgb_00250.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/fog/frames/depth/Camera_1/depth_00250.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/fog/frames/rgb/Camera_1/rgb_00251.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/fog/frames/depth/Camera_1/depth_00251.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_1/rgb_00392.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_1/depth_00392.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_1/rgb_00393.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_1/depth_00393.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_1/rgb_00394.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_1/depth_00394.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_1/rgb_00395.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_1/depth_00395.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/rgb/Camera_0/rgb_00168.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/depth/Camera_0/depth_00168.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/rgb/Camera_0/rgb_00169.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/depth/Camera_0/depth_00169.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/rgb/Camera_0/rgb_00170.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/depth/Camera_0/depth_00170.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/rgb/Camera_0/rgb_00171.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/depth/Camera_0/depth_00171.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/rgb/Camera_1/rgb_00200.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/depth/Camera_1/depth_00200.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/rgb/Camera_1/rgb_00201.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/depth/Camera_1/depth_00201.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/rgb/Camera_1/rgb_00202.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/depth/Camera_1/depth_00202.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/rgb/Camera_1/rgb_00203.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/morning/frames/depth/Camera_1/depth_00203.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene18/rain/frames/rgb/Camera_0/rgb_00184.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene18/rain/frames/depth/Camera_0/depth_00184.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene18/rain/frames/rgb/Camera_0/rgb_00185.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene18/rain/frames/depth/Camera_0/depth_00185.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene18/rain/frames/rgb/Camera_0/rgb_00186.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene18/rain/frames/depth/Camera_0/depth_00186.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene18/rain/frames/rgb/Camera_0/rgb_00187.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene18/rain/frames/depth/Camera_0/depth_00187.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/rgb/Camera_0/rgb_00528.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/depth/Camera_0/depth_00528.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/rgb/Camera_0/rgb_00529.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/depth/Camera_0/depth_00529.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/rgb/Camera_0/rgb_00530.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/depth/Camera_0/depth_00530.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/rgb/Camera_0/rgb_00531.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/depth/Camera_0/depth_00531.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/rgb/Camera_0/rgb_00588.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/depth/Camera_0/depth_00588.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/rgb/Camera_0/rgb_00589.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/depth/Camera_0/depth_00589.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/rgb/Camera_0/rgb_00590.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/depth/Camera_0/depth_00590.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/rgb/Camera_0/rgb_00591.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/depth/Camera_0/depth_00591.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/rgb/Camera_0/rgb_00224.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/depth/Camera_0/depth_00224.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/rgb/Camera_0/rgb_00225.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/depth/Camera_0/depth_00225.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/rgb/Camera_0/rgb_00226.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/depth/Camera_0/depth_00226.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/rgb/Camera_0/rgb_00227.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-right/frames/depth/Camera_0/depth_00227.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/rgb/Camera_0/rgb_00408.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/depth/Camera_0/depth_00408.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/rgb/Camera_0/rgb_00409.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/depth/Camera_0/depth_00409.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/rgb/Camera_0/rgb_00410.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/depth/Camera_0/depth_00410.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/rgb/Camera_0/rgb_00411.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/15-deg-right/frames/depth/Camera_0/depth_00411.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_0/rgb_00372.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_0/depth_00372.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_0/rgb_00373.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_0/depth_00373.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_0/rgb_00374.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_0/depth_00374.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_0/rgb_00375.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_0/depth_00375.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-left/frames/rgb/Camera_1/rgb_00420.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-left/frames/depth/Camera_1/depth_00420.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-left/frames/rgb/Camera_1/rgb_00421.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-left/frames/depth/Camera_1/depth_00421.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-left/frames/rgb/Camera_1/rgb_00422.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-left/frames/depth/Camera_1/depth_00422.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-left/frames/rgb/Camera_1/rgb_00423.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/30-deg-left/frames/depth/Camera_1/depth_00423.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_0/rgb_00684.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_0/depth_00684.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_0/rgb_00685.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_0/depth_00685.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_0/rgb_00686.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_0/depth_00686.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/rgb/Camera_0/rgb_00687.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene20/sunset/frames/depth/Camera_0/depth_00687.png"
+        ]
+      ]
+    },
+    {
+      "source": "vkitti2",
+      "pairs": [
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/sunset/frames/rgb/Camera_1/rgb_00352.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/sunset/frames/depth/Camera_1/depth_00352.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/sunset/frames/rgb/Camera_1/rgb_00353.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/sunset/frames/depth/Camera_1/depth_00353.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/sunset/frames/rgb/Camera_1/rgb_00354.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/sunset/frames/depth/Camera_1/depth_00354.png"
+        ],
+        [
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/sunset/frames/rgb/Camera_1/rgb_00355.jpg",
+          "/home/hyunsu/dataset_ssd/vkitti2/Scene01/sunset/frames/depth/Camera_1/depth_00355.png"
+        ]
+      ]
+    }
+  ],
+  "steps": 600,
+  "seed": 736,
+  "lr": 0.0003,
+  "train_clips": 48,
+  "train_frames": 192,
+  "objective": "mean L1 to frozen Q0 stage features + 0.1 raw pooled-feature L1; no GT losses and no decoded-depth loss",
+  "policy": "K4; anchor-relative MSE tau_on=.001/tau_off=.0005; adaptive full refresh when active > .4",
+  "training_policy": "one teacher refresh at t0, three selective predicted updates; no motion fallback during training",
+  "limits": "CLS and calibration pooled features get learned global deltas; only inactive patch tokens/SSM states are copied, not the whole output",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qdelta_study.py",
+      "bytes": 8147,
+      "sha256": "195b8a9807445ea306f1fcf0fd3cd202065eeee1237c36e20edd455b6465024c"
+    },
+    {
+      "path": "sokkanaem/qdelta_ssm.py",
+      "bytes": 2959,
+      "sha256": "efd2ec60e7bbaaa0c2e5ff3e6b9aa9298b49525a3026a95a520872e2991ff8ca"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "sokkanaem/ssm.py",
+      "bytes": 7846,
+      "sha256": "e1ec51be51ece9aa88b22e822b3af4c2039bcfc90b4a4debab88a506e90e32f8"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "sokkanaem/detector.py",
+      "bytes": 4110,
+      "sha256": "b9f8414395930b3e4b4913e1e006b1d91def3850b3944b668a0573d7bfd6809d"
+    }
+  ]
+}

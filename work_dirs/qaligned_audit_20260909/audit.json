@@ -1,0 +1,108 @@
+{
+  "role": "posthoc_training_objective_and_algebra_audit_not_independent_evaluation",
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/audit_qaligned.py",
+    "bytes": 4909,
+    "sha256": "5ffecdde091e714320b9501c13a1dfc28d42ee0d8088622b58a28eda7a385923"
+  },
+  "inputs": [
+    {
+      "path": "work_dirs/qaligned_20260909/ssm_adapter.pt",
+      "bytes": 363407,
+      "sha256": "13f539ced54245213a2adbd2e4852ce9b168f4a8854cbc0fdee2ac580c4ef4ed"
+    },
+    {
+      "path": "work_dirs/qaligned_20260909/mlp_adapter.pt",
+      "bytes": 361673,
+      "sha256": "045652a437df5d31422a184147e547f86a7f871b1953aecdd5d6ea7fce9b7831"
+    },
+    {
+      "path": "work_dirs/qaligned_20260909/training_cache.pt",
+      "bytes": 3689646017,
+      "sha256": "c35ff08d5d8dd3681083b2387ca612a434c261566c278bef310702d0d223bd10"
+    }
+  ],
+  "training_pairs": 384,
+  "matched_all_pair_mean": {
+    "aligned_no_update": {
+      "feature": 0.7184764035046101,
+      "depth": 0.025733560000693007,
+      "edge": 0.011085422712236928,
+      "flat": 0.005007252552483503,
+      "objective": 1.0581434816801143
+    },
+    "ssm": {
+      "feature": 0.7209484415749708,
+      "depth": 0.026577205167996,
+      "edge": 0.010913071456495041,
+      "flat": 0.0037094677668960685,
+      "objective": 1.0371545373178226
+    },
+    "mlp": {
+      "feature": 0.7204553704941645,
+      "depth": 0.026472524344323272,
+      "edge": 0.010931574668196239,
+      "flat": 0.003828345066779093,
+      "objective": 1.0387006402333252
+    }
+  },
+  "zero_history_core": [
+    {
+      "training_pair": 0,
+      "active_patches": 1269,
+      "output_max_abs": 2.384185791015625e-07,
+      "hidden_max_abs": 0.0,
+      "A_data_gradient_max_abs": 0.0
+    },
+    {
+      "training_pair": 48,
+      "active_patches": 1171,
+      "output_max_abs": 2.384185791015625e-07,
+      "hidden_max_abs": 0.0,
+      "A_data_gradient_max_abs": 0.0
+    },
+    {
+      "training_pair": 96,
+      "active_patches": 1203,
+      "output_max_abs": 2.384185791015625e-07,
+      "hidden_max_abs": 0.0,
+      "A_data_gradient_max_abs": 0.0
+    },
+    {
+      "training_pair": 144,
+      "active_patches": 1150,
+      "output_max_abs": 4.76837158203125e-07,
+      "hidden_max_abs": 0.0,
+      "A_data_gradient_max_abs": 0.0
+    },
+    {
+      "training_pair": 192,
+      "active_patches": 899,
+      "output_max_abs": 4.76837158203125e-07,
+      "hidden_max_abs": 0.0,
+      "A_data_gradient_max_abs": 0.0
+    },
+    {
+      "training_pair": 240,
+      "active_patches": 762,
+      "output_max_abs": 4.76837158203125e-07,
+      "hidden_max_abs": 0.0,
+      "A_data_gradient_max_abs": 0.0
+    },
+    {
+      "training_pair": 288,
+      "active_patches": 32,
+      "output_max_abs": 4.76837158203125e-07,
+      "hidden_max_abs": 0.0,
+      "A_data_gradient_max_abs": 0.0
+    },
+    {
+      "training_pair": 336,
+      "active_patches": 390,
+      "output_max_abs": 4.76837158203125e-07,
+      "hidden_max_abs": 0.0,
+      "A_data_gradient_max_abs": 0.0
+    }
+  ],
+  "note": "Different randomly sampled per-step losses are not a learning curve. These means use all same384trainingpairs. Zero-history algebra tests do not show memory benefit."
+}

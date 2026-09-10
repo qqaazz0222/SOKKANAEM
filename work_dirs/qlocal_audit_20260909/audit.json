@@ -1,0 +1,43 @@
+{
+  "role": "posthoc_GT_audit_not_runtime_mask",
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/audit_qlocal.py",
+    "bytes": 4287,
+    "sha256": "657d59a60438639a6421c5f8e7f429d82d5db6f60bda22c94d1d637b717517ad"
+  },
+  "decoder_source": {
+    "path": "/home/hyunsu/miniforge3/envs/sokkanaem/lib/python3.11/site-packages/transformers/models/depth_anything/modeling_depth_anything.py",
+    "bytes": 16126,
+    "sha256": "c01560e7a1ed75ab904fd0c86f62e4c797a7386d2664a748ac6455f180b67036"
+  },
+  "data": {
+    "L32": {
+      "skipped_pixels": 8388608,
+      "editable_pixels": 4781965,
+      "flat_pixels": 2563601,
+      "editable_flat_pixels": 1967392,
+      "flat_positive_excess_sum": 11856.480895996094,
+      "protected_positive_excess_sum": 10301.733413696289,
+      "refresh_frames": 128,
+      "protected_pixel_max_abs_change": 0.0,
+      "refresh_max_abs_change": 0.0,
+      "editable_pixel_fraction": 0.5700546503067017,
+      "editable_GTflat_fraction": 0.7674329975686544,
+      "protected_share_of_positive_excess": 0.8688693975946236
+    },
+    "L256": {
+      "skipped_pixels": 33554432,
+      "editable_pixels": 18589594,
+      "flat_pixels": 9684509,
+      "editable_flat_pixels": 7250170,
+      "flat_positive_excess_sum": 89244.65354919434,
+      "protected_positive_excess_sum": 80761.62040710449,
+      "refresh_frames": 512,
+      "protected_pixel_max_abs_change": 0.0,
+      "refresh_max_abs_change": 0.0,
+      "editable_pixel_fraction": 0.5540130734443665,
+      "editable_GTflat_fraction": 0.74863578525251,
+      "protected_share_of_positive_excess": 0.9049463154964937
+    }
+  }
+}

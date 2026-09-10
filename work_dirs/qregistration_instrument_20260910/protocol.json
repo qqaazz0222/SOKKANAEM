@@ -1,0 +1,75 @@
+{
+  "purpose": "same-modality known-shift instrument calibration only",
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/check_registration_instrument.py",
+    "bytes": 4987,
+    "sha256": "4bc05e3b32e4d1a0335db3d88ae0c213a6a5df89a5ea7945c9fd1cbc90eb40e6"
+  },
+  "inputs": [
+    {
+      "path": "work_dirs/qfixed_validation_20260910/corrected_sbm/depth/d000001.png",
+      "bytes": 185603,
+      "sha256": "ef45c580e95fa553f841d6de9d71a52ec40eb163c63524562526d56436ace1a5"
+    },
+    {
+      "path": "work_dirs/qfixed_validation_20260910/corrected_sbm/depth/d000021.png",
+      "bytes": 186895,
+      "sha256": "e4d135d70163247bcad95bb0e7b86430e7dd8200925ad609e58ec265043a4bc6"
+    },
+    {
+      "path": "work_dirs/qfixed_validation_20260910/corrected_sbm/depth/d000041.png",
+      "bytes": 185169,
+      "sha256": "3f69cd5802838aca72ecb4e49defad27cc7b0857e12574f328963fad78c8ad26"
+    },
+    {
+      "path": "work_dirs/qfixed_validation_20260910/corrected_sbm/depth/d000061.png",
+      "bytes": 183994,
+      "sha256": "8ba11d576bc326659f7ba41c05fae49c0e7a20a87d3cb0fdfc26f8e054173084"
+    },
+    {
+      "path": "work_dirs/qfixed_validation_20260910/corrected_sbm/depth/d000081.png",
+      "bytes": 187197,
+      "sha256": "0815c96200e6ebdc75936c1740d720309e4836611cb763caf022fed3d3a45087"
+    },
+    {
+      "path": "work_dirs/qfixed_validation_20260910/corrected_sbm/depth/d000101.png",
+      "bytes": 185874,
+      "sha256": "7245c0ddbeb01f168eb1e34e22a3f7c655e82c68a28a1d55e5459266cda3ed06"
+    },
+    {
+      "path": "work_dirs/qfixed_validation_20260910/corrected_sbm/depth/d000121.png",
+      "bytes": 187362,
+      "sha256": "b9d5575a409e58c6c9916be519b3f65e5df5bdf795b38556e1ba7a5cadc47485"
+    },
+    {
+      "path": "work_dirs/qfixed_validation_20260910/corrected_sbm/depth/d000141.png",
+      "bytes": 190948,
+      "sha256": "dfef8ff7f19e29e1fdadc7b679243b72e96bd4adbb082019449f5e4ebda3907a"
+    }
+  ],
+  "shifts_dy_dx": [
+    [
+      0,
+      0
+    ],
+    [
+      3,
+      -2
+    ],
+    [
+      -4,
+      4
+    ]
+  ],
+  "radius": 8,
+  "bins": 32,
+  "stride": 4,
+  "success_rule": "unique peak exactly at injected shift; flat control must be ambiguous",
+  "can_admit_rgb_depth": false,
+  "no_model_inference": true,
+  "fixed_candidate": {
+    "path": "paper/streaming_draft/frozen_candidate.json",
+    "bytes": 5331,
+    "sha256": "5fc6546287ffab7967bd4c4d099a4f88b67039c1525949b3e47cab4d7b0ac345"
+  }
+}

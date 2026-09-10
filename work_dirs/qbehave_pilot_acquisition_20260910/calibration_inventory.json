@@ -1,0 +1,670 @@
+{
+  "archive": {
+    "path": "work_dirs/qbehave_pilot_acquisition_20260910/calibs.zip",
+    "bytes": 395854758,
+    "sha256": "d5c1608fa989547c96a24fd9c82767e761d64de31f0a4fb9ddfcbe6f528c529d"
+  },
+  "crc_verified": true,
+  "members": [
+    {
+      "name": "calibs/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date07/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date07/background/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date07/background/background.ply",
+      "bytes": 62713012
+    },
+    {
+      "name": "calibs/Date07/background/t0002.000/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date07/background/t0002.000/k0.color.jpg",
+      "bytes": 271303
+    },
+    {
+      "name": "calibs/Date07/background/t0002.000/k1.color.jpg",
+      "bytes": 265950
+    },
+    {
+      "name": "calibs/Date07/background/t0002.000/k2.color.jpg",
+      "bytes": 287778
+    },
+    {
+      "name": "calibs/Date07/background/t0002.000/k3.color.jpg",
+      "bytes": 290544
+    },
+    {
+      "name": "calibs/Date07/background/t0002.000/k0.depth.png",
+      "bytes": 699750
+    },
+    {
+      "name": "calibs/Date07/background/t0002.000/k1.depth.png",
+      "bytes": 791491
+    },
+    {
+      "name": "calibs/Date07/background/t0002.000/k2.depth.png",
+      "bytes": 809844
+    },
+    {
+      "name": "calibs/Date07/background/t0002.000/k3.depth.png",
+      "bytes": 770110
+    },
+    {
+      "name": "calibs/Date07/config/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date07/config/1/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date07/config/1/config.json",
+      "bytes": 153
+    },
+    {
+      "name": "calibs/Date07/config/2/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date07/config/2/config.json",
+      "bytes": 345
+    },
+    {
+      "name": "calibs/Date07/config/0/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date07/config/0/config.json",
+      "bytes": 344
+    },
+    {
+      "name": "calibs/Date07/config/3/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date07/config/3/config.json",
+      "bytes": 352
+    },
+    {
+      "name": "calibs/Date03/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date03/config/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date03/config/1/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date03/config/1/config.json",
+      "bytes": 153
+    },
+    {
+      "name": "calibs/Date03/config/2/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date03/config/2/config.json",
+      "bytes": 350
+    },
+    {
+      "name": "calibs/Date03/config/0/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date03/config/0/config.json",
+      "bytes": 345
+    },
+    {
+      "name": "calibs/Date03/config/3/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date03/config/3/config.json",
+      "bytes": 349
+    },
+    {
+      "name": "calibs/Date03/background/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date03/background/t0002.000/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date03/background/t0002.000/k2.color.jpg",
+      "bytes": 175484
+    },
+    {
+      "name": "calibs/Date03/background/t0002.000/k3.color.jpg",
+      "bytes": 175640
+    },
+    {
+      "name": "calibs/Date03/background/t0002.000/k0.color.jpg",
+      "bytes": 178284
+    },
+    {
+      "name": "calibs/Date03/background/t0002.000/k1.color.jpg",
+      "bytes": 191370
+    },
+    {
+      "name": "calibs/Date03/background/t0002.000/k2.depth.png",
+      "bytes": 737126
+    },
+    {
+      "name": "calibs/Date03/background/t0002.000/k3.depth.png",
+      "bytes": 832273
+    },
+    {
+      "name": "calibs/Date03/background/t0002.000/k0.depth.png",
+      "bytes": 514284
+    },
+    {
+      "name": "calibs/Date03/background/t0002.000/k1.depth.png",
+      "bytes": 612513
+    },
+    {
+      "name": "calibs/Date03/background/background.ply",
+      "bytes": 43468068
+    },
+    {
+      "name": "calibs/Date04/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date04/config/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date04/config/0/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date04/config/0/config.json",
+      "bytes": 349
+    },
+    {
+      "name": "calibs/Date04/config/3/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date04/config/3/config.json",
+      "bytes": 352
+    },
+    {
+      "name": "calibs/Date04/config/1/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date04/config/1/config.json",
+      "bytes": 153
+    },
+    {
+      "name": "calibs/Date04/config/2/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date04/config/2/config.json",
+      "bytes": 354
+    },
+    {
+      "name": "calibs/Date04/background/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date04/background/t0002.000/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date04/background/t0002.000/k2.color.jpg",
+      "bytes": 265673
+    },
+    {
+      "name": "calibs/Date04/background/t0002.000/k3.color.jpg",
+      "bytes": 262740
+    },
+    {
+      "name": "calibs/Date04/background/t0002.000/k0.color.jpg",
+      "bytes": 294252
+    },
+    {
+      "name": "calibs/Date04/background/t0002.000/k1.color.jpg",
+      "bytes": 286236
+    },
+    {
+      "name": "calibs/Date04/background/t0002.000/k2.depth.png",
+      "bytes": 836152
+    },
+    {
+      "name": "calibs/Date04/background/t0002.000/k3.depth.png",
+      "bytes": 730884
+    },
+    {
+      "name": "calibs/Date04/background/t0002.000/k0.depth.png",
+      "bytes": 720145
+    },
+    {
+      "name": "calibs/Date04/background/t0002.000/k1.depth.png",
+      "bytes": 633178
+    },
+    {
+      "name": "calibs/Date04/background/background.ply",
+      "bytes": 66556372
+    },
+    {
+      "name": "calibs/Date06/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date06/config/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date06/config/0/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date06/config/0/config.json",
+      "bytes": 350
+    },
+    {
+      "name": "calibs/Date06/config/3/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date06/config/3/config.json",
+      "bytes": 350
+    },
+    {
+      "name": "calibs/Date06/config/1/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date06/config/1/config.json",
+      "bytes": 153
+    },
+    {
+      "name": "calibs/Date06/config/2/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date06/config/2/config.json",
+      "bytes": 351
+    },
+    {
+      "name": "calibs/Date06/background/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date06/background/background.ply",
+      "bytes": 66672260
+    },
+    {
+      "name": "calibs/Date06/background/t0002.000/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date06/background/t0002.000/k1.depth.png",
+      "bytes": 602344
+    },
+    {
+      "name": "calibs/Date06/background/t0002.000/k0.depth.png",
+      "bytes": 670522
+    },
+    {
+      "name": "calibs/Date06/background/t0002.000/k3.depth.png",
+      "bytes": 707173
+    },
+    {
+      "name": "calibs/Date06/background/t0002.000/k2.depth.png",
+      "bytes": 811621
+    },
+    {
+      "name": "calibs/Date06/background/t0002.000/k1.color.jpg",
+      "bytes": 239946
+    },
+    {
+      "name": "calibs/Date06/background/t0002.000/k0.color.jpg",
+      "bytes": 242057
+    },
+    {
+      "name": "calibs/Date06/background/t0002.000/k3.color.jpg",
+      "bytes": 231981
+    },
+    {
+      "name": "calibs/Date06/background/t0002.000/k2.color.jpg",
+      "bytes": 219122
+    },
+    {
+      "name": "calibs/intrinsics/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/intrinsics/1/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/intrinsics/1/pointcloud_table.npy",
+      "bytes": 25165904
+    },
+    {
+      "name": "calibs/intrinsics/1/calibs.pkl",
+      "bytes": 3929
+    },
+    {
+      "name": "calibs/intrinsics/1/calibration.json",
+      "bytes": 2636
+    },
+    {
+      "name": "calibs/intrinsics/2/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/intrinsics/2/pointcloud_table.npy",
+      "bytes": 25165904
+    },
+    {
+      "name": "calibs/intrinsics/2/calibs.pkl",
+      "bytes": 3921
+    },
+    {
+      "name": "calibs/intrinsics/2/calibration.json",
+      "bytes": 2604
+    },
+    {
+      "name": "calibs/intrinsics/0/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/intrinsics/0/pointcloud_table.npy",
+      "bytes": 25165904
+    },
+    {
+      "name": "calibs/intrinsics/0/calibs.pkl",
+      "bytes": 3908
+    },
+    {
+      "name": "calibs/intrinsics/0/calibration.json",
+      "bytes": 2602
+    },
+    {
+      "name": "calibs/intrinsics/3/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/intrinsics/3/calibs.pkl",
+      "bytes": 3938
+    },
+    {
+      "name": "calibs/intrinsics/3/calibration.json",
+      "bytes": 2645
+    },
+    {
+      "name": "calibs/intrinsics/3/pointcloud_table.npy",
+      "bytes": 25165904
+    },
+    {
+      "name": "calibs/Date01/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date01/config/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date01/config/3/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date01/config/3/config.json",
+      "bytes": 348
+    },
+    {
+      "name": "calibs/Date01/config/0/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date01/config/0/config.json",
+      "bytes": 342
+    },
+    {
+      "name": "calibs/Date01/config/2/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date01/config/2/config.json",
+      "bytes": 348
+    },
+    {
+      "name": "calibs/Date01/config/1/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date01/config/1/config.json",
+      "bytes": 153
+    },
+    {
+      "name": "calibs/Date01/background/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date01/background/t0002.000/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date01/background/t0002.000/k2.depth.png",
+      "bytes": 1049998
+    },
+    {
+      "name": "calibs/Date01/background/t0002.000/k3.depth.png",
+      "bytes": 797606
+    },
+    {
+      "name": "calibs/Date01/background/t0002.000/k0.depth.png",
+      "bytes": 610997
+    },
+    {
+      "name": "calibs/Date01/background/t0002.000/k1.depth.png",
+      "bytes": 1018072
+    },
+    {
+      "name": "calibs/Date01/background/t0002.000/k2.color.jpg",
+      "bytes": 138570
+    },
+    {
+      "name": "calibs/Date01/background/t0002.000/k3.color.jpg",
+      "bytes": 182369
+    },
+    {
+      "name": "calibs/Date01/background/t0002.000/k0.color.jpg",
+      "bytes": 193351
+    },
+    {
+      "name": "calibs/Date01/background/t0002.000/k1.color.jpg",
+      "bytes": 168288
+    },
+    {
+      "name": "calibs/Date01/background/background.ply",
+      "bytes": 60464948
+    },
+    {
+      "name": "calibs/Date05/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date05/background/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date05/background/background.ply",
+      "bytes": 66656468
+    },
+    {
+      "name": "calibs/Date05/background/t0002.000/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date05/background/t0002.000/k1.depth.png",
+      "bytes": 623012
+    },
+    {
+      "name": "calibs/Date05/background/t0002.000/k0.depth.png",
+      "bytes": 677543
+    },
+    {
+      "name": "calibs/Date05/background/t0002.000/k3.depth.png",
+      "bytes": 719352
+    },
+    {
+      "name": "calibs/Date05/background/t0002.000/k2.depth.png",
+      "bytes": 838807
+    },
+    {
+      "name": "calibs/Date05/background/t0002.000/k1.color.jpg",
+      "bytes": 220263
+    },
+    {
+      "name": "calibs/Date05/background/t0002.000/k0.color.jpg",
+      "bytes": 254028
+    },
+    {
+      "name": "calibs/Date05/background/t0002.000/k3.color.jpg",
+      "bytes": 235620
+    },
+    {
+      "name": "calibs/Date05/background/t0002.000/k2.color.jpg",
+      "bytes": 232690
+    },
+    {
+      "name": "calibs/Date05/config/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date05/config/3/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date05/config/3/config.json",
+      "bytes": 351
+    },
+    {
+      "name": "calibs/Date05/config/0/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date05/config/0/config.json",
+      "bytes": 345
+    },
+    {
+      "name": "calibs/Date05/config/2/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date05/config/2/config.json",
+      "bytes": 357
+    },
+    {
+      "name": "calibs/Date05/config/1/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date05/config/1/config.json",
+      "bytes": 153
+    },
+    {
+      "name": "calibs/Date02/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date02/background/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date02/background/t0002.000/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date02/background/t0002.000/k2.depth.png",
+      "bytes": 301089
+    },
+    {
+      "name": "calibs/Date02/background/t0002.000/k3.depth.png",
+      "bytes": 695189
+    },
+    {
+      "name": "calibs/Date02/background/t0002.000/k0.depth.png",
+      "bytes": 755405
+    },
+    {
+      "name": "calibs/Date02/background/t0002.000/k1.depth.png",
+      "bytes": 567842
+    },
+    {
+      "name": "calibs/Date02/background/t0002.000/k2.color.jpg",
+      "bytes": 251693
+    },
+    {
+      "name": "calibs/Date02/background/t0002.000/k3.color.jpg",
+      "bytes": 155993
+    },
+    {
+      "name": "calibs/Date02/background/t0002.000/k0.color.jpg",
+      "bytes": 161031
+    },
+    {
+      "name": "calibs/Date02/background/t0002.000/k1.color.jpg",
+      "bytes": 239804
+    },
+    {
+      "name": "calibs/Date02/background/background.ply",
+      "bytes": 43267876
+    },
+    {
+      "name": "calibs/Date02/config/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date02/config/0/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date02/config/0/config.json",
+      "bytes": 348
+    },
+    {
+      "name": "calibs/Date02/config/3/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date02/config/3/config.json",
+      "bytes": 348
+    },
+    {
+      "name": "calibs/Date02/config/1/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date02/config/1/config.json",
+      "bytes": 153
+    },
+    {
+      "name": "calibs/Date02/config/2/",
+      "bytes": 0
+    },
+    {
+      "name": "calibs/Date02/config/2/config.json",
+      "bytes": 348
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "scope": "only configured local TUM/Bonn roots; not exhaustive audit of every dataset or historical sample",
+  "configuration": {
+    "path": "configs/main_v8.toml",
+    "bytes": 4536,
+    "sha256": "dc4c83cbcf1fc43a8edcd9dd5dab2ad3da70c068d2d40720295474eea5bbafd0"
+  },
+  "training_script": {
+    "path": "scripts/train_q.py",
+    "bytes": 9162,
+    "sha256": "7fbe3db0ed9b7e20051dcaf3950cddbc5f891c61f57f7c1e45f38e33807bc4ed"
+  },
+  "checkpoint_config": {
+    "path": "work_dirs/q0-calib-s0/config.toml",
+    "bytes": 479,
+    "sha256": "8421e86950486a0904eb8cc5d8d1fec1b47eb9cd26ebd52b2d29446942d1cd86"
+  },
+  "inventory": [
+    {
+      "source": "tum",
+      "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_sitting_static",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "tum",
+      "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+      "role": "reused_development"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_balloon",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_balloon2",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_balloon_tracking",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_balloon_tracking2",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+      "role": "reused_development"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd3",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_kidnapping_box2",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_nonobstructing_box",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_nonobstructing_box2",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_moving_obstructing_box2",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+      "role": "reused_development"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box2",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_nonobstructing_box3",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_placing_obstructing_box",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_removing_nonobstructing_box",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_removing_nonobstructing_box2",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_removing_obstructing_box",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+      "role": "reused_development"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous",
+      "role": "training_eligible_not_independent"
+    },
+    {
+      "source": "bonn",
+      "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_synchronous2",
+      "role": "training_eligible_not_independent"
+    }
+  ],
+  "new_certified_independent_real_scenes": 0,
+  "limitation": "Current config and recorded training command establish training eligibility, not exact historical sampled frames. Other synthetic/outdoor sources not certified untouched. No new generalization run claimed."
+}

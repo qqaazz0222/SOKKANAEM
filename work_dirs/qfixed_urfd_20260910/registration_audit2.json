@@ -1,0 +1,249 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/audit_fixed_camera_registration2.py",
+    "bytes": 3983,
+    "sha256": "ba7016171606a8f763de90228552b02d472d61ad16d793e8595f7656b2491d60"
+  },
+  "protocol": {
+    "path": "work_dirs/qfixed_urfd_20260910/protocol_registration2.json",
+    "bytes": 3128,
+    "sha256": "44bd49c25a59f6324469a2a88afed30467add7933ae3734fc7489207ef9b9741"
+  },
+  "prior_admission": {
+    "path": "work_dirs/qfixed_urfd_20260910/urfd_admission.json",
+    "bytes": 96196,
+    "sha256": "c21adc1a15c7013baecbd9e9860fd39d1e37210e1888504851660c76d3d506fd"
+  },
+  "prior_registration_attempt": {
+    "path": "work_dirs/qfixed_urfd_20260910/registration_audit.json",
+    "bytes": 4938,
+    "sha256": "01a16457078912b116e7cc840b17004ed79c484a6d784b6c2073981dbd2b8b60"
+  },
+  "no_model_predictions": true,
+  "bins": 32,
+  "shift_radius_px": 8,
+  "attempt1_edge_test_failed": true,
+  "attempt2_mutual_information_failed": true,
+  "C8_no_boundary_peaks": false,
+  "C8_boundary_peak_frames": [
+    21,
+    41,
+    61,
+    81,
+    101,
+    121
+  ],
+  "C9_control_frames_off_origin": 8,
+  "C9_pass": true,
+  "C10_corrected_frames_at_origin": 0,
+  "C10_pass": false,
+  "void": true,
+  "registration_corroborated": false,
+  "C1_pass": false,
+  "C3_pass": true,
+  "C4_pass": true,
+  "admitted_as_masked_gt": false,
+  "scope": "one event, one location; alignment to released RGB only, not extrinsic calibration",
+  "sweeps": [
+    {
+      "id": 1,
+      "corrected": {
+        "evaluated_pixels": 148066,
+        "best": {
+          "dx": 4,
+          "dy": -2,
+          "nmi": 0.3083394924508672
+        },
+        "nmi_at_zero": 0.3058721162942177,
+        "best_offset_px": 4.47213595499958,
+        "boundary_peak": false
+      },
+      "control_unregistered_original": {
+        "evaluated_pixels": 161383,
+        "best": {
+          "dx": 0,
+          "dy": 6,
+          "nmi": 0.27318400760029937
+        },
+        "nmi_at_zero": 0.2697745164967593,
+        "best_offset_px": 6.0,
+        "boundary_peak": false
+      }
+    },
+    {
+      "id": 21,
+      "corrected": {
+        "evaluated_pixels": 191324,
+        "best": {
+          "dx": 6,
+          "dy": 2,
+          "nmi": 0.26357638609564243
+        },
+        "nmi_at_zero": 0.24132503550284776,
+        "best_offset_px": 6.324555320336759,
+        "boundary_peak": false
+      },
+      "control_unregistered_original": {
+        "evaluated_pixels": 215292,
+        "best": {
+          "dx": 8,
+          "dy": 7,
+          "nmi": 0.23837822116329324
+        },
+        "nmi_at_zero": 0.2286266042535254,
+        "best_offset_px": 10.63014581273465,
+        "boundary_peak": true
+      }
+    },
+    {
+      "id": 41,
+      "corrected": {
+        "evaluated_pixels": 201575,
+        "best": {
+          "dx": 5,
+          "dy": -3,
+          "nmi": 0.25427813211339684
+        },
+        "nmi_at_zero": 0.2511049394709574,
+        "best_offset_px": 5.830951894845301,
+        "boundary_peak": false
+      },
+      "control_unregistered_original": {
+        "evaluated_pixels": 230652,
+        "best": {
+          "dx": 8,
+          "dy": 0,
+          "nmi": 0.22252434947912628
+        },
+        "nmi_at_zero": 0.21130560345481922,
+        "best_offset_px": 8.0,
+        "boundary_peak": true
+      }
+    },
+    {
+      "id": 61,
+      "corrected": {
+        "evaluated_pixels": 211340,
+        "best": {
+          "dx": -7,
+          "dy": 0,
+          "nmi": 0.23866615966711072
+        },
+        "nmi_at_zero": 0.2204286231924858,
+        "best_offset_px": 7.0,
+        "boundary_peak": false
+      },
+      "control_unregistered_original": {
+        "evaluated_pixels": 243738,
+        "best": {
+          "dx": 7,
+          "dy": 8,
+          "nmi": 0.22560221442544875
+        },
+        "nmi_at_zero": 0.20248310555897248,
+        "best_offset_px": 10.63014581273465,
+        "boundary_peak": true
+      }
+    },
+    {
+      "id": 81,
+      "corrected": {
+        "evaluated_pixels": 185413,
+        "best": {
+          "dx": 6,
+          "dy": -2,
+          "nmi": 0.27927979838811834
+        },
+        "nmi_at_zero": 0.27610165366847755,
+        "best_offset_px": 6.324555320336759,
+        "boundary_peak": false
+      },
+      "control_unregistered_original": {
+        "evaluated_pixels": 204393,
+        "best": {
+          "dx": 8,
+          "dy": 8,
+          "nmi": 0.24133502027757892
+        },
+        "nmi_at_zero": 0.237140681493609,
+        "best_offset_px": 11.313708498984761,
+        "boundary_peak": true
+      }
+    },
+    {
+      "id": 101,
+      "corrected": {
+        "evaluated_pixels": 211612,
+        "best": {
+          "dx": -7,
+          "dy": 0,
+          "nmi": 0.29433116554435557
+        },
+        "nmi_at_zero": 0.27531756583919853,
+        "best_offset_px": 7.0,
+        "boundary_peak": false
+      },
+      "control_unregistered_original": {
+        "evaluated_pixels": 244547,
+        "best": {
+          "dx": 8,
+          "dy": 8,
+          "nmi": 0.2517823776385575
+        },
+        "nmi_at_zero": 0.23540289363430458,
+        "best_offset_px": 11.313708498984761,
+        "boundary_peak": true
+      }
+    },
+    {
+      "id": 121,
+      "corrected": {
+        "evaluated_pixels": 208706,
+        "best": {
+          "dx": -8,
+          "dy": -1,
+          "nmi": 0.20747127975829288
+        },
+        "nmi_at_zero": 0.1803435579819149,
+        "best_offset_px": 8.06225774829855,
+        "boundary_peak": true
+      },
+      "control_unregistered_original": {
+        "evaluated_pixels": 241772,
+        "best": {
+          "dx": 6,
+          "dy": -6,
+          "nmi": 0.17779780334160952
+        },
+        "nmi_at_zero": 0.17289095615867733,
+        "best_offset_px": 8.48528137423857,
+        "boundary_peak": false
+      }
+    },
+    {
+      "id": 141,
+      "corrected": {
+        "evaluated_pixels": 193860,
+        "best": {
+          "dx": -7,
+          "dy": -1,
+          "nmi": 0.21715933191404915
+        },
+        "nmi_at_zero": 0.2038018561952659,
+        "best_offset_px": 7.0710678118654755,
+        "boundary_peak": false
+      },
+      "control_unregistered_original": {
+        "evaluated_pixels": 217088,
+        "best": {
+          "dx": -5,
+          "dy": 2,
+          "nmi": 0.19598732475944514
+        },
+        "nmi_at_zero": 0.1939334433192287,
+        "best_offset_px": 5.385164807134504,
+        "boundary_peak": false
+      }
+    }
+  ]
+}

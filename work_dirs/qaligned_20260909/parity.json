@@ -1,0 +1,50 @@
+[
+  {
+    "length": "L32",
+    "model": "output_flow",
+    "comparisons": 128,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L32",
+    "model": "aligned_no_update",
+    "comparisons": 128,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L32",
+    "model": "ssm",
+    "comparisons": 128,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L32",
+    "model": "mlp",
+    "comparisons": 128,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L256",
+    "model": "output_flow",
+    "comparisons": 512,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L256",
+    "model": "aligned_no_update",
+    "comparisons": 512,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L256",
+    "model": "ssm",
+    "comparisons": 512,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L256",
+    "model": "mlp",
+    "comparisons": 512,
+    "max_abs": 0.0
+  }
+]

@@ -1,0 +1,98 @@
+{
+  "role": "reused_development_no_training_no_final_no_promotion",
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "data": [
+    {
+      "path": "work_dirs/qstream_20260908/development_data.pt",
+      "bytes": 285277993,
+      "sha256": "788b4bddf15b2d3b19bd6f81e7c3280308e3d8b644e5b39c4cf29814c03ae7a1"
+    },
+    {
+      "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+      "bytes": 1141081851,
+      "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+    }
+  ],
+  "policies": {
+    "flow_bilinear": {
+      "mode": "bilinear"
+    },
+    "flow_nearest": {
+      "mode": "nearest"
+    },
+    "flow_gated": {
+      "mode": "nearest",
+      "gated": true
+    },
+    "flow_safe": {
+      "mode": "nearest",
+      "gated": true,
+      "max_unreliable": 0.1
+    }
+  },
+  "flow": "OpenCV DIS ULTRAFAST, grayscale128, forward and backward; FB<=1.5pixels, photometric<=12.75/255, bounds and 3x3 erosion",
+  "confidence": "uncalibrated heuristic, NOT true occlusion or guaranteed correctness",
+  "schedule": "K2 output controls, no selective SSM; confidence rejection resets period with full Q0",
+  "timing": "synchronized per-frame wall time, GPU-resident input; includes gray resize, GPU->CPU, two CPU flows, CPU->GPU, warp, confidence, Q0; excludes initial IO/H2D",
+  "thresholds": "fixed before this run, no selection on final; unchanged Q0 quality gate and >=5pct mean latency reduction",
+  "runtime": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "opencv": "5.0.0",
+  "opencv_threads": 1,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qflow_study.py",
+      "bytes": 4994,
+      "sha256": "25b77ef7de3b96a40eca7f47d775712a9c648fbc485e24b1b4a4aafcd96f7e0b"
+    },
+    {
+      "path": "sokkanaem/qflow.py",
+      "bytes": 5116,
+      "sha256": "734664ad90d9ab64049cf38f685c87c0a77ed0abc8214590d6a2ee8bf5c5d6a3"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "bytes": 12181,
+      "sha256": "5f4b95ecdfd0c1a929d6e44c00a2d451620949fc43de6fca2a209079ef0dc6a5"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    }
+  ]
+}

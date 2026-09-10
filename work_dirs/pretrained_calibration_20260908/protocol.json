@@ -1,0 +1,59 @@
+{
+  "role": "adaptive_development_resolution_calibration_not_final",
+  "parent": {
+    "path": "work_dirs/pretrained_quality_20260908/protocol.json",
+    "bytes": 3077,
+    "sha256": "2b958102a7bf9d14856519ffded0311bd532e60a962bb816f1d6ba2efd4069b6"
+  },
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "infer_size": 224,
+  "steps": 1600,
+  "seed": 735,
+  "lr": 0.0001,
+  "batch": 8,
+  "train_frames": 512,
+  "development_frames": 128,
+  "objective": "valid-pixel log-depth L1 only; frozen shape predictions and pooled features",
+  "train_cache": {
+    "path": "work_dirs/pretrained_calibration_20260908/train_cache.pt",
+    "bytes": 303054871,
+    "sha256": "1f3475616ad998d6f783b0b156ddd59b08c749f3489f2088c67587d3568d9281"
+  },
+  "dev_cache": {
+    "path": "work_dirs/pretrained_calibration_20260908/dev_cache.pt",
+    "bytes": 75743087,
+    "sha256": "c8d9846ff22b7d8275eb0ec42d03fa38eca072eb9ce68f966bc9115cd3f18394"
+  },
+  "trainable_parameters": 25538,
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/calibrate_pretrained_resolution.py",
+      "bytes": 5827,
+      "sha256": "4d44d300d3ebafa97c467ac699068ba7611e479bf0a702943b4fd5bcb94dc7fb"
+    },
+    {
+      "path": "scripts/pretrained_quality_study.py",
+      "bytes": 9166,
+      "sha256": "887217850dc26dd8772f21ade2e5273075ace706ff0ee2ec9a556917ae70f0dc"
+    },
+    {
+      "path": "scripts/architecture_readout_study.py",
+      "bytes": 8495,
+      "sha256": "10289fdc0afffb8b404a8ba8b5af9098bce3731541e05f4152687e37b29686ab"
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "bytes": 12181,
+      "sha256": "5f4b95ecdfd0c1a929d6e44c00a2d451620949fc43de6fca2a209079ef0dc6a5"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    }
+  ]
+}

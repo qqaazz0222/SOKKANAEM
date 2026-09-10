@@ -1,0 +1,130 @@
+{
+  "protocol": {
+    "path": "work_dirs/qbehave_readiness_20260910/protocol.json",
+    "bytes": 548,
+    "sha256": "d6e0d340bfc8e2d361644bf19b4a8bab44684d1ce38338d7d8f6e82162d5cee8"
+  },
+  "page": {
+    "path": "work_dirs/qbehave_readiness_20260910/license_page.html",
+    "bytes": 15593,
+    "sha256": "f5ba537b429c1f3e91ef95ce34577e0dbb7ff9b1ef1999c341251c170a1ffe14"
+  },
+  "headers": [
+    {
+      "url": "https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/Date02.zip",
+      "method": "HEAD",
+      "status": 200,
+      "content_length": 17881182670,
+      "accept_ranges": "bytes",
+      "etag": "\"429cd31ce-5e21e99769ee6\"",
+      "last_modified": "Thu, 23 Jun 2022 14:52:15 GMT",
+      "body_bytes_downloaded": 0
+    },
+    {
+      "url": "https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/calibs.zip",
+      "method": "HEAD",
+      "status": 200,
+      "content_length": 395854758,
+      "accept_ranges": "bytes",
+      "etag": "\"179843a6-5e21d2269775f\"",
+      "last_modified": "Thu, 23 Jun 2022 13:07:22 GMT",
+      "body_bytes_downloaded": 0
+    },
+    {
+      "url": "https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date02_color.tar",
+      "method": "HEAD",
+      "status": 200,
+      "content_length": 5763911680,
+      "accept_ranges": "bytes",
+      "etag": "\"1578e5000-5e57045e8a8a3\"",
+      "last_modified": "Thu, 04 Aug 2022 20:34:15 GMT",
+      "body_bytes_downloaded": 0
+    },
+    {
+      "url": "https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date02_depth.tar",
+      "method": "HEAD",
+      "status": 200,
+      "content_length": 49815623680,
+      "accept_ranges": "bytes",
+      "etag": "\"b993e1800-5e5819ddd456d\"",
+      "last_modified": "Fri, 05 Aug 2022 17:15:45 GMT",
+      "body_bytes_downloaded": 0
+    },
+    {
+      "url": "https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date02_time.tar",
+      "method": "HEAD",
+      "status": 200,
+      "content_length": 5550080,
+      "accept_ranges": "bytes",
+      "etag": "\"54b000-5e5703f265ee0\"",
+      "last_modified": "Thu, 04 Aug 2022 20:32:22 GMT",
+      "body_bytes_downloaded": 0
+    }
+  ],
+  "sources": [
+    {
+      "repository": "xiexh20/behave-dataset",
+      "commit": "85664832b43008d70a9bc5f5ba3bb2aa173bc077",
+      "url": "https://raw.githubusercontent.com/xiexh20/behave-dataset/85664832b43008d70a9bc5f5ba3bb2aa173bc077/README.md",
+      "file": {
+        "path": "work_dirs/qbehave_readiness_20260910/sources/xiexh20/behave-dataset/README.md",
+        "bytes": 7716,
+        "sha256": "a5dc0cb2486868ffea733b5d53f00e40d6daa8c4b483d35bb09ddbbdb80d2fab"
+      }
+    },
+    {
+      "repository": "xiexh20/behave-dataset",
+      "commit": "85664832b43008d70a9bc5f5ba3bb2aa173bc077",
+      "url": "https://raw.githubusercontent.com/xiexh20/behave-dataset/85664832b43008d70a9bc5f5ba3bb2aa173bc077/LICENSE",
+      "file": {
+        "path": "work_dirs/qbehave_readiness_20260910/sources/xiexh20/behave-dataset/LICENSE",
+        "bytes": 1982,
+        "sha256": "62331297e2a609e106ff4b0c29dbed4ded7dcddc0ed5844407c292c4fbf329e7"
+      }
+    },
+    {
+      "repository": "xiexh20/behave-dataset",
+      "commit": "85664832b43008d70a9bc5f5ba3bb2aa173bc077",
+      "url": "https://raw.githubusercontent.com/xiexh20/behave-dataset/85664832b43008d70a9bc5f5ba3bb2aa173bc077/data/video_reader.py",
+      "file": {
+        "path": "work_dirs/qbehave_readiness_20260910/sources/xiexh20/behave-dataset/data/video_reader.py",
+        "bytes": 6263,
+        "sha256": "644c50246d8ce5492ec0edcd1cebd405d5ba21d22d52e3b31816753539c3236e"
+      }
+    },
+    {
+      "repository": "xiexh20/behave-dataset",
+      "commit": "85664832b43008d70a9bc5f5ba3bb2aa173bc077",
+      "url": "https://raw.githubusercontent.com/xiexh20/behave-dataset/85664832b43008d70a9bc5f5ba3bb2aa173bc077/data/kinect_calib.py",
+      "file": {
+        "path": "work_dirs/qbehave_readiness_20260910/sources/xiexh20/behave-dataset/data/kinect_calib.py",
+        "bytes": 7979,
+        "sha256": "63155b776f8b6d698ac95be37adde1e6d3604d43aaf7a5c34e2894d532eebfb5"
+      }
+    },
+    {
+      "repository": "vguzov/videoio",
+      "commit": "c7eca2fbadcb5d8e4bda4a7366254b6b489a6dfc",
+      "url": "https://raw.githubusercontent.com/vguzov/videoio/c7eca2fbadcb5d8e4bda4a7366254b6b489a6dfc/LICENSE",
+      "file": {
+        "path": "work_dirs/qbehave_readiness_20260910/sources/vguzov/videoio/LICENSE",
+        "bytes": 11343,
+        "sha256": "ee7603aef684373594ad54b64d43fbee5165491aff6b284334d7eace41e9960c"
+      }
+    },
+    {
+      "repository": "vguzov/videoio",
+      "commit": "c7eca2fbadcb5d8e4bda4a7366254b6b489a6dfc",
+      "url": "https://raw.githubusercontent.com/vguzov/videoio/c7eca2fbadcb5d8e4bda4a7366254b6b489a6dfc/videoio/video_uint16.py",
+      "file": {
+        "path": "work_dirs/qbehave_readiness_20260910/sources/vguzov/videoio/videoio/video_uint16.py",
+        "bytes": 10296,
+        "sha256": "87f8ce4240e99e97f7ebefb34c38b4882912d645d862f4d3032f653397c8c33c"
+      }
+    }
+  ],
+  "dataset_bytes_downloaded": 0,
+  "data_acquired": false,
+  "gt_admitted": false,
+  "license_confirmation": "pending explicit non-commercial research confirmation"
+}

@@ -23,7 +23,9 @@ def test_conversion_keeps_proofs_and_declarations():
 
 
 def test_current_markdown_images_and_full_sections():
-    md = Path('paper/draft.md').read_text()
+    # paper/draft.md is now the selective-refresh review draft; the full native
+    # manuscript this check guards was preserved as draft_native_20260909.md.
+    md = Path('paper/draft_native_20260909.md').read_text()
     images = re.findall(r'!\[[^\]]*\]\(([^)]+)\)', md)
     assert len(images) == 7
     assert all((Path('paper')/p).is_file() for p in images)

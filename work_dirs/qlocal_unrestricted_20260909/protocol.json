@@ -1,0 +1,103 @@
+{
+  "role": "reused_development_screen_no_promotion",
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "adapter": {
+    "path": "work_dirs/qquality_feature_20260908/adapter.pt",
+    "bytes": 616993,
+    "sha256": "a8a02c36e1885196ebdeef74ed1c0acfbdd62a05160f27350a98816133800cc1"
+  },
+  "train_cache": {
+    "path": "work_dirs/qquality_rgb_20260908/train_cache.pt",
+    "bytes": 314819447,
+    "sha256": "1157d3b0b4c4b06dbfa67226ec19046135d3950a6e10d0d74678de1df5747feb"
+  },
+  "training_gt": {
+    "path": "work_dirs/architecture_readout_20260908/train_cache.pt",
+    "bytes": 1158096471,
+    "sha256": "12aca88d0cabe5b8f2210a5f84fc2db149348e7ddd751716ad6dfe55f5001d8b"
+  },
+  "development": [
+    {
+      "path": "work_dirs/qstream_20260908/development_data.pt",
+      "bytes": 285277993,
+      "sha256": "788b4bddf15b2d3b19bd6f81e7c3280308e3d8b644e5b39c4cf29814c03ae7a1"
+    },
+    {
+      "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+      "bytes": 1141081851,
+      "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+    }
+  ],
+  "protected": false,
+  "steps": 600,
+  "seed": 736,
+  "lr": 0.001,
+  "train_skipped_frames": 96,
+  "parameters": 3217,
+  "objective": "5 Q0logdepth+10 Q0loggradient+20GTflat_Q0excess",
+  "bound": "+/- .03 logdepth",
+  "mask": "RGBgradient>.12 or predictedlogdepthgradient>.02, dilated5x5, output on mask copied exactly; no inferenceGT",
+  "base_reason": "Earlier feature K2 retained boundaries better than flat-trained feature candidates; same unchanged base for both local/unrestricted controls",
+  "limits": "Protected pixels retain coarse predictions, NOT groundtruth boundaries; normalized global metrics need not remain constant; no long SSM carry in this K2 base",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qlocal_study.py",
+      "bytes": 6473,
+      "sha256": "e494311c2eed5c6650b031aee5584bc718213776f368db932d3b07228b37ee33"
+    },
+    {
+      "path": "sokkanaem/qlocal.py",
+      "bytes": 1110,
+      "sha256": "d7be35152cd5ce104ac90f95c669ebd7a85c691110fa33828851d3b875d13664"
+    },
+    {
+      "path": "sokkanaem/qrgb_refiner.py",
+      "bytes": 1287,
+      "sha256": "47f8aa9db9c0c89dadd9ca174e8000f2d4926d6357bf6fd76a48e77de7a25126"
+    },
+    {
+      "path": "sokkanaem/qflat_state.py",
+      "bytes": 2775,
+      "sha256": "cb4cbda86e53ec363756091bad97686e426e809a789ad59061c8508399986381"
+    },
+    {
+      "path": "sokkanaem/qquality.py",
+      "bytes": 4341,
+      "sha256": "25463f2e849965132e714827dd70ad648a1d30e18641cf7fb5b5306812fa1d0c"
+    },
+    {
+      "path": "scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "sokkanaem/qdelta_ssm.py",
+      "bytes": 2959,
+      "sha256": "efd2ec60e7bbaaa0c2e5ff3e6b9aa9298b49525a3026a95a520872e2991ff8ca"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    }
+  ]
+}

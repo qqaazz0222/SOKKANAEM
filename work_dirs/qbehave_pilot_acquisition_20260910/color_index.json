@@ -1,0 +1,92 @@
+{
+  "archive": {
+    "url": "https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date02_color.tar",
+    "bytes": 5763911680,
+    "etag": "\"1578e5000-5e57045e8a8a3\""
+  },
+  "selected": {
+    "Date02_empty_E1.1.color.mp4": {
+      "name": "Date02_empty_E1.1.color.mp4",
+      "bytes": 7448930,
+      "offset": 4619776,
+      "regular": true
+    },
+    "Date02_Sub02_backpack_back.1.color.mp4": {
+      "name": "Date02_Sub02_backpack_back.1.color.mp4",
+      "bytes": 44070656,
+      "offset": 57441280,
+      "regular": true
+    },
+    "Date02_Sub02_backpack_hand.1.color.mp4": {
+      "name": "Date02_Sub02_backpack_hand.1.color.mp4",
+      "bytes": 44184158,
+      "offset": 224430592,
+      "regular": true
+    }
+  },
+  "visited_headers": [
+    {
+      "name": "Date02_empty_E1.0.color.mp4",
+      "bytes": 4618410,
+      "offset": 512,
+      "regular": true
+    },
+    {
+      "name": "Date02_empty_E1.1.color.mp4",
+      "bytes": 7448930,
+      "offset": 4619776,
+      "regular": true
+    },
+    {
+      "name": "Date02_empty_E1.2.color.mp4",
+      "bytes": 9107180,
+      "offset": 12069376,
+      "regular": true
+    },
+    {
+      "name": "Date02_empty_E1.3.color.mp4",
+      "bytes": 4134007,
+      "offset": 21177344,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_back.0.color.mp4",
+      "bytes": 32128275,
+      "offset": 25312256,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_back.1.color.mp4",
+      "bytes": 44070656,
+      "offset": 57441280,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_back.2.color.mp4",
+      "bytes": 57488804,
+      "offset": 101512704,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_back.3.color.mp4",
+      "bytes": 32435360,
+      "offset": 159002112,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_hand.0.color.mp4",
+      "bytes": 32991525,
+      "offset": 191438336,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_hand.1.color.mp4",
+      "bytes": 44184158,
+      "offset": 224430592,
+      "regular": true
+    }
+  ],
+  "header_bytes_transferred": 5129,
+  "whole_archive_acquired": false,
+  "whole_archive_indexed": false
+}

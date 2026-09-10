@@ -1,0 +1,1810 @@
+{
+  "baseline": {
+    "balanced": {
+      "absrel_raw": 0.11089033462728064,
+      "absrel_clip_median": 0.08180642973942062,
+      "absrel_edge": 0.15288375752667588,
+      "grad_ratio": 0.3653877479955554,
+      "overshoot": 0.1969815936560432,
+      "boundary_precision": 0.5671856961853337,
+      "boundary_recall": 0.2723666072443949,
+      "boundary_f1": 0.3424477206151803,
+      "flat_tv": 0.02689679095055908,
+      "flat_tv_gt": 0.005193411598838793,
+      "flat_tv_ratio": 1062.283808618784
+    },
+    "sources": {
+      "tum": {
+        "absrel_raw": 0.09098938293755054,
+        "absrel_clip_median": 0.07624281570315361,
+        "absrel_edge": 0.15882335603237152,
+        "grad_ratio": 0.4243844971060753,
+        "overshoot": 0.11983633041381836,
+        "boundary_precision": 0.531009051327904,
+        "boundary_recall": 0.3336074681525739,
+        "boundary_f1": 0.39331156238525483,
+        "flat_tv": 0.028797324281185865,
+        "flat_tv_gt": 0.0042042790446430445,
+        "flat_tv_ratio": 8.953381776809692
+      },
+      "bonn": {
+        "absrel_raw": 0.13079128631701073,
+        "absrel_clip_median": 0.08737004377568762,
+        "absrel_edge": 0.1469441590209802,
+        "grad_ratio": 0.3063909988850355,
+        "overshoot": 0.27412685689826805,
+        "boundary_precision": 0.6033623410427632,
+        "boundary_recall": 0.21112574633621586,
+        "boundary_f1": 0.2915838788451058,
+        "flat_tv": 0.024996257619932294,
+        "flat_tv_gt": 0.0061825441530345415,
+        "flat_tv_ratio": 2115.614235460758
+      }
+    },
+    "clips": [
+      {
+        "source": "tum",
+        "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+        "metrics": {
+          "absrel_raw": 0.0754980742931366,
+          "absrel_clip_median": 0.07010408490896225,
+          "absrel_edge": 0.15646837651729584,
+          "grad_ratio": 0.44652870297431946,
+          "overshoot": 0.14098046720027924,
+          "boundary_precision": 0.5110358943541845,
+          "boundary_recall": 0.33050580074389774,
+          "boundary_f1": 0.4008191799124082,
+          "flat_tv": 0.024672575294971466,
+          "flat_tv_gt": 0.0059913694858551025,
+          "flat_tv_ratio": 4.123493194580078
+        }
+      },
+      {
+        "source": "tum",
+        "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+        "metrics": {
+          "absrel_raw": 0.0927523672580719,
+          "absrel_clip_median": 0.06442512571811676,
+          "absrel_edge": 0.15586206316947937,
+          "grad_ratio": 0.3647244870662689,
+          "overshoot": 0.08343392610549927,
+          "boundary_precision": 0.6460227767626444,
+          "boundary_recall": 0.29405434150248766,
+          "boundary_f1": 0.36931400559842587,
+          "flat_tv": 0.031141716986894608,
+          "flat_tv_gt": 0.006292444188147783,
+          "flat_tv_ratio": 4.989346504211426
+        }
+      },
+      {
+        "source": "tum",
+        "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+        "metrics": {
+          "absrel_raw": 0.10435689240694046,
+          "absrel_clip_median": 0.08360161632299423,
+          "absrel_edge": 0.1612630933523178,
+          "grad_ratio": 0.44323867559432983,
+          "overshoot": 0.10016603767871857,
+          "boundary_precision": 0.4910983045895894,
+          "boundary_recall": 0.35521140981776017,
+          "boundary_f1": 0.39712604220646125,
+          "flat_tv": 0.03637969121336937,
+          "flat_tv_gt": 0.002306168433278799,
+          "flat_tv_ratio": 16.187198638916016
+        }
+      },
+      {
+        "source": "tum",
+        "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+        "metrics": {
+          "absrel_raw": 0.09135019779205322,
+          "absrel_clip_median": 0.0868404358625412,
+          "absrel_edge": 0.16169989109039307,
+          "grad_ratio": 0.44304612278938293,
+          "overshoot": 0.15476489067077637,
+          "boundary_precision": 0.4758792296051979,
+          "boundary_recall": 0.3546583205461502,
+          "boundary_f1": 0.4059870218237241,
+          "flat_tv": 0.02299531362950802,
+          "flat_tv_gt": 0.002227134071290493,
+          "flat_tv_ratio": 10.51348876953125
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+        "metrics": {
+          "absrel_raw": 0.13081353902816772,
+          "absrel_clip_median": 0.13662925362586975,
+          "absrel_edge": 0.10043676197528839,
+          "grad_ratio": 0.4334788918495178,
+          "overshoot": 0.3687138557434082,
+          "boundary_precision": 0.5188380954787135,
+          "boundary_recall": 0.36031911087532836,
+          "boundary_f1": 0.41614390009393293,
+          "flat_tv": 0.026249220594763756,
+          "flat_tv_gt": 0.0027082611341029406,
+          "flat_tv_ratio": 9.740594863891602
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+        "metrics": {
+          "absrel_raw": 0.17210441827774048,
+          "absrel_clip_median": 0.14688362181186676,
+          "absrel_edge": 0.1443817913532257,
+          "grad_ratio": 0.2990581691265106,
+          "overshoot": 0.3104504942893982,
+          "boundary_precision": 0.5143339165952057,
+          "boundary_recall": 0.34551599187155563,
+          "boundary_f1": 0.40579266636632383,
+          "flat_tv": 0.02577732503414154,
+          "flat_tv_gt": 0.003712107427418232,
+          "flat_tv_ratio": 6.963972091674805
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+        "metrics": {
+          "absrel_raw": 0.06578731536865234,
+          "absrel_clip_median": 0.07636822760105133,
+          "absrel_edge": 0.0904000848531723,
+          "grad_ratio": 0.43309295177459717,
+          "overshoot": 0.25318941473960876,
+          "boundary_precision": 0.5283942810880641,
+          "boundary_recall": 0.31455733222537674,
+          "boundary_f1": 0.3837057052102561,
+          "flat_tv": 0.02880748361349106,
+          "flat_tv_gt": 8.329008778673597e-06,
+          "flat_tv_ratio": 25322.6484375
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+        "metrics": {
+          "absrel_raw": 0.0490751676261425,
+          "absrel_clip_median": 0.030898625031113625,
+          "absrel_edge": 0.06833949685096741,
+          "grad_ratio": 0.30572474002838135,
+          "overshoot": 0.10596371442079544,
+          "boundary_precision": 0.825128031273683,
+          "boundary_recall": 0.16454218855748573,
+          "boundary_f1": 0.2718821025143067,
+          "flat_tv": 0.02378985658288002,
+          "flat_tv_gt": 0.0016668125754222274,
+          "flat_tv_ratio": 15.287394523620605
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+        "metrics": {
+          "absrel_raw": 0.07443228363990784,
+          "absrel_clip_median": 0.07158483564853668,
+          "absrel_edge": 0.10503458976745605,
+          "grad_ratio": 0.3080337941646576,
+          "overshoot": 0.2489449679851532,
+          "boundary_precision": 0.6180364117026329,
+          "boundary_recall": 0.20182349462993443,
+          "boundary_f1": 0.29184623310963315,
+          "flat_tv": 0.02563725784420967,
+          "flat_tv_gt": 0.0070685409009456635,
+          "flat_tv_ratio": 3.6310911178588867
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+        "metrics": {
+          "absrel_raw": 0.08107460290193558,
+          "absrel_clip_median": 0.07539902627468109,
+          "absrel_edge": 0.09933843463659286,
+          "grad_ratio": 0.27985680103302,
+          "overshoot": 0.22297009825706482,
+          "boundary_precision": 0.5729139776279529,
+          "boundary_recall": 0.22420866271325698,
+          "boundary_f1": 0.31281456685004133,
+          "flat_tv": 0.03274083510041237,
+          "flat_tv_gt": 0.002317203674465418,
+          "flat_tv_ratio": 14.401820182800293
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+        "metrics": {
+          "absrel_raw": 0.09544298052787781,
+          "absrel_clip_median": 0.09150795638561249,
+          "absrel_edge": 0.12350831925868988,
+          "grad_ratio": 0.08502186089754105,
+          "overshoot": 0.13827285170555115,
+          "boundary_precision": 0.40064065530896187,
+          "boundary_recall": 0.08137286753238489,
+          "boundary_f1": 0.1275946996950855,
+          "flat_tv": 0.037350550293922424,
+          "flat_tv_gt": 0.012927232310175896,
+          "flat_tv_ratio": 2.890413999557495
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+        "metrics": {
+          "absrel_raw": 0.07884357124567032,
+          "absrel_clip_median": 0.06185726076364517,
+          "absrel_edge": 0.09332112222909927,
+          "grad_ratio": 0.34787657856941223,
+          "overshoot": 0.4397774934768677,
+          "boundary_precision": 0.8168888787428538,
+          "boundary_recall": 0.13068986870348454,
+          "boundary_f1": 0.22020496055483818,
+          "flat_tv": 0.02908252738416195,
+          "flat_tv_gt": 0.014848314225673676,
+          "flat_tv_ratio": 1.958761215209961
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+        "metrics": {
+          "absrel_raw": 0.09968775510787964,
+          "absrel_clip_median": 0.07902488112449646,
+          "absrel_edge": 0.1260043978691101,
+          "grad_ratio": 0.2679152190685272,
+          "overshoot": 0.28717824816703796,
+          "boundary_precision": 0.5408500085274378,
+          "boundary_recall": 0.19219318901499113,
+          "boundary_f1": 0.28353983412186307,
+          "flat_tv": 0.020986447110772133,
+          "flat_tv_gt": 0.009585505351424217,
+          "flat_tv_ratio": 2.1894278526306152
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+        "metrics": {
+          "absrel_raw": 0.39729630947113037,
+          "absrel_clip_median": 0.08384279161691666,
+          "absrel_edge": 0.4354701042175293,
+          "grad_ratio": 0.36074864864349365,
+          "overshoot": 0.33199265599250793,
+          "boundary_precision": 0.7894570877154669,
+          "boundary_recall": 0.1218328345566988,
+          "boundary_f1": 0.20839629073937735,
+          "flat_tv": 0.02029849961400032,
+          "flat_tv_gt": 0.006370041985064745,
+          "flat_tv_ratio": 3.1919751167297363
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+        "metrics": {
+          "absrel_raw": 0.14999611675739288,
+          "absrel_clip_median": 0.10358468443155289,
+          "absrel_edge": 0.16031144559383392,
+          "grad_ratio": 0.2744508981704712,
+          "overshoot": 0.43140679597854614,
+          "boundary_precision": 0.5921587124466896,
+          "boundary_recall": 0.16409174352884293,
+          "boundary_f1": 0.25594482695062953,
+          "flat_tv": 0.01841561868786812,
+          "flat_tv_gt": 0.006767649669200182,
+          "flat_tv_ratio": 2.724806308746338
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+        "metrics": {
+          "absrel_raw": 0.17494137585163116,
+          "absrel_clip_median": 0.09085936099290848,
+          "absrel_edge": 0.21678335964679718,
+          "grad_ratio": 0.28143343329429626,
+          "overshoot": 0.15066169202327728,
+          "boundary_precision": 0.522708036005497,
+          "boundary_recall": 0.23236167182525,
+          "boundary_f1": 0.32114075993498165,
+          "flat_tv": 0.010819469578564167,
+          "flat_tv_gt": 0.006210531573742628,
+          "flat_tv_ratio": 1.7421307563781738
+        }
+      }
+    ]
+  },
+  "initial_bin_cached_features": {
+    "balanced": {
+      "absrel_raw": 0.11089035232240955,
+      "absrel_clip_median": 0.08180631697177887,
+      "absrel_edge": 0.1528837236886223,
+      "grad_ratio": 0.36538777252038324,
+      "overshoot": 0.1969746925557653,
+      "boundary_precision": 0.5671661293050015,
+      "boundary_recall": 0.2723609225807498,
+      "boundary_f1": 0.3424433945700811,
+      "flat_tv": 0.026896868677188955,
+      "flat_tv_gt": 0.005193411598838793,
+      "flat_tv_ratio": 1062.2822841902573
+    },
+    "sources": {
+      "tum": {
+        "absrel_raw": 0.09098941087722778,
+        "absrel_clip_median": 0.07624238729476929,
+        "absrel_edge": 0.15882326290011406,
+        "grad_ratio": 0.42438459396362305,
+        "overshoot": 0.11984232068061829,
+        "boundary_precision": 0.5310013412187496,
+        "boundary_recall": 0.33359823843541864,
+        "boundary_f1": 0.3933047842195568,
+        "flat_tv": 0.028797435574233532,
+        "flat_tv_gt": 0.0042042790446430445,
+        "flat_tv_ratio": 8.953410863876343
+      },
+      "bonn": {
+        "absrel_raw": 0.13079129376759133,
+        "absrel_clip_median": 0.08737024664878845,
+        "absrel_edge": 0.14694418447713056,
+        "grad_ratio": 0.30639095107714337,
+        "overshoot": 0.2741070644309123,
+        "boundary_precision": 0.6033309173912534,
+        "boundary_recall": 0.21112360672608096,
+        "boundary_f1": 0.29158200492060543,
+        "flat_tv": 0.024996301780144375,
+        "flat_tv_gt": 0.0061825441530345415,
+        "flat_tv_ratio": 2115.6111575166383
+      }
+    },
+    "clips": [
+      {
+        "source": "tum",
+        "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+        "metrics": {
+          "absrel_raw": 0.07549799233675003,
+          "absrel_clip_median": 0.07010417431592941,
+          "absrel_edge": 0.15646810829639435,
+          "grad_ratio": 0.44652700424194336,
+          "overshoot": 0.14100442826747894,
+          "boundary_precision": 0.5110403100649515,
+          "boundary_recall": 0.3305296463270982,
+          "boundary_f1": 0.4008377566933632,
+          "flat_tv": 0.02467273734509945,
+          "flat_tv_gt": 0.0059913694858551025,
+          "flat_tv_ratio": 4.123520851135254
+        }
+      },
+      {
+        "source": "tum",
+        "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+        "metrics": {
+          "absrel_raw": 0.09275243431329727,
+          "absrel_clip_median": 0.06442444771528244,
+          "absrel_edge": 0.15586213767528534,
+          "grad_ratio": 0.36472493410110474,
+          "overshoot": 0.08343392610549927,
+          "boundary_precision": 0.6460048208634058,
+          "boundary_recall": 0.29405434150248766,
+          "boundary_f1": 0.36930923722684383,
+          "flat_tv": 0.03114175796508789,
+          "flat_tv_gt": 0.006292444188147783,
+          "flat_tv_ratio": 4.989351272583008
+        }
+      },
+      {
+        "source": "tum",
+        "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+        "metrics": {
+          "absrel_raw": 0.10435689240694046,
+          "absrel_clip_median": 0.08360175043344498,
+          "absrel_edge": 0.16126282513141632,
+          "grad_ratio": 0.4432392418384552,
+          "overshoot": 0.10016603767871857,
+          "boundary_precision": 0.49108005811770755,
+          "boundary_recall": 0.35515064536593854,
+          "boundary_f1": 0.39708469645120203,
+          "flat_tv": 0.036379843950271606,
+          "flat_tv_gt": 0.002306168433278799,
+          "flat_tv_ratio": 16.187244415283203
+        }
+      },
+      {
+        "source": "tum",
+        "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+        "metrics": {
+          "absrel_raw": 0.09135032445192337,
+          "absrel_clip_median": 0.08683917671442032,
+          "absrel_edge": 0.16169998049736023,
+          "grad_ratio": 0.4430471956729889,
+          "overshoot": 0.15476489067077637,
+          "boundary_precision": 0.4758801758289337,
+          "boundary_recall": 0.3546583205461502,
+          "boundary_f1": 0.4059874465068181,
+          "flat_tv": 0.02299540303647518,
+          "flat_tv_gt": 0.002227134071290493,
+          "flat_tv_ratio": 10.513526916503906
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+        "metrics": {
+          "absrel_raw": 0.13081341981887817,
+          "absrel_clip_median": 0.13662967085838318,
+          "absrel_edge": 0.10043681412935257,
+          "grad_ratio": 0.43347910046577454,
+          "overshoot": 0.3686693608760834,
+          "boundary_precision": 0.5188374205802878,
+          "boundary_recall": 0.3602969304968913,
+          "boundary_f1": 0.41613228029261035,
+          "flat_tv": 0.026249054819345474,
+          "flat_tv_gt": 0.0027082611341029406,
+          "flat_tv_ratio": 9.740533828735352
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+        "metrics": {
+          "absrel_raw": 0.17210425436496735,
+          "absrel_clip_median": 0.14688387513160706,
+          "absrel_edge": 0.14438171684741974,
+          "grad_ratio": 0.29905906319618225,
+          "overshoot": 0.3104287385940552,
+          "boundary_precision": 0.5143276332722356,
+          "boundary_recall": 0.3455980811268091,
+          "boundary_f1": 0.4058464359647284,
+          "flat_tv": 0.02577732689678669,
+          "flat_tv_gt": 0.003712107427418232,
+          "flat_tv_ratio": 6.963973045349121
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+        "metrics": {
+          "absrel_raw": 0.06578733026981354,
+          "absrel_clip_median": 0.07636744529008865,
+          "absrel_edge": 0.09039993584156036,
+          "grad_ratio": 0.43309319019317627,
+          "overshoot": 0.25321120023727417,
+          "boundary_precision": 0.5283737994420031,
+          "boundary_recall": 0.31453555790358223,
+          "boundary_f1": 0.383687592848825,
+          "flat_tv": 0.028807394206523895,
+          "flat_tv_gt": 8.329008778673597e-06,
+          "flat_tv_ratio": 25322.611328125
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+        "metrics": {
+          "absrel_raw": 0.04907513037323952,
+          "absrel_clip_median": 0.03089865669608116,
+          "absrel_edge": 0.06833937764167786,
+          "grad_ratio": 0.3057257831096649,
+          "overshoot": 0.10596371442079544,
+          "boundary_precision": 0.8251945152878761,
+          "boundary_recall": 0.16452050115913153,
+          "boundary_f1": 0.2718592770397663,
+          "flat_tv": 0.023790016770362854,
+          "flat_tv_gt": 0.0016668125754222274,
+          "flat_tv_ratio": 15.287511825561523
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+        "metrics": {
+          "absrel_raw": 0.07443214952945709,
+          "absrel_clip_median": 0.07158463448286057,
+          "absrel_edge": 0.10503454506397247,
+          "grad_ratio": 0.30803102254867554,
+          "overshoot": 0.24888135492801666,
+          "boundary_precision": 0.6180740694204966,
+          "boundary_recall": 0.20179559903529784,
+          "boundary_f1": 0.2918229190011819,
+          "flat_tv": 0.025637323036789894,
+          "flat_tv_gt": 0.0070685409009456635,
+          "flat_tv_ratio": 3.631100654602051
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+        "metrics": {
+          "absrel_raw": 0.08107472211122513,
+          "absrel_clip_median": 0.07539935410022736,
+          "absrel_edge": 0.0993388295173645,
+          "grad_ratio": 0.2798575758934021,
+          "overshoot": 0.2229488044977188,
+          "boundary_precision": 0.572042583177487,
+          "boundary_recall": 0.22418746332793185,
+          "boundary_f1": 0.3127857061723868,
+          "flat_tv": 0.032740965485572815,
+          "flat_tv_gt": 0.002317203674465418,
+          "flat_tv_ratio": 14.401886940002441
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+        "metrics": {
+          "absrel_raw": 0.09544288367033005,
+          "absrel_clip_median": 0.0915079191327095,
+          "absrel_edge": 0.12350808829069138,
+          "grad_ratio": 0.08502206206321716,
+          "overshoot": 0.13827285170555115,
+          "boundary_precision": 0.40068097164233524,
+          "boundary_recall": 0.0813947287776197,
+          "boundary_f1": 0.12761615201209983,
+          "flat_tv": 0.03735069930553436,
+          "flat_tv_gt": 0.012927232310175896,
+          "flat_tv_ratio": 2.89042592048645
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+        "metrics": {
+          "absrel_raw": 0.07884372025728226,
+          "absrel_clip_median": 0.06185866519808769,
+          "absrel_edge": 0.0933212861418724,
+          "grad_ratio": 0.347878634929657,
+          "overshoot": 0.4397358298301697,
+          "boundary_precision": 0.8169515530268351,
+          "boundary_recall": 0.13068986870348454,
+          "boundary_f1": 0.2202065580834945,
+          "flat_tv": 0.029082629829645157,
+          "flat_tv_gt": 0.014848314225673676,
+          "flat_tv_ratio": 1.9587681293487549
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+        "metrics": {
+          "absrel_raw": 0.0996878445148468,
+          "absrel_clip_median": 0.0790243148803711,
+          "absrel_edge": 0.12600430846214294,
+          "grad_ratio": 0.2679150104522705,
+          "overshoot": 0.28717824816703796,
+          "boundary_precision": 0.5407952591776848,
+          "boundary_recall": 0.1921857719620069,
+          "boundary_f1": 0.28352421522140503,
+          "flat_tv": 0.02098657563328743,
+          "flat_tv_gt": 0.009585505351424217,
+          "flat_tv_ratio": 2.189441204071045
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+        "metrics": {
+          "absrel_raw": 0.3972964286804199,
+          "absrel_clip_median": 0.08384329080581665,
+          "absrel_edge": 0.4354701042175293,
+          "grad_ratio": 0.3607458770275116,
+          "overshoot": 0.33197081089019775,
+          "boundary_precision": 0.7897979989647865,
+          "boundary_recall": 0.1218328345566988,
+          "boundary_f1": 0.20841683261096478,
+          "flat_tv": 0.02029845491051674,
+          "flat_tv_gt": 0.006370041985064745,
+          "flat_tv_ratio": 3.1919684410095215
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+        "metrics": {
+          "absrel_raw": 0.14999628067016602,
+          "absrel_clip_median": 0.10358596593141556,
+          "absrel_edge": 0.16031154990196228,
+          "grad_ratio": 0.2744525671005249,
+          "overshoot": 0.43140679597854614,
+          "boundary_precision": 0.5921695803602537,
+          "boundary_recall": 0.16409914940595627,
+          "boundary_f1": 0.2559562399983406,
+          "flat_tv": 0.018415620550513268,
+          "flat_tv_gt": 0.006767649669200182,
+          "flat_tv_ratio": 2.724806785583496
+        }
+      },
+      {
+        "source": "bonn",
+        "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+        "metrics": {
+          "absrel_raw": 0.17494136095046997,
+          "absrel_clip_median": 0.09085916727781296,
+          "absrel_edge": 0.21678365767002106,
+          "grad_ratio": 0.28143152594566345,
+          "overshoot": 0.1506170630455017,
+          "boundary_precision": 0.5227256243427595,
+          "boundary_recall": 0.23234679425756136,
+          "boundary_f1": 0.3211298498014609,
+          "flat_tv": 0.010819559916853905,
+          "flat_tv_gt": 0.006210531573742628,
+          "flat_tv_ratio": 1.742145299911499
+        }
+      }
+    ]
+  },
+  "candidates": {
+    "bin": {
+      "metrics": {
+        "balanced": {
+          "absrel_raw": 0.11448050135125716,
+          "absrel_clip_median": 0.08432253651941815,
+          "absrel_edge": 0.15915862439821166,
+          "grad_ratio": 0.3633255629489819,
+          "overshoot": 0.20785695500671864,
+          "boundary_precision": 0.542536334661741,
+          "boundary_recall": 0.27217479293418967,
+          "boundary_f1": 0.3442534405282155,
+          "flat_tv": 0.026948208532606564,
+          "flat_tv_gt": 0.005193411598838793,
+          "flat_tv_ratio": 1027.6306958844266
+        },
+        "sources": {
+          "tum": {
+            "absrel_raw": 0.09388410300016403,
+            "absrel_clip_median": 0.07963461056351662,
+            "absrel_edge": 0.1618371158838272,
+            "grad_ratio": 0.4066331908106804,
+            "overshoot": 0.12526618503034115,
+            "boundary_precision": 0.49799155754347646,
+            "boundary_recall": 0.3306548109006447,
+            "boundary_f1": 0.39255590168371174,
+            "flat_tv": 0.02866270113736391,
+            "flat_tv_gt": 0.0042042790446430445,
+            "flat_tv_ratio": 8.997429847717285
+          },
+          "bonn": {
+            "absrel_raw": 0.1350768997023503,
+            "absrel_clip_median": 0.0890104624753197,
+            "absrel_edge": 0.15648013291259608,
+            "grad_ratio": 0.32001793508728343,
+            "overshoot": 0.2904477249830961,
+            "boundary_precision": 0.5870811117800055,
+            "boundary_recall": 0.2136947749677347,
+            "boundary_f1": 0.2959509793727193,
+            "flat_tv": 0.025233715927849214,
+            "flat_tv_gt": 0.0061825441530345415,
+            "flat_tv_ratio": 2046.2639619211357
+          }
+        },
+        "clips": [
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.07764756679534912,
+              "absrel_clip_median": 0.07405279576778412,
+              "absrel_edge": 0.15872764587402344,
+              "grad_ratio": 0.4323410093784332,
+              "overshoot": 0.14635023474693298,
+              "boundary_precision": 0.5168521975477537,
+              "boundary_recall": 0.32635032882293064,
+              "boundary_f1": 0.39968639860550564,
+              "flat_tv": 0.024463973939418793,
+              "flat_tv_gt": 0.0059913694858551025,
+              "flat_tv_ratio": 4.088640213012695
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.09622030705213547,
+              "absrel_clip_median": 0.06464354693889618,
+              "absrel_edge": 0.1586953103542328,
+              "grad_ratio": 0.3556363582611084,
+              "overshoot": 0.09168247133493423,
+              "boundary_precision": 0.49820414930582047,
+              "boundary_recall": 0.2883224921921889,
+              "boundary_f1": 0.3649068884551525,
+              "flat_tv": 0.02987613156437874,
+              "flat_tv_gt": 0.006292444188147783,
+              "flat_tv_ratio": 4.794461250305176
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.1052989512681961,
+              "absrel_clip_median": 0.08093336224555969,
+              "absrel_edge": 0.16307497024536133,
+              "grad_ratio": 0.41148144006729126,
+              "overshoot": 0.09002263844013214,
+              "boundary_precision": 0.49977588405211765,
+              "boundary_recall": 0.35652730031870306,
+              "boundary_f1": 0.40133080965218443,
+              "flat_tv": 0.03700806200504303,
+              "flat_tv_gt": 0.002306168433278799,
+              "flat_tv_ratio": 16.408103942871094
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.09636958688497543,
+              "absrel_clip_median": 0.09890873730182648,
+              "absrel_edge": 0.16685053706169128,
+              "grad_ratio": 0.42707395553588867,
+              "overshoot": 0.17300939559936523,
+              "boundary_precision": 0.4771339992682139,
+              "boundary_recall": 0.3514191222687562,
+              "boundary_f1": 0.4042995100220044,
+              "flat_tv": 0.023302637040615082,
+              "flat_tv_gt": 0.002227134071290493,
+              "flat_tv_ratio": 10.698513984680176
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.12787595391273499,
+              "absrel_clip_median": 0.16334792971611023,
+              "absrel_edge": 0.11698306351900101,
+              "grad_ratio": 0.47911038994789124,
+              "overshoot": 0.488406777381897,
+              "boundary_precision": 0.5226165447384119,
+              "boundary_recall": 0.3641870617866516,
+              "boundary_f1": 0.42108922606954974,
+              "flat_tv": 0.02440548501908779,
+              "flat_tv_gt": 0.0027082611341029406,
+              "flat_tv_ratio": 9.061376571655273
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.1473269909620285,
+              "absrel_clip_median": 0.13528066873550415,
+              "absrel_edge": 0.1299697607755661,
+              "grad_ratio": 0.3065575361251831,
+              "overshoot": 0.2907620966434479,
+              "boundary_precision": 0.503272306950142,
+              "boundary_recall": 0.33815370756201446,
+              "boundary_f1": 0.3969190364005044,
+              "flat_tv": 0.02619214542210102,
+              "flat_tv_gt": 0.003712107427418232,
+              "flat_tv_ratio": 7.072892189025879
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.0788426473736763,
+              "absrel_clip_median": 0.07078946381807327,
+              "absrel_edge": 0.10988465696573257,
+              "grad_ratio": 0.4309617578983307,
+              "overshoot": 0.2821502685546875,
+              "boundary_precision": 0.5287372055463493,
+              "boundary_recall": 0.30889037472661585,
+              "boundary_f1": 0.38003990698295337,
+              "flat_tv": 0.027874093502759933,
+              "flat_tv_gt": 8.329008778673597e-06,
+              "flat_tv_ratio": 24491.451171875
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.07112438976764679,
+              "absrel_clip_median": 0.0392569974064827,
+              "absrel_edge": 0.09173336625099182,
+              "grad_ratio": 0.2977552115917206,
+              "overshoot": 0.19662252068519592,
+              "boundary_precision": 0.7664452443520228,
+              "boundary_recall": 0.16994325257837772,
+              "boundary_f1": 0.2747486208875974,
+              "flat_tv": 0.021425265818834305,
+              "flat_tv_gt": 0.0016668125754222274,
+              "flat_tv_ratio": 13.775384902954102
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.06936536729335785,
+              "absrel_clip_median": 0.07031407207250595,
+              "absrel_edge": 0.10397792607545853,
+              "grad_ratio": 0.3252551555633545,
+              "overshoot": 0.27153006196022034,
+              "boundary_precision": 0.6038848298291365,
+              "boundary_recall": 0.19979275980343422,
+              "boundary_f1": 0.2925433438892166,
+              "flat_tv": 0.026052622124552727,
+              "flat_tv_gt": 0.0070685409009456635,
+              "flat_tv_ratio": 3.6872823238372803
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.07489105314016342,
+              "absrel_clip_median": 0.0880938246846199,
+              "absrel_edge": 0.10346595197916031,
+              "grad_ratio": 0.27578040957450867,
+              "overshoot": 0.2525773346424103,
+              "boundary_precision": 0.5346406089762846,
+              "boundary_recall": 0.20219529063130418,
+              "boundary_f1": 0.2883863856162255,
+              "flat_tv": 0.03326110914349556,
+              "flat_tv_gt": 0.002317203674465418,
+              "flat_tv_ratio": 14.631725311279297
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.08915971964597702,
+              "absrel_clip_median": 0.0889098271727562,
+              "absrel_edge": 0.11888734251260757,
+              "grad_ratio": 0.09131856262683868,
+              "overshoot": 0.10395882278680801,
+              "boundary_precision": 0.40584874898195267,
+              "boundary_recall": 0.10297908106197913,
+              "boundary_f1": 0.15703505370765924,
+              "flat_tv": 0.03822334483265877,
+              "flat_tv_gt": 0.012927232310175896,
+              "flat_tv_ratio": 2.957355499267578
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.09997080266475677,
+              "absrel_clip_median": 0.05787905678153038,
+              "absrel_edge": 0.12668412923812866,
+              "grad_ratio": 0.3907032310962677,
+              "overshoot": 0.4540491998195648,
+              "boundary_precision": 0.8166778162121773,
+              "boundary_recall": 0.16081897479792437,
+              "boundary_f1": 0.2653228373577197,
+              "flat_tv": 0.03067370131611824,
+              "flat_tv_gt": 0.014848314225673676,
+              "flat_tv_ratio": 2.0659446716308594
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.12030068039894104,
+              "absrel_clip_median": 0.08069782704114914,
+              "absrel_edge": 0.15113453567028046,
+              "grad_ratio": 0.2789081037044525,
+              "overshoot": 0.30373385548591614,
+              "boundary_precision": 0.5227384765942892,
+              "boundary_recall": 0.19449952555199465,
+              "boundary_f1": 0.28333357845743495,
+              "flat_tv": 0.021701771765947342,
+              "flat_tv_gt": 0.009585505351424217,
+              "flat_tv_ratio": 2.264120578765869
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.4166317284107208,
+              "absrel_clip_median": 0.08522597700357437,
+              "absrel_edge": 0.4569322168827057,
+              "grad_ratio": 0.38244110345840454,
+              "overshoot": 0.3247792422771454,
+              "boundary_precision": 0.7457643834253153,
+              "boundary_recall": 0.13601520967980227,
+              "boundary_f1": 0.22640897271533808,
+              "flat_tv": 0.021965855732560158,
+              "flat_tv_gt": 0.006370041985064745,
+              "flat_tv_ratio": 3.454713821411133
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.17774517834186554,
+              "absrel_clip_median": 0.09623993188142776,
+              "absrel_edge": 0.18855775892734528,
+              "grad_ratio": 0.2943570613861084,
+              "overshoot": 0.38109317421913147,
+              "boundary_precision": 0.5910880441466967,
+              "boundary_recall": 0.1727839099864165,
+              "boundary_f1": 0.26616310079892475,
+              "flat_tv": 0.01924891024827957,
+              "flat_tv_gt": 0.006767649669200182,
+              "flat_tv_ratio": 2.8486180305480957
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.14768828451633453,
+              "absrel_clip_median": 0.09208997339010239,
+              "absrel_edge": 0.1795508861541748,
+              "grad_ratio": 0.2870666980743408,
+              "overshoot": 0.13570934534072876,
+              "boundary_precision": 0.5032591316072891,
+              "boundary_recall": 0.2140781514463015,
+              "boundary_f1": 0.2994216895895079,
+              "flat_tv": 0.011780286207795143,
+              "flat_tv_gt": 0.006210531573742628,
+              "flat_tv_ratio": 1.896957278251648
+            }
+          }
+        ]
+      },
+      "gate": {
+        "checks": {
+          "raw_accuracy_nonregression": false,
+          "median_accuracy_nonregression": false,
+          "boundary_f1_plus_0.005": false,
+          "overshoot_nonregression": false,
+          "flat_tv_nonregression": false,
+          "gradient_upper_bound": true,
+          "per_source_raw_regression_at_most_1pct": false,
+          "edge_depth_accuracy_nonregression": false
+        },
+        "pass": false,
+        "note": "Screening gate only; not significance, long-stream or device validation."
+      },
+      "history": [
+        {
+          "step": 1,
+          "loss": 0.08735129237174988,
+          "metric": 0.0730387344956398,
+          "gradient": 0.028625112026929855,
+          "nll": 0.0
+        },
+        {
+          "step": 200,
+          "loss": 0.12216734141111374,
+          "metric": 0.109653040766716,
+          "gradient": 0.025028597563505173,
+          "nll": 0.0
+        },
+        {
+          "step": 400,
+          "loss": 0.12606574594974518,
+          "metric": 0.11520656198263168,
+          "gradient": 0.021718371659517288,
+          "nll": 0.0
+        },
+        {
+          "step": 600,
+          "loss": 0.13968737423419952,
+          "metric": 0.12358465790748596,
+          "gradient": 0.032205432653427124,
+          "nll": 0.0
+        },
+        {
+          "step": 800,
+          "loss": 0.141237273812294,
+          "metric": 0.12958265841007233,
+          "gradient": 0.02330923080444336,
+          "nll": 0.0
+        },
+        {
+          "step": 1000,
+          "loss": 0.10997527837753296,
+          "metric": 0.09423444420099258,
+          "gradient": 0.03148166090250015,
+          "nll": 0.0
+        },
+        {
+          "step": 1200,
+          "loss": 0.07599624246358871,
+          "metric": 0.06521639227867126,
+          "gradient": 0.0215597003698349,
+          "nll": 0.0
+        }
+      ],
+      "checkpoint": {
+        "path": "work_dirs/architecture_readout_20260908/bin.pt",
+        "bytes": 49509,
+        "sha256": "6dd30b16652dc9dbca357e923fb97297b67c89649ec8d7f541040926fe0ad87d"
+      },
+      "trainable_parameters": 11664
+    },
+    "mean": {
+      "metrics": {
+        "balanced": {
+          "absrel_raw": 0.11497499017665784,
+          "absrel_clip_median": 0.08358969430749616,
+          "absrel_edge": 0.15975881616274518,
+          "grad_ratio": 0.36436908040195704,
+          "overshoot": 0.20216268207877874,
+          "boundary_precision": 0.5639622408602414,
+          "boundary_recall": 0.27356519144531277,
+          "boundary_f1": 0.3439739788555016,
+          "flat_tv": 0.028069957198264696,
+          "flat_tv_gt": 0.005193411598838793,
+          "flat_tv_ratio": 1057.5373838096857
+        },
+        "sources": {
+          "tum": {
+            "absrel_raw": 0.0954760666936636,
+            "absrel_clip_median": 0.07954967953264713,
+            "absrel_edge": 0.16395945847034454,
+            "grad_ratio": 0.41671088337898254,
+            "overshoot": 0.1234987061470747,
+            "boundary_precision": 0.5296785266449054,
+            "boundary_recall": 0.3318970865996865,
+            "boundary_f1": 0.39144513602756587,
+            "flat_tv": 0.030637918040156364,
+            "flat_tv_gt": 0.0042042790446430445,
+            "flat_tv_ratio": 9.534447193145752
+          },
+          "bonn": {
+            "absrel_raw": 0.13447391365965208,
+            "absrel_clip_median": 0.08762970908234517,
+            "absrel_edge": 0.15555817385514578,
+            "grad_ratio": 0.3120272774249315,
+            "overshoot": 0.2808266580104828,
+            "boundary_precision": 0.5982459550755772,
+            "boundary_recall": 0.215233296290939,
+            "boundary_f1": 0.2965028216834374,
+            "flat_tv": 0.02550199635637303,
+            "flat_tv_gt": 0.0061825441530345415,
+            "flat_tv_ratio": 2105.5403204262257
+          }
+        },
+        "clips": [
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.07874470204114914,
+              "absrel_clip_median": 0.07397248595952988,
+              "absrel_edge": 0.16111834347248077,
+              "grad_ratio": 0.43954169750213623,
+              "overshoot": 0.14479203522205353,
+              "boundary_precision": 0.5109855011105537,
+              "boundary_recall": 0.3255030115445455,
+              "boundary_f1": 0.39702922602494556,
+              "flat_tv": 0.025436703115701675,
+              "flat_tv_gt": 0.0059913694858551025,
+              "flat_tv_ratio": 4.250952243804932
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.09877162426710129,
+              "absrel_clip_median": 0.06577029079198837,
+              "absrel_edge": 0.16247566044330597,
+              "grad_ratio": 0.35756754875183105,
+              "overshoot": 0.09297580271959305,
+              "boundary_precision": 0.6451196124156316,
+              "boundary_recall": 0.29232989142959315,
+              "boundary_f1": 0.3673744852033754,
+              "flat_tv": 0.0338202528655529,
+              "flat_tv_gt": 0.006292444188147783,
+              "flat_tv_ratio": 5.4214253425598145
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.10607457906007767,
+              "absrel_clip_median": 0.08263537287712097,
+              "absrel_edge": 0.1640458106994629,
+              "grad_ratio": 0.4344843924045563,
+              "overshoot": 0.08600755035877228,
+              "boundary_precision": 0.4877016097307205,
+              "boundary_recall": 0.3578222596552223,
+              "boundary_f1": 0.39747558122811216,
+              "flat_tv": 0.03842620924115181,
+              "flat_tv_gt": 0.002306168433278799,
+              "flat_tv_ratio": 17.094539642333984
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.0983133614063263,
+              "absrel_clip_median": 0.09582056850194931,
+              "absrel_edge": 0.16819801926612854,
+              "grad_ratio": 0.4352498948574066,
+              "overshoot": 0.17021943628787994,
+              "boundary_precision": 0.47490738332271576,
+              "boundary_recall": 0.35193318376938504,
+              "boundary_f1": 0.40390125165383023,
+              "flat_tv": 0.02486850693821907,
+              "flat_tv_gt": 0.002227134071290493,
+              "flat_tv_ratio": 11.370871543884277
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.12620073556900024,
+              "absrel_clip_median": 0.1414031684398651,
+              "absrel_edge": 0.11601293087005615,
+              "grad_ratio": 0.443432480096817,
+              "overshoot": 0.3836226165294647,
+              "boundary_precision": 0.5183743722736835,
+              "boundary_recall": 0.3614978340143959,
+              "boundary_f1": 0.4170864575232069,
+              "flat_tv": 0.0256222914904356,
+              "flat_tv_gt": 0.0027082611341029406,
+              "flat_tv_ratio": 9.510459899902344
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.15418346226215363,
+              "absrel_clip_median": 0.14527098834514618,
+              "absrel_edge": 0.135095477104187,
+              "grad_ratio": 0.3036051094532013,
+              "overshoot": 0.3233804702758789,
+              "boundary_precision": 0.5115252061902235,
+              "boundary_recall": 0.3432047116414954,
+              "boundary_f1": 0.4033550958459576,
+              "flat_tv": 0.026049066334962845,
+              "flat_tv_gt": 0.003712107427418232,
+              "flat_tv_ratio": 7.037793159484863
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.07309849560260773,
+              "absrel_clip_median": 0.07663871347904205,
+              "absrel_edge": 0.10480327159166336,
+              "grad_ratio": 0.4224075973033905,
+              "overshoot": 0.26494383811950684,
+              "boundary_precision": 0.5246251717520257,
+              "boundary_recall": 0.31138914116309024,
+              "boundary_f1": 0.38003928095956024,
+              "flat_tv": 0.02867194265127182,
+              "flat_tv_gt": 8.329008778673597e-06,
+              "flat_tv_ratio": 25200.48828125
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.07511522620916367,
+              "absrel_clip_median": 0.03081260249018669,
+              "absrel_edge": 0.08947832137346268,
+              "grad_ratio": 0.31011876463890076,
+              "overshoot": 0.1308070868253708,
+              "boundary_precision": 0.8126503850022951,
+              "boundary_recall": 0.1712544715652863,
+              "boundary_f1": 0.28037447358171147,
+              "flat_tv": 0.024679211899638176,
+              "flat_tv_gt": 0.0016668125754222274,
+              "flat_tv_ratio": 15.872633934020996
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.06769518554210663,
+              "absrel_clip_median": 0.06844682991504669,
+              "absrel_edge": 0.10020221024751663,
+              "grad_ratio": 0.3128935992717743,
+              "overshoot": 0.25534936785697937,
+              "boundary_precision": 0.6179557715853056,
+              "boundary_recall": 0.2022317675097535,
+              "boundary_f1": 0.29249111966540414,
+              "flat_tv": 0.025710023939609528,
+              "flat_tv_gt": 0.0070685409009456635,
+              "flat_tv_ratio": 3.640944004058838
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.07073413580656052,
+              "absrel_clip_median": 0.07852459698915482,
+              "absrel_edge": 0.09918177127838135,
+              "grad_ratio": 0.282888263463974,
+              "overshoot": 0.23176705837249756,
+              "boundary_precision": 0.5637771307180325,
+              "boundary_recall": 0.22065914891815433,
+              "boundary_f1": 0.3086364642949775,
+              "flat_tv": 0.03338892012834549,
+              "flat_tv_gt": 0.002317203674465418,
+              "flat_tv_ratio": 14.691795349121094
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.08848600089550018,
+              "absrel_clip_median": 0.08923786878585815,
+              "absrel_edge": 0.12000751495361328,
+              "grad_ratio": 0.08946763724088669,
+              "overshoot": 0.15091821551322937,
+              "boundary_precision": 0.39391328270236653,
+              "boundary_recall": 0.09959373669698834,
+              "boundary_f1": 0.15060618690525493,
+              "flat_tv": 0.038814809173345566,
+              "flat_tv_gt": 0.012927232310175896,
+              "flat_tv_ratio": 3.0040688514709473
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.09908602386713028,
+              "absrel_clip_median": 0.05878111720085144,
+              "absrel_edge": 0.12181463092565536,
+              "grad_ratio": 0.3619757294654846,
+              "overshoot": 0.43242284655570984,
+              "boundary_precision": 0.8267637193202972,
+              "boundary_recall": 0.14525108815481266,
+              "boundary_f1": 0.24017542290190855,
+              "flat_tv": 0.029978126287460327,
+              "flat_tv_gt": 0.014848314225673676,
+              "flat_tv_ratio": 2.019078254699707
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.11907918006181717,
+              "absrel_clip_median": 0.0816623643040657,
+              "absrel_edge": 0.14860062301158905,
+              "grad_ratio": 0.27363425493240356,
+              "overshoot": 0.3096655607223511,
+              "boundary_precision": 0.53572861601909,
+              "boundary_recall": 0.1899061327179273,
+              "boundary_f1": 0.2803504839539528,
+              "flat_tv": 0.02162386290729046,
+              "flat_tv_gt": 0.009585505351424217,
+              "flat_tv_ratio": 2.255913734436035
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.4155218005180359,
+              "absrel_clip_median": 0.0876735970377922,
+              "absrel_edge": 0.4563223719596863,
+              "grad_ratio": 0.37506529688835144,
+              "overshoot": 0.30490949749946594,
+              "boundary_precision": 0.7693004980683327,
+              "boundary_recall": 0.12904698929438987,
+              "boundary_f1": 0.21727458387613297,
+              "flat_tv": 0.021659089252352715,
+              "flat_tv_gt": 0.006370041985064745,
+              "flat_tv_ratio": 3.4066414833068848
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.17471358180046082,
+              "absrel_clip_median": 0.10101725906133652,
+              "absrel_edge": 0.1873255968093872,
+              "grad_ratio": 0.281544953584671,
+              "overshoot": 0.4249327778816223,
+              "boundary_precision": 0.5903275807698568,
+              "boundary_recall": 0.1672542318701744,
+              "boundary_f1": 0.259518147756656,
+              "flat_tv": 0.018915239721536636,
+              "flat_tv_gt": 0.006767649669200182,
+              "flat_tv_ratio": 2.7993080615997314
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.14977313578128815,
+              "absrel_clip_median": 0.09208740293979645,
+              "absrel_edge": 0.1878533661365509,
+              "grad_ratio": 0.2872936427593231,
+              "overshoot": 0.15720055997371674,
+              "boundary_precision": 0.5140097265054161,
+              "boundary_recall": 0.24151030194479972,
+              "boundary_f1": 0.32812614293652587,
+              "flat_tv": 0.010911372490227222,
+              "flat_tv_gt": 0.006210531573742628,
+              "flat_tv_ratio": 1.7569271326065063
+            }
+          }
+        ]
+      },
+      "gate": {
+        "checks": {
+          "raw_accuracy_nonregression": false,
+          "median_accuracy_nonregression": false,
+          "boundary_f1_plus_0.005": false,
+          "overshoot_nonregression": false,
+          "flat_tv_nonregression": false,
+          "gradient_upper_bound": true,
+          "per_source_raw_regression_at_most_1pct": false,
+          "edge_depth_accuracy_nonregression": false
+        },
+        "pass": false,
+        "note": "Screening gate only; not significance, long-stream or device validation."
+      },
+      "history": [
+        {
+          "step": 1,
+          "loss": 0.043079741299152374,
+          "metric": 0.07126617431640625,
+          "gradient": 0.028625115752220154,
+          "nll": -0.849979817867279
+        },
+        {
+          "step": 200,
+          "loss": 0.08220115303993225,
+          "metric": 0.10679493099451065,
+          "gradient": 0.02513033151626587,
+          "nll": -0.7431788444519043
+        },
+        {
+          "step": 400,
+          "loss": 0.09727304428815842,
+          "metric": 0.11954112350940704,
+          "gradient": 0.02192770317196846,
+          "nll": -0.6646386981010437
+        },
+        {
+          "step": 600,
+          "loss": 0.11133064329624176,
+          "metric": 0.12859614193439484,
+          "gradient": 0.0323714017868042,
+          "nll": -0.6690240502357483
+        },
+        {
+          "step": 800,
+          "loss": 0.1093599870800972,
+          "metric": 0.13224253058433533,
+          "gradient": 0.023528464138507843,
+          "nll": -0.6929354071617126
+        },
+        {
+          "step": 1000,
+          "loss": 0.06423048675060272,
+          "metric": 0.0967160165309906,
+          "gradient": 0.03181486204266548,
+          "nll": -0.9678592681884766
+        },
+        {
+          "step": 1200,
+          "loss": 0.012097939848899841,
+          "metric": 0.06925994902849197,
+          "gradient": 0.02205359935760498,
+          "nll": -1.3637760877609253
+        }
+      ],
+      "checkpoint": {
+        "path": "work_dirs/architecture_readout_20260908/mixture.pt",
+        "bytes": 14685,
+        "sha256": "b247a0229b935bc2cfc1035cdb6819a25449ca236e653879faac58c07e34ef40"
+      },
+      "trainable_parameters": 3045
+    },
+    "mode": {
+      "metrics": {
+        "balanced": {
+          "absrel_raw": 0.11590283860762914,
+          "absrel_clip_median": 0.08400777572145066,
+          "absrel_edge": 0.16143207469334203,
+          "grad_ratio": 0.3640804002061486,
+          "overshoot": 0.20423427255203327,
+          "boundary_precision": 0.5635314717979378,
+          "boundary_recall": 0.2734885580393893,
+          "boundary_f1": 0.34372015429107705,
+          "flat_tv": 0.028110480789716043,
+          "flat_tv_gt": 0.005193411598838793,
+          "flat_tv_ratio": 1043.5928568144639
+        },
+        "sources": {
+          "tum": {
+            "absrel_raw": 0.09591123834252357,
+            "absrel_clip_median": 0.08011782728135586,
+            "absrel_edge": 0.16443786025047302,
+            "grad_ratio": 0.4160822033882141,
+            "overshoot": 0.12477814964950085,
+            "boundary_precision": 0.5294472395131986,
+            "boundary_recall": 0.3320050804662363,
+            "boundary_f1": 0.3914300331380218,
+            "flat_tv": 0.03071941202506423,
+            "flat_tv_gt": 0.0042042790446430445,
+            "flat_tv_ratio": 9.563089728355408
+          },
+          "bonn": {
+            "absrel_raw": 0.1358944388727347,
+            "absrel_clip_median": 0.08789772416154544,
+            "absrel_edge": 0.15842628913621107,
+            "grad_ratio": 0.31207859702408314,
+            "overshoot": 0.2836903954545657,
+            "boundary_precision": 0.597615704082677,
+            "boundary_recall": 0.21497203561254233,
+            "boundary_f1": 0.2960102754441323,
+            "flat_tv": 0.02550154955436786,
+            "flat_tv_gt": 0.0061825441530345415,
+            "flat_tv_ratio": 2077.6226239005723
+          }
+        },
+        "clips": [
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.07899129390716553,
+              "absrel_clip_median": 0.07429074496030807,
+              "absrel_edge": 0.16146259009838104,
+              "grad_ratio": 0.4393486976623535,
+              "overshoot": 0.14637421071529388,
+              "boundary_precision": 0.5111695130666097,
+              "boundary_recall": 0.32511186475555104,
+              "boundary_f1": 0.3967939416567485,
+              "flat_tv": 0.025466112419962883,
+              "flat_tv_gt": 0.0059913694858551025,
+              "flat_tv_ratio": 4.255858898162842
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.09941940754652023,
+              "absrel_clip_median": 0.06600679457187653,
+              "absrel_edge": 0.16313210129737854,
+              "grad_ratio": 0.3567157983779907,
+              "overshoot": 0.09458526968955994,
+              "boundary_precision": 0.6449024354418119,
+              "boundary_recall": 0.29263770510442555,
+              "boundary_f1": 0.36744094189877313,
+              "flat_tv": 0.03387751430273056,
+              "flat_tv_gt": 0.006292444188147783,
+              "flat_tv_ratio": 5.430818557739258
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.1061602532863617,
+              "absrel_clip_median": 0.08244796842336655,
+              "absrel_edge": 0.16408711671829224,
+              "grad_ratio": 0.4333525002002716,
+              "overshoot": 0.08564528077840805,
+              "boundary_precision": 0.4869948501388232,
+              "boundary_recall": 0.35857459852316725,
+              "boundary_f1": 0.39780313630277914,
+              "flat_tv": 0.038598429411649704,
+              "flat_tv_gt": 0.002306168433278799,
+              "flat_tv_ratio": 17.164371490478516
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.09907399863004684,
+              "absrel_clip_median": 0.09772580116987228,
+              "absrel_edge": 0.16906963288784027,
+              "grad_ratio": 0.4349118173122406,
+              "overshoot": 0.17250783741474152,
+              "boundary_precision": 0.47472215940554935,
+              "boundary_recall": 0.35169615348180133,
+              "boundary_f1": 0.4036821126937866,
+              "flat_tv": 0.024935591965913773,
+              "flat_tv_gt": 0.002227134071290493,
+              "flat_tv_ratio": 11.401309967041016
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.1265888512134552,
+              "absrel_clip_median": 0.14332641661167145,
+              "absrel_edge": 0.12109681963920593,
+              "grad_ratio": 0.4469456374645233,
+              "overshoot": 0.38698264956474304,
+              "boundary_precision": 0.517684267523388,
+              "boundary_recall": 0.36289414546142024,
+              "boundary_f1": 0.4174670570840438,
+              "flat_tv": 0.025708746165037155,
+              "flat_tv_gt": 0.0027082611341029406,
+              "flat_tv_ratio": 9.542509078979492
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.15148688852787018,
+              "absrel_clip_median": 0.14470137655735016,
+              "absrel_edge": 0.1346706598997116,
+              "grad_ratio": 0.3033199608325958,
+              "overshoot": 0.3331160247325897,
+              "boundary_precision": 0.5108004085874805,
+              "boundary_recall": 0.34539567717971903,
+              "boundary_f1": 0.4044863443511228,
+              "flat_tv": 0.02597106248140335,
+              "flat_tv_gt": 0.003712107427418232,
+              "flat_tv_ratio": 7.016356468200684
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.07479638606309891,
+              "absrel_clip_median": 0.07784935086965561,
+              "absrel_edge": 0.10963693261146545,
+              "grad_ratio": 0.41821956634521484,
+              "overshoot": 0.26910915970802307,
+              "boundary_precision": 0.5240314554733535,
+              "boundary_recall": 0.3089130998026424,
+              "boundary_f1": 0.3776789307206248,
+              "flat_tv": 0.028291603550314903,
+              "flat_tv_gt": 8.329008778673597e-06,
+              "flat_tv_ratio": 24865.51171875
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.07794980704784393,
+              "absrel_clip_median": 0.03169689327478409,
+              "absrel_edge": 0.09342516958713531,
+              "grad_ratio": 0.3091130554676056,
+              "overshoot": 0.1421014964580536,
+              "boundary_precision": 0.8118326043089231,
+              "boundary_recall": 0.1705385266492764,
+              "boundary_f1": 0.2793368548154831,
+              "flat_tv": 0.024434786289930344,
+              "flat_tv_gt": 0.0016668125754222274,
+              "flat_tv_ratio": 15.718046188354492
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.06749637424945831,
+              "absrel_clip_median": 0.06763117760419846,
+              "absrel_edge": 0.1001615971326828,
+              "grad_ratio": 0.31275859475135803,
+              "overshoot": 0.2551797330379486,
+              "boundary_precision": 0.6166870755453905,
+              "boundary_recall": 0.20054108905605972,
+              "boundary_f1": 0.29057289597888786,
+              "flat_tv": 0.02550259791314602,
+              "flat_tv_gt": 0.0070685409009456635,
+              "flat_tv_ratio": 3.6114134788513184
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.07190222293138504,
+              "absrel_clip_median": 0.08166354149580002,
+              "absrel_edge": 0.10215871781110764,
+              "grad_ratio": 0.2813224494457245,
+              "overshoot": 0.23749680817127228,
+              "boundary_precision": 0.5617778220524391,
+              "boundary_recall": 0.21897628410564116,
+              "boundary_f1": 0.3064670998913546,
+              "flat_tv": 0.03352796286344528,
+              "flat_tv_gt": 0.002317203674465418,
+              "flat_tv_ratio": 14.752096176147461
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.08808454871177673,
+              "absrel_clip_median": 0.0885462611913681,
+              "absrel_edge": 0.12006182968616486,
+              "grad_ratio": 0.09032907336950302,
+              "overshoot": 0.1574844866991043,
+              "boundary_precision": 0.3933740643163522,
+              "boundary_recall": 0.10255150046820442,
+              "boundary_f1": 0.154262182302773,
+              "flat_tv": 0.03905746713280678,
+              "flat_tv_gt": 0.012927232310175896,
+              "flat_tv_ratio": 3.0229201316833496
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.10329161584377289,
+              "absrel_clip_median": 0.05686436593532562,
+              "absrel_edge": 0.1276797354221344,
+              "grad_ratio": 0.36490729451179504,
+              "overshoot": 0.40777549147605896,
+              "boundary_precision": 0.8301710685094198,
+              "boundary_recall": 0.14663599152117968,
+              "boundary_f1": 0.24226370143393675,
+              "flat_tv": 0.029973283410072327,
+              "flat_tv_gt": 0.014848314225673676,
+              "flat_tv_ratio": 2.0187525749206543
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.12325362861156464,
+              "absrel_clip_median": 0.08199053257703781,
+              "absrel_edge": 0.1542661190032959,
+              "grad_ratio": 0.27385395765304565,
+              "overshoot": 0.31382662057876587,
+              "boundary_precision": 0.5321602250138918,
+              "boundary_recall": 0.18795791392525038,
+              "boundary_f1": 0.277724452316761,
+              "flat_tv": 0.02183385193347931,
+              "flat_tv_gt": 0.009585505351424217,
+              "flat_tv_ratio": 2.2778236865997314
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.419302374124527,
+              "absrel_clip_median": 0.08832976967096329,
+              "absrel_edge": 0.4611685574054718,
+              "grad_ratio": 0.3767290413379669,
+              "overshoot": 0.3246918022632599,
+              "boundary_precision": 0.7682497526208559,
+              "boundary_recall": 0.12906517491986355,
+              "boundary_f1": 0.21725137097140154,
+              "flat_tv": 0.021806558594107628,
+              "flat_tv_gt": 0.006370041985064745,
+              "flat_tv_ratio": 3.429788112640381
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.179729163646698,
+              "absrel_clip_median": 0.10010143369436264,
+              "absrel_edge": 0.19378666579723358,
+              "grad_ratio": 0.2806417942047119,
+              "overshoot": 0.4219309985637665,
+              "boundary_precision": 0.5920962244272232,
+              "boundary_recall": 0.16561484523117542,
+              "boundary_f1": 0.25765665744741756,
+              "flat_tv": 0.018900740891695023,
+              "flat_tv_gt": 0.006767649669200182,
+              "flat_tv_ratio": 2.7972588539123535
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.14685140550136566,
+              "absrel_clip_median": 0.09207157045602798,
+              "absrel_edge": 0.18300266563892365,
+              "grad_ratio": 0.286802738904953,
+              "overshoot": 0.1545894742012024,
+              "boundary_precision": 0.5125234806134055,
+              "boundary_recall": 0.24058017903007567,
+              "boundary_f1": 0.3269557580157804,
+              "flat_tv": 0.011009933426976204,
+              "flat_tv_gt": 0.006210531573742628,
+              "flat_tv_ratio": 1.7728033065795898
+            }
+          }
+        ]
+      },
+      "gate": {
+        "checks": {
+          "raw_accuracy_nonregression": false,
+          "median_accuracy_nonregression": false,
+          "boundary_f1_plus_0.005": false,
+          "overshoot_nonregression": false,
+          "flat_tv_nonregression": false,
+          "gradient_upper_bound": true,
+          "per_source_raw_regression_at_most_1pct": false,
+          "edge_depth_accuracy_nonregression": false
+        },
+        "pass": false,
+        "note": "Screening gate only; not significance, long-stream or device validation."
+      },
+      "history": [
+        {
+          "step": 1,
+          "loss": 0.043079741299152374,
+          "metric": 0.07126617431640625,
+          "gradient": 0.028625115752220154,
+          "nll": -0.849979817867279
+        },
+        {
+          "step": 200,
+          "loss": 0.08220115303993225,
+          "metric": 0.10679493099451065,
+          "gradient": 0.02513033151626587,
+          "nll": -0.7431788444519043
+        },
+        {
+          "step": 400,
+          "loss": 0.09727304428815842,
+          "metric": 0.11954112350940704,
+          "gradient": 0.02192770317196846,
+          "nll": -0.6646386981010437
+        },
+        {
+          "step": 600,
+          "loss": 0.11133064329624176,
+          "metric": 0.12859614193439484,
+          "gradient": 0.0323714017868042,
+          "nll": -0.6690240502357483
+        },
+        {
+          "step": 800,
+          "loss": 0.1093599870800972,
+          "metric": 0.13224253058433533,
+          "gradient": 0.023528464138507843,
+          "nll": -0.6929354071617126
+        },
+        {
+          "step": 1000,
+          "loss": 0.06423048675060272,
+          "metric": 0.0967160165309906,
+          "gradient": 0.03181486204266548,
+          "nll": -0.9678592681884766
+        },
+        {
+          "step": 1200,
+          "loss": 0.012097939848899841,
+          "metric": 0.06925994902849197,
+          "gradient": 0.02205359935760498,
+          "nll": -1.3637760877609253
+        }
+      ],
+      "checkpoint": {
+        "path": "work_dirs/architecture_readout_20260908/mixture.pt",
+        "bytes": 14685,
+        "sha256": "b247a0229b935bc2cfc1035cdb6819a25449ca236e653879faac58c07e34ef40"
+      },
+      "trainable_parameters": 3045
+    }
+  },
+  "promoted": false,
+  "stage2_authorized_by_gate": false
+}

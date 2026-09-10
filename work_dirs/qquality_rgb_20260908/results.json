@@ -1,0 +1,6621 @@
+{
+  "baseline": {
+    "metrics": {
+      "balanced": {
+        "absrel_raw": 0.12812714899579686,
+        "absrel_clip_median": 0.0820263959467411,
+        "absrel_edge": 0.15932495053857565,
+        "grad_ratio": 0.7372025102376938,
+        "overshoot": 0.1759871256848176,
+        "boundary_precision": 0.7948570001042552,
+        "boundary_recall": 0.6028926178696565,
+        "boundary_f1": 0.6602192846799476,
+        "flat_tv": 0.024453518291314445,
+        "flat_tv_gt": 0.005542817942720527,
+        "flat_tv_ratio": 60.33229128519694
+      },
+      "sources": {
+        "tum": {
+          "absrel_raw": 0.08747774735093117,
+          "absrel_clip_median": 0.08145821839570999,
+          "absrel_edge": 0.142521433532238,
+          "grad_ratio": 0.6935093402862549,
+          "overshoot": 0.13355711847543716,
+          "boundary_precision": 0.7891270959128937,
+          "boundary_recall": 0.6412211656958485,
+          "boundary_f1": 0.6883267651622493,
+          "flat_tv": 0.027483469806611538,
+          "flat_tv_gt": 0.004203296848572791,
+          "flat_tv_ratio": 7.203530788421631
+        },
+        "bonn": {
+          "absrel_raw": 0.16877655064066252,
+          "absrel_clip_median": 0.08259457349777222,
+          "absrel_edge": 0.1761284675449133,
+          "grad_ratio": 0.7808956801891327,
+          "overshoot": 0.2184171328941981,
+          "boundary_precision": 0.8005869042956166,
+          "boundary_recall": 0.5645640700434645,
+          "boundary_f1": 0.6321118041976459,
+          "flat_tv": 0.02142356677601735,
+          "flat_tv_gt": 0.006882339036868264,
+          "flat_tv_ratio": 113.46105178197224
+        }
+      },
+      "clips": [
+        {
+          "source": "tum",
+          "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+          "metrics": {
+            "absrel_raw": 0.07583937048912048,
+            "absrel_clip_median": 0.07596156746149063,
+            "absrel_edge": 0.1352776437997818,
+            "grad_ratio": 0.7378108501434326,
+            "overshoot": 0.16488045454025269,
+            "boundary_precision": 0.8026109862451752,
+            "boundary_recall": 0.6927109702179829,
+            "boundary_f1": 0.7349114889899889,
+            "flat_tv": 0.03319589048624039,
+            "flat_tv_gt": 0.005831369198858738,
+            "flat_tv_ratio": 5.724700927734375
+          }
+        },
+        {
+          "source": "tum",
+          "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+          "metrics": {
+            "absrel_raw": 0.09911612421274185,
+            "absrel_clip_median": 0.08695486932992935,
+            "absrel_edge": 0.1497652232646942,
+            "grad_ratio": 0.6492078304290771,
+            "overshoot": 0.10223378241062164,
+            "boundary_precision": 0.7756432055806121,
+            "boundary_recall": 0.5897313611737142,
+            "boundary_f1": 0.6417420413345098,
+            "flat_tv": 0.02177104912698269,
+            "flat_tv_gt": 0.0025752244982868433,
+            "flat_tv_ratio": 8.682360649108887
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+          "metrics": {
+            "absrel_raw": 0.20192627608776093,
+            "absrel_clip_median": 0.20113591849803925,
+            "absrel_edge": 0.14860203862190247,
+            "grad_ratio": 1.0579729080200195,
+            "overshoot": 0.616814136505127,
+            "boundary_precision": 0.730279713558654,
+            "boundary_recall": 0.5893212243293723,
+            "boundary_f1": 0.6219813525676727,
+            "flat_tv": 0.015306113287806511,
+            "flat_tv_gt": 0.0027085235342383385,
+            "flat_tv_ratio": 5.777844429016113
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+          "metrics": {
+            "absrel_raw": 0.047447167336940765,
+            "absrel_clip_median": 0.04178345203399658,
+            "absrel_edge": 0.06216784194111824,
+            "grad_ratio": 0.8465962409973145,
+            "overshoot": 0.23485662043094635,
+            "boundary_precision": 0.8354740962386131,
+            "boundary_recall": 0.6048379726707935,
+            "boundary_f1": 0.6626581711073717,
+            "flat_tv": 0.02415056899189949,
+            "flat_tv_gt": 0.0012015864485874772,
+            "flat_tv_ratio": 664.8828125
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+          "metrics": {
+            "absrel_raw": 0.07425465434789658,
+            "absrel_clip_median": 0.06605543196201324,
+            "absrel_edge": 0.08543366193771362,
+            "grad_ratio": 0.7063243389129639,
+            "overshoot": 0.19461792707443237,
+            "boundary_precision": 0.780386286166807,
+            "boundary_recall": 0.6253886645038923,
+            "boundary_f1": 0.6860269733394185,
+            "flat_tv": 0.021800300106406212,
+            "flat_tv_gt": 0.00673291552811861,
+            "flat_tv_ratio": 3.27136492729187
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+          "metrics": {
+            "absrel_raw": 0.08833343535661697,
+            "absrel_clip_median": 0.06305504590272903,
+            "absrel_edge": 0.14723211526870728,
+            "grad_ratio": 0.6077969670295715,
+            "overshoot": 0.11006081104278564,
+            "boundary_precision": 0.8644578885287046,
+            "boundary_recall": 0.3760871884102623,
+            "boundary_f1": 0.4765161502485474,
+            "flat_tv": 0.03033386915922165,
+            "flat_tv_gt": 0.014857528731226921,
+            "flat_tv_ratio": 2.0431504249572754
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+          "metrics": {
+            "absrel_raw": 0.21817384660243988,
+            "absrel_clip_median": 0.05404059588909149,
+            "absrel_edge": 0.21961848437786102,
+            "grad_ratio": 0.7206985950469971,
+            "overshoot": 0.07900340855121613,
+            "boundary_precision": 0.8564204430828491,
+            "boundary_recall": 0.5985715994611382,
+            "boundary_f1": 0.7010221897313992,
+            "flat_tv": 0.020804613828659058,
+            "flat_tv_gt": 0.009696357883512974,
+            "flat_tv_ratio": 2.144193172454834
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+          "metrics": {
+            "absrel_raw": 0.38252392411231995,
+            "absrel_clip_median": 0.0694969967007637,
+            "absrel_edge": 0.3937166631221771,
+            "grad_ratio": 0.7459850311279297,
+            "overshoot": 0.07514989376068115,
+            "boundary_precision": 0.7365029981980721,
+            "boundary_recall": 0.5931777708853284,
+            "boundary_f1": 0.6444659881914655,
+            "flat_tv": 0.016145935282111168,
+            "flat_tv_gt": 0.006097122095525265,
+            "flat_tv_ratio": 2.6469452381134033
+          }
+        }
+      ]
+    },
+    "full_backbone_calls": 256,
+    "frames": 256,
+    "skip_fraction": 0.0,
+    "median_ms": 7.483637513360009,
+    "mean_ms": 7.4874359029308835,
+    "p95_ms": 7.523731736000627,
+    "per_frame_ms": [
+      7.458036008756608,
+      7.451849989593029,
+      7.486209040507674,
+      7.427344040479511,
+      7.4453490087762475,
+      7.48039101017639,
+      7.445809023920447,
+      7.475138991139829,
+      7.460284978151321,
+      7.481626991648227,
+      7.463739020749927,
+      7.48109701089561,
+      7.472306955605745,
+      7.466639974154532,
+      7.509623013902456,
+      7.472602999769151,
+      7.476263970602304,
+      7.46792001882568,
+      7.475170015823096,
+      7.4558870401233435,
+      7.4780459981411695,
+      7.50480400165543,
+      7.490572985261679,
+      7.479237043298781,
+      7.486534013878554,
+      7.4905980145558715,
+      7.457756961230189,
+      7.485199021175504,
+      7.47051095822826,
+      7.485540001653135,
+      7.475522987078875,
+      7.480193045921624,
+      7.700210029724985,
+      7.458960986696184,
+      7.49027100391686,
+      7.4966130196116865,
+      7.4952670256607234,
+      7.462556008249521,
+      7.5008770218119025,
+      7.502253050915897,
+      7.506091962568462,
+      7.490543997846544,
+      7.519469014368951,
+      7.502412947360426,
+      7.508869981393218,
+      7.496422971598804,
+      7.507254020310938,
+      7.529951981268823,
+      7.523784996010363,
+      7.505602028686553,
+      7.523713982664049,
+      7.499688013922423,
+      7.471457007341087,
+      7.510966039262712,
+      7.49423704110086,
+      7.4755370151251554,
+      7.495953992474824,
+      7.496002013795078,
+      7.507365953642875,
+      7.474862039089203,
+      7.515234989114106,
+      7.482524029910564,
+      7.511639967560768,
+      7.516635989304632,
+      7.55343196215108,
+      7.515617995522916,
+      7.473214995115995,
+      7.444182992912829,
+      7.468836032785475,
+      7.4761760188266635,
+      7.52336997538805,
+      7.498206978198141,
+      7.478040992282331,
+      7.4744519661180675,
+      7.490110001526773,
+      7.458489970304072,
+      7.475428050383925,
+      7.504743000026792,
+      7.463745016139001,
+      7.467942021321505,
+      7.459351967554539,
+      7.4705700390040874,
+      7.486803981009871,
+      7.525292981881648,
+      7.465175993274897,
+      7.4819489964284,
+      7.474745973013341,
+      7.462064968422055,
+      7.4744089506566525,
+      7.513289980124682,
+      7.497604005038738,
+      7.4666820000857115,
+      7.477833016309887,
+      7.499553961679339,
+      7.480981992557645,
+      7.463041984010488,
+      7.545985048636794,
+      7.523787033278495,
+      7.52333301352337,
+      7.5315500143915415,
+      7.492726028431207,
+      7.453598023857921,
+      7.488186005502939,
+      7.511303992941976,
+      7.491096039302647,
+      7.507761009037495,
+      7.499172992538661,
+      7.486985996365547,
+      7.467785966582596,
+      7.455390004906803,
+      7.488028961233795,
+      7.479152991436422,
+      7.495103986002505,
+      7.502900960389525,
+      7.472037978004664,
+      7.517971971537918,
+      7.4668770539574325,
+      7.446080970112234,
+      7.483638997655362,
+      7.479930995032191,
+      7.505304994992912,
+      7.511814997997135,
+      7.47360399691388,
+      7.476926955860108,
+      7.514527998864651,
+      7.485272013582289,
+      7.50563497422263,
+      7.4926509987562895,
+      7.555610965937376,
+      7.47809000313282,
+      7.462351000867784,
+      7.472127035725862,
+      7.487168011721224,
+      7.505592016968876,
+      7.470622018445283,
+      7.494907011277974,
+      7.43803899968043,
+      7.455666025634855,
+      7.499937026295811,
+      7.468183990567923,
+      7.4737039976753294,
+      7.540431048255414,
+      7.489899988286197,
+      7.490692019928247,
+      7.4796859989874065,
+      7.463616027962416,
+      7.501971034798771,
+      7.478127023205161,
+      7.4633180047385395,
+      7.4836440035142004,
+      7.452790974639356,
+      7.4815209954977036,
+      7.479110965505242,
+      7.492278004065156,
+      7.487579016014934,
+      7.4660530081018806,
+      7.469860021956265,
+      7.504736015107483,
+      7.454700011294335,
+      7.46737199369818,
+      7.555311021860689,
+      7.483755995053798,
+      7.483636029064655,
+      7.478438958059996,
+      7.5129439937882125,
+      7.4745299643836915,
+      7.471299963071942,
+      7.469477015547454,
+      7.492984004784375,
+      7.488759991247207,
+      7.494275050703436,
+      7.478012994397432,
+      7.502986001782119,
+      7.481788983568549,
+      7.504383043851703,
+      7.5041670352220535,
+      7.509146991651505,
+      7.522950007114559,
+      7.472780009265989,
+      7.468705007340759,
+      7.474113954231143,
+      7.461841974873096,
+      7.4893239652737975,
+      7.509529998060316,
+      7.465675997082144,
+      7.476947968825698,
+      7.475380960386246,
+      7.46998202521354,
+      7.5236979755572975,
+      7.513902965001762,
+      7.483032008167356,
+      7.498810009565204,
+      7.516810030210763,
+      7.480095024220645,
+      7.465777976904064,
+      7.480465981643647,
+      7.510919007472694,
+      7.463941990863532,
+      7.4972130241803825,
+      7.511586009059101,
+      7.478446001186967,
+      7.510890951380134,
+      7.4581290245987475,
+      7.500515028368682,
+      7.478339015506208,
+      7.484275032766163,
+      7.495222962461412,
+      7.469312986359,
+      7.510725990869105,
+      7.477728999219835,
+      7.446229981724173,
+      7.448407995980233,
+      7.508602982852608,
+      7.4677730444818735,
+      7.492733013350517,
+      7.460082997567952,
+      7.47811101609841,
+      7.466484967153519,
+      7.470222015399486,
+      7.50212196726352,
+      7.495336991269141,
+      7.492289005313069,
+      7.515722012612969,
+      7.482565997634083,
+      7.544722990132868,
+      7.4752900400199,
+      7.484988018404692,
+      7.462219975423068,
+      7.491968979593366,
+      7.526235014665872,
+      7.46180402347818,
+      7.488831004593521,
+      7.503063010517508,
+      7.466984970960766,
+      7.505385030526668,
+      7.475933991372585,
+      7.474758953321725,
+      7.47464201413095,
+      7.480288972146809,
+      7.4691129848361015,
+      7.481820997782052,
+      7.488912029657513,
+      7.4887570226565,
+      7.516141980886459,
+      7.501629996113479,
+      7.491458032745868,
+      7.488458999432623,
+      7.497047015931457,
+      7.477673992980272,
+      7.480036991182715,
+      7.484773988835514,
+      7.509035989642143,
+      7.482853019610047,
+      7.48290098272264,
+      7.49581801937893,
+      7.458510983269662
+    ],
+    "telemetry": [
+      {
+        "clip": 0,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          }
+        ]
+      },
+      {
+        "clip": 1,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          }
+        ]
+      },
+      {
+        "clip": 2,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          }
+        ]
+      },
+      {
+        "clip": 3,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          }
+        ]
+      },
+      {
+        "clip": 4,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          }
+        ]
+      },
+      {
+        "clip": 5,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          }
+        ]
+      },
+      {
+        "clip": 6,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          }
+        ]
+      },
+      {
+        "clip": 7,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1
+          }
+        ]
+      }
+    ]
+  },
+  "policies": {
+    "K2": {
+      "metrics": {
+        "balanced": {
+          "absrel_raw": 0.1284595935915907,
+          "absrel_clip_median": 0.08160779004295668,
+          "absrel_edge": 0.15795826725661755,
+          "grad_ratio": 0.7341078768173854,
+          "overshoot": 0.17151032264033955,
+          "boundary_precision": 0.7910900117648352,
+          "boundary_recall": 0.6017277124079152,
+          "boundary_f1": 0.6582945491989247,
+          "flat_tv": 0.024156817390273012,
+          "flat_tv_gt": 0.005542817942720527,
+          "flat_tv_ratio": 60.28528400262197
+        },
+        "sources": {
+          "tum": {
+            "absrel_raw": 0.08615900948643684,
+            "absrel_clip_median": 0.07986248284578323,
+            "absrel_edge": 0.1380651295185089,
+            "grad_ratio": 0.7086194753646851,
+            "overshoot": 0.12588850781321526,
+            "boundary_precision": 0.7930484860359381,
+            "boundary_recall": 0.6441358219211301,
+            "boundary_f1": 0.6925254426896572,
+            "flat_tv": 0.02645689994096756,
+            "flat_tv_gt": 0.004203296848572791,
+            "flat_tv_ratio": 6.9841461181640625
+          },
+          "bonn": {
+            "absrel_raw": 0.1707601776967446,
+            "absrel_clip_median": 0.08335309724013011,
+            "absrel_edge": 0.17785140499472618,
+            "grad_ratio": 0.7595962782700857,
+            "overshoot": 0.21713213746746382,
+            "boundary_precision": 0.7891315374937321,
+            "boundary_recall": 0.5593196028947003,
+            "boundary_f1": 0.6240636557081921,
+            "flat_tv": 0.02185673483957847,
+            "flat_tv_gt": 0.006882339036868264,
+            "flat_tv_ratio": 113.58642188707988
+          }
+        },
+        "clips": [
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.07311397790908813,
+              "absrel_clip_median": 0.0733722671866417,
+              "absrel_edge": 0.1301097869873047,
+              "grad_ratio": 0.7489900588989258,
+              "overshoot": 0.15488201379776,
+              "boundary_precision": 0.8202765295282006,
+              "boundary_recall": 0.6985137642671665,
+              "boundary_f1": 0.7444501438488563,
+              "flat_tv": 0.03154300898313522,
+              "flat_tv_gt": 0.005831369198858738,
+              "flat_tv_ratio": 5.441509246826172
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.09920404106378555,
+              "absrel_clip_median": 0.08635269850492477,
+              "absrel_edge": 0.14602047204971313,
+              "grad_ratio": 0.6682488918304443,
+              "overshoot": 0.0968950018286705,
+              "boundary_precision": 0.7658204425436755,
+              "boundary_recall": 0.5897578795750936,
+              "boundary_f1": 0.6406007415304581,
+              "flat_tv": 0.021370790898799896,
+              "flat_tv_gt": 0.0025752244982868433,
+              "flat_tv_ratio": 8.526782989501953
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.20494534075260162,
+              "absrel_clip_median": 0.20437197387218475,
+              "absrel_edge": 0.15232603251934052,
+              "grad_ratio": 1.0681957006454468,
+              "overshoot": 0.6032685041427612,
+              "boundary_precision": 0.7143421607712904,
+              "boundary_recall": 0.6023550260191163,
+              "boundary_f1": 0.6204610358302792,
+              "flat_tv": 0.016423076391220093,
+              "flat_tv_gt": 0.0027085235342383385,
+              "flat_tv_ratio": 6.159689903259277
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.04756641760468483,
+              "absrel_clip_median": 0.042589277029037476,
+              "absrel_edge": 0.06239410489797592,
+              "grad_ratio": 0.8320958614349365,
+              "overshoot": 0.23849667608737946,
+              "boundary_precision": 0.8316474271317323,
+              "boundary_recall": 0.5984665406867862,
+              "boundary_f1": 0.657020672224462,
+              "flat_tv": 0.02459050342440605,
+              "flat_tv_gt": 0.0012015864485874772,
+              "flat_tv_ratio": 665.114990234375
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.07550376653671265,
+              "absrel_clip_median": 0.06771229207515717,
+              "absrel_edge": 0.08782118558883667,
+              "grad_ratio": 0.6529533863067627,
+              "overshoot": 0.1924334168434143,
+              "boundary_precision": 0.7507625377426544,
+              "boundary_recall": 0.5936194056024154,
+              "boundary_f1": 0.6548211405364176,
+              "flat_tv": 0.022734712809324265,
+              "flat_tv_gt": 0.00673291552811861,
+              "flat_tv_ratio": 3.406501293182373
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.08976823091506958,
+              "absrel_clip_median": 0.06223424896597862,
+              "absrel_edge": 0.14674971997737885,
+              "grad_ratio": 0.5963870882987976,
+              "overshoot": 0.11156429350376129,
+              "boundary_precision": 0.858887872348229,
+              "boundary_recall": 0.3685267999147375,
+              "boundary_f1": 0.4695888652155797,
+              "flat_tv": 0.030295535922050476,
+              "flat_tv_gt": 0.014857528731226921,
+              "flat_tv_ratio": 2.040604829788208
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.21966823935508728,
+              "absrel_clip_median": 0.05329051986336708,
+              "absrel_edge": 0.21877960860729218,
+              "grad_ratio": 0.7084461450576782,
+              "overshoot": 0.08002373576164246,
+              "boundary_precision": 0.8437981655200323,
+              "boundary_recall": 0.5972411551823219,
+              "boundary_f1": 0.6954235980908076,
+              "flat_tv": 0.02108153887093067,
+              "flat_tv_gt": 0.009696357883512974,
+              "flat_tv_ratio": 2.172146797180176
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.38710907101631165,
+              "absrel_clip_median": 0.06992027163505554,
+              "absrel_edge": 0.39903777837753296,
+              "grad_ratio": 0.6994994878768921,
+              "overshoot": 0.07700619846582413,
+              "boundary_precision": 0.7353510614484549,
+              "boundary_recall": 0.5957086899628242,
+              "boundary_f1": 0.6470666223516067,
+              "flat_tv": 0.01601504161953926,
+              "flat_tv_gt": 0.006097122095525265,
+              "flat_tv_ratio": 2.624598264694214
+            }
+          }
+        ]
+      },
+      "full_backbone_calls": 128,
+      "frames": 256,
+      "skip_fraction": 0.5,
+      "median_ms": 4.919122526189312,
+      "mean_ms": 4.875197950241272,
+      "p95_ms": 7.606667000800371,
+      "per_frame_ms": [
+        7.591854024212807,
+        2.203261014074087,
+        7.61966803111136,
+        2.190388971939683,
+        7.570420973934233,
+        2.1513079991564155,
+        7.579105964396149,
+        2.1658139885403216,
+        7.57102103671059,
+        2.142153971362859,
+        7.592289999593049,
+        2.1121559548191726,
+        7.56739400094375,
+        2.168572973459959,
+        7.593283022288233,
+        2.162747026886791,
+        7.579618017189205,
+        2.1501390147022903,
+        7.578589953482151,
+        2.1323170512914658,
+        7.5650649960152805,
+        2.1588639938272536,
+        7.59105000179261,
+        2.16337398160249,
+        7.589252025354654,
+        2.2030650288797915,
+        7.570045010652393,
+        2.135135990101844,
+        7.538004021625966,
+        2.154887013603002,
+        7.5707799987867475,
+        2.116931020282209,
+        7.706000003963709,
+        2.300241030752659,
+        7.643643009942025,
+        2.1735369809903204,
+        7.578499964438379,
+        2.2211039904505014,
+        7.604176003951579,
+        2.119031036272645,
+        7.592026027850807,
+        2.18804000178352,
+        7.601724995765835,
+        2.1145869977772236,
+        7.591751986183226,
+        2.1706700208596885,
+        7.59351096348837,
+        2.119364042300731,
+        7.612668036017567,
+        2.1407509921118617,
+        7.6147199724800885,
+        2.231533988378942,
+        7.567749998997897,
+        2.244306029751897,
+        7.592228997964412,
+        2.1103640319779515,
+        7.598451978992671,
+        2.165724989026785,
+        7.572084025014192,
+        2.190200029872358,
+        7.593946007546037,
+        2.219952002633363,
+        7.558873970992863,
+        2.1626210073009133,
+        7.626516977325082,
+        2.2385880001820624,
+        7.569762994535267,
+        2.231944992672652,
+        7.569077017251402,
+        2.2188840084709227,
+        7.605566002894193,
+        2.1784959826618433,
+        7.574910006951541,
+        2.123994054272771,
+        7.566336949821562,
+        2.1461350261233747,
+        7.558763027191162,
+        2.232977014500648,
+        7.565352017991245,
+        2.173401997424662,
+        7.560739992186427,
+        2.102110011037439,
+        7.546774984803051,
+        2.1809209720231593,
+        7.543936022557318,
+        2.1122789476066828,
+        7.549170055426657,
+        2.1702820085920393,
+        7.56504200398922,
+        2.1123989718034863,
+        7.573467039037496,
+        2.199360984377563,
+        7.575841969810426,
+        2.168831997551024,
+        7.552691036835313,
+        2.1715330076403916,
+        7.610236993059516,
+        2.212888968642801,
+        7.6074349926784635,
+        2.1873749792575836,
+        7.576231029815972,
+        2.178303024265915,
+        7.559827994555235,
+        2.127191983163357,
+        7.555174001026899,
+        2.159170981030911,
+        7.558754994533956,
+        2.141761011444032,
+        7.539307000115514,
+        2.2139709908515215,
+        7.5723539921455085,
+        2.1374389762058854,
+        7.566703017801046,
+        2.208263031207025,
+        7.565781997982413,
+        2.195699024014175,
+        7.5444650137797,
+        2.2040189942345023,
+        7.580755976960063,
+        2.184224023949355,
+        7.575886964332312,
+        2.1935730474069715,
+        7.556449971161783,
+        2.178970957174897,
+        7.580061967018992,
+        2.1954679978080094,
+        7.606160012073815,
+        2.1674659801647067,
+        7.670140010304749,
+        2.239820023532957,
+        7.56926997564733,
+        2.2121210349723697,
+        7.5561669655144215,
+        2.2221250110305846,
+        7.568340981379151,
+        2.1773449843749404,
+        7.552860013674945,
+        2.1593160345219076,
+        7.612720015458763,
+        2.1475820103660226,
+        7.56178901065141,
+        2.200247021391988,
+        7.54926900845021,
+        2.1561110042966902,
+        7.546883018221706,
+        2.1687609842047095,
+        7.595405972097069,
+        2.1175919682718813,
+        7.575362978968769,
+        2.122766978573054,
+        7.563133025541902,
+        2.1639009937644005,
+        7.583474973216653,
+        2.2698130342178047,
+        7.582160003948957,
+        2.196980989538133,
+        7.5426900293678045,
+        2.1919860155321658,
+        7.592110021505505,
+        2.147877006791532,
+        7.616440998390317,
+        2.165494952350855,
+        7.580929028335959,
+        2.234099025372416,
+        7.589490967802703,
+        2.1941279992461205,
+        7.569965033326298,
+        2.1096320124343038,
+        7.582695980090648,
+        2.258248976431787,
+        7.592679001390934,
+        2.176487003453076,
+        7.568997971247882,
+        2.124836959410459,
+        7.5844969833269715,
+        2.1615499863401055,
+        7.559842022601515,
+        2.150561020243913,
+        7.565646024886519,
+        2.123521000612527,
+        7.552199997007847,
+        2.1719979704357684,
+        7.58200598647818,
+        2.188806014601141,
+        7.549477042630315,
+        2.2073439904488623,
+        7.54065002547577,
+        2.1496950066648424,
+        7.588893000502139,
+        2.121540019288659,
+        7.541943050455302,
+        2.1637349855154753,
+        7.606411003507674,
+        2.1994499838910997,
+        7.573092996608466,
+        2.1092960378155112,
+        7.594295020680875,
+        2.137821982614696,
+        7.58580002002418,
+        2.1065439796075225,
+        7.552043010946363,
+        2.151341992430389,
+        7.5462309760041535,
+        2.1487119956873357,
+        7.546373992227018,
+        2.1899639978073537,
+        7.56355602061376,
+        2.1240420173853636,
+        7.6229090336710215,
+        2.1486980258487165,
+        7.553294999524951,
+        2.2071769926697016,
+        7.579550961963832,
+        2.159614989068359,
+        7.599756994750351,
+        2.1762469550594687,
+        7.5836770120076835,
+        2.1623969660140574,
+        7.561456004623324,
+        2.1342799882404506,
+        7.551538001280278,
+        2.1690860157832503,
+        7.600468001328409,
+        2.1784930140711367,
+        7.626817969139665,
+        2.2883779602125287,
+        7.592792971991003,
+        2.192029030993581,
+        7.584309030789882,
+        2.1224559750407934,
+        7.549378031399101,
+        2.127057989127934,
+        7.602480007335544,
+        2.1791099570691586,
+        7.586969004478306,
+        2.1197139867581427,
+        7.561000005807728,
+        2.2043759818188846,
+        7.558670011349022,
+        2.1892570075578988,
+        7.557614997494966,
+        2.220112015493214,
+        7.595866976771504,
+        2.130949986167252,
+        7.56795599590987,
+        2.2706580348312855,
+        7.585496001411229,
+        2.1385500440374017,
+        7.560172991361469,
+        2.1940949955023825,
+        7.580181991215795,
+        2.1983060287311673,
+        7.546188018750399,
+        2.160308009479195,
+        7.566372980363667,
+        2.2051859996281564
+      ],
+      "telemetry": [
+        {
+          "clip": 0,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8750913143157959,
+              "updated_patches": 1198,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8897005319595337,
+              "updated_patches": 1218,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8933528661727905,
+              "updated_patches": 1223,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6530314087867737,
+              "updated_patches": 894,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7027027010917664,
+              "updated_patches": 962,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.853177547454834,
+              "updated_patches": 1168,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9057706594467163,
+              "updated_patches": 1240,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.869978129863739,
+              "updated_patches": 1191,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.910883903503418,
+              "updated_patches": 1247,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9043097496032715,
+              "updated_patches": 1238,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8758218288421631,
+              "updated_patches": 1199,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.88093501329422,
+              "updated_patches": 1206,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8188459277153015,
+              "updated_patches": 1121,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9415632486343384,
+              "updated_patches": 1289,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9342586398124695,
+              "updated_patches": 1279,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9079620242118835,
+              "updated_patches": 1243,
+              "cache_age": 1,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 1,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7947407364845276,
+              "updated_patches": 1088,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7801315188407898,
+              "updated_patches": 1068,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8655953407287598,
+              "updated_patches": 1185,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9240321516990662,
+              "updated_patches": 1265,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9240321516990662,
+              "updated_patches": 1265,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.840029239654541,
+              "updated_patches": 1150,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9196494221687317,
+              "updated_patches": 1259,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9057706594467163,
+              "updated_patches": 1240,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.910883903503418,
+              "updated_patches": 1247,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9013879299163818,
+              "updated_patches": 1234,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8049671649932861,
+              "updated_patches": 1102,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8933528661727905,
+              "updated_patches": 1223,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9094229936599731,
+              "updated_patches": 1245,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9218407869338989,
+              "updated_patches": 1262,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.91453617811203,
+              "updated_patches": 1252,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9313367605209351,
+              "updated_patches": 1275,
+              "cache_age": 1,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 2,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5967860221862793,
+              "updated_patches": 817,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6172388792037964,
+              "updated_patches": 845,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6289262771606445,
+              "updated_patches": 861,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6355003714561462,
+              "updated_patches": 870,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6639883518218994,
+              "updated_patches": 909,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 1.0,
+              "updated_patches": 1369,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.704163670539856,
+              "updated_patches": 964,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7070854902267456,
+              "updated_patches": 968,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 1.0,
+              "updated_patches": 1369,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9992696046829224,
+              "updated_patches": 1368,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6128561496734619,
+              "updated_patches": 839,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6376917958259583,
+              "updated_patches": 873,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6092038154602051,
+              "updated_patches": 834,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5938641428947449,
+              "updated_patches": 813,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6523009538650513,
+              "updated_patches": 893,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.701972246170044,
+              "updated_patches": 961,
+              "cache_age": 1,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 3,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5544192790985107,
+              "updated_patches": 759,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5339664220809937,
+              "updated_patches": 731,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5573411583900452,
+              "updated_patches": 763,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5639153122901917,
+              "updated_patches": 772,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5602629780769348,
+              "updated_patches": 767,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4645726978778839,
+              "updated_patches": 636,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5346968770027161,
+              "updated_patches": 732,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.48210373520851135,
+              "updated_patches": 660,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.43170198798179626,
+              "updated_patches": 591,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4214755594730377,
+              "updated_patches": 577,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4200146198272705,
+              "updated_patches": 575,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4141709506511688,
+              "updated_patches": 567,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4346238374710083,
+              "updated_patches": 595,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.43024107813835144,
+              "updated_patches": 589,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.24543462693691254,
+              "updated_patches": 336,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.352081835269928,
+              "updated_patches": 482,
+              "cache_age": 1,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 4,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7231556177139282,
+              "updated_patches": 990,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7618700265884399,
+              "updated_patches": 1043,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7757487297058105,
+              "updated_patches": 1062,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7311906814575195,
+              "updated_patches": 1001,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7713660001754761,
+              "updated_patches": 1056,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7940102815628052,
+              "updated_patches": 1087,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7238860726356506,
+              "updated_patches": 991,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7216947078704834,
+              "updated_patches": 988,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.735573410987854,
+              "updated_patches": 1007,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7304602265357971,
+              "updated_patches": 1000,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.701972246170044,
+              "updated_patches": 961,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7253469824790955,
+              "updated_patches": 993,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7275384068489075,
+              "updated_patches": 996,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.748721718788147,
+              "updated_patches": 1025,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7063550353050232,
+              "updated_patches": 967,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7107377648353577,
+              "updated_patches": 973,
+              "cache_age": 1,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 5,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6654492616653442,
+              "updated_patches": 911,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6756756901741028,
+              "updated_patches": 925,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6596055626869202,
+              "updated_patches": 903,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6143170595169067,
+              "updated_patches": 841,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5222790837287903,
+              "updated_patches": 715,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5441928505897522,
+              "updated_patches": 745,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5222790837287903,
+              "updated_patches": 715,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4550767242908478,
+              "updated_patches": 623,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.501095712184906,
+              "updated_patches": 686,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 1.0,
+              "updated_patches": 1369,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9693207144737244,
+              "updated_patches": 1327,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.32870709896087646,
+              "updated_patches": 450,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4054054319858551,
+              "updated_patches": 555,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.562454342842102,
+              "updated_patches": 770,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.512052595615387,
+              "updated_patches": 701,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4696859121322632,
+              "updated_patches": 643,
+              "cache_age": 1,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 6,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6449963450431824,
+              "updated_patches": 883,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6785975694656372,
+              "updated_patches": 929,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7282688617706299,
+              "updated_patches": 997,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6771366000175476,
+              "updated_patches": 927,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.691015362739563,
+              "updated_patches": 946,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7100073099136353,
+              "updated_patches": 972,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6260043978691101,
+              "updated_patches": 857,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7070854902267456,
+              "updated_patches": 968,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6844412088394165,
+              "updated_patches": 937,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.707815945148468,
+              "updated_patches": 969,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7421475648880005,
+              "updated_patches": 1016,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7436084747314453,
+              "updated_patches": 1018,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5807158946990967,
+              "updated_patches": 795,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5471147298812866,
+              "updated_patches": 749,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6267348527908325,
+              "updated_patches": 858,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7414171099662781,
+              "updated_patches": 1015,
+              "cache_age": 1,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 7,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7837837934494019,
+              "updated_patches": 1073,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7326515913009644,
+              "updated_patches": 1003,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7713660001754761,
+              "updated_patches": 1056,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5945945978164673,
+              "updated_patches": 814,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8166545033454895,
+              "updated_patches": 1118,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8356465101242065,
+              "updated_patches": 1144,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7998539209365845,
+              "updated_patches": 1095,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8108108639717102,
+              "updated_patches": 1110,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.663257896900177,
+              "updated_patches": 908,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7260774374008179,
+              "updated_patches": 994,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6807889342308044,
+              "updated_patches": 932,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.79547119140625,
+              "updated_patches": 1089,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9970781803131104,
+              "updated_patches": 1365,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7896274924278259,
+              "updated_patches": 1081,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8246895670890808,
+              "updated_patches": 1129,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.720964252948761,
+              "updated_patches": 987,
+              "cache_age": 1,
+              "warp": false
+            }
+          ]
+        }
+      ],
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "speedup": 1.5358219254585,
+      "screen_pass": true
+    },
+    "K4": {
+      "metrics": {
+        "balanced": {
+          "absrel_raw": 0.13077053396652144,
+          "absrel_clip_median": 0.08343432222803435,
+          "absrel_edge": 0.16321191502114135,
+          "grad_ratio": 0.6700165073076885,
+          "overshoot": 0.1717532891780138,
+          "boundary_precision": 0.7659736617869284,
+          "boundary_recall": 0.5763415423894509,
+          "boundary_f1": 0.6316972592806753,
+          "flat_tv": 0.0247871403892835,
+          "flat_tv_gt": 0.005542817942720527,
+          "flat_tv_ratio": 60.61871232589086
+        },
+        "sources": {
+          "tum": {
+            "absrel_raw": 0.08586626127362251,
+            "absrel_clip_median": 0.07972360774874687,
+            "absrel_edge": 0.1435323730111122,
+            "grad_ratio": 0.6624157130718231,
+            "overshoot": 0.12446297705173492,
+            "boundary_precision": 0.7920075639461478,
+            "boundary_recall": 0.6318853731499985,
+            "boundary_f1": 0.6821102489484474,
+            "flat_tv": 0.025990338996052742,
+            "flat_tv_gt": 0.004203296848572791,
+            "flat_tv_ratio": 6.956655025482178
+          },
+          "bonn": {
+            "absrel_raw": 0.17567480665942034,
+            "absrel_clip_median": 0.08714503670732181,
+            "absrel_edge": 0.18289145703117052,
+            "grad_ratio": 0.6776173015435537,
+            "overshoot": 0.21904360130429268,
+            "boundary_precision": 0.739939759627709,
+            "boundary_recall": 0.5207977116289032,
+            "boundary_f1": 0.5812842696129034,
+            "flat_tv": 0.023583941782514255,
+            "flat_tv_gt": 0.006882339036868264,
+            "flat_tv_ratio": 114.28076962629954
+          }
+        },
+        "clips": [
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.07196488976478577,
+              "absrel_clip_median": 0.07244426012039185,
+              "absrel_edge": 0.13635101914405823,
+              "grad_ratio": 0.6853302121162415,
+              "overshoot": 0.15503305196762085,
+              "boundary_precision": 0.8127826064204177,
+              "boundary_recall": 0.6795504561935862,
+              "boundary_f1": 0.7294113148624698,
+              "flat_tv": 0.02985663339495659,
+              "flat_tv_gt": 0.005831369198858738,
+              "flat_tv_ratio": 5.144648551940918
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.09976763278245926,
+              "absrel_clip_median": 0.0870029553771019,
+              "absrel_edge": 0.1507137268781662,
+              "grad_ratio": 0.6395012140274048,
+              "overshoot": 0.093892902135849,
+              "boundary_precision": 0.7712325214718779,
+              "boundary_recall": 0.5842202901064107,
+              "boundary_f1": 0.634809183034425,
+              "flat_tv": 0.022124044597148895,
+              "flat_tv_gt": 0.0025752244982868433,
+              "flat_tv_ratio": 8.768661499023438
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.2152324765920639,
+              "absrel_clip_median": 0.21492347121238708,
+              "absrel_edge": 0.16336962580680847,
+              "grad_ratio": 0.9619637727737427,
+              "overshoot": 0.5800975561141968,
+              "boundary_precision": 0.6518424421859285,
+              "boundary_recall": 0.5460522817447782,
+              "boundary_f1": 0.5624563040522238,
+              "flat_tv": 0.0201495923101902,
+              "flat_tv_gt": 0.0027085235342383385,
+              "flat_tv_ratio": 7.462918281555176
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.049387332051992416,
+              "absrel_clip_median": 0.0454443022608757,
+              "absrel_edge": 0.06564895063638687,
+              "grad_ratio": 0.7828169465065002,
+              "overshoot": 0.2380952388048172,
+              "boundary_precision": 0.7991276091585556,
+              "boundary_recall": 0.5804176817958554,
+              "boundary_f1": 0.6323733090733489,
+              "flat_tv": 0.02785016968846321,
+              "flat_tv_gt": 0.0012015864485874772,
+              "flat_tv_ratio": 667.4580688476562
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.0819869115948677,
+              "absrel_clip_median": 0.07084861397743225,
+              "absrel_edge": 0.09498290717601776,
+              "grad_ratio": 0.551163911819458,
+              "overshoot": 0.191572368144989,
+              "boundary_precision": 0.6864253331441432,
+              "boundary_recall": 0.5375426053069532,
+              "boundary_f1": 0.5946267220812539,
+              "flat_tv": 0.025203075259923935,
+              "flat_tv_gt": 0.00673291552811861,
+              "flat_tv_ratio": 3.8108251094818115
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.09122902154922485,
+              "absrel_clip_median": 0.06341921538114548,
+              "absrel_edge": 0.14600297808647156,
+              "grad_ratio": 0.5238890051841736,
+              "overshoot": 0.13693612813949585,
+              "boundary_precision": 0.8045419853491088,
+              "boundary_recall": 0.33149141321579617,
+              "boundary_f1": 0.4250062624923885,
+              "flat_tv": 0.030595099553465843,
+              "flat_tv_gt": 0.014857528731226921,
+              "flat_tv_ratio": 2.060053586959839
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.22667823731899261,
+              "absrel_clip_median": 0.05502007156610489,
+              "absrel_edge": 0.2232344150543213,
+              "grad_ratio": 0.6508121490478516,
+              "overshoot": 0.08287954330444336,
+              "boundary_precision": 0.8156362042451898,
+              "boundary_recall": 0.5830193056414524,
+              "boundary_f1": 0.6755954278632998,
+              "flat_tv": 0.021223632618784904,
+              "flat_tv_gt": 0.009696357883512974,
+              "flat_tv_ratio": 2.1877782344818115
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.3895348608493805,
+              "absrel_clip_median": 0.07321454584598541,
+              "absrel_edge": 0.4041098654270172,
+              "grad_ratio": 0.595058023929596,
+              "overshoot": 0.08468077331781387,
+              "boundary_precision": 0.6820649836833278,
+              "boundary_recall": 0.5462629820685834,
+              "boundary_f1": 0.5976475921149055,
+              "flat_tv": 0.01648208126425743,
+              "flat_tv_gt": 0.006097122095525265,
+              "flat_tv_ratio": 2.7049736976623535
+            }
+          }
+        ]
+      },
+      "full_backbone_calls": 64,
+      "frames": 256,
+      "skip_fraction": 0.75,
+      "median_ms": 2.147791994502768,
+      "mean_ms": 3.4907261319858662,
+      "p95_ms": 7.588140215375461,
+      "per_frame_ms": [
+        7.560781028587371,
+        2.31046398403123,
+        2.2381030139513314,
+        2.1433840156532824,
+        7.5601679855026305,
+        2.118747972417623,
+        2.197599969804287,
+        2.1122859907336533,
+        7.542614999692887,
+        2.1115480340085924,
+        2.169214014429599,
+        2.135491988155991,
+        7.5398070039227605,
+        2.102692029438913,
+        2.094064955599606,
+        2.104471030179411,
+        7.5520999962463975,
+        2.094672992825508,
+        2.112862013746053,
+        2.1216909517534077,
+        7.5663760071620345,
+        2.115821000188589,
+        2.201218972913921,
+        2.1481899893842638,
+        7.593149959575385,
+        2.1364520071074367,
+        2.18103697989136,
+        2.102942962665111,
+        7.549514004494995,
+        2.0915810018777847,
+        2.193049993366003,
+        2.077773038763553,
+        7.654941000510007,
+        2.1676060277968645,
+        2.2073109867051244,
+        2.1056229597888887,
+        7.588470994960517,
+        2.1701829973608255,
+        2.1716260234825313,
+        2.1035870304331183,
+        7.569484005216509,
+        2.1083360188640654,
+        2.1144349593669176,
+        2.1530649974010885,
+        7.588029955513775,
+        2.146282000467181,
+        2.1757129579782486,
+        2.0913970074616373,
+        7.5829229899682105,
+        2.194472006522119,
+        2.2208300069905818,
+        2.1964559564366937,
+        7.571191992610693,
+        2.166652004234493,
+        2.2777720005251467,
+        2.1481600124388933,
+        7.593808986712247,
+        2.1259060013107955,
+        2.236862957943231,
+        2.1800239919684827,
+        7.576169969979674,
+        2.1950920345261693,
+        2.209779981058091,
+        2.193877997342497,
+        7.664698990993202,
+        2.2248069872148335,
+        2.248039992991835,
+        2.0913169719278812,
+        7.551983988378197,
+        2.090770984068513,
+        2.1267629927024245,
+        2.0514719653874636,
+        7.549784961156547,
+        2.0700179738923907,
+        2.0937860244885087,
+        2.128677035216242,
+        7.536155986599624,
+        2.126945008058101,
+        2.1386779844760895,
+        2.0954280043952167,
+        7.528634974732995,
+        2.0750369876623154,
+        2.1089239744469523,
+        2.069334965199232,
+        7.537620957009494,
+        2.1206639939919114,
+        2.1651220158673823,
+        2.0761810010299087,
+        7.55667599150911,
+        2.1130749955773354,
+        2.1967299981042743,
+        2.0925599965266883,
+        7.560703030321747,
+        2.1097249700687826,
+        2.1707300329580903,
+        2.06185900606215,
+        7.638634997420013,
+        2.170659019611776,
+        2.202408970333636,
+        2.1205199882388115,
+        7.563433959148824,
+        2.094027993734926,
+        2.1788979647681117,
+        2.0809000125154853,
+        7.516674988437444,
+        2.080817997921258,
+        2.1547419601120055,
+        2.1381230326369405,
+        7.525330991484225,
+        2.1214820444583893,
+        2.116071991622448,
+        2.1153480047360063,
+        7.563955034129322,
+        2.107161039020866,
+        2.1864160080440342,
+        2.1390499896369874,
+        7.542813953477889,
+        2.074756019283086,
+        2.173947053961456,
+        2.0994190126657486,
+        7.562595012132078,
+        2.120944031048566,
+        2.1778210066258907,
+        2.0812780130654573,
+        7.549306028522551,
+        2.114236995112151,
+        2.155985974241048,
+        2.092381997499615,
+        7.64955795602873,
+        2.181571035180241,
+        2.1349579910747707,
+        2.101769030559808,
+        7.555332034826279,
+        2.1146709914319217,
+        2.1709909779019654,
+        2.0497419754974544,
+        7.548538967967033,
+        2.1302470122464,
+        2.107434964273125,
+        2.0726390066556633,
+        7.557139033451676,
+        2.1168480161577463,
+        2.1484539611265063,
+        2.0819519995711744,
+        7.526932982727885,
+        2.0912160398438573,
+        2.1788509911857545,
+        2.104233019053936,
+        7.519225007854402,
+        2.089237968903035,
+        2.138572046533227,
+        2.084237989038229,
+        7.54633400356397,
+        2.093263028655201,
+        2.112796006258577,
+        2.1194529836066067,
+        7.548493042122573,
+        2.1121969912201166,
+        2.1119120065122843,
+        2.0808519911952317,
+        7.607943029142916,
+        2.131204993929714,
+        2.1842109854333103,
+        2.0694760023616254,
+        7.598634983878583,
+        2.0927830482833087,
+        2.151816035620868,
+        2.0720299798995256,
+        7.54315301310271,
+        2.14043800951913,
+        2.130865992512554,
+        2.0904740085825324,
+        7.562570972368121,
+        2.104597049765289,
+        2.1313599427230656,
+        2.1066630142740905,
+        7.569635985419154,
+        2.0858729840256274,
+        2.0919069647789,
+        2.0796619937755167,
+        7.530570030212402,
+        2.087588014546782,
+        2.11544701596722,
+        2.0983080030418932,
+        7.524195010773838,
+        2.095318981446326,
+        2.1313459728844464,
+        2.0708380034193397,
+        7.560583995655179,
+        2.0992709905840456,
+        2.158246992621571,
+        2.093220013193786,
+        7.6327299466356635,
+        2.172315027564764,
+        2.184986020438373,
+        2.111291978508234,
+        7.5854730093851686,
+        2.1252980222925544,
+        2.1447380422614515,
+        2.0602120202966034,
+        7.557257020380348,
+        2.116894000209868,
+        2.1685640094801784,
+        2.079673984553665,
+        7.5577429961413145,
+        2.112151007167995,
+        2.0800550119020045,
+        2.100973972119391,
+        7.593324000481516,
+        2.0981859997846186,
+        2.1096079726703465,
+        2.069943002425134,
+        7.579220982734114,
+        2.150583954062313,
+        2.068720990791917,
+        2.196821034885943,
+        7.570144021883607,
+        2.1990800159983337,
+        2.249772020149976,
+        2.1659110207110643,
+        7.606250001117587,
+        2.139340969733894,
+        2.2385279880836606,
+        2.149859967175871,
+        7.59544997708872,
+        2.179723000153899,
+        2.2259800462052226,
+        2.0964490249753,
+        7.581812969874591,
+        2.117144991643727,
+        2.0910800085403025,
+        2.124661987181753,
+        7.577526033855975,
+        2.0945370197296143,
+        2.1502100280486047,
+        2.037596015725285,
+        7.511464995332062,
+        2.0848209969699383,
+        2.185133984312415,
+        2.0691700046882033,
+        7.560579048004001,
+        2.192211977671832,
+        2.2763220476917922,
+        2.1385999862104654,
+        7.563111954368651,
+        2.1474239765666425,
+        2.120024000760168,
+        2.128837048076093,
+        7.531241979449987,
+        2.0946210133843124,
+        2.1713919704779983,
+        2.129443979356438,
+        7.555864052847028,
+        2.102447033394128,
+        2.1990090026520193,
+        2.16748402453959
+      ],
+      "telemetry": [
+        {
+          "clip": 0,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8750913143157959,
+              "updated_patches": 1198,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8955442309379578,
+              "updated_patches": 1226,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8371074199676514,
+              "updated_patches": 1146,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8933528661727905,
+              "updated_patches": 1223,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8692476749420166,
+              "updated_patches": 1190,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8765522837638855,
+              "updated_patches": 1200,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7027027010917664,
+              "updated_patches": 962,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8290723562240601,
+              "updated_patches": 1135,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8816654682159424,
+              "updated_patches": 1207,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9057706594467163,
+              "updated_patches": 1240,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9254931211471558,
+              "updated_patches": 1267,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9408327341079712,
+              "updated_patches": 1288,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.910883903503418,
+              "updated_patches": 1247,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9379109144210815,
+              "updated_patches": 1284,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9481373429298401,
+              "updated_patches": 1298,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8758218288421631,
+              "updated_patches": 1199,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.938641369342804,
+              "updated_patches": 1285,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.938641369342804,
+              "updated_patches": 1285,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8188459277153015,
+              "updated_patches": 1121,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9393718242645264,
+              "updated_patches": 1286,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.968590259552002,
+              "updated_patches": 1326,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9342586398124695,
+              "updated_patches": 1279,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.944485068321228,
+              "updated_patches": 1293,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9612856507301331,
+              "updated_patches": 1316,
+              "cache_age": 3,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 1,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7947407364845276,
+              "updated_patches": 1088,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7165814638137817,
+              "updated_patches": 981,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5858290791511536,
+              "updated_patches": 802,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8655953407287598,
+              "updated_patches": 1185,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8078889846801758,
+              "updated_patches": 1106,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9159970879554749,
+              "updated_patches": 1254,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9240321516990662,
+              "updated_patches": 1265,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9335281848907471,
+              "updated_patches": 1278,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9130752682685852,
+              "updated_patches": 1250,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9196494221687317,
+              "updated_patches": 1259,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9152666330337524,
+              "updated_patches": 1253,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.944485068321228,
+              "updated_patches": 1293,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.910883903503418,
+              "updated_patches": 1247,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7472608089447021,
+              "updated_patches": 1023,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.853177547454834,
+              "updated_patches": 1168,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8049671649932861,
+              "updated_patches": 1102,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9072315692901611,
+              "updated_patches": 1242,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9313367605209351,
+              "updated_patches": 1275,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9094229936599731,
+              "updated_patches": 1245,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9225712418556213,
+              "updated_patches": 1263,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9525201320648193,
+              "updated_patches": 1304,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.91453617811203,
+              "updated_patches": 1252,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9459459781646729,
+              "updated_patches": 1295,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9503287672996521,
+              "updated_patches": 1301,
+              "cache_age": 3,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 2,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5967860221862793,
+              "updated_patches": 817,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6493791341781616,
+              "updated_patches": 889,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6698319911956787,
+              "updated_patches": 917,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6289262771606445,
+              "updated_patches": 861,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6537619233131409,
+              "updated_patches": 895,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6866326332092285,
+              "updated_patches": 940,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6639883518218994,
+              "updated_patches": 909,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 1.0,
+              "updated_patches": 1369,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9934259057044983,
+              "updated_patches": 1360,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.704163670539856,
+              "updated_patches": 964,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7552958726882935,
+              "updated_patches": 1034,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8035062551498413,
+              "updated_patches": 1100,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 1.0,
+              "updated_patches": 1369,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 1.0,
+              "updated_patches": 1369,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8371074199676514,
+              "updated_patches": 1146,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6128561496734619,
+              "updated_patches": 839,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7121987342834473,
+              "updated_patches": 975,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7845142483711243,
+              "updated_patches": 1074,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6092038154602051,
+              "updated_patches": 834,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6661797165870667,
+              "updated_patches": 912,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7662527561187744,
+              "updated_patches": 1049,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6523009538650513,
+              "updated_patches": 893,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7173119187355042,
+              "updated_patches": 982,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7845142483711243,
+              "updated_patches": 1074,
+              "cache_age": 3,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 3,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5544192790985107,
+              "updated_patches": 759,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5902118682861328,
+              "updated_patches": 808,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6084733605384827,
+              "updated_patches": 833,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5573411583900452,
+              "updated_patches": 763,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6106647253036499,
+              "updated_patches": 836,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6230825781822205,
+              "updated_patches": 853,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5602629780769348,
+              "updated_patches": 767,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5872899889945984,
+              "updated_patches": 804,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5989773869514465,
+              "updated_patches": 820,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5346968770027161,
+              "updated_patches": 732,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5573411583900452,
+              "updated_patches": 763,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5682980418205261,
+              "updated_patches": 778,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.43170198798179626,
+              "updated_patches": 591,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5091307759284973,
+              "updated_patches": 697,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5398101210594177,
+              "updated_patches": 739,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4200146198272705,
+              "updated_patches": 575,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4769905209541321,
+              "updated_patches": 653,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5069394111633301,
+              "updated_patches": 694,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4346238374710083,
+              "updated_patches": 595,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4850255846977234,
+              "updated_patches": 664,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5127830505371094,
+              "updated_patches": 702,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.24543462693691254,
+              "updated_patches": 336,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.36523011326789856,
+              "updated_patches": 500,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4346238374710083,
+              "updated_patches": 595,
+              "cache_age": 3,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 4,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7231556177139282,
+              "updated_patches": 990,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7238860726356506,
+              "updated_patches": 991,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7794010639190674,
+              "updated_patches": 1067,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7757487297058105,
+              "updated_patches": 1062,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7523740530014038,
+              "updated_patches": 1030,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7742878198623657,
+              "updated_patches": 1060,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7713660001754761,
+              "updated_patches": 1056,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7713660001754761,
+              "updated_patches": 1056,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8181154727935791,
+              "updated_patches": 1120,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7238860726356506,
+              "updated_patches": 991,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7574872374534607,
+              "updated_patches": 1037,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.782322883605957,
+              "updated_patches": 1071,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.735573410987854,
+              "updated_patches": 1007,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7560263276100159,
+              "updated_patches": 1035,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7735573649406433,
+              "updated_patches": 1059,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.701972246170044,
+              "updated_patches": 961,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7436084747314453,
+              "updated_patches": 1018,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7706355452537537,
+              "updated_patches": 1055,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7275384068489075,
+              "updated_patches": 996,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7560263276100159,
+              "updated_patches": 1035,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.776479184627533,
+              "updated_patches": 1063,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7063550353050232,
+              "updated_patches": 967,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7333820462226868,
+              "updated_patches": 1004,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7699050903320312,
+              "updated_patches": 1054,
+              "cache_age": 3,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 5,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6654492616653442,
+              "updated_patches": 911,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7582176923751831,
+              "updated_patches": 1038,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8655953407287598,
+              "updated_patches": 1185,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6596055626869202,
+              "updated_patches": 903,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7509130835533142,
+              "updated_patches": 1028,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.840029239654541,
+              "updated_patches": 1150,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5222790837287903,
+              "updated_patches": 715,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5536888241767883,
+              "updated_patches": 758,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6128561496734619,
+              "updated_patches": 839,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5222790837287903,
+              "updated_patches": 715,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5514974594116211,
+              "updated_patches": 755,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5894814133644104,
+              "updated_patches": 807,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.501095712184906,
+              "updated_patches": 686,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5982469320297241,
+              "updated_patches": 819,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 1.0,
+              "updated_patches": 1369,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9693207144737244,
+              "updated_patches": 1327,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9634770154953003,
+              "updated_patches": 1319,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9663988947868347,
+              "updated_patches": 1323,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.4054054319858551,
+              "updated_patches": 555,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5441928505897522,
+              "updated_patches": 745,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5938641428947449,
+              "updated_patches": 813,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.512052595615387,
+              "updated_patches": 701,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5529583692550659,
+              "updated_patches": 757,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.616508424282074,
+              "updated_patches": 844,
+              "cache_age": 3,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 6,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6449963450431824,
+              "updated_patches": 883,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.724616527557373,
+              "updated_patches": 992,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7691746354103088,
+              "updated_patches": 1053,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7282688617706299,
+              "updated_patches": 997,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8159240484237671,
+              "updated_patches": 1117,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8246895670890808,
+              "updated_patches": 1129,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.691015362739563,
+              "updated_patches": 946,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7406866550445557,
+              "updated_patches": 1014,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7472608089447021,
+              "updated_patches": 1023,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6260043978691101,
+              "updated_patches": 857,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6997808814048767,
+              "updated_patches": 958,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7348429560661316,
+              "updated_patches": 1006,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6844412088394165,
+              "updated_patches": 937,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7647918462753296,
+              "updated_patches": 1047,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7940102815628052,
+              "updated_patches": 1087,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7421475648880005,
+              "updated_patches": 1016,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8108108639717102,
+              "updated_patches": 1110,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8151935935020447,
+              "updated_patches": 1116,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.5807158946990967,
+              "updated_patches": 795,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6734843254089355,
+              "updated_patches": 922,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6866326332092285,
+              "updated_patches": 940,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6267348527908325,
+              "updated_patches": 858,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6851716637611389,
+              "updated_patches": 938,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7750182747840881,
+              "updated_patches": 1061,
+              "cache_age": 3,
+              "warp": false
+            }
+          ]
+        },
+        {
+          "clip": 7,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7837837934494019,
+              "updated_patches": 1073,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8239591121673584,
+              "updated_patches": 1128,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8261505365371704,
+              "updated_patches": 1131,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7713660001754761,
+              "updated_patches": 1056,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8035062551498413,
+              "updated_patches": 1100,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8020453453063965,
+              "updated_patches": 1098,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8166545033454895,
+              "updated_patches": 1118,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9766253232955933,
+              "updated_patches": 1337,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9934259057044983,
+              "updated_patches": 1360,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7998539209365845,
+              "updated_patches": 1095,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8276114463806152,
+              "updated_patches": 1133,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8487947583198547,
+              "updated_patches": 1162,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.663257896900177,
+              "updated_patches": 908,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7538349628448486,
+              "updated_patches": 1032,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8020453453063965,
+              "updated_patches": 1098,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.6807889342308044,
+              "updated_patches": 932,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.7574872374534607,
+              "updated_patches": 1037,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.812271773815155,
+              "updated_patches": 1112,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9970781803131104,
+              "updated_patches": 1365,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9948868155479431,
+              "updated_patches": 1362,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.9963477253913879,
+              "updated_patches": 1364,
+              "cache_age": 3,
+              "warp": false
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1,
+              "active_ratio": 1.0,
+              "updated_patches": 0,
+              "cache_age": 0,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8246895670890808,
+              "updated_patches": 1129,
+              "cache_age": 1,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8517166376113892,
+              "updated_patches": 1166,
+              "cache_age": 2,
+              "warp": false
+            },
+            {
+              "full_refresh": false,
+              "backbone_calls": 0,
+              "active_ratio": 0.8305332660675049,
+              "updated_patches": 1137,
+              "cache_age": 3,
+              "warp": false
+            }
+          ]
+        }
+      ],
+      "quality_gate": {
+        "pass": false,
+        "checks": {
+          "raw_absrel_within_1pct": false,
+          "edge_absrel_within_1pct": false,
+          "boundary_f1_drop_at_most_0.005": false,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": false,
+          "per_source_raw_within_2pct": false
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "speedup": 2.144950826798692,
+      "screen_pass": false
+    }
+  },
+  "parameters": 3217,
+  "promoted": false
+}

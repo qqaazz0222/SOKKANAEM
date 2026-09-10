@@ -1,0 +1,81 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/render_qflow.py",
+    "bytes": 3815,
+    "sha256": "40ff60a8b4a481bff7a903137c11386e78de3751694e159773d46f859933c6ca"
+  },
+  "inputs": [
+    {
+      "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+      "bytes": 1141081851,
+      "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+    },
+    {
+      "path": "work_dirs/qflow_20260909/L256_dense_predictions.pt",
+      "bytes": 268438067,
+      "sha256": "b3dc141eb0bcfd8e8b819c9eaf61c0450ed100e834aaecaf37523ccfecc87a13"
+    },
+    {
+      "path": "work_dirs/qflow_20260909/L256_hold_k2_predictions.pt",
+      "bytes": 268438087,
+      "sha256": "dee5b349e4d8b1f6bd2f5573dad987f91cc5fff4d0cacf68e9e40e96a58b544c"
+    },
+    {
+      "path": "work_dirs/qflow_20260909/L256_flow_nearest_predictions.pt",
+      "bytes": 268438137,
+      "sha256": "c2791588fe69c2553e2420c16b8a3008cb2ef20b9510baed9d093b8a0edcff5e"
+    },
+    {
+      "path": "work_dirs/qflow_20260909/L256_flow_gated_predictions.pt",
+      "bytes": 268438117,
+      "sha256": "5250515b6ea7c187eea3e5d386fae51eab6fa94aafa085a48e5002e605ad8079"
+    }
+  ],
+  "selection_rule": "midpoint+1, all4 existingL256clips",
+  "selection": [
+    {
+      "clip": 0,
+      "frame": 129,
+      "pair": [
+        "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static/rgb/1341846240.357948.png",
+        "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static/depth/1341846240.357960.png"
+      ]
+    },
+    {
+      "clip": 1,
+      "frame": 129,
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2/rgb/1548339905.13685.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2/depth/1548339905.14041.png"
+      ]
+    },
+    {
+      "clip": 2,
+      "frame": 129,
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2/rgb/1548265932.40145.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2/depth/1548265932.40743.png"
+      ]
+    },
+    {
+      "clip": 3,
+      "frame": 129,
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far/rgb/1548340580.12327.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far/depth/1548340580.11276.png"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "paper/qflow_visuals_20260909/comparison.png",
+      "bytes": 1105193,
+      "sha256": "095c3d9c92a33902a8750827b9a1e4fde620cc991bde8f41de9b43da713463af"
+    },
+    {
+      "path": "paper/qflow_visuals_20260909/comparison.pdf",
+      "bytes": 791666,
+      "sha256": "c33ab3792e84aaa5aac6a41077250d63eaa6a9995e2220e48ace90e7ecdf1dc7"
+    }
+  ]
+}

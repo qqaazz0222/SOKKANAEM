@@ -1,0 +1,47 @@
+{
+  "scope": "draft consistency, not independent scientific approval",
+  "verified_record_count": 45,
+  "checked_quality_cells": 18,
+  "independent_quality_cells": 12,
+  "moving_camera_failure_preserved": true,
+  "pose_audit_verified": true,
+  "fixed_camera_validation_complete": false,
+  "fixed_camera_gt_admission_failed": true,
+  "rgb_only_pilot_checked": true,
+  "reference_admission": {
+    "complete_reference_acquired": true,
+    "complete_reference_value_checks_passed": false,
+    "C1_pass": false,
+    "C3_mask_retention_pass": true,
+    "C4_masked_pass": true,
+    "C4_unmasked_pass": false,
+    "unit_error_excluded": null,
+    "unit_statement": "Bulk values compatible with millimetres; all scale/processing errors not excluded",
+    "registration_corroborated": false,
+    "gt_admitted": false
+  },
+  "instrument_recovered_shifts": 27,
+  "instrument_is_cross_modal_approval": false,
+  "registration_attempts_failed": 3,
+  "registration_corroborated": false,
+  "local_markdown_links": 15,
+  "all_current_markdown_links": 21,
+  "textwidth_tables": 4,
+  "pdf_compiled": true,
+  "overfull_or_missing_character_errors": false,
+  "draft": {
+    "path": "paper/draft.md",
+    "bytes": 33195,
+    "sha256": "6f5c36c343afd1a69750d280cd56bbb93673262ad345ef1dd93774ee5f35155f"
+  },
+  "tex": {
+    "path": "paper/streaming_draft/manuscript.tex",
+    "bytes": 41849,
+    "sha256": "37dfc147d8f9c70eb03621445595703879fe29a8fdb0692a83ec2c41932cd611"
+  },
+  "pdf": {
+    "path": "paper/streaming_draft/manuscript.pdf",
+    "bytes": 3187653,
+    "sha256": "6c4a8bac0330167826b9858a8378a1a832e3691db365e71ef94f03835a1b82a0"
+  }
+}

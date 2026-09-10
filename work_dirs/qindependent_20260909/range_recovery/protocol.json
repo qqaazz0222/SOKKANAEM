@@ -1,0 +1,21 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/qindependent_resume.py",
+    "bytes": 4405,
+    "sha256": "ec610602564f6269f6608c4cc1f4e63b5bb9ffda5f14551e2edbc7cccb6f60c8"
+  },
+  "preregistration": {
+    "path": "work_dirs/qindependent_20260909/preregistered.json",
+    "bytes": 2786,
+    "sha256": "919cfbe7bc5ff3dc3d6995c689bdf54d354369810c60e43ed51f00e7a06be586"
+  },
+  "reason": "Original acquisition connection became slow; terminated own downloader. Preserve prefix and resume missing bytes concurrently without changing data or sampling rules.",
+  "prefix": {
+    "path": "work_dirs/qindependent_20260909/archives/rgbd_dataset_freiburg2_desk.tgz",
+    "bytes": 1474854912,
+    "sha256": "07449931087c2b35b011da00a1143716a74224543c618e41aed9753ed7bb7b0b"
+  },
+  "start": 1474854912,
+  "total": 1893351095,
+  "url": "https://webshare.cvg.cit.tum.de/g/rgbd/dataset/freiburg2/rgbd_dataset_freiburg2_desk.tgz"
+}

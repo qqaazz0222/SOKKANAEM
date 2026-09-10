@@ -1,0 +1,20 @@
+[
+  {
+    "scene": "rgbd_dataset_freiburg1_room",
+    "url": "https://webshare.cvg.cit.tum.de/g/rgbd/dataset/freiburg1/rgbd_dataset_freiburg1_room.tgz",
+    "archive": {
+      "path": "work_dirs/qindependent_20260909/archives/rgbd_dataset_freiburg1_room.tgz",
+      "bytes": 782381450,
+      "sha256": "5ace47a1d2e53696bc939a84999293a04a7226958e848a609666691fd3cc38da"
+    }
+  },
+  {
+    "scene": "rgbd_dataset_freiburg2_desk",
+    "url": "https://webshare.cvg.cit.tum.de/g/rgbd/dataset/freiburg2/rgbd_dataset_freiburg2_desk.tgz",
+    "archive": {
+      "path": "work_dirs/qindependent_20260909/archives/rgbd_dataset_freiburg2_desk.complete.tgz",
+      "bytes": 1893351095,
+      "sha256": "1a0756d72510a26e26e2a02bf0b6c69c2796619fca531e176fc2e5110173807c"
+    }
+  }
+]

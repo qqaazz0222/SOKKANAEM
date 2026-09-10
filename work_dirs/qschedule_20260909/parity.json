@@ -1,0 +1,122 @@
+[
+  {
+    "length": "L32",
+    "policy": "output_k2",
+    "exact_refresh_comparisons": 128
+  },
+  {
+    "length": "L32",
+    "policy": "output_k4",
+    "exact_refresh_comparisons": 64
+  },
+  {
+    "length": "L32",
+    "policy": "carry_q25",
+    "exact_refresh_comparisons": 111
+  },
+  {
+    "length": "L32",
+    "policy": "carry_q50",
+    "exact_refresh_comparisons": 82
+  },
+  {
+    "length": "L32",
+    "policy": "carry_q75",
+    "exact_refresh_comparisons": 73
+  },
+  {
+    "length": "L32",
+    "policy": "reset_q25",
+    "exact_refresh_comparisons": 115
+  },
+  {
+    "length": "L32",
+    "policy": "reset_q50",
+    "exact_refresh_comparisons": 89
+  },
+  {
+    "length": "L32",
+    "policy": "reset_q75",
+    "exact_refresh_comparisons": 74
+  },
+  {
+    "length": "L32",
+    "policy": "mlp_q25",
+    "exact_refresh_comparisons": 118
+  },
+  {
+    "length": "L32",
+    "policy": "mlp_q50",
+    "exact_refresh_comparisons": 95
+  },
+  {
+    "length": "L32",
+    "policy": "mlp_q75",
+    "exact_refresh_comparisons": 72
+  },
+  {
+    "length": "L32",
+    "policy": "carry_q50_h_reset",
+    "exact_refresh_comparisons": 82
+  },
+  {
+    "length": "L256",
+    "policy": "output_k2",
+    "exact_refresh_comparisons": 512
+  },
+  {
+    "length": "L256",
+    "policy": "output_k4",
+    "exact_refresh_comparisons": 256
+  },
+  {
+    "length": "L256",
+    "policy": "carry_q25",
+    "exact_refresh_comparisons": 476
+  },
+  {
+    "length": "L256",
+    "policy": "carry_q50",
+    "exact_refresh_comparisons": 368
+  },
+  {
+    "length": "L256",
+    "policy": "carry_q75",
+    "exact_refresh_comparisons": 307
+  },
+  {
+    "length": "L256",
+    "policy": "reset_q25",
+    "exact_refresh_comparisons": 482
+  },
+  {
+    "length": "L256",
+    "policy": "reset_q50",
+    "exact_refresh_comparisons": 386
+  },
+  {
+    "length": "L256",
+    "policy": "reset_q75",
+    "exact_refresh_comparisons": 311
+  },
+  {
+    "length": "L256",
+    "policy": "mlp_q25",
+    "exact_refresh_comparisons": 481
+  },
+  {
+    "length": "L256",
+    "policy": "mlp_q50",
+    "exact_refresh_comparisons": 419
+  },
+  {
+    "length": "L256",
+    "policy": "mlp_q75",
+    "exact_refresh_comparisons": 307
+  },
+  {
+    "length": "L256",
+    "policy": "carry_q50_h_reset",
+    "exact_refresh_comparisons": 372
+  }
+]

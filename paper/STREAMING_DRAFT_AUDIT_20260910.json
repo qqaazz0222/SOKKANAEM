@@ -1,0 +1,71 @@
+{
+  "scope": "draft consistency, not independent scientific approval",
+  "verified_record_count": 45,
+  "checked_quality_cells": 18,
+  "independent_quality_cells": 12,
+  "moving_camera_failure_preserved": true,
+  "pose_audit_verified": true,
+  "fixed_camera_validation_complete": false,
+  "fixed_camera_gt_admission_failed": true,
+  "rgb_only_pilot_checked": true,
+  "complete_reference_value_checks_passed": true,
+  "unit_error_excluded": true,
+  "registration_attempts_failed": 3,
+  "registration_corroborated": false,
+  "local_markdown_links": 14,
+  "textwidth_tables": 4,
+  "pdf_compiled": true,
+  "overfull_or_missing_character_errors": false,
+  "draft": {
+    "path": "paper/draft.md",
+    "bytes": 36354,
+    "sha256": "639a906bd09879f05e78c0188f525c4a6fac7683376afcb9c45194e580b83336"
+  },
+  "tex": {
+    "path": "paper/streaming_draft/manuscript.tex",
+    "bytes": 45008,
+    "sha256": "2b5bfdc9e9cf59ddf9f1d9b1fbf18bde8d9311d07d2cf8dd2907650258cb89f9"
+  },
+  "pdf": {
+    "path": "paper/streaming_draft/manuscript.pdf",
+    "bytes": 3190707,
+    "sha256": "a49127983b16e3615f07a47788683ee4a84708bdc38bd6503de4fcd3ad37ed54"
+  },
+  "delivery": {
+    "path": "/home/hyunsu/gdrive/05. \ub17c\ubb38\uc791\uc5c5/Mathematics-SOKKANAEM/Draft/fixed_camera_reference_20260910",
+    "verified_copied_files": [
+      "draft.md",
+      "draft_native_20260909.md",
+      "streaming_draft/CAMERA_POSE_AUDIT.md",
+      "streaming_draft/FIXED_CAMERA_REFERENCE_ADMISSION.md",
+      "streaming_draft/FIXED_CAMERA_SCOPE.md",
+      "streaming_draft/FIXED_CAMERA_VALIDATION.md",
+      "streaming_draft/INDEPENDENT_VALIDATION.md",
+      "streaming_draft/PUBLIC_DATASET_SCREENING.md",
+      "streaming_draft/PUBLIC_DATA_PROBE.json",
+      "streaming_draft/README.md",
+      "streaming_draft/REVISION_STATUS.md",
+      "streaming_draft/evidence_table.json",
+      "streaming_draft/frozen_candidate.json",
+      "streaming_draft/layout.tex",
+      "streaming_draft/local_images.lua",
+      "streaming_draft/manuscript.pdf",
+      "streaming_draft/manuscript.tex",
+      "streaming_draft/split_audit.json",
+      "streaming_draft/visual_provenance.json",
+      "streaming_draft/figures/architecture.pdf",
+      "streaming_draft/figures/architecture.png",
+      "streaming_draft/figures/boundary_crops.pdf",
+      "streaming_draft/figures/boundary_crops.png",
+      "streaming_draft/figures/failure_cases.pdf",
+      "streaming_draft/figures/failure_cases.png",
+      "streaming_draft/figures/latency.pdf",
+      "streaming_draft/figures/latency.png",
+      "streaming_draft/figures/qualitative.pdf",
+      "streaming_draft/figures/qualitative.png",
+      "streaming_draft/fixed_camera_validation/depth_admission.pdf",
+      "streaming_draft/fixed_camera_validation/depth_admission.png"
+    ],
+    "old_paper_work_files_unchanged": true
+  }
+}

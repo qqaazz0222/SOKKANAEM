@@ -1,0 +1,25 @@
+{
+  "role": "post_selection_reused_development_audit_not_independent_validation",
+  "parent": {
+    "path": "work_dirs/qflow_20260909/protocol.json",
+    "bytes": 3237,
+    "sha256": "c5ef788ffd5eeef06dc09833295ff0589d4f36793f3fcd12f5b142563e2cbf88"
+  },
+  "results": {
+    "path": "work_dirs/qflow_20260909/results.json",
+    "bytes": 1966811,
+    "sha256": "3e92a2a3cb78f0e21ec82dedbbf3630f503eaa5b3b07d320da073492274f4b2b"
+  },
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/audit_qflow.py",
+    "bytes": 3923,
+    "sha256": "0df30ff4fdcab81201b463fe7171f5694bc9a23e0e49813b27d765c9755dcc2e"
+  },
+  "timing_source": {
+    "path": "scripts/qquality_audit.py",
+    "bytes": 7757,
+    "sha256": "8709d13d1c48eeb05115bd3c267eb937eb2a5d75c59784c3b628ff0f04795898"
+  },
+  "timing": "3 alternating repeats,64warmup; synchronized per-frame GPU-resident, flow/transfers included; shared GPU not device benchmark",
+  "phase": "first two frames exact then K2; no thresholds changed"
+}

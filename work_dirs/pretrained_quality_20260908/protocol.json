@@ -1,0 +1,86 @@
+{
+  "role": "adaptive_error_analysis_and_pretrained_system_comparison_not_final",
+  "checkpoint": {
+    "path": "work_dirs/v11-longclip-spread-s0/latest.pt",
+    "bytes": 67200316,
+    "sha256": "92565d186cb4448a71793597dea930a2faa77c0205093c892e8443d491193f1a"
+  },
+  "q_checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "q_config": {
+    "path": "work_dirs/q0-calib-s0/config.toml",
+    "bytes": 479,
+    "sha256": "8421e86950486a0904eb8cc5d8d1fec1b47eb9cd26ebd52b2d29446942d1cd86"
+  },
+  "dev_data": {
+    "path": "work_dirs/joint_decoder_20260908_v2/dev_tokens.pt",
+    "bytes": 192987381,
+    "sha256": "97407be7fa2e97f9265da4b759e6f1a3ee3ee2856edad50e93ad25537d687165"
+  },
+  "train_data": {
+    "path": "work_dirs/joint_decoder_20260908_v2/train_tokens.pt",
+    "bytes": 1158041757,
+    "sha256": "a539ebe886fae746622921bff3f9325aa8642d3af05e88c4b710c94ecca84bd6"
+  },
+  "joint_checkpoint": {
+    "path": "work_dirs/joint_decoder_20260908_v2/joint_detail.pt",
+    "bytes": 611881,
+    "sha256": "b4cf4565bd740be2e60f34f39e3d62e98546de47baf15c95b367a16471da9d4e"
+  },
+  "runtime": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "common_resolution": 224,
+  "score_resolution": 256,
+  "matched_comparison": "native224 vs Q0_224; both resize same cached RGB256 to224. Both checkpoints change inference resolution without retraining.",
+  "reference_only": "native256 and Q0_518 are different compute budgets. Q0 includes a different decoder, calibration and pretraining; not encoder-only causal evidence.",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/pretrained_quality_study.py",
+      "bytes": 9166,
+      "sha256": "887217850dc26dd8772f21ade2e5273075ace706ff0ee2ec9a556917ae70f0dc"
+    },
+    {
+      "path": "sokkanaem/quality_diagnostics.py",
+      "bytes": 1883,
+      "sha256": "b7bd486db53068b97598e2af51af34ce53f40d0fa9b6ae00d89df21ffdab0b72"
+    },
+    {
+      "path": "sokkanaem/joint_detail_decoder.py",
+      "bytes": 2497,
+      "sha256": "f20f0936a7e1c8f66f3c15c60a120501a9824baa890f046be5e798d1c9edcddd"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "sokkanaem/model.py",
+      "bytes": 37170,
+      "sha256": "104ac2b43c1fc80df9b9f2f430ff99c447e5a73481e066ed2b6597a10d8648f5"
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "bytes": 12181,
+      "sha256": "5f4b95ecdfd0c1a929d6e44c00a2d451620949fc43de6fca2a209079ef0dc6a5"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    }
+  ]
+}

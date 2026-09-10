@@ -1,0 +1,24 @@
+{
+  "written_before_analysis": true,
+  "no_model_predictions": true,
+  "supersedes": null,
+  "preserves": "work_dirs/qfixed_urfd_20260910/urfd_admission.json C5 failure is kept on the record and is not retracted.",
+  "why_a_second_test": "C5 scored the fraction of depth-discontinuity pixels near an RGB Canny edge. That score rewards moving depth edges into texture-dense image regions, so it is not chance-normalized. Its negative control, the unregistered original depth, attained its maximum at the boundary of the search window on 8 of 8 frames, i.e. the score was monotone toward the corner. A metric that cannot localize the alignment of a deliberately unregistered image cannot falsify the alignment of a registered one, so C5 is uninformative about registration in either direction.",
+  "criteria": [
+    {
+      "id": "C6_mutual_information_optimum",
+      "statement": "Normalized mutual information between the depth map and the grayscale SBM RGB frame, 32 bins each, computed over pixels valid in both after an integer shift dx, dy in [-8, 8] applied to the depth map with zero fill and an 8 px border excluded. Frames 1, 21, 41, 61, 81, 101, 121, 141, matching C5.",
+      "threshold": "Corrected depth attains its maximum within 1 px of shift (0,0) on at least 7 of 8 frames.",
+      "basis": "Mutual information is the standard multimodal registration objective and is chance-normalized, unlike the C5 edge-proximity count."
+    },
+    {
+      "id": "C7_control_validity",
+      "statement": "The identical sweep is run on the unregistered URFD original depth against the same RGB frames.",
+      "threshold": "The control's maximum must lie more than 1 px from (0,0) on at least 6 of 8 frames.",
+      "void_condition": "If the control instead peaks at (0,0), the metric does not discriminate registration and C6 is declared void rather than passed. C7 failing voids C6; it cannot rescue it."
+    }
+  ],
+  "admission_rule": "Registration is corroborated if and only if C6 passes and C7 confirms the metric discriminates. Combined with C3 and C4 from protocol.json, that admits the corrected depth as masked ground truth. C1 remains failed and reported.",
+  "if_admitted": "Ground-truth accuracy for the four policies is computed in a separate later step, on the C3 mask, with model weights and the MLP threshold unchanged. This step performs no inference.",
+  "limits": "Mutual information corroborates alignment to the released RGB. It does not establish absolute extrinsic calibration, and it does not extend the single event or single location to broader validation."
+}

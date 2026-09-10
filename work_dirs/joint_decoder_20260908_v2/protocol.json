@@ -1,0 +1,81 @@
+{
+  "role": "adaptive_joint_decoder_development_not_final",
+  "parent": {
+    "path": "work_dirs/architecture_readout_20260908/protocol.json",
+    "bytes": 2370,
+    "sha256": "4351278dd57e97a8c25546dce3c22729ba6af60c928fd482bc7ecf3185021cf4"
+  },
+  "checkpoint": {
+    "path": "work_dirs/v11-longclip-spread-s0/latest.pt",
+    "bytes": 67200316,
+    "sha256": "92565d186cb4448a71793597dea930a2faa77c0205093c892e8443d491193f1a"
+  },
+  "steps_per_real_arm": 1600,
+  "seed": 734,
+  "lr": 3e-05,
+  "batch": 8,
+  "supervision": "log L1 + 0.5 global signed-gradient L1 + 0.1 GT-discontinuity gradient L1, same for both arms",
+  "sanity_gate": {
+    "steps": 500,
+    "absrel_less_than": 0.08,
+    "boundary_f1_greater_than": 0.7,
+    "toy_only_boundary_rule": "log-gradient > 0.1, 2px tolerance; legacy quantile F1 also retained"
+  },
+  "train_cache": {
+    "path": "work_dirs/architecture_readout_20260908/train_cache.pt",
+    "bytes": 1158096471,
+    "sha256": "12aca88d0cabe5b8f2210a5f84fc2db149348e7ddd751716ad6dfe55f5001d8b"
+  },
+  "dev_cache": {
+    "path": "work_dirs/architecture_readout_20260908/development_cache.pt",
+    "bytes": 192992591,
+    "sha256": "43b9d8517f7ca65a2d828b4c733ed5012388db311ac2e2ba40595d402770bdb0"
+  },
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/joint_decoder_study.py",
+      "bytes": 9626,
+      "sha256": "2cd397afa93e1b4934758c266e37e1e1d209ef2f5ee484b8804182ddcd0aa2e1"
+    },
+    {
+      "path": "sokkanaem/joint_detail_decoder.py",
+      "bytes": 2497,
+      "sha256": "f20f0936a7e1c8f66f3c15c60a120501a9824baa890f046be5e798d1c9edcddd"
+    },
+    {
+      "path": "sokkanaem/detail_feature_path.py",
+      "bytes": 1291,
+      "sha256": "d17f26ab9918af16068978bff19ae3fcb2347068bba229e446db36e4093d274a"
+    },
+    {
+      "path": "sokkanaem/mixture_readout.py",
+      "bytes": 3103,
+      "sha256": "e3bd18559741238ad27a05e3590689f17b1ed6dc6bc338953b93970e148f3bb6"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "scripts/architecture_readout_study.py",
+      "bytes": 8495,
+      "sha256": "10289fdc0afffb8b404a8ba8b5af9098bce3731541e05f4152687e37b29686ab"
+    },
+    {
+      "path": "sokkanaem/model.py",
+      "bytes": 37170,
+      "sha256": "104ac2b43c1fc80df9b9f2f430ff99c447e5a73481e066ed2b6597a10d8648f5"
+    },
+    {
+      "path": "sokkanaem/data.py",
+      "bytes": 19420,
+      "sha256": "5acdd72fc89a981ad939b4fcc33e90fef3cb306d6000df4091db26dbe99926ea"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    }
+  ]
+}

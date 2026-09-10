@@ -1,0 +1,25 @@
+{
+  "url": "https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date02_time.tar",
+  "expected_bytes": 5550080,
+  "expected_etag": "\"54b000-5e5703f265ee0\"",
+  "max_bytes": 10000000,
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/acquire_behave_timestamps.py",
+    "bytes": 4955,
+    "sha256": "b5eaf15356d2ae2ab597a0a3fda02aa20f10d7962fbe5abe4ea70bf2ff857b79"
+  },
+  "helper": {
+    "path": "sokkanaem/behave_io.py",
+    "bytes": 5805,
+    "sha256": "e7bd4b0ca59624cc8d61a50f6987abdbc720cb473c2f0244f79e46392b200ec0"
+  },
+  "candidate": {
+    "path": "paper/streaming_draft/frozen_candidate.json",
+    "bytes": 5331,
+    "sha256": "5fc6546287ffab7967bd4c4d099a4f88b67039c1525949b3e47cab4d7b0ac345"
+  },
+  "license_url": "https://virtualhumans.mpi-inf.mpg.de/behave/license.html",
+  "confirmed_noncommercial_research_flag": true,
+  "no_model_inference": true,
+  "purpose": "timestamp inventory before selecting fixed-location validation clips"
+}

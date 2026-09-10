@@ -1,0 +1,42 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/report_fixed_camera_validation.py",
+    "bytes": 10632,
+    "sha256": "5b4065af1ddc76190f2bbd101f7cdc1037eac5634da00daa78ccb9c18b0af1f2"
+  },
+  "inputs": [
+    {
+      "path": "work_dirs/qfixed_validation_20260910/admission.json",
+      "bytes": 60082,
+      "sha256": "284ece79a4135955aa13d821c5367890506b3293804c4ef2df91707ff795b8c7"
+    },
+    {
+      "path": "work_dirs/qfixed_validation_20260910/depth_diagnostic.json",
+      "bytes": 12960,
+      "sha256": "a527780805ab40ccaa95a82ff2d05f5b06f0ea674b52fcda7677326efa9c6f02"
+    },
+    {
+      "path": "work_dirs/qfixed_validation_20260910/rgb_only_benchmark/results.json",
+      "bytes": 508215,
+      "sha256": "83db072d79779cfa3383955dd4409aba937b7866440e84e02f6de5c178dd1c25"
+    }
+  ],
+  "report": {
+    "path": "paper/streaming_draft/FIXED_CAMERA_VALIDATION.md",
+    "bytes": 6872,
+    "sha256": "7cb164b598b33b06e55f471062d675dc8f0841e716bfc05959259ecfdd0e616d"
+  },
+  "figures": [
+    {
+      "path": "paper/streaming_draft/fixed_camera_validation/depth_admission.png",
+      "bytes": 951872,
+      "sha256": "8c5de43d946104273d25f429dcd7f716648f4b36ce63601a334968dd595cdb34"
+    },
+    {
+      "path": "paper/streaming_draft/fixed_camera_validation/depth_admission.pdf",
+      "bytes": 761500,
+      "sha256": "db219f7d34e1c9f062ff4f56637408b3e32c41596820bd37bcfb045c54b1ea91"
+    }
+  ],
+  "scope": "data-only figure, RGB-only timing; no model GT scores"
+}

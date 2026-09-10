@@ -1,0 +1,36 @@
+{
+  "initial": {
+    "absrel": 1.46236252784729,
+    "boundary_f1": 0.8059749603271484,
+    "legacy_quantile_boundary_f1": 0.14471603060762087
+  },
+  "final": {
+    "absrel": 0.022050339728593826,
+    "boundary_f1": 0.9276425242424011,
+    "legacy_quantile_boundary_f1": 0.25536976583922905
+  },
+  "history": [
+    {
+      "step": 100,
+      "loss": 0.11017221212387085
+    },
+    {
+      "step": 200,
+      "loss": 0.11395442485809326
+    },
+    {
+      "step": 300,
+      "loss": 0.10904774069786072
+    },
+    {
+      "step": 400,
+      "loss": 0.10493043810129166
+    },
+    {
+      "step": 500,
+      "loss": 0.1045120507478714
+    }
+  ],
+  "pass": true,
+  "note": "Color-coded two-plane circles, independent train/validation seeds. Not real-depth accuracy or a backbone test. Toy weights NEVER transferred to real training."
+}

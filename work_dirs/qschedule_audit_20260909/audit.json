@@ -1,0 +1,601 @@
+{
+  "role": "posthoc_reused_development_schedule_audit_no_threshold_changes",
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/audit_qschedule.py",
+    "bytes": 6474,
+    "sha256": "97914c8497c9f5b58d034b3c9850b9911d0f7204bebb186839b0257bed809508"
+  },
+  "threshold_checks": {
+    "carry": {
+      "max_abs": 0.0,
+      "calibration_extension_observations": 144
+    },
+    "reset": {
+      "max_abs": 0.0,
+      "calibration_extension_observations": 144
+    },
+    "mlp": {
+      "max_abs": 0.0,
+      "calibration_extension_observations": 144
+    }
+  },
+  "inputs": [
+    {
+      "path": "work_dirs/qschedule_20260909/protocol.json",
+      "bytes": 4720,
+      "sha256": "7d7d416c6c8d1acfcdec899c5175ded383247bacbea5b22f4ae8a2319608b002"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/thresholds.json",
+      "bytes": 336,
+      "sha256": "cc1bc6c39209a9bfdae451065c047b78c75904a72b463143a5e59f64c6decce2"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/traces.pt",
+      "bytes": 446713,
+      "sha256": "3609967fded29d1fac8d981d76da44d1fa18250b752353f5218ccbee7a1810ba"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/results.json",
+      "bytes": 5100423,
+      "sha256": "e999bf2c095ab41de7903457e9a541bed7e68da049a32104b6e73b6060d254ed"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L32_carry_q25_predictions.pt",
+      "bytes": 67112649,
+      "sha256": "b027bbca950762228f4b562b00436af46ddc1377ffa962cd202611570503abfe"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L32_carry_q50_predictions.pt",
+      "bytes": 67112649,
+      "sha256": "5ceebe46be84441354d0b5034d0f397203afaf11590ea8a1e59983f87de54066"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L32_carry_q75_predictions.pt",
+      "bytes": 67112649,
+      "sha256": "e3efba55c38f380fcf8b49b24bbdd747b832707bed0b6151b691558b1db31bd3"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L32_reset_q25_predictions.pt",
+      "bytes": 67112649,
+      "sha256": "ecad991496828d2c50ac40c4f501b5b38356b9b88f99d666c3ea790aa53f24d3"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L32_reset_q50_predictions.pt",
+      "bytes": 67112649,
+      "sha256": "31ce1f34c255fc1a2eba4aa7038197474a2f2df1dee3575f5ef51bd08856ab71"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L32_reset_q75_predictions.pt",
+      "bytes": 67112649,
+      "sha256": "11dba20898dba94ed5d59f783c17923b40530577c7f8301c864035b855be36fb"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L32_mlp_q25_predictions.pt",
+      "bytes": 67112621,
+      "sha256": "527cd6de9e6bcb37f29e764d6c2cc8561c08a74c13fd6b67b2d25b3341b23937"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L32_mlp_q50_predictions.pt",
+      "bytes": 67112621,
+      "sha256": "7a45c4c61aa937ebb0db23fa587afe9056c8d03cddc93deb27a81706004653a5"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L32_mlp_q75_predictions.pt",
+      "bytes": 67112621,
+      "sha256": "dd391712b6e1f949bbc6f657a6990dd7d21da59b41adfe200bebddf3f81990ae"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L32_carry_q50_h_reset_predictions.pt",
+      "bytes": 67112761,
+      "sha256": "b6c66da9bfec4c38fe586b1416c0711290e12f4c598e2682b45b27c788d89b07"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L256_carry_q25_predictions.pt",
+      "bytes": 268438107,
+      "sha256": "5ee19c64aaa092e5ad20864b853b12265133e9f2ac7266e274ebf7c892c42ba9"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L256_carry_q50_predictions.pt",
+      "bytes": 268438107,
+      "sha256": "dc4f80a9bd5705745542cd4675ef838dccbf1c13fe4c3763db6a719e4d6ae016"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L256_carry_q75_predictions.pt",
+      "bytes": 268438107,
+      "sha256": "96bc655d4a747711fa285b72313cadbfdec4c6ddb4a1d5878b71dfa958520144"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L256_reset_q25_predictions.pt",
+      "bytes": 268438107,
+      "sha256": "9d3c6819b9ad94f4f732db1ee18a0249d204b35b6e3c7477a751d86bdd280b99"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L256_reset_q50_predictions.pt",
+      "bytes": 268438107,
+      "sha256": "b8a5a5c42f4522b88448f85ca255a0484a5633b2c48cfe2abd599f1da191069a"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L256_reset_q75_predictions.pt",
+      "bytes": 268438107,
+      "sha256": "0aad8900c8c54443e048deb55eed77ea95ab863ed50da66d879227dde032ae2b"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L256_mlp_q25_predictions.pt",
+      "bytes": 268438087,
+      "sha256": "15609b56d7f0d82393a2b7003ec395e0dff897ee8913ac037249848002150665"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L256_mlp_q50_predictions.pt",
+      "bytes": 268438087,
+      "sha256": "38d1e5af2d3a673eb63af786b17adc3192355f2e614ddeb2a45cf93d2db95f7b"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L256_mlp_q75_predictions.pt",
+      "bytes": 268438087,
+      "sha256": "3f30a7bffdc428d0189cfcfa1dd931855a8dc2aeabd986ef16b003aaa89f270b"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/L256_carry_q50_h_reset_predictions.pt",
+      "bytes": 268438187,
+      "sha256": "dad9a4f8e30f4754e93a33a98ce180386c99e7a194c89d5c4bf38faf2f71769b"
+    }
+  ],
+  "data": {
+    "L32": {
+      "policies": {
+        "carry_q25": {
+          "reasons": {
+            "initial": 8,
+            "mandatory_first_skip": 108,
+            "risk": 91,
+            "extended_reuse": 37,
+            "maximum_age": 12
+          },
+          "skipped_output_exact_replay_frames": 145,
+          "extension_risk_mae": 0.01264032231119927,
+          "accepted_true_teacher_risk_mean": 0.02992751117090921,
+          "rejected_true_teacher_risk_mean": 0.05210474919486832,
+          "reason_mean_ms": {
+            "initial": 7.693966741499025,
+            "mandatory_first_skip": 1.785405110610925,
+            "risk": 9.19963819854944,
+            "extended_reuse": 1.7414214058049224,
+            "maximum_age": 7.610723914694972
+          },
+          "extra_q0_calls_saved_vs_k2": 17,
+          "latency_change_vs_k2_pct": 11.147676709412435
+        },
+        "carry_q50": {
+          "reasons": {
+            "initial": 8,
+            "mandatory_first_skip": 82,
+            "risk": 34,
+            "extended_reuse": 92,
+            "maximum_age": 40
+          },
+          "skipped_output_exact_replay_frames": 174,
+          "extension_risk_mae": 0.013596386020441376,
+          "accepted_true_teacher_risk_mean": 0.03833666554166247,
+          "rejected_true_teacher_risk_mean": 0.06820221951998331,
+          "reason_mean_ms": {
+            "initial": 7.69947562366724,
+            "mandatory_first_skip": 1.8125192152915477,
+            "risk": 9.224562734529814,
+            "extended_reuse": 1.7550427848776884,
+            "maximum_age": 7.610027797636576
+          },
+          "extra_q0_calls_saved_vs_k2": 46,
+          "latency_change_vs_k2_pct": -11.805480178194328
+        },
+        "carry_q75": {
+          "reasons": {
+            "initial": 8,
+            "mandatory_first_skip": 73,
+            "extended_reuse": 110,
+            "maximum_age": 49,
+            "risk": 16
+          },
+          "skipped_output_exact_replay_frames": 183,
+          "extension_risk_mae": 0.01328549576213672,
+          "accepted_true_teacher_risk_mean": 0.04343495544215495,
+          "rejected_true_teacher_risk_mean": 0.07083635788876563,
+          "reason_mean_ms": {
+            "initial": 7.71849301236216,
+            "mandatory_first_skip": 1.822510713468982,
+            "extended_reuse": 1.7549841257277876,
+            "maximum_age": 7.612955385857091,
+            "risk": 9.257862311642384
+          },
+          "extra_q0_calls_saved_vs_k2": 55,
+          "latency_change_vs_k2_pct": -18.998687475473975
+        },
+        "reset_q25": {
+          "reasons": {
+            "initial": 8,
+            "mandatory_first_skip": 114,
+            "risk": 100,
+            "extended_reuse": 27,
+            "maximum_age": 7
+          },
+          "skipped_output_exact_replay_frames": 141,
+          "extension_risk_mae": 0.012509693098291167,
+          "accepted_true_teacher_risk_mean": 0.026190788485109806,
+          "rejected_true_teacher_risk_mean": 0.05081619968637824,
+          "reason_mean_ms": {
+            "initial": 7.709991994488519,
+            "mandatory_first_skip": 1.8087371309663642,
+            "risk": 9.206514360848814,
+            "extended_reuse": 1.7558329251456868,
+            "maximum_age": 7.615412851529462
+          },
+          "extra_q0_calls_saved_vs_k2": 13,
+          "latency_change_vs_k2_pct": 14.884870424498885
+        },
+        "reset_q50": {
+          "reasons": {
+            "initial": 8,
+            "mandatory_first_skip": 89,
+            "risk": 47,
+            "extended_reuse": 78,
+            "maximum_age": 34
+          },
+          "skipped_output_exact_replay_frames": 167,
+          "extension_risk_mae": 0.012069832615554332,
+          "accepted_true_teacher_risk_mean": 0.03588650417394745,
+          "rejected_true_teacher_risk_mean": 0.06552642409471755,
+          "reason_mean_ms": {
+            "initial": 7.708143115451094,
+            "mandatory_first_skip": 1.815300931227969,
+            "risk": 9.232647770252871,
+            "extended_reuse": 1.7624326029386468,
+            "maximum_age": 7.608564176788444
+          },
+          "extra_q0_calls_saved_vs_k2": 39,
+          "latency_change_vs_k2_pct": -6.13808567610763
+        },
+        "reset_q75": {
+          "reasons": {
+            "initial": 8,
+            "mandatory_first_skip": 74,
+            "extended_reuse": 108,
+            "maximum_age": 47,
+            "risk": 19
+          },
+          "skipped_output_exact_replay_frames": 182,
+          "extension_risk_mae": 0.012956983483154473,
+          "accepted_true_teacher_risk_mean": 0.04265750005530814,
+          "rejected_true_teacher_risk_mean": 0.07227079148747419,
+          "reason_mean_ms": {
+            "initial": 7.717053485976066,
+            "mandatory_first_skip": 1.8478439848656087,
+            "extended_reuse": 1.7861265633082777,
+            "maximum_age": 7.611920317743925,
+            "risk": 9.271663785176841
+          },
+          "extra_q0_calls_saved_vs_k2": 54,
+          "latency_change_vs_k2_pct": -17.54615964901596
+        },
+        "mlp_q25": {
+          "reasons": {
+            "initial": 8,
+            "mandatory_first_skip": 115,
+            "risk": 104,
+            "extended_reuse": 23,
+            "maximum_age": 6
+          },
+          "skipped_output_exact_replay_frames": 138,
+          "extension_risk_mae": 0.013189804996913813,
+          "accepted_true_teacher_risk_mean": 0.029097252322927765,
+          "rejected_true_teacher_risk_mean": 0.048655126440840274,
+          "reason_mean_ms": {
+            "initial": 7.714058010606095,
+            "mandatory_first_skip": 1.7423753844290648,
+            "risk": 9.194740017567081,
+            "extended_reuse": 1.7244543844793478,
+            "maximum_age": 7.613668984655912
+          },
+          "extra_q0_calls_saved_vs_k2": 10,
+          "latency_change_vs_k2_pct": 16.171648410335404
+        },
+        "mlp_q50": {
+          "reasons": {
+            "initial": 8,
+            "mandatory_first_skip": 95,
+            "risk": 58,
+            "extended_reuse": 66,
+            "maximum_age": 29
+          },
+          "skipped_output_exact_replay_frames": 161,
+          "extension_risk_mae": 0.012905577100032279,
+          "accepted_true_teacher_risk_mean": 0.03479425494813106,
+          "rejected_true_teacher_risk_mean": 0.06182760138321539,
+          "reason_mean_ms": {
+            "initial": 7.703548115387093,
+            "mandatory_first_skip": 1.7129932695656622,
+            "risk": 9.143295846397764,
+            "extended_reuse": 1.6522041202706257,
+            "maximum_age": 7.608757105431166
+          },
+          "extra_q0_calls_saved_vs_k2": 33,
+          "latency_change_vs_k2_pct": -3.3711172446856286
+        },
+        "mlp_q75": {
+          "reasons": {
+            "initial": 8,
+            "mandatory_first_skip": 72,
+            "extended_reuse": 112,
+            "maximum_age": 48,
+            "risk": 16
+          },
+          "skipped_output_exact_replay_frames": 184,
+          "extension_risk_mae": 0.01410880825278582,
+          "accepted_true_teacher_risk_mean": 0.0453352947037534,
+          "rejected_true_teacher_risk_mean": 0.07854369527194649,
+          "reason_mean_ms": {
+            "initial": 7.722752634435892,
+            "mandatory_first_skip": 1.7067720036720857,
+            "extended_reuse": 1.647488772765168,
+            "maximum_age": 7.602785310155014,
+            "risk": 9.099835562665248
+          },
+          "extra_q0_calls_saved_vs_k2": 56,
+          "latency_change_vs_k2_pct": -21.607898920587367
+        },
+        "carry_q50_h_reset": {
+          "reasons": {
+            "initial": 8,
+            "mandatory_first_skip": 82,
+            "risk": 35,
+            "extended_reuse": 92,
+            "maximum_age": 39
+          },
+          "skipped_output_exact_replay_frames": 174,
+          "extension_risk_mae": 0.014127593436168404,
+          "accepted_true_teacher_risk_mean": 0.03852147324537129,
+          "rejected_true_teacher_risk_mean": 0.0674800416720765,
+          "reason_mean_ms": {
+            "initial": 7.716040003288072,
+            "mandatory_first_skip": 1.8406510658323674,
+            "risk": 9.267136173522365,
+            "extended_reuse": 1.774022643550542,
+            "maximum_age": 7.606471915586064
+          },
+          "extra_q0_calls_saved_vs_k2": 46,
+          "latency_change_vs_k2_pct": -11.168216478955683
+        }
+      },
+      "same_weight_h_removal_changed_refresh_decisions": 2
+    },
+    "L256": {
+      "policies": {
+        "carry_q25": {
+          "reasons": {
+            "initial": 4,
+            "mandatory_first_skip": 474,
+            "risk": 443,
+            "extended_reuse": 74,
+            "maximum_age": 29
+          },
+          "skipped_output_exact_replay_frames": 548,
+          "extension_risk_mae": 0.023269097479258444,
+          "accepted_true_teacher_risk_mean": 0.033462106527106183,
+          "rejected_true_teacher_risk_mean": 0.07621607618536758,
+          "reason_mean_ms": {
+            "initial": 7.746926989057101,
+            "mandatory_first_skip": 1.8388297038451467,
+            "risk": 9.272221015302703,
+            "extended_reuse": 1.794020042005876,
+            "maximum_age": 7.609878586412504
+          },
+          "extra_q0_calls_saved_vs_k2": 36,
+          "latency_change_vs_k2_pct": 19.223436217510415
+        },
+        "carry_q50": {
+          "reasons": {
+            "initial": 4,
+            "mandatory_first_skip": 367,
+            "extended_reuse": 289,
+            "risk": 245,
+            "maximum_age": 119
+          },
+          "skipped_output_exact_replay_frames": 656,
+          "extension_risk_mae": 0.02437963622730323,
+          "accepted_true_teacher_risk_mean": 0.055595481832701854,
+          "rejected_true_teacher_risk_mean": 0.09190295401732532,
+          "reason_mean_ms": {
+            "initial": 7.759200743748806,
+            "mandatory_first_skip": 1.824228105240575,
+            "extended_reuse": 1.7657256522054774,
+            "risk": 9.241604988406204,
+            "maximum_age": 7.608985272529653
+          },
+          "extra_q0_calls_saved_vs_k2": 144,
+          "latency_change_vs_k2_pct": -2.630033419625133
+        },
+        "carry_q75": {
+          "reasons": {
+            "initial": 4,
+            "mandatory_first_skip": 307,
+            "extended_reuse": 410,
+            "risk": 111,
+            "maximum_age": 192
+          },
+          "skipped_output_exact_replay_frames": 717,
+          "extension_risk_mae": 0.02415154525749171,
+          "accepted_true_teacher_risk_mean": 0.06110613029904482,
+          "rejected_true_teacher_risk_mean": 0.11775088665990142,
+          "reason_mean_ms": {
+            "initial": 7.7651564934058115,
+            "mandatory_first_skip": 1.8426136116357672,
+            "extended_reuse": 1.7905208515003324,
+            "risk": 9.26984515542433,
+            "maximum_age": 7.610391808460311
+          },
+          "extra_q0_calls_saved_vs_k2": 205,
+          "latency_change_vs_k2_pct": -15.066247220190721
+        },
+        "reset_q25": {
+          "reasons": {
+            "initial": 4,
+            "mandatory_first_skip": 480,
+            "risk": 455,
+            "extended_reuse": 62,
+            "maximum_age": 23
+          },
+          "skipped_output_exact_replay_frames": 542,
+          "extension_risk_mae": 0.02280285556906946,
+          "accepted_true_teacher_risk_mean": 0.029179309554878744,
+          "rejected_true_teacher_risk_mean": 0.07458246636849183,
+          "reason_mean_ms": {
+            "initial": 7.7769907511537895,
+            "mandatory_first_skip": 1.8392956917523406,
+            "risk": 9.255413924072675,
+            "extended_reuse": 1.76224016280274,
+            "maximum_age": 7.598207904147389
+          },
+          "extra_q0_calls_saved_vs_k2": 30,
+          "latency_change_vs_k2_pct": 20.23637264944018
+        },
+        "reset_q50": {
+          "reasons": {
+            "initial": 4,
+            "mandatory_first_skip": 386,
+            "extended_reuse": 252,
+            "risk": 283,
+            "maximum_age": 99
+          },
+          "skipped_output_exact_replay_frames": 638,
+          "extension_risk_mae": 0.023616290543332835,
+          "accepted_true_teacher_risk_mean": 0.054123209501128824,
+          "rejected_true_teacher_risk_mean": 0.0874335484533133,
+          "reason_mean_ms": {
+            "initial": 7.749074255116284,
+            "mandatory_first_skip": 1.816024063872849,
+            "extended_reuse": 1.761093648152411,
+            "risk": 9.211747305280143,
+            "maximum_age": 7.60399852173798
+          },
+          "extra_q0_calls_saved_vs_k2": 126,
+          "latency_change_vs_k2_pct": 0.8155882050443264
+        },
+        "reset_q75": {
+          "reasons": {
+            "initial": 4,
+            "mandatory_first_skip": 310,
+            "extended_reuse": 403,
+            "risk": 122,
+            "maximum_age": 185
+          },
+          "skipped_output_exact_replay_frames": 713,
+          "extension_risk_mae": 0.023616454299716722,
+          "accepted_true_teacher_risk_mean": 0.06045379671765025,
+          "rejected_true_teacher_risk_mean": 0.11504600252040097,
+          "reason_mean_ms": {
+            "initial": 7.7637000067625195,
+            "mandatory_first_skip": 1.8422088920018607,
+            "extended_reuse": 1.7791965285376194,
+            "risk": 9.262770650045733,
+            "maximum_age": 7.608679844053915
+          },
+          "extra_q0_calls_saved_vs_k2": 201,
+          "latency_change_vs_k2_pct": -14.270148071092093
+        },
+        "mlp_q25": {
+          "reasons": {
+            "initial": 4,
+            "mandatory_first_skip": 479,
+            "risk": 454,
+            "extended_reuse": 64,
+            "maximum_age": 23
+          },
+          "skipped_output_exact_replay_frames": 543,
+          "extension_risk_mae": 0.02294230412936349,
+          "accepted_true_teacher_risk_mean": 0.0320942361431662,
+          "rejected_true_teacher_risk_mean": 0.07409105434529648,
+          "reason_mean_ms": {
+            "initial": 7.766439986880869,
+            "mandatory_first_skip": 1.7159274070317583,
+            "risk": 9.16335316175402,
+            "extended_reuse": 1.6612672143310192,
+            "maximum_age": 7.600272831041366
+          },
+          "extra_q0_calls_saved_vs_k2": 31,
+          "latency_change_vs_k2_pct": 17.68200139182039
+        },
+        "mlp_q50": {
+          "reasons": {
+            "initial": 4,
+            "mandatory_first_skip": 419,
+            "extended_reuse": 186,
+            "risk": 345,
+            "maximum_age": 70
+          },
+          "skipped_output_exact_replay_frames": 605,
+          "extension_risk_mae": 0.023638601314886817,
+          "accepted_true_teacher_risk_mean": 0.04537018191229592,
+          "rejected_true_teacher_risk_mean": 0.08400752553581328,
+          "reason_mean_ms": {
+            "initial": 7.751530749374069,
+            "mandatory_first_skip": 1.705304102978818,
+            "extended_reuse": 1.6510099111880947,
+            "risk": 9.136774284981083,
+            "maximum_age": 7.603068069355296
+          },
+          "extra_q0_calls_saved_vs_k2": 93,
+          "latency_change_vs_k2_pct": 5.295015898847422
+        },
+        "mlp_q75": {
+          "reasons": {
+            "initial": 4,
+            "mandatory_first_skip": 306,
+            "extended_reuse": 411,
+            "maximum_age": 189,
+            "risk": 114
+          },
+          "skipped_output_exact_replay_frames": 717,
+          "extension_risk_mae": 0.024198651569230217,
+          "accepted_true_teacher_risk_mean": 0.06345863877784307,
+          "rejected_true_teacher_risk_mean": 0.11306142637081314,
+          "reason_mean_ms": {
+            "initial": 7.763451736536808,
+            "mandatory_first_skip": 1.7073652298064914,
+            "extended_reuse": 1.6566849796049332,
+            "maximum_age": 7.611117748267673,
+            "risk": 9.13799978157489
+          },
+          "extra_q0_calls_saved_vs_k2": 205,
+          "latency_change_vs_k2_pct": -17.430569547926133
+        },
+        "carry_q50_h_reset": {
+          "reasons": {
+            "initial": 4,
+            "mandatory_first_skip": 371,
+            "extended_reuse": 281,
+            "risk": 255,
+            "maximum_age": 113
+          },
+          "skipped_output_exact_replay_frames": 652,
+          "extension_risk_mae": 0.024627386481125852,
+          "accepted_true_teacher_risk_mean": 0.05664406191173185,
+          "rejected_true_teacher_risk_mean": 0.08953726450163944,
+          "reason_mean_ms": {
+            "initial": 7.759914500638843,
+            "mandatory_first_skip": 1.8196433259806823,
+            "extended_reuse": 1.753257697338762,
+            "risk": 9.226103620055843,
+            "maximum_age": 7.603665708205704
+          },
+          "extra_q0_calls_saved_vs_k2": 140,
+          "latency_change_vs_k2_pct": -1.9592400197059767
+        }
+      },
+      "same_weight_h_removal_changed_refresh_decisions": 178
+    }
+  },
+  "notes": [
+    "True risk here means actual Q0 logdepth+2loggradient proxy, NOT GT risk or a quality guarantee.",
+    "Timing is original synchronized run grouped posthoc; individual reasons have different frames and counts, not matched causal component benchmarks.",
+    "Removing h changes future schedules and candidate caches too; whole-policy intervention, not isolated per-frame memory quality."
+  ]
+}

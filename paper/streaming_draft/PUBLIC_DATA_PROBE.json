@@ -1,0 +1,126 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/summarize_fixed_camera_probe.py",
+    "bytes": 2294,
+    "sha256": "6c01afcbe8935d0f34e1cfee49a5eb1ef5ef24ba219d546a6c22b7d934a103fe"
+  },
+  "original_protocol": {
+    "path": "work_dirs/qfixed_public_probe_20260910/protocol.json",
+    "bytes": 713,
+    "sha256": "92cbb3a2cb250c44518addb3b2972d7a2da73c6d120cef842e333bf558e025cf"
+  },
+  "download_process_stopped": true,
+  "reason": "Bounded source/format search; slow URFD transfers stopped after obtaining complete SBM correction. No background download promise.",
+  "no_model_predictions": true,
+  "archives": [
+    {
+      "url": "https://fenix.ur.edu.pl/~mkepski/ds/data/fall-01-cam1-d.zip",
+      "file": {
+        "path": "work_dirs/qfixed_public_probe_20260910/ur_fall01_cam1_depth.zip",
+        "bytes": 3145728,
+        "sha256": "b7cbe32d29defe39c7202f8397030f08529a8392c6e4a721063f7323d2ae913c"
+      },
+      "complete_zip": false,
+      "status": "incomplete transfer retained; never use as dataset"
+    },
+    {
+      "url": "https://fenix.ur.edu.pl/~mkepski/ds/data/fall-01-cam1-rgb.zip",
+      "file": {
+        "path": "work_dirs/qfixed_public_probe_20260910/ur_fall01_cam1_rgb.zip",
+        "bytes": 2097152,
+        "sha256": "bf6362aa3f06446591604d2aa522fd0e5c31f26f90f6eaf6245482e5544d5cee"
+      },
+      "complete_zip": false,
+      "status": "incomplete transfer retained; never use as dataset"
+    },
+    {
+      "url": "https://rgbd2017.na.icar.cnr.it/SBM-RGBDdataset/Shadows/Updatefall01cam1.zip",
+      "file": {
+        "path": "work_dirs/qfixed_public_probe_20260910/sbm_fall01cam1_update.zip",
+        "bytes": 29792821,
+        "sha256": "edad4bd69896dc82b77031f02d69b12b7cc3f2c7a5330bc7cf1a4a8bef43b809"
+      },
+      "complete_zip": true,
+      "groups": [
+        {
+          "parent": "depth",
+          "count": 160,
+          "samples": [
+            {
+              "member": "depth/d000001.png",
+              "shape": [
+                480,
+                640
+              ],
+              "dtype": "uint16",
+              "min": 0,
+              "max": 3357,
+              "nonzero_fraction": 0.7210221354166667
+            },
+            {
+              "member": "depth/d000081.png",
+              "shape": [
+                480,
+                640
+              ],
+              "dtype": "uint16",
+              "min": 0,
+              "max": 3372,
+              "nonzero_fraction": 0.78154296875
+            },
+            {
+              "member": "depth/d000160.png",
+              "shape": [
+                480,
+                640
+              ],
+              "dtype": "uint16",
+              "min": 0,
+              "max": 3423,
+              "nonzero_fraction": 0.8020703125
+            }
+          ]
+        },
+        {
+          "parent": "groundtruth",
+          "count": 7,
+          "samples": [
+            {
+              "member": "groundtruth/gt000071.png",
+              "shape": [
+                480,
+                640
+              ],
+              "dtype": "uint8",
+              "min": 0,
+              "max": 85,
+              "nonzero_fraction": 0.173408203125
+            },
+            {
+              "member": "groundtruth/gt000110.png",
+              "shape": [
+                480,
+                640
+              ],
+              "dtype": "uint8",
+              "min": 0,
+              "max": 255,
+              "nonzero_fraction": 0.25800130208333333
+            },
+            {
+              "member": "groundtruth/gt000160.png",
+              "shape": [
+                480,
+                640
+              ],
+              "dtype": "uint8",
+              "min": 0,
+              "max": 255,
+              "nonzero_fraction": 0.25274088541666667
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

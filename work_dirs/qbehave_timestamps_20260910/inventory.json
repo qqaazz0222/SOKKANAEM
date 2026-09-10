@@ -1,0 +1,4079 @@
+{
+  "protocol": {
+    "path": "work_dirs/qbehave_timestamps_20260910/protocol.json",
+    "bytes": 957,
+    "sha256": "e8f7b67e20b51a32007294ece7bfc6d3b8fe5aafccd02bed17e657bee88c7474"
+  },
+  "archive": {
+    "path": "work_dirs/qbehave_timestamps_20260910/date02_time.tar",
+    "bytes": 5550080,
+    "sha256": "bf8e52a5c28824079ebb5f255df056d97ddc8c3f58dba526a85428ff29168c73"
+  },
+  "timestamp_files": [
+    {
+      "member": "Date02_empty_E1.0.time.json",
+      "bytes": 5327,
+      "color": {
+        "count": 186,
+        "first_us": 329566.0,
+        "last_us": 6496233.0,
+        "duration_s": 6.166667,
+        "interval_us": {
+          "min": 33322.0,
+          "p50": 33333.0,
+          "p95": 33345.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 186,
+        "first_us": 329655.0,
+        "last_us": 6496322.0,
+        "duration_s": 6.166667,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33366.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_empty_E1.1.time.json",
+      "bytes": 5721,
+      "color": {
+        "count": 200,
+        "first_us": 366066.0,
+        "last_us": 6996388.0,
+        "duration_s": 6.630322,
+        "interval_us": {
+          "min": 30311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 200,
+        "first_us": 366077.0,
+        "last_us": 6999411.0,
+        "duration_s": 6.633334,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 33356.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_empty_E1.2.time.json",
+      "bytes": 5721,
+      "color": {
+        "count": 200,
+        "first_us": 363211.0,
+        "last_us": 6996533.0,
+        "duration_s": 6.633322,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33346.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 200,
+        "first_us": 363233.0,
+        "last_us": 6996566.0,
+        "duration_s": 6.633333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.1,
+          "max": 33356.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_empty_E1.3.time.json",
+      "bytes": 5761,
+      "color": {
+        "count": 200,
+        "first_us": 1830033.0,
+        "last_us": 8496344.0,
+        "duration_s": 6.666311,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33323.0,
+          "p95": 33355.0,
+          "max": 66644.0
+        }
+      },
+      "depth": {
+        "count": 200,
+        "first_us": 1830055.0,
+        "last_us": 8496722.0,
+        "duration_s": 6.666667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66666.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_back.0.time.json",
+      "bytes": 37199,
+      "color": {
+        "count": 1250,
+        "first_us": 796244.0,
+        "last_us": 60762911.0,
+        "duration_s": 59.966667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 466667.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 796300.0,
+        "last_us": 60762966.0,
+        "duration_s": 59.966666,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33345.0,
+          "p95": 99989.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_back.1.time.json",
+      "bytes": 44545,
+      "color": {
+        "count": 1500,
+        "first_us": 363044.0,
+        "last_us": 50363044.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66678.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 363066.0,
+        "last_us": 50363066.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_back.2.time.json",
+      "bytes": 44589,
+      "color": {
+        "count": 1500,
+        "first_us": 763211.0,
+        "last_us": 50763211.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33346.0,
+          "max": 66666.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 763211.0,
+        "last_us": 50763211.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_back.3.time.json",
+      "bytes": 32827,
+      "color": {
+        "count": 1100,
+        "first_us": 1430044.0,
+        "last_us": 49063388.0,
+        "duration_s": 47.633344,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 233344.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1430044.0,
+        "last_us": 49063388.0,
+        "duration_s": 47.633344,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66667.0,
+          "max": 233344.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_hand.0.time.json",
+      "bytes": 37211,
+      "color": {
+        "count": 1250,
+        "first_us": 829577.0,
+        "last_us": 57362911.0,
+        "duration_s": 56.533334,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 829633.0,
+        "last_us": 57362977.0,
+        "duration_s": 56.533344,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66700.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_hand.1.time.json",
+      "bytes": 44545,
+      "color": {
+        "count": 1500,
+        "first_us": 396388.0,
+        "last_us": 50363044.0,
+        "duration_s": 49.966656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33355.0,
+          "max": 33366.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 396411.0,
+        "last_us": 50363055.0,
+        "duration_s": 49.966644,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 33367.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_hand.2.time.json",
+      "bytes": 44533,
+      "color": {
+        "count": 1500,
+        "first_us": 263222.0,
+        "last_us": 50363200.0,
+        "duration_s": 50.099978,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 267000.0,
+        "last_us": 50363233.0,
+        "duration_s": 50.096233,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_hand.3.time.json",
+      "bytes": 32877,
+      "color": {
+        "count": 1100,
+        "first_us": 1796711.0,
+        "last_us": 56830044.0,
+        "duration_s": 55.033333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 100000.0,
+          "max": 866656.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1796733.0,
+        "last_us": 56830055.0,
+        "duration_s": 55.033322,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 100001.1,
+          "max": 866667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_twohand.0.time.json",
+      "bytes": 37153,
+      "color": {
+        "count": 1250,
+        "first_us": 696244.0,
+        "last_us": 54796244.0,
+        "duration_s": 54.1,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 696300.0,
+        "last_us": 54796300.0,
+        "duration_s": 54.1,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_twohand.1.time.json",
+      "bytes": 44541,
+      "color": {
+        "count": 1500,
+        "first_us": 363055.0,
+        "last_us": 50329722.0,
+        "duration_s": 49.966667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 363066.0,
+        "last_us": 50329744.0,
+        "duration_s": 49.966678,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33356.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_twohand.2.time.json",
+      "bytes": 44541,
+      "color": {
+        "count": 1500,
+        "first_us": 329877.0,
+        "last_us": 50429866.0,
+        "duration_s": 50.099989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 329900.0,
+        "last_us": 50429888.0,
+        "duration_s": 50.099988,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_backpack_twohand.3.time.json",
+      "bytes": 32677,
+      "color": {
+        "count": 1100,
+        "first_us": 1696700.0,
+        "last_us": 55630033.0,
+        "duration_s": 53.933333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 100000.0,
+          "max": 133355.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1696722.0,
+        "last_us": 55630055.0,
+        "duration_s": 53.933333,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 100011.0,
+          "max": 133345.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_basketball.0.time.json",
+      "bytes": 37179,
+      "color": {
+        "count": 1250,
+        "first_us": 762911.0,
+        "last_us": 56529588.0,
+        "duration_s": 55.766677,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99978.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 762966.0,
+        "last_us": 56529633.0,
+        "duration_s": 55.766667,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 99978.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_basketball.1.time.json",
+      "bytes": 44637,
+      "color": {
+        "count": 1500,
+        "first_us": 1263055.0,
+        "last_us": 51263066.0,
+        "duration_s": 50.000011,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 1263066.0,
+        "last_us": 51263066.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_basketball.2.time.json",
+      "bytes": 44537,
+      "color": {
+        "count": 1500,
+        "first_us": 296533.0,
+        "last_us": 50363200.0,
+        "duration_s": 50.066667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 300322.0,
+        "last_us": 50363211.0,
+        "duration_s": 50.062889,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_basketball.3.time.json",
+      "bytes": 32927,
+      "color": {
+        "count": 1100,
+        "first_us": 1763366.0,
+        "last_us": 51296700.0,
+        "duration_s": 49.533334,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 666667.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1763388.0,
+        "last_us": 51296722.0,
+        "duration_s": 49.533334,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 66667.0,
+          "max": 666678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxlarge_hand.0.time.json",
+      "bytes": 37083,
+      "color": {
+        "count": 1250,
+        "first_us": 462911.0,
+        "last_us": 47129566.0,
+        "duration_s": 46.666655,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 66667.0,
+          "max": 66689.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 462966.0,
+        "last_us": 47129644.0,
+        "duration_s": 46.666678,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33344.0,
+          "p95": 66667.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxlarge_hand.1.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 226766.0,
+        "last_us": 50229144.0,
+        "duration_s": 50.002378,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66656.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240822.0,
+        "last_us": 50229733.0,
+        "duration_s": 49.988911,
+        "interval_us": {
+          "min": 26022.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 62900.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxlarge_hand.2.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 223588.0,
+        "last_us": 50662544.0,
+        "duration_s": 50.438956,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240977.0,
+        "last_us": 50663222.0,
+        "duration_s": 50.422245,
+        "interval_us": {
+          "min": 26034.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxlarge_hand.3.time.json",
+      "bytes": 32895,
+      "color": {
+        "count": 1100,
+        "first_us": 2496700.0,
+        "last_us": 55394877.0,
+        "duration_s": 52.898177,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99979.1,
+          "max": 866656.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 2496711.0,
+        "last_us": 55396711.0,
+        "duration_s": 52.9,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 866667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxlong_hand.0.time.json",
+      "bytes": 37171,
+      "color": {
+        "count": 1250,
+        "first_us": 696244.0,
+        "last_us": 55662911.0,
+        "duration_s": 54.966667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 696300.0,
+        "last_us": 55662966.0,
+        "duration_s": 54.966666,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxlong_hand.1.time.json",
+      "bytes": 44553,
+      "color": {
+        "count": 1500,
+        "first_us": 463055.0,
+        "last_us": 50463055.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 463088.0,
+        "last_us": 50463077.0,
+        "duration_s": 49.999989,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66688.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxlong_hand.2.time.json",
+      "bytes": 44535,
+      "color": {
+        "count": 1500,
+        "first_us": 263222.0,
+        "last_us": 50296533.0,
+        "duration_s": 50.033311,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 267000.0,
+        "last_us": 50296566.0,
+        "duration_s": 50.029566,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxlong_hand.3.time.json",
+      "bytes": 32855,
+      "color": {
+        "count": 1100,
+        "first_us": 1596722.0,
+        "last_us": 51063377.0,
+        "duration_s": 49.466655,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 300000.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1596744.0,
+        "last_us": 51063400.0,
+        "duration_s": 49.466656,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 66677.1,
+          "max": 300022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxmedium_hand.0.time.json",
+      "bytes": 37115,
+      "color": {
+        "count": 1250,
+        "first_us": 496244.0,
+        "last_us": 48729577.0,
+        "duration_s": 48.233333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 66667.0,
+          "max": 66689.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 496300.0,
+        "last_us": 48729633.0,
+        "duration_s": 48.233333,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33344.0,
+          "p95": 66667.0,
+          "max": 66700.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxmedium_hand.1.time.json",
+      "bytes": 44621,
+      "color": {
+        "count": 1500,
+        "first_us": 1029722.0,
+        "last_us": 50996011.0,
+        "duration_s": 49.966289,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 1029733.0,
+        "last_us": 50996400.0,
+        "duration_s": 49.966667,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33367.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxmedium_hand.2.time.json",
+      "bytes": 44533,
+      "color": {
+        "count": 1500,
+        "first_us": 263222.0,
+        "last_us": 50396311.0,
+        "duration_s": 50.133089,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33345.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 267000.0,
+        "last_us": 50396566.0,
+        "duration_s": 50.129566,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxmedium_hand.3.time.json",
+      "bytes": 32813,
+      "color": {
+        "count": 1100,
+        "first_us": 1763366.0,
+        "last_us": 53995600.0,
+        "duration_s": 52.232234,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66688.0,
+          "max": 433344.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1763388.0,
+        "last_us": 53996722.0,
+        "duration_s": 52.233334,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 66678.0,
+          "max": 433345.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxsmall_hand.0.time.json",
+      "bytes": 37123,
+      "color": {
+        "count": 1250,
+        "first_us": 562900.0,
+        "last_us": 52762900.0,
+        "duration_s": 52.2,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66667.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 562977.0,
+        "last_us": 52762988.0,
+        "duration_s": 52.200011,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33344.0,
+          "p95": 66667.0,
+          "max": 100011.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxsmall_hand.1.time.json",
+      "bytes": 44569,
+      "color": {
+        "count": 1500,
+        "first_us": 596388.0,
+        "last_us": 50563044.0,
+        "duration_s": 49.966656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 596400.0,
+        "last_us": 50563055.0,
+        "duration_s": 49.966655,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 33356.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxsmall_hand.2.time.json",
+      "bytes": 44533,
+      "color": {
+        "count": 1500,
+        "first_us": 263222.0,
+        "last_us": 50396533.0,
+        "duration_s": 50.133311,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33345.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 267000.0,
+        "last_us": 50396566.0,
+        "duration_s": 50.129566,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxsmall_hand.3.time.json",
+      "bytes": 32801,
+      "color": {
+        "count": 1100,
+        "first_us": 1830033.0,
+        "last_us": 50630033.0,
+        "duration_s": 48.8,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 166678.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1830044.0,
+        "last_us": 50630044.0,
+        "duration_s": 48.8,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 166689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxtiny_hand.0.time.json",
+      "bytes": 37169,
+      "color": {
+        "count": 1250,
+        "first_us": 662900.0,
+        "last_us": 55062900.0,
+        "duration_s": 54.4,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 662977.0,
+        "last_us": 55062977.0,
+        "duration_s": 54.4,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxtiny_hand.1.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 229722.0,
+        "last_us": 50729733.0,
+        "duration_s": 50.500011,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240822.0,
+        "last_us": 50729755.0,
+        "duration_s": 50.488933,
+        "interval_us": {
+          "min": 26022.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 466666.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxtiny_hand.2.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 229877.0,
+        "last_us": 50229877.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66655.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240977.0,
+        "last_us": 50229900.0,
+        "duration_s": 49.988923,
+        "interval_us": {
+          "min": 26023.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 62911.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_boxtiny_hand.3.time.json",
+      "bytes": 32845,
+      "color": {
+        "count": 1100,
+        "first_us": 1963366.0,
+        "last_us": 50996700.0,
+        "duration_s": 49.033334,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 233344.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1963377.0,
+        "last_us": 50996722.0,
+        "duration_s": 49.033345,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 233344.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_hand.0.time.json",
+      "bytes": 37157,
+      "color": {
+        "count": 1250,
+        "first_us": 629566.0,
+        "last_us": 56229577.0,
+        "duration_s": 55.600011,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100023.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 629655.0,
+        "last_us": 56229633.0,
+        "duration_s": 55.599978,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66688.0,
+          "max": 100023.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_hand.1.time.json",
+      "bytes": 44589,
+      "color": {
+        "count": 1500,
+        "first_us": 763044.0,
+        "last_us": 50796388.0,
+        "duration_s": 50.033344,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 763055.0,
+        "last_us": 50796411.0,
+        "duration_s": 50.033356,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_hand.2.time.json",
+      "bytes": 44531,
+      "color": {
+        "count": 1500,
+        "first_us": 226044.0,
+        "last_us": 50829877.0,
+        "duration_s": 50.603833,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466678.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240977.0,
+        "last_us": 50829877.0,
+        "duration_s": 50.5889,
+        "interval_us": {
+          "min": 26023.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_hand.3.time.json",
+      "bytes": 32833,
+      "color": {
+        "count": 1100,
+        "first_us": 1630044.0,
+        "last_us": 51796700.0,
+        "duration_s": 50.166656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 333334.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1630055.0,
+        "last_us": 51796744.0,
+        "duration_s": 50.166689,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 66678.0,
+          "max": 333333.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_lift.0.time.json",
+      "bytes": 37177,
+      "color": {
+        "count": 1250,
+        "first_us": 629577.0,
+        "last_us": 56929588.0,
+        "duration_s": 56.300011,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66689.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 629633.0,
+        "last_us": 56929633.0,
+        "duration_s": 56.3,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33345.0,
+          "p95": 66700.0,
+          "max": 100033.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_lift.1.time.json",
+      "bytes": 44557,
+      "color": {
+        "count": 1500,
+        "first_us": 496388.0,
+        "last_us": 50629711.0,
+        "duration_s": 50.133323,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66677.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 496400.0,
+        "last_us": 50629733.0,
+        "duration_s": 50.133333,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_lift.2.time.json",
+      "bytes": 44595,
+      "color": {
+        "count": 1500,
+        "first_us": 796544.0,
+        "last_us": 51729877.0,
+        "duration_s": 50.933333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466677.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 796566.0,
+        "last_us": 51729911.0,
+        "duration_s": 50.933345,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 466678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_lift.3.time.json",
+      "bytes": 32851,
+      "color": {
+        "count": 1100,
+        "first_us": 2063388.0,
+        "last_us": 53896700.0,
+        "duration_s": 51.833312,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99977.1,
+          "max": 433333.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 2063388.0,
+        "last_us": 53896711.0,
+        "duration_s": 51.833323,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 99978.0,
+          "max": 433344.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_sit.0.time.json",
+      "bytes": 37183,
+      "color": {
+        "count": 1250,
+        "first_us": 662900.0,
+        "last_us": 57062911.0,
+        "duration_s": 56.400011,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99978.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 662977.0,
+        "last_us": 57062966.0,
+        "duration_s": 56.399989,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33344.0,
+          "p95": 99973.6,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_sit.1.time.json",
+      "bytes": 44533,
+      "color": {
+        "count": 1500,
+        "first_us": 263055.0,
+        "last_us": 50263066.0,
+        "duration_s": 50.000011,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66678.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 266844.0,
+        "last_us": 50263077.0,
+        "duration_s": 49.996233,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 62889.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_sit.2.time.json",
+      "bytes": 44541,
+      "color": {
+        "count": 1500,
+        "first_us": 363211.0,
+        "last_us": 50329877.0,
+        "duration_s": 49.966666,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33345.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 363233.0,
+        "last_us": 50329911.0,
+        "duration_s": 49.966678,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 33367.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairblack_sit.3.time.json",
+      "bytes": 32861,
+      "color": {
+        "count": 1100,
+        "first_us": 2163377.0,
+        "last_us": 51396711.0,
+        "duration_s": 49.233334,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 600000.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 2163377.0,
+        "last_us": 51396722.0,
+        "duration_s": 49.233345,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 600000.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairwood_hand.0.time.json",
+      "bytes": 37155,
+      "color": {
+        "count": 1250,
+        "first_us": 729577.0,
+        "last_us": 54596244.0,
+        "duration_s": 53.866667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 729633.0,
+        "last_us": 54596300.0,
+        "duration_s": 53.866667,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33344.0,
+          "p95": 66677.6,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairwood_hand.1.time.json",
+      "bytes": 44577,
+      "color": {
+        "count": 1500,
+        "first_us": 663055.0,
+        "last_us": 50629711.0,
+        "duration_s": 49.966656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33367.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 663077.0,
+        "last_us": 50629733.0,
+        "duration_s": 49.966656,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 33367.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairwood_hand.2.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 229866.0,
+        "last_us": 50296544.0,
+        "duration_s": 50.066678,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66666.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240977.0,
+        "last_us": 50296566.0,
+        "duration_s": 50.055589,
+        "interval_us": {
+          "min": 26034.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairwood_hand.3.time.json",
+      "bytes": 32697,
+      "color": {
+        "count": 1100,
+        "first_us": 1930044.0,
+        "last_us": 50630044.0,
+        "duration_s": 48.7,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 133334.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1930077.0,
+        "last_us": 50630066.0,
+        "duration_s": 48.699989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 133344.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairwood_sit.0.time.json",
+      "bytes": 37173,
+      "color": {
+        "count": 1250,
+        "first_us": 696244.0,
+        "last_us": 56762900.0,
+        "duration_s": 56.066656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66689.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 696300.0,
+        "last_us": 56762977.0,
+        "duration_s": 56.066677,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66700.0,
+          "max": 100023.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairwood_sit.1.time.json",
+      "bytes": 44561,
+      "color": {
+        "count": 1500,
+        "first_us": 529722.0,
+        "last_us": 50496377.0,
+        "duration_s": 49.966655,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33366.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 529744.0,
+        "last_us": 50496400.0,
+        "duration_s": 49.966656,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33367.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairwood_sit.2.time.json",
+      "bytes": 44553,
+      "color": {
+        "count": 1500,
+        "first_us": 463222.0,
+        "last_us": 50496533.0,
+        "duration_s": 50.033311,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 463233.0,
+        "last_us": 50496544.0,
+        "duration_s": 50.033311,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_chairwood_sit.3.time.json",
+      "bytes": 32837,
+      "color": {
+        "count": 1100,
+        "first_us": 1663377.0,
+        "last_us": 52730044.0,
+        "duration_s": 51.066667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99978.0,
+          "max": 766655.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1663400.0,
+        "last_us": 52730066.0,
+        "duration_s": 51.066666,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 99978.0,
+          "max": 766678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_keyboard_move.0.time.json",
+      "bytes": 37175,
+      "color": {
+        "count": 1250,
+        "first_us": 696244.0,
+        "last_us": 56762900.0,
+        "duration_s": 56.066656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66684.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 696311.0,
+        "last_us": 56762988.0,
+        "duration_s": 56.066677,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66700.0,
+          "max": 100033.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_keyboard_move.1.time.json",
+      "bytes": 44537,
+      "color": {
+        "count": 1500,
+        "first_us": 296388.0,
+        "last_us": 50396377.0,
+        "duration_s": 50.099989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 300166.0,
+        "last_us": 50396411.0,
+        "duration_s": 50.096245,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66688.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_keyboard_move.2.time.json",
+      "bytes": 44537,
+      "color": {
+        "count": 1500,
+        "first_us": 296533.0,
+        "last_us": 50863222.0,
+        "duration_s": 50.566689,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466666.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 300322.0,
+        "last_us": 50863222.0,
+        "duration_s": 50.5629,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 33356.0,
+          "max": 466666.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_keyboard_move.3.time.json",
+      "bytes": 32811,
+      "color": {
+        "count": 1100,
+        "first_us": 1696711.0,
+        "last_us": 53296700.0,
+        "duration_s": 51.599989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99978.0,
+          "max": 266666.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1696711.0,
+        "last_us": 53296711.0,
+        "duration_s": 51.6,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 99978.0,
+          "max": 266666.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_keyboard_typing.0.time.json",
+      "bytes": 37167,
+      "color": {
+        "count": 1250,
+        "first_us": 496244.0,
+        "last_us": 55229577.0,
+        "duration_s": 54.733333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 496300.0,
+        "last_us": 55229633.0,
+        "duration_s": 54.733333,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66677.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_keyboard_typing.1.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 229711.0,
+        "last_us": 50263066.0,
+        "duration_s": 50.033355,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240822.0,
+        "last_us": 50263088.0,
+        "duration_s": 50.022266,
+        "interval_us": {
+          "min": 26022.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_keyboard_typing.2.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 216988.0,
+        "last_us": 51096533.0,
+        "duration_s": 50.879545,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466656.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240977.0,
+        "last_us": 51096555.0,
+        "duration_s": 50.855578,
+        "interval_us": {
+          "min": 26023.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 466666.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_keyboard_typing.3.time.json",
+      "bytes": 32855,
+      "color": {
+        "count": 1100,
+        "first_us": 1830033.0,
+        "last_us": 50630033.0,
+        "duration_s": 48.8,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 666667.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1830055.0,
+        "last_us": 50630055.0,
+        "duration_s": 48.8,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 66677.0,
+          "max": 666667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_monitor_hand.0.time.json",
+      "bytes": 37177,
+      "color": {
+        "count": 1250,
+        "first_us": 696244.0,
+        "last_us": 56929577.0,
+        "duration_s": 56.233333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100011.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 696300.0,
+        "last_us": 56929633.0,
+        "duration_s": 56.233333,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 66689.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_monitor_hand.1.time.json",
+      "bytes": 44573,
+      "color": {
+        "count": 1500,
+        "first_us": 629711.0,
+        "last_us": 50596388.0,
+        "duration_s": 49.966677,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33366.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 629733.0,
+        "last_us": 50596422.0,
+        "duration_s": 49.966689,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33334.0,
+          "p95": 33355.0,
+          "max": 33367.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_monitor_hand.2.time.json",
+      "bytes": 44557,
+      "color": {
+        "count": 1500,
+        "first_us": 263211.0,
+        "last_us": 51163200.0,
+        "duration_s": 50.899989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466678.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 267000.0,
+        "last_us": 51163211.0,
+        "duration_s": 50.896211,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_monitor_hand.3.time.json",
+      "bytes": 32793,
+      "color": {
+        "count": 1100,
+        "first_us": 1863366.0,
+        "last_us": 52430044.0,
+        "duration_s": 50.566678,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 166677.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1863388.0,
+        "last_us": 52430044.0,
+        "duration_s": 50.566656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 166678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_monitor_move.0.time.json",
+      "bytes": 37223,
+      "color": {
+        "count": 1250,
+        "first_us": 1429566.0,
+        "last_us": 57596233.0,
+        "duration_s": 56.166667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66684.0,
+          "max": 100023.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 1429644.0,
+        "last_us": 57596322.0,
+        "duration_s": 56.166678,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66688.6,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_monitor_move.1.time.json",
+      "bytes": 44531,
+      "color": {
+        "count": 1500,
+        "first_us": 229722.0,
+        "last_us": 50296388.0,
+        "duration_s": 50.066666,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66678.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240822.0,
+        "last_us": 50296411.0,
+        "duration_s": 50.055589,
+        "interval_us": {
+          "min": 26033.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_monitor_move.2.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 224400.0,
+        "last_us": 50729888.0,
+        "duration_s": 50.505488,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33345.0,
+          "max": 466667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240977.0,
+        "last_us": 50729911.0,
+        "duration_s": 50.488934,
+        "interval_us": {
+          "min": 26023.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_monitor_move.3.time.json",
+      "bytes": 32797,
+      "color": {
+        "count": 1100,
+        "first_us": 1430044.0,
+        "last_us": 52930044.0,
+        "duration_s": 51.5,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 233344.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1430055.0,
+        "last_us": 52930077.0,
+        "duration_s": 51.500022,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 99979.0,
+          "max": 233322.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_plasticcontainer.0.time.json",
+      "bytes": 37197,
+      "color": {
+        "count": 1250,
+        "first_us": 729566.0,
+        "last_us": 57329577.0,
+        "duration_s": 56.600011,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66689.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 729655.0,
+        "last_us": 57329633.0,
+        "duration_s": 56.599978,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33345.0,
+          "p95": 66689.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_plasticcontainer.1.time.json",
+      "bytes": 44589,
+      "color": {
+        "count": 1500,
+        "first_us": 763044.0,
+        "last_us": 50796388.0,
+        "duration_s": 50.033344,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66677.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 763055.0,
+        "last_us": 50796400.0,
+        "duration_s": 50.033345,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_plasticcontainer.2.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 223455.0,
+        "last_us": 50229866.0,
+        "duration_s": 50.006411,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33345.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240977.0,
+        "last_us": 50229888.0,
+        "duration_s": 49.988911,
+        "interval_us": {
+          "min": 26034.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 62900.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_plasticcontainer.3.time.json",
+      "bytes": 32841,
+      "color": {
+        "count": 1100,
+        "first_us": 1463377.0,
+        "last_us": 50296711.0,
+        "duration_s": 48.833334,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66677.1,
+          "max": 466656.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1463400.0,
+        "last_us": 50296722.0,
+        "duration_s": 48.833322,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 66677.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_stool_move.0.time.json",
+      "bytes": 37189,
+      "color": {
+        "count": 1250,
+        "first_us": 829566.0,
+        "last_us": 56629566.0,
+        "duration_s": 55.8,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 829655.0,
+        "last_us": 56629633.0,
+        "duration_s": 55.799978,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 99984.6,
+          "max": 100033.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_stool_move.1.time.json",
+      "bytes": 44533,
+      "color": {
+        "count": 1500,
+        "first_us": 263055.0,
+        "last_us": 50696388.0,
+        "duration_s": 50.433333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466678.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 266844.0,
+        "last_us": 50696400.0,
+        "duration_s": 50.429556,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_stool_move.2.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 220466.0,
+        "last_us": 50763200.0,
+        "duration_s": 50.542734,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466656.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240977.0,
+        "last_us": 50763211.0,
+        "duration_s": 50.522234,
+        "interval_us": {
+          "min": 26023.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_stool_move.3.time.json",
+      "bytes": 32877,
+      "color": {
+        "count": 1100,
+        "first_us": 1730044.0,
+        "last_us": 54596711.0,
+        "duration_s": 52.866667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66688.0,
+          "max": 900000.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1730066.0,
+        "last_us": 54596733.0,
+        "duration_s": 52.866667,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 66678.0,
+          "max": 899989.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_stool_sit.0.time.json",
+      "bytes": 37197,
+      "color": {
+        "count": 1250,
+        "first_us": 696244.0,
+        "last_us": 55829566.0,
+        "duration_s": 55.133322,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 696300.0,
+        "last_us": 55829655.0,
+        "duration_s": 55.133355,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_stool_sit.1.time.json",
+      "bytes": 44549,
+      "color": {
+        "count": 1500,
+        "first_us": 429722.0,
+        "last_us": 50429711.0,
+        "duration_s": 49.999989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66666.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 429744.0,
+        "last_us": 50429744.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_stool_sit.2.time.json",
+      "bytes": 44581,
+      "color": {
+        "count": 1500,
+        "first_us": 696522.0,
+        "last_us": 50696544.0,
+        "duration_s": 50.000022,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66666.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 696555.0,
+        "last_us": 50696555.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_stool_sit.3.time.json",
+      "bytes": 32843,
+      "color": {
+        "count": 1100,
+        "first_us": 1596711.0,
+        "last_us": 49396711.0,
+        "duration_s": 47.8,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 500011.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1596733.0,
+        "last_us": 49396733.0,
+        "duration_s": 47.8,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 66677.0,
+          "max": 500012.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_suitcase_ground.0.time.json",
+      "bytes": 37217,
+      "color": {
+        "count": 1250,
+        "first_us": 796244.0,
+        "last_us": 57129577.0,
+        "duration_s": 56.333333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66688.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 796300.0,
+        "last_us": 57129633.0,
+        "duration_s": 56.333333,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66688.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_suitcase_ground.1.time.json",
+      "bytes": 44593,
+      "color": {
+        "count": 1500,
+        "first_us": 796388.0,
+        "last_us": 50763044.0,
+        "duration_s": 49.966656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 796411.0,
+        "last_us": 50763066.0,
+        "duration_s": 49.966655,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33367.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_suitcase_ground.2.time.json",
+      "bytes": 44583,
+      "color": {
+        "count": 1500,
+        "first_us": 696533.0,
+        "last_us": 51163200.0,
+        "duration_s": 50.466667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466689.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 696555.0,
+        "last_us": 51163222.0,
+        "duration_s": 50.466667,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_suitcase_ground.3.time.json",
+      "bytes": 32913,
+      "color": {
+        "count": 1100,
+        "first_us": 1863366.0,
+        "last_us": 58629844.0,
+        "duration_s": 56.766478,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 100000.0,
+          "max": 1299989.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1863388.0,
+        "last_us": 58630055.0,
+        "duration_s": 56.766667,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 100000.0,
+          "max": 1299988.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_suitcase_lift.0.time.json",
+      "bytes": 37221,
+      "color": {
+        "count": 1250,
+        "first_us": 829566.0,
+        "last_us": 56229588.0,
+        "duration_s": 55.400022,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 829644.0,
+        "last_us": 56229633.0,
+        "duration_s": 55.399989,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_suitcase_lift.1.time.json",
+      "bytes": 44581,
+      "color": {
+        "count": 1500,
+        "first_us": 696377.0,
+        "last_us": 50796400.0,
+        "duration_s": 50.100023,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66689.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 696400.0,
+        "last_us": 50796411.0,
+        "duration_s": 50.100011,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_suitcase_lift.2.time.json",
+      "bytes": 44537,
+      "color": {
+        "count": 1500,
+        "first_us": 329877.0,
+        "last_us": 50796555.0,
+        "duration_s": 50.466678,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 329911.0,
+        "last_us": 50796577.0,
+        "duration_s": 50.466666,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 466655.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_suitcase_lift.3.time.json",
+      "bytes": 32929,
+      "color": {
+        "count": 1100,
+        "first_us": 1863366.0,
+        "last_us": 59529422.0,
+        "duration_s": 57.666056,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 2933333.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1863377.0,
+        "last_us": 59530044.0,
+        "duration_s": 57.666667,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 99989.0,
+          "max": 2933333.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_lean.0.time.json",
+      "bytes": 37211,
+      "color": {
+        "count": 1250,
+        "first_us": 729577.0,
+        "last_us": 57229577.0,
+        "duration_s": 56.5,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 100033.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 729633.0,
+        "last_us": 57229644.0,
+        "duration_s": 56.500011,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 99978.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_lean.1.time.json",
+      "bytes": 44567,
+      "color": {
+        "count": 1500,
+        "first_us": 563044.0,
+        "last_us": 50796400.0,
+        "duration_s": 50.233356,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33355.0,
+          "max": 66678.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 563077.0,
+        "last_us": 50796422.0,
+        "duration_s": 50.233345,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_lean.2.time.json",
+      "bytes": 44569,
+      "color": {
+        "count": 1500,
+        "first_us": 596533.0,
+        "last_us": 50563188.0,
+        "duration_s": 49.966655,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33367.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 596577.0,
+        "last_us": 50563233.0,
+        "duration_s": 49.966656,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 33366.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_lean.3.time.json",
+      "bytes": 32803,
+      "color": {
+        "count": 1100,
+        "first_us": 1430033.0,
+        "last_us": 53196711.0,
+        "duration_s": 51.766678,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 300000.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1430055.0,
+        "last_us": 53196744.0,
+        "duration_s": 51.766689,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 99978.0,
+          "max": 300012.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_lift.0.time.json",
+      "bytes": 37195,
+      "color": {
+        "count": 1250,
+        "first_us": 862900.0,
+        "last_us": 56796233.0,
+        "duration_s": 55.933333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 862966.0,
+        "last_us": 56796322.0,
+        "duration_s": 55.933356,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_lift.1.time.json",
+      "bytes": 44571,
+      "color": {
+        "count": 1500,
+        "first_us": 596388.0,
+        "last_us": 50629711.0,
+        "duration_s": 50.033323,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 596422.0,
+        "last_us": 50629733.0,
+        "duration_s": 50.033311,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_lift.2.time.json",
+      "bytes": 44537,
+      "color": {
+        "count": 1500,
+        "first_us": 296544.0,
+        "last_us": 50729877.0,
+        "duration_s": 50.433333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466666.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 300322.0,
+        "last_us": 50729900.0,
+        "duration_s": 50.429578,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_lift.3.time.json",
+      "bytes": 32887,
+      "color": {
+        "count": 1100,
+        "first_us": 1830022.0,
+        "last_us": 60062766.0,
+        "duration_s": 58.232744,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 100000.0,
+          "max": 800000.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1830044.0,
+        "last_us": 60063377.0,
+        "duration_s": 58.233333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33355.0,
+          "p95": 100011.0,
+          "max": 800000.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_move.0.time.json",
+      "bytes": 37213,
+      "color": {
+        "count": 1250,
+        "first_us": 696233.0,
+        "last_us": 56996233.0,
+        "duration_s": 56.3,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66684.6,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 696311.0,
+        "last_us": 56996333.0,
+        "duration_s": 56.300022,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66689.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_move.1.time.json",
+      "bytes": 44541,
+      "color": {
+        "count": 1500,
+        "first_us": 363055.0,
+        "last_us": 50429711.0,
+        "duration_s": 50.066656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 363066.0,
+        "last_us": 50429733.0,
+        "duration_s": 50.066667,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_move.2.time.json",
+      "bytes": 44553,
+      "color": {
+        "count": 1500,
+        "first_us": 463222.0,
+        "last_us": 50463211.0,
+        "duration_s": 49.999989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 463233.0,
+        "last_us": 50463233.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesmall_move.3.time.json",
+      "bytes": 32809,
+      "color": {
+        "count": 1100,
+        "first_us": 1730044.0,
+        "last_us": 53296711.0,
+        "duration_s": 51.566667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66688.0,
+          "max": 233355.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1730077.0,
+        "last_us": 53296722.0,
+        "duration_s": 51.566645,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 66679.1,
+          "max": 233345.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_lift.0.time.json",
+      "bytes": 37185,
+      "color": {
+        "count": 1250,
+        "first_us": 696244.0,
+        "last_us": 55596233.0,
+        "duration_s": 54.899989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 696300.0,
+        "last_us": 55596322.0,
+        "duration_s": 54.900022,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_lift.1.time.json",
+      "bytes": 44593,
+      "color": {
+        "count": 1500,
+        "first_us": 729711.0,
+        "last_us": 50896377.0,
+        "duration_s": 50.166666,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 100011.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 729744.0,
+        "last_us": 50896388.0,
+        "duration_s": 50.166644,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 99989.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_lift.2.time.json",
+      "bytes": 44537,
+      "color": {
+        "count": 1500,
+        "first_us": 296544.0,
+        "last_us": 50363200.0,
+        "duration_s": 50.066656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 300322.0,
+        "last_us": 50363222.0,
+        "duration_s": 50.0629,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_lift.3.time.json",
+      "bytes": 32861,
+      "color": {
+        "count": 1100,
+        "first_us": 1563377.0,
+        "last_us": 58929422.0,
+        "duration_s": 57.366045,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 100011.0,
+          "max": 666655.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1563388.0,
+        "last_us": 58930055.0,
+        "duration_s": 57.366667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 100011.0,
+          "max": 666667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_move.0.time.json",
+      "bytes": 37169,
+      "color": {
+        "count": 1250,
+        "first_us": 562911.0,
+        "last_us": 55796244.0,
+        "duration_s": 55.233333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66689.0,
+          "max": 100011.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 562966.0,
+        "last_us": 55796300.0,
+        "duration_s": 55.233334,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33344.0,
+          "p95": 66695.6,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_move.1.time.json",
+      "bytes": 44545,
+      "color": {
+        "count": 1500,
+        "first_us": 396400.0,
+        "last_us": 50363044.0,
+        "duration_s": 49.966644,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 396422.0,
+        "last_us": 50363066.0,
+        "duration_s": 49.966644,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33356.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_move.2.time.json",
+      "bytes": 44577,
+      "color": {
+        "count": 1500,
+        "first_us": 663211.0,
+        "last_us": 50763211.0,
+        "duration_s": 50.1,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 663222.0,
+        "last_us": 50763211.0,
+        "duration_s": 50.099989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_move.3.time.json",
+      "bytes": 32847,
+      "color": {
+        "count": 1100,
+        "first_us": 1630033.0,
+        "last_us": 54063377.0,
+        "duration_s": 52.433344,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 433333.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1630066.0,
+        "last_us": 54063411.0,
+        "duration_s": 52.433345,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 99979.1,
+          "max": 433323.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_sit.0.time.json",
+      "bytes": 37209,
+      "color": {
+        "count": 1250,
+        "first_us": 796244.0,
+        "last_us": 56162911.0,
+        "duration_s": 55.366667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 796300.0,
+        "last_us": 56162966.0,
+        "duration_s": 55.366666,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100011.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_sit.1.time.json",
+      "bytes": 44581,
+      "color": {
+        "count": 1500,
+        "first_us": 696377.0,
+        "last_us": 50729733.0,
+        "duration_s": 50.033356,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 696411.0,
+        "last_us": 50729755.0,
+        "duration_s": 50.033344,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66677.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_sit.2.time.json",
+      "bytes": 44573,
+      "color": {
+        "count": 1500,
+        "first_us": 596544.0,
+        "last_us": 51129877.0,
+        "duration_s": 50.533333,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 466656.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 596566.0,
+        "last_us": 51129900.0,
+        "duration_s": 50.533334,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 466667.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_tablesquare_sit.3.time.json",
+      "bytes": 32801,
+      "color": {
+        "count": 1100,
+        "first_us": 1730044.0,
+        "last_us": 51296711.0,
+        "duration_s": 49.566667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 233344.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1730066.0,
+        "last_us": 51296722.0,
+        "duration_s": 49.566656,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 66678.0,
+          "max": 233356.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_toolbox.0.time.json",
+      "bytes": 37215,
+      "color": {
+        "count": 1250,
+        "first_us": 796233.0,
+        "last_us": 56929577.0,
+        "duration_s": 56.133344,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 133345.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 796311.0,
+        "last_us": 56929633.0,
+        "duration_s": 56.133322,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33344.0,
+          "p95": 66689.0,
+          "max": 133322.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_toolbox.1.time.json",
+      "bytes": 44529,
+      "color": {
+        "count": 1500,
+        "first_us": 229722.0,
+        "last_us": 50296388.0,
+        "duration_s": 50.066666,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 240822.0,
+        "last_us": 50296411.0,
+        "duration_s": 50.055589,
+        "interval_us": {
+          "min": 26033.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_toolbox.2.time.json",
+      "bytes": 44537,
+      "color": {
+        "count": 1500,
+        "first_us": 296533.0,
+        "last_us": 50296533.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66678.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 300322.0,
+        "last_us": 50296544.0,
+        "duration_s": 49.996222,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 62889.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_toolbox.3.time.json",
+      "bytes": 32847,
+      "color": {
+        "count": 1100,
+        "first_us": 1663388.0,
+        "last_us": 58263200.0,
+        "duration_s": 56.599812,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 100011.0,
+          "max": 433322.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1663422.0,
+        "last_us": 58263388.0,
+        "duration_s": 56.599966,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 100011.0,
+          "max": 433323.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_trashbin.0.time.json",
+      "bytes": 37171,
+      "color": {
+        "count": 1250,
+        "first_us": 796244.0,
+        "last_us": 54496233.0,
+        "duration_s": 53.699989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 796300.0,
+        "last_us": 54496322.0,
+        "duration_s": 53.700022,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_trashbin.1.time.json",
+      "bytes": 44541,
+      "color": {
+        "count": 1500,
+        "first_us": 363055.0,
+        "last_us": 50363044.0,
+        "duration_s": 49.999989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66666.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 363066.0,
+        "last_us": 50363066.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33355.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_trashbin.2.time.json",
+      "bytes": 44541,
+      "color": {
+        "count": 1500,
+        "first_us": 363211.0,
+        "last_us": 50329877.0,
+        "duration_s": 49.966666,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 363222.0,
+        "last_us": 50329911.0,
+        "duration_s": 49.966689,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 33367.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_trashbin.3.time.json",
+      "bytes": 32849,
+      "color": {
+        "count": 1100,
+        "first_us": 1930044.0,
+        "last_us": 57629455.0,
+        "duration_s": 55.699411,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 100000.0,
+          "max": 299978.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1930077.0,
+        "last_us": 57630066.0,
+        "duration_s": 55.699989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 100000.0,
+          "max": 299989.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogaball_play.0.time.json",
+      "bytes": 37219,
+      "color": {
+        "count": 1250,
+        "first_us": 829588.0,
+        "last_us": 57162911.0,
+        "duration_s": 56.333323,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 829633.0,
+        "last_us": 57162966.0,
+        "duration_s": 56.333333,
+        "interval_us": {
+          "min": 33278.0,
+          "p50": 33345.0,
+          "p95": 66678.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogaball_play.1.time.json",
+      "bytes": 44641,
+      "color": {
+        "count": 1500,
+        "first_us": 1363044.0,
+        "last_us": 51329722.0,
+        "duration_s": 49.966678,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33355.0,
+          "max": 33356.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 1363055.0,
+        "last_us": 51329733.0,
+        "duration_s": 49.966678,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 33367.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogaball_play.2.time.json",
+      "bytes": 44537,
+      "color": {
+        "count": 1500,
+        "first_us": 296533.0,
+        "last_us": 50296533.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 300322.0,
+        "last_us": 50296544.0,
+        "duration_s": 49.996222,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33333.0,
+          "p95": 33356.0,
+          "max": 62889.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogaball_play.3.time.json",
+      "bytes": 32845,
+      "color": {
+        "count": 1100,
+        "first_us": 1630033.0,
+        "last_us": 48863388.0,
+        "duration_s": 47.233355,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66677.0,
+          "max": 700000.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1630055.0,
+        "last_us": 48863400.0,
+        "duration_s": 47.233345,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33345.0,
+          "p95": 66677.0,
+          "max": 700011.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogaball_sit.0.time.json",
+      "bytes": 37177,
+      "color": {
+        "count": 1250,
+        "first_us": 729566.0,
+        "last_us": 56496233.0,
+        "duration_s": 55.766667,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 729644.0,
+        "last_us": 56496311.0,
+        "duration_s": 55.766667,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 99989.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogaball_sit.1.time.json",
+      "bytes": 44533,
+      "color": {
+        "count": 1500,
+        "first_us": 263066.0,
+        "last_us": 50296377.0,
+        "duration_s": 50.033311,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66678.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 266855.0,
+        "last_us": 50296400.0,
+        "duration_s": 50.029545,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66689.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogaball_sit.2.time.json",
+      "bytes": 44535,
+      "color": {
+        "count": 1500,
+        "first_us": 263211.0,
+        "last_us": 50363200.0,
+        "duration_s": 50.099989,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 267000.0,
+        "last_us": 50363222.0,
+        "duration_s": 50.096222,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 66678.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogaball_sit.3.time.json",
+      "bytes": 32849,
+      "color": {
+        "count": 1100,
+        "first_us": 1630044.0,
+        "last_us": 49030044.0,
+        "duration_s": 47.4,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66678.0,
+          "max": 600000.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1630066.0,
+        "last_us": 49030066.0,
+        "duration_s": 47.4,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33344.0,
+          "p95": 66677.0,
+          "max": 600011.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogamat.0.time.json",
+      "bytes": 37197,
+      "color": {
+        "count": 1250,
+        "first_us": 762911.0,
+        "last_us": 57229555.0,
+        "duration_s": 56.466644,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66689.0,
+          "max": 100022.0
+        }
+      },
+      "depth": {
+        "count": 1250,
+        "first_us": 762966.0,
+        "last_us": 57229655.0,
+        "duration_s": 56.466689,
+        "interval_us": {
+          "min": 33289.0,
+          "p50": 33345.0,
+          "p95": 66700.0,
+          "max": 100022.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogamat.1.time.json",
+      "bytes": 44537,
+      "color": {
+        "count": 1500,
+        "first_us": 329722.0,
+        "last_us": 50329722.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 66667.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 329744.0,
+        "last_us": 50329744.0,
+        "duration_s": 50.0,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 66677.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogamat.2.time.json",
+      "bytes": 44541,
+      "color": {
+        "count": 1500,
+        "first_us": 363211.0,
+        "last_us": 50329877.0,
+        "duration_s": 49.966666,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33333.0,
+          "p95": 33355.0,
+          "max": 33367.0
+        }
+      },
+      "depth": {
+        "count": 1500,
+        "first_us": 363222.0,
+        "last_us": 50329911.0,
+        "duration_s": 49.966689,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33334.0,
+          "p95": 33356.0,
+          "max": 33366.0
+        }
+      },
+      "ordered_timestamps": true
+    },
+    {
+      "member": "Date02_Sub02_yogamat.3.time.json",
+      "bytes": 32887,
+      "color": {
+        "count": 1100,
+        "first_us": 1896700.0,
+        "last_us": 49063377.0,
+        "duration_s": 47.166677,
+        "interval_us": {
+          "min": 33311.0,
+          "p50": 33344.0,
+          "p95": 66677.0,
+          "max": 599989.0
+        }
+      },
+      "depth": {
+        "count": 1100,
+        "first_us": 1896722.0,
+        "last_us": 49063400.0,
+        "duration_s": 47.166678,
+        "interval_us": {
+          "min": 33300.0,
+          "p50": 33345.0,
+          "p95": 66667.0,
+          "max": 600000.0
+        }
+      },
+      "ordered_timestamps": true
+    }
+  ],
+  "local_sha256_only_not_publisher_checksum": true,
+  "rgb_or_depth_video_acquired": false,
+  "gt_admitted": false,
+  "physical_location_groups_verified": false,
+  "selected_validation_clips": []
+}

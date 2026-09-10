@@ -1,0 +1,32 @@
+{
+  "written_before_analysis": true,
+  "no_model_predictions": true,
+  "attempt": 3,
+  "preserves": "The C5 edge-proximity failure and the C6 mutual-information failure are kept on the record and are not retracted.",
+  "diagnosed_defect": "In both prior attempts the evaluated pixel set changed with the shift: the depth validity mask was recomputed after shifting, and the shift used wraparound. Scores over different pixel sets are not comparable, so the objective rose monotonically toward a corner of the search window. The symptom was identical for the treatment and the negative control: all 16 sweeps in attempt 2 peaked on the window boundary, corrected at (-8,0) and control at (+8,+8). That is an instrument failure, and it is evidence about the metric, not about the registration.",
+  "correction": "Evaluate on a pixel set that is fixed across every shift: the 8 px inner rectangle intersected with erode(depth_valid, 8), so each evaluated pixel is valid under every shift in the sweep. Shift by indexing rather than wraparound. The grayscale channel and the pixel set are then identical at every shift and only the depth content moves.",
+  "criteria": [
+    {
+      "id": "C8_validity_interior_peak",
+      "statement": "Every sweep, treatment and control alike, must attain its maximum strictly inside the search window, i.e. at a shift with |dx| < 8 and |dy| < 8.",
+      "threshold": "Holds on all 8 frames for both treatment and control.",
+      "void_condition": "Any boundary peak voids the attempt. The result is then reported as a third instrument failure and no registration conclusion is drawn.",
+      "checked_first": true
+    },
+    {
+      "id": "C9_control_offset",
+      "statement": "The unregistered URFD original depth must peak away from (0,0).",
+      "threshold": "Peak offset > 1.5 px on at least 6 of 8 frames.",
+      "physical_expectation": "The Kinect v1 IR-to-RGB baseline is about 25 mm. At the roughly 3 m scene depth and a 570 px focal length that is about 5 px, predominantly horizontal. A control peak near dx = 5, dy = 0 would corroborate the metric independently; the criterion does not require it."
+    },
+    {
+      "id": "C10_corrected_at_origin",
+      "statement": "The SBM-corrected depth must peak at or within 1 px of (0,0).",
+      "threshold": "Holds on at least 7 of 8 frames."
+    }
+  ],
+  "admission_rule": "Registration is corroborated if and only if C8, C9 and C10 all hold. Combined with C3 and C4 from protocol.json that admits the corrected depth as masked ground truth. C1 remains failed and reported.",
+  "stop_rule": "This is the final registration attempt in this round. If it is void or fails, the corrected depth stays unadmitted, no ground-truth accuracy is computed, and the three failures are reported together.",
+  "if_admitted": "Ground-truth accuracy for the four policies is computed in a separate later step, on the C3 mask, with model weights and the MLP threshold unchanged.",
+  "limits": "Corroborates alignment to the released RGB only, on one event at one location. Not extrinsic calibration, not long-horizon or target-device validation."
+}

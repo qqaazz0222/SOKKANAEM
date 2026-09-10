@@ -1,0 +1,45 @@
+{
+  "written_before_analysis": true,
+  "no_model_predictions": true,
+  "objective": "Decide whether SBM-corrected fall01cam1 depth is admissible as metric ground truth on a documented valid mask, using the complete URFD original camera-1 depth as the independent reference.",
+  "reference": {
+    "url": "https://fenix.ur.edu.pl/~mkepski/ds/data/fall-01-cam1-d.zip",
+    "expected_bytes": 42997797,
+    "conversion": "mm = PNG16 * 3640 / 65535 (URFD published camera-1 scale)",
+    "note": "Complete archive, every member CRC-verified. Supersedes the 11-frame incomplete prefix used in the first admission."
+  },
+  "criteria": [
+    {
+      "id": "C1_unmasked_value_consistency",
+      "statement": "Per frame, fraction of corrected valid pixels within 1 mm of a rounded original mm value of the same frame.",
+      "threshold": ">= 0.99 on all 160 frames",
+      "expectation": "Expected to FAIL; restated from the first admission and extended from 11 to 160 frames."
+    },
+    {
+      "id": "C2_out_of_range_direction",
+      "statement": "Per frame counts of corrected valid values below the original minimum and above the original maximum.",
+      "threshold": "Descriptive, no pass/fail."
+    },
+    {
+      "id": "C3_valid_mask",
+      "statement": "mask = (corrected > 0) AND (original_min_mm - 1 <= corrected <= original_max_mm + 1) AND erode(corrected > 0, radius 1). Radius 1 is fixed in advance from the published depth_diagnostic.json, whose 90th-percentile distance from an out-of-range pixel to the nearest hole is 1.9 px. It is not chosen from any model error.",
+      "threshold": "Mask retains >= 0.90 of originally valid pixels on the median frame and >= 0.80 on every frame.",
+      "note": "C1 restricted to this mask is near-vacuous because the original mm ladder has 0.056 mm steps; it is therefore not used as evidence."
+    },
+    {
+      "id": "C4_metric_scale_agreement",
+      "statement": "Per frame, absolute difference between quantiles of masked corrected depth and quantiles of all valid original mm depth, at p in {0.05, 0.25, 0.50, 0.75, 0.95}. Compares value distributions, not pixel positions, so it is valid across the two coordinate frames.",
+      "threshold": "Median over frames of the maximum absolute difference over p <= 50 mm.",
+      "basis": "Kinect v1 random depth error near 3 m is roughly 30 mm; the IR/RGB baseline shifts pixels laterally rather than in depth. 50 mm allows both without admitting a scale error."
+    },
+    {
+      "id": "C5_registration_shift_optimum",
+      "statement": "Model-free RGB/depth registration check on frames 1, 21, 41, 61, 81, 101, 121, 141: fraction of depth-discontinuity pixels lying within 2 px of a Canny edge of the SBM RGB frame, swept over integer depth shifts dx, dy in [-8, 8]. The unregistered original depth is run through the identical sweep as a control.",
+      "threshold": "Corrected depth attains its maximum at shift (0,0) on every evaluated frame, and its score at (0,0) exceeds the control's score at (0,0).",
+      "note": "Establishes that the corrected depth is registered to the released RGB; it does not establish metric correctness, which is C4's role."
+    }
+  ],
+  "admission_rule": "Admit the corrected depth as masked ground truth if and only if C3, C4 and C5 all pass. C1 is reported regardless and its failure is preserved.",
+  "if_admitted": "Ground-truth accuracy for the four policies is computed in a separate later step on the masked ground truth, with model weights and the MLP threshold unchanged. This step performs no inference.",
+  "still_absent_if_admitted": "One event and one location only. Long-horizon continuous input, multiple independent locations, and Jetson Nano B01 / Raspberry Pi 4 end-to-end timing remain unvalidated."
+}

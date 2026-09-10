@@ -1,0 +1,26 @@
+{
+  "scope": {
+    "path": "paper/streaming_draft/FIXED_CAMERA_SCOPE.md",
+    "bytes": 4934,
+    "sha256": "fea0ce97168763c9c71321d51663c01d13273ed609a122e28679cf0bdbe9909b"
+  },
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/audit_camera_pose.py",
+    "bytes": 5072,
+    "sha256": "97fe5c234ce456c3f92f74f6add7cc3754b443c229be2f654b3ac43bf72fc632"
+  },
+  "rule": "pose nearest<=50ms; coverage>=95%; p95 displacement<=2cm and rotation<=1degree from first matched pose; diagnostic not proof of mount",
+  "no_model_inference_or_retraining": true,
+  "data": [
+    {
+      "path": "work_dirs/qstream_20260908/development_data.pt",
+      "bytes": 285277993,
+      "sha256": "788b4bddf15b2d3b19bd6f81e7c3280308e3d8b644e5b39c4cf29814c03ae7a1"
+    },
+    {
+      "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+      "bytes": 1141081851,
+      "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+    }
+  ]
+}

@@ -1,0 +1,2564 @@
+{
+  "role": "same_weight_recurrent_state_reset_development_ablation",
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/qdelta_memory_ablation.py",
+    "bytes": 2315,
+    "sha256": "e5ac8f00b4c4787f51c0b817009253b60c62501f94f3e2b696d058b227999322"
+  },
+  "adapter": {
+    "path": "work_dirs/qdelta_20260908/adapter.pt",
+    "bytes": 616865,
+    "sha256": "8aa6e64fd780da9f73c688d91ef4c3e47810cb06dd5c0ff6d57cb136e34bde6d"
+  },
+  "reset": {
+    "metrics": {
+      "balanced": {
+        "absrel_raw": 0.1311673081169526,
+        "absrel_clip_median": 0.08377775332580009,
+        "absrel_edge": 0.16446803386012715,
+        "grad_ratio": 0.6800986379384995,
+        "overshoot": 0.17831735561291379,
+        "boundary_precision": 0.7671014999763832,
+        "boundary_recall": 0.5794648803679997,
+        "boundary_f1": 0.6348624087857186,
+        "flat_tv": 0.024821309372782707,
+        "flat_tv_gt": 0.005542817942720527,
+        "flat_tv_ratio": 60.624663054943085
+      },
+      "sources": {
+        "tum": {
+          "absrel_raw": 0.08547145873308182,
+          "absrel_clip_median": 0.07977762445807457,
+          "absrel_edge": 0.14402350038290024,
+          "grad_ratio": 0.6733660101890564,
+          "overshoot": 0.13471418246626854,
+          "boundary_precision": 0.7939704402039448,
+          "boundary_recall": 0.6366378876846284,
+          "boundary_f1": 0.6875482821681846,
+          "flat_tv": 0.02595891710370779,
+          "flat_tv_gt": 0.004203296848572791,
+          "flat_tv_ratio": 6.942529678344727
+        },
+        "bonn": {
+          "absrel_raw": 0.17686315750082335,
+          "absrel_clip_median": 0.08777788219352563,
+          "absrel_edge": 0.18491256733735403,
+          "grad_ratio": 0.6868312656879425,
+          "overshoot": 0.221920528759559,
+          "boundary_precision": 0.7402325597488217,
+          "boundary_recall": 0.522291873051371,
+          "boundary_f1": 0.5821765354032525,
+          "flat_tv": 0.023683701641857624,
+          "flat_tv_gt": 0.006882339036868264,
+          "flat_tv_ratio": 114.30679643154144
+        }
+      },
+      "clips": [
+        {
+          "source": "tum",
+          "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+          "metrics": {
+            "absrel_raw": 0.07234445214271545,
+            "absrel_clip_median": 0.07265178114175797,
+            "absrel_edge": 0.13793356716632843,
+            "grad_ratio": 0.6975245475769043,
+            "overshoot": 0.1721542328596115,
+            "boundary_precision": 0.8136414277056853,
+            "boundary_recall": 0.685014289803803,
+            "boundary_f1": 0.7344351100424925,
+            "flat_tv": 0.02987600304186344,
+            "flat_tv_gt": 0.005831369198858738,
+            "flat_tv_ratio": 5.147932052612305
+          }
+        },
+        {
+          "source": "tum",
+          "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+          "metrics": {
+            "absrel_raw": 0.09859846532344818,
+            "absrel_clip_median": 0.08690346777439117,
+            "absrel_edge": 0.15011343359947205,
+            "grad_ratio": 0.6492074728012085,
+            "overshoot": 0.09727413207292557,
+            "boundary_precision": 0.7742994527022043,
+            "boundary_recall": 0.5882614855654538,
+            "boundary_f1": 0.6406614542938769,
+            "flat_tv": 0.02204183116555214,
+            "flat_tv_gt": 0.0025752244982868433,
+            "flat_tv_ratio": 8.737127304077148
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+          "metrics": {
+            "absrel_raw": 0.21388590335845947,
+            "absrel_clip_median": 0.21407848596572876,
+            "absrel_edge": 0.1609356850385666,
+            "grad_ratio": 0.9746212959289551,
+            "overshoot": 0.5841400623321533,
+            "boundary_precision": 0.6541967717930675,
+            "boundary_recall": 0.5428275169494251,
+            "boundary_f1": 0.5613663221398989,
+            "flat_tv": 0.020195243880152702,
+            "flat_tv_gt": 0.0027085235342383385,
+            "flat_tv_ratio": 7.478381156921387
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+          "metrics": {
+            "absrel_raw": 0.051741138100624084,
+            "absrel_clip_median": 0.0461532324552536,
+            "absrel_edge": 0.0689588412642479,
+            "grad_ratio": 0.792622983455658,
+            "overshoot": 0.24489253759384155,
+            "boundary_precision": 0.8000555373728275,
+            "boundary_recall": 0.5833591374879082,
+            "boundary_f1": 0.6340091554448009,
+            "flat_tv": 0.027956929057836533,
+            "flat_tv_gt": 0.0012015864485874772,
+            "flat_tv_ratio": 667.5465698242188
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+          "metrics": {
+            "absrel_raw": 0.0839759036898613,
+            "absrel_clip_median": 0.07105454057455063,
+            "absrel_edge": 0.09670015424489975,
+            "grad_ratio": 0.5563411116600037,
+            "overshoot": 0.19176903367042542,
+            "boundary_precision": 0.6875900874535242,
+            "boundary_recall": 0.5414655896214148,
+            "boundary_f1": 0.5972372309770435,
+            "flat_tv": 0.02526836469769478,
+            "flat_tv_gt": 0.00673291552811861,
+            "flat_tv_ratio": 3.8211450576782227
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+          "metrics": {
+            "absrel_raw": 0.09620583057403564,
+            "absrel_clip_median": 0.06652019172906876,
+            "absrel_edge": 0.15466202795505524,
+            "grad_ratio": 0.5309416055679321,
+            "overshoot": 0.1396777629852295,
+            "boundary_precision": 0.8044081185944378,
+            "boundary_recall": 0.33534632227383554,
+            "boundary_f1": 0.42825293525432545,
+            "flat_tv": 0.030650345608592033,
+            "flat_tv_gt": 0.014857528731226921,
+            "flat_tv_ratio": 2.0637409687042236
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+          "metrics": {
+            "absrel_raw": 0.2300073653459549,
+            "absrel_clip_median": 0.05694877728819847,
+            "absrel_edge": 0.2274419218301773,
+            "grad_ratio": 0.6623511910438538,
+            "overshoot": 0.08777601271867752,
+            "boundary_precision": 0.8152386195336779,
+            "boundary_recall": 0.5887309837465485,
+            "boundary_f1": 0.6789119190846881,
+            "flat_tv": 0.02147280052304268,
+            "flat_tv_gt": 0.009696357883512974,
+            "flat_tv_ratio": 2.2134652137756348
+          }
+        },
+        {
+          "source": "bonn",
+          "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+          "metrics": {
+            "absrel_raw": 0.38536280393600464,
+            "absrel_clip_median": 0.07191206514835358,
+            "absrel_edge": 0.40077677369117737,
+            "grad_ratio": 0.6041094064712524,
+            "overshoot": 0.08326776325702667,
+            "boundary_precision": 0.6799062237453958,
+            "boundary_recall": 0.5420216882290939,
+            "boundary_f1": 0.5932816495187581,
+            "flat_tv": 0.01655852608382702,
+            "flat_tv_gt": 0.006097122095525265,
+            "flat_tv_ratio": 2.7174763679504395
+          }
+        }
+      ]
+    },
+    "full_backbone_calls": 64,
+    "frames": 256,
+    "skip_fraction": 0.75,
+    "median_ms": 2.0129269978497177,
+    "mean_ms": 4.234472515008747,
+    "p95_ms": 7.586643230752088,
+    "per_frame_ms": [
+      7.756887993309647,
+      219.3242299836129,
+      2.248691045679152,
+      2.191983978264034,
+      7.778619998134673,
+      2.0445080008357763,
+      2.0963779534213245,
+      2.0081769907847047,
+      7.741404988337308,
+      2.0404389942996204,
+      2.0995100494474173,
+      1.9868320086970925,
+      7.714987965300679,
+      2.030548988841474,
+      2.1146780345588923,
+      2.045903995167464,
+      7.729350996669382,
+      2.0182239823043346,
+      2.0861250231973827,
+      1.995943021029234,
+      7.732374011538923,
+      2.0427400013431907,
+      2.1000190172344446,
+      1.9730799831449986,
+      7.751555007416755,
+      2.0672539831139147,
+      2.084092004224658,
+      2.0029490115121007,
+      7.708935998380184,
+      2.0392999867908657,
+      2.0777179743163288,
+      1.990046992432326,
+      7.73912196746096,
+      2.099598990753293,
+      2.0687769865617156,
+      1.9905850058421493,
+      7.527346024289727,
+      1.9520960049703717,
+      2.0686250063590705,
+      1.9283790024928749,
+      7.541235012467951,
+      1.979093998670578,
+      2.043562999460846,
+      1.9870699616149068,
+      7.53728998824954,
+      2.018211001995951,
+      2.0198560087010264,
+      1.9442790071479976,
+      7.499814964830875,
+      1.9587649730965495,
+      2.0620989962480962,
+      1.9591689924709499,
+      7.557867967989296,
+      2.0314480061642826,
+      2.0489520393311977,
+      1.9674930372275412,
+      7.484528003260493,
+      1.9871849799528718,
+      2.0210620132274926,
+      1.9492469727993011,
+      7.533836003858596,
+      2.0230619702488184,
+      2.019133942667395,
+      1.9678570097312331,
+      7.534042990300804,
+      2.021797001361847,
+      2.0159269915893674,
+      1.9469159888103604,
+      7.5018759816884995,
+      1.9911429844796658,
+      1.999002997763455,
+      1.9367140484973788,
+      7.480839965865016,
+      1.9596610218286514,
+      2.023826993536204,
+      1.9877460435964167,
+      7.535523967817426,
+      1.9625119748525321,
+      2.005563990678638,
+      1.9357230048626661,
+      7.505129964556545,
+      1.9469019607640803,
+      1.976971048861742,
+      1.9204069976694882,
+      7.495844969525933,
+      1.9533539889380336,
+      1.9750489736907184,
+      1.932988001499325,
+      7.520326995290816,
+      1.9406810170039535,
+      1.989557989872992,
+      1.9596790079958737,
+      7.543853018432856,
+      1.9780919537879527,
+      1.9855580176226795,
+      1.9278369727544487,
+      7.5980990077368915,
+      2.045406959950924,
+      2.0504199783317745,
+      1.9362160237506032,
+      7.531863986514509,
+      1.9599279621616006,
+      2.0195789984427392,
+      1.9695970113389194,
+      7.5222839950583875,
+      1.9722320139408112,
+      2.0051210303790867,
+      1.9552960293367505,
+      7.509476970881224,
+      1.9513749866746366,
+      2.0442199893295765,
+      1.9427069928497076,
+      7.543763960711658,
+      1.9924119696952403,
+      2.0443410030566156,
+      1.9516940228641033,
+      7.512776006478816,
+      1.9486770033836365,
+      2.0138630061410367,
+      1.9288120092824101,
+      7.5121509726159275,
+      1.9649360328912735,
+      2.01026804279536,
+      1.9678660319186747,
+      7.543970015831292,
+      2.018040046095848,
+      2.050055016297847,
+      1.9278289983049035,
+      7.567485969047993,
+      2.041503961663693,
+      2.0369290141388774,
+      2.007479954045266,
+      7.530138012953103,
+      1.965459028724581,
+      2.0463980035856366,
+      1.929509046021849,
+      7.513079966884106,
+      2.0386260002851486,
+      1.9967210246250033,
+      1.9805610063485801,
+      7.544764026533812,
+      1.8748550210148096,
+      2.0974279614165425,
+      1.9770449725911021,
+      7.519011036492884,
+      1.9523620139807463,
+      2.0016820053569973,
+      1.9252970232628286,
+      7.498586957808584,
+      2.018884988501668,
+      2.01915402431041,
+      1.9562169909477234,
+      7.528985035605729,
+      1.9462800119072199,
+      1.9874299759976566,
+      1.9672660273499787,
+      7.544102030806243,
+      1.9762819865718484,
+      1.9983870442956686,
+      1.9416389986872673,
+      7.585676969029009,
+      2.0671910024248064,
+      2.0509519963525236,
+      1.9809719524346292,
+      7.535854005254805,
+      1.9749390194192529,
+      2.0109849865548313,
+      1.9548540003597736,
+      7.5423839734867215,
+      2.0017679780721664,
+      2.015774021856487,
+      1.9326690235175192,
+      7.512315991334617,
+      1.910906983539462,
+      2.0494459895417094,
+      1.9615740166045725,
+      7.524656015448272,
+      2.0266229985281825,
+      1.998040999751538,
+      1.9350009970366955,
+      7.51942303031683,
+      1.9678210373967886,
+      2.0336239831522107,
+      1.9458240130916238,
+      7.503963017370552,
+      1.972777012269944,
+      2.011324977502227,
+      1.9603589898906648,
+      7.536809018347412,
+      1.992247998714447,
+      1.997218991164118,
+      1.9790329970419407,
+      7.605999999213964,
+      1.9853159901686013,
+      2.046654000878334,
+      1.9663849961943924,
+      7.540024002082646,
+      1.961955043952912,
+      2.018078987020999,
+      1.9358029821887612,
+      7.520965998992324,
+      1.9629250164143741,
+      2.019369974732399,
+      1.900434959679842,
+      7.53960304427892,
+      1.966346986591816,
+      1.9880799809470773,
+      1.9461159827187657,
+      7.565046020317823,
+      1.955075014848262,
+      2.0010339794680476,
+      1.9252970232628286,
+      7.514878991059959,
+      1.9711530185304582,
+      1.999079016968608,
+      1.9383039907552302,
+      7.547557004727423,
+      1.9882310298271477,
+      2.0129510085098445,
+      1.9275809754617512,
+      7.5320890173316,
+      1.962052017915994,
+      2.012312994338572,
+      1.9471559789963067,
+      7.5895420159213245,
+      1.9779530121013522,
+      2.0378389745019376,
+      1.9640050013549626,
+      7.562721963040531,
+      1.9501830101944506,
+      1.9927220419049263,
+      1.9606720306910574,
+      7.569087960291654,
+      1.963665010407567,
+      2.0207399502396584,
+      1.9053349969908595,
+      7.526031986344606,
+      1.9632760086096823,
+      2.020614978391677,
+      1.9242159905843437,
+      7.527320994995534,
+      1.9772879895754158,
+      2.0101069821976125,
+      1.9636430079117417,
+      7.542252016719431,
+      1.9756759866140783,
+      1.9855150021612644,
+      1.9878370221704245,
+      7.519283040892333,
+      2.012902987189591,
+      2.0270009990781546,
+      2.014147990848869,
+      7.5198920094408095,
+      1.9376989803276956,
+      2.0518700475804508,
+      1.941054011695087
+    ],
+    "telemetry": [
+      {
+        "clip": 0,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8750913143157959,
+            "updated_patches": 1198,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8955442309379578,
+            "updated_patches": 1226,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8371074199676514,
+            "updated_patches": 1146,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8933528661727905,
+            "updated_patches": 1223,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8692476749420166,
+            "updated_patches": 1190,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8765522837638855,
+            "updated_patches": 1200,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7027027010917664,
+            "updated_patches": 962,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8290723562240601,
+            "updated_patches": 1135,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8816654682159424,
+            "updated_patches": 1207,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9057706594467163,
+            "updated_patches": 1240,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9254931211471558,
+            "updated_patches": 1267,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9408327341079712,
+            "updated_patches": 1288,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.910883903503418,
+            "updated_patches": 1247,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9379109144210815,
+            "updated_patches": 1284,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9481373429298401,
+            "updated_patches": 1298,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8758218288421631,
+            "updated_patches": 1199,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.938641369342804,
+            "updated_patches": 1285,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.938641369342804,
+            "updated_patches": 1285,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8188459277153015,
+            "updated_patches": 1121,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9393718242645264,
+            "updated_patches": 1286,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.968590259552002,
+            "updated_patches": 1326,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9342586398124695,
+            "updated_patches": 1279,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.944485068321228,
+            "updated_patches": 1293,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9612856507301331,
+            "updated_patches": 1316,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          }
+        ]
+      },
+      {
+        "clip": 1,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7947407364845276,
+            "updated_patches": 1088,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7165814638137817,
+            "updated_patches": 981,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5858290791511536,
+            "updated_patches": 802,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8655953407287598,
+            "updated_patches": 1185,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8078889846801758,
+            "updated_patches": 1106,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9159970879554749,
+            "updated_patches": 1254,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9240321516990662,
+            "updated_patches": 1265,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9335281848907471,
+            "updated_patches": 1278,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9130752682685852,
+            "updated_patches": 1250,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9196494221687317,
+            "updated_patches": 1259,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9152666330337524,
+            "updated_patches": 1253,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.944485068321228,
+            "updated_patches": 1293,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.910883903503418,
+            "updated_patches": 1247,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7472608089447021,
+            "updated_patches": 1023,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.853177547454834,
+            "updated_patches": 1168,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8049671649932861,
+            "updated_patches": 1102,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9072315692901611,
+            "updated_patches": 1242,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9313367605209351,
+            "updated_patches": 1275,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9094229936599731,
+            "updated_patches": 1245,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9225712418556213,
+            "updated_patches": 1263,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9525201320648193,
+            "updated_patches": 1304,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.91453617811203,
+            "updated_patches": 1252,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9459459781646729,
+            "updated_patches": 1295,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9503287672996521,
+            "updated_patches": 1301,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          }
+        ]
+      },
+      {
+        "clip": 2,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5967860221862793,
+            "updated_patches": 817,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6493791341781616,
+            "updated_patches": 889,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6698319911956787,
+            "updated_patches": 917,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6289262771606445,
+            "updated_patches": 861,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6537619233131409,
+            "updated_patches": 895,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6866326332092285,
+            "updated_patches": 940,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6639883518218994,
+            "updated_patches": 909,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 1.0,
+            "updated_patches": 1369,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9934259057044983,
+            "updated_patches": 1360,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.704163670539856,
+            "updated_patches": 964,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7552958726882935,
+            "updated_patches": 1034,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8035062551498413,
+            "updated_patches": 1100,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 1.0,
+            "updated_patches": 1369,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 1.0,
+            "updated_patches": 1369,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8371074199676514,
+            "updated_patches": 1146,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6128561496734619,
+            "updated_patches": 839,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7121987342834473,
+            "updated_patches": 975,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7845142483711243,
+            "updated_patches": 1074,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6092038154602051,
+            "updated_patches": 834,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6661797165870667,
+            "updated_patches": 912,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7662527561187744,
+            "updated_patches": 1049,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6523009538650513,
+            "updated_patches": 893,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7173119187355042,
+            "updated_patches": 982,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7845142483711243,
+            "updated_patches": 1074,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          }
+        ]
+      },
+      {
+        "clip": 3,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5544192790985107,
+            "updated_patches": 759,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5902118682861328,
+            "updated_patches": 808,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6084733605384827,
+            "updated_patches": 833,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5573411583900452,
+            "updated_patches": 763,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6106647253036499,
+            "updated_patches": 836,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6230825781822205,
+            "updated_patches": 853,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5602629780769348,
+            "updated_patches": 767,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5872899889945984,
+            "updated_patches": 804,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5989773869514465,
+            "updated_patches": 820,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5346968770027161,
+            "updated_patches": 732,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5573411583900452,
+            "updated_patches": 763,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5682980418205261,
+            "updated_patches": 778,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.43170198798179626,
+            "updated_patches": 591,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5091307759284973,
+            "updated_patches": 697,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5398101210594177,
+            "updated_patches": 739,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.4200146198272705,
+            "updated_patches": 575,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.4769905209541321,
+            "updated_patches": 653,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5069394111633301,
+            "updated_patches": 694,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.4346238374710083,
+            "updated_patches": 595,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.4850255846977234,
+            "updated_patches": 664,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5127830505371094,
+            "updated_patches": 702,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.24543462693691254,
+            "updated_patches": 336,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.36523011326789856,
+            "updated_patches": 500,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.4346238374710083,
+            "updated_patches": 595,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          }
+        ]
+      },
+      {
+        "clip": 4,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7231556177139282,
+            "updated_patches": 990,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7238860726356506,
+            "updated_patches": 991,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7794010639190674,
+            "updated_patches": 1067,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7757487297058105,
+            "updated_patches": 1062,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7523740530014038,
+            "updated_patches": 1030,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7742878198623657,
+            "updated_patches": 1060,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7713660001754761,
+            "updated_patches": 1056,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7713660001754761,
+            "updated_patches": 1056,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8181154727935791,
+            "updated_patches": 1120,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7238860726356506,
+            "updated_patches": 991,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7574872374534607,
+            "updated_patches": 1037,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.782322883605957,
+            "updated_patches": 1071,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.735573410987854,
+            "updated_patches": 1007,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7560263276100159,
+            "updated_patches": 1035,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7735573649406433,
+            "updated_patches": 1059,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.701972246170044,
+            "updated_patches": 961,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7436084747314453,
+            "updated_patches": 1018,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7706355452537537,
+            "updated_patches": 1055,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7275384068489075,
+            "updated_patches": 996,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7560263276100159,
+            "updated_patches": 1035,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.776479184627533,
+            "updated_patches": 1063,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7063550353050232,
+            "updated_patches": 967,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7333820462226868,
+            "updated_patches": 1004,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7699050903320312,
+            "updated_patches": 1054,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          }
+        ]
+      },
+      {
+        "clip": 5,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6654492616653442,
+            "updated_patches": 911,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7582176923751831,
+            "updated_patches": 1038,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8655953407287598,
+            "updated_patches": 1185,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6596055626869202,
+            "updated_patches": 903,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7509130835533142,
+            "updated_patches": 1028,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.840029239654541,
+            "updated_patches": 1150,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5222790837287903,
+            "updated_patches": 715,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5536888241767883,
+            "updated_patches": 758,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6128561496734619,
+            "updated_patches": 839,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5222790837287903,
+            "updated_patches": 715,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5514974594116211,
+            "updated_patches": 755,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5894814133644104,
+            "updated_patches": 807,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.501095712184906,
+            "updated_patches": 686,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5982469320297241,
+            "updated_patches": 819,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 1.0,
+            "updated_patches": 1369,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9693207144737244,
+            "updated_patches": 1327,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9634770154953003,
+            "updated_patches": 1319,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9663988947868347,
+            "updated_patches": 1323,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.4054054319858551,
+            "updated_patches": 555,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5441928505897522,
+            "updated_patches": 745,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5938641428947449,
+            "updated_patches": 813,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.512052595615387,
+            "updated_patches": 701,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5529583692550659,
+            "updated_patches": 757,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.616508424282074,
+            "updated_patches": 844,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          }
+        ]
+      },
+      {
+        "clip": 6,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6449963450431824,
+            "updated_patches": 883,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.724616527557373,
+            "updated_patches": 992,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7691746354103088,
+            "updated_patches": 1053,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7282688617706299,
+            "updated_patches": 997,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8159240484237671,
+            "updated_patches": 1117,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8246895670890808,
+            "updated_patches": 1129,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.691015362739563,
+            "updated_patches": 946,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7406866550445557,
+            "updated_patches": 1014,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7472608089447021,
+            "updated_patches": 1023,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6260043978691101,
+            "updated_patches": 857,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6997808814048767,
+            "updated_patches": 958,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7348429560661316,
+            "updated_patches": 1006,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6844412088394165,
+            "updated_patches": 937,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7647918462753296,
+            "updated_patches": 1047,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7940102815628052,
+            "updated_patches": 1087,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7421475648880005,
+            "updated_patches": 1016,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8108108639717102,
+            "updated_patches": 1110,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8151935935020447,
+            "updated_patches": 1116,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.5807158946990967,
+            "updated_patches": 795,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6734843254089355,
+            "updated_patches": 922,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6866326332092285,
+            "updated_patches": 940,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6267348527908325,
+            "updated_patches": 858,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6851716637611389,
+            "updated_patches": 938,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7750182747840881,
+            "updated_patches": 1061,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          }
+        ]
+      },
+      {
+        "clip": 7,
+        "frames": [
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7837837934494019,
+            "updated_patches": 1073,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8239591121673584,
+            "updated_patches": 1128,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8261505365371704,
+            "updated_patches": 1131,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7713660001754761,
+            "updated_patches": 1056,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8035062551498413,
+            "updated_patches": 1100,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8020453453063965,
+            "updated_patches": 1098,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8166545033454895,
+            "updated_patches": 1118,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9766253232955933,
+            "updated_patches": 1337,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9934259057044983,
+            "updated_patches": 1360,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7998539209365845,
+            "updated_patches": 1095,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8276114463806152,
+            "updated_patches": 1133,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8487947583198547,
+            "updated_patches": 1162,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.663257896900177,
+            "updated_patches": 908,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7538349628448486,
+            "updated_patches": 1032,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8020453453063965,
+            "updated_patches": 1098,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.6807889342308044,
+            "updated_patches": 932,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.7574872374534607,
+            "updated_patches": 1037,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.812271773815155,
+            "updated_patches": 1112,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9970781803131104,
+            "updated_patches": 1365,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9948868155479431,
+            "updated_patches": 1362,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.9963477253913879,
+            "updated_patches": 1364,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": true,
+            "backbone_calls": 1,
+            "active_ratio": 1.0,
+            "updated_patches": 0,
+            "cache_age": 0,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8246895670890808,
+            "updated_patches": 1129,
+            "cache_age": 1,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8517166376113892,
+            "updated_patches": 1166,
+            "cache_age": 2,
+            "mode": "selective_ssm_feature_prediction"
+          },
+          {
+            "full_refresh": false,
+            "backbone_calls": 0,
+            "active_ratio": 0.8305332660675049,
+            "updated_patches": 1137,
+            "cache_age": 3,
+            "mode": "selective_ssm_feature_prediction"
+          }
+        ]
+      }
+    ]
+  },
+  "carry_minus_reset": {
+    "absrel_raw": -7.222934315603835e-05,
+    "absrel_clip_median": 2.1937613685935053e-05,
+    "absrel_edge": -3.404604891937835e-05,
+    "grad_ratio": -0.0003570069869358594,
+    "overshoot": -0.00017263864477479185,
+    "boundary_precision": 5.6907359976543503e-05,
+    "boundary_recall": -0.00010599521273335633,
+    "boundary_f1": -5.662709008902311e-05,
+    "flat_tv": -1.957174390554428e-06,
+    "flat_tv_gt": 0.0,
+    "flat_tv_ratio": -0.00043984254201490103
+  },
+  "note": "Caches retained, only SSM hidden state reset. Not a separately trained nonrecurrent control or long-stream test."
+}

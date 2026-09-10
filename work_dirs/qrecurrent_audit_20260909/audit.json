@@ -1,0 +1,1368 @@
+{
+  "role": "posthoc_reused_development_memory_and_teacher_temporal_diagnostic_not_final",
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/audit_qrecurrent.py",
+    "bytes": 4624,
+    "sha256": "ac381107c846378ec0afa6cf6ea696e85e4c1283876c5f1bef0808c1b9d99e83"
+  },
+  "training_gradient": {
+    "carry": {
+      "logged_steps": 7,
+      "A_gradient_max": 0.0005736597813665867,
+      "steps_with_nonzero_A_gradient": 6
+    },
+    "reset": {
+      "logged_steps": 7,
+      "A_gradient_max": 0.0,
+      "steps_with_nonzero_A_gradient": 0
+    },
+    "mlp": {
+      "logged_steps": 7,
+      "A_gradient_max": null,
+      "steps_with_nonzero_A_gradient": 0
+    }
+  },
+  "data": {
+    "L32": {
+      "incoming_h_by_age": {
+        "features_no_update": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "carry_carry": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.022324322613712866,
+          "3": 0.03647186367743416
+        },
+        "carry_reset": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "reset_reset": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "reset_carry": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.016441682430013316,
+          "3": 0.026942429030896164
+        },
+        "mlp": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        }
+      },
+      "same_weight_interventions": {
+        "carry": {
+          "identical_refresh_and_first_update_comparisons": 128,
+          "later_max_abs_depth_difference": 0.9188880920410156,
+          "later_difference": {
+            "balanced": {
+              "later_updates_same_weights_log_difference": 0.0012980848041479476
+            },
+            "sources": {
+              "tum": {
+                "later_updates_same_weights_log_difference": 0.0008485068246955052
+              },
+              "bonn": {
+                "later_updates_same_weights_log_difference": 0.00174766278360039
+              }
+            },
+            "clips": [
+              {
+                "source": "tum",
+                "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.001253302674740553
+                }
+              },
+              {
+                "source": "tum",
+                "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0004437109746504575
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0020448805298656225
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0012786927400156856
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0015657469630241394
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0020503767300397158
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0016515181632712483
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0018947615753859282
+                }
+              }
+            ]
+          },
+          "note": "same checkpoint, only h zeroing changed; feature cache feedback remains in both; difference is effect, not proof of benefit"
+        },
+        "reset": {
+          "identical_refresh_and_first_update_comparisons": 128,
+          "later_max_abs_depth_difference": 0.6855440139770508,
+          "later_difference": {
+            "balanced": {
+              "later_updates_same_weights_log_difference": 0.0013047220030178628
+            },
+            "sources": {
+              "tum": {
+                "later_updates_same_weights_log_difference": 0.00090284354519099
+              },
+              "bonn": {
+                "later_updates_same_weights_log_difference": 0.0017066004608447354
+              }
+            },
+            "clips": [
+              {
+                "source": "tum",
+                "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0014479930978268385
+                }
+              },
+              {
+                "source": "tum",
+                "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.00035769399255514145
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0013733019586652517
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0015835016965866089
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0021557570435106754
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0015314461197704077
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.00173674407415092
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0018588518723845482
+                }
+              }
+            ]
+          },
+          "note": "same checkpoint, only h zeroing changed; feature cache feedback remains in both; difference is effect, not proof of benefit"
+        }
+      },
+      "temporal": {
+        "output_k2": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.022095022878299155
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.027253655716776848
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.016936390039821465
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.02680491842329502
+              }
+            },
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.027702393010258675
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.020468151196837425
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.010740616358816624
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.021259868517518044
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.015008484944701195
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.01327271293848753
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.020868506282567978
+              }
+            }
+          ]
+        },
+        "output_k4": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.02471184738290807
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.030846222303807735
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.018577472462008398
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.031214158982038498
+              }
+            },
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.030478285625576973
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.02660335786640644
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.012811739929020405
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.022056344896554947
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.016189003363251686
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.013799628242850304
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.0200047604739666
+              }
+            }
+          ]
+        },
+        "features_no_update": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.028601495316252112
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.03514812886714935
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.022054861765354872
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03692655637860298
+              }
+            },
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.033369701355695724
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03108273632824421
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.015244834125041962
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.028207974508404732
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.01857459731400013
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.015367037616670132
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.023851990699768066
+              }
+            }
+          ]
+        },
+        "carry_carry": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.030908457469195127
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.03667348995804787
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.025143424980342388
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03912699967622757
+              }
+            },
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.034219980239868164
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.033510006964206696
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.017767317593097687
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.029894933104515076
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.023654241114854813
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.018451128154993057
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.027582922950387
+              }
+            }
+          ]
+        },
+        "carry_reset": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.030646708638717733
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.0366967786103487
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.02459663866708676
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03915190324187279
+              }
+            },
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.034241653978824615
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03289633244276047
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.01727350987493992
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.029502784833312035
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.022988270968198776
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.017892243340611458
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.027026690542697906
+              }
+            }
+          ]
+        },
+        "reset_reset": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.030330847948789597
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.03638320229947567
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.024278493598103523
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03891238942742348
+              }
+            },
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03385401517152786
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03133314102888107
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.017989415675401688
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.029921047389507294
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.021390337496995926
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.01804770529270172
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.026989314705133438
+              }
+            }
+          ]
+        },
+        "reset_carry": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.03064112846429149
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.03642960824072361
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.024852648687859375
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03901116922497749
+              }
+            },
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03384804725646973
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03165239468216896
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.0187265295535326
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.030469689518213272
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.022033143788576126
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.01868918351829052
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.02754495106637478
+              }
+            }
+          ]
+        },
+        "mlp": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.03020356005678574
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.03667277842760086
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.023734341685970623
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03917725011706352
+              }
+            },
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.0341683067381382
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03120458498597145
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.01688331365585327
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.028970621526241302
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.021319100633263588
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.017934748902916908
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.026093680411577225
+              }
+            }
+          ]
+        }
+      }
+    },
+    "L256": {
+      "incoming_h_by_age": {
+        "features_no_update": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "carry_carry": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.024252477174741216,
+          "3": 0.0392454284701671
+        },
+        "carry_reset": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "reset_reset": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "reset_carry": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.019410747580877796,
+          "3": 0.03135996729724866
+        },
+        "mlp": {
+          "0": 0.0,
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        }
+      },
+      "same_weight_interventions": {
+        "carry": {
+          "identical_refresh_and_first_update_comparisons": 512,
+          "later_max_abs_depth_difference": 1.2119386196136475,
+          "later_difference": {
+            "balanced": {
+              "later_updates_same_weights_log_difference": 0.0013831310983126361
+            },
+            "sources": {
+              "tum": {
+                "later_updates_same_weights_log_difference": 0.0008063922869041562
+              },
+              "bonn": {
+                "later_updates_same_weights_log_difference": 0.001959869909721116
+              }
+            },
+            "clips": [
+              {
+                "source": "tum",
+                "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0008063922869041562
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.001635939464904368
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0025088635738939047
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.001734806690365076
+                }
+              }
+            ]
+          },
+          "note": "same checkpoint, only h zeroing changed; feature cache feedback remains in both; difference is effect, not proof of benefit"
+        },
+        "reset": {
+          "identical_refresh_and_first_update_comparisons": 512,
+          "later_max_abs_depth_difference": 3.937678813934326,
+          "later_difference": {
+            "balanced": {
+              "later_updates_same_weights_log_difference": 0.001476164790801704
+            },
+            "sources": {
+              "tum": {
+                "later_updates_same_weights_log_difference": 0.0008964218432083726
+              },
+              "bonn": {
+                "later_updates_same_weights_log_difference": 0.0020559077383950353
+              }
+            },
+            "clips": [
+              {
+                "source": "tum",
+                "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0008964218432083726
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0023080811370164156
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0021985569037497044
+                }
+              },
+              {
+                "source": "bonn",
+                "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+                "metrics": {
+                  "later_updates_same_weights_log_difference": 0.0016610851744189858
+                }
+              }
+            ]
+          },
+          "note": "same checkpoint, only h zeroing changed; feature cache feedback remains in both; difference is effect, not proof of benefit"
+        }
+      },
+      "temporal": {
+        "output_k2": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.031037901528179646
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.03415141999721527
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.02792438305914402
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03415141999721527
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.028632352128624916
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.030525490641593933
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.02461530640721321
+              }
+            }
+          ]
+        },
+        "output_k4": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.03770955527822177
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.04146325960755348
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.03395585094889005
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04146325960755348
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04032289609313011
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03417389467358589
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.027370762079954147
+              }
+            }
+          ]
+        },
+        "features_no_update": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.04267037225266297
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.04449893534183502
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.04084180916349093
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04449893534183502
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04693729057908058
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04272471368312836
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.032863423228263855
+              }
+            }
+          ]
+        },
+        "carry_carry": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.04424982704222202
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.04598190635442734
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.04251774773001671
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04598190635442734
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.048489104956388474
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04379460960626602
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03526952862739563
+              }
+            }
+          ]
+        },
+        "carry_reset": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.04399164021015167
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.04586057737469673
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.04212270304560661
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04586057737469673
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.048093296587467194
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.043342504650354385
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03493230789899826
+              }
+            }
+          ]
+        },
+        "reset_reset": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.04368084793289502
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.045138079673051834
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.04222361619273821
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.045138079673051834
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04837841913104057
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.043263185769319534
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.03502924367785454
+              }
+            }
+          ]
+        },
+        "reset_carry": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.04396572771171729
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.04525221511721611
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.04267924030621847
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04525221511721611
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.048967525362968445
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.043651849031448364
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.035418346524238586
+              }
+            }
+          ]
+        },
+        "mlp": {
+          "balanced": {
+            "q0_log_temporal_delta_l1": 0.043640246614813805
+          },
+          "sources": {
+            "tum": {
+              "q0_log_temporal_delta_l1": 0.04544086009263992
+            },
+            "bonn": {
+              "q0_log_temporal_delta_l1": 0.041839633136987686
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04544086009263992
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.047900278121232986
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.04270482808351517
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "q0_log_temporal_delta_l1": 0.034913793206214905
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "inputs": [
+    {
+      "path": "work_dirs/qrecurrent_20260909/L32_dense_predictions.pt",
+      "bytes": 67112529,
+      "sha256": "22560dac90cfe141a66e99d37e0b2d6179fc713a20fcf5387f50bd73b88db5a0"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L32_output_k2_predictions.pt",
+      "bytes": 67112649,
+      "sha256": "475f0e0e77109fdb5bcf5f47d33a382436809ed25d4ee575c36388df27eba611"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L32_output_k4_predictions.pt",
+      "bytes": 67112649,
+      "sha256": "ffa89803fbc3374ecfae146114dbc26d30f1205e03001de56bbf0983995d12b9"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L32_features_no_update_predictions.pt",
+      "bytes": 67112775,
+      "sha256": "502738abd0796b65525b0c991f63ffe5f77ccd8bf421b46fff9cfef49d9cefc5"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L32_carry_carry_predictions.pt",
+      "bytes": 67112677,
+      "sha256": "e1ba0af5e02f223790aae024c2dd99b45e970c67dd4958004738d650cbd01ca8"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L32_carry_reset_predictions.pt",
+      "bytes": 67112677,
+      "sha256": "0474388f1e99e77de5080c5e43904db0019a1d9ba3dd9d2836fef36bb7d177b2"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L32_reset_reset_predictions.pt",
+      "bytes": 67112677,
+      "sha256": "79e97cad89cae96943da379bf076f61b1a4ed13da3f2d40b55b84ea257bc526f"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L32_reset_carry_predictions.pt",
+      "bytes": 67112677,
+      "sha256": "5b30422a0a923341fe0804c423b0b91821850fabc9b6edd70d549160c1c8b61c"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L32_mlp_predictions.pt",
+      "bytes": 67112501,
+      "sha256": "4aab557e2cb5fc313980b33249c301098a8c8b674123d23f772e9003cd3aa583"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L256_dense_predictions.pt",
+      "bytes": 268438067,
+      "sha256": "b3dc141eb0bcfd8e8b819c9eaf61c0450ed100e834aaecaf37523ccfecc87a13"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L256_output_k2_predictions.pt",
+      "bytes": 268438107,
+      "sha256": "af4858310f095612c2ba255550de4270196cce0fdd24d479a7d12d2f993c06c0"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L256_output_k4_predictions.pt",
+      "bytes": 268438107,
+      "sha256": "4eb37d3a1ed4288915f4da2462f84e0c151191e9af6bc3412c004df71dea967f"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L256_features_no_update_predictions.pt",
+      "bytes": 268438197,
+      "sha256": "cd0b607ec53e05338323a6430c563fb2c1193b38ea7816315c3145c5417bda41"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L256_carry_carry_predictions.pt",
+      "bytes": 268438127,
+      "sha256": "1f85618b797bfdf8cb5654cc7dd11df9d7bb69d9b0fdac35fd786b7d1087cda7"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L256_carry_reset_predictions.pt",
+      "bytes": 268438127,
+      "sha256": "aaf0eb236cc8409b871f773183c275ed2596c36171f96d03260886317941c210"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L256_reset_reset_predictions.pt",
+      "bytes": 268438127,
+      "sha256": "a4c209d631820fec436a1d23eb75504be1a48e40f52d7f6bf1092b7104fb5d83"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L256_reset_carry_predictions.pt",
+      "bytes": 268438127,
+      "sha256": "e6e0130b03b8c036b6f72a3f483db300d9037b472641b2b8e29b4caa49a6016f"
+    },
+    {
+      "path": "work_dirs/qrecurrent_20260909/L256_mlp_predictions.pt",
+      "bytes": 268437983,
+      "sha256": "ca17b02e94238191abfb4c1c38657088a5880b0a5069ac951e37f42cbb3410e1"
+    }
+  ],
+  "temporal_note": "Mean absolute error in consecutive log-depth differences relative to denseQ0, all pixels, source/scene balanced. Not GT temporal accuracy, OPW or paper TCE; no optical-flow alignment; no new gate."
+}

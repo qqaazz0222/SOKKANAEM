@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Date02_Sub02_backpack_back.1.time.json",
+    "color_count": 1500,
+    "matched": 1500,
+    "coverage": 1.0,
+    "max_rgb_gap_us": 66678.0
+  },
+  {
+    "name": "Date02_Sub02_backpack_hand.1.time.json",
+    "color_count": 1500,
+    "matched": 1500,
+    "coverage": 1.0,
+    "max_rgb_gap_us": 33366.0
+  },
+  {
+    "name": "Date02_empty_E1.1.time.json",
+    "color_count": 200,
+    "matched": 200,
+    "coverage": 1.0,
+    "max_rgb_gap_us": 33356.0
+  }
+]

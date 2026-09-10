@@ -1,0 +1,52 @@
+{
+  "scope": "draft consistency, not independent scientific approval",
+  "verified_record_count": 45,
+  "checked_quality_cells": 18,
+  "local_markdown_links": 6,
+  "textwidth_tables": 3,
+  "pdf_compiled": true,
+  "overfull_or_missing_character_errors": false,
+  "draft": {
+    "path": "paper/draft.md",
+    "bytes": 20993,
+    "sha256": "142e31da721d31eb697ac88511892e54088dddd07ed60d4daacda802fa6f1093"
+  },
+  "tex": {
+    "path": "paper/streaming_draft/manuscript.tex",
+    "bytes": 28373,
+    "sha256": "b34bc1e6e7713a561e12c602cd7561d1f01bdca1a05b007ce55edfb48f9af6b2"
+  },
+  "pdf": {
+    "path": "paper/streaming_draft/manuscript.pdf",
+    "bytes": 3174023,
+    "sha256": "acaa07863d3762b6ad9c38bc6979b4c6946218f23a7d9a64aef79aaf23bd94a5"
+  },
+  "delivery": {
+    "path": "/home/hyunsu/gdrive/05. \ub17c\ubb38\uc791\uc5c5/Mathematics-SOKKANAEM/Draft/streaming_refresh_20260909",
+    "verified_copied_files": [
+      "draft.md",
+      "draft_native_20260909.md",
+      "streaming_draft/README.md",
+      "streaming_draft/REVISION_STATUS.md",
+      "streaming_draft/evidence_table.json",
+      "streaming_draft/frozen_candidate.json",
+      "streaming_draft/layout.tex",
+      "streaming_draft/local_images.lua",
+      "streaming_draft/manuscript.pdf",
+      "streaming_draft/manuscript.tex",
+      "streaming_draft/split_audit.json",
+      "streaming_draft/visual_provenance.json",
+      "streaming_draft/figures/architecture.pdf",
+      "streaming_draft/figures/architecture.png",
+      "streaming_draft/figures/boundary_crops.pdf",
+      "streaming_draft/figures/boundary_crops.png",
+      "streaming_draft/figures/failure_cases.pdf",
+      "streaming_draft/figures/failure_cases.png",
+      "streaming_draft/figures/latency.pdf",
+      "streaming_draft/figures/latency.png",
+      "streaming_draft/figures/qualitative.pdf",
+      "streaming_draft/figures/qualitative.png"
+    ],
+    "old_paper_work_files_unchanged": true
+  }
+}

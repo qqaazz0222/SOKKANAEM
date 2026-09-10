@@ -1,0 +1,109 @@
+{
+  "role": "reused_development_no_final_no_promotion",
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "adapter": {
+    "path": "work_dirs/qquality_feature_20260908/adapter.pt",
+    "bytes": 616993,
+    "sha256": "a8a02c36e1885196ebdeef74ed1c0acfbdd62a05160f27350a98816133800cc1"
+  },
+  "training_data": {
+    "path": "work_dirs/architecture_readout_20260908/train_cache.pt",
+    "bytes": 1158096471,
+    "sha256": "12aca88d0cabe5b8f2210a5f84fc2db149348e7ddd751716ad6dfe55f5001d8b"
+  },
+  "development": [
+    {
+      "path": "work_dirs/qstream_20260908/development_data.pt",
+      "bytes": 285277993,
+      "sha256": "788b4bddf15b2d3b19bd6f81e7c3280308e3d8b644e5b39c4cf29814c03ae7a1"
+    },
+    {
+      "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+      "bytes": 1141081851,
+      "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+    }
+  ],
+  "mode": "transport",
+  "input_cache": {
+    "path": "work_dirs/qtransport_residual_20260909/training_cache.pt",
+    "bytes": 1259493569,
+    "sha256": "863ec9e88f28a15e9f3b9a42fdfebf55d8e462c01a98039d952eb3aa23925839"
+  },
+  "steps": 1200,
+  "seed": 736,
+  "lr": 0.0005,
+  "training_clips": 192,
+  "training_frames": 768,
+  "parameters": 23283,
+  "objective": "5Q0logdepth+10Q0loggradient+20GTflat_excess + .1BCErepair(residual) or .1CEcandidate(transport)",
+  "comparison": "same expanded data/order/steps/base/backbone family; output representation and supervision differ, NOT parameter-identical single-factor control",
+  "transport": "49 previous-depth offsets from(-4,-2,-1,0,1,2,4)^2 plus coarse; hard argmax, soft ST training surrogate; +/- .03 residual; no flow oracle",
+  "target": "trainingQ0 nearest log-depth candidate only when advantage over coarse>.005, otherwise coarse",
+  "base": "same pooled-held feature SSM K2; no recurrent h carry across refresh",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qtransport_study.py",
+      "bytes": 8750,
+      "sha256": "9c09fe267af379a48c339666fdeae2f7d87749bf3b4b0d98452387d64ce8cd3a"
+    },
+    {
+      "path": "sokkanaem/qtransport.py",
+      "bytes": 2940,
+      "sha256": "0b9f2ab5f095b16e3a73b742c022ea15ecc2e66973608f55c2608e10f9fb652a"
+    },
+    {
+      "path": "sokkanaem/qtemporal_refiner.py",
+      "bytes": 3014,
+      "sha256": "59f14847384f84bfb5dee2c4f97f72010fca31ad09bd9dc2e22f57993a7a1ce6"
+    },
+    {
+      "path": "sokkanaem/qseparated.py",
+      "bytes": 733,
+      "sha256": "1d9641764792989c66356802956c0af8f02640ef64b2699485bf0dc04224888f"
+    },
+    {
+      "path": "sokkanaem/qflat_state.py",
+      "bytes": 2775,
+      "sha256": "cb4cbda86e53ec363756091bad97686e426e809a789ad59061c8508399986381"
+    },
+    {
+      "path": "sokkanaem/qquality.py",
+      "bytes": 4341,
+      "sha256": "25463f2e849965132e714827dd70ad648a1d30e18641cf7fb5b5306812fa1d0c"
+    },
+    {
+      "path": "sokkanaem/qdelta_ssm.py",
+      "bytes": 2959,
+      "sha256": "efd2ec60e7bbaaa0c2e5ff3e6b9aa9298b49525a3026a95a520872e2991ff8ca"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    }
+  ]
+}

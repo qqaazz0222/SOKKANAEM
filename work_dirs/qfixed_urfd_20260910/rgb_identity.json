@@ -1,0 +1,822 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/audit_fixed_camera_rgb_identity.py",
+    "bytes": 2029,
+    "sha256": "c3bd1586ddd6e9cecf3ca51773ffeb1bdac0c9b8e09aca574165dd5a761c6e57"
+  },
+  "archive": {
+    "path": "work_dirs/qfixed_urfd_20260910/fall-01-cam1-rgb.zip",
+    "bytes": 60161135,
+    "sha256": "04d87d71380085bc944c02da4e81a7bf8228ef219c1f87969c93275db8bf47b6"
+  },
+  "archive_crc_verified": true,
+  "no_model_predictions": true,
+  "frames": 160,
+  "pixel_exact_frames": 160,
+  "all_pixel_exact": true,
+  "supersedes": "The first admission confirmed 5 frames from an incomplete archive prefix.",
+  "establishes": "The released RGB of this sequence is the URFD original, unmodified, on every frame.",
+  "does_not_establish": "Nothing about the depth channel. Registration of depth to this RGB remains uncorroborated and the sequence remains unadmitted as ground truth.",
+  "per_frame": [
+    {
+      "id": 1,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 2,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 3,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 4,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 5,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 6,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 7,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 8,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 9,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 10,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 11,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 12,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 13,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 14,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 15,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 16,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 17,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 18,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 19,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 20,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 21,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 22,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 23,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 24,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 25,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 26,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 27,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 28,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 29,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 30,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 31,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 32,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 33,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 34,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 35,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 36,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 37,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 38,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 39,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 40,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 41,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 42,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 43,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 44,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 45,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 46,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 47,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 48,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 49,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 50,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 51,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 52,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 53,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 54,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 55,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 56,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 57,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 58,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 59,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 60,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 61,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 62,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 63,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 64,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 65,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 66,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 67,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 68,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 69,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 70,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 71,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 72,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 73,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 74,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 75,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 76,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 77,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 78,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 79,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 80,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 81,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 82,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 83,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 84,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 85,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 86,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 87,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 88,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 89,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 90,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 91,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 92,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 93,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 94,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 95,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 96,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 97,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 98,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 99,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 100,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 101,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 102,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 103,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 104,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 105,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 106,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 107,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 108,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 109,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 110,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 111,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 112,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 113,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 114,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 115,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 116,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 117,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 118,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 119,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 120,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 121,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 122,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 123,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 124,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 125,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 126,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 127,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 128,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 129,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 130,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 131,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 132,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 133,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 134,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 135,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 136,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 137,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 138,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 139,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 140,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 141,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 142,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 143,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 144,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 145,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 146,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 147,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 148,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 149,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 150,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 151,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 152,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 153,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 154,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 155,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 156,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 157,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 158,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 159,
+      "shape_match": true,
+      "pixel_exact": true
+    },
+    {
+      "id": 160,
+      "shape_match": true,
+      "pixel_exact": true
+    }
+  ]
+}

@@ -1,0 +1,133 @@
+{
+  "role": "post_selection_reused_development_not_independent_validation",
+  "records": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qpreflow_study.py",
+      "bytes": 8286,
+      "sha256": "58c562ffb2d3fb893f4d290d6cfb3daa3686b9b58ea79240bba70ad08d3250e3"
+    },
+    {
+      "path": "sokkanaem/qpreflow.py",
+      "bytes": 2545,
+      "sha256": "0df82e61d5873341fb0652ab456e7c27d774aebcc604840ca20122f89dca1512"
+    },
+    {
+      "path": "sokkanaem/qschedule.py",
+      "bytes": 4005,
+      "sha256": "c5b6478bf05da0be7e632da507888e5d98e2e1f7c45cd277688bfcee19f5e723"
+    },
+    {
+      "path": "sokkanaem/qrisk.py",
+      "bytes": 1629,
+      "sha256": "a0706337bb75e04010972c1fc349b73a31753a7686ae9fa49cdbdc5ce6a683e9"
+    },
+    {
+      "path": "sokkanaem/qflow.py",
+      "bytes": 5116,
+      "sha256": "734664ad90d9ab64049cf38f685c87c0a77ed0abc8214590d6a2ee8bf5c5d6a3"
+    },
+    {
+      "path": "sokkanaem/ssm.py",
+      "bytes": 7846,
+      "sha256": "e1ec51be51ece9aa88b22e822b3af4c2039bcfc90b4a4debab88a506e90e32f8"
+    },
+    {
+      "path": "sokkanaem/qrecurrent_flow.py",
+      "bytes": 3751,
+      "sha256": "c8c63fe931391120ee09307d2ba81c446c22b40a9ef14b61630dc62f8821f7ba"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "bytes": 12181,
+      "sha256": "5f4b95ecdfd0c1a929d6e44c00a2d451620949fc43de6fca2a209079ef0dc6a5"
+    },
+    {
+      "path": "scripts/qschedule_study.py",
+      "bytes": 10520,
+      "sha256": "83d93aae6a443eeb4a5a8da2b359a5e73fcc42a6bfa3e1fbe3bbbef7c3645885"
+    },
+    {
+      "path": "scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    },
+    {
+      "path": "work_dirs/qstream_20260908/development_data.pt",
+      "bytes": 285277993,
+      "sha256": "788b4bddf15b2d3b19bd6f81e7c3280308e3d8b644e5b39c4cf29814c03ae7a1"
+    },
+    {
+      "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+      "bytes": 1141081851,
+      "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+    },
+    {
+      "path": "work_dirs/q0-calib-s0/latest.pt",
+      "bytes": 99357700,
+      "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/protocol.json",
+      "bytes": 4720,
+      "sha256": "7d7d416c6c8d1acfcdec899c5175ded383247bacbea5b22f4ae8a2319608b002"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/traces.pt",
+      "bytes": 446713,
+      "sha256": "3609967fded29d1fac8d981d76da44d1fa18250b752353f5218ccbee7a1810ba"
+    },
+    {
+      "path": "work_dirs/qschedule_20260909/training_order.json",
+      "bytes": 283720,
+      "sha256": "0931997949178de88ea6e6ade24daeeff58bbd489c040d1553d68b4b70a505ba"
+    },
+    {
+      "path": "work_dirs/qpreflow_20260909/results.json",
+      "bytes": 6915789,
+      "sha256": "55ca895507ca7db2d177f9fb2809e0bd5c2880a28cf28e090015b130d5039d83"
+    },
+    {
+      "path": "work_dirs/qpreflow_20260909/thresholds.json",
+      "bytes": 336,
+      "sha256": "4175c63286ae30d645f0f31f83f52023d4cd7143a5b1816c3eb4c904d2aa8f87"
+    },
+    {
+      "path": "work_dirs/qpreflow_20260909/mlp_risk.pt",
+      "bytes": 11729,
+      "sha256": "511f09cc1aa1052a244857e55f96895d0f9c65be23b06116234948784d2a185d"
+    },
+    {
+      "path": "/workspace/SOKKANAEM/scripts/audit_qpreflow_candidate.py",
+      "bytes": 3944,
+      "sha256": "2addfb0ef8b5b1e9831203cbe52f519f2f3c8d98ecad65990e4bb138719e2146"
+    },
+    {
+      "path": "scripts/qquality_audit.py",
+      "bytes": 7757,
+      "sha256": "8709d13d1c48eeb05115bd3c267eb937eb2a5d75c59784c3b628ff0f04795898"
+    }
+  ],
+  "candidate": "mlp_q50; unchanged held-prediction median; selected after initial development screen",
+  "phase": "first two frames exact, then unchanged policy; no tuning",
+  "timing": "three order-rotated repeats,64warmup,shared RTX4090, synchronized GPUresident including internal flow/transfers; no edge claim"
+}

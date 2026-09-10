@@ -1,0 +1,51 @@
+{
+  "preregistration": {
+    "path": "work_dirs/qindependent_20260909/preregistered.json",
+    "bytes": 2786,
+    "sha256": "919cfbe7bc5ff3dc3d6995c689bdf54d354369810c60e43ed51f00e7a06be586"
+  },
+  "manifests": [
+    {
+      "path": "work_dirs/qindependent_20260909/manifest_L32.json",
+      "bytes": 30132,
+      "sha256": "dde297c1f5d54907b8bcb404ea8e04235597330b8d883b6d92ee0d28a69d069f"
+    },
+    {
+      "path": "work_dirs/qindependent_20260909/manifest_L256.json",
+      "bytes": 236216,
+      "sha256": "a5f6d590b53573cf35b512401a29eb19cadf9c20da012cad81d9b5a1293e7789"
+    }
+  ],
+  "frames": {
+    "path": "work_dirs/qindependent_20260909/frame_hashes.json",
+    "bytes": 544419,
+    "sha256": "ac89551276343dd6ebc576d640d492024ddb6c582b9be6132b1f6a982b7a5016"
+  },
+  "frame_paths_disjoint": true,
+  "archives": [
+    {
+      "scene": "rgbd_dataset_freiburg1_room",
+      "url": "https://webshare.cvg.cit.tum.de/g/rgbd/dataset/freiburg1/rgbd_dataset_freiburg1_room.tgz",
+      "archive": {
+        "path": "work_dirs/qindependent_20260909/archives/rgbd_dataset_freiburg1_room.tgz",
+        "bytes": 782381450,
+        "sha256": "5ace47a1d2e53696bc939a84999293a04a7226958e848a609666691fd3cc38da"
+      }
+    },
+    {
+      "scene": "rgbd_dataset_freiburg2_desk",
+      "url": "https://webshare.cvg.cit.tum.de/g/rgbd/dataset/freiburg2/rgbd_dataset_freiburg2_desk.tgz",
+      "archive": {
+        "path": "work_dirs/qindependent_20260909/archives/rgbd_dataset_freiburg2_desk.complete.tgz",
+        "bytes": 1893351095,
+        "sha256": "1a0756d72510a26e26e2a02bf0b6c69c2796619fca531e176fc2e5110173807c"
+      }
+    }
+  ],
+  "recovery": {
+    "path": "work_dirs/qindependent_20260909/block_recovery/protocol.json",
+    "bytes": 9708,
+    "sha256": "dabf2995c0142ac458ca737b5d39583305d6a6688d020b507bf5d25596cc4d8e"
+  },
+  "prepared_before_any_new_predictions": true
+}

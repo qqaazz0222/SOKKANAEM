@@ -1,0 +1,17 @@
+[
+  {
+    "path": "work_dirs/qbehave_pilot_acquisition_20260910/videos/Date02_empty_E1.1.color.mp4",
+    "bytes": 7448930,
+    "sha256": "b39fca22563a469395cdb115ce522c0e539bd25c582d28973e02ec01bb6d8936"
+  },
+  {
+    "path": "work_dirs/qbehave_pilot_acquisition_20260910/videos/Date02_Sub02_backpack_back.1.color.mp4",
+    "bytes": 44070656,
+    "sha256": "6a18e122f309aac6936fcaf981dd3c2b0c4fbbe89f0413927ba1216d7d89379a"
+  },
+  {
+    "path": "work_dirs/qbehave_pilot_acquisition_20260910/videos/Date02_Sub02_backpack_hand.1.color.mp4",
+    "bytes": 44184158,
+    "sha256": "5f1aa0e0ab3aa0468be1b47b4c5ee02520325775369d3469a05112b5de5ed8be"
+  }
+]

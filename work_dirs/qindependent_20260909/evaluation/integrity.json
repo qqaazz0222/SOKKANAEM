@@ -1,0 +1,37 @@
+{
+  "hashes_unchanged": true,
+  "exact_refresh_comparisons": 1083,
+  "parity": [
+    {
+      "length": 32,
+      "policy": "dense",
+      "exact_refresh_comparisons": 0
+    },
+    {
+      "length": 32,
+      "policy": "output_k2",
+      "exact_refresh_comparisons": 64
+    },
+    {
+      "length": 32,
+      "policy": "mlp_q50",
+      "exact_refresh_comparisons": 46
+    },
+    {
+      "length": 256,
+      "policy": "dense",
+      "exact_refresh_comparisons": 0
+    },
+    {
+      "length": 256,
+      "policy": "output_k2",
+      "exact_refresh_comparisons": 512
+    },
+    {
+      "length": 256,
+      "policy": "mlp_q50",
+      "exact_refresh_comparisons": 461
+    }
+  ],
+  "candidate_promoted": false
+}

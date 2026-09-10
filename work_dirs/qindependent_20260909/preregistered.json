@@ -1,0 +1,86 @@
+{
+  "role": "new_local_sequence_holdout_after_candidate_freeze_not_pretraining_disjoint_certification",
+  "candidate": {
+    "path": "paper/streaming_draft/frozen_candidate.json",
+    "bytes": 5331,
+    "sha256": "5fc6546287ffab7967bd4c4d099a4f88b67039c1525949b3e47cab4d7b0ac345"
+  },
+  "weights": [
+    {
+      "path": "work_dirs/qpreflow_20260909/mlp_risk.pt",
+      "bytes": 11729,
+      "sha256": "511f09cc1aa1052a244857e55f96895d0f9c65be23b06116234948784d2a185d"
+    },
+    {
+      "path": "work_dirs/q0-calib-s0/latest.pt",
+      "bytes": 99357700,
+      "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+    }
+  ],
+  "threshold": 0.05327536165714264,
+  "scenes": [
+    "rgbd_dataset_freiburg1_room",
+    "rgbd_dataset_freiburg2_desk"
+  ],
+  "old_final_excluded": [
+    "rgbd_dataset_freiburg3_sitting_xyz",
+    "rgbd_dataset_freiburg3_sitting_rpy",
+    "rgbd_dataset_freiburg3_walking_xyz",
+    "rgbd_dataset_freiburg3_walking_rpy"
+  ],
+  "selection_before_predictions": "Per sequence L32 first32 and last32 associated frames; L256 two windows centered at1/3 and2/3 of associated timeline. Require disjoint RGB and depth paths across windows. No visual/GT/model-performance selection.",
+  "expected_frames": {
+    "L32": 128,
+    "L256": 1024
+  },
+  "policies": [
+    "dense",
+    "output_k2",
+    "mlp_q50"
+  ],
+  "scoring": "unchanged qstream quality_gate, report aggregate and every sequence; all failures retained, no retuning",
+  "timing": "primary synchronized resident-input timing; no independent edge or energy claim",
+  "limits": "Only two new TUM sequences; camera/environment shift, same benchmark family; DA2 pretraining overlap unknown. This test is consumed once evaluated.",
+  "history_scan": {
+    "command": [
+      "rg",
+      "-l",
+      "rgbd_dataset_freiburg1_room|rgbd_dataset_freiburg2_desk",
+      "configs",
+      "manifests",
+      "paper",
+      "scripts",
+      "work_dirs",
+      "-g",
+      "*.json",
+      "-g",
+      "*.toml",
+      "-g",
+      "*.md",
+      "-g",
+      "*.log",
+      "-g",
+      "*.py",
+      "-g",
+      "!qindependent_prepare.py"
+    ],
+    "matches": [],
+    "exit_code": 1
+  },
+  "training_config": {
+    "path": "work_dirs/q0-calib-s0/config.toml",
+    "bytes": 479,
+    "sha256": "8421e86950486a0904eb8cc5d8d1fec1b47eb9cd26ebd52b2d29446942d1cd86"
+  },
+  "configured_training_data": {
+    "path": "configs/main_v8.toml",
+    "bytes": 4536,
+    "sha256": "dc4c83cbcf1fc43a8edcd9dd5dab2ad3da70c068d2d40720295474eea5bbafd0"
+  },
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/qindependent_prepare.py",
+    "bytes": 5485,
+    "sha256": "9347275697a774d105d4b887789e3b80669fd27966e2d4d842f22a0705326eb2"
+  },
+  "official_page": "https://cvg.cit.tum.de/data/datasets/rgbd-dataset/download"
+}

@@ -1,0 +1,80 @@
+{
+  "role": "posttraining_development_diagnostic_no_retraining_no_promotion",
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "adapter": {
+    "path": "work_dirs/qflat_carry_flat_20260908/adapter.pt",
+    "bytes": 616801,
+    "sha256": "8ff873a566aa450892b1de7925b9d6eb269ed7fd7b18f682d1a50b5d35123186"
+  },
+  "development": [
+    {
+      "path": "work_dirs/qstream_20260908/development_data.pt",
+      "bytes": 285277993,
+      "sha256": "788b4bddf15b2d3b19bd6f81e7c3280308e3d8b644e5b39c4cf29814c03ae7a1"
+    },
+    {
+      "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+      "bytes": 1141081851,
+      "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+    }
+  ],
+  "policy": "K2 with same conservative refresh h carry; same trained patch updates",
+  "variants": [
+    "unchanged",
+    "hold_cls",
+    "hold_pooled",
+    "hold_both"
+  ],
+  "limits": "holding pooled fixes its delta, not all metric effects: normalized decoder disparity still changes; prior opened development only",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qseparated_study.py",
+      "bytes": 3455,
+      "sha256": "cf080a16d866407cf207b9d3bb9ac6fa7ddb6c062a3bbe12cf864212a327bb0b"
+    },
+    {
+      "path": "sokkanaem/qseparated.py",
+      "bytes": 733,
+      "sha256": "1d9641764792989c66356802956c0af8f02640ef64b2699485bf0dc04224888f"
+    },
+    {
+      "path": "sokkanaem/qflat_state.py",
+      "bytes": 2775,
+      "sha256": "cb4cbda86e53ec363756091bad97686e426e809a789ad59061c8508399986381"
+    },
+    {
+      "path": "sokkanaem/qdelta_ssm.py",
+      "bytes": 2959,
+      "sha256": "efd2ec60e7bbaaa0c2e5ff3e6b9aa9298b49525a3026a95a520872e2991ff8ca"
+    },
+    {
+      "path": "scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    }
+  ]
+}

@@ -1,0 +1,202 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/audit_fixed_camera_registration.py",
+    "bytes": 3681,
+    "sha256": "433c48c01d90327743b4f8d33b775f41c99bf1f3cd55424cff3b2cd6102dcaca"
+  },
+  "protocol": {
+    "path": "work_dirs/qfixed_urfd_20260910/protocol_registration.json",
+    "bytes": 2590,
+    "sha256": "ea67363de36ebccc878ac76240e28db1b7c86e20442abf9243eed0012c27cd11"
+  },
+  "prior_admission": {
+    "path": "work_dirs/qfixed_urfd_20260910/urfd_admission.json",
+    "bytes": 96196,
+    "sha256": "c21adc1a15c7013baecbd9e9860fd39d1e37210e1888504851660c76d3d506fd"
+  },
+  "no_model_predictions": true,
+  "bins": 32,
+  "frames_evaluated": 8,
+  "C5_edge_test_failed_and_preserved": true,
+  "C6_frames_peaking_at_origin": 0,
+  "C6_pass": false,
+  "C7_control_frames_peaking_off_origin": 8,
+  "C7_metric_discriminates": true,
+  "C6_void": false,
+  "registration_corroborated": false,
+  "C3_pass": true,
+  "C4_pass": true,
+  "C1_pass": false,
+  "admitted_as_masked_gt": false,
+  "scope": "one event, one location; alignment to released RGB only, not extrinsic calibration",
+  "sweeps": [
+    {
+      "id": 1,
+      "corrected": {
+        "best": {
+          "dx": -8,
+          "dy": 0,
+          "nmi": 0.24699969161006313
+        },
+        "nmi_at_zero": 0.23482016319369645,
+        "best_offset_px": 8.0
+      },
+      "control_unregistered_original": {
+        "best": {
+          "dx": 8,
+          "dy": 8,
+          "nmi": 0.2452302753698006
+        },
+        "nmi_at_zero": 0.22046994798454064,
+        "best_offset_px": 11.313708498984761
+      }
+    },
+    {
+      "id": 21,
+      "corrected": {
+        "best": {
+          "dx": -8,
+          "dy": 0,
+          "nmi": 0.22892451074053885
+        },
+        "nmi_at_zero": 0.21593338328386066,
+        "best_offset_px": 8.0
+      },
+      "control_unregistered_original": {
+        "best": {
+          "dx": 8,
+          "dy": 8,
+          "nmi": 0.22793625926492625
+        },
+        "nmi_at_zero": 0.19909679098499686,
+        "best_offset_px": 11.313708498984761
+      }
+    },
+    {
+      "id": 41,
+      "corrected": {
+        "best": {
+          "dx": -8,
+          "dy": 0,
+          "nmi": 0.23930594045254466
+        },
+        "nmi_at_zero": 0.22401797099131154,
+        "best_offset_px": 8.0
+      },
+      "control_unregistered_original": {
+        "best": {
+          "dx": 8,
+          "dy": 8,
+          "nmi": 0.21587277849153305
+        },
+        "nmi_at_zero": 0.1882884138471475,
+        "best_offset_px": 11.313708498984761
+      }
+    },
+    {
+      "id": 61,
+      "corrected": {
+        "best": {
+          "dx": -8,
+          "dy": 0,
+          "nmi": 0.23158101189974944
+        },
+        "nmi_at_zero": 0.21492416516934346,
+        "best_offset_px": 8.0
+      },
+      "control_unregistered_original": {
+        "best": {
+          "dx": 8,
+          "dy": 8,
+          "nmi": 0.2205897160185518
+        },
+        "nmi_at_zero": 0.19624578414581387,
+        "best_offset_px": 11.313708498984761
+      }
+    },
+    {
+      "id": 81,
+      "corrected": {
+        "best": {
+          "dx": -8,
+          "dy": 0,
+          "nmi": 0.24785046031983204
+        },
+        "nmi_at_zero": 0.23243668623217334,
+        "best_offset_px": 8.0
+      },
+      "control_unregistered_original": {
+        "best": {
+          "dx": 8,
+          "dy": 8,
+          "nmi": 0.23266566607076394
+        },
+        "nmi_at_zero": 0.20558427485478384,
+        "best_offset_px": 11.313708498984761
+      }
+    },
+    {
+      "id": 101,
+      "corrected": {
+        "best": {
+          "dx": -8,
+          "dy": 0,
+          "nmi": 0.266606026530408
+        },
+        "nmi_at_zero": 0.2444401836717955,
+        "best_offset_px": 8.0
+      },
+      "control_unregistered_original": {
+        "best": {
+          "dx": 8,
+          "dy": 8,
+          "nmi": 0.23793367599051857
+        },
+        "nmi_at_zero": 0.21277517865429849,
+        "best_offset_px": 11.313708498984761
+      }
+    },
+    {
+      "id": 121,
+      "corrected": {
+        "best": {
+          "dx": -8,
+          "dy": 0,
+          "nmi": 0.2067188383022928
+        },
+        "nmi_at_zero": 0.1690356212450115,
+        "best_offset_px": 8.0
+      },
+      "control_unregistered_original": {
+        "best": {
+          "dx": 8,
+          "dy": 8,
+          "nmi": 0.16882889741013438
+        },
+        "nmi_at_zero": 0.16102166005083143,
+        "best_offset_px": 11.313708498984761
+      }
+    },
+    {
+      "id": 141,
+      "corrected": {
+        "best": {
+          "dx": -8,
+          "dy": 0,
+          "nmi": 0.2006506958799729
+        },
+        "nmi_at_zero": 0.1759719026572845,
+        "best_offset_px": 8.0
+      },
+      "control_unregistered_original": {
+        "best": {
+          "dx": 8,
+          "dy": 8,
+          "nmi": 0.1785063309990311
+        },
+        "nmi_at_zero": 0.16641718535703398,
+        "best_offset_px": 11.313708498984761
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "role": "development_visualization_not_final",
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/render_pretrained_comparison.py",
+    "bytes": 3279,
+    "sha256": "2cf49b25463151a1b1e1f42942af6e3fdd21549c315aa86ffa3e8dc6b6c1e080"
+  },
+  "inputs": [
+    {
+      "path": "work_dirs/pretrained_quality_20260908/native224_predictions.pt",
+      "bytes": 33560295,
+      "sha256": "a1635cff00f73d369281091eecb13b07f25a7510074dca4e68cf1fb3a1d74436"
+    },
+    {
+      "path": "work_dirs/pretrained_quality_20260908/q0_224_predictions.pt",
+      "bytes": 33560229,
+      "sha256": "4b1a13d903ee8302621fbf0464e824864c424ba2f0d9eb72cf25cbe5b299c263"
+    },
+    {
+      "path": "work_dirs/pretrained_quality_20260908/q0_518_predictions.pt",
+      "bytes": 33560229,
+      "sha256": "b04ce67bea20406c2ff890295143607a8f1084af99fb9ce4bc486bc8d9059335"
+    },
+    {
+      "path": "work_dirs/joint_decoder_20260908_v2/dev_tokens.pt",
+      "bytes": 192987381,
+      "sha256": "97407be7fa2e97f9265da4b759e6f1a3ee3ee2856edad50e93ad25537d687165"
+    }
+  ],
+  "selection": [
+    {
+      "clip_index": 0,
+      "frame": 4,
+      "pair": [
+        "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static/rgb/1341846227.218443.png",
+        "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static/depth/1341846227.219317.png"
+      ]
+    },
+    {
+      "clip_index": 4,
+      "frame": 4,
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2/rgb/1548339892.63643.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2/depth/1548339892.62746.png"
+      ]
+    },
+    {
+      "clip_index": 8,
+      "frame": 4,
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2/rgb/1548265919.90103.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2/depth/1548265919.89429.png"
+      ]
+    },
+    {
+      "clip_index": 12,
+      "frame": 4,
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far/rgb/1548340550.39609.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far/depth/1548340550.38191.png"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "paper/pretrained_quality_visuals_20260908/comparison.png",
+      "bytes": 1135192,
+      "sha256": "94b2137ad92f0af131da1a5699a2fca7eea50117eb9deeb58b59ef21c441dc81"
+    },
+    {
+      "path": "paper/pretrained_quality_visuals_20260908/comparison.pdf",
+      "bytes": 779920,
+      "sha256": "a1f4732ab66101d0eff841936692499360ecb0f70082ea9e8aa081a44f23510e"
+    }
+  ]
+}

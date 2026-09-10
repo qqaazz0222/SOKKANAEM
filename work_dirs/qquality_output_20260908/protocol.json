@@ -1,0 +1,108 @@
+{
+  "role": "development_only_no_final_no_promotion",
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "initial_adapter": {
+    "path": "work_dirs/qdelta_20260908/adapter.pt",
+    "bytes": 616865,
+    "sha256": "8aa6e64fd780da9f73c688d91ef4c3e47810cb06dd5c0ff6d57cb136e34bde6d"
+  },
+  "teacher_cache": {
+    "path": "work_dirs/qdelta_20260908/teacher_cache.pt",
+    "bytes": 883978339,
+    "sha256": "acccf126e586400aa84b42f464c09fb3e58ba2b7c82711a9bd445d386aa99157"
+  },
+  "development": {
+    "path": "work_dirs/qstream_20260908/development_data.pt",
+    "bytes": 285277993,
+    "sha256": "788b4bddf15b2d3b19bd6f81e7c3280308e3d8b644e5b39c4cf29814c03ae7a1"
+  },
+  "mode": "output",
+  "warp": false,
+  "steps": 600,
+  "seed": 736,
+  "lr": 0.0003,
+  "clips": 48,
+  "objective": "featureL1 + .1 pooledL1 + 5 logdepthL1 + 10 multiscale_loggradientL1",
+  "training": "matched continuation of same600step adapter; same clip order; one refresh plus3 updates; no GT loss",
+  "motion": "backward RGB local match74px radius2; bilinear feature AND h transport; no learned confidence or certified occlusion",
+  "policies": [
+    "periodicK4",
+    "periodicK2",
+    "K4_h_reset",
+    "K4_no_delta"
+  ],
+  "quality_gate": "unchanged scripts.qstream_study.quality_gate; speed requires mean latency reduction>=5%",
+  "runtime": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    },
+    {
+      "path": "sokkanaem/qquality.py",
+      "bytes": 4341,
+      "sha256": "25463f2e849965132e714827dd70ad648a1d30e18641cf7fb5b5306812fa1d0c"
+    },
+    {
+      "path": "sokkanaem/qdelta_ssm.py",
+      "bytes": 2959,
+      "sha256": "efd2ec60e7bbaaa0c2e5ff3e6b9aa9298b49525a3026a95a520872e2991ff8ca"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "scripts/qdelta_study.py",
+      "bytes": 8147,
+      "sha256": "195b8a9807445ea306f1fcf0fd3cd202065eeee1237c36e20edd455b6465024c"
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "bytes": 12181,
+      "sha256": "5f4b95ecdfd0c1a929d6e44c00a2d451620949fc43de6fca2a209079ef0dc6a5"
+    },
+    {
+      "path": "sokkanaem/ssm.py",
+      "bytes": 7846,
+      "sha256": "e1ec51be51ece9aa88b22e822b3af4c2039bcfc90b4a4debab88a506e90e32f8"
+    },
+    {
+      "path": "sokkanaem/detector.py",
+      "bytes": 4110,
+      "sha256": "b9f8414395930b3e4b4913e1e006b1d91def3850b3944b668a0573d7bfd6809d"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "renderer": {
+    "path": "/workspace/SOKKANAEM/scripts/prepare_streaming_draft.py",
+    "bytes": 9473,
+    "sha256": "e87a2461124125aa926121f879f21177e13d793483152d9855f07722ef661c5a"
+  },
+  "data": {
+    "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+    "bytes": 1141081851,
+    "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+  },
+  "predictions": [
+    {
+      "path": "work_dirs/qpreflow_20260909/L256_dense_predictions.pt",
+      "bytes": 268438067,
+      "sha256": "b3dc141eb0bcfd8e8b819c9eaf61c0450ed100e834aaecaf37523ccfecc87a13"
+    },
+    {
+      "path": "work_dirs/qpreflow_20260909/L256_output_k2_predictions.pt",
+      "bytes": 268438107,
+      "sha256": "af4858310f095612c2ba255550de4270196cce0fdd24d479a7d12d2f993c06c0"
+    },
+    {
+      "path": "work_dirs/qpreflow_20260909/L256_mlp_q50_predictions.pt",
+      "bytes": 268438087,
+      "sha256": "379ac2feeab38d8ff1cfdaa713ab4601b82ae1710b33bc5b233c92fa668a2fd6"
+    }
+  ],
+  "selection": [
+    {
+      "clip": 0,
+      "frame": 127,
+      "reason": "skipped frame nearest temporal midpoint",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static/rgb/1341846240.290031.png",
+        "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static/depth/1341846240.290056.png"
+      ],
+      "telemetry": {
+        "full_refresh": false,
+        "backbone_calls": 0,
+        "cache_age": 1,
+        "gap_attempted": 1,
+        "predicted_risk": 0.06612782180309296,
+        "reason": "mandatory_first_skip",
+        "incoming_h_abs_mean": 0.0,
+        "flow_calls": 2,
+        "late": false
+      }
+    },
+    {
+      "clip": 1,
+      "frame": 128,
+      "reason": "skipped frame nearest temporal midpoint",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2/rgb/1548339905.10335.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2/depth/1548339905.10704.png"
+      ],
+      "telemetry": {
+        "full_refresh": false,
+        "backbone_calls": 0,
+        "cache_age": 2,
+        "gap_attempted": 2,
+        "predicted_risk": 0.04340602457523346,
+        "reason": "extended_reuse",
+        "incoming_h_abs_mean": 0.0,
+        "flow_calls": 2,
+        "late": false
+      }
+    },
+    {
+      "clip": 2,
+      "frame": 127,
+      "reason": "skipped frame nearest temporal midpoint",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2/rgb/1548265932.33442.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2/depth/1548265932.34067.png"
+      ],
+      "telemetry": {
+        "full_refresh": false,
+        "backbone_calls": 0,
+        "cache_age": 2,
+        "gap_attempted": 2,
+        "predicted_risk": 0.051671069115400314,
+        "reason": "extended_reuse",
+        "incoming_h_abs_mean": 0.0,
+        "flow_calls": 2,
+        "late": false
+      }
+    },
+    {
+      "clip": 3,
+      "frame": 127,
+      "reason": "skipped frame nearest temporal midpoint",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far/rgb/1548340580.05624.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far/depth/1548340580.04602.png"
+      ],
+      "telemetry": {
+        "full_refresh": false,
+        "backbone_calls": 0,
+        "cache_age": 1,
+        "gap_attempted": 1,
+        "predicted_risk": 0.059734046459198,
+        "reason": "mandatory_first_skip",
+        "incoming_h_abs_mean": 0.0,
+        "flow_calls": 2,
+        "late": false
+      }
+    },
+    {
+      "clip": 0,
+      "frame": 171,
+      "reason": "largest per-frame raw AbsRel increase vs Q0 among skipped frames; posthoc diagnostic",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static/rgb/1341846241.830240.png",
+        "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static/depth/1341846241.830265.png"
+      ],
+      "telemetry": {
+        "full_refresh": false,
+        "backbone_calls": 0,
+        "cache_age": 1,
+        "gap_attempted": 1,
+        "predicted_risk": 0.09427698701620102,
+        "reason": "mandatory_first_skip",
+        "incoming_h_abs_mean": 0.0,
+        "flow_calls": 2,
+        "late": false
+      }
+    },
+    {
+      "clip": 1,
+      "frame": 15,
+      "reason": "largest per-frame raw AbsRel increase vs Q0 among skipped frames; posthoc diagnostic",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2/rgb/1548339901.31633.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2/depth/1548339901.30314.png"
+      ],
+      "telemetry": {
+        "full_refresh": false,
+        "backbone_calls": 0,
+        "cache_age": 1,
+        "gap_attempted": 1,
+        "predicted_risk": 0.05762604996562004,
+        "reason": "mandatory_first_skip",
+        "incoming_h_abs_mean": 0.0,
+        "flow_calls": 2,
+        "late": false
+      }
+    },
+    {
+      "clip": 2,
+      "frame": 191,
+      "reason": "largest per-frame raw AbsRel increase vs Q0 among skipped frames; posthoc diagnostic",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2/rgb/1548265934.47990.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2/depth/1548265934.47630.png"
+      ],
+      "telemetry": {
+        "full_refresh": false,
+        "backbone_calls": 0,
+        "cache_age": 1,
+        "gap_attempted": 1,
+        "predicted_risk": 0.020378848537802696,
+        "reason": "mandatory_first_skip",
+        "incoming_h_abs_mean": 0.0,
+        "flow_calls": 2,
+        "late": false
+      }
+    },
+    {
+      "clip": 3,
+      "frame": 207,
+      "reason": "largest per-frame raw AbsRel increase vs Q0 among skipped frames; posthoc diagnostic",
+      "pair": [
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far/rgb/1548340582.73769.png",
+        "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far/depth/1548340582.74882.png"
+      ],
+      "telemetry": {
+        "full_refresh": false,
+        "backbone_calls": 0,
+        "cache_age": 1,
+        "gap_attempted": 1,
+        "predicted_risk": 0.08260273188352585,
+        "reason": "mandatory_first_skip",
+        "incoming_h_abs_mean": 0.0,
+        "flow_calls": 2,
+        "late": false
+      }
+    }
+  ],
+  "crop": "fixed central [64:192,64:192], not edge-metric selection",
+  "artifacts": [
+    {
+      "path": "paper/streaming_draft/figures/architecture.pdf",
+      "bytes": 19006,
+      "sha256": "7fcf88ae42b9e2842fce4339a1f178759b4d4211c229cc84c351704f49cc3945"
+    },
+    {
+      "path": "paper/streaming_draft/figures/architecture.png",
+      "bytes": 99480,
+      "sha256": "f37869850be4ee9901209d33258515fa74fb91833539fb6d42046b51c24e3ddc"
+    },
+    {
+      "path": "paper/streaming_draft/figures/boundary_crops.pdf",
+      "bytes": 399142,
+      "sha256": "b0e98c730b5ff6ff40a9c60b5e75650ed99a04601b32c8980a0293a6159c6098"
+    },
+    {
+      "path": "paper/streaming_draft/figures/boundary_crops.png",
+      "bytes": 565605,
+      "sha256": "e495c252c020af45e93751634f5a6d36a51272472f23545bd53e6c413446644b"
+    },
+    {
+      "path": "paper/streaming_draft/figures/failure_cases.pdf",
+      "bytes": 909763,
+      "sha256": "f3ad12d6ce806acf30d74af981bc18d099ecbc30c8e2c1e7508165731aba6756"
+    },
+    {
+      "path": "paper/streaming_draft/figures/failure_cases.png",
+      "bytes": 1244837,
+      "sha256": "4b430a4126196d61352b1a785d058c4e307715311e076e72ee0932cc250d5df5"
+    },
+    {
+      "path": "paper/streaming_draft/figures/latency.pdf",
+      "bytes": 17201,
+      "sha256": "4c8fc3cc943a7bd475a0627bd117c153925395649c48a23aef95cf3527579b65"
+    },
+    {
+      "path": "paper/streaming_draft/figures/latency.png",
+      "bytes": 59769,
+      "sha256": "0406bf7511bb8928c53b25a3b07f0a28582a8f4c34eab2def697b3ae584c86d5"
+    },
+    {
+      "path": "paper/streaming_draft/figures/qualitative.pdf",
+      "bytes": 1059119,
+      "sha256": "eafc8dbfe8ae31ff707cb90c4a0851f9b76632b746da747bba965f4c550b8987"
+    },
+    {
+      "path": "paper/streaming_draft/figures/qualitative.png",
+      "bytes": 1435686,
+      "sha256": "414b11565d752a9b71b5c3c2ccceb3a3e49a3707a2995d4cf6fb7c1be819eb37"
+    }
+  ],
+  "layout_revision": {
+    "path": "/workspace/SOKKANAEM/scripts/refine_streaming_layout.py",
+    "bytes": 2540,
+    "sha256": "a6f89ff3e42c0c4ae799dfc4f41f81b4b290c08f88bf56326e93e9f18d01ff08"
+  }
+}

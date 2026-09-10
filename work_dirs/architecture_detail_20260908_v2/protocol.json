@@ -1,0 +1,51 @@
+{
+  "role": "adaptive_development_stage2_independent_of_rejected_mixture",
+  "parent": {
+    "path": "work_dirs/architecture_readout_20260908/protocol.json",
+    "bytes": 2370,
+    "sha256": "4351278dd57e97a8c25546dce3c22729ba6af60c928fd482bc7ecf3185021cf4"
+  },
+  "checkpoint": {
+    "path": "work_dirs/v11-longclip-spread-s0/latest.pt",
+    "bytes": 67200316,
+    "sha256": "92565d186cb4448a71793597dea930a2faa77c0205093c892e8443d491193f1a"
+  },
+  "train_cache": {
+    "path": "work_dirs/architecture_readout_20260908/train_cache.pt",
+    "bytes": 1158096471,
+    "sha256": "12aca88d0cabe5b8f2210a5f84fc2db149348e7ddd751716ad6dfe55f5001d8b"
+  },
+  "dev_cache": {
+    "path": "work_dirs/architecture_readout_20260908/development_cache.pt",
+    "bytes": 192992591,
+    "sha256": "43b9d8517f7ca65a2d828b4c733ed5012388db311ac2e2ba40595d402770bdb0"
+  },
+  "seed": 20260909,
+  "steps": 1200,
+  "lr": 0.0001,
+  "batch": 8,
+  "trainable": "only RGB half/quarter feature pathway and feature fusion",
+  "frozen": "all original backbone, decoder and bin head",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/architecture_detail_study.py",
+      "bytes": 4510,
+      "sha256": "c19f61e58951f5ccddb4c68d0a59f8669b3692c0e70df29a1d98ecebccc9d34f"
+    },
+    {
+      "path": "sokkanaem/detail_feature_path.py",
+      "bytes": 1291,
+      "sha256": "d17f26ab9918af16068978bff19ae3fcb2347068bba229e446db36e4093d274a"
+    },
+    {
+      "path": "sokkanaem/mixture_readout.py",
+      "bytes": 3103,
+      "sha256": "e3bd18559741238ad27a05e3590689f17b1ed6dc6bc338953b93970e148f3bb6"
+    },
+    {
+      "path": "scripts/architecture_readout_study.py",
+      "bytes": 8495,
+      "sha256": "10289fdc0afffb8b404a8ba8b5af9098bce3731541e05f4152687e37b29686ab"
+    }
+  ]
+}

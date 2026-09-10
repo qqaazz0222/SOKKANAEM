@@ -1,0 +1,16 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/inspect_behave_sources.py",
+    "bytes": 3942,
+    "sha256": "648db7918b4f9ef3cf5007c7481ba134b25c12e4900ead3526d9dda9ffba8d87"
+  },
+  "created_utc": "2026-09-09T23:14:55.349542+00:00",
+  "purpose": "public documentation and HTTP metadata only",
+  "dataset_get_allowed": false,
+  "no_model_inference": true,
+  "candidate": {
+    "path": "paper/streaming_draft/frozen_candidate.json",
+    "bytes": 5331,
+    "sha256": "5fc6546287ffab7967bd4c4d099a4f88b67039c1525949b3e47cab4d7b0ac345"
+  }
+}

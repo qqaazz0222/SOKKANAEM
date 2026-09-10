@@ -1,0 +1,302 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/qindependent_blocks.py",
+    "bytes": 4369,
+    "sha256": "a2ff15bb46882cf211b8caefdb524d5633789cdf4f9518cbfbbd8a2caa629fe3"
+  },
+  "original_recovery": {
+    "path": "work_dirs/qindependent_20260909/range_recovery/protocol.json",
+    "bytes": 925,
+    "sha256": "ca02387ae47a6491a709669990424aa20bd6e7cb929f4916c374202a82eb632a"
+  },
+  "reason": "Short cache-distinct range requests after slow long connections; unchanged official archive and selected sequences.",
+  "existing_parts": [
+    {
+      "path": "work_dirs/qindependent_20260909/archives/rgbd_dataset_freiburg2_desk.tgz",
+      "bytes": 1474854912,
+      "sha256": "07449931087c2b35b011da00a1143716a74224543c618e41aed9753ed7bb7b0b"
+    },
+    {
+      "path": "work_dirs/qindependent_20260909/range_recovery/0.part",
+      "bytes": 21430272,
+      "sha256": "024379fadd289910549e91e25d25fd7d42965667d6ee2a4f522fe5a1fa9181ef"
+    },
+    {
+      "path": "work_dirs/qindependent_20260909/range_recovery/1.part",
+      "bytes": 21495808,
+      "sha256": "6c57a9eec6773729f2f076efca33eccc07676e268676fc822b836dd11b4f876a"
+    },
+    {
+      "path": "work_dirs/qindependent_20260909/range_recovery/2.part",
+      "bytes": 37421056,
+      "sha256": "3b14a427e8debd3647d83a510c955ac624b76a8c94cc429a99f604d48fb66c8c"
+    },
+    {
+      "path": "work_dirs/qindependent_20260909/range_recovery/3.part",
+      "bytes": 18284544,
+      "sha256": "58f0e9f2c98ef62884eef2d252503f48e23815d4b2523fbec86030621ad2d9ce"
+    },
+    {
+      "path": "work_dirs/qindependent_20260909/range_recovery/4.part",
+      "bytes": 45678592,
+      "sha256": "73b10649404b3032c705fab13a0f753902b9cd3ae37028f2cbbb153e796e04f5"
+    },
+    {
+      "path": "work_dirs/qindependent_20260909/range_recovery/5.part",
+      "bytes": 21364736,
+      "sha256": "fa4edb5bf18600a74f9f01f63cbb806f024694c8deb05da3b34a9bef58ee93b4"
+    },
+    {
+      "path": "work_dirs/qindependent_20260909/range_recovery/6.part",
+      "bytes": 35258368,
+      "sha256": "f59dd1fbff0e899684b759aedc13264c9ad35b6bd9a91089f5b8faafc552ded4"
+    },
+    {
+      "path": "work_dirs/qindependent_20260909/range_recovery/7.part",
+      "bytes": 35782656,
+      "sha256": "e186abd9c5ab76d36f641f1083974c10607f5ca7bc5908acb1940264f00bbc73"
+    }
+  ],
+  "jobs": [
+    {
+      "start": 1496285184,
+      "end_exclusive": 1500479488,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1496285184.part"
+    },
+    {
+      "start": 1500479488,
+      "end_exclusive": 1504673792,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1500479488.part"
+    },
+    {
+      "start": 1504673792,
+      "end_exclusive": 1508868096,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1504673792.part"
+    },
+    {
+      "start": 1508868096,
+      "end_exclusive": 1513062400,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1508868096.part"
+    },
+    {
+      "start": 1513062400,
+      "end_exclusive": 1517256704,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1513062400.part"
+    },
+    {
+      "start": 1517256704,
+      "end_exclusive": 1521451008,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1517256704.part"
+    },
+    {
+      "start": 1521451008,
+      "end_exclusive": 1525645312,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1521451008.part"
+    },
+    {
+      "start": 1525645312,
+      "end_exclusive": 1527166934,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1525645312.part"
+    },
+    {
+      "start": 1548662742,
+      "end_exclusive": 1552857046,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1548662742.part"
+    },
+    {
+      "start": 1552857046,
+      "end_exclusive": 1557051350,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1552857046.part"
+    },
+    {
+      "start": 1557051350,
+      "end_exclusive": 1561245654,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1557051350.part"
+    },
+    {
+      "start": 1561245654,
+      "end_exclusive": 1565439958,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1561245654.part"
+    },
+    {
+      "start": 1565439958,
+      "end_exclusive": 1569634262,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1565439958.part"
+    },
+    {
+      "start": 1569634262,
+      "end_exclusive": 1573828566,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1569634262.part"
+    },
+    {
+      "start": 1573828566,
+      "end_exclusive": 1578022870,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1573828566.part"
+    },
+    {
+      "start": 1578022870,
+      "end_exclusive": 1579478957,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1578022870.part"
+    },
+    {
+      "start": 1616900013,
+      "end_exclusive": 1621094317,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1616900013.part"
+    },
+    {
+      "start": 1621094317,
+      "end_exclusive": 1625288621,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1621094317.part"
+    },
+    {
+      "start": 1625288621,
+      "end_exclusive": 1629482925,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1625288621.part"
+    },
+    {
+      "start": 1629482925,
+      "end_exclusive": 1631790980,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1629482925.part"
+    },
+    {
+      "start": 1650075524,
+      "end_exclusive": 1654269828,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1650075524.part"
+    },
+    {
+      "start": 1654269828,
+      "end_exclusive": 1658464132,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1654269828.part"
+    },
+    {
+      "start": 1658464132,
+      "end_exclusive": 1662658436,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1658464132.part"
+    },
+    {
+      "start": 1662658436,
+      "end_exclusive": 1666852740,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1662658436.part"
+    },
+    {
+      "start": 1666852740,
+      "end_exclusive": 1671047044,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1666852740.part"
+    },
+    {
+      "start": 1671047044,
+      "end_exclusive": 1675241348,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1671047044.part"
+    },
+    {
+      "start": 1675241348,
+      "end_exclusive": 1679435652,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1675241348.part"
+    },
+    {
+      "start": 1679435652,
+      "end_exclusive": 1683629956,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1679435652.part"
+    },
+    {
+      "start": 1683629956,
+      "end_exclusive": 1684103003,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1683629956.part"
+    },
+    {
+      "start": 1729781595,
+      "end_exclusive": 1733975899,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1729781595.part"
+    },
+    {
+      "start": 1733975899,
+      "end_exclusive": 1736415026,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1733975899.part"
+    },
+    {
+      "start": 1757779762,
+      "end_exclusive": 1761974066,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1757779762.part"
+    },
+    {
+      "start": 1761974066,
+      "end_exclusive": 1766168370,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1761974066.part"
+    },
+    {
+      "start": 1766168370,
+      "end_exclusive": 1770362674,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1766168370.part"
+    },
+    {
+      "start": 1770362674,
+      "end_exclusive": 1774556978,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1770362674.part"
+    },
+    {
+      "start": 1774556978,
+      "end_exclusive": 1778751282,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1774556978.part"
+    },
+    {
+      "start": 1778751282,
+      "end_exclusive": 1782945586,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1778751282.part"
+    },
+    {
+      "start": 1782945586,
+      "end_exclusive": 1787139890,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1782945586.part"
+    },
+    {
+      "start": 1787139890,
+      "end_exclusive": 1788727049,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1787139890.part"
+    },
+    {
+      "start": 1823985417,
+      "end_exclusive": 1828179721,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1823985417.part"
+    },
+    {
+      "start": 1828179721,
+      "end_exclusive": 1832374025,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1828179721.part"
+    },
+    {
+      "start": 1832374025,
+      "end_exclusive": 1836568329,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1832374025.part"
+    },
+    {
+      "start": 1836568329,
+      "end_exclusive": 1840762633,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1836568329.part"
+    },
+    {
+      "start": 1840762633,
+      "end_exclusive": 1841039072,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1840762633.part"
+    },
+    {
+      "start": 1876821728,
+      "end_exclusive": 1881016032,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1876821728.part"
+    },
+    {
+      "start": 1881016032,
+      "end_exclusive": 1885210336,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1881016032.part"
+    },
+    {
+      "start": 1885210336,
+      "end_exclusive": 1889404640,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1885210336.part"
+    },
+    {
+      "start": 1889404640,
+      "end_exclusive": 1893351095,
+      "path": "work_dirs/qindependent_20260909/block_recovery/1889404640.part"
+    }
+  ]
+}

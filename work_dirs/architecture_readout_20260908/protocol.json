@@ -1,0 +1,70 @@
+{
+  "role": "new_frames_existing_development_scenes_not_final",
+  "seed": 20260909,
+  "steps_per_arm": 1200,
+  "batch": 8,
+  "lr": 0.0001,
+  "train_clips": 192,
+  "train_frames": 768,
+  "development_clips": 16,
+  "development_frames": 128,
+  "arms": [
+    "bin_head_finetune",
+    "anchored_mixture_mean",
+    "anchored_mixture_mode"
+  ],
+  "note": "Mixture mean and mode are TWO READOUTS OF ONE CHECKPOINT; original bin anchor stays frozen. Mixture adds 0.05 log-depth NLL to common metric/gradient objective. Not a pure loss-controlled comparison to bin finetune.",
+  "checkpoint": {
+    "path": "work_dirs/v11-longclip-spread-s0/latest.pt",
+    "bytes": 67200316,
+    "sha256": "92565d186cb4448a71793597dea930a2faa77c0205093c892e8443d491193f1a"
+  },
+  "manifest": {
+    "path": "manifests/acc_real_L8.json",
+    "bytes": 923628,
+    "sha256": "d0cb9334318c631484218e5b5385f8fc39dae9c5485cfbc4bbad2bb93cf5669a"
+  },
+  "gate": "prior strict gate plus edge-region AbsRel nonregression; all required before stage 2",
+  "selection": {
+    "path": "work_dirs/architecture_readout_20260908/selection.json",
+    "bytes": 225535,
+    "sha256": "4d235c07253de4de57d91681656c4aed63c85d7403410ce521e51fad4fefca23"
+  },
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/architecture_readout_study.py",
+      "bytes": 8495,
+      "sha256": "10289fdc0afffb8b404a8ba8b5af9098bce3731541e05f4152687e37b29686ab"
+    },
+    {
+      "path": "sokkanaem/mixture_readout.py",
+      "bytes": 3103,
+      "sha256": "e3bd18559741238ad27a05e3590689f17b1ed6dc6bc338953b93970e148f3bb6"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "sokkanaem/model.py",
+      "bytes": 37170,
+      "sha256": "104ac2b43c1fc80df9b9f2f430ff99c447e5a73481e066ed2b6597a10d8648f5"
+    },
+    {
+      "path": "sokkanaem/data.py",
+      "bytes": 19420,
+      "sha256": "5acdd72fc89a981ad939b4fcc33e90fef3cb306d6000df4091db26dbe99926ea"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    },
+    {
+      "path": "sokkanaem/alignment.py",
+      "bytes": 9386,
+      "sha256": "4dd37cabea900d9dc51400659fb519674794625a4b1ca2fc8ff2dff794a51ce8"
+    }
+  ]
+}

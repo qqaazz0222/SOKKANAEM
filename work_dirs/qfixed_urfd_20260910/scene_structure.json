@@ -1,0 +1,239 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/diagnose_fixed_scene_structure.py",
+    "bytes": 3324,
+    "sha256": "509bf5092b33f5e980c4f9b0023c9470c5946bcd6796cebe2249b8abd8e24e83"
+  },
+  "no_model_predictions": true,
+  "question": "Why did three model-free registration sweeps fail to localize the alignment?",
+  "annotated_foreground": [
+    {
+      "frame": "gt000071",
+      "foreground_fraction": 0.0
+    },
+    {
+      "frame": "gt000090",
+      "foreground_fraction": 0.010374348958333333
+    },
+    {
+      "frame": "gt000100",
+      "foreground_fraction": 0.06557942708333334
+    },
+    {
+      "frame": "gt000110",
+      "foreground_fraction": 0.07438151041666667
+    },
+    {
+      "frame": "gt000130",
+      "foreground_fraction": 0.07756510416666666
+    },
+    {
+      "frame": "gt000150",
+      "foreground_fraction": 0.068798828125
+    },
+    {
+      "frame": "gt000160",
+      "foreground_fraction": 0.068798828125
+    }
+  ],
+  "max_foreground_fraction": 0.07756510416666666,
+  "frames": [
+    {
+      "id": 1,
+      "depth_span_p01_p99_mm": 2776.0,
+      "histogram_bin_width_mm": 86.75,
+      "shift_response_mm": {
+        "1px": {
+          "median": 3.0,
+          "p95": 14.0
+        },
+        "2px": {
+          "median": 5.0,
+          "p95": 22.0
+        },
+        "4px": {
+          "median": 9.0,
+          "p95": 35.0
+        },
+        "8px": {
+          "median": 13.0,
+          "p95": 55.0
+        }
+      },
+      "median_8px_response_in_bins": 0.14985590778097982
+    },
+    {
+      "id": 21,
+      "depth_span_p01_p99_mm": 2211.010009765625,
+      "histogram_bin_width_mm": 69.09406280517578,
+      "shift_response_mm": {
+        "1px": {
+          "median": 3.0,
+          "p95": 15.0
+        },
+        "2px": {
+          "median": 6.0,
+          "p95": 25.0
+        },
+        "4px": {
+          "median": 9.0,
+          "p95": 38.0
+        },
+        "8px": {
+          "median": 13.0,
+          "p95": 58.0
+        }
+      },
+      "median_8px_response_in_bins": 0.18814930649911327
+    },
+    {
+      "id": 41,
+      "depth_span_p01_p99_mm": 1990.0,
+      "histogram_bin_width_mm": 62.1875,
+      "shift_response_mm": {
+        "1px": {
+          "median": 3.0,
+          "p95": 15.0
+        },
+        "2px": {
+          "median": 6.0,
+          "p95": 25.0
+        },
+        "4px": {
+          "median": 9.0,
+          "p95": 39.0
+        },
+        "8px": {
+          "median": 14.0,
+          "p95": 59.0
+        }
+      },
+      "median_8px_response_in_bins": 0.22512562814070353
+    },
+    {
+      "id": 61,
+      "depth_span_p01_p99_mm": 1622.3299560546875,
+      "histogram_bin_width_mm": 50.697811126708984,
+      "shift_response_mm": {
+        "1px": {
+          "median": 3.0,
+          "p95": 16.0
+        },
+        "2px": {
+          "median": 6.0,
+          "p95": 26.0
+        },
+        "4px": {
+          "median": 9.0,
+          "p95": 40.0
+        },
+        "8px": {
+          "median": 14.0,
+          "p95": 62.0
+        }
+      },
+      "median_8px_response_in_bins": 0.27614604435307505
+    },
+    {
+      "id": 81,
+      "depth_span_p01_p99_mm": 2397.0,
+      "histogram_bin_width_mm": 74.90625,
+      "shift_response_mm": {
+        "1px": {
+          "median": 3.0,
+          "p95": 15.0
+        },
+        "2px": {
+          "median": 6.0,
+          "p95": 25.0
+        },
+        "4px": {
+          "median": 9.0,
+          "p95": 40.0
+        },
+        "8px": {
+          "median": 13.0,
+          "p95": 61.0
+        }
+      },
+      "median_8px_response_in_bins": 0.1735502711722987
+    },
+    {
+      "id": 101,
+      "depth_span_p01_p99_mm": 1559.239990234375,
+      "histogram_bin_width_mm": 48.72624969482422,
+      "shift_response_mm": {
+        "1px": {
+          "median": 3.0,
+          "p95": 17.0
+        },
+        "2px": {
+          "median": 6.0,
+          "p95": 29.0
+        },
+        "4px": {
+          "median": 10.0,
+          "p95": 50.0
+        },
+        "8px": {
+          "median": 15.0,
+          "p95": 101.0
+        }
+      },
+      "median_8px_response_in_bins": 0.3078422840654885
+    },
+    {
+      "id": 121,
+      "depth_span_p01_p99_mm": 1684.0,
+      "histogram_bin_width_mm": 52.625,
+      "shift_response_mm": {
+        "1px": {
+          "median": 3.0,
+          "p95": 18.0
+        },
+        "2px": {
+          "median": 6.0,
+          "p95": 30.0
+        },
+        "4px": {
+          "median": 10.0,
+          "p95": 53.0
+        },
+        "8px": {
+          "median": 16.0,
+          "p95": 119.0
+        }
+      },
+      "median_8px_response_in_bins": 0.30403800475059384
+    },
+    {
+      "id": 141,
+      "depth_span_p01_p99_mm": 2189.0,
+      "histogram_bin_width_mm": 68.40625,
+      "shift_response_mm": {
+        "1px": {
+          "median": 4.0,
+          "p95": 18.0
+        },
+        "2px": {
+          "median": 6.0,
+          "p95": 29.0
+        },
+        "4px": {
+          "median": 10.0,
+          "p95": 51.0
+        },
+        "8px": {
+          "median": 15.0,
+          "p95": 98.0
+        }
+      },
+      "median_8px_response_in_bins": 0.21927820922795796
+    }
+  ],
+  "histogram_bins": 32,
+  "largest_median_8px_response_in_bins": 0.3078422840654885,
+  "finding": "A ceiling view of this room is close to a plane. Translating the depth map by the full 8 px search radius moves the median pixel by less than one histogram bin, so an intensity-similarity objective has almost no lateral signal to lock onto. The failure is a property of the scene, not only of the three metrics tried.",
+  "implication": "An intensity-based registration check cannot be repaired on this sequence. Either the SBM registration procedure is documented, or a fixed-camera source with real depth relief is used instead.",
+  "separate_concern": "The same near-planarity, with annotated foreground between 0.00% and 7.76% of the image, makes this sequence a weak depth benchmark even if it were admitted."
+}

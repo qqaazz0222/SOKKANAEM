@@ -1,0 +1,74 @@
+[
+  {
+    "length": "L32",
+    "model": "output_nearest",
+    "full_refresh_frames": 128,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L32",
+    "model": "unwarped_ssm",
+    "full_refresh_frames": 128,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L32",
+    "model": "nearest_no_ssm",
+    "full_refresh_frames": 128,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L32",
+    "model": "nearest_ssm",
+    "full_refresh_frames": 128,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L32",
+    "model": "bilinear_no_ssm",
+    "full_refresh_frames": 128,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L32",
+    "model": "bilinear_ssm",
+    "full_refresh_frames": 128,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L256",
+    "model": "output_nearest",
+    "full_refresh_frames": 512,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L256",
+    "model": "unwarped_ssm",
+    "full_refresh_frames": 512,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L256",
+    "model": "nearest_no_ssm",
+    "full_refresh_frames": 512,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L256",
+    "model": "nearest_ssm",
+    "full_refresh_frames": 512,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L256",
+    "model": "bilinear_no_ssm",
+    "full_refresh_frames": 512,
+    "max_abs": 0.0
+  },
+  {
+    "length": "L256",
+    "model": "bilinear_ssm",
+    "full_refresh_frames": 512,
+    "max_abs": 0.0
+  }
+]

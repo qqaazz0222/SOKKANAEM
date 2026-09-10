@@ -1,0 +1,126 @@
+{
+  "role": "new_policy_training_and_train_only_percentiles_reused_development_no_final",
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "training_cache": {
+    "path": "work_dirs/qrecurrent_20260909/training_cache.pt",
+    "bytes": 4265739073,
+    "sha256": "9edf3d018856a91f3defebe14c1665d3dca928672b4c78cefc811d972e8d41dc"
+  },
+  "parent_protocol": {
+    "path": "work_dirs/qrecurrent_20260909/protocol.json",
+    "bytes": 4687,
+    "sha256": "8deb31379cc4ce1199a58f515fd8b7c1b0c48e6b297fa05b78b8e3c2efeafa54"
+  },
+  "development": [
+    {
+      "path": "work_dirs/qstream_20260908/development_data.pt",
+      "bytes": 285277993,
+      "sha256": "788b4bddf15b2d3b19bd6f81e7c3280308e3d8b644e5b39c4cf29814c03ae7a1"
+    },
+    {
+      "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+      "bytes": 1141081851,
+      "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+    }
+  ],
+  "fit": "first48clips/source=144; calibration last16/source=48, disjoint frame paths; not independent new scenes/Q0 training data",
+  "traces": "anchors0,1 in each4frame trainingclip; allskip prefixes cover gap1/2/3 without using future inputs; labels depth+2gradient Q0 error",
+  "policy": "alwaysskip gap1, learned gap2/3, forcefull gap4; h updated eachskip attempt and reset afterfull; outputnever corrected",
+  "features": "14 RGB/anchor/age statistics + uncertainfraction/mean&p95flow/photometricresidual/logdepthgradient/logdepthstd",
+  "steps_each": 1000,
+  "batch": 32,
+  "lr": 0.001,
+  "seed": 741,
+  "models": [
+    "carry_ssm",
+    "reset_ssm",
+    "mlp"
+  ],
+  "threshold_rule": "per model .25/.50/.75 quantiles of predicted risk on gap>=2 calibration traces; same nominal calibration coverage, thresholds differ, no dev threshold tuning",
+  "calibration_warning": "percentile operating points, NOT calibrated probabilities/error bounds; quality gate evaluated independently",
+  "gate": "unchanged quality gate +>=5pct latency reduction vsdense; also compare stronger passing output-flow K2",
+  "timing": "synchronized GPUresident incl CPUflow/transfers/risk/telemetry/Q0; rejected reuse still pays flow cost; excludes initialIO/H2D; RTX4090 not edge",
+  "runtime": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "opencv": "5.0.0",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qschedule_study.py",
+      "bytes": 10520,
+      "sha256": "83d93aae6a443eeb4a5a8da2b359a5e73fcc42a6bfa3e1fbe3bbbef7c3645885"
+    },
+    {
+      "path": "sokkanaem/qschedule.py",
+      "bytes": 4005,
+      "sha256": "c5b6478bf05da0be7e632da507888e5d98e2e1f7c45cd277688bfcee19f5e723"
+    },
+    {
+      "path": "sokkanaem/qrisk.py",
+      "bytes": 1629,
+      "sha256": "a0706337bb75e04010972c1fc349b73a31753a7686ae9fa49cdbdc5ce6a683e9"
+    },
+    {
+      "path": "sokkanaem/qflow.py",
+      "bytes": 5116,
+      "sha256": "734664ad90d9ab64049cf38f685c87c0a77ed0abc8214590d6a2ee8bf5c5d6a3"
+    },
+    {
+      "path": "sokkanaem/qquality.py",
+      "bytes": 4341,
+      "sha256": "25463f2e849965132e714827dd70ad648a1d30e18641cf7fb5b5306812fa1d0c"
+    },
+    {
+      "path": "sokkanaem/ssm.py",
+      "bytes": 7846,
+      "sha256": "e1ec51be51ece9aa88b22e822b3af4c2039bcfc90b4a4debab88a506e90e32f8"
+    },
+    {
+      "path": "sokkanaem/qrecurrent_flow.py",
+      "bytes": 3751,
+      "sha256": "c8c63fe931391120ee09307d2ba81c446c22b40a9ef14b61630dc62f8821f7ba"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "bytes": 12181,
+      "sha256": "5f4b95ecdfd0c1a929d6e44c00a2d451620949fc43de6fca2a209079ef0dc6a5"
+    },
+    {
+      "path": "scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    }
+  ]
+}

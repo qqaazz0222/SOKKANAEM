@@ -1,0 +1,74 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/screen_fixed_camera_relief.py",
+    "bytes": 4374,
+    "sha256": "bb6bc6625eecac42ee7f5f478051a87412429a92fae0586b26d392d6509c490b"
+  },
+  "archive": {
+    "path": "work_dirs/qfixed_validation_20260910/Shadows.zip",
+    "bytes": 630619899,
+    "sha256": "9b10e20d387922451fcf6841e25173699125502ff218861c30b77bbf6ed1d877"
+  },
+  "no_model_predictions": true,
+  "no_admission_claim": true,
+  "statistic": "Median absolute depth change under a 8 px horizontal shift, divided by the width of one of 32 histogram bins spanning the frame p01 to p99 depth. Every 20th depth frame is sampled.",
+  "reference": "fall01cam1 scores 0.31 bins and three registration sweeps failed to localize on it.",
+  "caveat": "Relief and foreground share say whether a sequence could discriminate. They say nothing about metric-depth provenance or registration documentation, which remain the blockers. The depth encoding of these other sequences is undocumented, so none of them is admitted by this screen.",
+  "sequences": [
+    {
+      "sequence": "Shadows_ds",
+      "depth_frames": 331,
+      "annotated_frames": 9,
+      "sampled_frames": 17,
+      "median_relief_in_bins": 0.3378582202111614,
+      "min_relief_in_bins": 0.28747044917257686,
+      "median_depth_span": 1989.0,
+      "median_foreground_share": 0.07840169270833333,
+      "max_foreground_share": 0.085107421875
+    },
+    {
+      "sequence": "fall01cam1",
+      "depth_frames": 160,
+      "annotated_frames": 7,
+      "sampled_frames": 8,
+      "median_relief_in_bins": 0.22220191868433076,
+      "min_relief_in_bins": 0.14985590778097982,
+      "median_depth_span": 2089.5,
+      "median_foreground_share": 0.068798828125,
+      "max_foreground_share": 0.07756510416666666
+    },
+    {
+      "sequence": "genSeq2",
+      "depth_frames": 300,
+      "annotated_frames": 26,
+      "sampled_frames": 15,
+      "median_relief_in_bins": 0.8139223560910308,
+      "min_relief_in_bins": 0.39059674502712477,
+      "median_depth_span": 1494.0,
+      "median_foreground_share": 0.10515299479166668,
+      "max_foreground_share": 0.12798502604166667
+    },
+    {
+      "sequence": "shadows1",
+      "depth_frames": 260,
+      "annotated_frames": 28,
+      "sampled_frames": 13,
+      "median_relief_in_bins": 0.082687338501292,
+      "min_relief_in_bins": 0.06201550387596899,
+      "median_depth_span": 1548.0,
+      "median_foreground_share": 0.1290869140625,
+      "max_foreground_share": 0.1375
+    },
+    {
+      "sequence": "shadows2",
+      "depth_frames": 250,
+      "annotated_frames": 26,
+      "sampled_frames": 13,
+      "median_relief_in_bins": 0.08274078862314156,
+      "min_relief_in_bins": 0.082687338501292,
+      "median_depth_span": 1547.0,
+      "median_foreground_share": 0.10578287760416667,
+      "max_foreground_share": 0.16149088541666667
+    }
+  ]
+}

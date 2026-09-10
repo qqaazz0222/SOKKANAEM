@@ -1,0 +1,23 @@
+{
+  "carry": {
+    "fit_mae": 0.008557869121432304,
+    "calibration_mae": 0.015364834107458591,
+    "calibration_target_mean": 0.0509784109890461,
+    "calibration_prediction_mean": 0.04927729815244675,
+    "parameters": 1689
+  },
+  "reset": {
+    "fit_mae": 0.00845304038375616,
+    "calibration_mae": 0.015240341424942017,
+    "calibration_target_mean": 0.0509784109890461,
+    "calibration_prediction_mean": 0.04876795783638954,
+    "parameters": 1689
+  },
+  "mlp": {
+    "fit_mae": 0.008585210889577866,
+    "calibration_mae": 0.016108719632029533,
+    "calibration_target_mean": 0.0509784109890461,
+    "calibration_prediction_mean": 0.048776641488075256,
+    "parameters": 1688
+  }
+}

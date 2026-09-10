@@ -1,0 +1,92 @@
+{
+  "archive": {
+    "url": "https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date02_depth.tar",
+    "bytes": 49815623680,
+    "etag": "\"b993e1800-5e5819ddd456d\""
+  },
+  "selected": {
+    "Date02_empty_E1.1.depth-reg.mp4": {
+      "name": "Date02_empty_E1.1.depth-reg.mp4",
+      "bytes": 50692037,
+      "offset": 62227968,
+      "regular": true
+    },
+    "Date02_Sub02_backpack_back.1.depth-reg.mp4": {
+      "name": "Date02_Sub02_backpack_back.1.depth-reg.mp4",
+      "bytes": 384210016,
+      "offset": 628677120,
+      "regular": true
+    },
+    "Date02_Sub02_backpack_hand.1.depth-reg.mp4": {
+      "name": "Date02_Sub02_backpack_hand.1.depth-reg.mp4",
+      "bytes": 396189825,
+      "offset": 2061316608,
+      "regular": true
+    }
+  },
+  "visited_headers": [
+    {
+      "name": "Date02_empty_E1.0.depth-reg.mp4",
+      "bytes": 62226782,
+      "offset": 512,
+      "regular": true
+    },
+    {
+      "name": "Date02_empty_E1.1.depth-reg.mp4",
+      "bytes": 50692037,
+      "offset": 62227968,
+      "regular": true
+    },
+    {
+      "name": "Date02_empty_E1.2.depth-reg.mp4",
+      "bytes": 24007983,
+      "offset": 112920576,
+      "regular": true
+    },
+    {
+      "name": "Date02_empty_E1.3.depth-reg.mp4",
+      "bytes": 61317736,
+      "offset": 136929280,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_back.0.depth-reg.mp4",
+      "bytes": 430428618,
+      "offset": 198247936,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_back.1.depth-reg.mp4",
+      "bytes": 384210016,
+      "offset": 628677120,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_back.2.depth-reg.mp4",
+      "bytes": 253326085,
+      "offset": 1012888064,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_back.3.depth-reg.mp4",
+      "bytes": 354706763,
+      "offset": 1266214912,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_hand.0.depth-reg.mp4",
+      "bytes": 440393389,
+      "offset": 1620922368,
+      "regular": true
+    },
+    {
+      "name": "Date02_Sub02_backpack_hand.1.depth-reg.mp4",
+      "bytes": 396189825,
+      "offset": 2061316608,
+      "regular": true
+    }
+  ],
+  "header_bytes_transferred": 5129,
+  "whole_archive_acquired": false,
+  "whole_archive_indexed": false
+}

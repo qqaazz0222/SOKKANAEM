@@ -1,0 +1,15 @@
+{
+  "sources": {
+    "ur_fall01_cam1_depth.zip": "https://fenix.ur.edu.pl/~mkepski/ds/data/fall-01-cam1-d.zip",
+    "ur_fall01_cam1_rgb.zip": "https://fenix.ur.edu.pl/~mkepski/ds/data/fall-01-cam1-rgb.zip",
+    "sbm_fall01cam1_update.zip": "https://rgbd2017.na.icar.cnr.it/SBM-RGBDdataset/Shadows/Updatefall01cam1.zip"
+  },
+  "script": {
+    "path": "/workspace/SOKKANAEM/scripts/probe_fixed_camera_data.py",
+    "bytes": 3426,
+    "sha256": "bb028df220064ce5ae82e94ae4e7347c48756b853f66ce285b4246c56b4ff7ee"
+  },
+  "no_model_predictions": true,
+  "no_training": true,
+  "selection": "first UR fall sequence, ceiling camera, and corresponding official SBM correction; chosen for format inspection, not quality"
+}

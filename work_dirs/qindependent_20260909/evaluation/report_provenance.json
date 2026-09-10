@@ -1,0 +1,29 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/report_qindependent.py",
+    "bytes": 5937,
+    "sha256": "9a69880022044d2b3647cce6b02bed6aad08867d70fd0fc9f605c543f55330ba"
+  },
+  "results": {
+    "path": "work_dirs/qindependent_20260909/evaluation/results.json",
+    "bytes": 949644,
+    "sha256": "a32cc6a9a6b871c9c60ac294264eed48ba404f446875d0e1960c0be118e25b14"
+  },
+  "report": {
+    "path": "paper/Q0_INDEPENDENT_VALIDATION_20260909.md",
+    "bytes": 4372,
+    "sha256": "bba58c2db8f6cceaf4025f57a598696735c15195a86e271a57435bcb83092859"
+  },
+  "aggregate_candidate_pass": false,
+  "every_sequence_candidate_pass": false,
+  "failures": {
+    "L32_dense": [],
+    "L32_output_k2": [],
+    "L32_mlp_q50": [
+      "overshoot_within_1pct"
+    ],
+    "L256_dense": [],
+    "L256_output_k2": [],
+    "L256_mlp_q50": []
+  }
+}

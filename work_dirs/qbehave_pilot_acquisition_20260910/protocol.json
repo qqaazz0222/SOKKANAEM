@@ -1,0 +1,29 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/download_behave_pilot.py",
+    "bytes": 8891,
+    "sha256": "dacabbe5090e137284ce92587afc40139049aeda5c1a0f66040845902be70982"
+  },
+  "timestamps": {
+    "path": "work_dirs/qbehave_timestamps_20260910/inventory.json",
+    "bytes": 96916,
+    "sha256": "e9fb869b3bd075ca9b71cdf78f9bf6076688a54e2b9a3e53bd992a7c02526429"
+  },
+  "candidate": {
+    "path": "paper/streaming_draft/frozen_candidate.json",
+    "bytes": 5331,
+    "sha256": "5fc6546287ffab7967bd4c4d099a4f88b67039c1525949b3e47cab4d7b0ac345"
+  },
+  "user_confirmation": "\ube44\uc0c1\uc5c5\uc801 \uc5f0\uad6c\uc57c. \ub2e4\uc6b4\ub85c\ub4dc \uc9c4\ud589\ud574\uc918.",
+  "selection": "Date02 camera 1; lexicographically first two subject sequences and first empty reference",
+  "selected_timestamps": [
+    "Date02_Sub02_backpack_back.1.time.json",
+    "Date02_Sub02_backpack_hand.1.time.json",
+    "Date02_empty_E1.1.time.json"
+  ],
+  "no_model_predictions": true,
+  "purpose": "acquisition/format pilot, not independent-location accuracy validation",
+  "gt_admitted": false,
+  "max_selected_file_bytes": 2000000000,
+  "license": "https://virtualhumans.mpi-inf.mpg.de/behave/license.html"
+}

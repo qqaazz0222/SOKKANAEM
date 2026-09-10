@@ -1,0 +1,28 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/diagnose_fixed_depth_scale.py",
+    "bytes": 2842,
+    "sha256": "e5d231a02b701ac132eeebafafb7c0a861f263d121acb78343c694e793b1f5f5"
+  },
+  "prior_admission": {
+    "path": "work_dirs/qfixed_urfd_20260910/urfd_admission.json",
+    "bytes": 96196,
+    "sha256": "c21adc1a15c7013baecbd9e9860fd39d1e37210e1888504851660c76d3d506fd"
+  },
+  "no_model_predictions": true,
+  "masking": "none; C4 in the admission applies the C3 mask",
+  "unmasked_max_abs_diff_mm": {
+    "p05": 405.0,
+    "p25": 24.1,
+    "p50": 8.1,
+    "p75": 5.1,
+    "p95": 2.0
+  },
+  "unmasked_median_worst_quantile_mm": 103.0417334248873,
+  "unmasked_max_worst_quantile_mm": 405.0376897840847,
+  "masked_median_worst_quantile_mm": 13.958266575112702,
+  "c4_threshold_mm": 50.0,
+  "c4_would_pass_unmasked": false,
+  "finding": "C4 as specified passes only with the C3 mask: unmasked, the median worst quantile is 103.0 mm against a 50 mm threshold. The disagreement is confined to the lower tail. Unmasked agreement is still 8.1 mm at the median, 5.1 mm at p75 and 2.0 mm at p95, worst case over all 160 frames.",
+  "conclusion": "The exclusion of a unit or scale error does not depend on the mask, because it rests on the unmasked median and upper quantiles. The mask is what makes the lower tail usable, and that dependence is now stated rather than implied."
+}

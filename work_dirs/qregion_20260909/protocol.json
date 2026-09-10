@@ -1,0 +1,107 @@
+{
+  "role": "K2_output_region_training_reused_development_no_final",
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "training_cache": {
+    "path": "work_dirs/qrecurrent_20260909/training_cache.pt",
+    "bytes": 4265739073,
+    "sha256": "9edf3d018856a91f3defebe14c1665d3dca928672b4c78cefc811d972e8d41dc"
+  },
+  "parent_protocol": {
+    "path": "work_dirs/qrecurrent_20260909/protocol.json",
+    "bytes": 4687,
+    "sha256": "8deb31379cc4ce1199a58f515fd8b7c1b0c48e6b297fa05b78b8e3c2efeafa54"
+  },
+  "development": [
+    {
+      "path": "work_dirs/qstream_20260908/development_data.pt",
+      "bytes": 285277993,
+      "sha256": "788b4bddf15b2d3b19bd6f81e7c3280308e3d8b644e5b39c4cf29814c03ae7a1"
+    },
+    {
+      "path": "work_dirs/qquality_audit_20260908/long_development_data.pt",
+      "bytes": 1141081851,
+      "sha256": "aa20fa95461b3be253440bea638363d5e823673eedba7c49fb04c08a430b51f7"
+    }
+  ],
+  "training_clips": 192,
+  "training_frames": 768,
+  "steps_each": 1200,
+  "seed": 740,
+  "lr": 0.0005,
+  "batch": 4,
+  "parameters_each": 22433,
+  "comparison": "same architecture/initial weights/order/loss/budget; trainlocal/global x applylocal/global; mask from RGB correspondence only",
+  "editable": "complement of same DIS reliability incl bounds/FB/photo/erosion, not true disocclusion; 5x5 support taper, +/- .03logdepth; exact copy outside support",
+  "objective": "5Q0logdepth +10Q0multiscalegradient +10positive_increase_in_Q0depth_error +10positive_increase_in_Q0gradient_error; NO GTflat penalty",
+  "limits": "no-harm is a training penalty NOT guarantee; denseCNN computes entire frame; no sparse-compute or SSM novelty claim; different loss from previous feature studies, not a loss-only ablation",
+  "gate": "unchanged quality_gate and >=5pct mean latency reduction",
+  "timing": "synchronized GPUresident includes CPUflow/transfers/CNN/telemetry; excludes initialIO/H2D; RTX4090 not edge",
+  "runtime": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "opencv": "5.0.0",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qregion_study.py",
+      "bytes": 8309,
+      "sha256": "ee3c74d040d2452683be83077292e0f65fe9400badea2949475e16bf1ac041a7"
+    },
+    {
+      "path": "sokkanaem/qregion_repair.py",
+      "bytes": 3800,
+      "sha256": "8c50d2d2bd1f2cde42549aec5d1a12e78438eb136d4f8f0c5afcf9294267b342"
+    },
+    {
+      "path": "sokkanaem/qflow.py",
+      "bytes": 5116,
+      "sha256": "734664ad90d9ab64049cf38f685c87c0a77ed0abc8214590d6a2ee8bf5c5d6a3"
+    },
+    {
+      "path": "sokkanaem/qquality.py",
+      "bytes": 4341,
+      "sha256": "25463f2e849965132e714827dd70ad648a1d30e18641cf7fb5b5306812fa1d0c"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "bytes": 12181,
+      "sha256": "5f4b95ecdfd0c1a929d6e44c00a2d451620949fc43de6fca2a209079ef0dc6a5"
+    },
+    {
+      "path": "scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    }
+  ]
+}

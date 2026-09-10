@@ -1,0 +1,372 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/audit_qtemporal_refiner.py",
+    "bytes": 4175,
+    "sha256": "d6b640e11fc4a12df7fe853618031437a504ce373967ffe99a8d5ea15efd6408"
+  },
+  "role": "posthoc_diagnostics; oracle uses denseQ0 on skipped frames and is NOT a deployable model",
+  "lengths": {
+    "L32": {
+      "oracle": {
+        "metrics": {
+          "balanced": {
+            "absrel_raw": 0.127890320494771,
+            "absrel_clip_median": 0.08182026973615089,
+            "absrel_edge": 0.15796786919236183,
+            "grad_ratio": 0.7428394307692845,
+            "overshoot": 0.17318293141822022,
+            "boundary_precision": 0.7879654750771199,
+            "boundary_recall": 0.5976927798280183,
+            "boundary_f1": 0.6538694112548707,
+            "flat_tv": 0.0243248970558246,
+            "flat_tv_gt": 0.005542817942720527,
+            "flat_tv_ratio": 60.315068443616234
+          },
+          "sources": {
+            "tum": {
+              "absrel_raw": 0.0864357054233551,
+              "absrel_clip_median": 0.08045915886759758,
+              "absrel_edge": 0.13955611735582352,
+              "grad_ratio": 0.7038839757442474,
+              "overshoot": 0.13002882525324821,
+              "boundary_precision": 0.7825721574481577,
+              "boundary_recall": 0.6328353345161304,
+              "boundary_f1": 0.6796853788740311,
+              "flat_tv": 0.02687957137823105,
+              "flat_tv_gt": 0.004203296848572791,
+              "flat_tv_ratio": 7.067907810211182
+            },
+            "bonn": {
+              "absrel_raw": 0.1693449355661869,
+              "absrel_clip_median": 0.08318138060470422,
+              "absrel_edge": 0.17637962102890015,
+              "grad_ratio": 0.7817948857943217,
+              "overshoot": 0.2163370375831922,
+              "boundary_precision": 0.7933587927060822,
+              "boundary_recall": 0.562550225139906,
+              "boundary_f1": 0.6280534436357104,
+              "flat_tv": 0.021770222733418148,
+              "flat_tv_gt": 0.006882339036868264,
+              "flat_tv_ratio": 113.56222907702129
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "absrel_raw": 0.07427172362804413,
+                "absrel_clip_median": 0.07445533573627472,
+                "absrel_edge": 0.1320965737104416,
+                "grad_ratio": 0.7475972771644592,
+                "overshoot": 0.1604158878326416,
+                "boundary_precision": 0.8102477990711728,
+                "boundary_recall": 0.6812748143759867,
+                "boundary_f1": 0.7266956511884928,
+                "flat_tv": 0.032262466847896576,
+                "flat_tv_gt": 0.005831369198858738,
+                "flat_tv_ratio": 5.563385963439941
+              }
+            },
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "absrel_raw": 0.09859968721866608,
+                "absrel_clip_median": 0.08646298199892044,
+                "absrel_edge": 0.14701566100120544,
+                "grad_ratio": 0.6601706743240356,
+                "overshoot": 0.09964176267385483,
+                "boundary_precision": 0.7548965158251425,
+                "boundary_recall": 0.5843958546562741,
+                "boundary_f1": 0.6326751065595696,
+                "flat_tv": 0.02149667590856552,
+                "flat_tv_gt": 0.0025752244982868433,
+                "flat_tv_ratio": 8.572429656982422
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "absrel_raw": 0.20464685559272766,
+                "absrel_clip_median": 0.20402774214744568,
+                "absrel_edge": 0.14999441802501678,
+                "grad_ratio": 1.1079493761062622,
+                "overshoot": 0.6096687912940979,
+                "boundary_precision": 0.7257367804025611,
+                "boundary_recall": 0.6022319771970311,
+                "boundary_f1": 0.6256517410899202,
+                "flat_tv": 0.01616837829351425,
+                "flat_tv_gt": 0.0027085235342383385,
+                "flat_tv_ratio": 6.080204010009766
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "absrel_raw": 0.04729092866182327,
+                "absrel_clip_median": 0.04170211777091026,
+                "absrel_edge": 0.06223476678133011,
+                "grad_ratio": 0.8417062163352966,
+                "overshoot": 0.2346993088722229,
+                "boundary_precision": 0.8305543803920349,
+                "boundary_recall": 0.6061924854293466,
+                "boundary_f1": 0.6616661790758371,
+                "flat_tv": 0.024508073925971985,
+                "flat_tv_gt": 0.0012015864485874772,
+                "flat_tv_ratio": 665.0735473632812
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "absrel_raw": 0.07476766407489777,
+                "absrel_clip_median": 0.0665883719921112,
+                "absrel_edge": 0.08622310310602188,
+                "grad_ratio": 0.6852415800094604,
+                "overshoot": 0.18988217413425446,
+                "boundary_precision": 0.760090492044886,
+                "boundary_recall": 0.6094910060055554,
+                "boundary_f1": 0.6684410756764313,
+                "flat_tv": 0.022440169006586075,
+                "flat_tv_gt": 0.00673291552811861,
+                "flat_tv_ratio": 3.3649494647979736
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "absrel_raw": 0.08829675614833832,
+                "absrel_clip_median": 0.06302167475223541,
+                "absrel_edge": 0.14645591378211975,
+                "grad_ratio": 0.6043656468391418,
+                "overshoot": 0.11037816107273102,
+                "boundary_precision": 0.8659129254519939,
+                "boundary_recall": 0.3790448980095486,
+                "boundary_f1": 0.48004178640743095,
+                "flat_tv": 0.03032439574599266,
+                "flat_tv_gt": 0.014857528731226921,
+                "flat_tv_ratio": 2.0425238609313965
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "absrel_raw": 0.21829955279827118,
+                "absrel_clip_median": 0.0540648028254509,
+                "absrel_edge": 0.2187737226486206,
+                "grad_ratio": 0.7213395237922668,
+                "overshoot": 0.0785098746418953,
+                "boundary_precision": 0.8467827892551819,
+                "boundary_recall": 0.59348896642526,
+                "boundary_f1": 0.6941787724693617,
+                "flat_tv": 0.021065644919872284,
+                "flat_tv_gt": 0.009696357883512974,
+                "flat_tv_ratio": 2.1706254482269287
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "absrel_raw": 0.38276785612106323,
+                "absrel_clip_median": 0.06968357414007187,
+                "absrel_edge": 0.39459580183029175,
+                "grad_ratio": 0.7301669716835022,
+                "overshoot": 0.07488391548395157,
+                "boundary_precision": 0.7310753886898359,
+                "boundary_recall": 0.5848520177726945,
+                "boundary_f1": 0.6383411070952812,
+                "flat_tv": 0.016114674508571625,
+                "flat_tv_gt": 0.006097122095525265,
+                "flat_tv_ratio": 2.641524314880371
+              }
+            }
+          ]
+        },
+        "gate": {
+          "pass": false,
+          "checks": {
+            "raw_absrel_within_1pct": true,
+            "edge_absrel_within_1pct": true,
+            "boundary_f1_drop_at_most_0.005": false,
+            "overshoot_within_1pct": true,
+            "flat_tv_within_1pct": true,
+            "per_source_raw_within_2pct": true
+          },
+          "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+        },
+        "fraction_needing_over_0.1_log_change": 0.03198826313018799,
+        "note": "Pixelwise closest Q0 target within log box, NOT a theorem about best GT-gradient metrics; no speed assigned"
+      },
+      "current": {
+        "exact_refresh_frames": 128,
+        "gate_precision": 0.5636554273488719,
+        "gate_recall": 0.3144843514036322,
+        "gate_brier": 0.2366391308605671,
+        "mean_gate": 0.41812461614608765,
+        "note": "Pixel-weighted Q0-error classification on skipped frames; not GT-boundary precision or calibrated uncertainty"
+      },
+      "pair": {
+        "exact_refresh_frames": 128,
+        "gate_precision": 0.6460822515769266,
+        "gate_recall": 0.3189570310230271,
+        "gate_brier": 0.22302234545350075,
+        "mean_gate": 0.40636157244443893,
+        "note": "Pixel-weighted Q0-error classification on skipped frames; not GT-boundary precision or calibrated uncertainty"
+      }
+    },
+    "L256": {
+      "oracle": {
+        "metrics": {
+          "balanced": {
+            "absrel_raw": 0.1583041436970234,
+            "absrel_clip_median": 0.15576680998007458,
+            "absrel_edge": 0.1737386869887511,
+            "grad_ratio": 0.6751368343830109,
+            "overshoot": 0.20149877915779751,
+            "boundary_precision": 0.7282337276612654,
+            "boundary_recall": 0.5579948699542001,
+            "boundary_f1": 0.6091141892943092,
+            "flat_tv": 0.03151345563431581,
+            "flat_tv_gt": 0.006358106426584224,
+            "flat_tv_ratio": 7.35051965713501
+          },
+          "sources": {
+            "tum": {
+              "absrel_raw": 0.14136773347854614,
+              "absrel_clip_median": 0.14507776498794556,
+              "absrel_edge": 0.16402021050453186,
+              "grad_ratio": 0.6737486124038696,
+              "overshoot": 0.17519086599349976,
+              "boundary_precision": 0.7210398035337372,
+              "boundary_recall": 0.6254584924802961,
+              "boundary_f1": 0.6605930895214746,
+              "flat_tv": 0.03292124718427658,
+              "flat_tv_gt": 0.0037967434618622065,
+              "flat_tv_ratio": 10.230588912963867
+            },
+            "bonn": {
+              "absrel_raw": 0.17524055391550064,
+              "absrel_clip_median": 0.16645585497220358,
+              "absrel_edge": 0.18345716347297034,
+              "grad_ratio": 0.6765250563621521,
+              "overshoot": 0.22780669232209524,
+              "boundary_precision": 0.7354276517887937,
+              "boundary_recall": 0.4905312474281042,
+              "boundary_f1": 0.5576352890671438,
+              "flat_tv": 0.030105664084355038,
+              "flat_tv_gt": 0.008919469391306242,
+              "flat_tv_ratio": 4.470450401306152
+            }
+          },
+          "clips": [
+            {
+              "source": "tum",
+              "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+              "metrics": {
+                "absrel_raw": 0.14136773347854614,
+                "absrel_clip_median": 0.14507776498794556,
+                "absrel_edge": 0.16402021050453186,
+                "grad_ratio": 0.6737486124038696,
+                "overshoot": 0.17519086599349976,
+                "boundary_precision": 0.7210398035337372,
+                "boundary_recall": 0.6254584924802961,
+                "boundary_f1": 0.6605930895214746,
+                "flat_tv": 0.03292124718427658,
+                "flat_tv_gt": 0.0037967434618622065,
+                "flat_tv_ratio": 10.230588912963867
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+              "metrics": {
+                "absrel_raw": 0.1477217823266983,
+                "absrel_clip_median": 0.15680094063282013,
+                "absrel_edge": 0.1594240665435791,
+                "grad_ratio": 0.6804155707359314,
+                "overshoot": 0.3698040246963501,
+                "boundary_precision": 0.7307231167408949,
+                "boundary_recall": 0.578850559249986,
+                "boundary_f1": 0.6204413270849424,
+                "flat_tv": 0.022107943892478943,
+                "flat_tv_gt": 0.004027247428894043,
+                "flat_tv_ratio": 7.2372212409973145
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+              "metrics": {
+                "absrel_raw": 0.09710318595170975,
+                "absrel_clip_median": 0.08230544626712799,
+                "absrel_edge": 0.11787959188222885,
+                "grad_ratio": 0.660254955291748,
+                "overshoot": 0.11605539917945862,
+                "boundary_precision": 0.7710202221060172,
+                "boundary_recall": 0.46506449338630773,
+                "boundary_f1": 0.5439842952570567,
+                "flat_tv": 0.04141588136553764,
+                "flat_tv_gt": 0.012753661721944809,
+                "flat_tv_ratio": 3.479030132293701
+              }
+            },
+            {
+              "source": "bonn",
+              "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+              "metrics": {
+                "absrel_raw": 0.28089669346809387,
+                "absrel_clip_median": 0.2602611780166626,
+                "absrel_edge": 0.273067831993103,
+                "grad_ratio": 0.6889046430587769,
+                "overshoot": 0.197560653090477,
+                "boundary_precision": 0.7045396165194688,
+                "boundary_recall": 0.4276786896480189,
+                "boundary_f1": 0.5084802448594322,
+                "flat_tv": 0.026793166995048523,
+                "flat_tv_gt": 0.009977499023079872,
+                "flat_tv_ratio": 2.6950998306274414
+              }
+            }
+          ]
+        },
+        "gate": {
+          "pass": false,
+          "checks": {
+            "raw_absrel_within_1pct": true,
+            "edge_absrel_within_1pct": true,
+            "boundary_f1_drop_at_most_0.005": false,
+            "overshoot_within_1pct": true,
+            "flat_tv_within_1pct": false,
+            "per_source_raw_within_2pct": true
+          },
+          "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+        },
+        "fraction_needing_over_0.1_log_change": 0.06602436304092407,
+        "note": "Pixelwise closest Q0 target within log box, NOT a theorem about best GT-gradient metrics; no speed assigned"
+      },
+      "current": {
+        "exact_refresh_frames": 512,
+        "gate_precision": 0.6807947487143109,
+        "gate_recall": 0.4128236837245006,
+        "gate_brier": 0.24919584719464183,
+        "mean_gate": 0.4536175476387143,
+        "note": "Pixel-weighted Q0-error classification on skipped frames; not GT-boundary precision or calibrated uncertainty"
+      },
+      "pair": {
+        "exact_refresh_frames": 512,
+        "gate_precision": 0.725906960676668,
+        "gate_recall": 0.4805283058383045,
+        "gate_brier": 0.23658014787361026,
+        "mean_gate": 0.4646975230425596,
+        "note": "Pixel-weighted Q0-error classification on skipped frames; not GT-boundary precision or calibrated uncertainty"
+      }
+    }
+  }
+}
