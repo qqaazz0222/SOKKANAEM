@@ -26,6 +26,56 @@ def flat_excess_loss(pred, teacher, valid, mask):
     return (loss*keep).sum()/keep.sum().clamp_min(1)
 
 
+def flat_plane_loss(pred, teacher, valid, mask, win=9):
+    """Penalize curvature the reference does not have, inside GT-flat areas, leaving slope free.
+
+    `flat_excess_loss` penalizes any normalized-disparity gradient above the reference's, which
+    on a slanted plane removes the slope itself: with Kinect labels quantized flat, and even on
+    synthetic ones, it cost the MambaVision probe 0.139 -> 0.24 mean |log error| in Date04's
+    2-3 m band (SOKKANAEM_MV_DECODER_PROBE_20260915.md I.5, I.10).
+
+    A least-squares plane fitted over a symmetric window evaluates at the window centre to the
+    window mean, so `x - boxmean(x)` IS that plane's residual at the centre: any ramp gives
+    exactly zero, a bump does not. Only the prediction's residual beyond the reference's own is
+    paid for. Windows are truncated at the image border (count_include_pad=False), where a ramp
+    leaves a small residual on both maps and largely cancels in the difference.
+    """
+    shape = (-1, 1) + tuple(pred.shape[-2:])
+    p, t, v = (x.reshape(shape) for x in (pred, teacher, valid))
+    pd, td = norm_disp(p, v), norm_disp(t.detach(), v)
+    box = lambda x: F.avg_pool2d(x, win, 1, win // 2, count_include_pad=False)
+    excess = ((pd - box(pd)).abs() - (td - box(td)).abs()).clamp(min=0)
+    m = mask.reshape(shape) if mask.shape != shape else mask
+    n = m.flatten(1).sum(1)
+    loss = (excess * m).flatten(1).sum(1) / n.clamp_min(1)
+    keep = n >= 10
+    return (loss * keep).sum() / keep.sum().clamp_min(1)
+
+
+def flat_band_loss(pred, teacher, valid, mask, win_lo=5, win_hi=17):
+    """Penalize excess disparity energy in the win_lo..win_hi pixel band only (a
+    difference-of-box bandpass: box(x, win_lo) - box(x, win_hi)), leaving both finer detail
+    (boundary sharpness, < win_lo) and coarser structure (slope, > win_hi) untouched.
+
+    SOKKANAEM_MV_DECODER_PROBE_20260915.md I.20 found the 592px probe's flat-TV excess
+    concentrated in the 4-16px band and disappearing by 32px. `flat_plane_loss`'s single-window
+    high-pass (`x - box(x, win)`) keeps ALL finer content too (including whatever content is
+    driving boundary F1), which is why raising its weight erodes F1 alongside flat TV (I.19,
+    I.26). This term is a proper bandpass and should not have that coupling.
+    """
+    shape = (-1, 1) + tuple(pred.shape[-2:])
+    p, t, v = (x.reshape(shape) for x in (pred, teacher, valid))
+    pd, td = norm_disp(p, v), norm_disp(t.detach(), v)
+    box = lambda x, w: F.avg_pool2d(x, w, 1, w // 2, count_include_pad=False)
+    band = lambda x: box(x, win_lo) - box(x, win_hi)
+    excess = (band(pd).abs() - band(td).abs()).clamp(min=0)
+    m = mask.reshape(shape) if mask.shape != shape else mask
+    n = m.flatten(1).sum(1)
+    loss = (excess * m).flatten(1).sum(1) / n.clamp_min(1)
+    keep = n >= 10
+    return (loss * keep).sum() / keep.sum().clamp_min(1)
+
+
 def refresh_memory(fresh, old, frame, previous, carry, hard_reset=False):
     """Refresh features exactly, retain .9h only at low RGB-change locations.
 

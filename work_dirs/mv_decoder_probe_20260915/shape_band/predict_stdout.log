@@ -1,0 +1,11 @@
+/home/hyunsu/miniforge3/envs/mambavision/lib/python3.13/site-packages/timm/models/registry.py:4: FutureWarning: Importing from timm.models.registry is deprecated, please import via timm.models
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.models", FutureWarning)
+/home/hyunsu/miniforge3/envs/mambavision/lib/python3.13/site-packages/timm/models/layers/__init__.py:48: FutureWarning: Importing from timm.models.layers is deprecated, please import via timm.layers
+  warnings.warn(f"Importing from {__name__} is deprecated, please import via timm.layers", FutureWarning)
+predicted Date01_Sub01_basketball.1 (256, 1, 256, 256)
+predicted Date01_Sub01_keyboard_move.1 (256, 1, 256, 256)
+predicted Date02_Sub02_backpack_back.1 (256, 1, 256, 256)
+predicted Date02_Sub02_backpack_hand.1 (256, 1, 256, 256)
+predicted Date03_Sub03_backpack_back.1 (1024, 1, 256, 256)
+predicted Date04_Sub05_backpack.1 (1024, 1, 256, 256)
+PREDICT_DONE mambavision_da2_hr_ft 4.741376033052802
