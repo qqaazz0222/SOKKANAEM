@@ -1,0 +1,234 @@
+{
+  "role": "selection_identity_and_calibration_audit_no_timing_no_promotion",
+  "date": "2026-09-13",
+  "audits": "work_dirs/tile_refresh_opt_20260912/main",
+  "question": "did both engines use the same index tensor, element for element and in the same order, on every frame; is the refresh really a full update; is the field fast_norm_field reads finite; is fast_calibrate bitwise equal to the frozen _calibrate",
+  "method": "runtime wrappers on TiledQ0Probe.select / .layer_step and on the loaded model's _calibrate, plus direct reads of the optimized engine's index buffers; no audited source file is modified",
+  "timing": "NOT MEASURED. Wrappers and extra dense reference passes change the schedule; the 2026-09-12 latencies stand unaltered and are not restated",
+  "frames_per_sequence": 256,
+  "tokens": 1370,
+  "sequences": [
+    "Date01_Sub01_basketball.1",
+    "Date01_Sub01_keyboard_move.1",
+    "Date02_Sub02_backpack_back.1",
+    "Date02_Sub02_backpack_hand.1"
+  ],
+  "data_status": "Date01 and Date02 reused development data; Date03 unopened",
+  "records": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/tile_refresh_selection_audit.py",
+      "bytes": 19494,
+      "sha256": "c5c1318c78e21fcf7b65db4b560b92b3b6cd29a65a7e130ef1f54b69be9a2867"
+    },
+    {
+      "path": "sokkanaem/qtile_probe.py",
+      "bytes": 6948,
+      "sha256": "81fedeac893f9d674564a2a42c044aa919eb4f274e872ce81b2d61f012bbb1c4"
+    },
+    {
+      "path": "sokkanaem/qtile_fast.py",
+      "bytes": 16322,
+      "sha256": "9c657283112ad4f7097d4af0b59b3ce30ea4d1ee2d41aa857ad8bf315e644bdb"
+    },
+    {
+      "path": "scripts/tile_refresh_optimized_probe.py",
+      "bytes": 20628,
+      "sha256": "d3da6cbed8fb90eb192aed42bf746c0004813cbc697c44e02af2848044335a76"
+    },
+    {
+      "path": "scripts/tile_refresh_costsplit.py",
+      "bytes": 16596,
+      "sha256": "bf6877aba6edb975fe7e0b27f23a1b39e5998c055e04c8a4029f926f34b8aa4e"
+    },
+    {
+      "path": "scripts/tile_refresh_probe.py",
+      "bytes": 14107,
+      "sha256": "4eb290314ae9e5e6712fd8221471c51e6d8ec0941bac827e8f81d7299ee3a9ec"
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "bytes": 12181,
+      "sha256": "5f4b95ecdfd0c1a929d6e44c00a2d451620949fc43de6fca2a209079ef0dc6a5"
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "bytes": 4864,
+      "sha256": "8cff590eff87e9807ec7e8079f575d651913f8d556eeda8d31d044df062636ac"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    },
+    {
+      "path": "work_dirs/qbehave_development_ready2_20260911/prepared.json",
+      "bytes": 25616,
+      "sha256": "0df0a7663142dc1cb8d967ad3905789c9078c29d8dd15f8f542f9f352a76cb21"
+    },
+    {
+      "path": "work_dirs/qbehave_pilot_eval_20260910/prepared.json",
+      "bytes": 5927,
+      "sha256": "0f9efe0df93a0a4810a9624f2a33626b4da9e7a6c71054fbabf3fa50322cdc33"
+    },
+    {
+      "path": "work_dirs/q0-calib-s0/latest.pt",
+      "bytes": 99357700,
+      "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+    },
+    {
+      "path": "work_dirs/qbehave_development_ready2_20260911/Date01_Sub01_basketball.1.pt",
+      "bytes": 491526453,
+      "sha256": "aac40f7184b396855e37038920946d53b8b69f405e60ad92a8c0783bdb4f6008"
+    },
+    {
+      "path": "work_dirs/qbehave_development_ready2_20260911/Date01_Sub01_keyboard_move.1.pt",
+      "bytes": 491526477,
+      "sha256": "021b71a497e7ab1d599c3a159736f89e0239c9698da45182829d583ebf8a94aa"
+    },
+    {
+      "path": "work_dirs/qbehave_pilot_eval_20260910/Date02_Sub02_backpack_back.1.pt",
+      "bytes": 491526477,
+      "sha256": "d5cfa969bf19a309218cd16f15a44cf1d4cefb094cc6be7c66f724c120c62951"
+    },
+    {
+      "path": "work_dirs/qbehave_pilot_eval_20260910/Date02_Sub02_backpack_hand.1.pt",
+      "bytes": 491526477,
+      "sha256": "5899e3732866147184a33c83749a167dbff9fab3213af69d50f81d3385c01db0"
+    },
+    {
+      "path": "work_dirs/tile_refresh_opt_20260912/main/protocol.json",
+      "bytes": 5681,
+      "sha256": "c4fdefc83e4054303842da1fcfbbde2c06df09e8663455ce3f93c1eeb64b0839"
+    },
+    {
+      "path": "work_dirs/tile_refresh_opt_20260912/main/results.json",
+      "bytes": 483577,
+      "sha256": "624bc120db39dba35984ad6a7ff6b8608d3b9fbff1f808f2d662c44776737a37"
+    },
+    {
+      "path": "work_dirs/tile_refresh_opt_20260912/main/summary.csv",
+      "bytes": 1373,
+      "sha256": "663997b4da9a43322d80629e89c4111bf2556e2d834e9346772d9ceece27eac3"
+    },
+    {
+      "path": "work_dirs/tile_refresh_opt_20260912/main/parity.json",
+      "bytes": 600467,
+      "sha256": "6d7f38ac3d7f73e5c1f8a3b0df4c8b93e48d8a1790f78e2d4412dfcc7e4722a0"
+    },
+    {
+      "path": "work_dirs/tile_refresh_opt_20260912/main/audit.json",
+      "bytes": 675,
+      "sha256": "40c79a793c661ab8bfd99650848217f80de16c8e2ba738e6a47cfce758bb5b95"
+    },
+    {
+      "path": "work_dirs/tile_refresh_probe_20260912/protocol.json",
+      "bytes": 4947,
+      "sha256": "202c14fcbe1aaef4b378d59b6c8c393ca4e830bdf76db4c9d34eacfdd4858813"
+    },
+    {
+      "path": "work_dirs/tile_refresh_probe_20260912/results.json",
+      "bytes": 1416642,
+      "sha256": "6c6e0be6d7085f3f1064fd580442de1772cec59371c5858116ede4be56282f1b"
+    },
+    {
+      "path": "work_dirs/tile_refresh_probe_20260912/audit.json",
+      "bytes": 5932,
+      "sha256": "c5acc41ed4fd7117b4cc0e4e46b3d72ea106b94899a905fd0493632f0f33196e"
+    }
+  ],
+  "prior_run_integrity": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/tile_refresh_optimized_probe.py",
+      "unchanged": true
+    },
+    {
+      "path": "sokkanaem/qtile_fast.py",
+      "unchanged": true
+    },
+    {
+      "path": "sokkanaem/qtile_probe.py",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/tile_refresh_probe.py",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/tile_refresh_costsplit.py",
+      "unchanged": true
+    },
+    {
+      "path": "sokkanaem/qstream.py",
+      "unchanged": true
+    },
+    {
+      "path": "sokkanaem/qmodel.py",
+      "unchanged": true
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/evaluate_behave_pilot.py",
+      "unchanged": true
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "unchanged": true
+    },
+    {
+      "path": "work_dirs/qbehave_development_ready2_20260911/prepared.json",
+      "unchanged": true
+    },
+    {
+      "path": "work_dirs/qbehave_pilot_eval_20260910/prepared.json",
+      "unchanged": true
+    },
+    {
+      "path": "work_dirs/q0-calib-s0/latest.pt",
+      "unchanged": true
+    },
+    {
+      "path": "work_dirs/qbehave_development_ready2_20260911/Date01_Sub01_basketball.1.pt",
+      "unchanged": true
+    },
+    {
+      "path": "work_dirs/qbehave_development_ready2_20260911/Date01_Sub01_keyboard_move.1.pt",
+      "unchanged": true
+    },
+    {
+      "path": "work_dirs/qbehave_pilot_eval_20260910/Date02_Sub02_backpack_back.1.pt",
+      "unchanged": true
+    },
+    {
+      "path": "work_dirs/qbehave_pilot_eval_20260910/Date02_Sub02_backpack_hand.1.pt",
+      "unchanged": true
+    },
+    {
+      "path": "work_dirs/tile_refresh_probe_20260912/protocol.json",
+      "unchanged": true
+    },
+    {
+      "path": "work_dirs/tile_refresh_probe_20260912/results.json",
+      "unchanged": true
+    },
+    {
+      "path": "work_dirs/tile_refresh_probe_20260912/audit.json",
+      "unchanged": true
+    }
+  ],
+  "runtime": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "shared_gpu": true
+}

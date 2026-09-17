@@ -1,0 +1,32 @@
+[
+  {
+    "path": "paper/SOKKANAEM_OBSERVER_DESIGN_20260914.md",
+    "bytes": 20872,
+    "sha256": "fff9feb13b07e3d6c6ec7ab279ed2e1eb32c560b791b215c594ac0ff0166dae7"
+  },
+  {
+    "path": "work_dirs/sokkanaem_observer_design_20260914/arithmetic_check.json",
+    "bytes": 652,
+    "sha256": "1b62b4e548e7c47c3ed9aea30ae86c34b55be6f06aacde8b2194cd9fa5bbaf4e"
+  },
+  {
+    "path": "paper/TILE_MINIMAL_INTERVENTION_20260914.md",
+    "bytes": 12878,
+    "sha256": "1b3441491652ba53bc36394aa2bccd18b934637c502a738c8298410f0af7c71d"
+  },
+  {
+    "path": "paper/TILE_STAGE_SOLVER_AUDIT_20260914.md",
+    "bytes": 9995,
+    "sha256": "eec4413fbaaeefb3166fb61e60da75f7acf75d15d4c5190dccd12c73c5245c31"
+  },
+  {
+    "path": "paper/TILE_CORRESPONDENCE_PROBE_20260914.md",
+    "bytes": 9290,
+    "sha256": "4b60d85c0a34b4f0808ddc519e0fb42e3c35c9883e325f4472867dc383305d6d"
+  },
+  {
+    "path": "paper/TILE_REUSE_FEASIBILITY_20260914.md",
+    "bytes": 8328,
+    "sha256": "6b92c4861501a294ec9900663c5ae3a6a9885390c3f59e483f1822ed442b4cb9"
+  }
+]

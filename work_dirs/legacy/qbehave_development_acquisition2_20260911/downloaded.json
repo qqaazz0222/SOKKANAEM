@@ -1,0 +1,235 @@
+{
+  "protocol": {
+    "path": "work_dirs/qbehave_development_acquisition2_20260911/protocol.json",
+    "bytes": 1705,
+    "sha256": "267e4d33f34d83895aa2222b8b3f3a0a2438a34207a567e43b7e6bfecfc4af7f"
+  },
+  "selection": [
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_basketball.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_basketball.1.time.json",
+        "bytes": 44537,
+        "sha256": "1a6db359b11a7ccad4a80e185124f8dd48da9f168b1c32834181d497f8089cc8"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_boxlong_hand.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_boxlong_hand.1.time.json",
+        "bytes": 44529,
+        "sha256": "b1da240ecb490b3e7c7592bf1e0a48a2f4021d62820dca191a08b29de7113c28"
+      },
+      "color_count": 1500,
+      "paired_count": 1499,
+      "pairing_coverage": 0.9993333333333333,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_boxsmall_hand.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_boxsmall_hand.1.time.json",
+        "bytes": 44533,
+        "sha256": "6d74636ccf016997d4d5938daa45db7c2fd66b965540377b6b62e0d2af6d8105"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_chairblack_hand.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_chairblack_hand.1.time.json",
+        "bytes": 44541,
+        "sha256": "d85d47dd4282c23aa8b8408f05f0a82d1203beaa0865704bdc1fd6541ca69e7c"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_keyboard_move.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_keyboard_move.1.time.json",
+        "bytes": 44533,
+        "sha256": "22fa9311ea0b3a69e9688fe55f4c944740083437e9af6548256b7c4e9d6e35a8"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_plasticcontainer.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_plasticcontainer.1.time.json",
+        "bytes": 44537,
+        "sha256": "edbfd7e3a78a38c0c6e119f62822bca43c1ba7020b34c3ec659ddb59d2d918cd"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_suitcase.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_suitcase.1.time.json",
+        "bytes": 44529,
+        "sha256": "420781480c3a1cdfc12273f545691bb898833afd7059b109cbbdd47c6def787b"
+      },
+      "color_count": 1500,
+      "paired_count": 1499,
+      "pairing_coverage": 0.9993333333333333,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_tablesquare_hand.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_tablesquare_hand.1.time.json",
+        "bytes": 44533,
+        "sha256": "15ce5c40c52e946ead64183a789d1574208d0ea7c6131650859a2384d90c5563"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    }
+  ],
+  "videos": [
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_basketball.1.color.mp4",
+      "bytes": 46327815,
+      "sha256": "cb71d8e70fe8bbb76811b0529395b4a708db35f5a52c23615e23f12f067e051c"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_basketball.1.depth-reg.mp4",
+      "bytes": 687468496,
+      "sha256": "25d07aa445071c5d0c60d564905f1966e9ef27a2a7702fe6c646b36c19211b0d"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_boxlong_hand.1.color.mp4",
+      "bytes": 47240295,
+      "sha256": "2b601f10607330f6e986e384b7f7c6690832056488b54463c856b5904d7c0866"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_boxlong_hand.1.depth-reg.mp4",
+      "bytes": 681544260,
+      "sha256": "4c67d54deb54e2034e0a327048fe63d39d6ece2dd8b22602992e2b36630970b1"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_boxsmall_hand.1.color.mp4",
+      "bytes": 48561098,
+      "sha256": "88124ad5b83d4d805d2bf2d98e8a75a67249fa24324ff53bd5bbc70beefb8cab"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_boxsmall_hand.1.depth-reg.mp4",
+      "bytes": 681576404,
+      "sha256": "f8a9a3ca211a1a2420a7e7db69018e838e605ed1fdc2d5a85272e2d135f1150f"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_chairblack_hand.1.color.mp4",
+      "bytes": 47807978,
+      "sha256": "547e5c2385a69683e6f04660220453e6c2452b273e0ee21e91f00f77c3d18c03"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_chairblack_hand.1.depth-reg.mp4",
+      "bytes": 690419172,
+      "sha256": "d1dcf494ee1e47c160207015ac275f36991a9b071d6deb6bbbbe5d94120a83c4"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_keyboard_move.1.color.mp4",
+      "bytes": 48321782,
+      "sha256": "abdc2c10726b104fc2d370d06493b124e4fdf8f9cdfbfe9e59361a2f7683a37f"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_keyboard_move.1.depth-reg.mp4",
+      "bytes": 690702017,
+      "sha256": "f6238361d59e570bcdafbaab23270c14779f9c03a42f1da7f7e56ce09cf7cfaf"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_plasticcontainer.1.color.mp4",
+      "bytes": 49145414,
+      "sha256": "67ce9a67706ea31685aca15d4aefb49db5d23c63d53a3bbe37b74521d178aa76"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_plasticcontainer.1.depth-reg.mp4",
+      "bytes": 678626662,
+      "sha256": "ba0815d0a15613e9f55768b9db30152e0e06a977be008d27a7cce45f9ec5b862"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_suitcase.1.color.mp4",
+      "bytes": 45900658,
+      "sha256": "ed8073f517771fcefadfbbc949cc2e516932d0570084b205fc1ebe33eefa95f7"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_suitcase.1.depth-reg.mp4",
+      "bytes": 684077635,
+      "sha256": "4b708aafd203c1b967ff1639b4d3a8783d1c19ac7ee9b88e9c703d7e97fa6447"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_tablesquare_hand.1.color.mp4",
+      "bytes": 46250809,
+      "sha256": "dcb311bd8f8a0cae2c9591636a8111b65bf226b45b04ef108b0df9c3454278d2"
+    },
+    {
+      "path": "work_dirs/qbehave_development_acquisition2_20260911/videos/Date01_Sub01_tablesquare_hand.1.depth-reg.mp4",
+      "bytes": 691877767,
+      "sha256": "b182b396ced2a3a9c30b1dda06df52c0edbc4550d62f2042cc0fa07f4197ca69"
+    }
+  ],
+  "whole_archives_acquired": false,
+  "gt_admitted": false,
+  "model_inference_performed": false,
+  "calibration": {
+    "path": "work_dirs/qbehave_pilot_acquisition_20260910/calibs.zip",
+    "bytes": 395854758,
+    "sha256": "d5c1608fa989547c96a24fd9c82767e761d64de31f0a4fb9ddfcbe6f528c529d"
+  }
+}

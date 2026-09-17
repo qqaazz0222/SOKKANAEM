@@ -1,0 +1,58 @@
+[
+  {
+    "full_refresh": true,
+    "active_ratio": 1.0,
+    "active_patches": 1369,
+    "age": 0,
+    "reference_assisted": true
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.4864864864864865,
+    "active_patches": 666,
+    "age": 1,
+    "reference_assisted": true
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.4799123447772096,
+    "active_patches": 657,
+    "age": 2,
+    "reference_assisted": true
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.5003652300949598,
+    "active_patches": 685,
+    "age": 3,
+    "reference_assisted": true
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.5003652300949598,
+    "active_patches": 685,
+    "age": 4,
+    "reference_assisted": true
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.49306062819576335,
+    "active_patches": 675,
+    "age": 5,
+    "reference_assisted": true
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.4864864864864865,
+    "active_patches": 666,
+    "age": 6,
+    "reference_assisted": true
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.493791088385683,
+    "active_patches": 676,
+    "age": 7,
+    "reference_assisted": true
+  }
+]

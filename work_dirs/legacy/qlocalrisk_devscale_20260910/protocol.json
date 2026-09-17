@@ -1,0 +1,80 @@
+{
+  "role": "v2_patch_risk_regret_devscale_threshold_retry_development_no_final",
+  "parent": {
+    "protocol": {
+      "path": "work_dirs/qlocalrisk_regression_20260910/protocol.json",
+      "bytes": 2872,
+      "sha256": "a01d04778a08159079fb951ea23692f6bf3e6f17bd1ae8665e4e3e7ebc696e9b"
+    },
+    "model": {
+      "path": "work_dirs/qlocalrisk_regression_20260910/regret_regressor.pt",
+      "bytes": 15691,
+      "sha256": "399c30ef45cfdbeea4904064d032a3eb6beb9e0c1d9817192d80ce82bc52c908"
+    }
+  },
+  "checkpoint": {
+    "path": "work_dirs/q0-calib-s0/latest.pt",
+    "bytes": 99357700,
+    "sha256": "60b7a7451ea44b46e1b4102a83a9e25d11ad964768bdf9275e61bd70eac9c951"
+  },
+  "change_from_parent": "same trained regressor, unchanged; thresholds now come from percentiles of its OWN predicted score on the dev stream (probed at threshold=+inf), not calibration-trace quantiles",
+  "runtime": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qlocalrisk_devscale_study.py",
+      "bytes": 8383,
+      "sha256": "6b0f7f3c260099a991b3d83441ef80c7efaaa1be8b759e286b084b1679db87ab"
+    },
+    {
+      "path": "sokkanaem/qlocalrisk.py",
+      "bytes": 8344,
+      "sha256": "510f8898d50242e06bb82657777e765288cdbb283c36c18b91dbdba8ceb55bf8"
+    },
+    {
+      "path": "sokkanaem/qflow.py",
+      "bytes": 5116,
+      "sha256": "734664ad90d9ab64049cf38f685c87c0a77ed0abc8214590d6a2ee8bf5c5d6a3"
+    },
+    {
+      "path": "sokkanaem/qschedule.py",
+      "bytes": 4005,
+      "sha256": "c5b6478bf05da0be7e632da507888e5d98e2e1f7c45cd277688bfcee19f5e723"
+    },
+    {
+      "path": "sokkanaem/qpreflow.py",
+      "bytes": 2545,
+      "sha256": "0df82e61d5873341fb0652ab456e7c27d774aebcc604840ca20122f89dca1512"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    }
+  ]
+}

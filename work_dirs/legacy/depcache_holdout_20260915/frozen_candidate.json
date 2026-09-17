@@ -1,0 +1,142 @@
+{
+  "role": "candidate frozen BEFORE any holdout GT scoring, per work_dirs/qbehave_holdout_ready_20260911/protocol.json preservation rule",
+  "status": "SCORED_NOT_BLIND",
+  "supersedes": [
+    "QuantileSwitchQ0 k=4 (overwritten earlier today, holdout untouched)",
+    "withdrawn_mapped_rank.json (failed leave-one-sequence-out at 7 and 8 tiles)"
+  ],
+  "candidate": {
+    "class": "sokkanaem.qdepcache.QuantileSwitchQ0",
+    "k": 3.0,
+    "decay": 0.05,
+    "tiles": [
+      8,
+      12
+    ],
+    "prefix": 0,
+    "refresh_every": 8,
+    "use_graphs": true
+  },
+  "selection_rule": "no fitted map or learned quantity; the only development-chosen value is k. k=3, 4 and 6 all pass every development sequence, so any leave-one-sequence-out choice passes. Among them, take the one with the most margin on its tightest gate check, since the holdout is spent once: k=3 (tightest overshoot +0.87% vs +0.88% at k=4 and +0.94% at k=6, limit +1%).",
+  "development_result": {
+    "mean_ms": 5.2703,
+    "p95_ms": 7.1622,
+    "active_ratio": 0.56,
+    "gate": "pass on all four sequences",
+    "evidence": {
+      "path": "work_dirs/depcache_gate4_20260915/combined.json",
+      "bytes": 5730,
+      "sha256": "e6471651aebe0c29f3bc3420cb1fd4330af8fab67cbed3c9040c814eb3ca8edc"
+    }
+  },
+  "known_risk": "the tightest development margin is 0.13 percentage points of overshoot; a holdout failure on that check is a live possibility and will be reported as is",
+  "verification": "graph replay equals eager bitwise; per-stream statistic resets on a new stream, so repeat passes and the timing warmup reproduce bitwise",
+  "controls": [
+    "PrefixTiledQ0 prefix=12 (optimized dense, gate baseline)",
+    "PrefixTiledQ0 prefix=0 tiles=12",
+    "PrefixTiledQ0 prefix=0 tiles=8",
+    "AdaptiveReuseQ0 threshold=1.8604798128762923e-06 (frozen adaptive)"
+  ],
+  "judgement_fixed_in_advance": {
+    "quality": "frozen Q0-relative gate on each window AND on the pooled aggregate",
+    "latency": "mean and p95 over 3 rotated repeats, same timed() loop",
+    "claim_allowed_only_if": "the candidate passes the gate on every holdout window and the pooled aggregate AND its mean latency is below the frozen adaptive's in the same run",
+    "no_retuning": "k and the tile budget are not re-selected after seeing holdout numbers"
+  },
+  "code": [
+    {
+      "path": "sokkanaem/qdepcache.py",
+      "bytes": 21247,
+      "sha256": "fda1906f3ee9a1ef1d1b9293e4b2c2f8560cecc2a470549ad9b86aae9e47d028"
+    },
+    {
+      "path": "sokkanaem/qprefix_refresh.py",
+      "bytes": 18687,
+      "sha256": "25e760292fbea0b624b386c2f8f6894a453c6e089c13b848ff23b6a37fe24cef"
+    },
+    {
+      "path": "sokkanaem/qtile_probe.py",
+      "bytes": 6948,
+      "sha256": "81fedeac893f9d674564a2a42c044aa919eb4f274e872ce81b2d61f012bbb1c4"
+    },
+    {
+      "path": "sokkanaem/qtile_fast.py",
+      "bytes": 16322,
+      "sha256": "9c657283112ad4f7097d4af0b59b3ce30ea4d1ee2d41aa857ad8bf315e644bdb"
+    },
+    {
+      "path": "scripts/depcache_gate.py",
+      "bytes": 12219,
+      "sha256": "54e7c78f6ae27e058aa10c5030da6a322bc2661a543b54edc5be6a57e47b9d1b"
+    }
+  ],
+  "holdout_scoring_protocol": {
+    "fixed_before_scoring": true,
+    "admitted_sequences": [
+      "Date03_Sub03_backpack_back.1"
+    ],
+    "excluded_sequences": {
+      "Date04_Sub05_backpack.1": "prospective fixed-view screen failed at frame 3900 (2.18 px > 2.0 px limit); the all-frames rule is applied as written, no threshold relaxation or window clipping"
+    },
+    "windows": [
+      [
+        372,
+        628
+      ],
+      [
+        872,
+        1128
+      ]
+    ],
+    "window_rule": "two 256-frame windows centred at 1/3 and 2/3 of the timeline, the rule scripts/qindependent_prepare.py pre-registered for earlier independent data; no visual, GT or model-performance selection; each window is its own stream",
+    "gate": "frozen Q0-relative gate per window AND on the pooled two-window aggregate",
+    "requires_loo_pass": "work_dirs/depcache_loo_20260915 must show the leave-one-out map passing on every development sequence, else the map is in-sample only and the holdout is not spent on it"
+  },
+  "admission_review": {
+    "Date03_Sub03_backpack_back.1": {
+      "fixed_view_screen": "passed 9/9 prospective ORB/RANSAC checks",
+      "visual_review": "blurred RGB frames 0, 750, 1499 reviewed by the assistant: the white vehicle, red object, yellow machinery and ceiling light keep the same image positions across all three; only the person moves. Consistent with a fixed camera. RGB-depth registration cannot be judged from the blurred RGB alone and is NOT claimed; no depth rendering was reviewed.",
+      "reviewer": "assistant, pending researcher confirmation"
+    },
+    "Date04_Sub05_backpack.1": {
+      "fixed_view_screen": "failed at frame 3900 (2.18 px > 2.0 px); excluded by the pre-registered all-frames rule, not reviewed further"
+    }
+  },
+  "holdout_result": {
+    "claim_rule": "MET",
+    "pooled_gate_pass": true,
+    "every_window_pass": true,
+    "mean_ms": {
+      "frozen_candidate": 5.0784,
+      "adaptive_frozen": 5.731,
+      "tile8": 5.0465,
+      "tile12": 5.6924,
+      "dense_q0": 7.0901
+    },
+    "p95_ms": {
+      "frozen_candidate": 7.147,
+      "adaptive_frozen": 7.1554
+    },
+    "vs_frozen_adaptive_mean": "-11.39%",
+    "does_not_show": "fixed tile8 ALSO passed both windows here (overshoot +0.37% / -1.23%) and was 0.63% faster. This holdout video is not hard enough to separate the switch from a fixed 8-tile budget; the only evidence that the switch is needed remains development (keyboard_move, T8 +1.20% vs switch +0.93%).",
+    "scope": "one admitted sequence, two 256-frame windows; Date04 excluded by the fixed-view rule",
+    "evidence": [
+      {
+        "path": "work_dirs/depcache_holdout_20260915/score/combined.json",
+        "bytes": 6510,
+        "sha256": "7b276e522118d214055a32210da74eb066a8b4bd8440c56b6472095f930496d3"
+      },
+      {
+        "path": "work_dirs/depcache_holdout_20260915/score/sequence_results.json",
+        "bytes": 13766,
+        "sha256": "25f8606d06495fa8c8e10cc55a5a55964a2334d281a7d0e116c08b728beec472"
+      }
+    ],
+    "correction": {
+      "finding": "Date03_Sub03_backpack_back.1 and Date04_Sub05_backpack.1 were already scored on 2026-09-14 (frames 0..1023, T12 / adaptive / observer / native) as the 'previous independent' pair of SOKKANAEM_FOUR_CONFIGS_VALIDATION_20260914.md. qbehave_holdout_ready_20260911/prepared.json still reads quality_test_executed=false; that flag predates the 09-14 run and is stale.",
+      "overlap": "408 of the 512 scored frames (window [372,628) fully, [872,1024) of [872,1128)) were previously scored for this model family",
+      "consequence": "this is a pre-declared, frozen-candidate check on reused data, NOT a blind holdout. The candidate's selection did not read the 09-14 Date03 results, but the tile family's behaviour on this video was already known.",
+      "untouched_fixed_view_data_remaining": "none found locally"
+    }
+  }
+}

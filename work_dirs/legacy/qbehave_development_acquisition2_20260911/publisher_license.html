@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>BEHAVE | Real Virtual Humans</title>
+    <link rel="stylesheet" href="/css/all.css">
+</head>
+
+<body>
+
+<main role="main" id="main", class="container">
+    <div class="jumbotron">
+        <h1>BEHAVE Dataset</h1>
+    </div>
+    <div>
+        <h2><a href="https://virtualhumans.mpi-inf.mpg.de/behave/">Return back to the project page</a></h2>
+    </div>
+    <h2>Data License</h2>
+    For non-commercial and scientific research purposes <br><br>
+
+    Please read carefully the following terms and conditions and any accompanying documentation before you download and/or use the BEHAVE data (the "Data"). By downloading and/or using the Data, you acknowledge that you have read these terms and conditions, understand them, and agree to be bound by them. If you do not agree with these terms and conditions, you must not download and/or use the Data.
+    <br><br>
+
+    <h2>Ownership</h2>
+    The Data has been developed at the Max Planck Institute and is owned by and proprietary material of the Max-Planck-Gesellschaft zur Förderung der Wissenschaften e.V. (hereinafter “MPG”; MPI and MPG hereinafter collectively “Max-Planck”).
+
+    <br><br>
+    <h2>License Grant</h2>
+    Max-Planck grants you a non-exclusive, non-transferable, free of charge right:
+
+    To install the Data on computers owned, leased or otherwise controlled by you and/or your organisation;
+    To use the Data for the sole purpose of performing non-commercial scientific research.
+    Any other use, in particular any use for commercial purposes, is prohibited. This includes, without limitation, incorporation in a commercial product, use in a commercial service, or production of other artefacts for commercial purposes including, for example, 3D models, movies, or video games. The Data may not be reproduced, modified and/or made available in any form to any third party without Max-Planck’s prior written permission.
+    <br><br>
+
+    <h2>Usage for publication</h2>
+    In case the images are used for publication or public presentations, you are required to <strong>blur all human faces</strong>.
+    <br><br>
+
+    <h2>Disclaimer of Representations and Warranties</h2>
+    You expressly acknowledge and agree that the Data results from basic research, is provided “AS IS”, may contain errors, and that any use of the Data is at your sole risk. MAX-PLANCK MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND CONCERNING THE CODE, NEITHER EXPRESS NOR IMPLIED, AND THE ABSENCE OF ANY LEGAL OR ACTUAL DEFECTS, WHETHER DISCOVERABLE OR NOT. Specifically, and not to limit the foregoing, Max-Planck makes no representations or warranties (i) regarding the merchantability or fitness for a particular purpose of the Data, (ii) that the use of the Data will not infringe any patents, copyrights or other intellectual property rights of a third party, and (iii) that the use of the Data will not cause any damage of any kind to you or a third party.
+    <br><br>
+
+    <h2>Limitation of Liability</h2>
+    Under no circumstances shall Max-Planck be liable for any incidental, special, indirect or consequential damages arising out of or relating to this license, including but not limited to, any lost profits, business interruption, loss of programs or other data, or all other commercial damages or losses, even if advised of the possibility thereof.
+    <br><br>
+
+    <h2>No Maintenance Services</h2>
+    You understand and agree that Max-Planck is under no obligation to provide either maintenance services, update services, notices of latent defects, or corrections of defects with regard to the Data. Max-Planck nevertheless reserves the right to update, modify, or discontinue the Data at any time.
+    <br><br>
+
+    <h2>Publication with BEHAVE</h2>
+    You agree to cite the corresponding CVPR'22 paper when reporting results with this dataset.
+    This website lists the most up to date bibliographic information on the front page.
+    <br><br>
+
+    <h2>Citation</h2>
+    If you use this dataset, you agree to cite the corresponding CVPR'22 paper:
+    <pre class="bg-light p-2">
+
+    @inproceedings{bhatnagar22behave,
+    title = {BEHAVE: Dataset and Method for Tracking Human Object Interactions},
+    author={Bhatnagar, Bharat Lal and Xie, Xianghui and Petrov, Ilya and Sminchisescu, Cristian and Theobalt, Christian and Pons-Moll, Gerard},
+    booktitle = {{IEEE} Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month = {jun},
+    organization = {{IEEE}},
+    year = {2022},
+    }</pre>
+    <br>
+
+    <h2>Updates</h2>
+    <li>March 20, 2024: Added object masks for frame `t0038.000`, `t0048.000` in sequence `Date03_Sub03_tablesquare_lift`, thanks to Daniel Sungho Jung! The data is packed into Date03 sequences.</li>
+    <li>February 05, 2024: Packed data for the <a href="https://rhobin-challenge.github.io/">second RHOBIN challenge </a> are released. Download details see <a href="https://codalab.lisn.upsaclay.fr/competitions/17572#learn_the_details">competition website</a>.
+    <li>January 10, 2023: Packed training data and test input for the <a href="https://codalab.lisn.upsaclay.fr/competitions/9337" target="_blank">BEHAVE challenges</a> are released. Download <a href = "license.html">here.</a> </li>
+    <li>October 08, 2022: After comprehensive processing, our first version of registrations at 30fps is released! Download <a href = "license.html">here.</a> </li>
+    <li>August 06, 2022: Raw videos are released. Download <a href = "license.html">here.</a> </li>
+    <br>
+
+    <h2>Download</h2>
+    By downloading the Data, you agree to the license terms. The full dataset contains multi-view RGB-D images paired with SMPL and object registrations. Details about the dataset structure and usage are described in the demo repository.
+    <li><a href="https://github.com/xiexh20/behave-dataset" target="_blank">Demo repository</a></li>
+    <br>
+    Download datasets:
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/objects.zip" target="_blank">Scanned objects </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/calibs.zip" target="_blank">Calibration files </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/split.json" target="_blank">Train and test split </a></li>
+    Sequences separated by dates (in total ~140GB):
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/Date01.zip" target="_blank">Date01 sequences </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/Date02.zip" target="_blank">Date02 sequences </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/Date03.zip" target="_blank">Date03 sequences </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/Date04.zip" target="_blank">Date04 sequences </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/Date05.zip" target="_blank">Date05 sequences </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/Date06.zip" target="_blank">Date06 sequences </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/Date07.zip" target="_blank">Date07 sequences </a></li>
+    After downloading all the sequences, run <code>unzip "Date*.zip" -d sequences</code> to extract all sequence files. Please refer to the <a href="https://github.com/xiexh20/behave-dataset#dataset-structure" target="_blank">github repo</a> for more details about the dataset structure.
+    <br>
+    <br>
+    Raw videos, we provide the RGB videos and registered depth (i.e. same resolution with color image) videos:
+    <li>Date01: <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date01_color.tar" target="_blank">color videos (5.5GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date01_depth.tar" target="_blank">depth videos (73.6GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date01_time.tar" target="_blank">frame timestamps</a></li>
+    <li>Date02: <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date02_color.tar" target="_blank">color videos (5.4GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date02_depth.tar" target="_blank">depth videos (46.4GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date02_time.tar" target="_blank">frame timestamps</a></li>
+    <li>Date03: <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date03_color.tar" target="_blank">color videos (16.5GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date03_depth_sub03.tar" target="_blank">depth part1 (60.8GB)</a>,
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date03_depth_sub04.tar" target="_blank">depth part2 (59.7GB)</a>,
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date03_depth_sub05.tar" target="_blank">depth part3 (49.5GB)</a>,
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date03_empty.tar" target="_blank">depth part4 (0.5GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date03_time.tar" target="_blank">frame timestamps</a></li>
+    <li>Date04: <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date04_color.tar" target="_blank">color videos (6.5GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date04_depth.tar" target="_blank">depth videos (69.5GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date04_time.tar" target="_blank">frame timestamps</a></li>
+    <li>Date05: <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date05_color.tar" target="_blank">color videos (6.8GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date05_depth.tar" target="_blank">depth videos (86.1GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date05_time.tar" target="_blank">frame timestamps</a></li>
+    <li>Date06: <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date06_color.tar" target="_blank">color videos (6.0GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date06_depth.tar" target="_blank">depth videos (69.2GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date06_time.tar" target="_blank">frame timestamps</a></li>
+    <li>Date07: <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date07_color.tar" target="_blank">color videos (10.7GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date07_depth_sub4-5.tar" target="_blank">depth part1 (92.6GB)</a>,
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date07_depth_sub8.tar" target="_blank">depth part2 (60.8GB)</a>,
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date07_empty.tar" target="_blank">depth part3 (0.5GB)</a>,
+    <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date07_time.tar" target="_blank">frame timestamps</a></li>
+
+    <br>
+    <br>
+    Annotations at 30fps:
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/behave-30fps-params-v1.tar" target="_blank">SMPL and object parameters </a>.
+        Interpretation of these parameters can be found in <a href="https://github.com/xiexh20/behave-dataset/tree/main/tools" target="_blank">our repo.</a></li>
+    <br>
+    Most sequences have accurate alignment between registration and point clouds as well as RGB images. For a few seuqencses where object rigistration is very difficult,
+    there might be frames that do not align perfectly. These frames are found empirically by computing the vertex to vertex distance between two consecutive frames.
+    We provide a reference for the possible error frames <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/behave-30fps-error_frames.json" target="_blank">here</a>.
+    <br>
+    Human and object segmentation masks:
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/masks/masks-date01-02.tar" target="_blank">part1 (~7GB) </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/masks/masks-date03.tar" target="_blank">part2 (~10GB) </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/masks/masks-date04-06.tar" target="_blank">part3 (~10GB) </a></li>
+    <li><a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/masks/masks-date07.tar" target="_blank">part4 (~7GB) </a></li>
+
+    <br>
+    <a href="https://rhobin-challenge.github.io/" target="_blank">2nd RHOBIN challenge (CVPR'24)</a> data:
+    <li><a href="https://codalab.lisn.upsaclay.fr/competitions/17571" target="_blank">Human reconstruction</a>:
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/cvprw24/behave-train.tar" target="_blank"> BEHAVE training data (26GB), </a>
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/cvprw24/behave-val-test.tar" target="_blank"> BEHAVE validation and test data (3.3GB), </a>
+        <a href="https://intercap.is.tue.mpg.de/" target="_blank"> InterCap validation and test</a>: Download->Processed data for the CVPR'24 RHOBIN challenge->image-based tasks->validation and test set.
+    </li>
+    <li><a href="https://codalab.lisn.upsaclay.fr/competitions/17524" target="_blank">Object 6DoF pose estimation</a>:
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/cvprw24/behave-train.tar" target="_blank"> BEHAVE training data (26GB, same as HMR track), </a>
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/cvprw24/behave-val-test.tar" target="_blank"> BEHAVE validation and test data (3.3GB, same as HMR track), </a>
+        <a href="https://intercap.is.tue.mpg.de/" target="_blank"> InterCap validation and test: </a>Download->Processed data for the CVPR'24 RHOBIN challenge->image-based tasks.
+    </li>
+    <li><a href="https://codalab.lisn.upsaclay.fr/competitions/17522" target="_blank">Joint interaction reconstruction</a>:
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/cvprw24/behave-train.tar" target="_blank"> BEHAVE training data (26GB, same as HMR track), </a>
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/cvprw24/behave-val-test.tar" target="_blank"> BEHAVE validation and test data (3.3GB, same as HMR track), </a>
+        <a href="https://intercap.is.tue.mpg.de/" target="_blank"> InterCap validation and test: </a>Download->Processed data for the CVPR'24 RHOBIN challenge->image-based tasks.
+    </li>
+    <li><a href="https://codalab.lisn.upsaclay.fr/competitions/17572" target="_blank">Joint interaction tracking</a>:
+        <a href="https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/cvprw24/behave-video.tar" target="_blank"> BEHAVE train, val and test (25GB), </a>
+        <a href="https://intercap.is.tue.mpg.de/" target="_blank"> InterCap validation and test: </a>Download->Processed data for the CVPR'24 RHOBIN challenge->video-based tasks->train, validation and test.
+    </li>
+</main>
+
+
+
+<footer class="mt-5 pt-2 pb-3 border-top text-center text-muted">
+    <a href="//virtualhumans.mpi-inf.mpg.de/contact.html" class="text-muted small">Contact</a> •
+    <a href="//imprint.mpi-klsb.mpg.de/inf/virtualhumans.mpi-inf.mpg.de" class="text-muted small">Imprint/ Impressum</a> •
+    <a href="//data-protection.mpi-klsb.mpg.de/inf/virtualhumans.mpi-inf.mpg.de" class="text-muted small">Data Protection / Datenschutzhinweis</a>
+</footer>
+
+</body>
+</html>

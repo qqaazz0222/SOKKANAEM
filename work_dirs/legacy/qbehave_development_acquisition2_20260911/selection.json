@@ -1,0 +1,146 @@
+{
+  "selection": [
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_basketball.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_basketball.1.time.json",
+        "bytes": 44537,
+        "sha256": "1a6db359b11a7ccad4a80e185124f8dd48da9f168b1c32834181d497f8089cc8"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_boxlong_hand.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_boxlong_hand.1.time.json",
+        "bytes": 44529,
+        "sha256": "b1da240ecb490b3e7c7592bf1e0a48a2f4021d62820dca191a08b29de7113c28"
+      },
+      "color_count": 1500,
+      "paired_count": 1499,
+      "pairing_coverage": 0.9993333333333333,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_boxsmall_hand.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_boxsmall_hand.1.time.json",
+        "bytes": 44533,
+        "sha256": "6d74636ccf016997d4d5938daa45db7c2fd66b965540377b6b62e0d2af6d8105"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_chairblack_hand.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_chairblack_hand.1.time.json",
+        "bytes": 44541,
+        "sha256": "d85d47dd4282c23aa8b8408f05f0a82d1203beaa0865704bdc1fd6541ca69e7c"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_keyboard_move.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_keyboard_move.1.time.json",
+        "bytes": 44533,
+        "sha256": "22fa9311ea0b3a69e9688fe55f4c944740083437e9af6548256b7c4e9d6e35a8"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_plasticcontainer.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_plasticcontainer.1.time.json",
+        "bytes": 44537,
+        "sha256": "edbfd7e3a78a38c0c6e119f62822bca43c1ba7020b34c3ec659ddb59d2d918cd"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_suitcase.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_suitcase.1.time.json",
+        "bytes": 44529,
+        "sha256": "420781480c3a1cdfc12273f545691bb898833afd7059b109cbbdd47c6def787b"
+      },
+      "color_count": 1500,
+      "paired_count": 1499,
+      "pairing_coverage": 0.9993333333333333,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    },
+    {
+      "date": "date01",
+      "prefix": "Date01_Sub01_tablesquare_hand.1",
+      "timestamp": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/Date01_Sub01_tablesquare_hand.1.time.json",
+        "bytes": 44533,
+        "sha256": "15ce5c40c52e946ead64183a789d1574208d0ea7c6131650859a2384d90c5563"
+      },
+      "color_count": 1500,
+      "paired_count": 1500,
+      "pairing_coverage": 1.0,
+      "timestamp_archive": {
+        "path": "work_dirs/qbehave_development_acquisition2_20260911/date01_time.tar",
+        "bytes": 5939200,
+        "sha256": "cd2dbfa432ff4340b58164cba173ed04ffea805f6995b243a3130e487bdbda95"
+      }
+    }
+  ],
+  "license_snapshot": {
+    "path": "work_dirs/qbehave_development_acquisition2_20260911/publisher_license.html",
+    "bytes": 15593,
+    "sha256": "f5ba537b429c1f3e91ef95ce34577e0dbb7ff9b1ef1999c341251c170a1ffe14"
+  },
+  "no_predictions": true
+}

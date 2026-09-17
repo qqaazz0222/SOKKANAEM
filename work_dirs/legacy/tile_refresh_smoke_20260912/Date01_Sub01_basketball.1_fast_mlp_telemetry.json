@@ -1,0 +1,90 @@
+[
+  {
+    "full_refresh": true,
+    "backbone_calls": 1,
+    "cache_age": 0,
+    "gap_attempted": 0,
+    "predicted_risk": null,
+    "reason": "initial",
+    "incoming_h_abs_mean": 0.0,
+    "flow_calls": 0,
+    "late": false
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 1,
+    "gap_attempted": 1,
+    "predicted_risk": 0.04450317844748497,
+    "reason": "mandatory_first_skip",
+    "incoming_h_abs_mean": 0.0,
+    "flow_calls": 2,
+    "late": false
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 2,
+    "gap_attempted": 2,
+    "predicted_risk": 0.04311797395348549,
+    "reason": "extended_reuse",
+    "incoming_h_abs_mean": 0.0,
+    "flow_calls": 2,
+    "late": false
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 3,
+    "gap_attempted": 3,
+    "predicted_risk": 0.0449274443089962,
+    "reason": "extended_reuse",
+    "incoming_h_abs_mean": 0.0,
+    "flow_calls": 2,
+    "late": false
+  },
+  {
+    "full_refresh": true,
+    "backbone_calls": 1,
+    "cache_age": 0,
+    "gap_attempted": 4,
+    "predicted_risk": null,
+    "reason": "maximum_age",
+    "incoming_h_abs_mean": 0.0,
+    "flow_calls": 0,
+    "late": false
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 1,
+    "gap_attempted": 1,
+    "predicted_risk": 0.04276068136096001,
+    "reason": "mandatory_first_skip",
+    "incoming_h_abs_mean": 0.0,
+    "flow_calls": 2,
+    "late": false
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 2,
+    "gap_attempted": 2,
+    "predicted_risk": 0.04245075210928917,
+    "reason": "extended_reuse",
+    "incoming_h_abs_mean": 0.0,
+    "flow_calls": 2,
+    "late": false
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 3,
+    "gap_attempted": 3,
+    "predicted_risk": 0.043777596205472946,
+    "reason": "extended_reuse",
+    "incoming_h_abs_mean": 0.0,
+    "flow_calls": 2,
+    "late": false
+  }
+]

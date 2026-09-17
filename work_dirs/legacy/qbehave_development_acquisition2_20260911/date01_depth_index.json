@@ -1,0 +1,794 @@
+{
+  "archive": {
+    "url": "https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date01_depth.tar",
+    "bytes": 79066552320,
+    "etag": "\"1268bbd800-5e5814a18f73f\""
+  },
+  "selected": {
+    "Date01_Sub01_basketball.1.depth-reg.mp4": {
+      "name": "Date01_Sub01_basketball.1.depth-reg.mp4",
+      "bytes": 687468496,
+      "offset": 8067243008,
+      "regular": true
+    },
+    "Date01_Sub01_boxlong_hand.1.depth-reg.mp4": {
+      "name": "Date01_Sub01_boxlong_hand.1.depth-reg.mp4",
+      "bytes": 681544260,
+      "offset": 12329834496,
+      "regular": true
+    },
+    "Date01_Sub01_boxsmall_hand.1.depth-reg.mp4": {
+      "name": "Date01_Sub01_boxsmall_hand.1.depth-reg.mp4",
+      "bytes": 681576404,
+      "offset": 16592154112,
+      "regular": true
+    },
+    "Date01_Sub01_chairblack_hand.1.depth-reg.mp4": {
+      "name": "Date01_Sub01_chairblack_hand.1.depth-reg.mp4",
+      "bytes": 690419172,
+      "offset": 20870855168,
+      "regular": true
+    },
+    "Date01_Sub01_keyboard_move.1.depth-reg.mp4": {
+      "name": "Date01_Sub01_keyboard_move.1.depth-reg.mp4",
+      "bytes": 690702017,
+      "offset": 33856144384,
+      "regular": true
+    },
+    "Date01_Sub01_plasticcontainer.1.depth-reg.mp4": {
+      "name": "Date01_Sub01_plasticcontainer.1.depth-reg.mp4",
+      "bytes": 678626662,
+      "offset": 42973668352,
+      "regular": true
+    },
+    "Date01_Sub01_suitcase.1.depth-reg.mp4": {
+      "name": "Date01_Sub01_suitcase.1.depth-reg.mp4",
+      "bytes": 684077635,
+      "offset": 49834995712,
+      "regular": true
+    },
+    "Date01_Sub01_tablesquare_hand.1.depth-reg.mp4": {
+      "name": "Date01_Sub01_tablesquare_hand.1.depth-reg.mp4",
+      "bytes": 691877767,
+      "offset": 61253369344,
+      "regular": true
+    }
+  },
+  "visited_headers": [
+    {
+      "name": "Date01_empty02.0.depth-reg.mp4",
+      "bytes": 104717527,
+      "offset": 512,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty02.1.depth-reg.mp4",
+      "bytes": 141980923,
+      "offset": 104718848,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty02.2.depth-reg.mp4",
+      "bytes": 143433537,
+      "offset": 246700544,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty02.3.depth-reg.mp4",
+      "bytes": 86041007,
+      "offset": 390134784,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty03.0.depth-reg.mp4",
+      "bytes": 73856968,
+      "offset": 476176384,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty03.1.depth-reg.mp4",
+      "bytes": 136462332,
+      "offset": 550033920,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty03.2.depth-reg.mp4",
+      "bytes": 137767612,
+      "offset": 686496768,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty03.3.depth-reg.mp4",
+      "bytes": 77845036,
+      "offset": 824265216,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty.0.depth-reg.mp4",
+      "bytes": 70918477,
+      "offset": 902111232,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty.1.depth-reg.mp4",
+      "bytes": 94712612,
+      "offset": 973030400,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty.2.depth-reg.mp4",
+      "bytes": 91457175,
+      "offset": 1067743744,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty.3.depth-reg.mp4",
+      "bytes": 75064461,
+      "offset": 1159201792,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_back.0.depth-reg.mp4",
+      "bytes": 385698972,
+      "offset": 1234267136,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_back.1.depth-reg.mp4",
+      "bytes": 683178578,
+      "offset": 1619966976,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_back.2.depth-reg.mp4",
+      "bytes": 691327612,
+      "offset": 2303146496,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_back.3.depth-reg.mp4",
+      "bytes": 391435291,
+      "offset": 2994475008,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hand.0.depth-reg.mp4",
+      "bytes": 387449274,
+      "offset": 3385911296,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hand.1.depth-reg.mp4",
+      "bytes": 687743248,
+      "offset": 3773361152,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hand.2.depth-reg.mp4",
+      "bytes": 694484579,
+      "offset": 4461105152,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hand.3.depth-reg.mp4",
+      "bytes": 388128578,
+      "offset": 5155590656,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hug.0.depth-reg.mp4",
+      "bytes": 384913958,
+      "offset": 5543719936,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hug.1.depth-reg.mp4",
+      "bytes": 685398181,
+      "offset": 5928634880,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hug.2.depth-reg.mp4",
+      "bytes": 681300198,
+      "offset": 6614033920,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hug.3.depth-reg.mp4",
+      "bytes": 383970516,
+      "offset": 7295334912,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_basketball.0.depth-reg.mp4",
+      "bytes": 387935888,
+      "offset": 7679306240,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_basketball.1.depth-reg.mp4",
+      "bytes": 687468496,
+      "offset": 8067243008,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_basketball.2.depth-reg.mp4",
+      "bytes": 688154839,
+      "offset": 8754712064,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_basketball.3.depth-reg.mp4",
+      "bytes": 386517546,
+      "offset": 9442867712,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlarge_hand.0.depth-reg.mp4",
+      "bytes": 380237937,
+      "offset": 9829386240,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlarge_hand.1.depth-reg.mp4",
+      "bytes": 675696376,
+      "offset": 10209625088,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlarge_hand.2.depth-reg.mp4",
+      "bytes": 678488009,
+      "offset": 10885322240,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlarge_hand.3.depth-reg.mp4",
+      "bytes": 385023399,
+      "offset": 11563810816,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlong_hand.0.depth-reg.mp4",
+      "bytes": 380998782,
+      "offset": 11948834816,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlong_hand.1.depth-reg.mp4",
+      "bytes": 681544260,
+      "offset": 12329834496,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlong_hand.2.depth-reg.mp4",
+      "bytes": 683252657,
+      "offset": 13011379712,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlong_hand.3.depth-reg.mp4",
+      "bytes": 384664775,
+      "offset": 13694632960,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxmedium_hand.0.depth-reg.mp4",
+      "bytes": 378971994,
+      "offset": 14079298560,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxmedium_hand.1.depth-reg.mp4",
+      "bytes": 681482066,
+      "offset": 14458271232,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxmedium_hand.2.depth-reg.mp4",
+      "bytes": 688119377,
+      "offset": 15139753984,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxmedium_hand.3.depth-reg.mp4",
+      "bytes": 388222257,
+      "offset": 15827874304,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxsmall_hand.0.depth-reg.mp4",
+      "bytes": 376055863,
+      "offset": 16216097280,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxsmall_hand.1.depth-reg.mp4",
+      "bytes": 681576404,
+      "offset": 16592154112,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxsmall_hand.2.depth-reg.mp4",
+      "bytes": 681505868,
+      "offset": 17273731072,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxsmall_hand.3.depth-reg.mp4",
+      "bytes": 387428009,
+      "offset": 17955237888,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxtiny_hand.0.depth-reg.mp4",
+      "bytes": 381802444,
+      "offset": 18342666752,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxtiny_hand.1.depth-reg.mp4",
+      "bytes": 684670664,
+      "offset": 18724469760,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxtiny_hand.2.depth-reg.mp4",
+      "bytes": 679015733,
+      "offset": 19409141248,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxtiny_hand.3.depth-reg.mp4",
+      "bytes": 385343621,
+      "offset": 20088157696,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_hand.0.depth-reg.mp4",
+      "bytes": 397352378,
+      "offset": 20473502208,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_hand.1.depth-reg.mp4",
+      "bytes": 690419172,
+      "offset": 20870855168,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_hand.2.depth-reg.mp4",
+      "bytes": 700312044,
+      "offset": 21561274880,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_hand.3.depth-reg.mp4",
+      "bytes": 392242019,
+      "offset": 22261587456,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_lift.0.depth-reg.mp4",
+      "bytes": 387293533,
+      "offset": 22653830144,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_lift.1.depth-reg.mp4",
+      "bytes": 687167061,
+      "offset": 23041124352,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_lift.2.depth-reg.mp4",
+      "bytes": 687157582,
+      "offset": 23728292352,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_lift.3.depth-reg.mp4",
+      "bytes": 388402951,
+      "offset": 24415450624,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_sit.0.depth-reg.mp4",
+      "bytes": 386185922,
+      "offset": 24803854336,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_sit.1.depth-reg.mp4",
+      "bytes": 691156361,
+      "offset": 25190041088,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_sit.2.depth-reg.mp4",
+      "bytes": 694687068,
+      "offset": 25881198080,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_sit.3.depth-reg.mp4",
+      "bytes": 392415095,
+      "offset": 26575885824,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_hand.0.depth-reg.mp4",
+      "bytes": 389114494,
+      "offset": 26968301568,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_hand.1.depth-reg.mp4",
+      "bytes": 692495370,
+      "offset": 27357416960,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_hand.2.depth-reg.mp4",
+      "bytes": 701603125,
+      "offset": 28049913344,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_hand.3.depth-reg.mp4",
+      "bytes": 393035878,
+      "offset": 28751517184,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_lift.0.depth-reg.mp4",
+      "bytes": 391549755,
+      "offset": 29144553984,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_lift.1.depth-reg.mp4",
+      "bytes": 691283768,
+      "offset": 29536104448,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_lift.2.depth-reg.mp4",
+      "bytes": 689753357,
+      "offset": 30227388928,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_lift.3.depth-reg.mp4",
+      "bytes": 390857165,
+      "offset": 30917143040,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_sit.0.depth-reg.mp4",
+      "bytes": 382409922,
+      "offset": 31308000768,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_sit.1.depth-reg.mp4",
+      "bytes": 691845658,
+      "offset": 31690411520,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_sit.2.depth-reg.mp4",
+      "bytes": 685341510,
+      "offset": 32382258176,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_sit.3.depth-reg.mp4",
+      "bytes": 393292783,
+      "offset": 33067600384,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_move.0.depth-reg.mp4",
+      "bytes": 395250167,
+      "offset": 33460893696,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_move.1.depth-reg.mp4",
+      "bytes": 690702017,
+      "offset": 33856144384,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_move.2.depth-reg.mp4",
+      "bytes": 685515151,
+      "offset": 34546847232,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_move.3.depth-reg.mp4",
+      "bytes": 523489361,
+      "offset": 35232363008,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_typing.0.depth-reg.mp4",
+      "bytes": 394585392,
+      "offset": 35755853312,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_typing.1.depth-reg.mp4",
+      "bytes": 692056332,
+      "offset": 36150439424,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_typing.2.depth-reg.mp4",
+      "bytes": 679115550,
+      "offset": 36842496512,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_typing.3.depth-reg.mp4",
+      "bytes": 519820690,
+      "offset": 37521612800,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_hand.0.depth-reg.mp4",
+      "bytes": 394743325,
+      "offset": 38041434112,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_hand.1.depth-reg.mp4",
+      "bytes": 685265555,
+      "offset": 38436178432,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_hand.2.depth-reg.mp4",
+      "bytes": 675951260,
+      "offset": 39121444864,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_hand.3.depth-reg.mp4",
+      "bytes": 515717955,
+      "offset": 39797396992,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_move.0.depth-reg.mp4",
+      "bytes": 393841475,
+      "offset": 40313115648,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_move.1.depth-reg.mp4",
+      "bytes": 685222446,
+      "offset": 40706957824,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_move.2.depth-reg.mp4",
+      "bytes": 684696048,
+      "offset": 41392181248,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_move.3.depth-reg.mp4",
+      "bytes": 512908683,
+      "offset": 42076877824,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_plasticcontainer.0.depth-reg.mp4",
+      "bytes": 383880643,
+      "offset": 42589787136,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_plasticcontainer.1.depth-reg.mp4",
+      "bytes": 678626662,
+      "offset": 42973668352,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_plasticcontainer.2.depth-reg.mp4",
+      "bytes": 686079958,
+      "offset": 43652295680,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_plasticcontainer.3.depth-reg.mp4",
+      "bytes": 529937862,
+      "offset": 44338376192,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_move.0.depth-reg.mp4",
+      "bytes": 390878412,
+      "offset": 44868314624,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_move.1.depth-reg.mp4",
+      "bytes": 692055762,
+      "offset": 45259193856,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_move.2.depth-reg.mp4",
+      "bytes": 685559759,
+      "offset": 45951250432,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_move.3.depth-reg.mp4",
+      "bytes": 524410599,
+      "offset": 46636810752,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_sit.0.depth-reg.mp4",
+      "bytes": 380392506,
+      "offset": 47161222144,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_sit.1.depth-reg.mp4",
+      "bytes": 692913059,
+      "offset": 47541615616,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_sit.2.depth-reg.mp4",
+      "bytes": 690843549,
+      "offset": 48234529280,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_sit.3.depth-reg.mp4",
+      "bytes": 527913487,
+      "offset": 48925373440,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase.0.depth-reg.mp4",
+      "bytes": 381707190,
+      "offset": 49453287936,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase.1.depth-reg.mp4",
+      "bytes": 684077635,
+      "offset": 49834995712,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase.2.depth-reg.mp4",
+      "bytes": 689483183,
+      "offset": 50519074304,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase.3.depth-reg.mp4",
+      "bytes": 518253617,
+      "offset": 51208558080,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase_lift.0.depth-reg.mp4",
+      "bytes": 390257527,
+      "offset": 51726812672,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase_lift.1.depth-reg.mp4",
+      "bytes": 684788602,
+      "offset": 52117070848,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase_lift.2.depth-reg.mp4",
+      "bytes": 689917023,
+      "offset": 52801860096,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase_lift.3.depth-reg.mp4",
+      "bytes": 522498241,
+      "offset": 53491778048,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lean.0.depth-reg.mp4",
+      "bytes": 384300444,
+      "offset": 54014277120,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lean.1.depth-reg.mp4",
+      "bytes": 683147276,
+      "offset": 54398578176,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lean.2.depth-reg.mp4",
+      "bytes": 680197641,
+      "offset": 55081726464,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lean.3.depth-reg.mp4",
+      "bytes": 521466574,
+      "offset": 55761925120,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lift.0.depth-reg.mp4",
+      "bytes": 384268269,
+      "offset": 56283392512,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lift.1.depth-reg.mp4",
+      "bytes": 679044808,
+      "offset": 56667661312,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lift.2.depth-reg.mp4",
+      "bytes": 685623828,
+      "offset": 57346706944,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lift.3.depth-reg.mp4",
+      "bytes": 524182523,
+      "offset": 58032331776,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_move.0.depth-reg.mp4",
+      "bytes": 389664575,
+      "offset": 58556514816,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_move.1.depth-reg.mp4",
+      "bytes": 689998842,
+      "offset": 58946180096,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_move.2.depth-reg.mp4",
+      "bytes": 698890401,
+      "offset": 59636179456,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_move.3.depth-reg.mp4",
+      "bytes": 529205129,
+      "offset": 60335070720,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesquare_hand.0.depth-reg.mp4",
+      "bytes": 389092045,
+      "offset": 60864276480,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesquare_hand.1.depth-reg.mp4",
+      "bytes": 691877767,
+      "offset": 61253369344,
+      "regular": true
+    }
+  ],
+  "header_bytes_transferred": 62585,
+  "whole_archive_acquired": false,
+  "whole_archive_indexed": false
+}

@@ -1,0 +1,794 @@
+{
+  "archive": {
+    "url": "https://datasets.d2.mpi-inf.mpg.de/cvpr22behave/video/date01_color.tar",
+    "bytes": 5935503360,
+    "etag": "\"161c89800-5e5703f0c5e9e\""
+  },
+  "selected": {
+    "Date01_Sub01_basketball.1.color.mp4": {
+      "name": "Date01_Sub01_basketball.1.color.mp4",
+      "bytes": 46327815,
+      "offset": 610601984,
+      "regular": true
+    },
+    "Date01_Sub01_boxlong_hand.1.color.mp4": {
+      "name": "Date01_Sub01_boxlong_hand.1.color.mp4",
+      "bytes": 47240295,
+      "offset": 933831680,
+      "regular": true
+    },
+    "Date01_Sub01_boxsmall_hand.1.color.mp4": {
+      "name": "Date01_Sub01_boxsmall_hand.1.color.mp4",
+      "bytes": 48561098,
+      "offset": 1259321856,
+      "regular": true
+    },
+    "Date01_Sub01_chairblack_hand.1.color.mp4": {
+      "name": "Date01_Sub01_chairblack_hand.1.color.mp4",
+      "bytes": 47807978,
+      "offset": 1577740288,
+      "regular": true
+    },
+    "Date01_Sub01_keyboard_move.1.color.mp4": {
+      "name": "Date01_Sub01_keyboard_move.1.color.mp4",
+      "bytes": 48321782,
+      "offset": 2542944256,
+      "regular": true
+    },
+    "Date01_Sub01_plasticcontainer.1.color.mp4": {
+      "name": "Date01_Sub01_plasticcontainer.1.color.mp4",
+      "bytes": 49145414,
+      "offset": 3241221632,
+      "regular": true
+    },
+    "Date01_Sub01_suitcase.1.color.mp4": {
+      "name": "Date01_Sub01_suitcase.1.color.mp4",
+      "bytes": 45900658,
+      "offset": 3745098240,
+      "regular": true
+    },
+    "Date01_Sub01_tablesquare_hand.1.color.mp4": {
+      "name": "Date01_Sub01_tablesquare_hand.1.color.mp4",
+      "bytes": 46250809,
+      "offset": 4600305664,
+      "regular": true
+    }
+  },
+  "visited_headers": [
+    {
+      "name": "Date01_empty02.0.color.mp4",
+      "bytes": 9583751,
+      "offset": 512,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty02.1.color.mp4",
+      "bytes": 11613273,
+      "offset": 9585152,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty02.2.color.mp4",
+      "bytes": 7170209,
+      "offset": 21199360,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty02.3.color.mp4",
+      "bytes": 5281605,
+      "offset": 28370432,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty03.0.color.mp4",
+      "bytes": 7240522,
+      "offset": 33652736,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty03.1.color.mp4",
+      "bytes": 7967095,
+      "offset": 40893952,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty03.2.color.mp4",
+      "bytes": 7372202,
+      "offset": 48861696,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty03.3.color.mp4",
+      "bytes": 7501488,
+      "offset": 56234496,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty.0.color.mp4",
+      "bytes": 6875434,
+      "offset": 63736832,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty.1.color.mp4",
+      "bytes": 6766865,
+      "offset": 70612992,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty.2.color.mp4",
+      "bytes": 5161873,
+      "offset": 77380608,
+      "regular": true
+    },
+    {
+      "name": "Date01_empty.3.color.mp4",
+      "bytes": 5367174,
+      "offset": 82543104,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_back.0.color.mp4",
+      "bytes": 37896753,
+      "offset": 87910912,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_back.1.color.mp4",
+      "bytes": 45321615,
+      "offset": 125808640,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_back.2.color.mp4",
+      "bytes": 43124872,
+      "offset": 171130880,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_back.3.color.mp4",
+      "bytes": 32985712,
+      "offset": 214256640,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hand.0.color.mp4",
+      "bytes": 39530384,
+      "offset": 247243264,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hand.1.color.mp4",
+      "bytes": 46025994,
+      "offset": 286774272,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hand.2.color.mp4",
+      "bytes": 44099692,
+      "offset": 332801024,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hand.3.color.mp4",
+      "bytes": 33741148,
+      "offset": 376901632,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hug.0.color.mp4",
+      "bytes": 36279974,
+      "offset": 410643456,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hug.1.color.mp4",
+      "bytes": 47902699,
+      "offset": 446924288,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hug.2.color.mp4",
+      "bytes": 45684525,
+      "offset": 494827520,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_backpack_hug.3.color.mp4",
+      "bytes": 33781041,
+      "offset": 540512768,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_basketball.0.color.mp4",
+      "bytes": 36306901,
+      "offset": 574294528,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_basketball.1.color.mp4",
+      "bytes": 46327815,
+      "offset": 610601984,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_basketball.2.color.mp4",
+      "bytes": 42189673,
+      "offset": 656930816,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_basketball.3.color.mp4",
+      "bytes": 33024943,
+      "offset": 699121152,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlarge_hand.0.color.mp4",
+      "bytes": 39036341,
+      "offset": 732146688,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlarge_hand.1.color.mp4",
+      "bytes": 48133827,
+      "offset": 771183616,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlarge_hand.2.color.mp4",
+      "bytes": 44303203,
+      "offset": 819318272,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlarge_hand.3.color.mp4",
+      "bytes": 35390086,
+      "offset": 863622144,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlong_hand.0.color.mp4",
+      "bytes": 34817678,
+      "offset": 899013120,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlong_hand.1.color.mp4",
+      "bytes": 47240295,
+      "offset": 933831680,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlong_hand.2.color.mp4",
+      "bytes": 44206831,
+      "offset": 981072896,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxlong_hand.3.color.mp4",
+      "bytes": 33757511,
+      "offset": 1025280512,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxmedium_hand.0.color.mp4",
+      "bytes": 39651036,
+      "offset": 1059038720,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxmedium_hand.1.color.mp4",
+      "bytes": 47338714,
+      "offset": 1098690560,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxmedium_hand.2.color.mp4",
+      "bytes": 43154788,
+      "offset": 1146030080,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxmedium_hand.3.color.mp4",
+      "bytes": 33453287,
+      "offset": 1189185536,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxsmall_hand.0.color.mp4",
+      "bytes": 36681709,
+      "offset": 1222639616,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxsmall_hand.1.color.mp4",
+      "bytes": 48561098,
+      "offset": 1259321856,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxsmall_hand.2.color.mp4",
+      "bytes": 41106005,
+      "offset": 1307883520,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxsmall_hand.3.color.mp4",
+      "bytes": 32008069,
+      "offset": 1348990464,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxtiny_hand.0.color.mp4",
+      "bytes": 37790161,
+      "offset": 1380999168,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxtiny_hand.1.color.mp4",
+      "bytes": 46735868,
+      "offset": 1418789888,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxtiny_hand.2.color.mp4",
+      "bytes": 40149969,
+      "offset": 1465526272,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_boxtiny_hand.3.color.mp4",
+      "bytes": 32898356,
+      "offset": 1505676800,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_hand.0.color.mp4",
+      "bytes": 39163439,
+      "offset": 1538575872,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_hand.1.color.mp4",
+      "bytes": 47807978,
+      "offset": 1577740288,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_hand.2.color.mp4",
+      "bytes": 43828841,
+      "offset": 1625548800,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_hand.3.color.mp4",
+      "bytes": 34997023,
+      "offset": 1669378560,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_lift.0.color.mp4",
+      "bytes": 36824804,
+      "offset": 1704376320,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_lift.1.color.mp4",
+      "bytes": 47969047,
+      "offset": 1741201920,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_lift.2.color.mp4",
+      "bytes": 45566248,
+      "offset": 1789171712,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_lift.3.color.mp4",
+      "bytes": 35975442,
+      "offset": 1834738688,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_sit.0.color.mp4",
+      "bytes": 36978314,
+      "offset": 1870714880,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_sit.1.color.mp4",
+      "bytes": 42784731,
+      "offset": 1907694080,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_sit.2.color.mp4",
+      "bytes": 37256145,
+      "offset": 1950479360,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairblack_sit.3.color.mp4",
+      "bytes": 32859914,
+      "offset": 1987736064,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_hand.0.color.mp4",
+      "bytes": 37077709,
+      "offset": 2020596736,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_hand.1.color.mp4",
+      "bytes": 47468927,
+      "offset": 2057675264,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_hand.2.color.mp4",
+      "bytes": 42862391,
+      "offset": 2105144832,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_hand.3.color.mp4",
+      "bytes": 34314214,
+      "offset": 2148007936,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_lift.0.color.mp4",
+      "bytes": 38331678,
+      "offset": 2182322688,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_lift.1.color.mp4",
+      "bytes": 48611383,
+      "offset": 2220655104,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_lift.2.color.mp4",
+      "bytes": 43787487,
+      "offset": 2269267456,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_lift.3.color.mp4",
+      "bytes": 35028246,
+      "offset": 2313055744,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_sit.0.color.mp4",
+      "bytes": 40162663,
+      "offset": 2348084736,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_sit.1.color.mp4",
+      "bytes": 42502826,
+      "offset": 2388248064,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_sit.2.color.mp4",
+      "bytes": 35897126,
+      "offset": 2430751744,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_chairwood_sit.3.color.mp4",
+      "bytes": 35792782,
+      "offset": 2466649600,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_move.0.color.mp4",
+      "bytes": 40500454,
+      "offset": 2502443008,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_move.1.color.mp4",
+      "bytes": 48321782,
+      "offset": 2542944256,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_move.2.color.mp4",
+      "bytes": 41986883,
+      "offset": 2591266816,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_move.3.color.mp4",
+      "bytes": 46108074,
+      "offset": 2633254400,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_typing.0.color.mp4",
+      "bytes": 37461560,
+      "offset": 2679363072,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_typing.1.color.mp4",
+      "bytes": 46362860,
+      "offset": 2716825600,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_typing.2.color.mp4",
+      "bytes": 38735897,
+      "offset": 2763189248,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_keyboard_typing.3.color.mp4",
+      "bytes": 47894217,
+      "offset": 2801926144,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_hand.0.color.mp4",
+      "bytes": 39807353,
+      "offset": 2849821184,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_hand.1.color.mp4",
+      "bytes": 45928489,
+      "offset": 2889629184,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_hand.2.color.mp4",
+      "bytes": 41547063,
+      "offset": 2935558656,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_hand.3.color.mp4",
+      "bytes": 42454515,
+      "offset": 2977106432,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_move.0.color.mp4",
+      "bytes": 41061000,
+      "offset": 3019561472,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_move.1.color.mp4",
+      "bytes": 48326012,
+      "offset": 3060623360,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_move.2.color.mp4",
+      "bytes": 44134289,
+      "offset": 3108950016,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_monitor_move.3.color.mp4",
+      "bytes": 47230081,
+      "offset": 3153084928,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_plasticcontainer.0.color.mp4",
+      "bytes": 40904712,
+      "offset": 3200315904,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_plasticcontainer.1.color.mp4",
+      "bytes": 49145414,
+      "offset": 3241221632,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_plasticcontainer.2.color.mp4",
+      "bytes": 41595333,
+      "offset": 3290368000,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_plasticcontainer.3.color.mp4",
+      "bytes": 44268186,
+      "offset": 3331963904,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_move.0.color.mp4",
+      "bytes": 43845788,
+      "offset": 3376232960,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_move.1.color.mp4",
+      "bytes": 44405075,
+      "offset": 3420079616,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_move.2.color.mp4",
+      "bytes": 35551169,
+      "offset": 3464485376,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_move.3.color.mp4",
+      "bytes": 44235963,
+      "offset": 3500037120,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_sit.0.color.mp4",
+      "bytes": 39090360,
+      "offset": 3544273920,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_sit.1.color.mp4",
+      "bytes": 41940294,
+      "offset": 3583365120,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_sit.2.color.mp4",
+      "bytes": 33819128,
+      "offset": 3625306112,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_stool_sit.3.color.mp4",
+      "bytes": 48935695,
+      "offset": 3659125760,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase.0.color.mp4",
+      "bytes": 37035251,
+      "offset": 3708062208,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase.1.color.mp4",
+      "bytes": 45900658,
+      "offset": 3745098240,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase.2.color.mp4",
+      "bytes": 38179539,
+      "offset": 3790999552,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase.3.color.mp4",
+      "bytes": 44300388,
+      "offset": 3829179904,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase_lift.0.color.mp4",
+      "bytes": 36382977,
+      "offset": 3873481216,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase_lift.1.color.mp4",
+      "bytes": 46059270,
+      "offset": 3909864960,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase_lift.2.color.mp4",
+      "bytes": 40765406,
+      "offset": 3955924992,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_suitcase_lift.3.color.mp4",
+      "bytes": 48491624,
+      "offset": 3996690944,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lean.0.color.mp4",
+      "bytes": 34580816,
+      "offset": 4045183488,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lean.1.color.mp4",
+      "bytes": 44869580,
+      "offset": 4079764992,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lean.2.color.mp4",
+      "bytes": 41801390,
+      "offset": 4124635136,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lean.3.color.mp4",
+      "bytes": 43320120,
+      "offset": 4166437376,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lift.0.color.mp4",
+      "bytes": 38964137,
+      "offset": 4209758208,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lift.1.color.mp4",
+      "bytes": 48017059,
+      "offset": 4248722944,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lift.2.color.mp4",
+      "bytes": 43099757,
+      "offset": 4296740864,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_lift.3.color.mp4",
+      "bytes": 47968630,
+      "offset": 4339841536,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_move.0.color.mp4",
+      "bytes": 38483410,
+      "offset": 4387810816,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_move.1.color.mp4",
+      "bytes": 48347479,
+      "offset": 4426294784,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_move.2.color.mp4",
+      "bytes": 43255761,
+      "offset": 4474642944,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesmall_move.3.color.mp4",
+      "bytes": 45853512,
+      "offset": 4517899264,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesquare_hand.0.color.mp4",
+      "bytes": 36551610,
+      "offset": 4563753472,
+      "regular": true
+    },
+    {
+      "name": "Date01_Sub01_tablesquare_hand.1.color.mp4",
+      "bytes": 46250809,
+      "offset": 4600305664,
+      "regular": true
+    }
+  ],
+  "header_bytes_transferred": 62585,
+  "whole_archive_acquired": false,
+  "whole_archive_indexed": false
+}

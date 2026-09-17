@@ -1,0 +1,38 @@
+{
+  "role": "design arithmetic only; no depth model inference",
+  "probe_axis_positions": [
+    4,
+    14,
+    23,
+    32
+  ],
+  "probe_indices": [
+    152,
+    162,
+    171,
+    180,
+    522,
+    532,
+    541,
+    550,
+    855,
+    865,
+    874,
+    883,
+    1188,
+    1198,
+    1207,
+    1216
+  ],
+  "spatial_observation_rank": 6,
+  "observer_kappa": 0.20928343958497253,
+  "additional_persistent_state_bytes": 68576,
+  "latency_target_from_rounded_previous_ms": 5.58526,
+  "scalar_anchor_example": {
+    "cached_actual_feature": 105,
+    "current_observer": 6,
+    "observer_at_last_update": 5,
+    "with_stamp": 106,
+    "without_stamp": 111
+  }
+}

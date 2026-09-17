@@ -1,0 +1,165 @@
+{
+  "role": "candidate frozen BEFORE any holdout GT scoring, per work_dirs/qbehave_holdout_ready_20260911/protocol.json preservation rule",
+  "supersedes": "the QuantileSwitchQ0 k=4 freeze written earlier today; the holdout was not touched in between, so re-freezing on development evidence is allowed",
+  "candidate": {
+    "class": "sokkanaem.qdepcache.MappedRankQ0",
+    "k": 6.0,
+    "decay": 0.05,
+    "tiles": [
+      7,
+      11
+    ],
+    "prefix": 0,
+    "refresh_every": 8,
+    "use_graphs": true,
+    "sensitivity": [
+      2.0138,
+      2.2321,
+      1.4192,
+      2.0879,
+      0.4056,
+      1.3326,
+      0.9099,
+      1.1446,
+      0.5242,
+      1.4464,
+      0.9691,
+      0.5146,
+      0.2041,
+      0.146,
+      0.2812,
+      0.3687
+    ]
+  },
+  "sensitivity_provenance": "per-tile (output gain of refreshing that tile alone) / (its stale feature error), measured on the four development sequences at stride 4, normalised to mean one. A calibration of THIS camera geometry, crop and tile grid.",
+  "why_this_configuration": {
+    "gate_4_of_4_at": "5.1471 ms mean, 0.513 active, p95 7.1697 (development run gate8)",
+    "both_parts_needed": "fixed 7 tiles without the switch fails flat_tv on backpack_back; the switch rescues it. At 8 tiles the ranking alone sufficed.",
+    "boundary": "6/10 tiles fails edge AbsRel and flat_tv, so the budget floor is located"
+  },
+  "verification": "graph replay equals eager bitwise; repeat determinism holds across the timing protocol's warmup; 28 captured graphs",
+  "controls": [
+    "PrefixTiledQ0 prefix=12 (optimized dense, gate baseline)",
+    "PrefixTiledQ0 prefix=0 tiles=12",
+    "PrefixTiledQ0 prefix=0 tiles=8",
+    "AdaptiveReuseQ0 threshold=1.8604798128762923e-06 (frozen adaptive)"
+  ],
+  "judgement_fixed_in_advance": {
+    "quality": "frozen Q0-relative gate, combined AND every-sequence pass required",
+    "latency": "mean and p95 over 3 rotated repeats, same timed() loop",
+    "claim_allowed_only_if": "the candidate passes the gate on every holdout sequence AND its mean latency is below the frozen adaptive's in the same run",
+    "no_retuning": "neither k, the tile budget nor the sensitivity map is re-selected after seeing holdout numbers; a failure is reported as a failure"
+  },
+  "code": [
+    {
+      "path": "sokkanaem/qdepcache.py",
+      "bytes": 21247,
+      "sha256": "fda1906f3ee9a1ef1d1b9293e4b2c2f8560cecc2a470549ad9b86aae9e47d028"
+    },
+    {
+      "path": "sokkanaem/qprefix_refresh.py",
+      "bytes": 18687,
+      "sha256": "25e760292fbea0b624b386c2f8f6894a453c6e089c13b848ff23b6a37fe24cef"
+    },
+    {
+      "path": "sokkanaem/qtile_probe.py",
+      "bytes": 6948,
+      "sha256": "81fedeac893f9d674564a2a42c044aa919eb4f274e872ce81b2d61f012bbb1c4"
+    },
+    {
+      "path": "sokkanaem/qtile_fast.py",
+      "bytes": 16322,
+      "sha256": "9c657283112ad4f7097d4af0b59b3ce30ea4d1ee2d41aa857ad8bf315e644bdb"
+    },
+    {
+      "path": "scripts/depcache_gate.py",
+      "bytes": 9394,
+      "sha256": "662d1fed0bcf89bcb43be89ac21d4d152e2c033301925b00a8be5632c3108ce4"
+    }
+  ],
+  "development_evidence": [
+    {
+      "path": "work_dirs/depcache_gate8_20260915/combined.json",
+      "bytes": 7109,
+      "sha256": "98a92a4fb90ff198b6168ba3c5038dbb661d0974afeff44fc586425580fa41be"
+    },
+    {
+      "path": "work_dirs/depcache_gate7_20260915/combined.json",
+      "bytes": 5718,
+      "sha256": "50a0fd38ab8aaa87b29024f3d44f949493625efa203987a33908292c3bbc9885"
+    },
+    {
+      "path": "work_dirs/depcache_gate6_20260915/combined.json",
+      "bytes": 6946,
+      "sha256": "65ed6709a82708901f98f1490ce5d55451a2c722042ec53236147b19d68fa784"
+    },
+    {
+      "path": "work_dirs/depcache_gate4_20260915/combined.json",
+      "bytes": 5730,
+      "sha256": "e6471651aebe0c29f3bc3420cb1fd4330af8fab67cbed3c9040c814eb3ca8edc"
+    },
+    {
+      "path": "work_dirs/depcache_gate2_20260915/combined.json",
+      "bytes": 8111,
+      "sha256": "fccc9be06e24e4857de1936d0b625995da48b34f363f83db51d020d85f55c053"
+    }
+  ],
+  "holdout_preconditions_not_yet_met": {
+    "fixed_view_screen_pass": false,
+    "admission_pending_visual_review": true,
+    "note": "prepared.json reports the ORB/RANSAC fixed-view screen has not passed and the visual review is pending; scoring must not run until admission is recorded"
+  },
+  "holdout_scoring_protocol": {
+    "fixed_before_scoring": true,
+    "admitted_sequences": [
+      "Date03_Sub03_backpack_back.1"
+    ],
+    "excluded_sequences": {
+      "Date04_Sub05_backpack.1": "prospective fixed-view screen failed at frame 3900 (2.18 px > 2.0 px limit); the all-frames rule is applied as written, no threshold relaxation or window clipping"
+    },
+    "windows": [
+      [
+        372,
+        628
+      ],
+      [
+        872,
+        1128
+      ]
+    ],
+    "window_rule": "two 256-frame windows centred at 1/3 and 2/3 of the timeline, the rule scripts/qindependent_prepare.py pre-registered for earlier independent data; no visual, GT or model-performance selection; each window is its own stream",
+    "gate": "frozen Q0-relative gate per window AND on the pooled two-window aggregate",
+    "requires_loo_pass": "work_dirs/depcache_loo_20260915 must show the leave-one-out map passing on every development sequence, else the map is in-sample only and the holdout is not spent on it"
+  },
+  "status": "WITHDRAWN_BEFORE_HOLDOUT",
+  "withdrawal": {
+    "reason": "requires_loo_pass not met: with a sensitivity map built from the other three development sequences, MappedRankQ0 k=6 tiles=(7,11) fails the gate on Date02_Sub02_backpack_back.1 (flat_tv +1.11%) and Date02_Sub02_backpack_hand.1 (edge AbsRel and flat_tv +1.51%). The in-sample pass is map overfitting.",
+    "reproduction_check": "the in-sample arm of the LOO run reproduced the gate8 per-sequence overshoot values exactly (-1.01, +0.52, -1.27, -1.94 %)",
+    "evidence": {
+      "path": "work_dirs/depcache_loo_20260915/loo_results.json",
+      "bytes": 9057,
+      "sha256": "2de9046697e464ed9d6cfb1b3b59eb9cd26961a87257c27f6d2ba97ef40f165b"
+    },
+    "holdout_touched": false,
+    "eight_tile_check": {
+      "question": "does the measured map survive out of sample at the 8-tile budget, where its in-sample margin was largest?",
+      "answer": "no. MappedRankQ0 tiles=(8,12) k=1e9 with the leave-one-out map fails Date02_Sub02_backpack_hand.1 (edge AbsRel and flat_tv +1.25%); the other three pass",
+      "reading": "the 16-value map does not transfer between sequences in closed loop at either budget; backpack_hand's leave-one-out map was the least similar (5/7 top tiles)",
+      "evidence": {
+        "path": "work_dirs/depcache_loo_t8_20260915/loo_results.json",
+        "bytes": 9060,
+        "sha256": "bf2b43fbb0e0a6d5a7ea99e99655c3424eb4f79b65974089a305ef8dc965b886"
+      }
+    }
+  },
+  "admission_review": {
+    "Date03_Sub03_backpack_back.1": {
+      "fixed_view_screen": "passed 9/9 prospective ORB/RANSAC checks",
+      "visual_review": "blurred RGB frames 0, 750, 1499 reviewed by the assistant: the white vehicle, red object, yellow machinery and ceiling light keep the same image positions across all three; only the person moves. Consistent with a fixed camera. RGB-depth registration cannot be judged from the blurred RGB alone and is NOT claimed; no depth rendering was reviewed.",
+      "reviewer": "assistant, pending researcher confirmation"
+    },
+    "Date04_Sub05_backpack.1": {
+      "fixed_view_screen": "failed at frame 3900 (2.18 px > 2.0 px); excluded by the pre-registered all-frames rule, not reviewed further"
+    }
+  }
+}

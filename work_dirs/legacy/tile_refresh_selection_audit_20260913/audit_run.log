@@ -1,0 +1,26 @@
+Loading weights:   0%|          | 0/287 [00:00<?, ?it/s]Loading weights: 100%|██████████| 287/287 [00:00<00:00, 17661.13it/s]
+AUDIT Date01_Sub01_basketball.1 index_equal True finite True calib_bitwise True
+AUDIT Date01_Sub01_keyboard_move.1 index_equal True finite True calib_bitwise True
+AUDIT Date02_Sub02_backpack_back.1 index_equal True finite True calib_bitwise True
+AUDIT Date02_Sub02_backpack_hand.1 index_equal True finite True calib_bitwise True
+index_tensor_equal_ordered                     checked=  896 all_true=True
+index_set_equal                                checked=  896 all_true=True
+frozen_index_strictly_ascending                checked= 1024 all_true=True
+frozen_index_unique                            checked= 1024 all_true=True
+all_12_layers_same_index_object                checked= 1024 all_true=True
+mask_to_index_consistent                       checked=  896 all_true=True
+refresh_frozen_index_is_full_arange            checked=  128 all_true=True
+refresh_frozen_all_rows_current                checked=  128 all_true=True
+refresh_fast_all_rows_current                  checked=  128 all_true=True
+refresh_fast_stage_features_match_dense        checked=  128 all_true=True
+refresh_fast_pooled_matches_dense              checked=  128 all_true=True
+partial_selected_rows_are_current              checked=  896 all_true=True
+partial_other_rows_unchanged                   checked=  896 all_true=True
+partial_frozen_selected_rows_are_current       checked=  896 all_true=True
+partial_frozen_other_rows_unchanged            checked=  896 all_true=True
+depth_bitwise                                  checked= 1024 all_true=True
+calibration_field_finite                       checked= 1024 all_true=True
+fast_calibrate_bitwise_vs_frozen               checked= 1024 all_true=True
+index_digests_equal                            checked=  896 all_true=True
+SELECTION_IDENTICAL_ORDERED True
+CALIBRATION_CLAIM_VERIFIED True

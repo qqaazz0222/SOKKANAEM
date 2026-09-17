@@ -1,0 +1,489 @@
+{
+  "protocol": {
+    "path": "work_dirs/tile_refresh_selection_audit_20260913/main/protocol.json",
+    "bytes": 7814,
+    "sha256": "2a6d9f9fbc1ffeb081786fba8983115e3a242f1c12751c0c079f87e20dfccd3a"
+  },
+  "combined": {
+    "index_tensor_equal_ordered": {
+      "checked": 896,
+      "all_true": true
+    },
+    "index_set_equal": {
+      "checked": 896,
+      "all_true": true
+    },
+    "frozen_index_strictly_ascending": {
+      "checked": 1024,
+      "all_true": true
+    },
+    "frozen_index_unique": {
+      "checked": 1024,
+      "all_true": true
+    },
+    "all_12_layers_same_index_object": {
+      "checked": 1024,
+      "all_true": true
+    },
+    "mask_to_index_consistent": {
+      "checked": 896,
+      "all_true": true
+    },
+    "refresh_frozen_index_is_full_arange": {
+      "checked": 128,
+      "all_true": true
+    },
+    "refresh_frozen_all_rows_current": {
+      "checked": 128,
+      "all_true": true
+    },
+    "refresh_fast_all_rows_current": {
+      "checked": 128,
+      "all_true": true
+    },
+    "refresh_fast_stage_features_match_dense": {
+      "checked": 128,
+      "all_true": true
+    },
+    "refresh_fast_pooled_matches_dense": {
+      "checked": 128,
+      "all_true": true
+    },
+    "partial_selected_rows_are_current": {
+      "checked": 896,
+      "all_true": true
+    },
+    "partial_other_rows_unchanged": {
+      "checked": 896,
+      "all_true": true
+    },
+    "partial_frozen_selected_rows_are_current": {
+      "checked": 896,
+      "all_true": true
+    },
+    "partial_frozen_other_rows_unchanged": {
+      "checked": 896,
+      "all_true": true
+    },
+    "depth_bitwise": {
+      "checked": 1024,
+      "all_true": true
+    },
+    "calibration_field_finite": {
+      "checked": 1024,
+      "all_true": true
+    },
+    "fast_calibrate_bitwise_vs_frozen": {
+      "checked": 1024,
+      "all_true": true
+    },
+    "index_digests_equal": {
+      "checked": 896,
+      "all_true": true
+    }
+  },
+  "sequences": {
+    "Date01_Sub01_basketball.1": {
+      "frames": 256,
+      "refresh_frames": 32,
+      "partial_frames": 224,
+      "index_tensor_equal_ordered": {
+        "checked": 224,
+        "all_true": true
+      },
+      "index_set_equal": {
+        "checked": 224,
+        "all_true": true
+      },
+      "index_digests_equal": {
+        "checked": 224,
+        "all_true": true
+      },
+      "frozen_index_strictly_ascending": {
+        "checked": 256,
+        "all_true": true
+      },
+      "frozen_index_unique": {
+        "checked": 256,
+        "all_true": true
+      },
+      "all_12_layers_same_index_object": {
+        "checked": 256,
+        "all_true": true
+      },
+      "mask_to_index_consistent": {
+        "checked": 224,
+        "all_true": true
+      },
+      "select_called_on_every_partial_frame": {
+        "checked": 224,
+        "all_true": true
+      },
+      "refresh_frozen_index_is_full_arange": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_frozen_all_rows_current": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_all_rows_current": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_stage_features_match_dense": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_pooled_matches_dense": {
+        "checked": 32,
+        "all_true": true
+      },
+      "partial_selected_rows_are_current": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_other_rows_unchanged": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_frozen_selected_rows_are_current": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_frozen_other_rows_unchanged": {
+        "checked": 224,
+        "all_true": true
+      },
+      "depth_bitwise": {
+        "checked": 256,
+        "all_true": true
+      },
+      "calibration_field_finite": {
+        "checked": 256,
+        "all_true": true
+      },
+      "fast_calibrate_bitwise_vs_frozen": {
+        "checked": 256,
+        "all_true": true
+      },
+      "distinct_partial_index_counts": [
+        1010,
+        1019,
+        1028,
+        1037,
+        1046
+      ],
+      "calibration_field_range": [
+        0.02467004582285881,
+        7.453494071960449
+      ],
+      "frame_start": 622,
+      "stream_state_bytes": 77859840
+    },
+    "Date01_Sub01_keyboard_move.1": {
+      "frames": 256,
+      "refresh_frames": 32,
+      "partial_frames": 224,
+      "index_tensor_equal_ordered": {
+        "checked": 224,
+        "all_true": true
+      },
+      "index_set_equal": {
+        "checked": 224,
+        "all_true": true
+      },
+      "index_digests_equal": {
+        "checked": 224,
+        "all_true": true
+      },
+      "frozen_index_strictly_ascending": {
+        "checked": 256,
+        "all_true": true
+      },
+      "frozen_index_unique": {
+        "checked": 256,
+        "all_true": true
+      },
+      "all_12_layers_same_index_object": {
+        "checked": 256,
+        "all_true": true
+      },
+      "mask_to_index_consistent": {
+        "checked": 224,
+        "all_true": true
+      },
+      "select_called_on_every_partial_frame": {
+        "checked": 224,
+        "all_true": true
+      },
+      "refresh_frozen_index_is_full_arange": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_frozen_all_rows_current": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_all_rows_current": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_stage_features_match_dense": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_pooled_matches_dense": {
+        "checked": 32,
+        "all_true": true
+      },
+      "partial_selected_rows_are_current": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_other_rows_unchanged": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_frozen_selected_rows_are_current": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_frozen_other_rows_unchanged": {
+        "checked": 224,
+        "all_true": true
+      },
+      "depth_bitwise": {
+        "checked": 256,
+        "all_true": true
+      },
+      "calibration_field_finite": {
+        "checked": 256,
+        "all_true": true
+      },
+      "fast_calibrate_bitwise_vs_frozen": {
+        "checked": 256,
+        "all_true": true
+      },
+      "distinct_partial_index_counts": [
+        1009,
+        1018,
+        1019,
+        1028,
+        1037,
+        1046
+      ],
+      "calibration_field_range": [
+        0.003097857115790248,
+        6.730609893798828
+      ],
+      "frame_start": 622,
+      "stream_state_bytes": 77859840
+    },
+    "Date02_Sub02_backpack_back.1": {
+      "frames": 256,
+      "refresh_frames": 32,
+      "partial_frames": 224,
+      "index_tensor_equal_ordered": {
+        "checked": 224,
+        "all_true": true
+      },
+      "index_set_equal": {
+        "checked": 224,
+        "all_true": true
+      },
+      "index_digests_equal": {
+        "checked": 224,
+        "all_true": true
+      },
+      "frozen_index_strictly_ascending": {
+        "checked": 256,
+        "all_true": true
+      },
+      "frozen_index_unique": {
+        "checked": 256,
+        "all_true": true
+      },
+      "all_12_layers_same_index_object": {
+        "checked": 256,
+        "all_true": true
+      },
+      "mask_to_index_consistent": {
+        "checked": 224,
+        "all_true": true
+      },
+      "select_called_on_every_partial_frame": {
+        "checked": 224,
+        "all_true": true
+      },
+      "refresh_frozen_index_is_full_arange": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_frozen_all_rows_current": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_all_rows_current": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_stage_features_match_dense": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_pooled_matches_dense": {
+        "checked": 32,
+        "all_true": true
+      },
+      "partial_selected_rows_are_current": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_other_rows_unchanged": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_frozen_selected_rows_are_current": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_frozen_other_rows_unchanged": {
+        "checked": 224,
+        "all_true": true
+      },
+      "depth_bitwise": {
+        "checked": 256,
+        "all_true": true
+      },
+      "calibration_field_finite": {
+        "checked": 256,
+        "all_true": true
+      },
+      "fast_calibrate_bitwise_vs_frozen": {
+        "checked": 256,
+        "all_true": true
+      },
+      "distinct_partial_index_counts": [
+        1000,
+        1009,
+        1010,
+        1018,
+        1019,
+        1028
+      ],
+      "calibration_field_range": [
+        0.013803078792989254,
+        8.017708778381348
+      ],
+      "frame_start": 622,
+      "stream_state_bytes": 77859840
+    },
+    "Date02_Sub02_backpack_hand.1": {
+      "frames": 256,
+      "refresh_frames": 32,
+      "partial_frames": 224,
+      "index_tensor_equal_ordered": {
+        "checked": 224,
+        "all_true": true
+      },
+      "index_set_equal": {
+        "checked": 224,
+        "all_true": true
+      },
+      "index_digests_equal": {
+        "checked": 224,
+        "all_true": true
+      },
+      "frozen_index_strictly_ascending": {
+        "checked": 256,
+        "all_true": true
+      },
+      "frozen_index_unique": {
+        "checked": 256,
+        "all_true": true
+      },
+      "all_12_layers_same_index_object": {
+        "checked": 256,
+        "all_true": true
+      },
+      "mask_to_index_consistent": {
+        "checked": 224,
+        "all_true": true
+      },
+      "select_called_on_every_partial_frame": {
+        "checked": 224,
+        "all_true": true
+      },
+      "refresh_frozen_index_is_full_arange": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_frozen_all_rows_current": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_all_rows_current": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_stage_features_match_dense": {
+        "checked": 32,
+        "all_true": true
+      },
+      "refresh_fast_pooled_matches_dense": {
+        "checked": 32,
+        "all_true": true
+      },
+      "partial_selected_rows_are_current": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_other_rows_unchanged": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_frozen_selected_rows_are_current": {
+        "checked": 224,
+        "all_true": true
+      },
+      "partial_frozen_other_rows_unchanged": {
+        "checked": 224,
+        "all_true": true
+      },
+      "depth_bitwise": {
+        "checked": 256,
+        "all_true": true
+      },
+      "calibration_field_finite": {
+        "checked": 256,
+        "all_true": true
+      },
+      "fast_calibrate_bitwise_vs_frozen": {
+        "checked": 256,
+        "all_true": true
+      },
+      "distinct_partial_index_counts": [
+        1000,
+        1009,
+        1010,
+        1018,
+        1019,
+        1028,
+        1037
+      ],
+      "calibration_field_range": [
+        0.000832866586279124,
+        7.021912097930908
+      ],
+      "frame_start": 622,
+      "stream_state_bytes": 77859840
+    }
+  },
+  "selection_identical_ordered": true,
+  "refresh_is_full_update": true,
+  "calibration_claim_verified": true,
+  "prior_run_integrity_unchanged": true,
+  "timing_claimed": false,
+  "promoted": false
+}

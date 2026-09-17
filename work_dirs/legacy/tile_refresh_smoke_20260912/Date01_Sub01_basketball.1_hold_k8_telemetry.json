@@ -1,0 +1,58 @@
+[
+  {
+    "full_refresh": true,
+    "backbone_calls": 1,
+    "cache_age": 0,
+    "flow_calls": 0,
+    "mode": "periodic_whole_output_hold_control"
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 1,
+    "flow_calls": 0,
+    "mode": "periodic_whole_output_hold_control"
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 2,
+    "flow_calls": 0,
+    "mode": "periodic_whole_output_hold_control"
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 3,
+    "flow_calls": 0,
+    "mode": "periodic_whole_output_hold_control"
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 4,
+    "flow_calls": 0,
+    "mode": "periodic_whole_output_hold_control"
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 5,
+    "flow_calls": 0,
+    "mode": "periodic_whole_output_hold_control"
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 6,
+    "flow_calls": 0,
+    "mode": "periodic_whole_output_hold_control"
+  },
+  {
+    "full_refresh": false,
+    "backbone_calls": 0,
+    "cache_age": 7,
+    "flow_calls": 0,
+    "mode": "periodic_whole_output_hold_control"
+  }
+]

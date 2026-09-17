@@ -1,0 +1,166 @@
+{
+  "records": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/depcache_gate.py",
+      "bytes": 8926,
+      "sha256": "5cc31162d523c626a10d9acab687b80807d8418fb872f4c59fe7260e87832201"
+    },
+    {
+      "path": "sokkanaem/qdepcache.py",
+      "bytes": 21247,
+      "sha256": "fda1906f3ee9a1ef1d1b9293e4b2c2f8560cecc2a470549ad9b86aae9e47d028"
+    },
+    {
+      "path": "sokkanaem/qprefix_refresh.py",
+      "bytes": 18687,
+      "sha256": "25e760292fbea0b624b386c2f8f6894a453c6e089c13b848ff23b6a37fe24cef"
+    },
+    {
+      "path": "work_dirs/qbehave_development_ready2_20260911/prepared.json",
+      "bytes": 25616,
+      "sha256": "0df0a7663142dc1cb8d967ad3905789c9078c29d8dd15f8f542f9f352a76cb21"
+    },
+    {
+      "path": "work_dirs/qbehave_pilot_eval_20260910/prepared.json",
+      "bytes": 5927,
+      "sha256": "0f9efe0df93a0a4810a9624f2a33626b4da9e7a6c71054fbabf3fa50322cdc33"
+    }
+  ],
+  "window": 622,
+  "frames": 256,
+  "repeats": 3,
+  "arms": {
+    "dense_q0": {
+      "metrics": {
+        "absrel_raw": 0.17368026743158185,
+        "absrel_edge": 0.15116165088584899,
+        "overshoot": 0.27303195431752997,
+        "boundary_f1": 0.5569381399157768,
+        "flat_tv": 0.02101860881975881
+      },
+      "mean_ms": 7.1016854295749,
+      "p95_ms": 7.113280735211447,
+      "mean_active_ratio": 1.0,
+      "peak_over_resident_bytes": 524288,
+      "every_sequence_pass": true,
+      "per_sequence_failed_checks": {
+        "Date01_Sub01_basketball.1": [],
+        "Date01_Sub01_keyboard_move.1": [],
+        "Date02_Sub02_backpack_back.1": [],
+        "Date02_Sub02_backpack_hand.1": []
+      },
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "speedup_vs_dense": 1.0
+    },
+    "cost_aware_k6": {
+      "metrics": {
+        "absrel_raw": 0.17404176480775935,
+        "absrel_edge": 0.15166676995244172,
+        "overshoot": 0.2694396628335052,
+        "boundary_f1": 0.5563292482984252,
+        "flat_tv": 0.021055556709143275
+      },
+      "mean_ms": 5.420574742288409,
+      "p95_ms": 7.16794218897121,
+      "mean_active_ratio": 0.5668157071767712,
+      "peak_over_resident_bytes": 532992,
+      "every_sequence_pass": true,
+      "per_sequence_failed_checks": {
+        "Date01_Sub01_basketball.1": [],
+        "Date01_Sub01_keyboard_move.1": [],
+        "Date02_Sub02_backpack_back.1": [],
+        "Date02_Sub02_backpack_hand.1": []
+      },
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "speedup_vs_dense": 1.3101351364406748
+    },
+    "quantile_switch_k6": {
+      "metrics": {
+        "absrel_raw": 0.17382088506862592,
+        "absrel_edge": 0.15128844334035685,
+        "overshoot": 0.27280086571883283,
+        "boundary_f1": 0.5568955745790543,
+        "flat_tv": 0.021029294316576852
+      },
+      "mean_ms": 5.2607132422508585,
+      "p95_ms": 7.167837422457524,
+      "mean_active_ratio": 0.5567533327246166,
+      "peak_over_resident_bytes": 532992,
+      "every_sequence_pass": true,
+      "per_sequence_failed_checks": {
+        "Date01_Sub01_basketball.1": [],
+        "Date01_Sub01_keyboard_move.1": [],
+        "Date02_Sub02_backpack_back.1": [],
+        "Date02_Sub02_backpack_hand.1": []
+      },
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "speedup_vs_dense": 1.3499472604852265
+    },
+    "cost_aware_k1e+09": {
+      "metrics": {
+        "absrel_raw": 0.17400606228464147,
+        "absrel_edge": 0.1516324933463226,
+        "overshoot": 0.2693403998992543,
+        "boundary_f1": 0.5562685005716048,
+        "flat_tv": 0.021054365041891288
+      },
+      "mean_ms": 5.412632504658177,
+      "p95_ms": 7.160435488913208,
+      "mean_active_ratio": 0.5648632955168005,
+      "peak_over_resident_bytes": 532992,
+      "every_sequence_pass": true,
+      "per_sequence_failed_checks": {
+        "Date01_Sub01_basketball.1": [],
+        "Date01_Sub01_keyboard_move.1": [],
+        "Date02_Sub02_backpack_back.1": [],
+        "Date02_Sub02_backpack_hand.1": []
+      },
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "speedup_vs_dense": 1.312057565974247
+    }
+  }
+}

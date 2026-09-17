@@ -1,0 +1,714 @@
+{
+  "Date01_Sub01_basketball.1": {
+    "dense_q0": {
+      "metrics": {
+        "absrel_raw": 0.1705414784471062,
+        "absrel_edge": 0.14803519080792163,
+        "overshoot": 0.14918153855042068,
+        "boundary_f1": 0.4808620325832938,
+        "flat_tv": 0.024420755180472042
+      },
+      "runs": [
+        {
+          "mean_ms": 7.077012522586301,
+          "p95_ms": 7.09658328560181
+        },
+        {
+          "mean_ms": 7.080913915160636,
+          "p95_ms": 7.094502943800762
+        },
+        {
+          "mean_ms": 7.082555463966855,
+          "p95_ms": 7.099025038769469
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864718336,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 524288,
+        "peak_reserved_bytes": 2042626048
+      },
+      "mean_active_ratio": 1.0,
+      "mean_ms": 7.080913915160636,
+      "p95_ms": 7.09658328560181,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k3": {
+      "metrics": {
+        "absrel_raw": 0.1711117987520452,
+        "absrel_edge": 0.1486548104960371,
+        "overshoot": 0.15047774818854837,
+        "boundary_f1": 0.4809589360763008,
+        "flat_tv": 0.024437607600702904
+      },
+      "runs": [
+        {
+          "mean_ms": 5.354735475975758,
+          "p95_ms": 7.150409946916625
+        },
+        {
+          "mean_ms": 5.354608188099519,
+          "p95_ms": 7.151762751163915
+        },
+        {
+          "mean_ms": 5.360776631277986,
+          "p95_ms": 7.161487825214863
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864727040,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532992,
+        "peak_reserved_bytes": 2046820352
+      },
+      "mean_active_ratio": 0.5614956172388605,
+      "mean_ms": 5.354735475975758,
+      "p95_ms": 7.151762751163915,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k4": {
+      "metrics": {
+        "absrel_raw": 0.1711117987520452,
+        "absrel_edge": 0.1486548104960371,
+        "overshoot": 0.15047774818854837,
+        "boundary_f1": 0.4809589360763008,
+        "flat_tv": 0.024437607600702904
+      },
+      "runs": [
+        {
+          "mean_ms": 5.3553697302959336,
+          "p95_ms": 7.149885263061151
+        },
+        {
+          "mean_ms": 5.35515365709216,
+          "p95_ms": 7.152405712986365
+        },
+        {
+          "mean_ms": 5.355441146548401,
+          "p95_ms": 7.151437312131748
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864727040,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532992,
+        "peak_reserved_bytes": 2046820352
+      },
+      "mean_active_ratio": 0.5614956172388605,
+      "mean_ms": 5.3553697302959336,
+      "p95_ms": 7.151437312131748,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k6": {
+      "metrics": {
+        "absrel_raw": 0.17113280212864032,
+        "absrel_edge": 0.14868270878033962,
+        "overshoot": 0.15058637727131022,
+        "boundary_f1": 0.4809872792490447,
+        "flat_tv": 0.024435824787360616
+      },
+      "runs": [
+        {
+          "mean_ms": 5.35096527528367,
+          "p95_ms": 7.141739741200581
+        },
+        {
+          "mean_ms": 5.349565031792736,
+          "p95_ms": 7.146003481466323
+        },
+        {
+          "mean_ms": 5.350310246740264,
+          "p95_ms": 7.145594718167558
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864727040,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532992,
+        "peak_reserved_bytes": 2046820352
+      },
+      "mean_active_ratio": 0.5604655542366692,
+      "mean_ms": 5.350310246740264,
+      "p95_ms": 7.145594718167558,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    }
+  },
+  "Date01_Sub01_keyboard_move.1": {
+    "dense_q0": {
+      "metrics": {
+        "absrel_raw": 0.15432093703148003,
+        "absrel_edge": 0.1310997415428027,
+        "overshoot": 0.1605853949628815,
+        "boundary_f1": 0.6137905690508584,
+        "flat_tv": 0.02579222094936995
+      },
+      "runs": [
+        {
+          "mean_ms": 7.089658272434463,
+          "p95_ms": 7.102610252331942
+        },
+        {
+          "mean_ms": 7.088824139827921,
+          "p95_ms": 7.098269474226981
+        },
+        {
+          "mean_ms": 7.089421081218461,
+          "p95_ms": 7.09888176061213
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864718336,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 524288,
+        "peak_reserved_bytes": 2243952640
+      },
+      "mean_active_ratio": 1.0,
+      "mean_ms": 7.089421081218461,
+      "p95_ms": 7.09888176061213,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k3": {
+      "metrics": {
+        "absrel_raw": 0.15439980962859526,
+        "absrel_edge": 0.1311981547969858,
+        "overshoot": 0.16178935309467588,
+        "boundary_f1": 0.6135054524832715,
+        "flat_tv": 0.025784921483136714
+      },
+      "runs": [
+        {
+          "mean_ms": 5.3644291861019155,
+          "p95_ms": 7.1554750320501626
+        },
+        {
+          "mean_ms": 5.3656852714993875,
+          "p95_ms": 7.161049754358828
+        },
+        {
+          "mean_ms": 5.368211031964165,
+          "p95_ms": 7.160599227063358
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864727040,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532992,
+        "peak_reserved_bytes": 2248146944
+      },
+      "mean_active_ratio": 0.5649253560993426,
+      "mean_ms": 5.3656852714993875,
+      "p95_ms": 7.160599227063358,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k4": {
+      "metrics": {
+        "absrel_raw": 0.15443715696449184,
+        "absrel_edge": 0.1312328252696037,
+        "overshoot": 0.16199993687464764,
+        "boundary_f1": 0.6134789099451154,
+        "flat_tv": 0.025783072684134822
+      },
+      "runs": [
+        {
+          "mean_ms": 5.360614465644176,
+          "p95_ms": 7.157505315262824
+        },
+        {
+          "mean_ms": 5.361616390928248,
+          "p95_ms": 7.160273235058412
+        },
+        {
+          "mean_ms": 5.360683469007199,
+          "p95_ms": 7.15639753616415
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864727040,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532992,
+        "peak_reserved_bytes": 2248146944
+      },
+      "mean_active_ratio": 0.5628680834550767,
+      "mean_ms": 5.360683469007199,
+      "p95_ms": 7.157505315262824,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k6": {
+      "metrics": {
+        "absrel_raw": 0.15442982708213118,
+        "absrel_edge": 0.1312251427522495,
+        "overshoot": 0.1620623858459181,
+        "boundary_f1": 0.6134923984839891,
+        "flat_tv": 0.025783346805837937
+      },
+      "runs": [
+        {
+          "mean_ms": 5.3578259712594445,
+          "p95_ms": 7.153882936108857
+        },
+        {
+          "mean_ms": 5.356559671326977,
+          "p95_ms": 7.1544707752764225
+        },
+        {
+          "mean_ms": 5.359656444397842,
+          "p95_ms": 7.155351748224348
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864727040,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532992,
+        "peak_reserved_bytes": 2248146944
+      },
+      "mean_active_ratio": 0.5618637006939371,
+      "mean_ms": 5.3578259712594445,
+      "p95_ms": 7.1544707752764225,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    }
+  },
+  "Date02_Sub02_backpack_back.1": {
+    "dense_q0": {
+      "metrics": {
+        "absrel_raw": 0.1863502289316191,
+        "absrel_edge": 0.15791001898606966,
+        "overshoot": 0.38580208517450176,
+        "boundary_f1": 0.5652935778101286,
+        "flat_tv": 0.017188697209348902
+      },
+      "runs": [
+        {
+          "mean_ms": 7.102638390733773,
+          "p95_ms": 7.118889770936221
+        },
+        {
+          "mean_ms": 7.096583951806679,
+          "p95_ms": 7.108444231562316
+        },
+        {
+          "mean_ms": 7.095868836131558,
+          "p95_ms": 7.107777491910383
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864718336,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 524288,
+        "peak_reserved_bytes": 2243952640
+      },
+      "mean_active_ratio": 1.0,
+      "mean_ms": 7.096583951806679,
+      "p95_ms": 7.108444231562316,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k3": {
+      "metrics": {
+        "absrel_raw": 0.18637895016326758,
+        "absrel_edge": 0.15737554587183888,
+        "overshoot": 0.3824558051196134,
+        "boundary_f1": 0.5652553004329093,
+        "flat_tv": 0.0171882058493793
+      },
+      "runs": [
+        {
+          "mean_ms": 5.160868873645086,
+          "p95_ms": 7.165836752392352
+        },
+        {
+          "mean_ms": 5.158830900654721,
+          "p95_ms": 7.165777467889711
+        },
+        {
+          "mean_ms": 5.160846806575137,
+          "p95_ms": 7.1659864916000515
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864726528,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532480,
+        "peak_reserved_bytes": 2248146944
+      },
+      "mean_active_ratio": 0.5533749543462382,
+      "mean_ms": 5.160846806575137,
+      "p95_ms": 7.165836752392352,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k4": {
+      "metrics": {
+        "absrel_raw": 0.18637298670099903,
+        "absrel_edge": 0.15744189895910596,
+        "overshoot": 0.3826135646298524,
+        "boundary_f1": 0.5652478339422184,
+        "flat_tv": 0.017188142064696876
+      },
+      "runs": [
+        {
+          "mean_ms": 5.1527915657061385,
+          "p95_ms": 7.1643882256466895
+        },
+        {
+          "mean_ms": 5.153911433808389,
+          "p95_ms": 7.166791008785367
+        },
+        {
+          "mean_ms": 5.153128094661952,
+          "p95_ms": 7.1665074792690575
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864726528,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532480,
+        "peak_reserved_bytes": 2248146944
+      },
+      "mean_active_ratio": 0.5513718955441929,
+      "mean_ms": 5.153128094661952,
+      "p95_ms": 7.1665074792690575,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k6": {
+      "metrics": {
+        "absrel_raw": 0.18637298670099903,
+        "absrel_edge": 0.15744189895910596,
+        "overshoot": 0.3826135646298524,
+        "boundary_f1": 0.5652478339422184,
+        "flat_tv": 0.017188142064696876
+      },
+      "runs": [
+        {
+          "mean_ms": 5.1551020824263105,
+          "p95_ms": 7.165515562519431
+        },
+        {
+          "mean_ms": 5.152435601758043,
+          "p95_ms": 7.16164251207374
+        },
+        {
+          "mean_ms": 5.151135333107959,
+          "p95_ms": 7.1584142569918185
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864726528,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532480,
+        "peak_reserved_bytes": 2248146944
+      },
+      "mean_active_ratio": 0.5513718955441929,
+      "mean_ms": 5.152435601758043,
+      "p95_ms": 7.16164251207374,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    }
+  },
+  "Date02_Sub02_backpack_hand.1": {
+    "dense_q0": {
+      "metrics": {
+        "absrel_raw": 0.1835084253161221,
+        "absrel_edge": 0.1676016522066019,
+        "overshoot": 0.3965587985823159,
+        "boundary_f1": 0.5678063802188262,
+        "flat_tv": 0.01667276193984435
+      },
+      "runs": [
+        {
+          "mean_ms": 7.103109478521219,
+          "p95_ms": 7.11952373967506
+        },
+        {
+          "mean_ms": 7.101874598447466,
+          "p95_ms": 7.111450569937006
+        },
+        {
+          "mean_ms": 7.101583998519345,
+          "p95_ms": 7.112890220014378
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864718336,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 524288,
+        "peak_reserved_bytes": 2243952640
+      },
+      "mean_active_ratio": 1.0,
+      "mean_ms": 7.101874598447466,
+      "p95_ms": 7.112890220014378,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k3": {
+      "metrics": {
+        "absrel_raw": 0.18330636017906793,
+        "absrel_edge": 0.1678337617236117,
+        "overshoot": 0.3962132525372884,
+        "boundary_f1": 0.5677801384978617,
+        "flat_tv": 0.016716718790121377
+      },
+      "runs": [
+        {
+          "mean_ms": 5.1992580920341425,
+          "p95_ms": 7.170473749283701
+        },
+        {
+          "mean_ms": 5.199765798806766,
+          "p95_ms": 7.171574485255405
+        },
+        {
+          "mean_ms": 5.20002686062071,
+          "p95_ms": 7.16837850632146
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864726528,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532480,
+        "peak_reserved_bytes": 2248146944
+      },
+      "mean_active_ratio": 0.5614956172388605,
+      "mean_ms": 5.199765798806766,
+      "p95_ms": 7.170473749283701,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k4": {
+      "metrics": {
+        "absrel_raw": 0.18330260750429303,
+        "absrel_edge": 0.16778986359592266,
+        "overshoot": 0.39606207614155103,
+        "boundary_f1": 0.5678395552483076,
+        "flat_tv": 0.01671476607225486
+      },
+      "runs": [
+        {
+          "mean_ms": 5.184193355489697,
+          "p95_ms": 7.171325501985848
+        },
+        {
+          "mean_ms": 5.1862926425201294,
+          "p95_ms": 7.170719240093604
+        },
+        {
+          "mean_ms": 5.183437027426407,
+          "p95_ms": 7.170553755713627
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864726528,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532480,
+        "peak_reserved_bytes": 2248146944
+      },
+      "mean_active_ratio": 0.5574038988312637,
+      "mean_ms": 5.184193355489697,
+      "p95_ms": 7.170719240093604,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "quantile_switch_k6": {
+      "metrics": {
+        "absrel_raw": 0.18334792436273312,
+        "absrel_edge": 0.1678040228697323,
+        "overshoot": 0.39594113512825063,
+        "boundary_f1": 0.5678547866409644,
+        "flat_tv": 0.01670986360841198
+      },
+      "runs": [
+        {
+          "mean_ms": 5.173814692170708,
+          "p95_ms": 7.16624956112355
+        },
+        {
+          "mean_ms": 5.17392366691638,
+          "p95_ms": 7.167381467297673
+        },
+        {
+          "mean_ms": 5.172944836886018,
+          "p95_ms": 7.164034992456436
+        }
+      ],
+      "memory": {
+        "peak_allocated_bytes": 864726528,
+        "allocated_before_bytes": 864194048,
+        "peak_over_resident_bytes": 532480,
+        "peak_reserved_bytes": 2248146944
+      },
+      "mean_active_ratio": 0.5533121804236669,
+      "mean_ms": 5.173814692170708,
+      "p95_ms": 7.16624956112355,
+      "quality_gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    }
+  }
+}

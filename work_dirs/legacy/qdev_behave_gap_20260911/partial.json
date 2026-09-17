@@ -1,0 +1,100 @@
+{
+  "development": {
+    "L32": {
+      "tum/rgbd_dataset_freiburg3_walking_static": {
+        "unreliable_fraction": 0.19781112670898438,
+        "flow_median_px": 0.803203072398901,
+        "flow_p95_px": 1.2390745356678963,
+        "valid_coverage": 0.7178173065185547,
+        "band_share_of_valid": 0.09805009793490171,
+        "flat_share_of_valid": 0.363909088075161,
+        "transported_band_share": 0.29227638244628906
+      },
+      "bonn/rgbd_bonn_crowd2": {
+        "unreliable_fraction": 0.22095298767089844,
+        "flow_median_px": 1.4801122471690178,
+        "flow_p95_px": 3.156310111284256,
+        "valid_coverage": 0.8927116394042969,
+        "band_share_of_valid": 0.09737312234938145,
+        "flat_share_of_valid": 0.3658255338668823,
+        "transported_band_share": 0.37019920349121094
+      },
+      "bonn/rgbd_bonn_person_tracking2": {
+        "unreliable_fraction": 0.14733123779296875,
+        "flow_median_px": 2.0145947486162186,
+        "flow_p95_px": 3.44594843685627,
+        "valid_coverage": 0.9230995178222656,
+        "band_share_of_valid": 0.09793721791356802,
+        "flat_share_of_valid": 0.33234385401010513,
+        "transported_band_share": 0.3681163787841797
+      },
+      "bonn/rgbd_bonn_static_close_far": {
+        "unreliable_fraction": 0.16149330139160156,
+        "flow_median_px": 1.1151646599173546,
+        "flow_p95_px": 2.6423198878765106,
+        "valid_coverage": 0.8893337249755859,
+        "band_share_of_valid": 0.09672015439718962,
+        "flat_share_of_valid": 0.3701845072209835,
+        "transported_band_share": 0.3036155700683594
+      }
+    },
+    "L256": {
+      "tum/rgbd_dataset_freiburg3_walking_static": {
+        "unreliable_fraction": 0.30132532119750977,
+        "flow_median_px": 0.8433757498860359,
+        "flow_p95_px": 3.543284264393151,
+        "valid_coverage": 0.6721572875976562,
+        "band_share_of_valid": 0.09748185332864523,
+        "flat_share_of_valid": 0.3638154473155737,
+        "transported_band_share": 0.28395891189575195
+      },
+      "bonn/rgbd_bonn_crowd2": {
+        "unreliable_fraction": 0.21166086196899414,
+        "flow_median_px": 2.8532785438001156,
+        "flow_p95_px": 6.068238522857428,
+        "valid_coverage": 0.900632381439209,
+        "band_share_of_valid": 0.09765148814767599,
+        "flat_share_of_valid": 0.3566033160313964,
+        "transported_band_share": 0.3707709312438965
+      },
+      "bonn/rgbd_bonn_person_tracking2": {
+        "unreliable_fraction": 0.21503448486328125,
+        "flow_median_px": 3.1911642821505666,
+        "flow_p95_px": 4.7060206569731236,
+        "valid_coverage": 0.9260177612304688,
+        "band_share_of_valid": 0.09820577618665993,
+        "flat_share_of_valid": 0.3445919593796134,
+        "transported_band_share": 0.35875558853149414
+      },
+      "bonn/rgbd_bonn_static_close_far": {
+        "unreliable_fraction": 0.20930194854736328,
+        "flow_median_px": 1.7909485306590796,
+        "flow_p95_px": 3.514773979783058,
+        "valid_coverage": 0.7595500946044922,
+        "band_share_of_valid": 0.09621635521762073,
+        "flat_share_of_valid": 0.34990412881597877,
+        "transported_band_share": 0.30619239807128906
+      }
+    }
+  },
+  "behave": {
+    "Date02_Sub02_backpack_back.1": {
+      "unreliable_fraction": 0.05342435836791992,
+      "flow_median_px": 0.03306091210106388,
+      "flow_p95_px": 0.576859662309289,
+      "valid_coverage": 0.29288387298583984,
+      "band_share_of_valid": 0.09110892983153462,
+      "flat_share_of_valid": 0.4000136749818921,
+      "transported_band_share": 0.21968984603881836
+    },
+    "Date02_Sub02_backpack_hand.1": {
+      "unreliable_fraction": 0.04856443405151367,
+      "flow_median_px": 0.028963311051484197,
+      "flow_p95_px": 0.48444250179454684,
+      "valid_coverage": 0.30698156356811523,
+      "band_share_of_valid": 0.09138953988440335,
+      "flat_share_of_valid": 0.4057957101613283,
+      "transported_band_share": 0.22188282012939453
+    }
+  }
+}

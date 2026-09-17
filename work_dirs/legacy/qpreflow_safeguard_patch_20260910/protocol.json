@@ -1,0 +1,68 @@
+{
+  "role": "mlp_q50_v1_patch_safeguard_threshold_sweep_development_no_final",
+  "candidate": {
+    "path": "paper/streaming_draft/frozen_candidate.json",
+    "bytes": 5331,
+    "sha256": "5fc6546287ffab7967bd4c4d099a4f88b67039c1525949b3e47cab4d7b0ac345"
+  },
+  "note": "wraps the frozen candidate unchanged; no training in this script",
+  "runtime": {
+    "python": "3.11.15",
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "torch": "2.8.0",
+    "torchvision": "0.23.0",
+    "numpy": "2.4.6",
+    "Pillow": "12.3.0",
+    "transformers": "5.14.1",
+    "triton": "3.4.0",
+    "opencv-python": "5.0.0.93"
+  },
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "code": [
+    {
+      "path": "/workspace/SOKKANAEM/scripts/qpreflow_safeguard_patch_study.py",
+      "bytes": 4333,
+      "sha256": "8db7d511352c1af12f0bce50f6444f579566f7827785566348d8cd1607bc6af7"
+    },
+    {
+      "path": "sokkanaem/qpreflow_safeguard_patch.py",
+      "bytes": 4826,
+      "sha256": "68bbd3cbbd537aec14ed45966c914122365ab9cdbdcc7e1b7c7a20bdef4d405c"
+    },
+    {
+      "path": "sokkanaem/qpreflow.py",
+      "bytes": 2545,
+      "sha256": "0df82e61d5873341fb0652ab456e7c27d774aebcc604840ca20122f89dca1512"
+    },
+    {
+      "path": "sokkanaem/qflow.py",
+      "bytes": 5116,
+      "sha256": "734664ad90d9ab64049cf38f685c87c0a77ed0abc8214590d6a2ee8bf5c5d6a3"
+    },
+    {
+      "path": "sokkanaem/qschedule.py",
+      "bytes": 4005,
+      "sha256": "c5b6478bf05da0be7e632da507888e5d98e2e1f7c45cd277688bfcee19f5e723"
+    },
+    {
+      "path": "sokkanaem/sharpness.py",
+      "bytes": 10564,
+      "sha256": "c61088b6177eaee47d0b761337634f7e2c5d3919d9a6f2ec4c17a3cc32866351"
+    },
+    {
+      "path": "scripts/quality_refinement.py",
+      "bytes": 10847,
+      "sha256": "da8f2f97df32608fbff4e75cf1c7aa559ac3ef43bd38f942c78a4a19e223bbda"
+    },
+    {
+      "path": "scripts/qstream_study.py",
+      "bytes": 7691,
+      "sha256": "3e0fa89fbb80aa6f2a7c9b6c1f517f683e497a2761d35db0ec45dcf3ab589dd5"
+    },
+    {
+      "path": "scripts/qquality_study.py",
+      "bytes": 12572,
+      "sha256": "8e54b6267ea04913f0bc6ca9940a0addab87d9e328141502e05db65e8d1c578b"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+[
+  {
+    "full_refresh": true,
+    "active_ratio": 1.0,
+    "active_patches": 1369,
+    "age": 0,
+    "reference_assisted": false
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.2366691015339664,
+    "active_patches": 324,
+    "age": 1,
+    "reference_assisted": false
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.24324324324324326,
+    "active_patches": 333,
+    "age": 2,
+    "reference_assisted": false
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.2505478451424397,
+    "active_patches": 343,
+    "age": 3,
+    "reference_assisted": false
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.2505478451424397,
+    "active_patches": 343,
+    "age": 4,
+    "reference_assisted": false
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.2366691015339664,
+    "active_patches": 324,
+    "age": 5,
+    "reference_assisted": false
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.2366691015339664,
+    "active_patches": 324,
+    "age": 6,
+    "reference_assisted": false
+  },
+  {
+    "full_refresh": false,
+    "active_ratio": 0.2366691015339664,
+    "active_patches": 324,
+    "age": 7,
+    "reference_assisted": false
+  }
+]

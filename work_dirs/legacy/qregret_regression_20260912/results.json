@@ -1,0 +1,994 @@
+{
+  "protocol": {
+    "path": "work_dirs/qregret_regression_20260912/protocol.json",
+    "bytes": 9812,
+    "sha256": "b6c70d53980986d3b5a3175c39226c61f3a09c1623d841c0714a1da6167a5197"
+  },
+  "results": {
+    "plain": {
+      "training": {
+        "rows": 16158,
+        "correlation_on_training": 0.9109942317008972,
+        "predicted_quantiles": {
+          "0.1": 3.9365901947021484,
+          "0.25": 6.324003219604492,
+          "0.5": 11.662284851074219,
+          "0.75": 28.242156982421875,
+          "0.9": 60.764366149902344
+        },
+        "true_quantiles": {
+          "0.1": 2.28257417678833,
+          "0.25": 6.115495681762695,
+          "0.5": 14.08864974975586,
+          "0.75": 32.84611129760742,
+          "0.9": 67.18155670166016
+        }
+      },
+      "taus": {
+        "10.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.1674104194905645,
+                "absrel_edge": 0.1498369216052985,
+                "overshoot": 0.20499848267314766,
+                "boundary_f1": 0.5477719896259131,
+                "flat_tv": 0.023871142973916397
+              },
+              "skip_fraction": 0.4244444444444444,
+              "reasons": {
+                "reuse": 0.42444444444444446,
+                "initial": 0.0011111111111111111,
+                "risk": 0.5744444444444444
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.019428770667346162,
+              "boundary_f1_drop_reported_only": -0.0040866472102977225
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15228539021495466,
+                "absrel_edge": 0.14071786565983482,
+                "overshoot": 0.22241600944925521,
+                "boundary_f1": 0.6314104329877429,
+                "flat_tv": 0.02475036815326247
+              },
+              "skip_fraction": 0.4722222222222222,
+              "reasons": {
+                "reuse": 0.4722222222222222,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0044444444444444444,
+                "risk": 0.5222222222222223
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.005301419494640136,
+              "boundary_f1_drop_reported_only": 0.0009580297602548304
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.16528234134019834,
+                "absrel_edge": 0.1504285540509773,
+                "overshoot": 0.22954710038704182,
+                "boundary_f1": 0.5936340600969614,
+                "flat_tv": 0.023667101512352625
+              },
+              "skip_fraction": 0.5233333333333333,
+              "reasons": {
+                "reuse": 0.5233333333333333,
+                "initial": 0.0011111111111111111,
+                "risk": 0.47555555555555556
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.014301297717334238,
+              "boundary_f1_drop_reported_only": -0.0036768673912241923
+            }
+          },
+          "skip_fraction": 0.47333333333333333,
+          "feasible": false,
+          "reaches_target_skip": false
+        },
+        "13.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.16765247805774303,
+                "absrel_edge": 0.1506247873880694,
+                "overshoot": 0.2053012767428768,
+                "boundary_f1": 0.5482578057050705,
+                "flat_tv": 0.024110944504953092
+              },
+              "skip_fraction": 0.5266666666666666,
+              "reasons": {
+                "reuse": 0.5266666666666666,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0011111111111111111,
+                "risk": 0.4711111111111111
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.029669611680112284,
+              "boundary_f1_drop_reported_only": -0.004572463289455153
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.152644141239732,
+                "absrel_edge": 0.14165884124044062,
+                "overshoot": 0.2225505153031071,
+                "boundary_f1": 0.6296084966924456,
+                "flat_tv": 0.02493765901877648
+              },
+              "skip_fraction": 0.5544444444444445,
+              "reasons": {
+                "reuse": 0.5544444444444444,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0044444444444444444,
+                "risk": 0.44
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.012908731506877658,
+              "boundary_f1_drop_reported_only": 0.0027599660555521766
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.16550198097168142,
+                "absrel_edge": 0.1513766111506041,
+                "overshoot": 0.22988536077687305,
+                "boundary_f1": 0.5935663077842307,
+                "flat_tv": 0.02376253657663862
+              },
+              "skip_fraction": 0.5900000000000001,
+              "reasons": {
+                "reuse": 0.59,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0011111111111111111,
+                "risk": 0.4077777777777778
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.01839135959088045,
+              "boundary_f1_drop_reported_only": -0.0036091150784934856
+            }
+          },
+          "skip_fraction": 0.5570370370370371,
+          "feasible": false,
+          "reaches_target_skip": false
+        },
+        "16.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.1679402127756449,
+                "absrel_edge": 0.15141916204453068,
+                "overshoot": 0.2072105061408969,
+                "boundary_f1": 0.5475282881491714,
+                "flat_tv": 0.024349899867342577
+              },
+              "skip_fraction": 0.5800000000000001,
+              "reasons": {
+                "reuse": 0.58,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0044444444444444444,
+                "risk": 0.41444444444444445
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.03987431664925678,
+              "boundary_f1_drop_reported_only": -0.0038429457335560357
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15296512568083567,
+                "absrel_edge": 0.1423596799231121,
+                "overshoot": 0.22267561792970225,
+                "boundary_f1": 0.629034456665869,
+                "flat_tv": 0.025012480756267906
+              },
+              "skip_fraction": 0.6011111111111112,
+              "reasons": {
+                "reuse": 0.6011111111111112,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.006666666666666667,
+                "risk": 0.39111111111111113
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.015947813529553434,
+              "boundary_f1_drop_reported_only": 0.0033340060821287487
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.16577377327540485,
+                "absrel_edge": 0.15258119380331198,
+                "overshoot": 0.23114378864382473,
+                "boundary_f1": 0.5940166516933176,
+                "flat_tv": 0.023926078114244673
+              },
+              "skip_fraction": 0.6511111111111111,
+              "reasons": {
+                "reuse": 0.6511111111111111,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0033333333333333335,
+                "risk": 0.34444444444444444
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.02540026153596786,
+              "boundary_f1_drop_reported_only": -0.004059458987580422
+            }
+          },
+          "skip_fraction": 0.6107407407407407,
+          "feasible": false,
+          "reaches_target_skip": true
+        },
+        "19.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.16821097746089186,
+                "absrel_edge": 0.1522592737172019,
+                "overshoot": 0.20898937080781543,
+                "boundary_f1": 0.5478751989923142,
+                "flat_tv": 0.024643528976788124
+              },
+              "skip_fraction": 0.6355555555555555,
+              "reasons": {
+                "reuse": 0.6355555555555555,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.008888888888888889,
+                "risk": 0.35444444444444445
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.052413890577547306,
+              "boundary_f1_drop_reported_only": -0.004189856576698792
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15315329396237495,
+                "absrel_edge": 0.1431489497250724,
+                "overshoot": 0.22275534018454918,
+                "boundary_f1": 0.6277283961905373,
+                "flat_tv": 0.025210020046474206
+              },
+              "skip_fraction": 0.6544444444444444,
+              "reasons": {
+                "reuse": 0.6544444444444445,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.006666666666666667,
+                "risk": 0.3377777777777778
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.023971392315155438,
+              "boundary_f1_drop_reported_only": 0.004640066557460409
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.1657457606238702,
+                "absrel_edge": 0.15316158710056138,
+                "overshoot": 0.23202619034687222,
+                "boundary_f1": 0.592762460719656,
+                "flat_tv": 0.02408811281538672
+              },
+              "skip_fraction": 0.6844444444444444,
+              "reasons": {
+                "reuse": 0.6844444444444444,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0077777777777777776,
+                "risk": 0.30666666666666664
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.03234458496982118,
+              "boundary_f1_drop_reported_only": -0.0028052680139187824
+            }
+          },
+          "skip_fraction": 0.6581481481481481,
+          "feasible": false,
+          "reaches_target_skip": true
+        },
+        "22.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.16891407745384285,
+                "absrel_edge": 0.15324628256252962,
+                "overshoot": 0.20753662417326293,
+                "boundary_f1": 0.5476587554177752,
+                "flat_tv": 0.024898119303915237
+              },
+              "skip_fraction": 0.6777777777777778,
+              "reasons": {
+                "reuse": 0.6777777777777778,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.011111111111111112,
+                "risk": 0.31
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.06328629432003186,
+              "boundary_f1_drop_reported_only": -0.003973413002159809
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15338817419015013,
+                "absrel_edge": 0.1438163041447127,
+                "overshoot": 0.22265190569865734,
+                "boundary_f1": 0.6268552118208673,
+                "flat_tv": 0.025281320900345843
+              },
+              "skip_fraction": 0.6833333333333333,
+              "reasons": {
+                "reuse": 0.6833333333333333,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.008888888888888889,
+                "risk": 0.30666666666666664
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.026867464372123395,
+              "boundary_f1_drop_reported_only": 0.0055132509271303975
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.1660236806964538,
+                "absrel_edge": 0.1539663279808269,
+                "overshoot": 0.23394205418856406,
+                "boundary_f1": 0.5936456384206259,
+                "flat_tv": 0.024235747052977482
+              },
+              "skip_fraction": 0.7077777777777778,
+              "reasons": {
+                "reuse": 0.7077777777777777,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0077777777777777776,
+                "risk": 0.2833333333333333
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.03867174753755953,
+              "boundary_f1_drop_reported_only": -0.0036884457148886884
+            }
+          },
+          "skip_fraction": 0.6896296296296297,
+          "feasible": false,
+          "reaches_target_skip": true
+        },
+        "25.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.16901967557491995,
+                "absrel_edge": 0.15388257064379043,
+                "overshoot": 0.21016722858704173,
+                "boundary_f1": 0.5483884366518922,
+                "flat_tv": 0.02505581775473224
+              },
+              "skip_fraction": 0.71,
+              "reasons": {
+                "reuse": 0.71,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.012222222222222223,
+                "risk": 0.27666666666666667
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.07002088336037171,
+              "boundary_f1_drop_reported_only": -0.004703094236276795
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.1536496226881853,
+                "absrel_edge": 0.14446040951775152,
+                "overshoot": 0.22453948282856204,
+                "boundary_f1": 0.6252767885614325,
+                "flat_tv": 0.025428219452086422
+              },
+              "skip_fraction": 0.7077777777777778,
+              "reasons": {
+                "reuse": 0.7077777777777777,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.012222222222222223,
+                "risk": 0.2788888888888889
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.03283413612714736,
+              "boundary_f1_drop_reported_only": 0.0070916741865652
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.16629388203122106,
+                "absrel_edge": 0.1547489607464438,
+                "overshoot": 0.23269662084528328,
+                "boundary_f1": 0.5922940852299884,
+                "flat_tv": 0.024434276171442535
+              },
+              "skip_fraction": 0.7366666666666667,
+              "reasons": {
+                "reuse": 0.7366666666666667,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.011111111111111112,
+                "risk": 0.2511111111111111
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.047180112720709655,
+              "boundary_f1_drop_reported_only": -0.0023368925242511773
+            }
+          },
+          "skip_fraction": 0.7181481481481482,
+          "feasible": false,
+          "reaches_target_skip": true
+        },
+        "30.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.16919657019870754,
+                "absrel_edge": 0.1546122744960634,
+                "overshoot": 0.21142505430961236,
+                "boundary_f1": 0.545783668715093,
+                "flat_tv": 0.02542007487681177
+              },
+              "skip_fraction": 0.7444444444444445,
+              "reasons": {
+                "reuse": 0.7444444444444445,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.013333333333333334,
+                "risk": 0.2411111111111111
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.08557666091882843,
+              "boundary_f1_drop_reported_only": -0.002098326299477593
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15367991202005366,
+                "absrel_edge": 0.14496518638370523,
+                "overshoot": 0.22198387441107295,
+                "boundary_f1": 0.6230359460358266,
+                "flat_tv": 0.025639442642115883
+              },
+              "skip_fraction": 0.7377777777777778,
+              "reasons": {
+                "reuse": 0.7377777777777778,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.016666666666666666,
+                "risk": 0.24444444444444444
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.04141352256099373,
+              "boundary_f1_drop_reported_only": 0.009332516712171168
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.16680724667116442,
+                "absrel_edge": 0.15619415388114047,
+                "overshoot": 0.2373197890479708,
+                "boundary_f1": 0.5912298356382935,
+                "flat_tv": 0.02470105376508501
+              },
+              "skip_fraction": 0.7655555555555555,
+              "reasons": {
+                "reuse": 0.7655555555555555,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.01888888888888889,
+                "risk": 0.21444444444444444
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.05861340375097113,
+              "boundary_f1_drop_reported_only": -0.001272642932556245
+            }
+          },
+          "skip_fraction": 0.7492592592592592,
+          "feasible": false,
+          "reaches_target_skip": true
+        }
+      }
+    },
+    "weighted": {
+      "training": {
+        "rows": 16158,
+        "correlation_on_training": 0.9077121615409851,
+        "predicted_quantiles": {
+          "0.1": 3.958911180496216,
+          "0.25": 6.389321327209473,
+          "0.5": 11.58450984954834,
+          "0.75": 28.742231369018555,
+          "0.9": 62.01875305175781
+        },
+        "true_quantiles": {
+          "0.1": 2.28257417678833,
+          "0.25": 6.115495681762695,
+          "0.5": 14.08864974975586,
+          "0.75": 32.84611129760742,
+          "0.9": 67.18155670166016
+        }
+      },
+      "taus": {
+        "10.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.16732690646283616,
+                "absrel_edge": 0.1497725328507812,
+                "overshoot": 0.2047360884269985,
+                "boundary_f1": 0.5473665401781046,
+                "flat_tv": 0.023857598886307743
+              },
+              "skip_fraction": 0.4177777777777778,
+              "reasons": {
+                "reuse": 0.4177777777777778,
+                "initial": 0.0011111111111111111,
+                "risk": 0.5811111111111111
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.01885036381871763,
+              "boundary_f1_drop_reported_only": -0.003681197762489208
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15243514599489802,
+                "absrel_edge": 0.14089830165045242,
+                "overshoot": 0.2232267232229951,
+                "boundary_f1": 0.6317166263748099,
+                "flat_tv": 0.02479469289071858
+              },
+              "skip_fraction": 0.47,
+              "reasons": {
+                "reuse": 0.47,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0022222222222222222,
+                "risk": 0.5266666666666666
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.007101785501619329,
+              "boundary_f1_drop_reported_only": 0.0006518363731878862
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.1651142373993829,
+                "absrel_edge": 0.15006838554370533,
+                "overshoot": 0.22851160809700724,
+                "boundary_f1": 0.5934783794758497,
+                "flat_tv": 0.023630650668508477
+              },
+              "skip_fraction": 0.4933333333333333,
+              "reasons": {
+                "reuse": 0.49333333333333335,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0011111111111111111,
+                "risk": 0.5044444444444445
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.01273912339722516,
+              "boundary_f1_drop_reported_only": -0.0035211867701124833
+            }
+          },
+          "skip_fraction": 0.4603703703703704,
+          "feasible": false,
+          "reaches_target_skip": false
+        },
+        "13.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.16760213157020704,
+                "absrel_edge": 0.1505040559166599,
+                "overshoot": 0.20625130973725248,
+                "boundary_f1": 0.5474336601352251,
+                "flat_tv": 0.02409007678429286
+              },
+              "skip_fraction": 0.5233333333333333,
+              "reasons": {
+                "reuse": 0.5233333333333333,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0011111111111111111,
+                "risk": 0.47444444444444445
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.028778445520094786,
+              "boundary_f1_drop_reported_only": -0.003748317719609706
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15269681071500504,
+                "absrel_edge": 0.1415403818869159,
+                "overshoot": 0.22273489843778807,
+                "boundary_f1": 0.6299530078967412,
+                "flat_tv": 0.024869199559713402
+              },
+              "skip_fraction": 0.5488888888888889,
+              "reasons": {
+                "reuse": 0.5488888888888889,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0044444444444444444,
+                "risk": 0.44555555555555554
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.010128070187103377,
+              "boundary_f1_drop_reported_only": 0.0024154548512564933
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.16535890500703057,
+                "absrel_edge": 0.15101706234515097,
+                "overshoot": 0.22955319151186238,
+                "boundary_f1": 0.5937195699248049,
+                "flat_tv": 0.023752038062860567
+              },
+              "skip_fraction": 0.5588888888888889,
+              "reasons": {
+                "reuse": 0.5588888888888889,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0022222222222222222,
+                "risk": 0.43777777777777777
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.017941424640306902,
+              "boundary_f1_drop_reported_only": -0.003762377219067692
+            }
+          },
+          "skip_fraction": 0.5437037037037037,
+          "feasible": false,
+          "reaches_target_skip": false
+        },
+        "16.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.1678545994943828,
+                "absrel_edge": 0.1512605622265112,
+                "overshoot": 0.20667363933898983,
+                "boundary_f1": 0.546903419693311,
+                "flat_tv": 0.024341600446237458
+              },
+              "skip_fraction": 0.5955555555555556,
+              "reasons": {
+                "reuse": 0.5955555555555555,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0011111111111111111,
+                "risk": 0.4022222222222222
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.0395198858344572,
+              "boundary_f1_drop_reported_only": -0.00321807727769563
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.1530714174154461,
+                "absrel_edge": 0.1427431931470613,
+                "overshoot": 0.22263841398914316,
+                "boundary_f1": 0.6284936886584318,
+                "flat_tv": 0.02504388521425426
+              },
+              "skip_fraction": 0.6133333333333333,
+              "reasons": {
+                "reuse": 0.6133333333333333,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.006666666666666667,
+                "risk": 0.3788888888888889
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.017223388341073065,
+              "boundary_f1_drop_reported_only": 0.0038747740895659355
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.16547825404725927,
+                "absrel_edge": 0.1515461106647541,
+                "overshoot": 0.23055700974189045,
+                "boundary_f1": 0.5934475236248087,
+                "flat_tv": 0.023806740757491854
+              },
+              "skip_fraction": 0.6011111111111112,
+              "reasons": {
+                "reuse": 0.6011111111111112,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0022222222222222222,
+                "risk": 0.39555555555555555
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.020285818782707077,
+              "boundary_f1_drop_reported_only": -0.0034903309190714715
+            }
+          },
+          "skip_fraction": 0.6033333333333334,
+          "feasible": false,
+          "reaches_target_skip": true
+        },
+        "19.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.16825913909703022,
+                "absrel_edge": 0.15216038974212515,
+                "overshoot": 0.20756661205711616,
+                "boundary_f1": 0.5477889674846773,
+                "flat_tv": 0.024546557660732004
+              },
+              "skip_fraction": 0.6466666666666667,
+              "reasons": {
+                "reuse": 0.6466666666666666,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0033333333333333335,
+                "risk": 0.3488888888888889
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.04827268336241297,
+              "boundary_f1_drop_reported_only": -0.0041036250690619225
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15329849655542602,
+                "absrel_edge": 0.14329740669675936,
+                "overshoot": 0.2241429154290692,
+                "boundary_f1": 0.6276193263243747,
+                "flat_tv": 0.025165913344050446
+              },
+              "skip_fraction": 0.6511111111111111,
+              "reasons": {
+                "reuse": 0.6511111111111111,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.01,
+                "risk": 0.3377777777777778
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.02217988237553503,
+              "boundary_f1_drop_reported_only": 0.004749136423623068
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.1657517216649196,
+                "absrel_edge": 0.15245838333056044,
+                "overshoot": 0.23150722600057413,
+                "boundary_f1": 0.593665462412216,
+                "flat_tv": 0.023986934475186798
+              },
+              "skip_fraction": 0.6466666666666667,
+              "reasons": {
+                "reuse": 0.6466666666666666,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0044444444444444444,
+                "risk": 0.3477777777777778
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.028008383440787155,
+              "boundary_f1_drop_reported_only": -0.0037082697064787506
+            }
+          },
+          "skip_fraction": 0.6481481481481481,
+          "feasible": false,
+          "reaches_target_skip": true
+        },
+        "22.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.16846237320001797,
+                "absrel_edge": 0.15290194299528886,
+                "overshoot": 0.20975656101640133,
+                "boundary_f1": 0.5466229824390676,
+                "flat_tv": 0.024712609040240446
+              },
+              "skip_fraction": 0.6766666666666667,
+              "reasons": {
+                "reuse": 0.6766666666666666,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.0044444444444444444,
+                "risk": 0.31777777777777777
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.05536398828505029,
+              "boundary_f1_drop_reported_only": -0.0029376400234522038
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15319642073460732,
+                "absrel_edge": 0.14343377571462057,
+                "overshoot": 0.22253293547558495,
+                "boundary_f1": 0.6269118041020851,
+                "flat_tv": 0.02520258605169753
+              },
+              "skip_fraction": 0.6799999999999999,
+              "reasons": {
+                "reuse": 0.68,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.011111111111111112,
+                "risk": 0.30777777777777776
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.023669441028805638,
+              "boundary_f1_drop_reported_only": 0.005456658645912604
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.16589783916527864,
+                "absrel_edge": 0.15324670982645855,
+                "overshoot": 0.23248871020283343,
+                "boundary_f1": 0.5936446994653454,
+                "flat_tv": 0.02410505853386389
+              },
+              "skip_fraction": 0.6799999999999999,
+              "reasons": {
+                "reuse": 0.68,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.006666666666666667,
+                "risk": 0.31222222222222223
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.03307082786159121,
+              "boundary_f1_drop_reported_only": -0.003687506759608161
+            }
+          },
+          "skip_fraction": 0.6788888888888889,
+          "feasible": false,
+          "reaches_target_skip": true
+        },
+        "25.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.16873684385027476,
+                "absrel_edge": 0.1534478112896211,
+                "overshoot": 0.20886567086781765,
+                "boundary_f1": 0.5468142098105615,
+                "flat_tv": 0.02496785915767153
+              },
+              "skip_fraction": 0.7044444444444444,
+              "reasons": {
+                "reuse": 0.7044444444444444,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.005555555555555556,
+                "risk": 0.28888888888888886
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.06626456869336117,
+              "boundary_f1_drop_reported_only": -0.003128867394946111
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15360865523630016,
+                "absrel_edge": 0.1445062597600817,
+                "overshoot": 0.22365967645937448,
+                "boundary_f1": 0.6262501455788259,
+                "flat_tv": 0.0253602636170884
+              },
+              "skip_fraction": 0.7066666666666667,
+              "reasons": {
+                "reuse": 0.7066666666666667,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.011111111111111112,
+                "risk": 0.2811111111111111
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.03007393082581933,
+              "boundary_f1_drop_reported_only": 0.006118317169171883
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.16609542028702115,
+                "absrel_edge": 0.15400851827595344,
+                "overshoot": 0.2322759266221384,
+                "boundary_f1": 0.5932498774263594,
+                "flat_tv": 0.024254997741017078
+              },
+              "skip_fraction": 0.7066666666666667,
+              "reasons": {
+                "reuse": 0.7066666666666667,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.008888888888888889,
+                "risk": 0.2833333333333333
+              },
+              "raw_within_1pct": true,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.039496774541830426,
+              "boundary_f1_drop_reported_only": -0.0032926847206221632
+            }
+          },
+          "skip_fraction": 0.7059259259259258,
+          "feasible": false,
+          "reaches_target_skip": true
+        },
+        "30.0": {
+          "per_sequence": {
+            "Date01_Sub01_basketball.1": {
+              "metrics": {
+                "absrel_raw": 0.1694043066864926,
+                "absrel_edge": 0.15482876733366163,
+                "overshoot": 0.21075490828858617,
+                "boundary_f1": 0.5468009564832406,
+                "flat_tv": 0.025395914713541665
+              },
+              "skip_fraction": 0.7455555555555555,
+              "reasons": {
+                "reuse": 0.7455555555555555,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.01,
+                "risk": 0.24333333333333335
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.08454488939584448,
+              "boundary_f1_drop_reported_only": -0.003115614067625172
+            },
+            "Date01_Sub01_keyboard_move.1": {
+              "metrics": {
+                "absrel_raw": 0.15390304916107353,
+                "absrel_edge": 0.14496551113914355,
+                "overshoot": 0.22348224350430454,
+                "boundary_f1": 0.6239335109017514,
+                "flat_tv": 0.025570292400403156
+              },
+              "skip_fraction": 0.7366666666666667,
+              "reasons": {
+                "reuse": 0.7366666666666667,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.015555555555555555,
+                "risk": 0.24666666666666667
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.038604803283699196,
+              "boundary_f1_drop_reported_only": 0.008434951846246319
+            },
+            "Date01_Sub01_plasticcontainer.1": {
+              "metrics": {
+                "absrel_raw": 0.16660638789072377,
+                "absrel_edge": 0.15541888635776346,
+                "overshoot": 0.2348179584137919,
+                "boundary_f1": 0.5919564438804432,
+                "flat_tv": 0.024487612764868473
+              },
+              "skip_fraction": 0.7433333333333334,
+              "reasons": {
+                "reuse": 0.7433333333333333,
+                "initial": 0.0011111111111111111,
+                "maximum_age": 0.015555555555555555,
+                "risk": 0.24
+              },
+              "raw_within_1pct": false,
+              "edge_within_1pct": false,
+              "flat_tv_reported_only": 0.04946595984480795,
+              "boundary_f1_drop_reported_only": -0.001999251174706007
+            }
+          },
+          "skip_fraction": 0.7418518518518518,
+          "feasible": false,
+          "reaches_target_skip": true
+        }
+      }
+    }
+  },
+  "feasible": [],
+  "chosen": null,
+  "target_skip": 0.58,
+  "selected_on_raw_and_edge_only": true,
+  "nothing_promoted": true,
+  "date02_untouched_here": true
+}

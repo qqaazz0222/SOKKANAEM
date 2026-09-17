@@ -1,0 +1,7014 @@
+{
+  "combos": [
+    {
+      "tau_occ": 1.0,
+      "tau_photo": 1000000000.0,
+      "label": "unsafeguarded_reference"
+    },
+    {
+      "tau_occ": 0.5,
+      "tau_photo": 0.4,
+      "label": "loose"
+    },
+    {
+      "tau_occ": 0.35,
+      "tau_photo": 0.25,
+      "label": "default"
+    },
+    {
+      "tau_occ": 0.2,
+      "tau_photo": 0.15,
+      "label": "tight"
+    }
+  ],
+  "L32": {
+    "baseline": {
+      "metrics": {
+        "balanced": {
+          "absrel_raw": 0.12812714899579686,
+          "absrel_clip_median": 0.0820263959467411,
+          "absrel_edge": 0.15932495053857565,
+          "grad_ratio": 0.7372025102376938,
+          "overshoot": 0.1759871256848176,
+          "boundary_precision": 0.7948570001042552,
+          "boundary_recall": 0.6028926178696565,
+          "boundary_f1": 0.6602192846799476,
+          "flat_tv": 0.024453518291314445,
+          "flat_tv_gt": 0.005542817942720527,
+          "flat_tv_ratio": 60.33229128519694
+        },
+        "sources": {
+          "tum": {
+            "absrel_raw": 0.08747774735093117,
+            "absrel_clip_median": 0.08145821839570999,
+            "absrel_edge": 0.142521433532238,
+            "grad_ratio": 0.6935093402862549,
+            "overshoot": 0.13355711847543716,
+            "boundary_precision": 0.7891270959128937,
+            "boundary_recall": 0.6412211656958485,
+            "boundary_f1": 0.6883267651622493,
+            "flat_tv": 0.027483469806611538,
+            "flat_tv_gt": 0.004203296848572791,
+            "flat_tv_ratio": 7.203530788421631
+          },
+          "bonn": {
+            "absrel_raw": 0.16877655064066252,
+            "absrel_clip_median": 0.08259457349777222,
+            "absrel_edge": 0.1761284675449133,
+            "grad_ratio": 0.7808956801891327,
+            "overshoot": 0.2184171328941981,
+            "boundary_precision": 0.8005869042956166,
+            "boundary_recall": 0.5645640700434645,
+            "boundary_f1": 0.6321118041976459,
+            "flat_tv": 0.02142356677601735,
+            "flat_tv_gt": 0.006882339036868264,
+            "flat_tv_ratio": 113.46105178197224
+          }
+        },
+        "clips": [
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.07583937048912048,
+              "absrel_clip_median": 0.07596156746149063,
+              "absrel_edge": 0.1352776437997818,
+              "grad_ratio": 0.7378108501434326,
+              "overshoot": 0.16488045454025269,
+              "boundary_precision": 0.8026109862451752,
+              "boundary_recall": 0.6927109702179829,
+              "boundary_f1": 0.7349114889899889,
+              "flat_tv": 0.03319589048624039,
+              "flat_tv_gt": 0.005831369198858738,
+              "flat_tv_ratio": 5.724700927734375
+            }
+          },
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.09911612421274185,
+              "absrel_clip_median": 0.08695486932992935,
+              "absrel_edge": 0.1497652232646942,
+              "grad_ratio": 0.6492078304290771,
+              "overshoot": 0.10223378241062164,
+              "boundary_precision": 0.7756432055806121,
+              "boundary_recall": 0.5897313611737142,
+              "boundary_f1": 0.6417420413345098,
+              "flat_tv": 0.02177104912698269,
+              "flat_tv_gt": 0.0025752244982868433,
+              "flat_tv_ratio": 8.682360649108887
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.20192627608776093,
+              "absrel_clip_median": 0.20113591849803925,
+              "absrel_edge": 0.14860203862190247,
+              "grad_ratio": 1.0579729080200195,
+              "overshoot": 0.616814136505127,
+              "boundary_precision": 0.730279713558654,
+              "boundary_recall": 0.5893212243293723,
+              "boundary_f1": 0.6219813525676727,
+              "flat_tv": 0.015306113287806511,
+              "flat_tv_gt": 0.0027085235342383385,
+              "flat_tv_ratio": 5.777844429016113
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.047447167336940765,
+              "absrel_clip_median": 0.04178345203399658,
+              "absrel_edge": 0.06216784194111824,
+              "grad_ratio": 0.8465962409973145,
+              "overshoot": 0.23485662043094635,
+              "boundary_precision": 0.8354740962386131,
+              "boundary_recall": 0.6048379726707935,
+              "boundary_f1": 0.6626581711073717,
+              "flat_tv": 0.02415056899189949,
+              "flat_tv_gt": 0.0012015864485874772,
+              "flat_tv_ratio": 664.8828125
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.07425465434789658,
+              "absrel_clip_median": 0.06605543196201324,
+              "absrel_edge": 0.08543366193771362,
+              "grad_ratio": 0.7063243389129639,
+              "overshoot": 0.19461792707443237,
+              "boundary_precision": 0.780386286166807,
+              "boundary_recall": 0.6253886645038923,
+              "boundary_f1": 0.6860269733394185,
+              "flat_tv": 0.021800300106406212,
+              "flat_tv_gt": 0.00673291552811861,
+              "flat_tv_ratio": 3.27136492729187
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.08833343535661697,
+              "absrel_clip_median": 0.06305504590272903,
+              "absrel_edge": 0.14723211526870728,
+              "grad_ratio": 0.6077969670295715,
+              "overshoot": 0.11006081104278564,
+              "boundary_precision": 0.8644578885287046,
+              "boundary_recall": 0.3760871884102623,
+              "boundary_f1": 0.4765161502485474,
+              "flat_tv": 0.03033386915922165,
+              "flat_tv_gt": 0.014857528731226921,
+              "flat_tv_ratio": 2.0431504249572754
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.21817384660243988,
+              "absrel_clip_median": 0.05404059588909149,
+              "absrel_edge": 0.21961848437786102,
+              "grad_ratio": 0.7206985950469971,
+              "overshoot": 0.07900340855121613,
+              "boundary_precision": 0.8564204430828491,
+              "boundary_recall": 0.5985715994611382,
+              "boundary_f1": 0.7010221897313992,
+              "flat_tv": 0.020804613828659058,
+              "flat_tv_gt": 0.009696357883512974,
+              "flat_tv_ratio": 2.144193172454834
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.38252392411231995,
+              "absrel_clip_median": 0.0694969967007637,
+              "absrel_edge": 0.3937166631221771,
+              "grad_ratio": 0.7459850311279297,
+              "overshoot": 0.07514989376068115,
+              "boundary_precision": 0.7365029981980721,
+              "boundary_recall": 0.5931777708853284,
+              "boundary_f1": 0.6444659881914655,
+              "flat_tv": 0.016145935282111168,
+              "flat_tv_gt": 0.006097122095525265,
+              "flat_tv_ratio": 2.6469452381134033
+            }
+          }
+        ]
+      },
+      "full_backbone_calls": 256,
+      "frames": 256,
+      "skip_fraction": 0.0,
+      "median_ms": 7.52158195246011,
+      "mean_ms": 7.52292659080922,
+      "p95_ms": 7.566002837847918,
+      "per_frame_ms": [
+        7.476418977603316,
+        7.491171942092478,
+        7.545185042545199,
+        7.533520110882819,
+        7.54778494592756,
+        7.580336998216808,
+        7.545917993411422,
+        7.528414949774742,
+        7.524425047449768,
+        7.519545964896679,
+        7.474357029423118,
+        7.534797885455191,
+        7.485716021619737,
+        7.480632979422808,
+        7.537386962212622,
+        7.513253018260002,
+        7.503855042159557,
+        7.574885035865009,
+        7.495861034840345,
+        7.50566297210753,
+        7.527820998802781,
+        7.539618061855435,
+        7.525977911427617,
+        7.512307958677411,
+        7.529043010435998,
+        7.534805918112397,
+        7.4935510056093335,
+        7.542420062236488,
+        7.491469033993781,
+        7.51137500628829,
+        7.521540974266827,
+        7.5506530702114105,
+        7.7166929841041565,
+        7.495291065424681,
+        7.534396019764245,
+        7.575758034363389,
+        7.527683977968991,
+        7.514751050621271,
+        7.544583990238607,
+        7.549652014859021,
+        7.544852094724774,
+        7.519406965002418,
+        7.554376032203436,
+        7.535615935921669,
+        7.54698202945292,
+        7.525459979660809,
+        7.547787972725928,
+        7.566662039607763,
+        7.543999003246427,
+        7.541064987890422,
+        7.56578310392797,
+        7.55786697845906,
+        7.508698967285454,
+        7.537210010923445,
+        7.523576961830258,
+        7.508598966524005,
+        7.54001596942544,
+        7.5165609596297145,
+        7.521622930653393,
+        7.506105932407081,
+        7.545031025074422,
+        7.574107963591814,
+        7.538027013652027,
+        7.551106973551214,
+        7.569886045530438,
+        7.5354729779064655,
+        7.491694064810872,
+        7.464810041710734,
+        7.497177924960852,
+        7.496944046579301,
+        7.545720087364316,
+        7.506453082896769,
+        7.537369034253061,
+        7.5201879953965545,
+        7.526466040872037,
+        7.4800909496843815,
+        7.516233017668128,
+        7.520511979237199,
+        7.507320027798414,
+        7.4916110606864095,
+        7.509598042815924,
+        7.5199330458417535,
+        7.515901001170278,
+        7.525830063968897,
+        7.498741033487022,
+        7.499266997911036,
+        7.5185009045526385,
+        7.514010998420417,
+        7.500495063140988,
+        7.532070972956717,
+        7.53300404176116,
+        7.500745938159525,
+        7.526585948653519,
+        7.532081101089716,
+        7.519614999182522,
+        7.51737505197525,
+        7.5778589816764,
+        7.53000401891768,
+        7.529639056883752,
+        7.58131209295243,
+        7.5151530327275395,
+        7.510493043810129,
+        7.5122370617464185,
+        7.5327049707993865,
+        7.513695978559554,
+        7.507705013267696,
+        7.524458924308419,
+        7.537654950283468,
+        7.516089943237603,
+        7.522794068790972,
+        7.526569068431854,
+        7.541294093243778,
+        7.565687992610037,
+        7.534092990681529,
+        7.5329989194869995,
+        7.524386048316956,
+        7.5223499443382025,
+        7.50254699960351,
+        7.524469052441418,
+        7.519610924646258,
+        7.529956987127662,
+        7.555564981885254,
+        7.504728971980512,
+        7.528990041464567,
+        7.533547934144735,
+        7.502061082050204,
+        7.559961988590658,
+        7.521410007029772,
+        7.5534150237217546,
+        7.545119966380298,
+        7.538844016380608,
+        7.520762970671058,
+        7.5577819952741265,
+        7.557670935057104,
+        7.521705934777856,
+        7.547328947111964,
+        7.519821985624731,
+        7.519823033362627,
+        7.536640972830355,
+        7.509023998863995,
+        7.531055016443133,
+        7.521193940192461,
+        7.512212032452226,
+        7.501967949792743,
+        7.503399043343961,
+        7.5444650137797,
+        7.5156319653615355,
+        7.5216490076854825,
+        7.481098989956081,
+        7.518247002735734,
+        7.501645013689995,
+        7.496763952076435,
+        7.519047940149903,
+        7.510922965593636,
+        7.549813948571682,
+        7.502718945033848,
+        7.493101991713047,
+        7.530172006227076,
+        7.496083970181644,
+        7.480737986043096,
+        7.541286060586572,
+        7.480247993953526,
+        7.507172995246947,
+        7.516858982853591,
+        7.528738002292812,
+        7.509562070481479,
+        7.482058950699866,
+        7.505438989028335,
+        7.509585004299879,
+        7.466900045983493,
+        7.530792965553701,
+        7.493513054214418,
+        7.541517028585076,
+        7.511859992519021,
+        7.528104004450142,
+        7.4987090192735195,
+        7.469828007742763,
+        7.5262150494381785,
+        7.457294967025518,
+        7.4896609876304865,
+        7.485192967578769,
+        7.5031580636277795,
+        7.5027069542557,
+        7.512968964874744,
+        7.501599960960448,
+        7.4934420408681035,
+        7.512231939472258,
+        7.510197930969298,
+        7.53543502651155,
+        7.541889091953635,
+        7.502801949158311,
+        7.537747034803033,
+        7.569810026325285,
+        7.519948994740844,
+        7.569389999844134,
+        7.489166921004653,
+        7.5295999413356185,
+        7.489475072361529,
+        7.540576043538749,
+        7.504755049012601,
+        7.54067802336067,
+        7.518956903368235,
+        7.469791918992996,
+        7.547667948529124,
+        7.477839011698961,
+        7.524987915530801,
+        7.492678007110953,
+        7.516404963098466,
+        7.53583200275898,
+        7.483569090254605,
+        7.537878002040088,
+        7.488142000511289,
+        7.506223046220839,
+        7.501672953367233,
+        7.5178740080446005,
+        7.51229899469763,
+        7.531318929977715,
+        7.5352920684963465,
+        7.516085985116661,
+        7.510174997150898,
+        7.5489230221137404,
+        7.558817975223064,
+        7.565245032310486,
+        7.5087640434503555,
+        7.560268044471741,
+        7.490486954338849,
+        7.4821210000664,
+        7.569386041723192,
+        7.525369990617037,
+        7.528499932959676,
+        7.493376033380628,
+        7.501119980588555,
+        7.548190071247518,
+        7.5084270210936666,
+        7.53997394349426,
+        7.4925790540874,
+        7.500354899093509,
+        7.546209031715989,
+        7.517575053498149,
+        7.4916069861501455,
+        7.523096981458366,
+        7.510329014621675,
+        7.531268987804651,
+        7.520179031416774,
+        7.533675990998745,
+        7.5266930507496,
+        7.5476570054888725,
+        7.5500920647755265,
+        7.521251100115478,
+        7.550824899226427,
+        7.547412998974323,
+        7.571020047180355,
+        7.502501946873963,
+        7.5468020513653755,
+        7.535298937000334,
+        7.52836000174284
+      ],
+      "telemetry": [
+        {
+          "clip": 0,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        },
+        {
+          "clip": 1,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        },
+        {
+          "clip": 2,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        },
+        {
+          "clip": 3,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        },
+        {
+          "clip": 4,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        },
+        {
+          "clip": 5,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        },
+        {
+          "clip": 6,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        },
+        {
+          "clip": 7,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        }
+      ]
+    },
+    "unsafeguarded_reference": {
+      "metrics": {
+        "absrel_raw": 0.1283771473293503,
+        "absrel_clip_median": 0.08207731787115335,
+        "absrel_edge": 0.16015471393863362,
+        "grad_ratio": 0.7320867627859116,
+        "overshoot": 0.17503151732186478,
+        "boundary_precision": 0.7907336682805586,
+        "boundary_recall": 0.6054056639226877,
+        "boundary_f1": 0.6611366202252813,
+        "flat_tv": 0.024628340577085815,
+        "flat_tv_gt": 0.005542817942720527,
+        "flat_tv_ratio": 62.76204113165537
+      },
+      "speedup": 1.9443648861444085,
+      "skip_fraction": 0.62109375,
+      "gate_pass": true,
+      "checks": {
+        "raw_absrel_within_1pct": true,
+        "edge_absrel_within_1pct": true,
+        "boundary_f1_drop_at_most_0.005": true,
+        "overshoot_within_1pct": true,
+        "flat_tv_within_1pct": true,
+        "per_source_raw_within_2pct": true
+      }
+    },
+    "loose": {
+      "metrics": {
+        "absrel_raw": 0.1284308722242713,
+        "absrel_clip_median": 0.08202837873250246,
+        "absrel_edge": 0.16058956334988278,
+        "grad_ratio": 0.7324593812227249,
+        "overshoot": 0.17518832969168824,
+        "boundary_precision": 0.7932721537072212,
+        "boundary_recall": 0.6065313773967015,
+        "boundary_f1": 0.6624021197979648,
+        "flat_tv": 0.024534855969250202,
+        "flat_tv_gt": 0.005542817942720527,
+        "flat_tv_ratio": 62.72109274069468
+      },
+      "speedup": 1.800660873254636,
+      "skip_fraction": 0.61328125,
+      "gate_pass": true,
+      "checks": {
+        "raw_absrel_within_1pct": true,
+        "edge_absrel_within_1pct": true,
+        "boundary_f1_drop_at_most_0.005": true,
+        "overshoot_within_1pct": true,
+        "flat_tv_within_1pct": true,
+        "per_source_raw_within_2pct": true
+      }
+    },
+    "default": {
+      "metrics": {
+        "absrel_raw": 0.12894030008465052,
+        "absrel_clip_median": 0.08255996710310379,
+        "absrel_edge": 0.16052478676040965,
+        "grad_ratio": 0.7327320575714111,
+        "overshoot": 0.17654192571838695,
+        "boundary_precision": 0.7912354540700715,
+        "boundary_recall": 0.6050742978243053,
+        "boundary_f1": 0.6608995806891471,
+        "flat_tv": 0.024686564380923905,
+        "flat_tv_gt": 0.005542817942720527,
+        "flat_tv_ratio": 62.748749097188316
+      },
+      "speedup": 1.6318859711843574,
+      "skip_fraction": 0.55859375,
+      "gate_pass": true,
+      "checks": {
+        "raw_absrel_within_1pct": true,
+        "edge_absrel_within_1pct": true,
+        "boundary_f1_drop_at_most_0.005": true,
+        "overshoot_within_1pct": true,
+        "flat_tv_within_1pct": true,
+        "per_source_raw_within_2pct": true
+      }
+    },
+    "tight": {
+      "metrics": {
+        "absrel_raw": 0.12830328724036616,
+        "absrel_clip_median": 0.08187350506583849,
+        "absrel_edge": 0.15977333796521026,
+        "grad_ratio": 0.7348631670077641,
+        "overshoot": 0.17575917020440102,
+        "boundary_precision": 0.7944350854959339,
+        "boundary_recall": 0.6035898499022652,
+        "boundary_f1": 0.6605753593095061,
+        "flat_tv": 0.024472760812689863,
+        "flat_tv_gt": 0.005542817942720527,
+        "flat_tv_ratio": 62.68110809723536
+      },
+      "speedup": 1.1225174708196155,
+      "skip_fraction": 0.2890625,
+      "gate_pass": true,
+      "checks": {
+        "raw_absrel_within_1pct": true,
+        "edge_absrel_within_1pct": true,
+        "boundary_f1_drop_at_most_0.005": true,
+        "overshoot_within_1pct": true,
+        "flat_tv_within_1pct": true,
+        "per_source_raw_within_2pct": true
+      }
+    }
+  },
+  "L256": {
+    "baseline": {
+      "metrics": {
+        "balanced": {
+          "absrel_raw": 0.1591827856997649,
+          "absrel_clip_median": 0.1565833402176698,
+          "absrel_edge": 0.1742369905114174,
+          "grad_ratio": 0.6833516259988148,
+          "overshoot": 0.2042851063112418,
+          "boundary_precision": 0.7363613575911991,
+          "boundary_recall": 0.5610290547364356,
+          "boundary_f1": 0.6146654316346232,
+          "flat_tv": 0.03098809656997522,
+          "flat_tv_gt": 0.006358106426584224,
+          "flat_tv_ratio": 7.17897375424703
+        },
+        "sources": {
+          "tum": {
+            "absrel_raw": 0.1442229300737381,
+            "absrel_clip_median": 0.14777646958827972,
+            "absrel_edge": 0.1658398061990738,
+            "grad_ratio": 0.6625455617904663,
+            "overshoot": 0.17819565534591675,
+            "boundary_precision": 0.723441204871051,
+            "boundary_recall": 0.6274494248403547,
+            "boundary_f1": 0.6641390640094565,
+            "flat_tv": 0.0323614738881588,
+            "flat_tv_gt": 0.0037967434618622065,
+            "flat_tv_ratio": 10.006917953491211
+          },
+          "bonn": {
+            "absrel_raw": 0.17414264132579169,
+            "absrel_clip_median": 0.16539021084705988,
+            "absrel_edge": 0.182634174823761,
+            "grad_ratio": 0.7041576902071635,
+            "overshoot": 0.23037455727656683,
+            "boundary_precision": 0.7492815103113472,
+            "boundary_recall": 0.49460868463251645,
+            "boundary_f1": 0.5651917992597899,
+            "flat_tv": 0.029614719251791637,
+            "flat_tv_gt": 0.008919469391306242,
+            "flat_tv_ratio": 4.351029555002849
+          }
+        },
+        "clips": [
+          {
+            "source": "tum",
+            "scene": "/home/hyunsu/dataset_ssd/tum_static/rgbd_dataset_freiburg3_walking_static",
+            "metrics": {
+              "absrel_raw": 0.1442229300737381,
+              "absrel_clip_median": 0.14777646958827972,
+              "absrel_edge": 0.1658398061990738,
+              "grad_ratio": 0.6625455617904663,
+              "overshoot": 0.17819565534591675,
+              "boundary_precision": 0.723441204871051,
+              "boundary_recall": 0.6274494248403547,
+              "boundary_f1": 0.6641390640094565,
+              "flat_tv": 0.0323614738881588,
+              "flat_tv_gt": 0.0037967434618622065,
+              "flat_tv_ratio": 10.006917953491211
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_crowd2",
+            "metrics": {
+              "absrel_raw": 0.145734041929245,
+              "absrel_clip_median": 0.1549340784549713,
+              "absrel_edge": 0.15935543179512024,
+              "grad_ratio": 0.7039726376533508,
+              "overshoot": 0.373078852891922,
+              "boundary_precision": 0.7437678763138441,
+              "boundary_recall": 0.5758744644699618,
+              "boundary_f1": 0.6246128549682908,
+              "flat_tv": 0.021306470036506653,
+              "flat_tv_gt": 0.004027247428894043,
+              "flat_tv_ratio": 6.944791793823242
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_person_tracking2",
+            "metrics": {
+              "absrel_raw": 0.09647703915834427,
+              "absrel_clip_median": 0.08150541037321091,
+              "absrel_edge": 0.11678212881088257,
+              "grad_ratio": 0.7057635188102722,
+              "overshoot": 0.11710266023874283,
+              "boundary_precision": 0.7925372969669601,
+              "boundary_recall": 0.4742031015630346,
+              "boundary_f1": 0.5564463707269169,
+              "flat_tv": 0.040490977466106415,
+              "flat_tv_gt": 0.012753661721944809,
+              "flat_tv_ratio": 3.3949694633483887
+            }
+          },
+          {
+            "source": "bonn",
+            "scene": "/home/hyunsu/dataset_ssd/bonn/rgbd_bonn_dataset/rgbd_bonn_static_close_far",
+            "metrics": {
+              "absrel_raw": 0.28021684288978577,
+              "absrel_clip_median": 0.25973114371299744,
+              "absrel_edge": 0.27176496386528015,
+              "grad_ratio": 0.7027369141578674,
+              "overshoot": 0.20094215869903564,
+              "boundary_precision": 0.711539357653237,
+              "boundary_recall": 0.43374848786455306,
+              "boundary_f1": 0.5145161720841619,
+              "flat_tv": 0.02704671025276184,
+              "flat_tv_gt": 0.009977499023079872,
+              "flat_tv_ratio": 2.713327407836914
+            }
+          }
+        ]
+      },
+      "full_backbone_calls": 1024,
+      "frames": 1024,
+      "skip_fraction": 0.0,
+      "median_ms": 7.529513502959162,
+      "mean_ms": 7.532307162477991,
+      "p95_ms": 7.574038201710209,
+      "per_frame_ms": [
+        7.484124973416328,
+        7.500033010728657,
+        7.530840928666294,
+        7.534859934821725,
+        7.502613007090986,
+        7.534336065873504,
+        7.5353949796408415,
+        7.52060697413981,
+        7.519158069044352,
+        7.562328013591468,
+        7.550884038209915,
+        7.5404440285637975,
+        7.520515006035566,
+        7.5379399349913,
+        7.534181931987405,
+        7.539408979937434,
+        7.562219980172813,
+        7.574506918899715,
+        7.512194919399917,
+        7.531877956353128,
+        7.548950030468404,
+        7.5825260719284415,
+        7.559124031104147,
+        7.59219191968441,
+        7.536201039329171,
+        7.578327087685466,
+        7.552611990831792,
+        7.573984912596643,
+        7.532665040344,
+        7.544102962128818,
+        7.557554985396564,
+        7.548143970780075,
+        7.544466992840171,
+        7.551681948825717,
+        7.566729094833136,
+        7.531221024692059,
+        7.541713071987033,
+        7.54125602543354,
+        7.507925969548523,
+        7.533892057836056,
+        7.503568078391254,
+        7.558582001365721,
+        7.530585047788918,
+        7.570505025796592,
+        7.518987054936588,
+        7.545005064457655,
+        7.543905987404287,
+        7.5328090460971,
+        7.546807057224214,
+        7.534818956628442,
+        7.555688964203,
+        7.521696039475501,
+        7.529869093559682,
+        7.534352014772594,
+        7.541893050074577,
+        7.587966974824667,
+        7.56489101331681,
+        7.527878042310476,
+        7.538379984907806,
+        7.575185038149357,
+        7.573188049718738,
+        7.558103068731725,
+        7.527711917646229,
+        7.590931025333703,
+        7.5546009466052055,
+        7.517385063692927,
+        7.554535986855626,
+        7.578358985483646,
+        7.574010989628732,
+        7.544870022684336,
+        7.566899061203003,
+        7.516187964938581,
+        7.515206001698971,
+        7.5725410133600235,
+        7.558834971860051,
+        7.573246024549007,
+        7.545090047642589,
+        7.535837008617818,
+        7.49596708919853,
+        7.568335975520313,
+        7.515079923905432,
+        7.5760140316560864,
+        7.530911010690033,
+        7.569415029138327,
+        7.542010047473013,
+        7.553638075478375,
+        7.533773081377149,
+        7.5301299802958965,
+        7.507764035835862,
+        7.546517997980118,
+        7.52662995364517,
+        7.5408839620649815,
+        7.539483951404691,
+        7.556468015536666,
+        7.532262010499835,
+        7.549797999672592,
+        7.5494080083444715,
+        7.55949504673481,
+        7.607171079143882,
+        7.5642409501597285,
+        7.571020978502929,
+        7.521173916757107,
+        7.533330004662275,
+        7.541124941781163,
+        7.567888940684497,
+        7.554564042948186,
+        7.576287025585771,
+        7.595950039103627,
+        7.544390973635018,
+        7.57394393440336,
+        7.543793064542115,
+        7.564874948002398,
+        7.545528933405876,
+        7.535379030741751,
+        7.574868970550597,
+        7.535585085861385,
+        7.5518060475587845,
+        7.544719963334501,
+        7.511427043937147,
+        7.604826008901,
+        7.553044939413667,
+        7.5936190551146865,
+        7.547333021648228,
+        7.515051984228194,
+        7.518496015109122,
+        7.560216938145459,
+        7.510124938562512,
+        7.530361996032298,
+        7.604267913848162,
+        7.521873922087252,
+        7.511149975471199,
+        7.52702506724745,
+        7.54411390516907,
+        7.5642510782927275,
+        7.582038990221918,
+        7.534914067946374,
+        7.563870050944388,
+        7.501095999032259,
+        7.522287080064416,
+        7.532026036642492,
+        7.516212994232774,
+        7.529014954343438,
+        7.528955931775272,
+        7.499102037400007,
+        7.5394390150904655,
+        7.512565003708005,
+        7.530878065153956,
+        7.523074047639966,
+        7.549230009317398,
+        7.5154880760237575,
+        7.535477983765304,
+        7.509393966756761,
+        7.566106040030718,
+        7.566659012809396,
+        7.534486008808017,
+        7.528800051659346,
+        7.559451973065734,
+        7.542472914792597,
+        7.539851940236986,
+        7.507994072511792,
+        7.527517969720066,
+        7.5431730365380645,
+        7.512410986237228,
+        7.551392074674368,
+        7.529187016189098,
+        7.5208330526947975,
+        7.5662919552996755,
+        7.503764936700463,
+        7.553957984782755,
+        7.515909033827484,
+        7.506070891395211,
+        7.527179084718227,
+        7.51954095903784,
+        7.530005066655576,
+        7.517589954659343,
+        7.561384001746774,
+        7.545546977780759,
+        7.524585002101958,
+        7.506963098421693,
+        7.539564976468682,
+        7.514266995713115,
+        7.52140290569514,
+        7.539874059148133,
+        7.526376051828265,
+        7.562370039522648,
+        7.531987968832254,
+        7.5892269378528,
+        7.53873900976032,
+        7.557739969342947,
+        7.527304929681122,
+        7.532828953117132,
+        7.53314804751426,
+        7.537274970673025,
+        7.582049001939595,
+        7.555386051535606,
+        7.583042955957353,
+        7.568497909232974,
+        7.517635938711464,
+        7.534003001637757,
+        7.541954983025789,
+        7.55379197653383,
+        7.534414995461702,
+        7.5464179972186685,
+        7.537133060395718,
+        7.520142011344433,
+        7.561728009022772,
+        7.573641021735966,
+        7.584568927995861,
+        7.551289047114551,
+        7.544582011178136,
+        7.530407980084419,
+        7.544821011833847,
+        7.507388014346361,
+        7.572298054583371,
+        7.5366320088505745,
+        7.523396052420139,
+        7.5298360316082835,
+        7.5261639431118965,
+        7.519376929849386,
+        7.546509965322912,
+        7.528335088863969,
+        7.525412947870791,
+        7.565590087324381,
+        7.556441007182002,
+        7.53543502651155,
+        7.546482956968248,
+        7.556507014669478,
+        7.530700997449458,
+        7.534058997407556,
+        7.525098975747824,
+        7.5386869721114635,
+        7.554025971330702,
+        7.515253033488989,
+        7.547799032181501,
+        7.514073979109526,
+        7.535436074249446,
+        7.554510026238859,
+        7.546553038991988,
+        7.514660945162177,
+        7.528811926022172,
+        7.503653061576188,
+        7.519553997553885,
+        7.538603967987001,
+        7.520030019804835,
+        7.537867990322411,
+        7.545536034740508,
+        7.511124014854431,
+        7.5625639874488115,
+        7.513326010666788,
+        7.563572027720511,
+        7.518755039200187,
+        7.571061025373638,
+        7.519928039982915,
+        7.555305026471615,
+        7.558469078503549,
+        7.53717205952853,
+        7.667182013392448,
+        7.546922075562179,
+        7.498098071664572,
+        7.543163956142962,
+        7.513424032367766,
+        7.544744992628694,
+        7.515778997913003,
+        7.520775077864528,
+        7.552449009381235,
+        7.536974968388677,
+        7.568003959022462,
+        7.591235917061567,
+        7.537437020801008,
+        7.497546030208468,
+        7.5180340791121125,
+        7.480158936232328,
+        7.531648967415094,
+        7.506636087782681,
+        7.535051088780165,
+        7.555837044492364,
+        7.524462998844683,
+        7.532308925874531,
+        7.521807914599776,
+        7.561052916571498,
+        7.540642051026225,
+        7.532836985774338,
+        7.544724969193339,
+        7.508654962293804,
+        7.543112966232002,
+        7.518374011851847,
+        7.52713403198868,
+        7.5076030334457755,
+        7.51546595711261,
+        7.507995003834367,
+        7.513222983106971,
+        7.510009105317295,
+        7.513877935707569,
+        7.496521924622357,
+        7.513468968681991,
+        7.538929930888116,
+        7.533319061622024,
+        7.546160952188075,
+        7.508461945690215,
+        7.59533594828099,
+        7.506170077249408,
+        7.505906047299504,
+        7.501457002945244,
+        7.519039907492697,
+        7.527397945523262,
+        7.579993922263384,
+        7.554240990430117,
+        7.538372999988496,
+        7.5354030122980475,
+        7.499358034692705,
+        7.576829055324197,
+        7.5484830886125565,
+        7.531616021879017,
+        7.5316609581932425,
+        7.5004620011895895,
+        7.526162080466747,
+        7.522710948251188,
+        7.518063066527247,
+        7.515154080465436,
+        7.513341028243303,
+        7.515470962971449,
+        7.558463956229389,
+        7.5086560100317,
+        7.5726869981735945,
+        7.550233975052834,
+        7.53220496699214,
+        7.493991986848414,
+        7.5178309343755245,
+        7.535181939601898,
+        7.522713043726981,
+        7.529398892074823,
+        7.5430970173329115,
+        7.515726028941572,
+        7.508996990509331,
+        7.547679939307272,
+        7.514650002121925,
+        7.529163965955377,
+        7.500761072151363,
+        7.566594053059816,
+        7.566892076283693,
+        7.613650988787413,
+        7.547813933342695,
+        7.503864937461913,
+        7.549458998255432,
+        7.53857393283397,
+        7.517649908550084,
+        7.517675985582173,
+        7.527164998464286,
+        7.525982102379203,
+        7.513005984947085,
+        7.553351926617324,
+        7.481915992684662,
+        7.506313035264611,
+        7.506776018999517,
+        7.585369981825352,
+        7.531376904807985,
+        7.5269159860908985,
+        7.564736995846033,
+        7.524834014475346,
+        7.52235995605588,
+        7.5367329409345984,
+        7.518715923652053,
+        7.511859992519021,
+        7.490553078241646,
+        7.528166985139251,
+        7.517846068367362,
+        7.51767901238054,
+        7.529609021730721,
+        7.520601036958396,
+        7.4920899933204055,
+        7.510505965910852,
+        7.48572195880115,
+        7.499160943552852,
+        7.509408053010702,
+        7.517074001953006,
+        7.54719297401607,
+        7.521925028413534,
+        7.509767077863216,
+        7.551599061116576,
+        7.523523992858827,
+        7.520360988564789,
+        7.520190090872347,
+        7.539749960415065,
+        7.510746014304459,
+        7.515848963521421,
+        7.522517000325024,
+        7.503705914132297,
+        7.512488984502852,
+        7.503984030336142,
+        7.49387196265161,
+        7.499409024603665,
+        7.522205007262528,
+        7.519399980083108,
+        7.5655929977074265,
+        7.525856024585664,
+        7.508117007091641,
+        7.529541966505349,
+        7.485734997317195,
+        7.503335946239531,
+        7.494905032217503,
+        7.525473018176854,
+        7.522378931753337,
+        7.543704006820917,
+        7.546936976723373,
+        7.5530699687078595,
+        7.508322014473379,
+        7.529292954131961,
+        7.516192039474845,
+        7.50691897701472,
+        7.49897793866694,
+        7.498592953197658,
+        7.503662025555968,
+        7.540473015978932,
+        7.503786939196289,
+        7.501179003156722,
+        7.513148942962289,
+        7.511136005632579,
+        7.509615970775485,
+        7.532031973823905,
+        7.536626071669161,
+        7.524759974330664,
+        7.536535966210067,
+        7.516660960391164,
+        7.526586065068841,
+        7.52724299672991,
+        7.527361041866243,
+        7.539147045463324,
+        7.504478911869228,
+        7.506457972340286,
+        7.544214022345841,
+        7.515607983805239,
+        7.483660941943526,
+        7.5357831083238125,
+        7.542886072769761,
+        7.516773999668658,
+        7.54097499884665,
+        7.530634058639407,
+        7.536891032941639,
+        7.5556819792836905,
+        7.5025109108537436,
+        7.543112034909427,
+        7.5477639911696315,
+        7.554359035566449,
+        7.548131980001926,
+        7.521842024289072,
+        7.542110048234463,
+        7.5351649429649115,
+        7.526336004957557,
+        7.521357969380915,
+        7.5337119633331895,
+        7.525934954173863,
+        7.527393056079745,
+        7.50919699203223,
+        7.4960950296372175,
+        7.530334987677634,
+        7.5315519934520125,
+        7.5215710094198585,
+        7.5284900376573205,
+        7.496000966057181,
+        7.530085975304246,
+        7.516752928495407,
+        7.521771942265332,
+        7.5464589754119515,
+        7.5272900285199285,
+        7.53696309402585,
+        7.505510002374649,
+        7.5346099911257625,
+        7.506747031584382,
+        7.531116018071771,
+        7.532507064752281,
+        7.555963005870581,
+        7.510590949095786,
+        7.523237029090524,
+        7.4972150614485145,
+        7.494512014091015,
+        7.529533933848143,
+        7.536795921623707,
+        7.531097042374313,
+        7.499400991946459,
+        7.511583971790969,
+        7.513114949688315,
+        7.510659983381629,
+        7.5020380318164825,
+        7.541278027929366,
+        7.511067902669311,
+        7.530939066782594,
+        7.5269920052960515,
+        7.550349924713373,
+        7.555137970484793,
+        7.504486013203859,
+        7.559527992270887,
+        7.496549049392343,
+        7.523222011514008,
+        7.5074100168421865,
+        7.529341033659875,
+        7.497327984310687,
+        7.528919959440827,
+        7.568015018478036,
+        7.512871990911663,
+        7.519044913351536,
+        7.529831025749445,
+        7.546112989075482,
+        7.510810042731464,
+        7.542147999629378,
+        7.5515840435400605,
+        7.543307961896062,
+        7.500961073674262,
+        7.498014019802213,
+        7.525834953412414,
+        7.486658054403961,
+        7.540275109931827,
+        7.517602061852813,
+        7.707181968726218,
+        7.604671991430223,
+        7.532510091550648,
+        7.537618046626449,
+        7.544049993157387,
+        7.562212995253503,
+        7.49804696533829,
+        7.52224400639534,
+        7.563530001789331,
+        7.493323995731771,
+        7.52555497456342,
+        7.519303006120026,
+        7.550960057415068,
+        7.530216011218727,
+        7.545577944256365,
+        7.516599027439952,
+        7.532340008765459,
+        7.50766193959862,
+        7.51980603672564,
+        7.51335103996098,
+        7.539742975495756,
+        7.545809028670192,
+        7.510463008657098,
+        7.505247951485217,
+        7.518832921050489,
+        7.556629017926753,
+        7.515628938563168,
+        7.514684926718473,
+        7.51224800478667,
+        7.556334021501243,
+        7.55393598228693,
+        7.5181620195508,
+        7.51898402813822,
+        7.493274984881282,
+        7.541783037595451,
+        7.525478024035692,
+        7.565886015072465,
+        7.502209977246821,
+        7.5118630193173885,
+        7.55756301805377,
+        7.500188075937331,
+        7.497500046156347,
+        7.505190093070269,
+        7.534487987868488,
+        7.606950937770307,
+        7.53798196092248,
+        7.528170011937618,
+        7.505257963202894,
+        7.524073007516563,
+        7.523935986682773,
+        7.5153299840167165,
+        7.515734061598778,
+        7.495812955312431,
+        7.508405949920416,
+        7.51757703255862,
+        7.528490968979895,
+        7.548528024926782,
+        7.541732979007065,
+        7.531084003858268,
+        7.527186069637537,
+        7.523738080635667,
+        7.536844001151621,
+        7.518014055676758,
+        7.526108995079994,
+        7.519430015236139,
+        7.498160004615784,
+        7.514461991377175,
+        7.53494503442198,
+        7.509725051932037,
+        7.5023380341008306,
+        7.48234405182302,
+        7.508932030759752,
+        7.538831094279885,
+        7.539366954006255,
+        7.513215998187661,
+        7.50262092333287,
+        7.514334982261062,
+        7.539995014667511,
+        7.541961036622524,
+        7.517295074649155,
+        7.546650944277644,
+        7.472069002687931,
+        7.521666004322469,
+        7.533514057286084,
+        7.531595998443663,
+        7.510286057367921,
+        7.624316960573196,
+        7.526675006374717,
+        7.52274296246469,
+        7.598720956593752,
+        7.521889987401664,
+        7.548874011263251,
+        7.5536989606916904,
+        7.5322330230847,
+        7.552120019681752,
+        7.521452032960951,
+        7.547067012637854,
+        7.5421169167384505,
+        7.525006076321006,
+        7.512029958888888,
+        7.531450013630092,
+        7.507657981477678,
+        7.5378259643912315,
+        7.528510992415249,
+        7.547471905127168,
+        7.537141093052924,
+        7.566438987851143,
+        7.736795931123197,
+        7.616001996211708,
+        7.56331195589155,
+        7.553400006145239,
+        7.624453981406987,
+        7.603337988257408,
+        7.5358489993959665,
+        7.55524798296392,
+        7.570222020149231,
+        7.53897603135556,
+        7.574100978672504,
+        7.519393926486373,
+        7.50797800719738,
+        7.505844929255545,
+        7.489117910154164,
+        7.514494005590677,
+        7.567616063170135,
+        7.510522962547839,
+        7.565538980998099,
+        7.5008450075984,
+        7.522564963437617,
+        7.545241969637573,
+        7.520425016991794,
+        7.564122905023396,
+        7.527426001615822,
+        7.610761909745634,
+        7.532367017120123,
+        7.514987955801189,
+        7.529482012614608,
+        7.5657450361177325,
+        7.554734940640628,
+        7.54318805411458,
+        7.540232967585325,
+        7.528622983954847,
+        7.52573402132839,
+        7.533089024946094,
+        7.523845997639,
+        7.523908047005534,
+        7.524408050812781,
+        7.549196947365999,
+        7.524313987232745,
+        7.564920000731945,
+        7.5343600474298,
+        7.657030015252531,
+        7.56994797848165,
+        7.506728987209499,
+        7.539421087130904,
+        7.558938930742443,
+        7.541861035861075,
+        7.556180004030466,
+        7.552775088697672,
+        7.559160934761167,
+        7.5243719620630145,
+        7.546617998741567,
+        7.586758933030069,
+        7.5334119610488415,
+        7.534940959885716,
+        7.559755933471024,
+        7.525396998971701,
+        7.510325056500733,
+        7.550504989922047,
+        7.5614419765770435,
+        7.515472010709345,
+        7.514241966418922,
+        7.53953296225518,
+        7.578650023788214,
+        7.511481060646474,
+        7.5421849032863975,
+        7.525974069721997,
+        7.527163019403815,
+        7.569196983240545,
+        7.5313670095056295,
+        7.516775978729129,
+        7.53733201418072,
+        7.544563035480678,
+        7.543078041635454,
+        7.53250892739743,
+        7.516514975577593,
+        7.543465006165206,
+        7.518871920183301,
+        7.550289970822632,
+        7.553428993560374,
+        7.52977398224175,
+        7.518172031268477,
+        7.534677977673709,
+        7.518177037127316,
+        7.516285986639559,
+        7.526397937908769,
+        7.570824003778398,
+        7.558578043244779,
+        7.507904898375273,
+        7.540014921687543,
+        7.529854075983167,
+        7.54919508472085,
+        7.506112917326391,
+        7.51866796053946,
+        7.5497220968827605,
+        7.520896033383906,
+        7.522211992181838,
+        7.547750021331012,
+        7.511107018217444,
+        7.533277035690844,
+        7.520896033383906,
+        7.540703052654862,
+        7.552958093583584,
+        7.527468027547002,
+        7.565259002149105,
+        7.561381906270981,
+        7.565420935861766,
+        7.526169065386057,
+        7.555743912234902,
+        7.5673459796234965,
+        7.528048940002918,
+        7.547717075794935,
+        7.510888972319663,
+        7.5417590560391545,
+        7.538588950410485,
+        7.532921968959272,
+        7.5455139158293605,
+        7.550772046670318,
+        7.512827985920012,
+        7.555862073786557,
+        7.522162050008774,
+        7.561119040474296,
+        7.573154987767339,
+        7.5570030603557825,
+        7.554063107818365,
+        7.520276005379856,
+        7.525859982706606,
+        7.517586927860975,
+        7.509578950703144,
+        7.530630100518465,
+        7.496161968447268,
+        7.525429944507778,
+        7.564435945823789,
+        7.51147698611021,
+        7.507615024223924,
+        7.5227770721539855,
+        7.542178966104984,
+        7.524488959461451,
+        7.521477993577719,
+        7.527009001933038,
+        7.535464013926685,
+        7.519538979977369,
+        7.507259026169777,
+        7.514934055507183,
+        7.526040077209473,
+        7.541583036072552,
+        7.521684980019927,
+        7.6912520453333855,
+        7.522418047301471,
+        7.500365958549082,
+        7.554645068012178,
+        7.501516025513411,
+        7.513814023695886,
+        7.541437982581556,
+        7.515577017329633,
+        7.553547970019281,
+        7.5223291059955955,
+        7.507384056225419,
+        7.5111419428139925,
+        7.480686996132135,
+        7.508895010687411,
+        7.500068983063102,
+        7.50140193849802,
+        7.516145007684827,
+        7.506694062612951,
+        7.531646988354623,
+        7.5377559987828135,
+        7.534587057307363,
+        7.507759961299598,
+        7.511297008022666,
+        7.490377989597619,
+        7.52623297739774,
+        7.574043003842235,
+        7.494749967008829,
+        7.510903989896178,
+        7.5518840458244085,
+        7.499260012991726,
+        7.5180670246481895,
+        7.527287001721561,
+        7.554919924587011,
+        7.502102060243487,
+        7.588983979076147,
+        7.529277005232871,
+        7.522290921770036,
+        7.507135043852031,
+        7.505896035581827,
+        7.51820404548198,
+        7.517767953686416,
+        7.530988077633083,
+        7.527173962444067,
+        7.543089101091027,
+        7.526688044890761,
+        7.531277951784432,
+        7.524330052547157,
+        7.500027888454497,
+        7.55503901746124,
+        7.55243597086519,
+        7.5155230006203055,
+        7.529392023570836,
+        7.511836942285299,
+        7.491072989068925,
+        7.509587099775672,
+        7.516289013437927,
+        7.520123035646975,
+        7.495934027247131,
+        7.512534968554974,
+        7.5014319736510515,
+        7.538545993156731,
+        7.532866904512048,
+        7.495111087337136,
+        7.5498620280995965,
+        7.529493072070181,
+        7.516155019402504,
+        7.497198064811528,
+        7.535562966950238,
+        7.495858008041978,
+        7.521742954850197,
+        7.500273059122264,
+        7.509444025345147,
+        7.502737920731306,
+        7.508659968152642,
+        7.495069061405957,
+        7.553881965577602,
+        7.506506983190775,
+        7.5582480058074,
+        7.50714004971087,
+        7.501111947931349,
+        7.528604939579964,
+        7.522754021920264,
+        7.535491022281349,
+        7.498012972064316,
+        7.493758923374116,
+        7.537637953646481,
+        7.559976074844599,
+        7.503748987801373,
+        7.471546996384859,
+        7.532580057159066,
+        7.489478099159896,
+        7.502197986468673,
+        7.516202051192522,
+        7.544489111751318,
+        7.550652953796089,
+        7.494164048694074,
+        7.501333020627499,
+        7.507992093451321,
+        7.514076074585319,
+        7.504255045205355,
+        7.473897072486579,
+        7.49827700201422,
+        7.514598895795643,
+        7.479342981241643,
+        7.513872929848731,
+        7.52641202416271,
+        7.528885034844279,
+        7.497211918234825,
+        7.502953987568617,
+        7.510195020586252,
+        7.4953369330614805,
+        7.490984979085624,
+        7.535299984738231,
+        7.500740000978112,
+        7.575482013635337,
+        7.493968936614692,
+        7.483746972866356,
+        7.528048008680344,
+        7.52631900832057,
+        7.491861004382372,
+        7.512743002735078,
+        7.492750999517739,
+        7.562904967926443,
+        7.5192570220679045,
+        7.501287967897952,
+        7.5132009806111455,
+        7.53629207611084,
+        7.507062051445246,
+        7.5152600184082985,
+        7.49736896250397,
+        7.512024021707475,
+        7.522045052610338,
+        7.505513960495591,
+        7.491458090953529,
+        7.5313529232516885,
+        7.530606002546847,
+        7.5932510662823915,
+        7.519284961745143,
+        7.54833803512156,
+        7.509849034249783,
+        7.508244947530329,
+        7.515373989008367,
+        7.502419990487397,
+        7.533938973210752,
+        7.5339339673519135,
+        7.5044960249215364,
+        7.5106959557160735,
+        7.5749269453808665,
+        7.554012001492083,
+        7.540412014350295,
+        7.516197976656258,
+        7.54522904753685,
+        7.517221965827048,
+        7.509259041398764,
+        7.515501929447055,
+        7.556386990472674,
+        7.535174023360014,
+        7.51341599971056,
+        7.5009389547631145,
+        7.515138015151024,
+        7.5210799695923924,
+        7.547728950157762,
+        7.539168000221252,
+        7.522601983509958,
+        7.528809015639126,
+        7.5708579970523715,
+        7.523943088017404,
+        7.523481966927648,
+        7.540244027040899,
+        7.530952920205891,
+        7.483880966901779,
+        7.534659001976252,
+        7.572933100163937,
+        7.544043939560652,
+        7.510551018640399,
+        7.529646973125637,
+        7.516216021031141,
+        7.525897934101522,
+        7.522923988290131,
+        7.523391977883875,
+        7.5236589182168245,
+        7.568191969767213,
+        7.506267982535064,
+        7.558426936157048,
+        7.5235930271446705,
+        7.540849037468433,
+        7.5248179491609335,
+        7.53367505967617,
+        7.55315599963069,
+        7.507390109822154,
+        7.558440091088414,
+        7.505494984798133,
+        7.535284967161715,
+        7.4853639816865325,
+        7.529076072387397,
+        7.568725035525858,
+        7.55335995927453,
+        7.503914996050298,
+        7.575114024803042,
+        7.5084890704602,
+        7.552517927251756,
+        7.560890982858837,
+        7.590705994516611,
+        7.532041985541582,
+        7.52847408875823,
+        7.532770978286862,
+        7.527509005740285,
+        7.520076003856957,
+        7.536152959801257,
+        7.554949028417468,
+        7.556046941317618,
+        7.520601036958396,
+        7.544459076598287,
+        7.534675067290664,
+        7.534038973972201,
+        7.501034997403622,
+        7.541907019913197,
+        7.534035015851259,
+        7.528724963776767,
+        7.565284031443298,
+        7.523386972025037,
+        7.5173500226810575,
+        7.524118991568685,
+        7.53379799425602,
+        7.501549087464809,
+        7.544656982645392,
+        7.534797070547938,
+        7.559756049886346,
+        7.549197995103896,
+        7.5362189672887325,
+        7.532737101428211,
+        7.52991100307554,
+        7.515828008763492,
+        7.530574104748666,
+        7.529330090619624,
+        7.539737969636917,
+        7.52042792737484,
+        7.522478001192212,
+        7.533136988058686,
+        7.547238958068192,
+        7.547807996161282,
+        7.58683099411428,
+        7.542895968072116,
+        7.5326209189370275,
+        7.53902003634721,
+        7.516074925661087,
+        7.548299035988748,
+        7.512775016948581,
+        7.582799065858126,
+        7.542968960478902,
+        7.532762945629656,
+        7.517511025071144,
+        7.569923065602779,
+        7.544953026808798,
+        7.5192200019955635,
+        7.511073024943471
+      ],
+      "telemetry": [
+        {
+          "clip": 0,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        },
+        {
+          "clip": 1,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        },
+        {
+          "clip": 2,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        },
+        {
+          "clip": 3,
+          "frames": [
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            },
+            {
+              "full_refresh": true,
+              "backbone_calls": 1
+            }
+          ]
+        }
+      ]
+    },
+    "unsafeguarded_reference": {
+      "metrics": {
+        "absrel_raw": 0.15933578461408615,
+        "absrel_clip_median": 0.15621723110477131,
+        "absrel_edge": 0.17466579253474873,
+        "grad_ratio": 0.6783664425214131,
+        "overshoot": 0.20251368110378581,
+        "boundary_precision": 0.7369364222088026,
+        "boundary_recall": 0.570367180048682,
+        "boundary_f1": 0.6219732186598573,
+        "flat_tv": 0.031286624570687614,
+        "flat_tv_gt": 0.006358106426584224,
+        "flat_tv_ratio": 7.228051026662191
+      },
+      "speedup": 1.9365165460383513,
+      "skip_fraction": 0.6171875,
+      "gate_pass": true,
+      "checks": {
+        "raw_absrel_within_1pct": true,
+        "edge_absrel_within_1pct": true,
+        "boundary_f1_drop_at_most_0.005": true,
+        "overshoot_within_1pct": true,
+        "flat_tv_within_1pct": true,
+        "per_source_raw_within_2pct": true
+      }
+    },
+    "loose": {
+      "metrics": {
+        "absrel_raw": 0.1593579115966956,
+        "absrel_clip_median": 0.1562561144431432,
+        "absrel_edge": 0.1742681960264842,
+        "grad_ratio": 0.6778737505276997,
+        "overshoot": 0.20389498646060628,
+        "boundary_precision": 0.7359184600985221,
+        "boundary_recall": 0.5679678662385816,
+        "boundary_f1": 0.6203113224118069,
+        "flat_tv": 0.03124014070878426,
+        "flat_tv_gt": 0.006358106426584224,
+        "flat_tv_ratio": 7.205749154090881
+      },
+      "speedup": 1.7118238267426087,
+      "skip_fraction": 0.5927734375,
+      "gate_pass": true,
+      "checks": {
+        "raw_absrel_within_1pct": true,
+        "edge_absrel_within_1pct": true,
+        "boundary_f1_drop_at_most_0.005": true,
+        "overshoot_within_1pct": true,
+        "flat_tv_within_1pct": true,
+        "per_source_raw_within_2pct": true
+      }
+    },
+    "default": {
+      "metrics": {
+        "absrel_raw": 0.15954310695330304,
+        "absrel_clip_median": 0.1565442221860091,
+        "absrel_edge": 0.1744345985352993,
+        "grad_ratio": 0.6796048879623413,
+        "overshoot": 0.20336001614729565,
+        "boundary_precision": 0.7362684026027435,
+        "boundary_recall": 0.5665393905946985,
+        "boundary_f1": 0.6195900468188079,
+        "flat_tv": 0.031100089040895305,
+        "flat_tv_gt": 0.006358106426584224,
+        "flat_tv_ratio": 7.183882077534994
+      },
+      "speedup": 1.4893105669953226,
+      "skip_fraction": 0.505859375,
+      "gate_pass": true,
+      "checks": {
+        "raw_absrel_within_1pct": true,
+        "edge_absrel_within_1pct": true,
+        "boundary_f1_drop_at_most_0.005": true,
+        "overshoot_within_1pct": true,
+        "flat_tv_within_1pct": true,
+        "per_source_raw_within_2pct": true
+      }
+    },
+    "tight": {
+      "metrics": {
+        "absrel_raw": 0.15905360629161197,
+        "absrel_clip_median": 0.15637078508734703,
+        "absrel_edge": 0.17404830704132718,
+        "grad_ratio": 0.6818800270557404,
+        "overshoot": 0.20428504298130673,
+        "boundary_precision": 0.7363551016516996,
+        "boundary_recall": 0.5629165162465345,
+        "boundary_f1": 0.6167520360819859,
+        "flat_tv": 0.031000163716574512,
+        "flat_tv_gt": 0.006358106426584224,
+        "flat_tv_ratio": 7.1781076192855835
+      },
+      "speedup": 0.9623672340314149,
+      "skip_fraction": 0.1494140625,
+      "gate_pass": true,
+      "checks": {
+        "raw_absrel_within_1pct": true,
+        "edge_absrel_within_1pct": true,
+        "boundary_f1_drop_at_most_0.005": true,
+        "overshoot_within_1pct": true,
+        "flat_tv_within_1pct": true,
+        "per_source_raw_within_2pct": true
+      }
+    }
+  }
+}

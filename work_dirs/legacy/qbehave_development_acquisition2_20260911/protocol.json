@@ -1,0 +1,34 @@
+{
+  "source": {
+    "path": "/workspace/SOKKANAEM/scripts/acquire_behave_development.py",
+    "bytes": 9031,
+    "sha256": "63e13ad3216a057f0392034f0e62652811c9edfd066061963a94732022c67ddd"
+  },
+  "helper": {
+    "path": "scripts/download_behave_pilot.py",
+    "bytes": 8891,
+    "sha256": "dacabbe5090e137284ce92587afc40139049aeda5c1a0f66040845902be70982"
+  },
+  "license": "https://virtualhumans.mpi-inf.mpg.de/behave/license.html",
+  "permission": "user confirmed non-commercial research earlier and explicitly requested this target-regime development acquisition",
+  "purpose": "DEVELOPMENT source in the declared fixed-view target regime; not a holdout",
+  "date": "date01",
+  "camera": 1,
+  "sequences_requested": 8,
+  "partition": {
+    "Date02": "spent as evaluation pilot",
+    "Date03": "reserved final test, untouched",
+    "Date04-07": "reserved group, untouched",
+    "Date01": "this development source"
+  },
+  "selection": "rule v2: one sequence per distinct object (interaction suffix stripped), evenly spaced over the sorted object list, name-only",
+  "selection_rule_version": 2,
+  "skipped_objects": [
+    "backpack"
+  ],
+  "note": "work_dirs/qbehave_development_acquisition_20260911 used rule v1, which keyed on the full trailing token and therefore drew three carry-variants of one backpack; the file_record of this script inside that run refers to the v1 text",
+  "regime_evidence": "work_dirs/qdev_behave_gap2_20260911/results.json",
+  "acceptance_required_before_use": "numeric rules + fixed-view screen + motion/noise/coverage statistics within the BEHAVE regime (scripts/diagnose_dev_behave_gap.py)",
+  "no_interaction_inference": true,
+  "max_selected_total_bytes": 6000000000
+}

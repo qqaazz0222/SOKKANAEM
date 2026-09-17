@@ -1,0 +1,350 @@
+{
+  "Date01_Sub01_basketball.1": {
+    "dense": {
+      "absrel_raw": 0.1705414784471062,
+      "absrel_edge": 0.14803519080792163,
+      "overshoot": 0.14918153855042068,
+      "boundary_f1": 0.4808620325832938,
+      "flat_tv": 0.024420755180472042
+    },
+    "in_sample_map": {
+      "metrics": {
+        "absrel_raw": 0.17167781422422182,
+        "absrel_edge": 0.14921023226493188,
+        "overshoot": 0.14767247494025473,
+        "boundary_f1": 0.4794547021350203,
+        "flat_tv": 0.02442851358500775
+      },
+      "gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "map": [
+        2.0138,
+        2.2321,
+        1.4192,
+        2.0879,
+        0.4056,
+        1.3326,
+        0.9099,
+        1.1446,
+        0.5242,
+        1.4464,
+        0.9691,
+        0.5146,
+        0.2041,
+        0.146,
+        0.2812,
+        0.3687
+      ]
+    },
+    "loo_map": {
+      "metrics": {
+        "absrel_raw": 0.17163672581633074,
+        "absrel_edge": 0.14913645842110532,
+        "overshoot": 0.1471029063386189,
+        "boundary_f1": 0.48081652756081894,
+        "flat_tv": 0.02442747626628261
+      },
+      "gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "map": [
+        1.8442,
+        2.4411,
+        1.5327,
+        2.1139,
+        0.4036,
+        1.1472,
+        0.8993,
+        1.0913,
+        0.4548,
+        1.4286,
+        1.0439,
+        0.3667,
+        0.2515,
+        0.2323,
+        0.2943,
+        0.4547
+      ]
+    }
+  },
+  "Date01_Sub01_keyboard_move.1": {
+    "dense": {
+      "absrel_raw": 0.15432093703148003,
+      "absrel_edge": 0.1310997415428027,
+      "overshoot": 0.1605853949628815,
+      "boundary_f1": 0.6137905690508584,
+      "flat_tv": 0.02579222094936995
+    },
+    "in_sample_map": {
+      "metrics": {
+        "absrel_raw": 0.15444277521818245,
+        "absrel_edge": 0.13138776188790116,
+        "overshoot": 0.16142482527612098,
+        "boundary_f1": 0.6130028417489182,
+        "flat_tv": 0.02582433048519306
+      },
+      "gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "map": [
+        2.0138,
+        2.2321,
+        1.4192,
+        2.0879,
+        0.4056,
+        1.3326,
+        0.9099,
+        1.1446,
+        0.5242,
+        1.4464,
+        0.9691,
+        0.5146,
+        0.2041,
+        0.146,
+        0.2812,
+        0.3687
+      ]
+    },
+    "loo_map": {
+      "metrics": {
+        "absrel_raw": 0.1544457280058963,
+        "absrel_edge": 0.13132866365787552,
+        "overshoot": 0.1596036383437394,
+        "boundary_f1": 0.6127869478271654,
+        "flat_tv": 0.02581504005502211
+      },
+      "gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "map": [
+        2.2056,
+        2.4324,
+        1.5992,
+        2.3674,
+        0.1762,
+        1.2115,
+        0.7883,
+        1.0438,
+        0.3621,
+        1.3301,
+        0.9329,
+        0.5086,
+        0.2087,
+        0.182,
+        0.2984,
+        0.3529
+      ]
+    }
+  },
+  "Date02_Sub02_backpack_back.1": {
+    "dense": {
+      "absrel_raw": 0.1863502289316191,
+      "absrel_edge": 0.15791001898606966,
+      "overshoot": 0.38580208517450176,
+      "boundary_f1": 0.5652935778101286,
+      "flat_tv": 0.017188697209348902
+    },
+    "in_sample_map": {
+      "metrics": {
+        "absrel_raw": 0.1867692666661748,
+        "absrel_edge": 0.15860643766598728,
+        "overshoot": 0.3808915420002433,
+        "boundary_f1": 0.564231195312459,
+        "flat_tv": 0.01733963135848171
+      },
+      "gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "map": [
+        2.0138,
+        2.2321,
+        1.4192,
+        2.0879,
+        0.4056,
+        1.3326,
+        0.9099,
+        1.1446,
+        0.5242,
+        1.4464,
+        0.9691,
+        0.5146,
+        0.2041,
+        0.146,
+        0.2812,
+        0.3687
+      ]
+    },
+    "loo_map": {
+      "metrics": {
+        "absrel_raw": 0.1869282906234681,
+        "absrel_edge": 0.15850075197197613,
+        "overshoot": 0.38010052182999776,
+        "boundary_f1": 0.5635921280869903,
+        "flat_tv": 0.017379006454575574
+      },
+      "gate": {
+        "pass": false,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": false,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "map": [
+        1.7388,
+        2.4519,
+        1.4376,
+        2.5582,
+        0.2916,
+        1.2094,
+        0.9658,
+        1.1899,
+        0.4351,
+        1.2701,
+        0.959,
+        0.5237,
+        0.2307,
+        0.064,
+        0.3192,
+        0.355
+      ]
+    }
+  },
+  "Date02_Sub02_backpack_hand.1": {
+    "dense": {
+      "absrel_raw": 0.1835084253161221,
+      "absrel_edge": 0.1676016522066019,
+      "overshoot": 0.3965587985823159,
+      "boundary_f1": 0.5678063802188262,
+      "flat_tv": 0.01667276193984435
+    },
+    "in_sample_map": {
+      "metrics": {
+        "absrel_raw": 0.18409813509196027,
+        "absrel_edge": 0.16901290242321526,
+        "overshoot": 0.38885529255899237,
+        "boundary_f1": 0.5675113842977831,
+        "flat_tv": 0.016772153016063385
+      },
+      "gate": {
+        "pass": true,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": true,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": true,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "map": [
+        2.0138,
+        2.2321,
+        1.4192,
+        2.0879,
+        0.4056,
+        1.3326,
+        0.9099,
+        1.1446,
+        0.5242,
+        1.4464,
+        0.9691,
+        0.5146,
+        0.2041,
+        0.146,
+        0.2812,
+        0.3687
+      ]
+    },
+    "loo_map": {
+      "metrics": {
+        "absrel_raw": 0.18486231503573494,
+        "absrel_edge": 0.17096279749018295,
+        "overshoot": 0.39075579331811783,
+        "boundary_f1": 0.5667407258491343,
+        "flat_tv": 0.016924184183153557
+      },
+      "gate": {
+        "pass": false,
+        "checks": {
+          "raw_absrel_within_1pct": true,
+          "edge_absrel_within_1pct": false,
+          "boundary_f1_drop_at_most_0.005": true,
+          "overshoot_within_1pct": true,
+          "flat_tv_within_1pct": false,
+          "per_source_raw_within_2pct": true
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      },
+      "map": [
+        2.3951,
+        1.2505,
+        0.9263,
+        0.8896,
+        0.9458,
+        2.0046,
+        1.0348,
+        1.3202,
+        1.0261,
+        1.9269,
+        0.9234,
+        0.7443,
+        0.0817,
+        0.0767,
+        0.1756,
+        0.2784
+      ]
+    }
+  }
+}
