@@ -1,0 +1,68 @@
+{
+  "step": 4000,
+  "weights": "ema",
+  "calibrated": true,
+  "sequences": {
+    "Date01_Sub01_basketball.1": {
+      "start": 622,
+      "end": 878,
+      "shape": [
+        256,
+        1,
+        256,
+        256
+      ]
+    },
+    "Date01_Sub01_keyboard_move.1": {
+      "start": 622,
+      "end": 878,
+      "shape": [
+        256,
+        1,
+        256,
+        256
+      ]
+    },
+    "Date02_Sub02_backpack_back.1": {
+      "start": 622,
+      "end": 878,
+      "shape": [
+        256,
+        1,
+        256,
+        256
+      ]
+    },
+    "Date02_Sub02_backpack_hand.1": {
+      "start": 622,
+      "end": 878,
+      "shape": [
+        256,
+        1,
+        256,
+        256
+      ]
+    },
+    "Date03_Sub03_backpack_back.1": {
+      "start": 0,
+      "end": 1024,
+      "shape": [
+        1024,
+        1,
+        256,
+        256
+      ]
+    },
+    "Date04_Sub05_backpack.1": {
+      "start": 0,
+      "end": 1024,
+      "shape": [
+        1024,
+        1,
+        256,
+        256
+      ]
+    }
+  },
+  "latency_backbone_plus_decoder_ms_median_batch1_fp32_eager": 2.738383482210338
+}

@@ -775,5 +775,138 @@
       "shape_g1_calibrated"
     ],
     "best": "shape_band_w30_calibrated"
+  },
+  {
+    "decision": "best arm",
+    "composite_and_raw_ratio": {
+      "probe_mambavision_da2_hr_ft_calibrated": [
+        1.5437046756379875,
+        1.2282537145326993
+      ],
+      "probe_mambavision_da2_mr_calibrated": [
+        1.6040671379479299,
+        1.4014034250420273
+      ],
+      "probe_mambavision_da2_mr_distill8k_calibrated": [
+        1.7640821612892663,
+        1.476208729037518
+      ],
+      "probe_mambavision_da2_mr_ft_calibrated": [
+        1.455387538656585,
+        1.1655286100566398
+      ],
+      "probe_mambavision_da2_mr_ft_distill8k_calibrated": [
+        1.6684761032766207,
+        1.437942180737612
+      ],
+      "shape_a_calibrated": [
+        1.4162559156155359,
+        1.2923573924239056
+      ],
+      "shape_b_calibrated": [
+        1.3840593277231654,
+        1.2681565716101741
+      ],
+      "shape_band_calibrated": [
+        1.3216305854262589,
+        1.0993602378251772
+      ],
+      "shape_band_mr_calibrated": [
+        1.364167464486742,
+        1.132222909601276
+      ],
+      "shape_band_narrow_calibrated": [
+        1.344067890325295,
+        1.0970412501920872
+      ],
+      "shape_band_w10_calibrated": [
+        1.3532751508394743,
+        1.176365625801376
+      ],
+      "shape_band_w30_calibrated": [
+        1.3189720683327395,
+        1.0423461778991847
+      ],
+      "shape_band_wide_calibrated": [
+        1.3648819510679226,
+        1.1373107394798656
+      ],
+      "shape_c_calibrated": [
+        1.3494715819113923,
+        1.10891629071159
+      ],
+      "shape_d_calibrated": [
+        1.4029277718447906,
+        1.260431679220568
+      ],
+      "shape_e_calibrated": [
+        1.3629028650147708,
+        1.143407638124952
+      ],
+      "shape_f_calibrated": [
+        1.3394231421739147,
+        1.1351286338257514
+      ],
+      "shape_g1_calibrated": [
+        1.3153714280415092,
+        1.043030308851654
+      ],
+      "shape_g2_calibrated": [
+        1.3407475777010212,
+        1.156072962029384
+      ],
+      "shape_g3_calibrated": [
+        1.378909250902133,
+        1.0512608387285085
+      ],
+      "shape_g4_calibrated": [
+        1.344323028375946,
+        1.1693623506213071
+      ],
+      "shape_m1_calibrated": [
+        1.4143024898924599,
+        1.1894038539592882
+      ],
+      "shape_m1_distill8k_calibrated": [
+        1.4971928593231068,
+        1.2378822017101418
+      ],
+      "shape_n1_calibrated": [
+        1.4305869698498923,
+        1.116819397585239
+      ],
+      "shape_n2_calibrated": [
+        1.3831558746065602,
+        1.0877802563180232
+      ],
+      "shape_n3_calibrated": [
+        1.3855066002709426,
+        1.1087249007670656
+      ],
+      "shape_n4_calibrated": [
+        1.397720801340847,
+        1.159854368592274
+      ],
+      "shape_p1_calibrated": [
+        1.4131509152900696,
+        1.114623980457461
+      ],
+      "shape_p2_calibrated": [
+        1.4033020336854953,
+        1.1545526203223095
+      ],
+      "shape_p3_calibrated": [
+        1.4172722354706984,
+        1.11879133190018
+      ]
+    },
+    "raw_guard": 1.3,
+    "composite_tie": 0.01,
+    "tied_within_window": [
+      "shape_band_calibrated",
+      "shape_band_w30_calibrated",
+      "shape_g1_calibrated"
+    ],
+    "best": "shape_band_w30_calibrated"
   }
 ]

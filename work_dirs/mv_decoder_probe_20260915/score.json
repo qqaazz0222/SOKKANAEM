@@ -489,6 +489,27 @@
           "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
         }
       },
+      "shape_band_mr_calibrated": {
+        "metrics": {
+          "absrel_raw": 0.180516210389329,
+          "absrel_edge": 0.1612599259306849,
+          "overshoot": 0.45037925050476774,
+          "boundary_f1": 0.5978471727648866,
+          "flat_tv": 0.03139793278387515
+        },
+        "gate_vs_q0": {
+          "pass": false,
+          "checks": {
+            "raw_absrel_within_1pct": false,
+            "edge_absrel_within_1pct": false,
+            "boundary_f1_drop_at_most_0.005": true,
+            "overshoot_within_1pct": false,
+            "flat_tv_within_1pct": false,
+            "per_source_raw_within_2pct": false
+          },
+          "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+        }
+      },
       "shape_band_narrow_calibrated": {
         "metrics": {
           "absrel_raw": 0.16454509960270394,
@@ -1401,6 +1422,27 @@
           "overshoot": 0.5162294786972748,
           "boundary_f1": 0.4927965733853246,
           "flat_tv": 0.03156289441540139
+        },
+        "gate_vs_q0": {
+          "pass": false,
+          "checks": {
+            "raw_absrel_within_1pct": false,
+            "edge_absrel_within_1pct": false,
+            "boundary_f1_drop_at_most_0.005": false,
+            "overshoot_within_1pct": false,
+            "flat_tv_within_1pct": false,
+            "per_source_raw_within_2pct": false
+          },
+          "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+        }
+      },
+      "shape_band_mr_calibrated": {
+        "metrics": {
+          "absrel_raw": 0.18474655201136297,
+          "absrel_edge": 0.24246497810826412,
+          "overshoot": 0.5589053744189973,
+          "boundary_f1": 0.4531443211981241,
+          "flat_tv": 0.034766785182000604
         },
         "gate_vs_q0": {
           "pass": false,
@@ -2341,6 +2383,27 @@
           "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
         }
       },
+      "shape_band_mr_calibrated": {
+        "metrics": {
+          "absrel_raw": 0.219162759265923,
+          "absrel_edge": 0.2248459531248795,
+          "overshoot": 0.46521068638958596,
+          "boundary_f1": 0.5064039508676312,
+          "flat_tv": 0.03292384514497826
+        },
+        "gate_vs_q0": {
+          "pass": false,
+          "checks": {
+            "raw_absrel_within_1pct": false,
+            "edge_absrel_within_1pct": false,
+            "boundary_f1_drop_at_most_0.005": false,
+            "overshoot_within_1pct": false,
+            "flat_tv_within_1pct": false,
+            "per_source_raw_within_2pct": false
+          },
+          "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+        }
+      },
       "shape_band_narrow_calibrated": {
         "metrics": {
           "absrel_raw": 0.2087467952578598,
@@ -3260,6 +3323,27 @@
             "raw_absrel_within_1pct": false,
             "edge_absrel_within_1pct": false,
             "boundary_f1_drop_at_most_0.005": true,
+            "overshoot_within_1pct": false,
+            "flat_tv_within_1pct": false,
+            "per_source_raw_within_2pct": false
+          },
+          "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+        }
+      },
+      "shape_band_mr_calibrated": {
+        "metrics": {
+          "absrel_raw": 0.2044324745759396,
+          "absrel_edge": 0.2074120211228815,
+          "overshoot": 0.44760882414747466,
+          "boundary_f1": 0.49426263364390854,
+          "flat_tv": 0.034647025109734386
+        },
+        "gate_vs_q0": {
+          "pass": false,
+          "checks": {
+            "raw_absrel_within_1pct": false,
+            "edge_absrel_within_1pct": false,
+            "boundary_f1_drop_at_most_0.005": false,
             "overshoot_within_1pct": false,
             "flat_tv_within_1pct": false,
             "per_source_raw_within_2pct": false
@@ -4193,6 +4277,27 @@
           "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
         }
       },
+      "shape_band_mr_calibrated": {
+        "metrics": {
+          "absrel_raw": 0.16800162764213492,
+          "absrel_edge": 0.24681083615200383,
+          "overshoot": 0.5135176541794224,
+          "boundary_f1": 0.5481150862421297,
+          "flat_tv": 0.05691242727334611
+        },
+        "gate_vs_q0": {
+          "pass": false,
+          "checks": {
+            "raw_absrel_within_1pct": true,
+            "edge_absrel_within_1pct": false,
+            "boundary_f1_drop_at_most_0.005": false,
+            "overshoot_within_1pct": false,
+            "flat_tv_within_1pct": false,
+            "per_source_raw_within_2pct": true
+          },
+          "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+        }
+      },
       "shape_band_narrow_calibrated": {
         "metrics": {
           "absrel_raw": 0.1768466004926207,
@@ -5112,6 +5217,27 @@
             "raw_absrel_within_1pct": false,
             "edge_absrel_within_1pct": false,
             "boundary_f1_drop_at_most_0.005": true,
+            "overshoot_within_1pct": false,
+            "flat_tv_within_1pct": true,
+            "per_source_raw_within_2pct": false
+          },
+          "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+        }
+      },
+      "shape_band_mr_calibrated": {
+        "metrics": {
+          "absrel_raw": 0.22304295324736031,
+          "absrel_edge": 0.19833461549233572,
+          "overshoot": 0.7541998790490709,
+          "boundary_f1": 0.34274326328022653,
+          "flat_tv": 0.032329066250895266
+        },
+        "gate_vs_q0": {
+          "pass": false,
+          "checks": {
+            "raw_absrel_within_1pct": false,
+            "edge_absrel_within_1pct": false,
+            "boundary_f1_drop_at_most_0.005": false,
             "overshoot_within_1pct": false,
             "flat_tv_within_1pct": true,
             "per_source_raw_within_2pct": false
@@ -6147,6 +6273,32 @@
       "aligned_log_rms": {
         "all": 0.21344489629509703,
         "band": 0.24274117668236503
+      },
+      "combined_gate_vs_q0": {
+        "pass": false,
+        "checks": {
+          "raw_absrel_within_1pct": false,
+          "edge_absrel_within_1pct": false,
+          "boundary_f1_drop_at_most_0.005": false,
+          "overshoot_within_1pct": false,
+          "flat_tv_within_1pct": false,
+          "per_source_raw_within_2pct": false
+        },
+        "scope": "Predeclared Q0-relative development screen, not former native-improvement gate or a final guarantee."
+      }
+    },
+    "shape_band_mr_calibrated": {
+      "metrics": {
+        "absrel_raw": 0.19665042952200829,
+        "absrel_edge": 0.21352138832184162,
+        "overshoot": 0.5316369447815532,
+        "boundary_f1": 0.49041940466615114,
+        "flat_tv": 0.03716284695747163
+      },
+      "sequences_passing_q0_gate": 0,
+      "aligned_log_rms": {
+        "all": 0.2274689225021345,
+        "band": 0.25507415312820403
       },
       "combined_gate_vs_q0": {
         "pass": false,
