@@ -48,7 +48,8 @@ OUT = ROOT / "work_dirs/mv_decoder_probe_bigdecoder_20260917"
 # ARM/N_TAPS/TAP_INDICES are set from --taps in main() before any mode function runs, so a
 # 6-taps sweep point can reuse this same file/root as the original all-8 ablation (appendix
 # M) without duplicating it. --taps 8 (the default) reproduces appendix M's arm exactly.
-ARM = "mambavision_da2_hr_8taps"
+ARM = "mambavision_da2_hr_8taps"    # stage-1 (train) name: taps+seed only, never tagged
+FT_ARM = ARM                        # stage-2-onward name: ARM + --tag, for shape-loss combos
 N_TAPS = 8
 TAP_INDICES = tuple(range(8))
 # the reference ratios this ablation is judged against: appendix F/G1's own numbers,
@@ -167,9 +168,17 @@ def train(args):
 
 
 def finetune(args):
-    """Stage 2: unfreeze backbone too, joint train from stage 1's decoder."""
+    """Stage 2: unfreeze backbone too, joint train from stage 1's decoder.
+
+    Resumable: this environment has been killing long background runs outright (not just
+    IPC/terminal loss -- full sandbox restarts, which setsid/nohup/disown cannot survive)
+    roughly every 30-40 minutes, so an 8000-step run has repeatedly died mid-flight with
+    nothing saved (torch.save only ran at the very end). `partial.pt` now checkpoints
+    decoder+backbone+optimizer+step every 500 steps; a restart with the same --tag/--taps
+    picks it back up instead of losing the whole run.
+    """
     random.seed(args.seed); np.random.seed(args.seed); torch.manual_seed(args.seed)
-    arm = OUT / (ARM + "_ft")
+    arm = OUT / (FT_ARM + "_ft")
     if (arm / "decoder.pt").exists():
         raise SystemExit(f"{arm / 'decoder.pt'} exists; refusing to overwrite")
     arm.mkdir(parents=True, exist_ok=True)
@@ -199,8 +208,15 @@ def finetune(args):
     bases = [args.backbone_lr, args.lr]
     ema_decoder = {k: v.detach().clone() for k, v in decoder.state_dict().items()}
     ema_backbone = {k: v.detach().clone() for k, v in model.state_dict().items()}
-    log = open(arm / "finetune.log", "a")
     step, start = 0, time.time()
+    partial_path = arm / "partial.pt"
+    if partial_path.exists():
+        ckpt = torch.load(partial_path, map_location="cuda", weights_only=False)
+        decoder.load_state_dict(ckpt["decoder"]); model.load_state_dict(ckpt["backbone"])
+        opt.load_state_dict(ckpt["opt"]); ema_decoder = ckpt["ema_decoder"]
+        ema_backbone = ckpt["ema_backbone"]; step = ckpt["step"]
+        print(f"RESUMED from partial.pt at step {step}", flush=True)
+    log = open(arm / "finetune.log", "a")
     while step < args.steps:
         for batch in loader:
             if step >= args.steps:
@@ -211,7 +227,9 @@ def finetune(args):
             feats = backbone.features(frames)
             bin_logits.clear()
             depths, loss = native_depth_loss(decoder, feats, frames, clip, gt, valid, bin_logits,
-                                             backbone.size, boundary=3.0)
+                                             backbone.size, args.boundary_weight, args.overshoot_weight,
+                                             args.flat_weight, None, args.flat_mode, args.flat_win,
+                                             args.flat_win_hi)
             if not torch.isfinite(loss):
                 raise FloatingPointError(f"non-finite loss at step {step}")
             for group, base in zip(opt.param_groups, bases):
@@ -229,11 +247,16 @@ def finetune(args):
                         f"elapsed {time.time() - start:.0f}s")
                 print(line, flush=True)
                 log.write(line + "\n"); log.flush()
+            if step % 500 == 0:
+                torch.save({"decoder": decoder.state_dict(), "backbone": model.state_dict(),
+                            "opt": opt.state_dict(), "ema_decoder": ema_decoder,
+                            "ema_backbone": ema_backbone, "step": step}, partial_path)
     meta = {"source": ARM, "args": vars(args)}
     torch.save({"backbone": ema_backbone, "step": step, "meta": meta}, arm / "backbone.pt")
     torch.save({"decoder": decoder.state_dict(), "ema": ema_decoder, "step": step, "meta": meta},
                arm / "decoder.pt")
-    print("FINETUNE_DONE", ARM + "_ft", step, flush=True)
+    partial_path.unlink(missing_ok=True)
+    print("FINETUNE_DONE", FT_ARM + "_ft", step, flush=True)
 
 
 class FineTunedAllTapsBackbone(AllTapsBackbone):
@@ -250,7 +273,7 @@ def frozen_probe(backbone_cls, decoder_path):
 
 def calibrate(args):
     random.seed(0); np.random.seed(0); torch.manual_seed(0)
-    arm = OUT / (ARM + "_ft")
+    arm = OUT / (FT_ARM + "_ft")
     if (arm / "calib.pt").exists():
         raise SystemExit(f"{arm / 'calib.pt'} exists; refusing to overwrite")
     FineTunedAllTapsBackbone.student = arm / "backbone.pt"
@@ -293,13 +316,13 @@ def calibrate(args):
                 print(line, flush=True)
                 log.write(line + "\n"); log.flush()
     torch.save({"head": head.state_dict(), "step": step, "decoder_step": decoder_step,
-                "meta": {"backbone": ARM + "_ft", "args": vars(args)}}, arm / "calib.pt")
-    print("CALIB_DONE", ARM + "_ft", step, flush=True)
+                "meta": {"backbone": FT_ARM + "_ft", "args": vars(args)}}, arm / "calib.pt")
+    print("CALIB_DONE", FT_ARM + "_ft", step, flush=True)
 
 
 @torch.no_grad()
 def predict(args):
-    arm = OUT / (ARM + "_ft")
+    arm = OUT / (FT_ARM + "_ft")
     dev = "cuda"
     FineTunedAllTapsBackbone.student = arm / "backbone.pt"
     backbone, decoder, decoder_step = frozen_probe(FineTunedAllTapsBackbone, arm / "decoder.pt")
@@ -330,7 +353,7 @@ def predict(args):
             raise FloatingPointError(f"non-finite prediction in {name}")
         torch.save(prediction, folder / f"{name}_predictions.pt")
         print("predicted", name, tuple(prediction.shape), flush=True)
-    print("PREDICT_DONE", ARM + "_ft", flush=True)
+    print("PREDICT_DONE", FT_ARM + "_ft", flush=True)
 
 
 def score(args):
@@ -344,7 +367,7 @@ def score(args):
     ref_g1 = orig["shape_g1_calibrated"]["metrics"]
     q0 = orig["q0_dense"]["metrics"]
     keys = ("absrel_raw", "absrel_edge", "overshoot", "boundary_f1", "flat_tv")
-    arm = OUT / (ARM + "_ft")
+    arm = OUT / (FT_ARM + "_ft")
     per_seq = {}
     for name, (source, start, end) in BEHAVE.items():
         data = torch.load(ROOT / source / f"{name}.pt", map_location="cpu", weights_only=False)
@@ -357,7 +380,7 @@ def score(args):
         print("scored", name, flush=True)
     combined = {k: float(np.mean([per_seq[s][k] for s in per_seq])) for k in keys}
     passing = sum(gate(q0, per_seq[s])["pass"] for s in per_seq)
-    print(f"\n{ARM} F-equivalent, combined metrics:", combined)
+    print(f"\n{FT_ARM} F-equivalent, combined metrics:", combined)
     print(f"Q0 gate: {passing}/6")
     print("ratio to F (4 taps):     ", {k: round(combined[k] / ref_f[k], 3) for k in keys})
     print("ratio to G1 (best, 592): ", {k: round(combined[k] / ref_g1[k], 3) for k in keys})
@@ -382,11 +405,22 @@ def main():
     ap.add_argument("--seed", type=int, default=0, help="train/finetune seed; seed 0 is "
                      "the original arm's directory name (unsuffixed), seed>0 gets its own "
                      "directory so it never collides with or overwrites the seed-0 result")
+    ap.add_argument("--boundary-weight", type=float, default=3.0, help="finetune: "
+                     "boundary_location_loss weight (appendix M/N's plain arms use the default)")
+    ap.add_argument("--overshoot-weight", type=float, default=0.0, help="finetune: overshoot_loss weight")
+    ap.add_argument("--flat-weight", type=float, default=0.0, help="finetune: GT-flat excess/band weight")
+    ap.add_argument("--flat-mode", choices=("excess", "plane", "band"), default="excess")
+    ap.add_argument("--flat-win", type=int, default=9, help="plane window, or band mode's low cutoff")
+    ap.add_argument("--flat-win-hi", type=int, default=17, help="band mode's high cutoff")
+    ap.add_argument("--tag", default="", help="extra suffix for the arm directory, so a "
+                     "shape-loss combo never collides with appendix M/N's plain-recipe arm "
+                     "of the same --taps/--seed")
     args = ap.parse_args()
-    global ARM, N_TAPS, TAP_INDICES
+    global ARM, FT_ARM, N_TAPS, TAP_INDICES
     N_TAPS = args.taps
     TAP_INDICES = spaced_indices(args.taps)
     ARM = f"mambavision_da2_hr_{args.taps}taps" + (f"_s{args.seed}" if args.seed else "")
+    FT_ARM = ARM + (f"_{args.tag}" if args.tag else "")
     {"train": train, "finetune": finetune, "calibrate": calibrate, "predict": predict,
      "score": score}[args.mode](args)
 

@@ -70,7 +70,8 @@ ALL_TAPS = ([(0, 0, 80)]
             + [(3, i, 640) for i in range(4)])
 TAP_PRESETS = {12: [t for t in ALL_TAPS if t[0] in (2, 3)], 16: ALL_TAPS}
 
-ARM = "mambavision_da2_hr_16taps"
+ARM = "mambavision_da2_hr_16taps"    # stage-1 (train) name: taps+seed only, never tagged
+FT_ARM = ARM                        # stage-2-onward name: ARM + --tag, for shape-loss combos
 TAPS = TAP_PRESETS[16]
 
 
@@ -222,7 +223,7 @@ def train(args):
 def finetune(args):
     """Stage 2: unfreeze backbone too, joint train from stage 1's decoder."""
     random.seed(args.seed); np.random.seed(args.seed); torch.manual_seed(args.seed)
-    arm = OUT / (ARM + "_ft")
+    arm = OUT / (FT_ARM + "_ft")
     if (arm / "decoder.pt").exists():
         raise SystemExit(f"{arm / 'decoder.pt'} exists; refusing to overwrite")
     arm.mkdir(parents=True, exist_ok=True)
@@ -267,7 +268,9 @@ def finetune(args):
             feats = backbone.features(frames)
             bin_logits.clear()
             depths, loss = native_depth_loss(decoder, feats, frames, clip, gt, valid, bin_logits,
-                                             backbone.size, boundary=3.0)
+                                             backbone.size, args.boundary_weight, args.overshoot_weight,
+                                             args.flat_weight, None, args.flat_mode, args.flat_win,
+                                             args.flat_win_hi)
             if not torch.isfinite(loss):
                 raise FloatingPointError(f"non-finite loss at step {step}")
             for group, base in zip(opt.param_groups, bases):
@@ -289,7 +292,7 @@ def finetune(args):
     torch.save({"backbone": ema_backbone, "step": step, "meta": meta}, arm / "backbone.pt")
     torch.save({"decoder": decoder.state_dict(), "ema": ema_decoder, "step": step, "meta": meta},
                arm / "decoder.pt")
-    print("FINETUNE_DONE", ARM + "_ft", step, flush=True)
+    print("FINETUNE_DONE", FT_ARM + "_ft", step, flush=True)
 
 
 class FineTunedCrossStageBackbone(CrossStageBackbone):
@@ -306,7 +309,7 @@ def frozen_probe(backbone_cls, decoder_path):
 
 def calibrate(args):
     random.seed(0); np.random.seed(0); torch.manual_seed(0)
-    arm = OUT / (ARM + "_ft")
+    arm = OUT / (FT_ARM + "_ft")
     if (arm / "calib.pt").exists():
         raise SystemExit(f"{arm / 'calib.pt'} exists; refusing to overwrite")
     FineTunedCrossStageBackbone.student = arm / "backbone.pt"
@@ -349,13 +352,13 @@ def calibrate(args):
                 print(line, flush=True)
                 log.write(line + "\n"); log.flush()
     torch.save({"head": head.state_dict(), "step": step, "decoder_step": decoder_step,
-                "meta": {"backbone": ARM + "_ft", "args": vars(args)}}, arm / "calib.pt")
-    print("CALIB_DONE", ARM + "_ft", step, flush=True)
+                "meta": {"backbone": FT_ARM + "_ft", "args": vars(args)}}, arm / "calib.pt")
+    print("CALIB_DONE", FT_ARM + "_ft", step, flush=True)
 
 
 @torch.no_grad()
 def predict(args):
-    arm = OUT / (ARM + "_ft")
+    arm = OUT / (FT_ARM + "_ft")
     dev = "cuda"
     FineTunedCrossStageBackbone.student = arm / "backbone.pt"
     backbone, decoder, decoder_step = frozen_probe(FineTunedCrossStageBackbone, arm / "decoder.pt")
@@ -386,7 +389,7 @@ def predict(args):
             raise FloatingPointError(f"non-finite prediction in {name}")
         torch.save(prediction, folder / f"{name}_predictions.pt")
         print("predicted", name, tuple(prediction.shape), flush=True)
-    print("PREDICT_DONE", ARM + "_ft", flush=True)
+    print("PREDICT_DONE", FT_ARM + "_ft", flush=True)
 
 
 def score(args):
@@ -402,7 +405,7 @@ def score(args):
     m8_path = ROOT / "work_dirs/mv_decoder_probe_bigdecoder_20260917/mambavision_da2_hr_8taps_ft/score.json"
     ref_m8 = json.loads(m8_path.read_text())["combined"] if m8_path.exists() else None
     keys = ("absrel_raw", "absrel_edge", "overshoot", "boundary_f1", "flat_tv")
-    arm = OUT / (ARM + "_ft")
+    arm = OUT / (FT_ARM + "_ft")
     per_seq = {}
     for name, (source, start, end) in BEHAVE.items():
         data = torch.load(ROOT / source / f"{name}.pt", map_location="cpu", weights_only=False)
@@ -415,7 +418,7 @@ def score(args):
         print("scored", name, flush=True)
     combined = {k: float(np.mean([per_seq[s][k] for s in per_seq])) for k in keys}
     passing = sum(gate(q0, per_seq[s])["pass"] for s in per_seq)
-    print(f"\n{ARM} F-equivalent, combined metrics:", combined)
+    print(f"\n{FT_ARM} F-equivalent, combined metrics:", combined)
     print(f"Q0 gate: {passing}/6")
     print("ratio to F (4 taps):     ", {k: round(combined[k] / ref_f[k], 3) for k in keys})
     print("ratio to G1 (best, 592): ", {k: round(combined[k] / ref_g1[k], 3) for k in keys})
@@ -441,10 +444,21 @@ def main():
     ap.add_argument("--seed", type=int, default=0, help="train/finetune seed; seed 0 is "
                      "the original arm's directory name (unsuffixed), seed>0 gets its own "
                      "directory so it never collides with or overwrites the seed-0 result")
+    ap.add_argument("--boundary-weight", type=float, default=3.0, help="finetune: "
+                     "boundary_location_loss weight (appendix N's plain arms use the default)")
+    ap.add_argument("--overshoot-weight", type=float, default=0.0, help="finetune: overshoot_loss weight")
+    ap.add_argument("--flat-weight", type=float, default=0.0, help="finetune: GT-flat excess/band weight")
+    ap.add_argument("--flat-mode", choices=("excess", "plane", "band"), default="excess")
+    ap.add_argument("--flat-win", type=int, default=9, help="plane window, or band mode's low cutoff")
+    ap.add_argument("--flat-win-hi", type=int, default=17, help="band mode's high cutoff")
+    ap.add_argument("--tag", default="", help="extra suffix for the arm directory, so a "
+                     "shape-loss combo (e.g. G1's band recipe on this backbone) never "
+                     "collides with appendix N's plain-recipe arm of the same --taps/--seed")
     args = ap.parse_args()
-    global ARM, TAPS
+    global ARM, FT_ARM, TAPS
     TAPS = TAP_PRESETS[args.taps]
     ARM = f"mambavision_da2_hr_{args.taps}taps" + (f"_s{args.seed}" if args.seed else "")
+    FT_ARM = ARM + (f"_{args.tag}" if args.tag else "")
     {"train": train, "finetune": finetune, "calibrate": calibrate, "predict": predict,
      "score": score}[args.mode](args)
 
