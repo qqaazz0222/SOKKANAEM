@@ -2029,3 +2029,40 @@ edge가 남은 유일한 약점(O.3)이라, K.2와 같은 세 창을 이 백본�
 가중치)가 필요해 보인다 — 다음 후보.
 
 산출물: `work_dirs/mv_decoder_probe_bigdecoder_20260917/mambavision_da2_hr_8taps_band{narrow,wide}8k_ft/`.
+
+## O.7 boundary_location_loss 재도입 (0.5 / 1.0) — edge를 못 고친다
+
+O.6이 시도한 마지막 후보(경계 손실 자체의 가중치)를 마저 확인했다. J 트랙 전체가
+`--boundary-weight 0`을 써 온 이유는 REPORT §4.44의 오래된 기록("boundary 손실이 overshoot를
+0.316→0.361로 키운다")인데, 그건 band 손실이 없던 시절의 결론이다 — 지금은 band 항이 overshoot를
+따로 잡고 있으니 소량의 boundary를 다시 켜면 overshoot를 다시 망가뜨리지 않고 edge만 개선될
+수 있다는 가설로 0.5·1.0을 시도했다(나머지: overshoot 0.5, band 5–17 weight22, 8000 step).
+
+| 구성 | raw | edge | overshoot | F1 | flat TV | 복합(vs G1) |
+|---|---:|---:|---:|---:|---:|---:|
+| **boundary=0 (기존 선택)** | 0.1780 | 0.2010 | **0.4621**(최선) | 0.5213 | **0.0371** | **0.9643**(최선) |
+| boundary=0.5 | **0.1706**(최선) | 0.1994 | 0.5356(최악) | 0.5333 | 0.0370 | 0.9786 |
+| boundary=1.0 | 0.1720 | **0.1985**(최선) | 0.5103 | **0.5333/0.5272** | 0.0389 | 0.9819 |
+
+가설의 절반은 맞았다 — boundary를 올릴수록 raw·edge·F1은 조금씩 좋아진다(edge 0.2010→0.1985,
+개선 폭은 작다). 그러나 overshoot가 **비단조로** 나빠진다(0→0.46, 0.5→0.54, 1.0→0.51) — band
+손실이 overshoot를 완전히는 못 지켜준다는 뜻이다. 복합 지표는 boundary=0이 가장 낮게(=가장
+좋게) 유지된다. **선택 변동 없음: boundary=0, weight=22, window(5,17), 8000 step.**
+
+## O.8 결론: edge는 이 트랙의 모든 지렛대로 못 고쳤다
+
+부록 O에서 시도한 세 지렛대 — 창 폭(O.6: 3–9/5–17/9–25), boundary 가중치(O.7: 0/0.5/1.0),
+그리고 애초에 탭 수·스텝 수 자체(O.1–O.3) — 전부 edge를 소폭만 움직였고 어느 것도 G1의 edge
+(0.1880)를 이기지 못했다. 5개 지표 중 4개(raw·overshoot·F1·flat TV)가 G1을 이기는 조합
+(`8taps + band(5,17,w22) + boundary0 + overshoot0.5, 8000 step`)이 이 부록의 최종 선택이며,
+edge 하나만 이 저장소가 가진 손실 항 집합으로는 안 풀리는 것으로 잠정 결론짓는다. Marigold 계열
+diffusion 모델의 edge 보존 기법(VAE 잠재공간 재학습, 디코드 후 pixel-space 손실)을 대안으로
+검토했으나, 후자는 이미 이 저장소의 boundary/edge 손실과 동치이고 전자는 VAE 자체가 없어
+적용 불가로 기각했다(가장 가까운 고전적 대안인 guided edge snap도 native 트랙에서 이미
+실패 기록됨, PROGRESS.md 2026-09-11 "경계이동 경로 폐쇄").
+
+**남는 후보(실행하지 않음):** decoder의 upsample 경로(`up_stem`/`up_res`, D1의 RGB 디테일
+잔차) 쪽 가중치나 구조를 건드리는 것 — 지금까지 O 전체가 손실 함수와 백본 쪽만 건드렸고
+디코더 자체의 full-res 경로는 손대지 않았다.
+
+산출물: `work_dirs/mv_decoder_probe_bigdecoder_20260917/mambavision_da2_hr_8taps_bandb{05,1}_8k_ft/`.
