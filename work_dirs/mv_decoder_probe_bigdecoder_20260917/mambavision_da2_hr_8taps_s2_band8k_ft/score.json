@@ -1,0 +1,54 @@
+{
+  "per_sequence": {
+    "Date01_Sub01_basketball.1": {
+      "absrel_raw": 0.28133445104818344,
+      "absrel_edge": 0.24663353925298634,
+      "overshoot": 0.576160021806507,
+      "boundary_f1": 0.6288490653775322,
+      "flat_tv": 0.02511938624229515
+    },
+    "Date01_Sub01_keyboard_move.1": {
+      "absrel_raw": 0.28149412835740295,
+      "absrel_edge": 0.26072448402473797,
+      "overshoot": 0.5968017447395694,
+      "boundary_f1": 0.5907473421472483,
+      "flat_tv": 0.024616371461888775
+    },
+    "Date02_Sub02_backpack_back.1": {
+      "absrel_raw": 0.31897988486771905,
+      "absrel_edge": 0.2194200598293011,
+      "overshoot": 0.5063237147521215,
+      "boundary_f1": 0.5701071746104087,
+      "flat_tv": 0.030413926771871047
+    },
+    "Date02_Sub02_backpack_hand.1": {
+      "absrel_raw": 0.33252250646270554,
+      "absrel_edge": 0.2482982197952099,
+      "overshoot": 0.5265184558261793,
+      "boundary_f1": 0.609196646042013,
+      "flat_tv": 0.02302001465795911
+    },
+    "Date03_Sub03_backpack_back.1": {
+      "absrel_raw": 0.22214367273017036,
+      "absrel_edge": 0.26097213235311356,
+      "overshoot": 0.6401952742303958,
+      "boundary_f1": 0.5999141128947182,
+      "flat_tv": 0.0446300505882391
+    },
+    "Date04_Sub05_backpack.1": {
+      "absrel_raw": 0.2476444521585267,
+      "absrel_edge": 0.24989715374254298,
+      "overshoot": 0.7707541392677301,
+      "boundary_f1": 0.40817631298947765,
+      "flat_tv": 0.03126744579458318
+    }
+  },
+  "combined": {
+    "absrel_raw": 0.28068651593745136,
+    "absrel_edge": 0.2476575981663153,
+    "overshoot": 0.6027922251037504,
+    "boundary_f1": 0.5678317756768997,
+    "flat_tv": 0.029844532586139394
+  },
+  "sequences_passing_q0_gate": 0
+}
