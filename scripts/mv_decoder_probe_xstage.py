@@ -256,8 +256,15 @@ def finetune(args):
     bases = [args.backbone_lr, args.lr]
     ema_decoder = {k: v.detach().clone() for k, v in decoder.state_dict().items()}
     ema_backbone = {k: v.detach().clone() for k, v in model.state_dict().items()}
-    log = open(arm / "finetune.log", "a")
     step, start = 0, time.time()
+    partial_path = arm / "partial.pt"
+    if partial_path.exists():
+        ckpt = torch.load(partial_path, map_location="cuda", weights_only=False)
+        decoder.load_state_dict(ckpt["decoder"]); model.load_state_dict(ckpt["backbone"])
+        opt.load_state_dict(ckpt["opt"]); ema_decoder = ckpt["ema_decoder"]
+        ema_backbone = ckpt["ema_backbone"]; step = ckpt["step"]
+        print(f"RESUMED from partial.pt at step {step}", flush=True)
+    log = open(arm / "finetune.log", "a")
     while step < args.steps:
         for batch in loader:
             if step >= args.steps:
@@ -288,10 +295,15 @@ def finetune(args):
                         f"elapsed {time.time() - start:.0f}s")
                 print(line, flush=True)
                 log.write(line + "\n"); log.flush()
+            if step % 500 == 0:
+                torch.save({"decoder": decoder.state_dict(), "backbone": model.state_dict(),
+                            "opt": opt.state_dict(), "ema_decoder": ema_decoder,
+                            "ema_backbone": ema_backbone, "step": step}, partial_path)
     meta = {"source": ARM, "args": vars(args)}
     torch.save({"backbone": ema_backbone, "step": step, "meta": meta}, arm / "backbone.pt")
     torch.save({"decoder": decoder.state_dict(), "ema": ema_decoder, "step": step, "meta": meta},
                arm / "decoder.pt")
+    partial_path.unlink(missing_ok=True)
     print("FINETUNE_DONE", FT_ARM + "_ft", step, flush=True)
 
 
